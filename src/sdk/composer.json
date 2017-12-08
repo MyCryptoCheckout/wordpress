@@ -1,0 +1,41 @@
+{
+    "name": "plainview/sdk",
+    "description": "Plainview SDK",
+    "license" : "GPL-3.0",
+    "authors": [
+        {
+            "name": "Edward Plainview",
+            "email": "edward@plainview.se"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "php": ">=5.4.0"
+    },
+    "autoload":
+    {
+    	"psr-4":
+    	{
+    		"plainview\\sdk_mcc\\" : "."
+    	}
+    },
+    "minimum-stability" : "dev",
+	"repositories": [
+		{
+			"type": "package",
+			"package":
+			{
+				"name": "the-plainview/sdk",
+				"version": "master",
+				"source":
+				{
+					"url": "https://bitbucket.org/edward_electric/plainview-sdk.git",
+					"type": "git",
+					"reference": "master"
+				}
+			}
+		}
+	]
+}

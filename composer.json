@@ -1,0 +1,9 @@
+{
+	"autoload":
+	{
+		"psr-4": {
+			"mycryptocheckout\\" : "src/",
+			"plainview\\sdk_mcc\\" : "src/sdk/"
+		}
+	}
+}

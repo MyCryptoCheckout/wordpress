@@ -1,0 +1,10 @@
+PROJECT_NAME		= Plainview&nbsp;SDK
+INPUT			= *php form2 html wordpress table
+
+EXTRACT_ALL		= YES
+EXTRACT_PRIVATE		= YES
+GENERATE_HTML		= YES
+GENERATE_LATEX		= NO
+HTML_OUTPUT		= apidoc
+RECURSIVE		= YES
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="bootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+>
+    <testsuites>
+        <testsuite name="base">
+            <directory>.</directory>
+        </testsuite>
+        <testsuite name="collections">
+            <directory>../collections/tests</directory>
+        </testsuite>
+        <testsuite name="form2">
+            <directory>../form2/tests</directory>
+        </testsuite>
+        <testsuite name="html">
+            <directory>../html/tests</directory>
+        </testsuite>
+        <testsuite name="mail">
+            <directory>../mail/tests</directory>
+        </testsuite>
+        <testsuite name="pagination">
+            <directory>../pagination/tests</directory>
+        </testsuite>
+        <testsuite name="breadcrumbs">
+            <directory>../breadcrumbs/tests</directory>
+        </testsuite>
+        <testsuite name="table">
+            <directory>../table/tests</directory>
+        </testsuite>
+        <testsuite name="tree">
+            <directory>../tree/tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
