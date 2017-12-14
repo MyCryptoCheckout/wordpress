@@ -42,24 +42,41 @@ trait menu_trait
 
 		$tabs->tab( 'currencies' )
 			->callback_this( 'admin_currencies' )
+			// Tab heading
+			->heading( __( 'MyCryptoCheckout Currencies', 'mycryptocheckout' ) )
 			// Name of tab
 			->name( __( 'Currencies', 'mycryptocheckout' ) );
 
-		$tabs->tab( 'license' )
-			->callback_this( 'admin_license' )
+		$tabs->tab( 'account' )
+			->callback_this( 'admin_account' )
+			// Tab heading
+			->heading( __( 'MyCryptoCheckout Account', 'mycryptocheckout' ) )
 			// Name of tab
-			->name( __( 'License', 'mycryptocheckout' ) );
+			->name( __( 'Account', 'mycryptocheckout' ) );
 
 		$tabs->tab( 'settings' )
 			->callback_this( 'admin_settings' )
+			// Tab heading
+			->heading( __( 'MyCryptoCheckout Settings', 'mycryptocheckout' ) )
 			// Name of tab
 			->name( __( 'Settings', 'mycryptocheckout' ) );
 
 		$tabs->tab( 'uninstall' )
 			->callback_this( 'admin_uninstall' )
+			// Tab heading
+			->heading( __( 'Uninstall MyCryptoCheckout', 'mycryptocheckout' ) )
 			// Name of tab
 			->name( __( 'Uninstall', 'mycryptocheckout' ) )
 			->sort_order( 90 );		// Always last.
+
+		if ( $tabs->get_is( 'edit_wallet' ) )
+		{
+			$tabs->tab( 'edit_wallet' )
+				->callback_this( 'admin_edit_wallet' )
+				// Name of tab
+				->name( __( 'Edit wallet', 'mycryptocheckout' ) )
+				->parameters( $_GET[ 'wallet_id' ] );
+		}
 
 		echo $tabs->render();
 	}

@@ -20,7 +20,7 @@ class Wallet
 		@see		MyCryptoCheckout\currencies_trait
 		@since		2017-12-09 09:06:07
 	**/
-	public $currency = '';
+	public $currency_id = '';
 
 	/**
 		@brief		Is the wallet enabled at all?
@@ -54,9 +54,9 @@ class Wallet
 		@brief		Return the currency.
 		@since		2017-12-09 18:50:18
 	**/
-	public function get_currency()
+	public function get_currency_id()
 	{
-		return $this->currency;
+		return $this->currency_id;
 	}
 
 	/**
@@ -81,7 +81,7 @@ class Wallet
 				$sites = [];
 				foreach( $this->sites as $site_id )
 				{
-					$name = get_site_option( $site_id, 'blogname' );
+					$name = get_site_option( $site_id, 'sitename' );
 					$sites []= sprintf( '%s (%d)', $name, $site_id );
 				}
 				$r []= sprintf(
@@ -92,6 +92,21 @@ class Wallet
 		}
 
 		return $r;
+	}
+
+	/**
+		@brief		Convenience method that returns whether this wallet is enabled on the current site.
+		@since		2017-12-10 19:14:14
+	**/
+	public function is_enabled_on_this_site()
+	{
+		if ( ! $this->enabled )
+			return false;
+		if ( $this->network )
+			return true;
+		if ( in_array( get_current_site_id(), $this->sites ) )
+			return true;
+		return false;
 	}
 
 	/**

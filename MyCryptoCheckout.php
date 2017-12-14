@@ -18,11 +18,14 @@ namespace mycryptocheckout
 	class MyCryptoCheckout
 		extends \plainview\sdk_mcc\wordpress\base
 	{
+		use \plainview\sdk_mcc\wordpress\traits\debug;
+
 		use admin_trait;
 		use api_trait;
 		use currencies_trait;
 		use wallets_trait;
 		use menu_trait;
+		use misc_methods_trait;
 
 		/**
 			@brief		Constructor.
@@ -30,6 +33,7 @@ namespace mycryptocheckout
 		**/
 		public function _construct()
 		{
+			$this->init_api_trait();
 			$this->init_menu_trait();
 			new ecommerce\woocommerce\WooCommerce();
 		}

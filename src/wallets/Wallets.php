@@ -10,7 +10,10 @@ namespace mycryptocheckout\wallets;
 class Wallets
 	extends \mycryptocheckout\Collection
 {
-	use \plainview\sdk_mcc\wordpress\object_stores\Site_Option;
+	use \plainview\sdk_mcc\wordpress\object_stores\Site_Option
+	{
+		save as trait_save;
+	}
 
 	/**
 		@brief		Add this wallet to the collection.
@@ -18,8 +21,21 @@ class Wallets
 	**/
 	public function add( $wallet )
 	{
-		$key = md5( $wallet->currency . $wallet->address . AUTH_SALT );
-		return $this->append( $wallet );
+		$key = md5( $wallet->get_currency_id() . $wallet->get_address() . AUTH_SALT );
+		return $this->set( $key, $wallet );
+	}
+
+	/**
+		@brief		Return all wallets that are enabled on this site.
+		@since		2017-12-10 19:13:02
+	**/
+	public function enabled_on_this_site()
+	{
+		$r = [];
+		foreach( $this as $wallet )
+			if ( $wallet->is_enabled_on_this_site() )
+				$r []= $wallet;
+		return $r;
 	}
 
 	/**
@@ -31,6 +47,22 @@ class Wallets
 	public function new_wallet()
 	{
 		return new Wallet();
+	}
+
+	/**
+		@brief		Before a save, sort the wallets.
+		@since		2017-12-14 08:43:35
+	**/
+	public function save()
+	{
+		$currencies = MyCryptoCheckout()->currencies();
+		$this->sortBy( function( $wallet )
+		use ( $currencies )
+		{
+			$currency = $currencies->get( $wallet->get_currency_id() );
+			return sprintf( '%s_%s', $currency->get_name(), $wallet->get_address() );
+		} );
+		$this->trait_save();
 	}
 
 	/**

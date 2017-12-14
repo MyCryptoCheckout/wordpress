@@ -16,13 +16,113 @@ trait admin_trait
 	**/
 	public function activate()
 	{
-		// Check that there is a private key.
-		if ( $this->is_network )
+		wp_schedule_event( time(), 'hourly', 'mycryptocheckout_retrieve_account' );
+		// We need to run this as soon as the plugin is active.
+		wp_schedule_single_event( time(), 'mycryptocheckout_retrieve_account' );
+	}
+
+	/**
+		@brief		Admin the account.
+		@since		2017-12-11 14:20:17
+	**/
+	public function admin_account()
+	{
+		$form = $this->form();
+		$form->id( 'broadcast_settings' );
+		$r = '';
+
+		if ( isset( $_POST[ 'retrieve_account' ] ) )
 		{
+			$result = $this->mycryptocheckout_retrieve_account();
+			if ( $result )
+				$r .= $this->info_message_box()->_( __( 'Account data refreshed!', 'mycryptocheckout' ) );
+			else
+				$r .= $this->error_message_box()->_( __( 'Error refreshing your account data. Please enable debug mode to find the error.', 'mycryptocheckout' ) );
 		}
+
+		$account_data = $this->api()->account()->get();
+
+		if ( ! $account_data->is_valid() )
+			$r .= $this->admin_account_invalid();
 		else
+			$r .= $this->admin_account_valid( $account_data );
+
+		$save = $form->secondary_button( 'retrieve_account' )
+			->value( __( 'Refresh your account data', 'mycryptocheckout' ) );
+
+		if ( $form->is_posting() )
 		{
+			$form->post();
+			$form->use_post_values();
 		}
+
+		$r .= $form->open_tag();
+		$r .= $form->display_form_table();
+		$r .= $form->close_tag();
+
+		echo $r;
+	}
+
+	/**
+		@brief		Show the invalid account text.
+		@since		2017-12-12 11:07:42
+	**/
+	public function admin_account_invalid()
+	{
+		$r = '';
+		$r .= wpautop( __( 'It appears as if MyCrytpoCheckout was unable to retrieve your account data from the MyCryptoCheckout server.', 'mycryptocheckout' ) );
+		$r .= wpautop( __( 'Use the button below to try and retrieve your account data again.', 'mycryptocheckout' ) );
+		return $r;
+	}
+
+	/**
+		@brief		Show the valid account text.
+		@since		2017-12-12 11:07:42
+	**/
+	public function admin_account_valid( $account_data )
+	{
+		$r = '';
+		$table = $this->table();
+		$table->caption()->text( __( 'Information about your account on mycryptocheckout.com', 'mycryptocheckout' ) );
+
+		// Assemble the current wallets into the table.
+		$row = $table->head()->row()->hidden();
+		// Table column name
+		$row->th( 'key' )->text( __( 'Key', 'mycryptocheckout' ) );
+		// Table column name
+		$row->th( 'details' )->text( __( 'Details', 'mycryptocheckout' ) );
+
+		// Server name
+		$row = $table->head()->row();
+		// Table column name
+		$row->th( 'key' )->text( __( 'API key', 'mycryptocheckout' ) );
+		// Table column name
+		$row->th( 'details' )->text( $account_data->get_domain_key() );
+
+		// API key.
+		$row = $table->head()->row();
+		// Table column name
+		$row->th( 'key' )->text( __( "This server's name", 'mycryptocheckout' ) );
+		// Table column name
+		$row->th( 'details' )->text( $this->get_server_name() );
+
+		// API key.
+		$row = $table->head()->row();
+		// Table column name
+		$row->th( 'key' )->text( __( 'Purchases left this period', 'mycryptocheckout' ) );
+		// Table column name
+		$row->th( 'details' )->text( $account_data->get_purchases_left() );
+
+		// API key.
+		$row = $table->head()->row();
+		// Table column name
+		$row->th( 'key' )->text( __( 'Currency exchange rates updated', 'mycryptocheckout' ) );
+		// Table column name
+		$row->th( 'details' )->text( date( 'Y-m-d H:i:s', $account_data->data->physical_exchange_rates_timestamp ) );
+
+		$r .= $table;
+
+		return $r;
 	}
 
 	/**
@@ -31,9 +131,8 @@ trait admin_trait
 	**/
 	public function admin_currencies()
 	{
-		$form = $this->form2();
+		$form = $this->form();
 		$form->id( 'broadcast_settings' );
-		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
 
 		$table = $this->table();
@@ -63,8 +162,23 @@ trait admin_trait
 		{
 			$row = $table->body()->row();
 			$table->bulk_actions()->cb( $row, $index );
-			$row->td( 'currency' )->text( $wallet->get_currency() );
-			$row->td( 'wallet' )->text( $wallet->get_address() );
+			$currency = $this->currencies()->get( $wallet->get_currency_id() );
+			$currency_text = sprintf( '%s %s', $currency->get_name(), $currency->get_id() );
+			$row->td( 'currency' )->text( $currency_text );
+
+			// Address
+			$url = add_query_arg( [
+				'tab' => 'edit_wallet',
+				'wallet_id' => $index,
+			] );
+			$url = sprintf( '<a href="%s" title="%s">%s</a>',
+				$url,
+				__( 'Edit this currency', 'mycryptocheckout' ),
+				$wallet->get_address()
+			);
+			$row->td( 'wallet' )->text( $url );
+
+			// Details
 			$details = $wallet->get_details();
 			$details = implode( "\n", $details );
 			$row->td( 'details' )->text( wpautop( $details ) );
@@ -144,16 +258,16 @@ trait admin_trait
 			{
 				try
 				{
-					$chosen_currency = $wallet_currency->get_filtered_post_value();
-					$currency = $this->currencies()->get( $chosen_currency );
-
 					$wallet = $wallets->new_wallet();
 					$wallet->address = $wallet_address->get_filtered_post_value();
-					$wallet->currency = $chosen_currency;
 					if ( $this->is_network )
 						$wallet->network = $wallet_on_network->is_checked();
 
+					$chosen_currency = $wallet_currency->get_filtered_post_value();
+					$currency = $this->currencies()->get( $chosen_currency );
 					$currency->validate_address( $wallet->address );
+
+					$wallet->currency_id = $chosen_currency;
 
 					$wallets->add( $wallet );
 					$wallets->save();
@@ -176,11 +290,101 @@ trait admin_trait
 			}
 		}
 
-		$r .= wpautop( __( 'The table below shows the wallets you have set up in the plugin. To edit a wallet, click the address.', 'mycryptocheckout' ) );
+		$r .= wpautop( __( 'The table below shows the currencies and wallets you have set up in the plugin. To edit a wallet, click the address.', 'mycryptocheckout' ) );
 
 		$r .= $form->open_tag();
 		$r .= $table;
 		$r .= $form->close_tag();
+		$r .= $form->open_tag();
+		$r .= $form->display_form_table();
+		$r .= $form->close_tag();
+
+		echo $r;
+	}
+
+	/**
+		@brief		Edit this wallet.
+		@since		2017-12-09 20:44:32
+	**/
+	public function admin_edit_wallet( $wallet_id )
+	{
+		$wallets = $this->wallets();
+		if ( ! $wallets->has( $wallet_id ) )
+		{
+			echo 'Invalid wallet ID!';
+			return;
+		}
+		$wallet = $wallets->get( $wallet_id );
+
+			$form = $this->form();
+		$form->id( 'broadcast_settings' );
+		$form->css_class( 'plainview_form_auto_tabs' );
+		$r = '';
+
+		$wallet_address = $form->text( 'wallet_address' )
+			->description( __( 'The address of your wallet to which you want to receive funds.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Address', 'mycryptocheckout' ) )
+			->required()
+			->size( 64, 256 )
+			->trim()
+			->value( $wallet->get_address() );
+
+		$wallet_enabled = $form->checkbox( 'wallet_enabled' )
+			->checked( $wallet->enabled )
+			->description( __( 'Is this wallet enabled and ready to receive funds?', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Enabled', 'mycryptocheckout' ) );
+
+		if ( $this->is_network )
+			$wallet_on_network = $form->checkbox( 'wallet_on_network' )
+				->checked( $wallet->network )
+				->description( __( 'Do you want the wallet to be available on the whole network?', 'mycryptocheckout' ) )
+				// Input label
+				->label( __( 'Network wallet', 'mycryptocheckout' ) );
+
+		$save = $form->primary_button( 'save' )
+			->value( __( 'Save settings', 'mycryptocheckout' ) );
+
+		if ( $form->is_posting() )
+		{
+			$form->post();
+			$form->use_post_values();
+
+			if ( $save->pressed() )
+			{
+				try
+				{
+					$wallet->address = $wallet_address->get_filtered_post_value();
+
+					if ( $this->is_network )
+						$wallet->network = $wallet_on_network->is_checked();
+
+					$currency = $this->currencies()->get( $wallet->get_currency_id() );
+					$currency->validate_address( $wallet->address );
+
+					$wallet->enabled = $wallet_enabled->is_checked();
+
+					$wallets->save();
+					$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
+					$reshow = true;
+				}
+				catch ( Exception $e )
+				{
+					$r .= $this->error_message_box()->_( $e->getMessage() );
+				}
+			}
+
+			if ( $reshow )
+			{
+				echo $r;
+				$_POST = [];
+				$function = __FUNCTION__;
+				echo $this->$function( $wallet_id );
+				return;
+			}
+		}
+
 		$r .= $form->open_tag();
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
@@ -203,22 +407,41 @@ trait admin_trait
 	**/
 	public function admin_settings()
 	{
-		echo 'settings';
+		$form = $this->form();
+		$r = '';
+
+		$this->add_debug_settings_to_form( $form );
+
+		$save = $form->primary_button( 'save' )
+			->value( __( 'Save settings', 'mycryptocheckout' ) );
+
+		if ( $form->is_posting() )
+		{
+			$form->post();
+			$form->use_post_values();
+			$this->save_debug_settings_from_form( $form );
+			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
+
+			echo $r;
+			$_POST = [];
+			$function = __FUNCTION__;
+			echo $this->$function();
+			return;
+		}
+
+		$r .= $form->open_tag();
+		$r .= $form->display_form_table();
+		$r .= $form->close_tag();
+
+		echo $r;
 	}
 
 	/**
-		@brief		Site options.
-		@since		2017-12-09 09:18:21
+		@brief		Deactivation.
+		@since		2017-12-14 08:36:14
 	**/
-	public function site_options()
+	public function deactivate()
 	{
-		return array_merge( [
-			/**
-				@brief		The Wallets collection in which all wallet info is stored.
-				@see		Wallets()
-				@since		2017-12-09 09:15:52
-			**/
-			'wallets' => false,
-		], parent::site_options() );
+		wp_clear_scheduled_hook( time(), 'hourly', 'mycryptocheckout_retrieve_account' );
 	}
 }

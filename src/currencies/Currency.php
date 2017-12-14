@@ -11,6 +11,15 @@ use \Exception;
 abstract class Currency
 {
 	/**
+		@brief		Convert this amount to this currency.
+		@since		2017-12-10 20:05:14
+	**/
+	public function convert( $original_currency, $original_amount )
+	{
+		return rand( 1000, 10000000 );
+	}
+
+	/**
 		@brief		Return the ID of this currency.
 		@since		2017-12-09 20:05:36
 	**/
