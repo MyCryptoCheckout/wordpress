@@ -24,7 +24,7 @@ class BTC
 	**/
 	public static function validate_address( $address )
 	{
-		static::validate_address_length( $address, 40 );
+		static::validate_address_length( $address, 34 );
 		return true;
 	}
 }

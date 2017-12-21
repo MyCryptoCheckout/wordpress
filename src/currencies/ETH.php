@@ -24,7 +24,7 @@ class ETH
 	**/
 	public static function validate_address( $address )
 	{
-		static::validate_address_length( $address, 20 );
+		static::validate_address_length( $address, 42 );
 		return true;
 	}
 }

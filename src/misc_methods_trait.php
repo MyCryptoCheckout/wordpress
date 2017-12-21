@@ -9,6 +9,15 @@ namespace mycryptocheckout;
 trait misc_methods_trait
 {
 	/**
+		@brief		Convenience method to return a new collection.
+		@since		2017-12-14 18:45:53
+	**/
+	public function collection( $items = [] )
+	{
+		return new Collection( $items );
+	}
+
+	/**
 		@brief		Return the shortest possible name of this server.
 		@since		2017-12-11 14:23:01
 	**/
@@ -40,6 +49,19 @@ trait misc_methods_trait
 				@since		2017-12-11 19:27:46
 			**/
 			'account_data' => '',
+
+			/**
+				@brief		Fixed amount markup of products for using MyCryptoCheckout as the payment.
+				@since		2017-12-14 16:50:25
+			**/
+			'markup_amount' => 0,
+
+			/**
+				@brief		Percentage markup of products for using MyCryptoCheckout as the payment.
+				@since		2017-12-14 16:50:25
+			**/
+			'markup_percent' => 0,
+
 			/**
 				@brief		The Wallets collection in which all wallet info is stored.
 				@see		Wallets()

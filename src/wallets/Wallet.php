@@ -29,6 +29,12 @@ class Wallet
 	public $enabled = true;
 
 	/**
+		@brief		When the wallet was last used for payment.
+		@since		2017-12-14 18:38:13
+	**/
+	public $last_used = 0;
+
+	/**
 		@brief		Is the wallet available on all sites on the network?
 		@since		2017-12-09 09:06:16
 	**/
@@ -40,6 +46,12 @@ class Wallet
 		@since		2017-12-09 09:07:04
 	**/
 	public $sites = [];
+
+	/**
+		@brief		How many times the wallet has been used for payment.
+		@since		2017-12-14 18:38:42
+	**/
+	public $times_used = 0;
 
 	/**
 		@brief		Return the address.
@@ -90,6 +102,20 @@ class Wallet
 				);
 			}
 		}
+
+		if ( $this->last_used > 0 )
+			$r []= sprintf(
+				// Used 123 times
+				__( 'Last used %s', 'mycryptocheckout' ),
+				ago( $this->last_used )
+			);
+
+		if ( $this->times_used > 0 )
+			$r []= sprintf(
+				// Used 123 times
+				__( 'Used %d times', 'mycryptocheckout' ),
+				$this->times_used
+			);
 
 		return $r;
 	}

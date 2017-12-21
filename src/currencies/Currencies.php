@@ -25,8 +25,10 @@ class Currencies
 	**/
 	public function load()
 	{
+		$this->add( new BCH() );
 		$this->add( new BTC() );
 		$this->add( new ETH() );
+		$this->add( new LTC() );
 	}
 
 	/**

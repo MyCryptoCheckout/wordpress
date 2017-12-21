@@ -50,7 +50,7 @@ trait api_trait
 
 		try
 		{
-			$this->api()->process_notifications( $json );
+			$this->api()->process_messages( $json );
 			wp_send_json( [ 'result' => 'ok' ] );
 		}
 		catch ( api\Exception $e )

@@ -39,6 +39,27 @@ class Wallets
 	}
 
 	/**
+		@brief		Find the wallet of this currency that has been used the least.
+		@since		2017-12-14 18:43:04
+	**/
+	public function get_dustiest_wallet( $currency_id )
+	{
+		$dustiest_wallets = MyCryptoCheckout()->collection();
+		$wallets = $this->enabled_on_this_site();
+		foreach( $wallets as $index => $wallet )
+			if ( $wallet->get_currency_id() == $currency_id )
+				$dustiest_wallets->append( $wallet );
+		// Sort them by the last used attribute.
+		$dustiest_wallets->sort_by( function( $wallet )
+		{
+			return $wallet->last_used;
+		} );
+
+		// And now return the first one, which is the dustiest.
+		return $dustiest_wallets->first();
+	}
+
+	/**
 		@brief		Create a new wallet.
 		@details	Does not add it to the collection.
 		@see		add()

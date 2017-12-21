@@ -90,35 +90,42 @@ trait admin_trait
 		// Table column name
 		$row->th( 'key' )->text( __( 'Key', 'mycryptocheckout' ) );
 		// Table column name
-		$row->th( 'details' )->text( __( 'Details', 'mycryptocheckout' ) );
+		$row->td( 'details' )->text( __( 'Details', 'mycryptocheckout' ) );
 
 		// Server name
 		$row = $table->head()->row();
 		// Table column name
 		$row->th( 'key' )->text( __( 'API key', 'mycryptocheckout' ) );
 		// Table column name
-		$row->th( 'details' )->text( $account_data->get_domain_key() );
+		$row->td( 'details' )->text( $account_data->get_domain_key() );
 
 		// API key.
 		$row = $table->head()->row();
 		// Table column name
 		$row->th( 'key' )->text( __( "This server's name", 'mycryptocheckout' ) );
 		// Table column name
-		$row->th( 'details' )->text( $this->get_server_name() );
+		$row->td( 'details' )->text( $this->get_server_name() );
 
 		// API key.
 		$row = $table->head()->row();
 		// Table column name
 		$row->th( 'key' )->text( __( 'Purchases left this period', 'mycryptocheckout' ) );
 		// Table column name
-		$row->th( 'details' )->text( $account_data->get_purchases_left() );
+		$row->td( 'details' )->text( $account_data->get_purchases_left() );
 
 		// API key.
 		$row = $table->head()->row();
 		// Table column name
-		$row->th( 'key' )->text( __( 'Currency exchange rates updated', 'mycryptocheckout' ) );
+		$row->th( 'key' )->text( __( 'Physical currency exchange rates updated', 'mycryptocheckout' ) );
 		// Table column name
-		$row->th( 'details' )->text( date( 'Y-m-d H:i:s', $account_data->data->physical_exchange_rates_timestamp ) );
+		$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $account_data->data->physical_exchange_rates->timestamp ) );
+
+		// API key.
+		$row = $table->head()->row();
+		// Table column name
+		$row->th( 'key' )->text( __( 'Cryptocurrency exchange rates updated', 'mycryptocheckout' ) );
+		// Table column name
+		$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $account_data->data->virtual_exchange_rates->timestamp ) );
 
 		$r .= $table;
 
@@ -408,7 +415,36 @@ trait admin_trait
 	public function admin_settings()
 	{
 		$form = $this->form();
+		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
+
+		$fs = $form->fieldset( 'gateway_fees' );
+		// Label for fieldset
+		$fs->legend->label( __( 'Gateway fees', 'mycryptocheckout' ) );
+
+		$fs->markup( 'm_gateway_fees' )
+			->p( __( 'If you wish to charge (or discount) visitors for using MyCryptoCheckout as the payment gateway, you can enter the fixed or percentage amounts in the boxes below. The cryptocurrency checkout price will be modified in accordande with the values below.', 'mycryptocheckout' ) );
+
+		$markup_amount = $fs->number( 'markup_amount' )
+			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the fixed amount in this box.', 'mycryptocheckout' ) )
+			// Input label.
+			->label( __( 'Markup amount', 'mycryptocheckout' ) )
+			->max( 100 )
+			->min( -100 )
+			->step( 0.01 )
+			->size( 6, 6 )
+			->value( $this->get_site_option( 'markup_amount' ) );
+
+		$markup_percent = $fs->number( 'markup_percent' )
+			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the percentage in this box.', 'mycryptocheckout' ) )
+			// Input label.
+			->label( __( 'Markup %', 'mycryptocheckout' ) )
+			->max( 100 )
+			->min( -100 )
+			->step( 0.01 )
+			->size( 6, 6 )
+			->value( $this->get_site_option( 'markup_percent' ) );
+
 
 		$this->add_debug_settings_to_form( $form );
 
@@ -419,6 +455,10 @@ trait admin_trait
 		{
 			$form->post();
 			$form->use_post_values();
+
+			$this->update_site_option( 'markup_amount', $markup_amount->get_filtered_post_value() );
+			$this->update_site_option( 'markup_percent', $markup_percent->get_filtered_post_value() );
+
 			$this->save_debug_settings_from_form( $form );
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
 
@@ -442,6 +482,6 @@ trait admin_trait
 	**/
 	public function deactivate()
 	{
-		wp_clear_scheduled_hook( time(), 'hourly', 'mycryptocheckout_retrieve_account' );
+		wp_clear_scheduled_hook( 'mycryptocheckout_retrieve_account' );
 	}
 }

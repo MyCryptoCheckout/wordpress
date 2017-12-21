@@ -42,16 +42,16 @@ class API
 		@brief		Process this json data that was received from the API server.
 		@since		2017-12-11 14:15:03
 	**/
-	public function process_notifications( $json )
+	public function process_messages( $json )
 	{
 		// This must be an array.
-		if ( ! is_array( $json->notifications ) )
-			return MyCryptoCheckout()->debug( 'JSON does not contain a notifications array.' );
+		if ( ! is_array( $json->messages ) )
+			return MyCryptoCheckout()->debug( 'JSON does not contain a messages array.' );
 
-		// First check for a retrieve_account notification.
-		foreach( $json->notifications as $notification )
+		// First check for a retrieve_account message.
+		foreach( $json->messages as $message )
 		{
-			if ( $notification->type != 'retrieve_account' )
+			if ( $message->type != 'retrieve_account' )
 				continue;
 			// Does the retrieve key match?
 			$existing_account_data = MyCryptoCheckout()->get_site_option( 'account_data' );
@@ -63,10 +63,10 @@ class API
 			if ( ! isset( $existing_account_data->retrieve_key ) )
 				throw new Exception( 'No retrieve key is set. Not expecting an account retrieval.' );
 			// Does it match the one we got?
-			if ( $existing_account_data->retrieve_key != $notification->retrieve_key )
-				throw new Exception( 'Retrieve keys do not match. Expecting %s but got %s.', $existing_account_data->retrieve_key, $notification->retrieve_key );
+			if ( $existing_account_data->retrieve_key != $message->retrieve_key )
+				throw new Exception( 'Retrieve keys do not match. Expecting %s but got %s.', $existing_account_data->retrieve_key, $message->retrieve_key );
 			// Everything looks good to go.
-			$new_account_data = (object) (array) $notification;
+			$new_account_data = (object) (array) $message;
 			unset( $new_account_data->type );
 			unset( $new_account_data->retrieve_key );
 			MyCryptoCheckout()->debug( 'Setting new account data: %s', $new_account_data );
@@ -77,16 +77,16 @@ class API
 		$account_data = MyCryptoCheckout()->get_site_option( 'account_data' );
 		$account_data = json_decode( $account_data );
 		if ( ! $account_data )
-			return MyCryptoCheckout()->debug( 'No account data found. Ignoring notifications.' );
+			return MyCryptoCheckout()->debug( 'No account data found. Ignoring messages.' );
 
 		// Check that the domain key matches ours.
 		if ( $account_data->domain_key != $json->mycryptocheckout )
 			return MyCryptoCheckout()->debug( 'Invalid domain key. Received %s', $json->mycryptocheckout );
 
-		// Handle the notifications, one by one.
-		foreach( $json->notifications as $notification )
+		// Handle the messages, one by one.
+		foreach( $json->messages as $message )
 		{
-			switch( $notification->type )
+			switch( $message->type )
 			{
 				case 'retrieve_account':
 					// Already handled above.

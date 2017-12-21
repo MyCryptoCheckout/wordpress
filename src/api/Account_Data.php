@@ -26,12 +26,36 @@ class Account_Data
 	}
 
 	/**
+		@brief		Convenience method to return a physical exchange rate.
+		@since		2017-12-14 17:11:13
+	**/
+	public function get_physical_exchange_rate( $currency )
+	{
+		if ( isset( $this->data->physical_exchange_rates->rates->$currency ) )
+			return $this->data->physical_exchange_rates->rates->$currency;
+		else
+			return false;
+	}
+
+	/**
 		@brief		Return the amount of purchases left.
 		@since		2017-12-12 11:32:47
 	**/
 	public function get_purchases_left()
 	{
 		return $this->data->purchases_left;
+	}
+
+	/**
+		@brief		Convenience method to return a virtual exchange rate.
+		@since		2017-12-14 17:11:13
+	**/
+	public function get_virtual_exchange_rate( $currency )
+	{
+		if ( isset( $this->data->virtual_exchange_rates->rates->$currency ) )
+			return $this->data->virtual_exchange_rates->rates->$currency;
+		else
+			return false;
 	}
 
 	/**
@@ -44,6 +68,9 @@ class Account_Data
 		if ( ! $data )
 			return;
 		$this->data = $data;
+		foreach( $data as $key => $value )
+			$this->set( $key, $value );
+		return $this;
 	}
 
 	/**

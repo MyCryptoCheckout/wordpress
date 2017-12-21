@@ -14,9 +14,23 @@ abstract class Currency
 		@brief		Convert this amount to this currency.
 		@since		2017-12-10 20:05:14
 	**/
-	public function convert( $original_currency, $original_amount )
+	public function convert( $currency, $amount )
 	{
-		return rand( 1000, 10000000 );
+		// Get the account data in order to get to the exchange rates.
+		$account_data = MyCryptoCheckout()->api()->account()->get();
+		// Convert to USD.
+		if ( $currency != 'USD' )
+		{
+			$usd = $amount / $account_data->get_physical_exchange_rate( $currency );
+			$usd = round( $usd, 2 );
+		}
+		else
+			$usd = $amount;
+
+		$cryptocurrency_amount = $account_data->get_virtual_exchange_rate( $this->get_id() );
+		$cryptocurrency_amount = $usd * $cryptocurrency_amount;
+
+		return $cryptocurrency_amount;
 	}
 
 	/**
