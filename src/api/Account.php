@@ -16,15 +16,132 @@ class Account
 	public static $account_data_site_option_key = 'account_data';
 
 	/**
-		@brief		Load the locally stored account data, using the Account_Data object.
+		@brief		The transient key for storing the account retrieval key.
+		@since		2017-12-22 00:22:36
+	**/
+	public static $account_retrieve_transient_key = 'mycryptocheckout_account_retrieve_key';
+
+	/**
+		@brief		Constructor.
 		@since		2017-12-12 11:04:04
 	**/
-	public function get()
+	public function __construct()
 	{
-		$account_data = MyCryptoCheckout()->get_site_option( static::$account_data_site_option_key );
-		$r = new Account_Data();
-		$r->load( $account_data );
-		return $r;
+		$this->load_data();
+	}
+
+	/**
+		@brief		Get the domain key.
+		@since		2017-12-12 11:18:05
+	**/
+	public function get_domain_key()
+	{
+		return $this->data->domain_key;
+	}
+
+	/**
+		@brief		Return the date the license expires.
+		@return		The time() the license expires, else false.
+		@since		2017-12-27 17:26:28
+	**/
+	public function get_license_expiration()
+	{
+		return false;
+	}
+
+	/**
+		@brief		Return the payments left.
+		@since		2017-12-23 09:03:56
+	**/
+	public function get_payments_left()
+	{
+		if ( ! $this->is_valid() )
+			return 0;
+		return $this->data->payments_left;
+	}
+
+	/**
+		@brief		Return the payments used.
+		@since		2017-12-23 09:03:56
+	**/
+	public function get_payments_used()
+	{
+		return $this->data->payments_used;
+	}
+
+	/**
+		@brief		Convenience method to return a physical exchange rate.
+		@since		2017-12-14 17:11:13
+	**/
+	public function get_physical_exchange_rate( $currency )
+	{
+		if ( isset( $this->data->physical_exchange_rates->rates->$currency ) )
+			return $this->data->physical_exchange_rates->rates->$currency;
+		else
+			return false;
+	}
+
+	/**
+		@brief		Convenience method to return a virtual exchange rate.
+		@since		2017-12-14 17:11:13
+	**/
+	public function get_virtual_exchange_rate( $currency )
+	{
+		if ( isset( $this->data->virtual_exchange_rates->rates->$currency ) )
+			return $this->data->virtual_exchange_rates->rates->$currency;
+		else
+			return false;
+	}
+
+	/**
+		@brief		Does the account have any payments left this month?
+		@since		2017-12-23 08:59:11
+	**/
+	public function has_payments_left()
+	{
+		return $this->get_payments_left() > 0;
+	}
+
+	/**
+		@brief		Is MCC available for payment?
+		@return		True if avaiable, else an exception containing the reason why it is not.
+		@since		2017-12-23 09:22:12
+	**/
+	public function is_available_for_payment()
+	{
+		// The account needs payments available.
+		if ( ! $this->has_payments_left() )
+			throw new Exception( 'Your account does not have any payments left this month.' );
+
+		// We need at least one wallet.
+		$wallets = MyCryptoCheckout()->wallets()->enabled_on_this_site();
+		if ( count( $wallets ) < 1 )
+			throw new Exception( 'There are no currencies enabled on this site.' );
+	}
+
+	/**
+		@brief		Is this account data valid?
+		@since		2017-12-12 11:15:12
+	**/
+	public function is_valid()
+	{
+		return isset( $this->data->domain_key );
+	}
+
+	/**
+		@brief		Load the data from the option.
+		@since		2017-12-24 11:17:31
+	**/
+	public function load_data()
+	{
+		$this->data = (object)[];
+
+		$data = MyCryptoCheckout()->get_site_option( static::$account_data_site_option_key );
+		$data = json_decode( $data );
+		if ( ! $data )
+			$this->data = (object)[];
+		else
+			$this->data = $data;
 	}
 
 	/**
@@ -37,17 +154,14 @@ class Account
 		{
 			// Set a retrieve key so we know that the retrieve_account data is ours.
 			$retrieve_key = hash( 'md5', microtime() . AUTH_SALT . rand( 0, PHP_INT_MAX ) );
-			$account_data = [
-				'retrieve_key' => $retrieve_key,
-			];
-			$account_data = json_encode( $account_data );
-			MyCryptoCheckout()->update_site_option( 'account_data', $account_data );
+			set_site_transient( static::$account_retrieve_transient_key, $retrieve_key, 60 );
 
-			$api_url = sprintf( 'account/retrieve/%s/%s',
-				base64_encode( MyCryptoCheckout()->get_server_name() ),
-				$retrieve_key
-			);
-			$result = $this->api->send_get( $api_url );
+			$result = MyCryptoCheckout()->api()->send_post( 'account/retrieve',
+				[
+					'admin_email' => MyCryptoCheckout()->get_admin_email(),
+					'domain' => base64_encode( MyCryptoCheckout()->get_server_name() ),
+					'retrieve_key' => $retrieve_key,
+				] );
 			if ( ! $result )
 				throw new Exception( 'No valid answer from the API server.' );
 
@@ -56,11 +170,11 @@ class Account
 			$cache_key = get_current_network_id() . ':' . $option_key;
 			wp_cache_delete( $cache_key, 'site-options' );
 			wp_cache_delete( $option_key, 'options' );
-			$account_data = MyCryptoCheckout()->get_site_option( static::$account_data_site_option_key );
-			$account_data = json_decode( $account_data );
-			if ( ! $account_data )
+			$this->load_data();
+			MyCryptoCheckout()->debug( 'Account updated from server.' );
+			if ( ! $this->is_valid() )
 				throw new Exception( 'Unable to retrieve new account data.' );
-			if ( ! isset( $account_data->domain_key ) )
+			if ( ! $this->get_domain_key() )
 				throw new Exception( 'New account data does not contain the domain key.' );
 			return true;
 		}
@@ -70,4 +184,5 @@ class Account
 			return false;
 		}
 	}
+
 }

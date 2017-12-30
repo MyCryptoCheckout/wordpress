@@ -23,6 +23,12 @@ class Wallet
 	public $currency_id = '';
 
 	/**
+		@brief		How many confirmations for payments to be considered complete.
+		@since		2017-12-22 19:26:23
+	**/
+	public $confirmations = 1;
+
+	/**
 		@brief		Is the wallet enabled at all?
 		@since		2017-12-09 09:06:47
 	**/
@@ -30,6 +36,7 @@ class Wallet
 
 	/**
 		@brief		When the wallet was last used for payment.
+		@details	Unix time.
 		@since		2017-12-14 18:38:13
 	**/
 	public $last_used = 0;
@@ -103,11 +110,18 @@ class Wallet
 			}
 		}
 
+		if ( $this->confirmations > 1 )
+			$r []= sprintf(
+				// Used 123 times
+				__( '%d confirmations', 'mycryptocheckout' ),
+				$this->confirmations
+			);
+
 		if ( $this->last_used > 0 )
 			$r []= sprintf(
 				// Used 123 times
 				__( 'Last used %s', 'mycryptocheckout' ),
-				ago( $this->last_used )
+				( MyCryptoCheckout()->local_datetime( $this->last_used ) )
 			);
 
 		if ( $this->times_used > 0 )
@@ -143,5 +157,15 @@ class Wallet
 	{
 		$this->enabled = $status;
 		return $this;
+	}
+
+	/**
+		@brief		Touch the uses of thie wallet.
+		@since		2017-12-27 11:54:28
+	**/
+	public function use()
+	{
+		$this->last_used = time();
+		$this->times_used++;
 	}
 }

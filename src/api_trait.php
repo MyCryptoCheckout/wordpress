@@ -61,7 +61,7 @@ trait api_trait
 	}
 
 	/**
-		@brief		Update the account information hourly.
+		@brief		Convenience method to update the account data hourly.
 		@details	Used mostly to update the currency exchange info.
 		@since		2017-12-14 08:08:49
 	**/

@@ -7,21 +7,18 @@
 class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 {
 	/**
-		@brief		The ID of the gateway.
-		@since		2017-12-08 16:45:27
-	**/
-	public static $gateway_id = 'mycryptocheckout';
-
-	/**
 		@brief		Constructor.
 		@since		2017-12-15 08:06:14
 	**/
 	public function __construct()
 	{
-		$this->id                 = static::$gateway_id;
-		//$this->icon               = apply_filters( 'woocommerce_cod_icon', '' );
+		$this->id                 = \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
 		$this->method_title       = 'MyCryptoCheckout';
-		$this->method_description = __( 'Accept cryptocurrency payments directly into your wallet using the MyCryptoCheckout service.', 'mycryptocheckout' );
+		$this->method_description = sprintf(
+			__( 'Accept cryptocurrency payments directly into your wallet using the MyCryptoCheckout service. %sConfigure your wallets here.%s', 'mycryptocheckout' ),
+			'<a href="options-general.php?page=mycryptocheckout">',
+			'</a>'
+		);
 		$this->has_fields         = true;
 
 		$this->init_form_fields();
@@ -48,7 +45,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function change_payment_complete_order_status( $status, $order_id = 0, $order = false )
 	{
 		if ( $order )
-			if ( static::$gateway_id === $order->get_payment_method() )
+			if ( \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id === $order->get_payment_method() )
 				$status = 'completed';
 		return $status;
 	}
@@ -63,8 +60,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$order = wc_get_order( $order_id );
 		$instructions = str_replace( '[AMOUNT]', $order->get_meta( '_mcc_amount' ), $instructions );
 		$instructions = str_replace( '[CURRENCY]', $order->get_meta( '_mcc_currency_id' ), $instructions );
-		$instructions = str_replace( '[SENDER_WALLET]', $order->get_meta( '_mcc_sender_wallet' ), $instructions );
-		$instructions = str_replace( '[RECEIVER_WALLET]', $order->get_meta( '_mcc_receiver_wallet' ), $instructions );
+		$instructions = str_replace( '[FROM]', $order->get_meta( '_mcc_from' ), $instructions );
+		$instructions = str_replace( '[TO]', $order->get_meta( '_mcc_to' ), $instructions );
 		return $instructions;
 	}
 
@@ -74,6 +71,19 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function init_form_fields()
 	{
+		try
+		{
+			MyCryptoCheckout()->woocommerce->is_available_for_payment();
+		}
+		catch ( Exception $e )
+		{
+			$message = sprintf( '%s: %s',
+				__( 'Payments using this gateway are currently not available', 'woocommerce' ),
+				$e->getMessage()
+			);
+			echo MyCryptoCheckout()->error_message_box()->_( $message );
+		}
+
 		$this->form_fields = [
 			'enabled' => [
 				'title'       => __( 'Enable/Disable', 'woocommerce' ),
@@ -85,8 +95,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'instructions' => array(
 				'title'       => __( 'Instructions', 'mycryptocheckout' ),
 				'type'        => 'textarea',
-				'description' => __( 'Instructions for payment that will be added to the thank you page. The following shortcodes are available: [AMOUNT], [CURRENCY], [RECEIVER_WALLET], [SENDER_WALLET]', 'mycryptocheckout' ),
-				'default'     => __( 'Please pay for your order by transfering [AMOUNT] [CURRENCY] from your [SENDER_WALLET] wallet to [RECEIVER_WALLET].', 'mycryptocheckout' ),
+				'description' => __( 'Instructions for payment that will be added to the thank you page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO], [FROM]', 'mycryptocheckout' ),
+				'default'     => __( 'Please pay for your order by transfering [AMOUNT] [CURRENCY] from your [FROM] wallet to [TO].', 'mycryptocheckout' ),
 			),
 			'title' => [
 				'title' => __( 'Payment type name', 'mycryptocheckout' ),
@@ -122,17 +132,15 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function is_available()
 	{
-		// We need at least one wallet.
-		$wallets = MyCryptoCheckout()->wallets()->enabled_on_this_site();
-		if ( count( $wallets ) < 1 )
+		try
+		{
+			MyCryptoCheckout()->woocommerce->is_available_for_payment();
+			return true;
+		}
+		catch ( Exception $e )
+		{
 			return false;
-
-		// And we need to be able to convert this currency.
-		$account = MyCryptoCheckout()->api()->account()->get();
-		if ( ! $account->get_physical_exchange_rate( get_woocommerce_currency() ) )
-			return false;
-
-		return true;
+		}
 	}
 
 	/**
@@ -241,12 +249,38 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			__( 'MyCryptoCheckout details', 'woocommerce' )
 		);
 
-		$r .= sprintf( '<p class="form-field form-field-wide">Expecting %s&nbsp;%s from address %s to address %s</p>',
+		$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+			// Expecting 123 BTC from abcxyz to xyzabc
+			sprintf( __( 'Expecting %s&nbsp;%s from %s to %s', 'mycryptocheckout'),
             	$amount,
             	$order->get_meta( '_mcc_currency_id' ),
-            	$order->get_meta( '_mcc_sender_wallet' ),
-            	$order->get_meta( '_mcc_receiver_wallet' )
+            	$order->get_meta( '_mcc_from' ),
+            	$order->get_meta( '_mcc_to' )
+			)
 		);
+
+		$attempts = $order->get_meta( '_mcc_attempts' );
+		$payment_id = $order->get_meta( '_mcc_payment_id' );
+
+		if ( $payment_id > 0 )
+		{
+			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+				// Expecting 123 BTC from abcxyz to xyzabc
+				sprintf( __( 'MyCryptoCheckout payment ID: %d', 'mycryptocheckout'),
+					$payment_id
+				)
+			);
+		}
+		else
+		{
+			if ( $attempts > 0 )
+				$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+					sprintf( __( '%d attempts made to contact the API server.', 'mycryptocheckout'),
+						$attempts
+					)
+				);
+		}
+
 
 		$r .= '</div>';
 		echo $r;
@@ -272,16 +306,22 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$currencies = $mcc->currencies();
 		$currency = $currencies->get( $currency_id );
 		$wallet = $mcc->wallets()->get_dustiest_wallet( $currency_id );
+
+		$wallet->use();
+		$mcc->wallets()->save();
+
 		$woocommerce_currency = get_woocommerce_currency();
 		$amount = \mycryptocheckout\ecommerce\woocommerce\WooCommerce::markup_total( $order_total );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
 
 		$sender_address = sanitize_text_field( $_POST[ 'mcc_sender_address' ] );
-
 		$order->update_meta_data( '_mcc_amount', $amount );
 		$order->update_meta_data( '_mcc_currency_id', $currency_id );
-		$order->update_meta_data( '_mcc_sender_wallet', $sender_address );
-		$order->update_meta_data( '_mcc_receiver_wallet', $wallet->get_address() );
+		$order->update_meta_data( '_mcc_confirmations', $wallet->confirmations );
+		$order->update_meta_data( '_mcc_created_at', time() );
+		$order->update_meta_data( '_mcc_from', $sender_address );
+		$order->update_meta_data( '_mcc_payment_id', 0 );		// 0 = not sent.
+		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
 	}
 
 	/**
@@ -311,27 +351,3 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		echo wpautop( wptexturize( $instructions ) ) . PHP_EOL;
 	}
 }
-
-
-/**
-		woocommerce_form_field( '_mcc_amount',
-		[
-			'type' => 'text',
-			'class' => [ 'mcc_amount' ],
-			'label' =>  __( 'Cryptocurrency amount', 'mycryptocheckout' ),
-			'value' => $amount . ' ' . $order->get_meta( '_mcc_currency_id' )
-		] );
-    <div class="order_data_column">
-
-        <h4>---------php _e( 'MyCryptoCheckout details', 'woocommerce' ); --------------<a href="#" class="edit_address">---------php _e( 'Edit', 'woocommerce' ); --------------</a></h4>
-        <div class="address">
-        ---------php
-            echo '<p><strong>' . __( 'Some field' ) . ':</strong>' . $order->get_meta( '_some_field' ) . '</p>';
-            echo '<p><strong>' . __( 'Another field' ) . ':</strong>' . $order->get_meta( '_another_field' ) . '</p>'; --------------
-        </div>
-        <div class="edit_address">
-            ---------php woocommerce_wp_text_input( array( 'id' => '_some_field', 'label' => __( 'Some field' ), 'wrapper_class' => '_billing_company_field' ) ); --------------
-            ---------php woocommerce_wp_text_input( array( 'id' => '_another_field', 'label' => __( 'Another field' ), 'wrapper_class' => '_billing_company_field' ) ); --------------
-        </div>
-    </div>
-**/

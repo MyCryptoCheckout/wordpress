@@ -16,9 +16,9 @@ trait admin_trait
 	**/
 	public function activate()
 	{
-		wp_schedule_event( time(), 'hourly', 'mycryptocheckout_retrieve_account' );
+		wp_schedule_event( time(), 'hourly', 'mycryptocheckout_hourly' );
 		// We need to run this as soon as the plugin is active.
-		wp_schedule_single_event( time(), 'mycryptocheckout_retrieve_account' );
+		wp_schedule_single_event( time(), 'mycryptocheckout_hourly' );
 	}
 
 	/**
@@ -40,12 +40,12 @@ trait admin_trait
 				$r .= $this->error_message_box()->_( __( 'Error refreshing your account data. Please enable debug mode to find the error.', 'mycryptocheckout' ) );
 		}
 
-		$account_data = $this->api()->account()->get();
+		$account = $this->api()->account();
 
-		if ( ! $account_data->is_valid() )
+		if ( ! $account->is_valid() )
 			$r .= $this->admin_account_invalid();
 		else
-			$r .= $this->admin_account_valid( $account_data );
+			$r .= $this->admin_account_valid( $account );
 
 		$save = $form->secondary_button( 'retrieve_account' )
 			->value( __( 'Refresh your account data', 'mycryptocheckout' ) );
@@ -79,53 +79,103 @@ trait admin_trait
 		@brief		Show the valid account text.
 		@since		2017-12-12 11:07:42
 	**/
-	public function admin_account_valid( $account_data )
+	public function admin_account_valid( $account )
 	{
 		$r = '';
+
+		try
+		{
+			$this->api()->account()->is_available_for_payment();
+		}
+		catch ( Exception $e )
+		{
+			$message = sprintf( '%s: %s',
+				__( 'Payments using MyCryptoCheckout are currently not available', 'woocommerce' ),
+				$e->getMessage()
+			);
+			$r .= $this->error_message_box()->_( $message );
+		}
+
 		$table = $this->table();
 		$table->caption()->text( __( 'Information about your account on mycryptocheckout.com', 'mycryptocheckout' ) );
 
-		// Assemble the current wallets into the table.
 		$row = $table->head()->row()->hidden();
 		// Table column name
 		$row->th( 'key' )->text( __( 'Key', 'mycryptocheckout' ) );
 		// Table column name
 		$row->td( 'details' )->text( __( 'Details', 'mycryptocheckout' ) );
 
-		// Server name
+		if ( $this->debugging() )
+		{
+			$row = $table->head()->row();
+			// Table column name
+			$row->th( 'key' )->text( __( 'API key', 'mycryptocheckout' ) );
+			// Table column name
+			$row->td( 'details' )->text( $account->get_domain_key() );
+
+			$row = $table->head()->row();
+			// Table column name
+			$row->th( 'key' )->text( __( 'Server name', 'mycryptocheckout' ) );
+			// Table column name
+			$row->td( 'details' )->text( $this->get_server_name() );
+		}
+
 		$row = $table->head()->row();
 		// Table column name
-		$row->th( 'key' )->text( __( 'API key', 'mycryptocheckout' ) );
+		$row->th( 'key' )->text( __( 'Payments remaining this month', 'mycryptocheckout' ) );
 		// Table column name
-		$row->td( 'details' )->text( $account_data->get_domain_key() );
+		$row->td( 'details' )->text( $account->get_payments_left() );
 
-		// API key.
 		$row = $table->head()->row();
 		// Table column name
-		$row->th( 'key' )->text( __( "This server's name", 'mycryptocheckout' ) );
+		$row->th( 'key' )->text( __( 'Payments processed', 'mycryptocheckout' ) );
 		// Table column name
-		$row->td( 'details' )->text( $this->get_server_name() );
+		$row->td( 'details' )->text( $account->get_payments_used() );
 
-		// API key.
-		$row = $table->head()->row();
-		// Table column name
-		$row->th( 'key' )->text( __( 'Purchases left this period', 'mycryptocheckout' ) );
-		// Table column name
-		$row->td( 'details' )->text( $account_data->get_purchases_left() );
-
-		// API key.
 		$row = $table->head()->row();
 		// Table column name
 		$row->th( 'key' )->text( __( 'Physical currency exchange rates updated', 'mycryptocheckout' ) );
 		// Table column name
-		$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $account_data->data->physical_exchange_rates->timestamp ) );
+		$time = $account->data->physical_exchange_rates->timestamp;
+		$text = sprintf( '<span title="%s">%s</span>',
+			$this->local_datetime( $time ),
+			human_time_diff( $time )
+		);
+		$row->td( 'details' )->text( $text );
 
-		// API key.
 		$row = $table->head()->row();
 		// Table column name
 		$row->th( 'key' )->text( __( 'Cryptocurrency exchange rates updated', 'mycryptocheckout' ) );
 		// Table column name
-		$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $account_data->data->virtual_exchange_rates->timestamp ) );
+		$time = $account->data->virtual_exchange_rates->timestamp;
+		$text = sprintf( '<span title="%s">%s</span>',
+			$this->local_datetime( $time ),
+			human_time_diff( $time )
+		);
+		$row->td( 'details' )->text( $text );
+
+		$expiration = $this->api()->account()->get_license_expiration();
+		if ( $expiration !== false )
+		{
+			$row = $table->head()->row();
+			// Table column name
+			$row->th( 'key' )->text( __( 'License expiration', 'mycryptocheckout' ) );
+			// Table column name
+			$value = $this->local_date( $expiration );
+			$row->td( 'details' )->text( $value );
+		}
+
+		$row = $table->head()->row();
+		// Table column name
+		if ( ! $expiration )
+			$text =  __( 'Purchase a license for unlimited payments', 'mycryptocheckout' );
+		else
+			$text =  __( 'Renew your license', 'mycryptocheckout' );
+		$row->th( 'key' )->text( $text );
+		// Table column name
+		$url = $this->api()->get_purchase_url();
+		$url = sprintf( '<a href="%s">%s</a>', $url, $url );
+		$row->td( 'details' )->text( $url );
 
 		$r .= $table;
 
@@ -323,7 +373,9 @@ trait admin_trait
 		}
 		$wallet = $wallets->get( $wallet_id );
 
-			$form = $this->form();
+		$currencies = $this->currencies();
+		$currency = $currencies->get( $wallet->get_currency_id() );
+		$form = $this->form();
 		$form->id( 'broadcast_settings' );
 		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
@@ -333,7 +385,7 @@ trait admin_trait
 			// Input label
 			->label( __( 'Address', 'mycryptocheckout' ) )
 			->required()
-			->size( 64, 256 )
+			->size( $currency->get_address_length(), $currency->get_address_length() )
 			->trim()
 			->value( $wallet->get_address() );
 
@@ -342,6 +394,13 @@ trait admin_trait
 			->description( __( 'Is this wallet enabled and ready to receive funds?', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Enabled', 'mycryptocheckout' ) );
+
+		$confirmations = $form->number( 'confirmations' )
+			->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Confirmations', 'mycryptocheckout' ) )
+			->min( 1, 100 )
+			->value( $wallet->confirmations );
 
 		if ( $this->is_network )
 			$wallet_on_network = $form->checkbox( 'wallet_on_network' )
@@ -358,6 +417,8 @@ trait admin_trait
 			$form->post();
 			$form->use_post_values();
 
+			$reshow = false;
+
 			if ( $save->pressed() )
 			{
 				try
@@ -371,6 +432,7 @@ trait admin_trait
 					$currency->validate_address( $wallet->address );
 
 					$wallet->enabled = $wallet_enabled->is_checked();
+					$wallet->confirmations = $confirmations->get_filtered_post_value();
 
 					$wallets->save();
 					$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
@@ -423,7 +485,7 @@ trait admin_trait
 		$fs->legend->label( __( 'Gateway fees', 'mycryptocheckout' ) );
 
 		$fs->markup( 'm_gateway_fees' )
-			->p( __( 'If you wish to charge (or discount) visitors for using MyCryptoCheckout as the payment gateway, you can enter the fixed or percentage amounts in the boxes below. The cryptocurrency checkout price will be modified in accordande with the values below.', 'mycryptocheckout' ) );
+			->p( __( 'If you wish to charge (or discount) visitors for using MyCryptoCheckout as the payment gateway, you can enter the fixed or percentage amounts in the boxes below. The cryptocurrency checkout price will be modified in accordance with the combined values below.', 'mycryptocheckout' ) );
 
 		$markup_amount = $fs->number( 'markup_amount' )
 			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the fixed amount in this box.', 'mycryptocheckout' ) )
@@ -482,6 +544,24 @@ trait admin_trait
 	**/
 	public function deactivate()
 	{
-		wp_clear_scheduled_hook( 'mycryptocheckout_retrieve_account' );
+		wp_clear_scheduled_hook( 'mycryptocheckout_hourly' );
+	}
+
+	/**
+		@brief		init_admin_trait
+		@since		2017-12-25 18:25:53
+	**/
+	public function init_admin_trait()
+	{
+		$this->add_action( 'mycryptocheckout_hourly' );
+	}
+
+	/**
+		@brief		Our hourly cron.
+		@since		2017-12-22 07:49:38
+	**/
+	public function mycryptocheckout_hourly()
+	{
+		$this->api()->account()->retrieve();
 	}
 }

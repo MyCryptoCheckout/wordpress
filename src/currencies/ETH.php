@@ -19,12 +19,11 @@ class ETH
 	}
 
 	/**
-		@brief		Validate that this address looks normal.
-		@since		2017-12-09 20:09:17
+		@brief		Return the length of the wallet address.
+		@since		2017-12-24 10:58:43
 	**/
-	public static function validate_address( $address )
+	public static function get_address_length()
 	{
-		static::validate_address_length( $address, 42 );
-		return true;
+		return 42;
 	}
 }

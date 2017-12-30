@@ -16,21 +16,30 @@ abstract class Currency
 	**/
 	public function convert( $currency, $amount )
 	{
-		// Get the account data in order to get to the exchange rates.
-		$account_data = MyCryptoCheckout()->api()->account()->get();
+		// The exchange rates are stored in the account.
+		$account = MyCryptoCheckout()->api()->account();
 		// Convert to USD.
 		if ( $currency != 'USD' )
 		{
-			$usd = $amount / $account_data->get_physical_exchange_rate( $currency );
+			$usd = $amount / $account->get_physical_exchange_rate( $currency );
 			$usd = round( $usd, 2 );
 		}
 		else
 			$usd = $amount;
 
-		$cryptocurrency_amount = $account_data->get_virtual_exchange_rate( $this->get_id() );
+		$cryptocurrency_amount = $account->get_virtual_exchange_rate( $this->get_id() );
 		$cryptocurrency_amount = $usd * $cryptocurrency_amount;
 
 		return $cryptocurrency_amount;
+	}
+
+	/**
+		@brief		Return the length of the wallet address.
+		@since		2017-12-24 10:58:43
+	**/
+	public static function get_address_length()
+	{
+		return 34;	// This is the default for a lot of coins.
 	}
 
 	/**
@@ -56,6 +65,7 @@ abstract class Currency
 	**/
 	public static function validate_address( $address )
 	{
+		static::validate_address_length( $address, static::get_address_length() );
 		return true;
 	}
 

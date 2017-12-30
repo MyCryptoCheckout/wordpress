@@ -17,14 +17,4 @@ class BTC
 	{
 		return 'Bitcoin';
 	}
-
-	/**
-		@brief		Validate that this address looks normal.
-		@since		2017-12-09 20:09:17
-	**/
-	public static function validate_address( $address )
-	{
-		static::validate_address_length( $address, 34 );
-		return true;
-	}
 }

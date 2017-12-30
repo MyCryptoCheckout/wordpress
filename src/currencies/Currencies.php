@@ -39,7 +39,7 @@ class Currencies
 	{
 		$r = [];
 		foreach( $this as $currency )
-			$r[ $currency->get_id() ] = $currency->get_name();
+			$r[ $currency->get_id() ] = sprintf( '%s (%s)', $currency->get_name(), $currency->get_id() );
 		return array_flip( $r );
 	}
 }
