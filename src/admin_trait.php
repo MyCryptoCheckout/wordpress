@@ -259,13 +259,6 @@ trait admin_trait
 			->size( 64, 256 )
 			->trim();
 
-		if ( $this->is_network )
-			$wallet_on_network = $fs->checkbox( 'wallet_on_network' )
-				->checked( true )
-				->description( __( 'Do you want the wallet to be available on the whole network?', 'mycryptocheckout' ) )
-				// Input label
-				->label( __( 'Network wallet', 'mycryptocheckout' ) );
-
 		$save = $form->primary_button( 'save' )
 			->value( __( 'Save settings', 'mycryptocheckout' ) );
 
@@ -317,8 +310,6 @@ trait admin_trait
 				{
 					$wallet = $wallets->new_wallet();
 					$wallet->address = $wallet_address->get_filtered_post_value();
-					if ( $this->is_network )
-						$wallet->network = $wallet_on_network->is_checked();
 
 					$chosen_currency = $wallet_currency->get_filtered_post_value();
 					$currency = $this->currencies()->get( $chosen_currency );
@@ -402,12 +393,26 @@ trait admin_trait
 			->min( 1, 100 )
 			->value( $wallet->confirmations );
 
-		if ( $this->is_network )
+		if ( $this->is_network && is_super_admin() )
+		{
 			$wallet_on_network = $form->checkbox( 'wallet_on_network' )
 				->checked( $wallet->network )
 				->description( __( 'Do you want the wallet to be available on the whole network?', 'mycryptocheckout' ) )
 				// Input label
 				->label( __( 'Network wallet', 'mycryptocheckout' ) );
+
+			$sites = $form->select( 'site_ids' )
+				->description( __( 'If not network enabled, on which sites this wallet should be available.', 'mycryptocheckout' ) )
+				// Input label
+				->label( __( 'Sites', 'mycryptocheckout' ) )
+				->multiple()
+				->value( $wallet->sites );
+
+			foreach( $this->get_sorted_sites() as $site_id => $site_name )
+				$sites->option( $site_name, $site_id );
+
+			$sites->autosize();
+		}
 
 		$save = $form->primary_button( 'save' )
 			->value( __( 'Save settings', 'mycryptocheckout' ) );
@@ -433,6 +438,12 @@ trait admin_trait
 
 					$wallet->enabled = $wallet_enabled->is_checked();
 					$wallet->confirmations = $confirmations->get_filtered_post_value();
+
+					if ( $this->is_network && is_super_admin() )
+					{
+						$wallet->network = $wallet_on_network->is_checked();
+						$wallet->sites = $sites->get_post_value();
+					}
 
 					$wallets->save();
 					$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
@@ -539,6 +550,47 @@ trait admin_trait
 	}
 
 	/**
+		@brief		Tools
+		@since		2017-12-30 23:02:12
+	**/
+	public function admin_tools()
+	{
+		$form = $this->form();
+		$form->css_class( 'plainview_form_auto_tabs' );
+		$r = '';
+
+		$form->markup( 'm_hourly_cron' )
+			->p(  __( 'The hourly run cron job will do things like update the account information, exchange rates, send unsent data to the API server, etc.', 'mycryptocheckout' ) );
+
+		$hourly_cron = $form->secondary_button( 'hourly_cron' )
+			->value( __( 'Run hourly cron job', 'mycryptocheckout' ) );
+
+		if ( $form->is_posting() )
+		{
+			$form->post();
+			$form->use_post_values();
+
+			if ( $hourly_cron->pressed() )
+			{
+				do_action( 'mycryptocheckout_hourly' );
+				$r .= $this->info_message_box()->_( __( 'MyCryptoCheckout hourly cron job run.', 'mycryptocheckout' ) );
+			}
+
+			echo $r;
+			$_POST = [];
+			$function = __FUNCTION__;
+			echo $this->$function();
+			return;
+		}
+
+		$r .= $form->open_tag();
+		$r .= $form->display_form_table();
+		$r .= $form->close_tag();
+
+		echo $r;
+	}
+
+	/**
 		@brief		Deactivation.
 		@since		2017-12-14 08:36:14
 	**/
@@ -554,6 +606,10 @@ trait admin_trait
 	public function init_admin_trait()
 	{
 		$this->add_action( 'mycryptocheckout_hourly' );
+
+		// The plugin table.
+		$this->add_filter( 'network_admin_plugin_action_links', 'plugin_action_links', 10, 4 );
+		$this->add_filter( 'plugin_action_links', 'plugin_action_links', 10, 4 );
 	}
 
 	/**
@@ -563,5 +619,24 @@ trait admin_trait
 	public function mycryptocheckout_hourly()
 	{
 		$this->api()->account()->retrieve();
+	}
+
+	/**
+		@brief		Modify the plugin links in the plugins table.
+		@since		2017-12-30 20:49:13
+	**/
+	public function plugin_action_links( $links, $plugin_name )
+	{
+		if ( $plugin_name != 'mycryptocheckout/MyCryptoCheckout.php' )
+			return $links;
+		if ( is_network_admin() )
+			$url = network_admin_url( 'settings.php?page=mycryptocheckout' );
+		else
+			$url = admin_url( 'options-general.php?page=mycryptocheckout' );
+		$links []= sprintf( '<a href="%s">%s</a>',
+			$url,
+			__( 'Settings', 'threewp_broadcast' )
+		);
+		return $links;
 	}
 }

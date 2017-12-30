@@ -100,11 +100,12 @@ class Wallet
 				$sites = [];
 				foreach( $this->sites as $site_id )
 				{
-					$name = get_site_option( $site_id, 'sitename' );
+					$name = get_blog_option( $site_id, 'blogname' );
 					$sites []= sprintf( '%s (%d)', $name, $site_id );
 				}
 				$r []= sprintf(
-					__( 'Available only on %s', 'mycryptocheckout' ),
+					// This wallet is available on SITE1, SITE2, SITE3
+					__( 'Available on %s', 'mycryptocheckout' ),
 					implode( ', ', $sites )
 				);
 			}
@@ -144,7 +145,7 @@ class Wallet
 			return false;
 		if ( $this->network )
 			return true;
-		if ( in_array( get_current_site_id(), $this->sites ) )
+		if ( in_array( get_current_blog_id(), $this->sites ) )
 			return true;
 		return false;
 	}

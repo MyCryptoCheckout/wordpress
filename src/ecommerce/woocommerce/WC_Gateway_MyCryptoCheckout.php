@@ -13,12 +13,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function __construct()
 	{
 		$this->id                 = \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
-		$this->method_title       = 'MyCryptoCheckout';
-		$this->method_description = sprintf(
-			__( 'Accept cryptocurrency payments directly into your wallet using the MyCryptoCheckout service. %sConfigure your wallets here.%s', 'mycryptocheckout' ),
-			'<a href="options-general.php?page=mycryptocheckout">',
-			'</a>'
-		);
+		$this->method_title       = $this->get_method_title();
+		$this->method_description = $this->get_method_description();
 		$this->has_fields         = true;
 
 		$this->init_form_fields();
@@ -26,10 +22,11 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		$this->title = $this->get_option( 'title' );
 		$this->description = $this->get_option( 'description' );
+
 		add_action( 'woocommerce_admin_order_data_after_order_details', [ $this, 'woocommerce_admin_order_data_after_order_details' ] );
 		add_action( 'woocommerce_checkout_create_order', [ $this, 'woocommerce_checkout_create_order' ], 10, 2 );
 		add_action( 'woocommerce_email_before_order_table', [ $this, 'woocommerce_email_before_order_table' ], 10, 3 );
-		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'process_admin_options' ] );
+		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'post_process_admin_options' ] );
 		add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'woocommerce_thankyou' ] );
 	}
 
@@ -51,40 +48,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Return the instructions for this order.
-		@since		2017-12-14 19:45:28
+		@brief		Return the form fields used for the settings.
+		@since		2017-12-30 21:14:39
 	**/
-	public function get_instructions( $order_id )
+	public function get_form_fields()
 	{
-		$instructions = $this->get_option( 'instructions' );
-		$order = wc_get_order( $order_id );
-		$instructions = str_replace( '[AMOUNT]', $order->get_meta( '_mcc_amount' ), $instructions );
-		$instructions = str_replace( '[CURRENCY]', $order->get_meta( '_mcc_currency_id' ), $instructions );
-		$instructions = str_replace( '[FROM]', $order->get_meta( '_mcc_from' ), $instructions );
-		$instructions = str_replace( '[TO]', $order->get_meta( '_mcc_to' ), $instructions );
-		return $instructions;
-	}
-
-	/**
-		@brief		Init the form fields.
-		@since		2017-12-09 22:05:11
-	**/
-	public function init_form_fields()
-	{
-		try
-		{
-			MyCryptoCheckout()->woocommerce->is_available_for_payment();
-		}
-		catch ( Exception $e )
-		{
-			$message = sprintf( '%s: %s',
-				__( 'Payments using this gateway are currently not available', 'woocommerce' ),
-				$e->getMessage()
-			);
-			echo MyCryptoCheckout()->error_message_box()->_( $message );
-		}
-
-		$this->form_fields = [
+		return [
 			'enabled' => [
 				'title'       => __( 'Enable/Disable', 'woocommerce' ),
 				'label'       => __( 'Enable MyCryptoCheckout', 'mycryptocheckout' ),
@@ -96,7 +65,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'title'       => __( 'Instructions', 'mycryptocheckout' ),
 				'type'        => 'textarea',
 				'description' => __( 'Instructions for payment that will be added to the thank you page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO], [FROM]', 'mycryptocheckout' ),
-				'default'     => __( 'Please pay for your order by transfering [AMOUNT] [CURRENCY] from your [FROM] wallet to [TO].', 'mycryptocheckout' ),
+				'default'     => __( 'Please pay for your order by transferring [AMOUNT] [CURRENCY] from your [FROM] wallet to [TO].', 'mycryptocheckout' ),
 			),
 			'title' => [
 				'title' => __( 'Payment type name', 'mycryptocheckout' ),
@@ -122,8 +91,82 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'description' => __( "This is the description for the the input asking for the user's wallet address.", 'mycryptocheckout' ),
 				'default' => __( "Your wallet address is used to track the payment.", 'mycryptocheckout' ),
 			],
-
+			'reset_to_defaults' => [
+				'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
+				'type'			=> 'checkbox',
+				'default'     => 'no',
+				'description'	=> __( 'If you wish to reset all of these settings to the default, check this box and save your changes.', 'mycryptocheckout' ),
+			],
     	];
+	}
+
+	/**
+		@brief		Return the instructions for this order.
+		@since		2017-12-14 19:45:28
+	**/
+	public function get_instructions( $order_id )
+	{
+		$instructions = $this->get_option( 'instructions' );
+		$order = wc_get_order( $order_id );
+		$instructions = str_replace( '[AMOUNT]', $order->get_meta( '_mcc_amount' ), $instructions );
+		$instructions = str_replace( '[CURRENCY]', $order->get_meta( '_mcc_currency_id' ), $instructions );
+		$instructions = str_replace( '[FROM]', $order->get_meta( '_mcc_from' ), $instructions );
+		$instructions = str_replace( '[TO]', $order->get_meta( '_mcc_to' ), $instructions );
+		return $instructions;
+	}
+
+	/**
+		@brief		Return the description of this gateway.
+		@since		2017-12-30 21:40:51
+	**/
+	public function get_method_description()
+	{
+		$r = __( 'Accept cryptocurrency payments directly into your wallet using the MyCryptoCheckout service.', 'mycryptocheckout' );
+
+		try
+		{
+			MyCryptoCheckout()->woocommerce->is_available_for_payment();
+
+			$wallets = MyCryptoCheckout()->wallets()->enabled_on_this_site();
+			$currency_ids = [];
+			foreach( $wallets as $wallet )
+				$currency_ids[ $wallet->currency_id ] = $wallet->currency_id;
+			ksort( $currency_ids );
+
+			// ANCHOR Link to wallet configuration page. ENDANCHOR
+			$r .= "\n\n" . sprintf( __( 'You currently have the following currencies configured: %s', 'mycryptocheckout' ),
+				implode( ', ', $currency_ids )
+			);
+		}
+		catch ( Exception $e )
+		{
+			$r .= "\n\n<em>" . __( 'You cannot currently accept any payments using this service:', 'mycryptocheckout' ) . '</em> ' . $e->getMessage();
+		}
+
+		$r .= "\n\n" . sprintf( __( '%sConfigure your wallets here.%s', 'mycryptocheckout' ),
+			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
+			'</a>'
+		);
+
+		return $r;
+	}
+
+	/**
+		@brief		Return the title of this gateway.
+		@since		2017-12-30 21:43:30
+	**/
+	public function get_method_title()
+	{
+		return 'MyCryptoCheckout';
+	}
+
+	/**
+		@brief		Init the form fields.
+		@since		2017-12-09 22:05:11
+	**/
+	public function init_form_fields()
+	{
+		$this->form_fields = $this->get_form_fields();
 	}
 
 	/**
@@ -203,10 +246,33 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$woocommerce->cart->empty_cart();
 
 		// Return thankyou redirect
-		return array(
+		return [
 			'result' => 'success',
 			'redirect' => $this->get_return_url( $order )
-		);
+		];
+	}
+
+	/**
+		@brief		Handle the resetting of the settings.
+		@since		2017-12-30 21:24:38
+	**/
+	public function post_process_admin_options()
+	{
+		$this->process_admin_options();
+
+		$reset = $this->get_option( 'reset_to_defaults' );
+		if ( $reset != 'yes' )
+			return;
+		// Reset all of the settings!
+		$settings = $this->get_form_fields();
+		$new_settings = [];
+		foreach( $settings as $key => $field )
+		{
+			if ( ! isset( $field[ 'default' ] ) )
+				continue;
+			$default = $field[ 'default' ];
+		}
+		update_option( $this->get_option_key(), apply_filters( 'woocommerce_settings_api_sanitized_fields_' . $this->id, $new_settings ) );
 	}
 
 	function validate_fields()

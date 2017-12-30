@@ -33,6 +33,12 @@ class Payment
 	public $currency_id;
 
 	/**
+		@brief		Any extra data we want to send to the server.
+		@since		2017-12-30 19:41:56
+	**/
+	public $data;
+
+	/**
 		@brief		From which address?
 		@since		2017-12-21 23:36:42
 	**/
@@ -45,6 +51,15 @@ class Payment
 	public $to;
 
 	/**
+		@brief		Return the data handling object for this payment.
+		@since		2017-12-30 19:45:00
+	**/
+	public function data()
+	{
+		return new Payment_Data( $this );
+	}
+
+	/**
 		@brief		Return this object as an array.
 		@since		2017-12-21 23:37:48
 	**/
@@ -55,6 +70,7 @@ class Payment
 			'confirmations' => $this->confirmations,
 			'created_at' => $this->created_at,
 			'currency_id' => $this->currency_id,
+			'data' => $this->data,
 			'from' => $this->from,
 			'to' => $this->to,
 		];

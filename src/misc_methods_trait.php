@@ -35,14 +35,10 @@ trait misc_methods_trait
 	public function get_admin_email()
 	{
 		if ( ! $this->is_network )
-		{
 			$admin_email = get_bloginfo( 'admin_email' );
-		}
 		else
-		{
-			// The server name is the name of the first blog.
-			$admin_email = get_blog_details( 1, 'admin_email' );
-		}
+			// Use the admin email of blog 1.
+			$admin_email = get_blog_option( 1, 'admin_email' );
 
 		return $admin_email;
 	}
@@ -54,16 +50,41 @@ trait misc_methods_trait
 	public function get_server_name()
 	{
 		if ( ! $this->is_network )
-		{
 			$server_name = get_bloginfo( 'url' );
-		}
 		else
-		{
 			// The server name is the name of the first blog.
-			$server_name = get_blog_details( 1, 'url' );
-		}
+			$server_name = get_blog_option( 1, 'siteurl' );
 
 		return $server_name;
+	}
+
+	/**
+		@brief		Return a collection of sites ordered by site 1, and then the rest alphabetically.
+		@since		2017-12-30 22:28:15
+	**/
+	public function get_sorted_sites()
+	{
+		$r = [];
+		$sites = get_sites();
+		$blog_name = get_blog_option( 1, 'blogname' );
+		$unsorted[ 0 ] = [ 1, $blog_name ];
+
+		// Ignore blog 1, since we have already handled it.
+		array_shift( $sites );
+		foreach( $sites as $site )
+		{
+			$blog_id = $site->blog_id;
+			$blog_name = get_blog_option( $blog_id, 'blogname' );
+			$unsorted[ $blog_name ] = [ $blog_id, $blog_name ];
+		}
+
+		ksort( $unsorted );
+
+		$r = [];
+		foreach( $unsorted as $unsorted_site )
+			$r[ $unsorted_site[ 0 ] ] = $unsorted_site[ 1 ];
+
+		return $r;
 	}
 
 	/**

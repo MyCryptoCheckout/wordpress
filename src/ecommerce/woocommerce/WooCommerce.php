@@ -31,15 +31,6 @@ class WooCommerce
 	}
 
 	/**
-		@brief		Generate a JSON object to be stored as the order identfier.
-		@since		2017-12-21 23:50:37
-	**/
-	public function generate_order_data( $order_id )
-	{
-		return json_encode( [ 'woocommerce_order_id' => $order_id ] );
-	}
-
-	/**
 		@brief		Generate a Payment class from an order.
 		@since		2017-12-21 23:47:17
 	**/
@@ -53,6 +44,11 @@ class WooCommerce
 		$payment->currency_id = $order->get_meta( '_mcc_currency_id' );
 		$payment->from = $order->get_meta( '_mcc_from' );
 		$payment->to = $order->get_meta( '_mcc_to' );
+
+		// If we are on a network, then note down the site ID.
+		if ( $this->is_network )
+			$payment->data()->set( 'site_id', get_current_blog_id() );
+
 		return $payment;
 	}
 
@@ -104,6 +100,20 @@ class WooCommerce
 	**/
 	public function mycryptocheckout_payment_complete( $payment )
 	{
+		$switched_blog = 0;
+		if ( isset( $payment->data ) )
+		{
+			$data = json_decode( $payment->data );
+			if ( $data )
+			{
+				if ( isset( $data->site_id ) )
+				{
+					$switched_blog = $data->site_id;
+					switch_to_blog( $switched_blog );
+				}
+			}
+		}
+
 		// Find the payment with this ID.
 		global $wpdb;
 		$query = sprintf( "SELECT `post_id` FROM `%s` WHERE `meta_key` = '_mcc_payment_id' AND `meta_value` = '%d'",
@@ -116,6 +126,9 @@ class WooCommerce
 			$order = wc_get_order( $order_id );
 			$order->payment_complete( $payment->transaction_id );
 		}
+
+		if ( $switched_blog > 0 )
+			restore_current_blog();
 	}
 
 	/**

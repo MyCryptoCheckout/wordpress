@@ -15,7 +15,7 @@ trait menu_trait
 	public function init_menu_trait()
 	{
 		$this->add_action( 'admin_menu' );
-		$this->add_action( 'network_admin_menu', 'admin_menu' );
+		$this->add_action( 'network_admin_menu' );
 	}
 
 	/**
@@ -24,6 +24,7 @@ trait menu_trait
 	**/
 	public function admin_menu()
 	{
+		// For normal admin.
 		add_submenu_page(
 			'options-general.php',
 			// Page heading
@@ -34,6 +35,7 @@ trait menu_trait
 			'mycryptocheckout',
 			[ &$this, 'admin_menu_tabs' ]
 		);
+
 	}
 
 	public function admin_menu_tabs()
@@ -61,6 +63,13 @@ trait menu_trait
 			// Name of tab
 			->name( __( 'Settings', 'mycryptocheckout' ) );
 
+		$tabs->tab( 'tools' )
+			->callback_this( 'admin_tools' )
+			// Tab heading
+			->heading( __( 'MyCryptoCheckout Tools', 'mycryptocheckout' ) )
+			// Name of tab
+			->name( __( 'Tools', 'mycryptocheckout' ) );
+
 		$tabs->tab( 'uninstall' )
 			->callback_this( 'admin_uninstall' )
 			// Tab heading
@@ -80,4 +89,23 @@ trait menu_trait
 
 		echo $tabs->render();
 	}
+
+	/**
+		@brief		network_admin_menu
+		@since		2017-12-30 20:51:49
+	**/
+	public function network_admin_menu()
+	{
+		add_submenu_page(
+			'settings.php',
+			// Page heading
+			__( 'MyCryptoCheckout Settings', 'mycryptocheckout' ),
+			// Menu item name
+			__( 'MyCryptoCheckout', 'mycryptocheckout' ),
+			'manage_options',
+			'mycryptocheckout',
+			[ &$this, 'admin_menu_tabs' ]
+		);
+	}
+
 }

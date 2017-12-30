@@ -155,7 +155,6 @@ class Account
 			// Set a retrieve key so we know that the retrieve_account data is ours.
 			$retrieve_key = hash( 'md5', microtime() . AUTH_SALT . rand( 0, PHP_INT_MAX ) );
 			set_site_transient( static::$account_retrieve_transient_key, $retrieve_key, 60 );
-
 			$result = MyCryptoCheckout()->api()->send_post( 'account/retrieve',
 				[
 					'admin_email' => MyCryptoCheckout()->get_admin_email(),
