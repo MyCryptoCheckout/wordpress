@@ -315,38 +315,50 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			__( 'MyCryptoCheckout details', 'woocommerce' )
 		);
 
-		$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-			// Expecting 123 BTC from abcxyz to xyzabc
-			sprintf( __( 'Expecting %s&nbsp;%s from %s to %s', 'mycryptocheckout'),
-            	$amount,
-            	$order->get_meta( '_mcc_currency_id' ),
-            	$order->get_meta( '_mcc_from' ),
-            	$order->get_meta( '_mcc_to' )
-			)
-		);
-
-		$attempts = $order->get_meta( '_mcc_attempts' );
-		$payment_id = $order->get_meta( '_mcc_payment_id' );
-
-		if ( $payment_id > 0 )
+		if ( $order->is_paid() )
+			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+				// Expecting 123 BTC from abcxyz to xyzabc
+				sprintf( __( 'Received %s&nbsp;%s from %s to %s', 'mycryptocheckout'),
+					$amount,
+					$order->get_meta( '_mcc_currency_id' ),
+					$order->get_meta( '_mcc_from' ),
+					$order->get_meta( '_mcc_to' )
+				)
+			);
+		else
 		{
 			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
 				// Expecting 123 BTC from abcxyz to xyzabc
-				sprintf( __( 'MyCryptoCheckout payment ID: %d', 'mycryptocheckout'),
-					$payment_id
+				sprintf( __( 'Expecting %s&nbsp;%s from %s to %s', 'mycryptocheckout'),
+					$amount,
+					$order->get_meta( '_mcc_currency_id' ),
+					$order->get_meta( '_mcc_from' ),
+					$order->get_meta( '_mcc_to' )
 				)
 			);
-		}
-		else
-		{
-			if ( $attempts > 0 )
+
+			$attempts = $order->get_meta( '_mcc_attempts' );
+			$payment_id = $order->get_meta( '_mcc_payment_id' );
+
+			if ( $payment_id > 0 )
+			{
 				$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-					sprintf( __( '%d attempts made to contact the API server.', 'mycryptocheckout'),
-						$attempts
+					// Expecting 123 BTC from abcxyz to xyzabc
+					sprintf( __( 'MyCryptoCheckout payment ID: %d', 'mycryptocheckout'),
+						$payment_id
 					)
 				);
+			}
+			else
+			{
+				if ( $attempts > 0 )
+					$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+						sprintf( __( '%d attempts made to contact the API server.', 'mycryptocheckout'),
+							$attempts
+						)
+					);
+			}
 		}
-
 
 		$r .= '</div>';
 		echo $r;

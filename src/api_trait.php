@@ -67,7 +67,6 @@ trait api_trait
 	**/
 	public function mycryptocheckout_retrieve_account()
 	{
-		$url = $this->get_server_name();
 		return $this->api()->account()->retrieve();
 	}
 }
