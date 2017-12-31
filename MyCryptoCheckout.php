@@ -37,28 +37,6 @@ namespace mycryptocheckout
 			$this->init_api_trait();
 			$this->init_menu_trait();
 			$this->woocommerce = new ecommerce\woocommerce\WooCommerce();
-
-			$this->add_action( 'admin_head' );
-		}
-
-		/**
-			@brief		Plugins loaded!
-			@since		2017-12-21 23:48:35
-		**/
-		public function admin_head()
-		{
-			if ( isset( $_GET[ 'hourly' ] ) )
-				do_action( 'mycryptocheckout_hourly' );
-			return;
-			try
-			{
-				$this->woocommerce->mycryptocheckout_woocommerce_send_payment( 18 );
-			}
-			catch ( \Exception $e )
-			{
-				ddd( 'wee' );
-				ddd( $e->getMessage() );
-			}
 		}
 	}
 }
