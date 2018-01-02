@@ -29,6 +29,22 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Return some default gateway strings that are useful here and there.
+		@since		2018-01-02 18:28:52
+	**/
+	public function gateway_strings()
+	{
+		$r = $this->collection();
+		$r->set( 'currency_selection_text', __( 'Please select the currency with which you wish to pay', 'mycryptocheckout' ) );
+		$r->set( 'gateway_name', __( 'Cryptocurrency', 'mycryptocheckout' ) );
+		$r->set( 'payment_instructions', __( 'Please pay for your order by transferring [AMOUNT] [CURRENCY] from your [FROM] wallet to [TO].', 'mycryptocheckout' ) );
+		$r->set( 'payment_instructions_description', __( 'Instructions for payment that will be added to the thank you page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO], [FROM]', 'mycryptocheckout' ) );
+		$r->set( 'your_wallet_address_title_text', __( 'Your wallet address', 'mycryptocheckout' ) );
+		$r->set( 'your_wallet_address_description_text', __( 'Your wallet address is used to track the payment.', 'mycryptocheckout' ) );
+		return $r;
+	}
+
+	/**
 		@brief		Retrieve the admin's email.
 		@since		2017-12-25 09:03:56
 	**/

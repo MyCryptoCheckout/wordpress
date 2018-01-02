@@ -53,6 +53,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function get_form_fields()
 	{
+		$strings = MyCryptoCheckout()->gateway_strings();
+
 		return [
 			'enabled' => [
 				'title'       => __( 'Enable/Disable', 'woocommerce' ),
@@ -64,32 +66,32 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'instructions' => array(
 				'title'       => __( 'Instructions', 'mycryptocheckout' ),
 				'type'        => 'textarea',
-				'description' => __( 'Instructions for payment that will be added to the thank you page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO], [FROM]', 'mycryptocheckout' ),
-				'default'     => __( 'Please pay for your order by transferring [AMOUNT] [CURRENCY] from your [FROM] wallet to [TO].', 'mycryptocheckout' ),
+				'description' => $strings->get( 'payment_instructions_description' ),
+				'default' => $strings->get( 'payment_instructions' ),
 			),
 			'title' => [
 				'title' => __( 'Payment type name', 'mycryptocheckout' ),
 				'type' => 'text',
 				'description' => __( 'This is the name of the payment option the user will see during checkout.', 'mycryptocheckout' ),
-				'default' => __( 'Cryptocurrency', 'mycryptocheckout' ),
+				'default' => $strings->get( 'gateway_name' )
 			],
 			'currency_selection_text' => [
 				'title' => __( 'Text for currency selection', 'mycryptocheckout' ),
 				'type' => 'text',
 				'description' => __( 'This is the text for the currency selection input.', 'mycryptocheckout' ),
-				'default' => __( 'Please select the currency with which you wish to pay', 'mycryptocheckout' ),
+				'default' => $strings->get( 'currency_selection_text' ),
 			],
 			'your_wallet_address_title_text' => [
 				'title' => __( 'Text for user wallet input', 'mycryptocheckout' ),
 				'type' => 'text',
 				'description' => __( "This is the text for the the input asking for the user's wallet address.", 'mycryptocheckout' ),
-				'default' => __( "Your wallet address", 'mycryptocheckout' ),
+				'default' => $strings->get( 'your_wallet_address_title_text' ),
 			],
 			'your_wallet_address_description_text' => [
 				'title' => __( 'Description for user wallet input', 'mycryptocheckout' ),
 				'type' => 'text',
 				'description' => __( "This is the description for the the input asking for the user's wallet address.", 'mycryptocheckout' ),
-				'default' => __( "Your wallet address is used to track the payment.", 'mycryptocheckout' ),
+				'default' => $strings->get( 'your_wallet_address_description_text' ),
 			],
 			'reset_to_defaults' => [
 				'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
@@ -315,7 +317,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		if ( $order->is_paid() )
 			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-				// Expecting 123 BTC from abcxyz to xyzabc
+				// Received 123 BTC from abcxyz to xyzabc
 				sprintf( __( 'Received %s&nbsp;%s from %s to %s', 'mycryptocheckout'),
 					$amount,
 					$order->get_meta( '_mcc_currency_id' ),

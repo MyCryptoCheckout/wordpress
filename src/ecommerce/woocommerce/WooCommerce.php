@@ -25,31 +25,8 @@ class WooCommerce
 	{
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_payment_complete' );
-		$this->add_action( 'mycryptocheckout_woocommerce_send_payment' );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
 		$this->add_filter( 'woocommerce_payment_gateways' );
-	}
-
-	/**
-		@brief		Generate a Payment class from an order.
-		@since		2017-12-21 23:47:17
-	**/
-	public function generate_payment_from_order( $order_id )
-	{
-		$order = wc_get_order( $order_id );
-		$payment = new \mycryptocheckout\api\Payment();
-		$payment->amount = $order->get_meta( '_mcc_amount' );
-		$payment->confirmations = $order->get_meta( '_mcc_confirmations' );
-		$payment->created_at = $order->get_meta( '_mcc_created_at' );
-		$payment->currency_id = $order->get_meta( '_mcc_currency_id' );
-		$payment->from = $order->get_meta( '_mcc_from' );
-		$payment->to = $order->get_meta( '_mcc_to' );
-
-		// If we are on a network, then note down the site ID.
-		if ( $this->is_network )
-			$payment->data()->set( 'site_id', get_current_blog_id() );
-
-		return $payment;
 	}
 
 	/**
@@ -91,7 +68,9 @@ class WooCommerce
 	**/
 	public function mycryptocheckout_hourly()
 	{
-		$this->send_unsent_payments();
+		if ( ! function_exists( 'WC' ) )
+			return;
+		MyCryptoCheckout()->api()->payments()->send_unsent_payments();
 	}
 
 	/**
@@ -124,63 +103,13 @@ class WooCommerce
 		foreach( $results as $order_id )
 		{
 			$order = wc_get_order( $order_id );
+			if ( ! $order )
+				continue;
 			$order->payment_complete( $payment->transaction_id );
 		}
 
 		if ( $switched_blog > 0 )
 			restore_current_blog();
-	}
-
-	/**
-		@brief		Attempt to send a payment to the API server.
-		@since		2017-12-22 08:00:21
-	**/
-	public function mycryptocheckout_woocommerce_send_payment( $order_id )
-	{
-		$order = wc_get_order( $order_id );
-		$attempts = intval( $order->get_meta( '_mcc_attempts' ) );
-
-		try
-		{
-			$payment = $this->generate_payment_from_order( $order_id );
-			$payment_id = MyCryptoCheckout()->api()->payments()->add( $payment );
-			$order->update_meta_data( '_mcc_payment_id', $payment_id );
-			MyCryptoCheckout()->debug( 'Payment for order %d has been added as payment #%d.', $order_id, $payment_id );
-		}
-		catch ( Exception $e )
-		{
-			$attempts++;
-			$order->update_meta_data( '_mcc_attempts', $attempts );
-			MyCryptoCheckout()->debug( 'Failure #%d trying to send the payment for order %d. %s', $attempts, $order_id, $e->getMessage() );
-			if ( $attempts > 48 )	// 48 hours, since this is usually run on the hourly cron.
-			{
-				// TODO: Give up and inform the admin of the failure.
-				MyCryptoCheckout()->debug( 'We have now given up on trying to send the payment for order %d.', $order_id );
-				$order->update_meta_data( '_mcc_payment_id', -1 );
-			}
-		}
-
-		// We save it here, because either we got a payment ID or we updated the attempts.
-		$order->save();
-	}
-
-	/**
-		@brief		send_unsent_payments
-		@since		2017-12-24 12:11:03
-	**/
-	public function send_unsent_payments()
-	{
-		// Find all orders in the database that do not have a payment ID.
-		global $wpdb;
-		$query = sprintf( "SELECT `post_id` FROM `%s` WHERE `meta_key` = '_mcc_payment_id' AND `meta_value` = '0'",
-			$wpdb->postmeta
-		);
-		$results = $wpdb->get_col( $query );
-		if ( count( $results ) < 1 )
-			return;
-		MyCryptoCheckout()->debug( 'Unsent payments: %s', implode( ', ', $results ) );
-		foreach( $results as $order_id )
-			$this->mycryptocheckout_woocommerce_send_payment( $order_id );
 	}
 
 	/**
@@ -194,7 +123,7 @@ class WooCommerce
 		// This must be a MCC checkout.
 		if ( $payment_method != static::$gateway_id )
 			return;
-		do_action( 'mycryptocheckout_woocommerce_send_payment', $order_id );
+		do_action( 'mycryptocheckout_send_payment', $order_id );
 	}
 
 	/**

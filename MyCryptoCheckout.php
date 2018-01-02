@@ -36,6 +36,7 @@ namespace mycryptocheckout
 			$this->init_admin_trait();
 			$this->init_api_trait();
 			$this->init_menu_trait();
+			$this->easy_digital_downloads = new ecommerce\easy_digital_downloads\Easy_Digital_Downloads();
 			$this->woocommerce = new ecommerce\woocommerce\WooCommerce();
 		}
 	}

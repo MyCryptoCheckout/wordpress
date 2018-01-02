@@ -15,6 +15,7 @@ trait api_trait
 	public function init_api_trait()
 	{
 		$this->add_action( 'mycryptocheckout_retrieve_account' );
+		$this->add_action( 'mycryptocheckout_send_payment' );
 		$this->add_action( 'template_redirect', 'api_template_redirect' );
 	}
 
@@ -68,5 +69,14 @@ trait api_trait
 	public function mycryptocheckout_retrieve_account()
 	{
 		return $this->api()->account()->retrieve();
+	}
+
+	/**
+		@brief		Send a payment to the API.
+		@since		2018-01-02 19:19:21
+	**/
+	public function mycryptocheckout_send_payment( $post_id )
+	{
+		$this->api()->payments()->send( $post_id );
 	}
 }
