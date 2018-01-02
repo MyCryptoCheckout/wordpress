@@ -108,34 +108,56 @@ trait admin_trait
 		if ( $this->debugging() )
 		{
 			$row = $table->head()->row();
-			// Table column name
 			$row->th( 'key' )->text( __( 'API key', 'mycryptocheckout' ) );
-			// Table column name
 			$row->td( 'details' )->text( $account->get_domain_key() );
 
 			$row = $table->head()->row();
-			// Table column name
 			$row->th( 'key' )->text( __( 'Server name', 'mycryptocheckout' ) );
-			// Table column name
 			$row->td( 'details' )->text( $this->get_server_name() );
 		}
 
 		$row = $table->head()->row();
-		// Table column name
-		$row->th( 'key' )->text( __( 'Payments remaining this month', 'mycryptocheckout' ) );
-		// Table column name
-		$row->td( 'details' )->text( $account->get_payments_left() );
+		$row->th( 'key' )->text( __( 'Account data updated', 'mycryptocheckout' ) );
+		$time = $account->data->updated;
+		$text = sprintf( '<span title="%s">%s</span>',
+			$this->local_datetime( $time ),
+			human_time_diff( $time )
+		);
+		$row->td( 'details' )->text( $text );
+
+		if ( $account->has_license() )
+		{
+			$row = $table->head()->row();
+			$text =  __( 'Your license expires', 'mycryptocheckout' );
+			$row->th( 'key' )->text( $text );
+			$time = $account->get_license_valid_until();
+			$text = sprintf( '%s (%s)',
+				$this->local_date( $time ),
+				human_time_diff( $time )
+			);
+			$row->td( 'details' )->text( $text );
+		}
 
 		$row = $table->head()->row();
-		// Table column name
+		if ( $account->has_license() )
+			$text =  __( 'Extend your license', 'mycryptocheckout' );
+		else
+			$text =  __( 'Purchase a license for unlimited payments', 'mycryptocheckout' );
+		$row->th( 'key' )->text( $text );
+		$url = $this->api()->get_purchase_url();
+		$url = sprintf( '<a href="%s">%s</a>', $url, $url );
+		$row->td( 'details' )->text( $url );
+
+		$row = $table->head()->row();
+		$row->th( 'key' )->text( __( 'Payments remaining this month', 'mycryptocheckout' ) );
+		$row->td( 'details' )->text( $account->get_payments_left_text() );
+
+		$row = $table->head()->row();
 		$row->th( 'key' )->text( __( 'Payments processed', 'mycryptocheckout' ) );
-		// Table column name
 		$row->td( 'details' )->text( $account->get_payments_used() );
 
 		$row = $table->head()->row();
-		// Table column name
 		$row->th( 'key' )->text( __( 'Physical currency exchange rates updated', 'mycryptocheckout' ) );
-		// Table column name
 		$time = $account->data->physical_exchange_rates->timestamp;
 		$text = sprintf( '<span title="%s">%s</span>',
 			$this->local_datetime( $time ),
@@ -144,38 +166,13 @@ trait admin_trait
 		$row->td( 'details' )->text( $text );
 
 		$row = $table->head()->row();
-		// Table column name
 		$row->th( 'key' )->text( __( 'Cryptocurrency exchange rates updated', 'mycryptocheckout' ) );
-		// Table column name
 		$time = $account->data->virtual_exchange_rates->timestamp;
 		$text = sprintf( '<span title="%s">%s</span>',
 			$this->local_datetime( $time ),
 			human_time_diff( $time )
 		);
 		$row->td( 'details' )->text( $text );
-
-		$expiration = $this->api()->account()->get_license_expiration();
-		if ( $expiration !== false )
-		{
-			$row = $table->head()->row();
-			// Table column name
-			$row->th( 'key' )->text( __( 'License expiration', 'mycryptocheckout' ) );
-			// Table column name
-			$value = $this->local_date( $expiration );
-			$row->td( 'details' )->text( $value );
-		}
-
-		$row = $table->head()->row();
-		// Table column name
-		if ( ! $expiration )
-			$text =  __( 'Purchase a license for unlimited payments', 'mycryptocheckout' );
-		else
-			$text =  __( 'Renew your license', 'mycryptocheckout' );
-		$row->th( 'key' )->text( $text );
-		// Table column name
-		$url = $this->api()->get_purchase_url();
-		$url = sprintf( '<a href="%s">%s</a>', $url, $url );
-		$row->td( 'details' )->text( $url );
 
 		$r .= $table;
 
@@ -618,7 +615,12 @@ trait admin_trait
 	**/
 	public function mycryptocheckout_hourly()
 	{
-		$this->api()->account()->retrieve();
+		// Schedule an account retrieval sometime.
+		// The timestamp shoule be anywhere between now and 45 minutes later.
+		$timestamp = rand( 0, 45 ) * 60;
+		$timestamp = time() + $timestamp;
+		$this->debug( 'Scheduled for %s', $this->local_datetime( $timestamp ) );
+		wp_schedule_single_event( $timestamp, 'mycryptocheckout_retrieve_account' );
 	}
 
 	/**

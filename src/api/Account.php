@@ -44,9 +44,9 @@ class Account
 		@return		The time() the license expires, else false.
 		@since		2017-12-27 17:26:28
 	**/
-	public function get_license_expiration()
+	public function get_license_valid_until()
 	{
-		return false;
+		return $this->data->license_valid_until;
 	}
 
 	/**
@@ -58,6 +58,18 @@ class Account
 		if ( ! $this->is_valid() )
 			return 0;
 		return $this->data->payments_left;
+	}
+
+	/**
+		@brief		Return the payments left as a more descriptive text.
+		@since		2018-01-02 00:53:25
+	**/
+	public function get_payments_left_text()
+	{
+		if ( $this->has_license() )
+			return 'Unlimited';
+		else
+			return $this->get_payments_left();
 	}
 
 	/**
@@ -100,6 +112,15 @@ class Account
 	public function has_payments_left()
 	{
 		return $this->get_payments_left() > 0;
+	}
+
+	/**
+		@brief		Is this account licensed?
+		@since		2018-01-02 00:54:48
+	**/
+	public function has_license()
+	{
+		return $this->data->license_valid;
 	}
 
 	/**

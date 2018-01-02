@@ -309,8 +309,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( ! $amount )
 			return;
 
-		$r = '<div class="">';
-
 		$r .= sprintf( '<h3>%s</h3>',
 			__( 'MyCryptoCheckout details', 'woocommerce' )
 		);
@@ -360,7 +358,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			}
 		}
 
-		$r .= '</div>';
 		echo $r;
 	}
 
