@@ -26,7 +26,7 @@ class Payment_Data
 	{
 		$r = json_decode( $this->payment->data );
 		if ( ! $r )
-			$r = [];
+			$r = (object)[];
 		return $r;
 	}
 
@@ -47,7 +47,7 @@ class Payment_Data
 	public function set( $key, $value )
 	{
 		$r = $this->load();
-		$r[ $key ] = $value;
+		$r->$key = $value;
 		$this->save( $r );
 	}
 }

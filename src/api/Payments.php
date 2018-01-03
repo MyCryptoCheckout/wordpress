@@ -40,9 +40,12 @@ class Payments
 		$payment->from = get_post_meta( $post_id,  '_mcc_from', true );
 		$payment->to = get_post_meta( $post_id,  '_mcc_to', true );
 
-		// If we are on a network, then note down the site ID.
+		// If we are on a network, then note down the site data.
 		if ( MULTISITE )
+		{
 			$payment->data()->set( 'site_id', get_current_blog_id() );
+			$payment->data()->set( 'site_url', get_option( 'siteurl' ) );
+		}
 
 		return $payment;
 	}

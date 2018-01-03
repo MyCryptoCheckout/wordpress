@@ -79,6 +79,9 @@ class WooCommerce
 	**/
 	public function mycryptocheckout_payment_complete( $payment )
 	{
+		if ( ! function_exists( 'WC' ) )
+			return;
+
 		$switched_blog = 0;
 		if ( isset( $payment->data ) )
 		{

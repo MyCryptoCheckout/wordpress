@@ -376,6 +376,9 @@ class Easy_Digital_Downloads
 	**/
 	public function mycryptocheckout_payment_complete( $payment )
 	{
+		if ( ! function_exists( 'EDD' ) )
+			return;
+
 		$switched_blog = 0;
 		if ( isset( $payment->data ) )
 		{
@@ -383,10 +386,11 @@ class Easy_Digital_Downloads
 			if ( $data )
 			{
 				if ( isset( $data->site_id ) )
-				{
-					$switched_blog = $data->site_id;
-					switch_to_blog( $switched_blog );
-				}
+					if ( $data->site_id != get_current_blog_id() )
+					{
+						$switched_blog = $data->site_id;
+						switch_to_blog( $switched_blog );
+					}
 			}
 		}
 
@@ -399,6 +403,7 @@ class Easy_Digital_Downloads
 		$results = $wpdb->get_col( $query );
 		foreach( $results as $payment_id )
 		{
+			MyCryptoCheckout()->debug( 'Marking EDD payment %s as complete.', $payment_id );
 			update_post_meta( $payment_id, '_mcc_transaction_id', $payment->transaction_id );
 			edd_update_payment_status( $payment_id, 'publish' );
 		}
