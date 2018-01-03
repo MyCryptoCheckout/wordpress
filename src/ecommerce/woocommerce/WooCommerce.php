@@ -48,21 +48,6 @@ class WooCommerce
 	}
 
 	/**
-		@brief		Calculate the final price of this purchase, with markup.
-		@since		2017-12-14 17:00:15
-	**/
-	public static function markup_total( $amount )
-	{
-		$markup_amount = MyCryptoCheckout()->get_site_option( 'markup_amount' );
-		$amount += $markup_amount;
-
-		$markup_percent = MyCryptoCheckout()->get_site_option( 'markup_percent' );
-		$amount = $amount * ( 1 + ( $markup_percent / 100 ) );
-
-		return $amount;
-	}
-
-	/**
 		@brief		Hourly cron.
 		@since		2017-12-24 12:10:14
 	**/

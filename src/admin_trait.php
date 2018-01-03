@@ -499,8 +499,8 @@ trait admin_trait
 			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the fixed amount in this box.', 'mycryptocheckout' ) )
 			// Input label.
 			->label( __( 'Markup amount', 'mycryptocheckout' ) )
-			->max( 100 )
-			->min( -100 )
+			->max( 1000 )
+			->min( -1000 )
 			->step( 0.01 )
 			->size( 6, 6 )
 			->value( $this->get_site_option( 'markup_amount' ) );
@@ -509,7 +509,7 @@ trait admin_trait
 			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the percentage in this box.', 'mycryptocheckout' ) )
 			// Input label.
 			->label( __( 'Markup %', 'mycryptocheckout' ) )
-			->max( 100 )
+			->max( 1000 )
 			->min( -100 )
 			->step( 0.01 )
 			->size( 6, 6 )

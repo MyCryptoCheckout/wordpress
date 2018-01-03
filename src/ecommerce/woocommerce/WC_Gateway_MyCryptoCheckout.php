@@ -203,7 +203,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		{
 			$currency_id = $wallet->get_currency_id();
 			$currency = $currencies->get( $currency_id );
-			$this_total = \mycryptocheckout\ecommerce\woocommerce\WooCommerce::markup_total( $cart_total );
+			$this_total = $mcc->markup_total( $cart_total );
 			$wallet_options[ $currency_id ] = sprintf( '%s (%s %s)',
 				$currency->get_name(),
 				$currency->convert( $woocommerce_currency, $this_total ),

@@ -150,10 +150,11 @@ class Easy_Digital_Downloads
 		{
 			$currency_id = $wallet->get_currency_id();
 			$currency = $currencies->get( $currency_id );
+			$this_total = $mcc->markup_total( $cart_total );
 			$wallet_options[ $currency_id ] = sprintf( '<option value="%s">%s (%s %s)</option>',
 				$currency_id,
 				$currency->get_name(),
-				$currency->convert( $edd_currency, $cart_total ),
+				$currency->convert( $edd_currency, $this_total ),
 				$currency_id
 			);
 		}
@@ -513,7 +514,7 @@ class Easy_Digital_Downloads
 	public function do_shortcode_tag( $output, $tag, $p3, $p4 )
 	{
 		if ( $tag != 'edd_receipt' )
-			return;
+			return $output;
 
 		$leave = edd_get_option( 'mcc_leave_edd_receipt_shortcode_alone' );
 		if ( $leave )
