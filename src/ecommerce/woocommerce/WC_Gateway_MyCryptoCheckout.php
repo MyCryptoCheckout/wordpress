@@ -308,6 +308,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( ! $amount )
 			return;
 
+		$r = '';
 		$r .= sprintf( '<h3>%s</h3>',
 			__( 'MyCryptoCheckout details', 'woocommerce' )
 		);
@@ -385,7 +386,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$mcc->wallets()->save();
 
 		$woocommerce_currency = get_woocommerce_currency();
-		$amount = \mycryptocheckout\ecommerce\woocommerce\WooCommerce::markup_total( $order_total );
+		$amount = $mcc->markup_total( $order_total );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
 
 		$sender_address = sanitize_text_field( $_POST[ 'mcc_sender_address' ] );

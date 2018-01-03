@@ -118,12 +118,7 @@ trait admin_trait
 
 		$row = $table->head()->row();
 		$row->th( 'key' )->text( __( 'Account data updated', 'mycryptocheckout' ) );
-		$time = $account->data->updated;
-		$text = sprintf( '<span title="%s">%s</span>',
-			$this->local_datetime( $time ),
-			human_time_diff( $time )
-		);
-		$row->td( 'details' )->text( $text );
+		$row->td( 'details' )->text( static::wordpress_ago( $account->data->updated ) );
 
 		if ( $account->has_license() )
 		{
@@ -158,21 +153,11 @@ trait admin_trait
 
 		$row = $table->head()->row();
 		$row->th( 'key' )->text( __( 'Physical currency exchange rates updated', 'mycryptocheckout' ) );
-		$time = $account->data->physical_exchange_rates->timestamp;
-		$text = sprintf( '<span title="%s">%s</span>',
-			$this->local_datetime( $time ),
-			human_time_diff( $time )
-		);
-		$row->td( 'details' )->text( $text );
+		$row->td( 'details' )->text( static::wordpress_ago( $account->data->physical_exchange_rates->timestamp ) );
 
 		$row = $table->head()->row();
 		$row->th( 'key' )->text( __( 'Cryptocurrency exchange rates updated', 'mycryptocheckout' ) );
-		$time = $account->data->virtual_exchange_rates->timestamp;
-		$text = sprintf( '<span title="%s">%s</span>',
-			$this->local_datetime( $time ),
-			human_time_diff( $time )
-		);
-		$row->td( 'details' )->text( $text );
+		$row->td( 'details' )->text( static::wordpress_ago( $account->data->virtual_exchange_rates->timestamp ) );
 
 		$r .= $table;
 

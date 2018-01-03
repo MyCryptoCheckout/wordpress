@@ -20,6 +20,20 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Return an X ago string.
+		@since		2018-01-03 22:15:39
+	**/
+	public static function wordpress_ago( $time )
+	{
+		$ago = sprintf( __( '%s ago' ), human_time_diff( $time ) );
+		$text = sprintf( '<span title="%s">%s</span>',
+			MyCryptoCheckout()->local_datetime( $time ),
+			$ago
+		);
+		return $text;
+	}
+
+	/**
 		@brief		Convenience method to return a new collection.
 		@since		2017-12-14 18:45:53
 	**/
