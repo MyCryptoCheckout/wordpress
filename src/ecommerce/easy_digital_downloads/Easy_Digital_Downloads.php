@@ -23,6 +23,7 @@ class Easy_Digital_Downloads
 	**/
 	public function _construct()
 	{
+		$this->add_action( 'edd_add_email_tags' );
 		$this->add_action( 'edd_gateway_' . static::$gateway_id );
 		$this->add_action( 'edd_mycryptocheckout_cc_form' );
 		$this->add_filter( 'edd_payment_gateways' );
@@ -31,6 +32,7 @@ class Easy_Digital_Downloads
 		$this->add_action( 'edd_view_order_details_billing_after' );
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_payment_complete' );
+		$this->add_filter( 'do_shortcode_tag', 10, 4 );
 	}
 
 	/**
@@ -40,6 +42,21 @@ class Easy_Digital_Downloads
 	public function echo_option_or_default( $key )
 	{
 		_e( $this->get_option_or_default( $key ) );
+	}
+
+	/**
+		@brief		Add the instructions email tag.
+		@since		2018-01-03 13:26:03
+	**/
+	public function edd_add_email_tags()
+	{
+		edd_add_email_tag( 'mcc_instructions', $this->get_option_or_default( 'payment_instructions_description' ), function( $payment_id )
+		{
+			$instructions = $this->get_option_or_default( 'payment_instructions' );
+			$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
+			$instructions = $payment->replace_shortcodes( $instructions );
+			return $instructions;
+		} );
 	}
 
 	/**
@@ -207,6 +224,26 @@ class Easy_Digital_Downloads
 				'name' => '<strong>' . __( 'MyCryptoCheckout settings', 'mycryptocheckout' ) . '</strong>',
 				'type' => 'header',
 			],
+			// Leave this here as a placeholder, since inserting things into arrays at specific places is a pain.
+			'mcc_info_no_wallets' => array(
+				'id'   => 'mcc_info_no_wallets',
+				'desc' => '',
+				'type' => 'descriptive_text',
+			),
+			'mcc_info_configure_wallets' => array(
+				'id'   => 'mcc_info_configure_wallets',
+				'desc' => sprintf(
+					__( "%sConfigure your wallets here.%s", 'mycryptocheckout' ),
+					'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
+					'</a>'
+				),
+				'type' => 'descriptive_text',
+			),
+			'mcc_info_defaults' => array(
+				'id'   => 'mcc_info_defaults',
+				'desc' => __( "If left empty, the texts below will use the MyCryptoCheckout defaults.", 'mycryptocheckout' ),
+				'type' => 'descriptive_text',
+			),
 			'mcc_gateway_name' =>
 			[
 				'id'   => 'mcc_gateway_name',
@@ -214,6 +251,19 @@ class Easy_Digital_Downloads
 				'name' => __( 'Gateway name', 'mycryptocheckout' ),
 				'size' => 'regular',
 				'type' => 'text',
+			],
+			'mcc_payment_instructions' => array(
+				'id' 	=> 'mcc_payment_instructions',
+				'name'       => __( 'Instructions', 'mycryptocheckout' ),
+				'type'        => 'textarea',
+				'desc' => $this->get_option_or_default( 'payment_instructions_description' ),
+			),
+			'mcc_leave_edd_receipt_shortcode_alone' =>
+			[
+				'id'   => 'mcc_leave_edd_receipt_shortcode_alone',
+				'desc' => __( "MyCryptoCheckout normally automatically inserts payment instructions into the [edd_receipt] shortcode that is used on the purchase confirmation page.", 'mycryptocheckout' ),
+				'name' => __( 'Do not insert payment instructions into the [edd_receipt] shortcode.', 'mycryptocheckout' ),
+				'type' => 'checkbox',
 			],
 			'mcc_currency_selection_text' =>
 			[
@@ -239,7 +289,51 @@ class Easy_Digital_Downloads
 				'size' => 'regular',
 				'type' => 'text',
 			],
+			'mcc_reset_to_defaults' => [
+				'id'	=> 'mcc_reset_to_defaults',
+				'name'	=> __( 'Reset to defaults', 'mycryptocheckout' ),
+				'type'	=> 'checkbox',
+				'desc'	=> __( 'If you wish to reset all of these settings to the defaults, check this box and save your changes.', 'mycryptocheckout' ),
+			],
 		);
+
+		if ( edd_get_option( 'mcc_reset_to_defaults' ) )
+		{
+			global $edd_options;
+
+			foreach( $settings as $key => $ignore )
+			{
+				unset( $edd_options[ $key ] );
+				edd_delete_option( $key );
+
+				// Yepp. EDD requires a prefix. WC doesn't. Smart WC.
+				$small_key = str_replace( 'mcc_', '', $key );
+				$default = static::get_gateway_string( $small_key );
+				if ( $default == '' )
+					continue;
+
+				edd_update_option( $key, $default );
+			}
+		}
+
+		try
+		{
+			MyCryptoCheckout()->api()->account()->is_available_for_payment();
+
+			$gateways[ static::$gateway_id ] = [
+				'admin_label'    => 'MyCryptoCheckout',
+				// Checkout label for EDD gateway.
+				'checkout_label' => $this->get_option_or_default( 'gateway_name' ),
+			];
+			unset( $settings[ 'mcc_info_no_wallets' ] );
+		}
+		catch ( Exception $e )
+		{
+			$settings[ 'mcc_info_no_wallets' ][ 'desc' ] = sprintf(
+				__( 'Warning! Payments using MyCryptoCheckout are not possible: %s', 'mycryptocheckout' ),
+				$e->getMessage()
+			);
+		}
 
 		$gateway_settings[ static::$gateway_id ] = $settings;
 		return $gateway_settings;
@@ -410,5 +504,41 @@ class Easy_Digital_Downloads
 
 		if ( $switched_blog > 0 )
 			restore_current_blog();
+	}
+
+	/**
+		@brief		Insert our payment info into the edd_receipt shortcode.
+		@since		2018-01-03 11:57:26
+	**/
+	public function do_shortcode_tag( $output, $tag, $p3, $p4 )
+	{
+		if ( $tag != 'edd_receipt' )
+			return;
+
+		$leave = edd_get_option( 'mcc_leave_edd_receipt_shortcode_alone' );
+		if ( $leave )
+			return $output;
+
+		$session = edd_get_purchase_session();
+		if ( isset( $_GET['payment_key'] ) ){
+			$payment_key = urldecode( $_GET['payment_key'] );
+		} else if ( $session ) {
+			$payment_key = $session['purchase_key'];
+		} elseif ( $edd_receipt_args['payment_key'] ) {
+			$payment_key = $edd_receipt_args['payment_key'];
+		}
+
+		// No key found
+		if ( ! isset( $payment_key ) )
+			return;
+
+		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
+
+		$instructions = $this->get_option_or_default( 'payment_instructions' );
+		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
+		$instructions = $payment->replace_shortcodes( $instructions );
+
+		$output = wpautop( $instructions ) . $output;
+		return $output;
 	}
 }

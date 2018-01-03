@@ -60,6 +60,19 @@ class Payment
 	}
 
 	/**
+		@brief		Replace the instruction shortcodes in this instruction string.
+		@since		2018-01-03 12:05:12
+	**/
+	public function replace_shortcodes( $instructions )
+	{
+		$instructions = str_replace( '[AMOUNT]', $this->amount, $instructions );
+		$instructions = str_replace( '[CURRENCY]', $this->currency_id, $instructions );
+		$instructions = str_replace( '[FROM]', $this->from, $instructions );
+		$instructions = str_replace( '[TO]', $this->to, $instructions );
+		return $instructions;
+	}
+
+	/**
 		@brief		Return this object as an array.
 		@since		2017-12-21 23:37:48
 	**/

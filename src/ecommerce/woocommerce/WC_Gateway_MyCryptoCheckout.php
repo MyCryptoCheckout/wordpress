@@ -97,7 +97,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
 				'type'			=> 'checkbox',
 				'default'     => 'no',
-				'description'	=> __( 'If you wish to reset all of these settings to the default, check this box and save your changes.', 'mycryptocheckout' ),
+				'description'	=> __( 'If you wish to reset all of these settings to the defaults, check this box and save your changes.', 'mycryptocheckout' ),
 			],
     	];
 	}
@@ -109,11 +109,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function get_instructions( $order_id )
 	{
 		$instructions = $this->get_option( 'instructions' );
-		$order = wc_get_order( $order_id );
-		$instructions = str_replace( '[AMOUNT]', $order->get_meta( '_mcc_amount' ), $instructions );
-		$instructions = str_replace( '[CURRENCY]', $order->get_meta( '_mcc_currency_id' ), $instructions );
-		$instructions = str_replace( '[FROM]', $order->get_meta( '_mcc_from' ), $instructions );
-		$instructions = str_replace( '[TO]', $order->get_meta( '_mcc_to' ), $instructions );
+		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
+		$instructions = $payment->replace_shortcodes( $instructions );
 		return $instructions;
 	}
 
