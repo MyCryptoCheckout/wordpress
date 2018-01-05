@@ -26,6 +26,24 @@ class Wallets
 	}
 
 	/**
+		@brief		Build a string that shows which wallets are enabled on this blog.
+		@since		2018-01-05 15:58:01
+	**/
+	public function build_enabled_string()
+	{
+		$wallets = $this->enabled_on_this_site();
+		$currency_ids = [];
+		foreach( $wallets as $wallet )
+			$currency_ids[ $wallet->currency_id ] = $wallet->currency_id;
+		ksort( $currency_ids );
+
+		// ANCHOR Link to wallet configuration page. ENDANCHOR
+		return "\n\n" . sprintf( __( 'You currently have the following currencies configured: %s', 'mycryptocheckout' ),
+			implode( ', ', $currency_ids )
+		);
+	}
+
+	/**
 		@brief		Return all wallets that are enabled on this site.
 		@since		2017-12-10 19:13:02
 	**/
@@ -56,7 +74,16 @@ class Wallets
 		} );
 
 		// And now return the first one, which is the dustiest.
-		return $dustiest_wallets->first();
+		$wallet = $dustiest_wallets->first();
+
+		// Allow other people to modify our selection.
+		$action = $this->new_action( 'get_dustiest_wallet' );
+		$action->currency_id = $currency_id;
+		$action->dustiest_wallets = $dustiest_wallets;
+		$action->wallets = $wallets;
+		$action->execute();
+
+		return $action->wallet;
 	}
 
 	/**

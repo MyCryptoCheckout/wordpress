@@ -150,7 +150,7 @@ class Easy_Digital_Downloads
 		{
 			$currency_id = $wallet->get_currency_id();
 			$currency = $currencies->get( $currency_id );
-			$this_total = $mcc->markup_total( $cart_total );
+			$this_total = $mcc->markup_amount( $cart_total );
 			$wallet_options[ $currency_id ] = sprintf( '<option value="%s">%s (%s %s)</option>',
 				$currency_id,
 				$currency->get_name(),
@@ -218,6 +218,14 @@ class Easy_Digital_Downloads
 	**/
 	public function edd_settings_gateways( $gateway_settings )
 	{
+		$wallets_text = MyCryptoCheckout()->wallets()->build_enabled_string();
+		$wallets_text .= "<br/>";
+		$wallets_text .= sprintf(
+			__( "%sConfigure your wallets here.%s", 'mycryptocheckout' ),
+			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
+			'</a>'
+		);
+
 		$settings = array (
 			'mycryptocheckout_settings' =>
 			[
@@ -233,11 +241,7 @@ class Easy_Digital_Downloads
 			),
 			'mcc_info_configure_wallets' => array(
 				'id'   => 'mcc_info_configure_wallets',
-				'desc' => sprintf(
-					__( "%sConfigure your wallets here.%s", 'mycryptocheckout' ),
-					'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
-					'</a>'
-				),
+				'desc' => $wallets_text,
 				'type' => 'descriptive_text',
 			),
 			'mcc_info_defaults' => array(

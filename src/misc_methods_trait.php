@@ -51,7 +51,7 @@ trait misc_methods_trait
 		$r = $this->collection();
 		$r->set( 'currency_selection_text', __( 'Please select the currency with which you wish to pay', 'mycryptocheckout' ) );
 		$r->set( 'gateway_name', __( 'Cryptocurrency', 'mycryptocheckout' ) );
-		$r->set( 'payment_instructions', __( 'Please complete your order by transferring <strong>[AMOUNT] [CURRENCY]</strong> from your [FROM] wallet to <strong>[TO]</strong>.', 'mycryptocheckout' ) );
+		$r->set( 'payment_instructions', __( 'Please complete your order by transferring<br/><strong>[AMOUNT] [CURRENCY]</strong><br />from [FROM]<br />to <strong>[TO]</strong>.', 'mycryptocheckout' ) );
 		$r->set( 'payment_instructions_description', __( 'Instructions for payment that will be added to the receipt and purchase confirmation page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO], [FROM]', 'mycryptocheckout' ) );
 		$r->set( 'your_wallet_address_title_text', __( 'Your wallet address', 'mycryptocheckout' ) );
 		$r->set( 'your_wallet_address_description_text', __( 'Your wallet address is used to track the payment.', 'mycryptocheckout' ) );
@@ -152,15 +152,38 @@ trait misc_methods_trait
 		@brief		Calculate the final price of this purchase, with markup.
 		@since		2017-12-14 17:00:15
 	**/
-	public static function markup_total( $amount )
+	public static function markup_amount( $amount )
 	{
+		$marked_up_amount = $amount;
+
 		$markup_amount = MyCryptoCheckout()->get_site_option( 'markup_amount' );
-		$amount += $markup_amount;
+		$marked_up_amount += $markup_amount;
 
 		$markup_percent = MyCryptoCheckout()->get_site_option( 'markup_percent' );
-		$amount = $amount * ( 1 + ( $markup_percent / 100 ) );
+		$marked_up_amount = $marked_up_amount * ( 1 + ( $markup_percent / 100 ) );
 
-		return $amount;
+		$action = MyCryptoCheckout()->new_action( 'markup_amount' );
+		$action->markup_amount = $markup_amount;
+		$action->markup_percent = $markup_percent;
+		$action->marked_up_amount = $marked_up_amount;
+		$action->original_amount = $amount;
+		$action->execute();
+
+		return $action->marked_up_amount;
+	}
+
+	/**
+		@brief		Generate a new action.
+		@details	Convenience method so that other plugins don't have to use the whole namespace for the class' actions.
+		@since		2017-09-27 13:20:01
+	**/
+	public function new_action( $action_name )
+	{
+		$called_class = get_called_class();
+		// Strip off the class name.
+		$namespace = preg_replace( '/(.*)\\\\.*/', '\1', $called_class );
+		$classname = $namespace  . '\\actions\\' . $action_name;
+		return new $classname();
 	}
 
 	/**

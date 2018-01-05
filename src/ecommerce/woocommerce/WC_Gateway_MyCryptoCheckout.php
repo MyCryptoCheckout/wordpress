@@ -125,24 +125,14 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		try
 		{
 			MyCryptoCheckout()->woocommerce->is_available_for_payment();
-
-			$wallets = MyCryptoCheckout()->wallets()->enabled_on_this_site();
-			$currency_ids = [];
-			foreach( $wallets as $wallet )
-				$currency_ids[ $wallet->currency_id ] = $wallet->currency_id;
-			ksort( $currency_ids );
-
-			// ANCHOR Link to wallet configuration page. ENDANCHOR
-			$r .= "\n\n" . sprintf( __( 'You currently have the following currencies configured: %s', 'mycryptocheckout' ),
-				implode( ', ', $currency_ids )
-			);
+			$r .= MyCryptoCheckout()->wallets()->build_enabled_string();
 		}
 		catch ( Exception $e )
 		{
 			$r .= "\n\n<em>" . __( 'You cannot currently accept any payments using this service:', 'mycryptocheckout' ) . '</em> ' . $e->getMessage();
 		}
 
-		$r .= "\n\n" . sprintf( __( '%sConfigure your wallets here.%s', 'mycryptocheckout' ),
+		$r .= "\n" . sprintf( __( '%sConfigure your wallets here.%s', 'mycryptocheckout' ),
 			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
 			'</a>'
 		);
@@ -203,7 +193,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		{
 			$currency_id = $wallet->get_currency_id();
 			$currency = $currencies->get( $currency_id );
-			$this_total = $mcc->markup_total( $cart_total );
+			$this_total = $mcc->markup_amount( $cart_total );
 			$wallet_options[ $currency_id ] = sprintf( '%s (%s %s)',
 				$currency->get_name(),
 				$currency->convert( $woocommerce_currency, $this_total ),
@@ -316,7 +306,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( $order->is_paid() )
 			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
 				// Received 123 BTC from abcxyz to xyzabc
-				sprintf( __( 'Received %s&nbsp;%s from %s to %s', 'mycryptocheckout'),
+				sprintf( __( 'Received %s&nbsp;%s<br/>from %s<br/>to %s', 'mycryptocheckout'),
 					$amount,
 					$order->get_meta( '_mcc_currency_id' ),
 					$order->get_meta( '_mcc_from' ),
@@ -327,7 +317,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		{
 			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
 				// Expecting 123 BTC from abcxyz to xyzabc
-				sprintf( __( 'Expecting %s&nbsp;%s from %s to %s', 'mycryptocheckout'),
+				sprintf( __( 'Expecting %s&nbsp;%s<br/>from %s<br/>to %s', 'mycryptocheckout'),
 					$amount,
 					$order->get_meta( '_mcc_currency_id' ),
 					$order->get_meta( '_mcc_from' ),
@@ -386,7 +376,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$mcc->wallets()->save();
 
 		$woocommerce_currency = get_woocommerce_currency();
-		$amount = $mcc->markup_total( $order_total );
+		$amount = $mcc->markup_amount( $order_total );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
 
 		$sender_address = sanitize_text_field( $_POST[ 'mcc_sender_address' ] );
@@ -420,6 +410,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( $sent_to_admin )
 			return;
 		if ( $this->id != $order->get_payment_method() )
+			return;
+
+		// If paid, do not do anything.
+		if ( $order->is_paid() )
 			return;
 
 		$instructions = $this->get_instructions( $order->get_id() );
