@@ -29,6 +29,7 @@ class Currencies
 		$this->add( new BTC() );
 		$this->add( new ETH() );
 		$this->add( new LTC() );
+		$this->add( new XRP() );
 	}
 
 	/**

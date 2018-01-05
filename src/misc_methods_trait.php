@@ -51,7 +51,7 @@ trait misc_methods_trait
 		$r = $this->collection();
 		$r->set( 'currency_selection_text', __( 'Please select the currency with which you wish to pay', 'mycryptocheckout' ) );
 		$r->set( 'gateway_name', __( 'Cryptocurrency', 'mycryptocheckout' ) );
-		$r->set( 'payment_instructions', __( 'Please pay for your order by transferring [AMOUNT] [CURRENCY] from your [FROM] wallet to [TO].', 'mycryptocheckout' ) );
+		$r->set( 'payment_instructions', __( 'Please complete your order by transferring <strong>[AMOUNT] [CURRENCY]</strong> from your [FROM] wallet to <strong>[TO]</strong>.', 'mycryptocheckout' ) );
 		$r->set( 'payment_instructions_description', __( 'Instructions for payment that will be added to the receipt and purchase confirmation page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO], [FROM]', 'mycryptocheckout' ) );
 		$r->set( 'your_wallet_address_title_text', __( 'Your wallet address', 'mycryptocheckout' ) );
 		$r->set( 'your_wallet_address_description_text', __( 'Your wallet address is used to track the payment.', 'mycryptocheckout' ) );

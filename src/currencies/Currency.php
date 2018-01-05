@@ -60,6 +60,15 @@ abstract class Currency
 	public abstract function get_name();
 
 	/**
+		@brief		Does this currency support confirmations?
+		@since		2018-01-05 13:46:45
+	**/
+	public function supports_confirmations()
+	{
+		return true;
+	}
+
+	/**
 		@brief		Validate that this address looks normal.
 		@since		2017-12-09 20:09:17
 	**/

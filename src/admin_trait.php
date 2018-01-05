@@ -322,6 +322,8 @@ trait admin_trait
 
 		$r .= wpautop( __( 'The table below shows the currencies and wallets you have set up in the plugin. To edit a wallet, click the address.', 'mycryptocheckout' ) );
 
+		$r .= wpautop( __( 'You can have several wallets in the same currency. The wallets will be used in sequential order.', 'mycryptocheckout' ) );
+
 		$r .= $form->open_tag();
 		$r .= $table;
 		$r .= $form->close_tag();
@@ -368,12 +370,13 @@ trait admin_trait
 			// Input label
 			->label( __( 'Enabled', 'mycryptocheckout' ) );
 
-		$confirmations = $form->number( 'confirmations' )
-			->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer.', 'mycryptocheckout' ) )
-			// Input label
-			->label( __( 'Confirmations', 'mycryptocheckout' ) )
-			->min( 1, 100 )
-			->value( $wallet->confirmations );
+		if ( $currency->supports_confirmations() )
+			$confirmations = $form->number( 'confirmations' )
+				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer.', 'mycryptocheckout' ) )
+				// Input label
+				->label( __( 'Confirmations', 'mycryptocheckout' ) )
+				->min( 1, 100 )
+				->value( $wallet->confirmations );
 
 		if ( $this->is_network && is_super_admin() )
 		{
@@ -419,7 +422,8 @@ trait admin_trait
 					$currency->validate_address( $wallet->address );
 
 					$wallet->enabled = $wallet_enabled->is_checked();
-					$wallet->confirmations = $confirmations->get_filtered_post_value();
+					if ( $currency->supports_confirmations() )
+						$wallet->confirmations = $confirmations->get_filtered_post_value();
 
 					if ( $this->is_network && is_super_admin() )
 					{

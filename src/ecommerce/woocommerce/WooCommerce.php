@@ -93,6 +93,7 @@ class WooCommerce
 			$order = wc_get_order( $order_id );
 			if ( ! $order )
 				continue;
+			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as complete.', $payment_id, get_current_blog_id() );
 			$order->payment_complete( $payment->transaction_id );
 		}
 

@@ -57,7 +57,7 @@ class API
 	**/
 	public function get_purchase_url()
 	{
-		$url = 'https://mycryptocheckout.com/shop/';
+		$url = 'https://mycryptocheckout.com/pricing/';
 		return add_query_arg( [
 			'domain' => base64_encode( MyCryptoCheckout()->get_server_name() ),
 		], $url );

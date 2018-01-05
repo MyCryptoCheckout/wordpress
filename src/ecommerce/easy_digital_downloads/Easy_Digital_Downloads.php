@@ -498,7 +498,7 @@ class Easy_Digital_Downloads
 		$results = $wpdb->get_col( $query );
 		foreach( $results as $payment_id )
 		{
-			MyCryptoCheckout()->debug( 'Marking EDD payment %s as complete.', $payment_id );
+			MyCryptoCheckout()->debug( 'Marking EDD payment %s on blog %d as complete.', $payment_id, get_current_blog_id() );
 			update_post_meta( $payment_id, '_mcc_transaction_id', $payment->transaction_id );
 			edd_update_payment_status( $payment_id, 'publish' );
 		}
