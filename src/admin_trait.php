@@ -140,7 +140,10 @@ trait admin_trait
 			$text =  __( 'Purchase a license for unlimited payments', 'mycryptocheckout' );
 		$row->th( 'key' )->text( $text );
 		$url = $this->api()->get_purchase_url();
-		$url = sprintf( '<a href="%s">%s</a>', $url, $url );
+		$url = sprintf( '<a href="%s">%s</a>',
+			$url,
+			__( 'MyCryptoCheckout pricing', 'mycryptocheckout' )
+		);
 		$row->td( 'details' )->text( $url );
 
 		$row = $table->head()->row();
