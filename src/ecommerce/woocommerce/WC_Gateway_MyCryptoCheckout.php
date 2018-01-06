@@ -81,18 +81,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'description' => __( 'This is the text for the currency selection input.', 'mycryptocheckout' ),
 				'default' => $strings->get( 'currency_selection_text' ),
 			],
-			'your_wallet_address_title_text' => [
-				'title' => __( 'Text for user wallet input', 'mycryptocheckout' ),
-				'type' => 'text',
-				'description' => __( "This is the text for the the input asking for the user's wallet address.", 'mycryptocheckout' ),
-				'default' => $strings->get( 'your_wallet_address_title_text' ),
-			],
-			'your_wallet_address_description_text' => [
-				'title' => __( 'Description for user wallet input', 'mycryptocheckout' ),
-				'type' => 'text',
-				'description' => __( "This is the description for the the input asking for the user's wallet address.", 'mycryptocheckout' ),
-				'default' => $strings->get( 'your_wallet_address_description_text' ),
-			],
 			'reset_to_defaults' => [
 				'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
 				'type'			=> 'checkbox',
@@ -193,16 +181,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'label' =>esc_html__( $this->get_option( 'currency_selection_text' ) ),
 			'options' => $wallet_options,
 		] );
-
-		woocommerce_form_field( 'mcc_sender_address',
-		[
-			'type' => 'text',
-			'class' => [ 'sender_address form-row-full' ],
-			'description' => esc_html__( $this->get_option( 'your_wallet_address_description_text' ) ),
-			'label' => esc_html__( $this->get_option( 'your_wallet_address_title_text' ) ),
-			'required' => true,
-			'placeholder' => '',
-		] );
 	}
 
 	function process_payment( $order_id )
@@ -214,7 +192,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$order->update_status('on-hold', __( 'Awaiting cryptocurrency payment', 'mycryptocheckout' ) );
 
 		// Reduce stock levels
-		$order->reduce_order_stock();
+		wc_reduce_stock_levels( $order_id );
 
 		// Remove cart
 		$woocommerce->cart->empty_cart();
@@ -249,30 +227,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		update_option( $this->get_option_key(), apply_filters( 'woocommerce_settings_api_sanitized_fields_' . $this->id, $new_settings ) );
 	}
 
-	function validate_fields()
-	{
-		// Validate the address.
-		$mcc = MyCryptoCheckout();
-		$currencies = $mcc->currencies();
-		$currency_id = sanitize_text_field( $_POST[ 'mcc_currency_id' ] );
-		$currency = $currencies->get( $currency_id );
-
-		$sender_address = sanitize_text_field( $_POST[ 'mcc_sender_address' ] );
-		try
-		{
-			$currency->validate_address( $sender_address );
-		}
-		catch( Exception $e )
-		{
-			$message = sprintf(
-				__( 'The address you specified seems invalid. Could you please double check it? %s', 'mycryptocheckout'),
-				$e->getMessage()
-			);
-			wc_add_notice( $message, 'error' );
-			return false;
-		}
-	}
-
 	/**
 		@brief		woocommerce_admin_order_data_after_order_details
 		@since		2017-12-14 20:35:48
@@ -290,22 +244,20 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		if ( $order->is_paid() )
 			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-				// Received 123 BTC from abcxyz to xyzabc
-				sprintf( __( 'Received %s&nbsp;%s<br/>from %s<br/>to %s', 'mycryptocheckout'),
+				// Received 123 BTC to xyzabc
+				sprintf( __( 'Received %s&nbsp;%s<br/>to %s', 'mycryptocheckout'),
 					$amount,
 					$order->get_meta( '_mcc_currency_id' ),
-					$order->get_meta( '_mcc_from' ),
 					$order->get_meta( '_mcc_to' )
 				)
 			);
 		else
 		{
 			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-				// Expecting 123 BTC from abcxyz to xyzabc
-				sprintf( __( 'Expecting %s&nbsp;%s<br/>from %s<br/>to %s', 'mycryptocheckout'),
+				// Expecting 123 BTC to xyzabc
+				sprintf( __( 'Expecting %s&nbsp;%s<br/>to %s', 'mycryptocheckout'),
 					$amount,
 					$order->get_meta( '_mcc_currency_id' ),
-					$order->get_meta( '_mcc_from' ),
 					$order->get_meta( '_mcc_to' )
 				)
 			);
@@ -316,7 +268,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			if ( $payment_id > 0 )
 			{
 				$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-					// Expecting 123 BTC from abcxyz to xyzabc
+					// Expecting 123 BTC to xyzabc
 					sprintf( __( 'MyCryptoCheckout payment ID: %d', 'mycryptocheckout'),
 						$payment_id
 					)
@@ -344,8 +296,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	{
 		if ( ! isset( $_POST[ 'mcc_currency_id' ] ) )
 			return;
-		if ( ! isset( $_POST[ 'mcc_sender_address' ] ) )
-			return;
 
 		$currency_id = sanitize_text_field( $_POST[ 'mcc_currency_id' ] );
 
@@ -365,13 +315,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$amount = $currency->convert( $woocommerce_currency, $amount );
 		$amount = $currency->find_next_available_amount( $amount );
 
-		$sender_address = sanitize_text_field( $_POST[ 'mcc_sender_address' ] );
-		$sender_address = trim( $sender_address );
 		$order->update_meta_data( '_mcc_amount', $amount );
 		$order->update_meta_data( '_mcc_currency_id', $currency_id );
 		$order->update_meta_data( '_mcc_confirmations', $wallet->confirmations );
 		$order->update_meta_data( '_mcc_created_at', time() );
-		$order->update_meta_data( '_mcc_from', $sender_address );
 		$order->update_meta_data( '_mcc_payment_id', 0 );		// 0 = not sent.
 		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
 	}

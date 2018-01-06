@@ -78,7 +78,7 @@ class Account
 	**/
 	public function get_payments_used()
 	{
-		return $this->data->payments_used;
+		return intval( $this->data->payments_used );
 	}
 
 	/**
@@ -132,7 +132,7 @@ class Account
 	{
 		// The account needs payments available.
 		if ( ! $this->has_payments_left() )
-			throw new Exception( 'Your account does not have any payments left this month.' );
+			throw new Exception( 'Your account does not have any payments left this month. Either wait until next month or purchase an unlimited license using the link on your MyCryptoCheckout settings account page.' );
 
 		// We need at least one wallet.
 		$wallets = MyCryptoCheckout()->wallets()->enabled_on_this_site();
@@ -146,20 +146,12 @@ class Account
 	**/
 	public function is_payment_amount_available( $currency_id, $amount )
 	{
-		global $payment_amounts;
-		if ( ! $payment_amounts )
-			$payment_amounts = (object)[];
-		if ( ! isset( $payment_amounts->$currency_id ) )
-			$payment_amounts->$currency_id = (object)[];
-		$r = ! isset( $payment_amounts->$currency_id->$amount );;
-		return $r;
-
 		if ( ! isset( $this->data->payment_amounts ) )
 			$this->data->payment_amounts = (object)[];
 		$pa = $this->data->payment_amounts;
 		if ( ! isset( $pa->$currency_id ) )
 			$pa->$currency_id = (object)[];
-		$r = ! isset( $pa->$currency_id->$amount );;
+		$r = ! isset( $pa->$currency_id->$amount );
 		return $r;
 	}
 

@@ -37,7 +37,6 @@ class Payments
 		$payment->confirmations = get_post_meta( $post_id,  '_mcc_confirmations', true );
 		$payment->created_at = get_post_meta( $post_id,  '_mcc_created_at', true );
 		$payment->currency_id = get_post_meta( $post_id,  '_mcc_currency_id', true );
-		$payment->from = get_post_meta( $post_id,  '_mcc_from', true );
 		$payment->to = get_post_meta( $post_id,  '_mcc_to', true );
 
 		// If we are on a network, then note down the site data.

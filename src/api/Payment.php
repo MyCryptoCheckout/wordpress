@@ -39,12 +39,6 @@ class Payment
 	public $data;
 
 	/**
-		@brief		From which address?
-		@since		2017-12-21 23:36:42
-	**/
-	public $from;
-
-	/**
 		@brief		The address to which we are expecting payment.
 		@since		2017-12-21 23:36:54
 	**/
@@ -67,7 +61,6 @@ class Payment
 	{
 		$instructions = str_replace( '[AMOUNT]', $this->amount, $instructions );
 		$instructions = str_replace( '[CURRENCY]', $this->currency_id, $instructions );
-		$instructions = str_replace( '[FROM]', $this->from, $instructions );
 		$instructions = str_replace( '[TO]', $this->to, $instructions );
 		return $instructions;
 	}
@@ -84,7 +77,6 @@ class Payment
 			'created_at' => $this->created_at,
 			'currency_id' => $this->currency_id,
 			'data' => $this->data,
-			'from' => $this->from,
 			'to' => $this->to,
 		];
 	}

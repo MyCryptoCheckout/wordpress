@@ -73,29 +73,6 @@ class Easy_Digital_Downloads
 		$currency = $currencies->get( $currency_id );
 		$wallet = $mcc->wallets()->get_dustiest_wallet( $currency_id );
 
-		// Check address.
-		$from = $purchase_data[ 'post_data' ][ 'mcc_from' ];
-		$from = trim( $from );
-		try
-		{
-			$currency->validate_address( $from );
-		}
-		catch( Exception $e )
-		{
-			$message = sprintf(
-				__( 'The address you specified seems invalid. Could you please double check it? %s', 'mycryptocheckout'),
-				$e->getMessage()
-			);
-			edd_set_error( 'mcc_from', $message );
-		}
-
-		$errors = edd_get_errors();
-		if ( $errors )
-		{
-			edd_send_back_to_checkout( '?payment-mode=' . static::$gateway_id );
-			return;
-		}
-
 		$amount = edd_get_cart_total();
 		$edd_currency = edd_get_currency();
 		$amount = $currency->convert( $edd_currency, $amount );
@@ -125,7 +102,6 @@ class Easy_Digital_Downloads
 		edd_update_payment_meta( $payment_id, '_mcc_currency_id', $currency_id  );
 		edd_update_payment_meta( $payment_id, '_mcc_confirmations', $wallet->confirmations );
 		edd_update_payment_meta( $payment_id, '_mcc_created_at', time() );
-		edd_update_payment_meta( $payment_id, '_mcc_from', $from );
 		edd_update_payment_meta( $payment_id, '_mcc_payment_id', 0 );
 		edd_update_payment_meta( $payment_id, '_mcc_to', $wallet->get_address() );
 
@@ -155,11 +131,6 @@ class Easy_Digital_Downloads
 				<select id="mcc_currency_id" name="mcc_currency_id" class="mcc_currency_id edd-input required">
 					<?php echo $wallet_options; ?>
 				</select>
-			</p>
-			<p>
-				<label class="edd-label" for="mcc_from"><?php $this->echo_option_or_default( 'your_wallet_address_title_text' ); ?><span class="edd-required-indicator">*</span></label>
-				<span class="edd-description"><?php $this->echo_option_or_default( 'your_wallet_address_description_text' ); ?></span>
-				<input type="text" id="mcc_from" name="mcc_from" class="mcc_from edd-input required" required="required"/>
 			</p>
 		</fieldset>
 		<?php
@@ -265,22 +236,6 @@ class Easy_Digital_Downloads
 				'size' => 'regular',
 				'type' => 'text',
 			],
-			'mcc_your_wallet_address_title_text' =>
-			[
-				'id'   => 'mcc_your_wallet_address_title_text',
-				'desc' => __( "This is the text for the the input asking for the user's wallet address.", 'mycryptocheckout' ),
-				'name' => __( 'Text for user wallet input', 'mycryptocheckout' ),
-				'size' => 'regular',
-				'type' => 'text',
-			],
-			'mcc_your_wallet_address_description_text' =>
-			[
-				'id'   => 'mcc_your_wallet_address_description_text',
-				'desc' => __( "This is the description for the the input asking for the user's wallet address.", 'mycryptocheckout' ),
-				'name' => __( 'Description for user wallet input', 'mycryptocheckout' ),
-				'size' => 'regular',
-				'type' => 'text',
-			],
 			'mcc_reset_to_defaults' => [
 				'id'	=> 'mcc_reset_to_defaults',
 				'name'	=> __( 'Reset to defaults', 'mycryptocheckout' ),
@@ -370,12 +325,6 @@ class Easy_Digital_Downloads
 						</div>
 						<div class="column">
 							<p>
-								<strong class="mcc_from"><?php _e( 'From', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( get_post_meta( $post_id, '_mcc_from', true ) ); ?></span>
-							</p>
-						</div>
-						<div class="column">
-							<p>
 								<strong class="mcc_to"><?php _e( 'To', 'mycryptocheckout' ); ?></strong><br/>
 								<span><?php _e( get_post_meta( $post_id, '_mcc_to', true ) ); ?></span>
 							</p>
@@ -393,7 +342,7 @@ class Easy_Digital_Downloads
 					?>
 						<div class="column">
 							<p>
-								<strong class="mcc_payment_id"><?php _e( 'Payment ID', 'mycryptocheckout' ); ?></strong><br/>
+								<strong class="mcc_payment_id"><?php _e( 'API payment ID', 'mycryptocheckout' ); ?></strong><br/>
 								<span><?php _e( get_post_meta( $post_id, '_mcc_payment_id', true ) ); ?></span>
 							</p>
 						</div>
