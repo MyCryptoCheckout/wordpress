@@ -38,17 +38,6 @@ namespace mycryptocheckout
 			$this->init_menu_trait();
 			$this->easy_digital_downloads = new ecommerce\easy_digital_downloads\Easy_Digital_Downloads();
 			$this->woocommerce = new ecommerce\woocommerce\WooCommerce();
-			$this->add_action( 'init', 1 );
-		}
-
-		/**
-			@brief		Init.
-			@since		2018-01-05 21:35:18
-		**/
-		public function init()
-		{
-			if( ! session_id() )
-				session_start();
 		}
 	}
 }

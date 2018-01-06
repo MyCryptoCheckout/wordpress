@@ -99,7 +99,7 @@ class Easy_Digital_Downloads
 		$amount = edd_get_cart_total();
 		$edd_currency = edd_get_currency();
 		$amount = $currency->convert( $edd_currency, $amount );
-		$amount = MyCryptoCheckout()->randomizer()->modify( $amount );
+		$amount = $currency->find_next_available_amount( $amount );
 
 		// Good to go.
 
@@ -130,8 +130,6 @@ class Easy_Digital_Downloads
 		edd_update_payment_meta( $payment_id, '_mcc_to', $wallet->get_address() );
 
 		do_action( 'mycryptocheckout_send_payment', $payment_id );
-
-		$mcc->randomizer()->clear();
 
 		edd_empty_cart();
 		edd_send_to_success_page();

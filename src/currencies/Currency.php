@@ -30,7 +30,27 @@ abstract class Currency
 		$cryptocurrency_amount = $account->get_virtual_exchange_rate( $this->get_id() );
 		$cryptocurrency_amount = $usd * $cryptocurrency_amount;
 
+		$cryptocurrency_amount = rtrim( sprintf( '%.20F', $cryptocurrency_amount ), '0' );
+		$cryptocurrency_amount = $this->trim_decimals( $cryptocurrency_amount );
+
 		return $cryptocurrency_amount;
+	}
+
+	/**
+		@brief		Find the next available payment amount that has not been used.
+		@since		2018-01-06 09:04:51
+	**/
+	public function find_next_available_amount( $amount )
+	{
+		$precision = $this->get_decimal_precision();
+
+		$account = MyCryptoCheckout()->api()->account();
+
+		$counter = 0;
+		while( ! $account->is_payment_amount_available( $this->get_id(), $amount ) )
+			$amount = MyCryptoCheckout()->increase_floating_point_number( $amount, $precision );
+
+		return $amount;
 	}
 
 	/**
@@ -40,6 +60,16 @@ abstract class Currency
 	public static function get_address_length()
 	{
 		return 34;	// This is the default for a lot of coins.
+	}
+
+	/**
+		@brief		Return the decimal precision of this currency.
+		@since		2018-01-06 06:34:38
+	**/
+	public function get_decimal_precision()
+	{
+		// BTC is 8.
+		return 8;
 	}
 
 	/**
@@ -66,6 +96,22 @@ abstract class Currency
 	public function supports_confirmations()
 	{
 		return true;
+	}
+
+	/**
+		@brief		Trim the decimals of this number.
+		@since		2018-01-06 06:35:44
+	**/
+	public function trim_decimals( $amount )
+	{
+		$decimal = strpos( $amount, '.');
+		if ( $decimal === false )
+			return $amount;
+		$amount = sprintf( '%s.%s',
+			substr( $amount, 0, $decimal ),
+			substr( $amount, $decimal + 1, $this->get_decimal_precision() )
+		);
+		return $amount;
 	}
 
 	/**

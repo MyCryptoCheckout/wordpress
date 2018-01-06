@@ -363,7 +363,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$woocommerce_currency = get_woocommerce_currency();
 		$amount = $mcc->markup_amount( $order_total );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
-		$amount = MyCryptoCheckout()->randomizer()->modify( $amount );
+		$amount = $currency->find_next_available_amount( $amount );
 
 		$sender_address = sanitize_text_field( $_POST[ 'mcc_sender_address' ] );
 		$sender_address = trim( $sender_address );
@@ -374,8 +374,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$order->update_meta_data( '_mcc_from', $sender_address );
 		$order->update_meta_data( '_mcc_payment_id', 0 );		// 0 = not sent.
 		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
-
-		$mcc->randomizer()->clear();
 	}
 
 	/**

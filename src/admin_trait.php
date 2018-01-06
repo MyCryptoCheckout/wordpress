@@ -508,16 +508,6 @@ trait admin_trait
 		// Label for fieldset
 		$fs->legend->label( __( 'Payment options', 'mycryptocheckout' ) );
 
-		$markup_randomization = $fs->number( 'markup_randomization' )
-			->description( __( "Randomize the cryptocurrency amount by up to this tiny percentage, up or down, as an extra safeguard for buyers that don't type in their wallet address correctly.", 'mycryptocheckout' ) )
-			// Input label.
-			->label( __( 'Markup randomization %', 'mycryptocheckout' ) )
-			->max( 10 )
-			->min( 0 )
-			->step( 0.01 )
-			->size( 6, 6 )
-			->value( $this->get_site_option( 'markup_randomization' ) );
-
 		$this->add_debug_settings_to_form( $form );
 
 		$save = $form->primary_button( 'save' )

@@ -94,7 +94,7 @@ trait misc_methods_trait
 			$currency = $currencies->get( $currency_id );
 			$amount = $this->markup_amount( $options->amount );
 			$cryptocurrency_amount = $currency->convert( $options->original_currency, $amount );
-			$cryptocurrency_amount = $this->randomizer()->modify( $cryptocurrency_amount );
+			$cryptocurrency_amount = $currency->find_next_available_amount( $cryptocurrency_amount );
 
 			if ( $options->as_html )
 				$value = sprintf( '<option value="%s">%s (%s %s)</option>',
@@ -160,6 +160,60 @@ trait misc_methods_trait
 			$r[ $unsorted_site[ 0 ] ] = $unsorted_site[ 1 ];
 
 		return $r;
+	}
+
+	/**
+		@brief		Increase a floating point number with this precision.
+		@details	Use strings for the calculations. Thanks floating point!
+		@since		2018-01-06 13:35:37
+	**/
+	public static function increase_floating_point_number( $number, $precision )
+	{
+		$decimal = strpos( $number, '.');
+		if ( $decimal === false )
+		{
+			// No decimals = easy increase.
+			$padded_precision = str_pad( 1, $precision, '0', STR_PAD_LEFT );
+			$number = $number . '.' . $padded_precision;
+		}
+		else
+		{
+			if ( $decimal === 0 )
+			{
+				$number = '0' . $number;
+				$decimal++;
+			}
+
+			$power = pow( 10, $precision );
+			$whole = substr( $number, 0, $decimal );
+
+			$fraction = substr( $number, $decimal + 1, $precision );
+			$fraction = str_pad( $fraction, $precision, '0' );
+
+			$powered = false;
+			if ( $fraction < $power )
+			{
+				$powered = true;
+				$fraction = $power + $fraction;
+			}
+
+			$fraction += 1;
+
+			if ( $powered )
+			{
+				$fraction = substr( $fraction, 1 );
+				if ( $fraction == 0 )
+					$whole++;
+			}
+
+
+			$number = sprintf( '%s.%s', $whole, $fraction );
+		}
+
+		$number = rtrim( $number, '0' );
+		$number = rtrim( $number, '.' );
+
+		return $number;
 	}
 
 	/**
@@ -232,15 +286,6 @@ trait misc_methods_trait
 	}
 
 	/**
-		@brief		Return the randomizer class.
-		@since		2018-01-05 21:11:26
-	**/
-	public function randomizer()
-	{
-		return new Randomizer();
-	}
-
-	/**
 		@brief		Site options.
 		@since		2017-12-09 09:18:21
 	**/
@@ -265,12 +310,6 @@ trait misc_methods_trait
 				@since		2017-12-14 16:50:25
 			**/
 			'markup_percent' => 0,
-
-			/**
-				@brief		Randomize the final amount in order to more easily identify transactions.
-				@since		2018-01-05 17:53:52
-			**/
-			'markup_randomization'  => 0.01,
 
 			/**
 				@brief		The Wallets collection in which all wallet info is stored.

@@ -141,6 +141,29 @@ class Account
 	}
 
 	/**
+		@brief		Return whether this payment amount for this currency has not been used.
+		@since		2018-01-06 08:54:49
+	**/
+	public function is_payment_amount_available( $currency_id, $amount )
+	{
+		global $payment_amounts;
+		if ( ! $payment_amounts )
+			$payment_amounts = (object)[];
+		if ( ! isset( $payment_amounts->$currency_id ) )
+			$payment_amounts->$currency_id = (object)[];
+		$r = ! isset( $payment_amounts->$currency_id->$amount );;
+		return $r;
+
+		if ( ! isset( $this->data->payment_amounts ) )
+			$this->data->payment_amounts = (object)[];
+		$pa = $this->data->payment_amounts;
+		if ( ! isset( $pa->$currency_id ) )
+			$pa->$currency_id = (object)[];
+		$r = ! isset( $pa->$currency_id->$amount );;
+		return $r;
+	}
+
+	/**
 		@brief		Is this account data valid?
 		@since		2017-12-12 11:15:12
 	**/
