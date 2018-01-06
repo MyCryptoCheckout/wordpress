@@ -9,7 +9,7 @@ use Exception;
 	@since		2017-12-08 16:30:20
 **/
 class WooCommerce
-	extends \plainview\sdk_mcc\wordpress\base
+	extends \mycryptocheckout\ecommerce\Ecommerce
 {
 	/**
 		@brief		The ID of the gateway.
@@ -24,6 +24,7 @@ class WooCommerce
 	public function _construct()
 	{
 		$this->add_action( 'mycryptocheckout_hourly' );
+		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_payment_complete' );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
 		$this->add_filter( 'woocommerce_payment_gateways' );
@@ -59,46 +60,40 @@ class WooCommerce
 	}
 
 	/**
+		@brief		Payment was abanadoned.
+		@since		2018-01-06 15:59:11
+	**/
+	public function mycryptocheckout_cancel_payment( $payment )
+	{
+		$this->do_with_payment( $payment, function( $order_id )
+		{
+			if ( ! function_exists( 'WC' ) )
+				return;
+			$order = wc_get_order( $order_id );
+			if ( ! $order )
+				return;
+			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as cancelled.', $order_id, get_current_blog_id() );
+			update_post_meta( $order_id, '_mcc_payment_id', -1 );
+			$order->update_status( 'cancelled', 'Payment timed out.' );
+		} );
+	}
+
+	/**
 		@brief		mycryptocheckout_payment_complete
 		@since		2017-12-26 10:17:13
 	**/
 	public function mycryptocheckout_payment_complete( $payment )
 	{
-		if ( ! function_exists( 'WC' ) )
-			return;
-
-		$switched_blog = 0;
-		if ( isset( $payment->data ) )
+		$this->do_with_payment( $payment, function( $order_id )
 		{
-			$data = json_decode( $payment->data );
-			if ( $data )
-			{
-				if ( isset( $data->site_id ) )
-				{
-					$switched_blog = $data->site_id;
-					switch_to_blog( $switched_blog );
-				}
-			}
-		}
-
-		// Find the payment with this ID.
-		global $wpdb;
-		$query = sprintf( "SELECT `post_id` FROM `%s` WHERE `meta_key` = '_mcc_payment_id' AND `meta_value` = '%d'",
-			$wpdb->postmeta,
-			$payment->payment_id
-		);
-		$results = $wpdb->get_col( $query );
-		foreach( $results as $order_id )
-		{
+			if ( ! function_exists( 'WC' ) )
+				return;
 			$order = wc_get_order( $order_id );
 			if ( ! $order )
-				continue;
-			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as complete.', $payment_id, get_current_blog_id() );
+				return;
+			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as complete.', $order_id, get_current_blog_id() );
 			$order->payment_complete( $payment->transaction_id );
-		}
-
-		if ( $switched_blog > 0 )
-			restore_current_blog();
+		} );
 	}
 
 	/**

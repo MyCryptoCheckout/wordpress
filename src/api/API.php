@@ -150,11 +150,15 @@ class API
 		// Handle the messages, one by one.
 		foreach( $json->messages as $message )
 		{
-			MyCryptoCheckout()->debug( 'Processing a %s message: %s', $message->type, json_encode( $message ) );
+			MyCryptoCheckout()->debug( '(%d) Processing a %s message: %s', get_current_blog_id(), $message->type, json_encode( $message ) );
 			switch( $message->type )
 			{
 				case 'retrieve_account':
 					// Already handled above.
+				break;
+				case 'cancel_payment':
+					// This payment timed out and was cancelled.
+					do_action( 'mycryptocheckout_cancel_payment', $message->payment );
 				break;
 				case 'payment_complete':
 					// Send out info about this completed payment.

@@ -9,7 +9,7 @@ use Exception;
 	@since		2018-01-02 15:29:30
 **/
 class Easy_Digital_Downloads
-	extends \plainview\sdk_mcc\wordpress\base
+	extends \mycryptocheckout\ecommerce\Ecommerce
 {
 	/**
 		@brief		Gateway ID.
@@ -30,6 +30,7 @@ class Easy_Digital_Downloads
 		$this->add_filter( 'edd_settings_gateways' );
 		$this->add_filter( 'edd_settings_sections_gateways' );
 		$this->add_action( 'edd_view_order_details_billing_after' );
+		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_payment_complete' );
 		$this->add_filter( 'do_shortcode_tag', 10, 4 );
@@ -52,6 +53,11 @@ class Easy_Digital_Downloads
 	{
 		edd_add_email_tag( 'mcc_instructions', $this->get_option_or_default( 'payment_instructions_description' ), function( $payment_id )
 		{
+			$payment = new \EDD_Payment( $payment_id );
+			// Don't show the payment instructions is the payment is paid.
+			if ( $payment->status == 'publish' )
+				return;
+
 			$instructions = $this->get_option_or_default( 'payment_instructions' );
 			$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
 			$instructions = $payment->replace_shortcodes( $instructions );
@@ -311,6 +317,17 @@ class Easy_Digital_Downloads
 		else
 			$status = __( 'Attempting to contact API server', 'mycryptocheckout' );
 
+		$api_payment_id = get_post_meta( $post_id, '_mcc_payment_id', true );
+		switch( $api_payment_id )
+		{
+			case -1:
+				$api_payment_id = __( 'Abandoned', 'mycryptocheckout' );
+			break;
+			case 0:
+				$api_payment_id = __( 'Pending', 'mycryptocheckout' );
+			break;
+		}
+
 		?>
 		<div id="mcc_payment_details" class="postbox">
 			<h3 class="hndle"><span><?php _e( 'MyCryptoCheckout details', 'mycryptocheckout' ); ?></span></h3>
@@ -343,7 +360,7 @@ class Easy_Digital_Downloads
 						<div class="column">
 							<p>
 								<strong class="mcc_payment_id"><?php _e( 'API payment ID', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( get_post_meta( $post_id, '_mcc_payment_id', true ) ); ?></span>
+								<span><?php _e( $api_payment_id ); ?></span>
 							</p>
 						</div>
 						<div class="column">
@@ -406,45 +423,35 @@ class Easy_Digital_Downloads
 	}
 
 	/**
+		@brief		Payment was abanadoned.
+		@since		2018-01-06 15:59:11
+	**/
+	public function mycryptocheckout_cancel_payment( $payment )
+	{
+		$this->do_with_payment( $payment, function( $order_id )
+		{
+			if ( ! function_exists( 'EDD' ) )
+				return;
+			MyCryptoCheckout()->debug( 'Marking EDD payment %s on blog %d as abandoned.', $order_id, get_current_blog_id() );
+			update_post_meta( $order_id, '_mcc_payment_id', -1 );
+			edd_update_payment_status( $order_id, 'abandoned' );
+		} );
+	}
+
+	/**
 		@brief		mycryptocheckout_payment_complete
 		@since		2018-01-02 21:54:53
 	**/
 	public function mycryptocheckout_payment_complete( $payment )
 	{
-		if ( ! function_exists( 'EDD' ) )
-			return;
-
-		$switched_blog = 0;
-		if ( isset( $payment->data ) )
+		$this->do_with_payment( $payment, function( $order_id )
 		{
-			$data = json_decode( $payment->data );
-			if ( $data )
-			{
-				if ( isset( $data->site_id ) )
-					if ( $data->site_id != get_current_blog_id() )
-					{
-						$switched_blog = $data->site_id;
-						switch_to_blog( $switched_blog );
-					}
-			}
-		}
-
-		// Find the payment with this ID.
-		global $wpdb;
-		$query = sprintf( "SELECT `post_id` FROM `%s` WHERE `meta_key` = '_mcc_payment_id' AND `meta_value` = '%d'",
-			$wpdb->postmeta,
-			$payment->payment_id
-		);
-		$results = $wpdb->get_col( $query );
-		foreach( $results as $payment_id )
-		{
-			MyCryptoCheckout()->debug( 'Marking EDD payment %s on blog %d as complete.', $payment_id, get_current_blog_id() );
-			update_post_meta( $payment_id, '_mcc_transaction_id', $payment->transaction_id );
-			edd_update_payment_status( $payment_id, 'publish' );
-		}
-
-		if ( $switched_blog > 0 )
-			restore_current_blog();
+			if ( ! function_exists( 'EDD' ) )
+				return;
+			MyCryptoCheckout()->debug( 'Marking EDD payment %s on blog %d as complete.', $order_id, get_current_blog_id() );
+			update_post_meta( $order_id, '_mcc_transaction_id', $payment->transaction_id );
+			edd_update_payment_status( $order_id, 'publish' );
+		} );
 	}
 
 	/**
