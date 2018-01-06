@@ -181,25 +181,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	function payment_fields()
 	{
-		$mcc = MyCryptoCheckout();
-
-		$cart_total = WC()->cart->cart_contents_total;
-		$currencies = $mcc->currencies();
-		$wallet_options = [];
-		$wallets = $mcc->wallets()->enabled_on_this_site();
-		$woocommerce_currency = get_woocommerce_currency();
-
-		foreach( $wallets as $wallet )
-		{
-			$currency_id = $wallet->get_currency_id();
-			$currency = $currencies->get( $currency_id );
-			$this_total = $mcc->markup_amount( $cart_total );
-			$wallet_options[ $currency_id ] = sprintf( '%s (%s %s)',
-				$currency->get_name(),
-				$currency->convert( $woocommerce_currency, $this_total ),
-				$currency_id
-			);
-		}
+		$wallet_options = MyCryptoCheckout()->get_checkout_wallet_options( [
+			'amount' => WC()->cart->cart_contents_total,
+			'original_currency' => get_woocommerce_currency(),
+		] );
 
 		woocommerce_form_field( 'mcc_currency_id',
 		[
@@ -378,8 +363,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$woocommerce_currency = get_woocommerce_currency();
 		$amount = $mcc->markup_amount( $order_total );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
+		$amount = MyCryptoCheckout()->randomizer()->modify( $amount );
 
 		$sender_address = sanitize_text_field( $_POST[ 'mcc_sender_address' ] );
+		$sender_address = trim( $sender_address );
 		$order->update_meta_data( '_mcc_amount', $amount );
 		$order->update_meta_data( '_mcc_currency_id', $currency_id );
 		$order->update_meta_data( '_mcc_confirmations', $wallet->confirmations );
@@ -387,6 +374,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$order->update_meta_data( '_mcc_from', $sender_address );
 		$order->update_meta_data( '_mcc_payment_id', 0 );		// 0 = not sent.
 		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
+
+		$mcc->randomizer()->clear();
 	}
 
 	/**

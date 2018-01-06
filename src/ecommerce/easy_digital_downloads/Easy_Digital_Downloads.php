@@ -75,6 +75,7 @@ class Easy_Digital_Downloads
 
 		// Check address.
 		$from = $purchase_data[ 'post_data' ][ 'mcc_from' ];
+		$from = trim( $from );
 		try
 		{
 			$currency->validate_address( $from );
@@ -98,6 +99,7 @@ class Easy_Digital_Downloads
 		$amount = edd_get_cart_total();
 		$edd_currency = edd_get_currency();
 		$amount = $currency->convert( $edd_currency, $amount );
+		$amount = MyCryptoCheckout()->randomizer()->modify( $amount );
 
 		// Good to go.
 
@@ -129,6 +131,8 @@ class Easy_Digital_Downloads
 
 		do_action( 'mycryptocheckout_send_payment', $payment_id );
 
+		$mcc->randomizer()->clear();
+
 		edd_empty_cart();
 		edd_send_to_success_page();
 	}
@@ -139,26 +143,11 @@ class Easy_Digital_Downloads
 	**/
 	public function edd_mycryptocheckout_cc_form()
 	{
-		// Assemble the currency options.
-		$cart_total = edd_get_cart_total();
-		$mcc = MyCryptoCheckout();
-		$currencies = $mcc->currencies();
-		$edd_currency = edd_get_currency();
-		$wallet_options = [];
-		$wallets = $mcc->wallets()->enabled_on_this_site();
-		foreach( $wallets as $wallet )
-		{
-			$currency_id = $wallet->get_currency_id();
-			$currency = $currencies->get( $currency_id );
-			$this_total = $mcc->markup_amount( $cart_total );
-			$wallet_options[ $currency_id ] = sprintf( '<option value="%s">%s (%s %s)</option>',
-				$currency_id,
-				$currency->get_name(),
-				$currency->convert( $edd_currency, $this_total ),
-				$currency_id
-			);
-		}
-		$wallet_options = implode( "\n", $wallet_options );
+		$wallet_options = MyCryptoCheckout()->get_checkout_wallet_options( [
+			'as_html' => true,
+			'amount' => edd_get_cart_total(),
+			'original_currency' => edd_get_currency(),
+		] );
 
 		ob_start(); ?>
 		<fieldset>
@@ -172,7 +161,7 @@ class Easy_Digital_Downloads
 			<p>
 				<label class="edd-label" for="mcc_from"><?php $this->echo_option_or_default( 'your_wallet_address_title_text' ); ?><span class="edd-required-indicator">*</span></label>
 				<span class="edd-description"><?php $this->echo_option_or_default( 'your_wallet_address_description_text' ); ?></span>
-				<input type="text" id="mcc_from" name="mcc_from" class="mcc_from edd-input required" placeholder="1Agzz6ryfjvALJuDL23AVzNCL5iBULNTgU" required="required"/>
+				<input type="text" id="mcc_from" name="mcc_from" class="mcc_from edd-input required" required="required"/>
 			</p>
 		</fieldset>
 		<?php

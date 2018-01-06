@@ -51,7 +51,7 @@ trait misc_methods_trait
 		$r = $this->collection();
 		$r->set( 'currency_selection_text', __( 'Please select the currency with which you wish to pay', 'mycryptocheckout' ) );
 		$r->set( 'gateway_name', __( 'Cryptocurrency', 'mycryptocheckout' ) );
-		$r->set( 'payment_instructions', __( 'Please complete your order by transferring<br/><strong>[AMOUNT] [CURRENCY]</strong><br />from [FROM]<br />to <strong>[TO]</strong>.', 'mycryptocheckout' ) );
+		$r->set( 'payment_instructions', __( 'Please complete your order by transferring<br/><strong>[AMOUNT] [CURRENCY]</strong><br />from [FROM]<br />to <strong>[TO]</strong>', 'mycryptocheckout' ) );
 		$r->set( 'payment_instructions_description', __( 'Instructions for payment that will be added to the receipt and purchase confirmation page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO], [FROM]', 'mycryptocheckout' ) );
 		$r->set( 'your_wallet_address_title_text', __( 'Your wallet address', 'mycryptocheckout' ) );
 		$r->set( 'your_wallet_address_description_text', __( 'Your wallet address is used to track the payment.', 'mycryptocheckout' ) );
@@ -71,6 +71,51 @@ trait misc_methods_trait
 			$admin_email = get_blog_option( 1, 'admin_email' );
 
 		return $admin_email;
+	}
+
+	/**
+		@brief		Get the options
+		@since		2018-01-05 19:58:46
+	**/
+	public function get_checkout_wallet_options( $options )
+	{
+		$options = array_merge( [
+			'as_html' => false,
+		], $options );
+		$options = (object) $options;
+
+		$currencies = $this->currencies();
+		$wallet_options = [];
+		$wallets = $this->wallets()->enabled_on_this_site();
+
+		foreach( $wallets as $wallet )
+		{
+			$currency_id = $wallet->get_currency_id();
+			$currency = $currencies->get( $currency_id );
+			$amount = $this->markup_amount( $options->amount );
+			$cryptocurrency_amount = $currency->convert( $options->original_currency, $amount );
+			$cryptocurrency_amount = $this->randomizer()->modify( $cryptocurrency_amount );
+
+			if ( $options->as_html )
+				$value = sprintf( '<option value="%s">%s (%s %s)</option>',
+					$currency_id,
+					$currency->get_name(),
+					$cryptocurrency_amount,
+					$currency_id
+				);
+			else
+				$value = sprintf( '%s (%s %s)',
+					$currency->get_name(),
+					$cryptocurrency_amount,
+					$currency_id
+				);
+			$wallet_options[ $currency_id ] = $value;
+		}
+
+		if ( $options->as_html )
+			$wallet_options = implode( "\n", $wallet_options );
+
+		return $wallet_options;
 	}
 
 	/**
@@ -187,6 +232,15 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Return the randomizer class.
+		@since		2018-01-05 21:11:26
+	**/
+	public function randomizer()
+	{
+		return new Randomizer();
+	}
+
+	/**
 		@brief		Site options.
 		@since		2017-12-09 09:18:21
 	**/
@@ -213,11 +267,18 @@ trait misc_methods_trait
 			'markup_percent' => 0,
 
 			/**
+				@brief		Randomize the final amount in order to more easily identify transactions.
+				@since		2018-01-05 17:53:52
+			**/
+			'markup_randomization'  => 0.01,
+
+			/**
 				@brief		The Wallets collection in which all wallet info is stored.
 				@see		Wallets()
 				@since		2017-12-09 09:15:52
 			**/
 			'wallets' => false,
+
 		], parent::site_options() );
 	}
 }

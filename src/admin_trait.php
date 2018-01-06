@@ -477,12 +477,12 @@ trait admin_trait
 		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
 
-		$fs = $form->fieldset( 'gateway_fees' );
+		$fs = $form->fieldset( 'fs_gateway_fees' );
 		// Label for fieldset
 		$fs->legend->label( __( 'Gateway fees', 'mycryptocheckout' ) );
 
 		$fs->markup( 'm_gateway_fees' )
-			->p( __( 'If you wish to charge (or discount) visitors for using MyCryptoCheckout as the payment gateway, you can enter the fixed or percentage amounts in the boxes below. The cryptocurrency checkout price will be modified in accordance with the combined values below.', 'mycryptocheckout' ) );
+			->p( __( 'If you wish to charge (or discount) visitors for using MyCryptoCheckout as the payment gateway, you can enter the fixed or percentage amounts in the boxes below. The cryptocurrency checkout price will be modified in accordance with the combined values below. These are applied to the original currency.', 'mycryptocheckout' ) );
 
 		$markup_amount = $fs->number( 'markup_amount' )
 			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the fixed amount in this box.', 'mycryptocheckout' ) )
@@ -504,6 +504,19 @@ trait admin_trait
 			->size( 6, 6 )
 			->value( $this->get_site_option( 'markup_percent' ) );
 
+		$fs = $form->fieldset( 'fs_payments' );
+		// Label for fieldset
+		$fs->legend->label( __( 'Payment options', 'mycryptocheckout' ) );
+
+		$markup_randomization = $fs->number( 'markup_randomization' )
+			->description( __( "Randomize the cryptocurrency amount by up to this tiny percentage, up or down, as an extra safeguard for buyers that don't type in their wallet address correctly.", 'mycryptocheckout' ) )
+			// Input label.
+			->label( __( 'Markup randomization %', 'mycryptocheckout' ) )
+			->max( 10 )
+			->min( 0 )
+			->step( 0.01 )
+			->size( 6, 6 )
+			->value( $this->get_site_option( 'markup_randomization' ) );
 
 		$this->add_debug_settings_to_form( $form );
 

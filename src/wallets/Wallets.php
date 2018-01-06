@@ -77,9 +77,10 @@ class Wallets
 		$wallet = $dustiest_wallets->first();
 
 		// Allow other people to modify our selection.
-		$action = $this->new_action( 'get_dustiest_wallet' );
+		$action = MyCryptoCheckout()->new_action( 'get_dustiest_wallet' );
 		$action->currency_id = $currency_id;
 		$action->dustiest_wallets = $dustiest_wallets;
+		$action->wallet = $wallet;
 		$action->wallets = $wallets;
 		$action->execute();
 
