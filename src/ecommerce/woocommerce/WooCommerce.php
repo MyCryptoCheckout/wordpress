@@ -84,7 +84,7 @@ class WooCommerce
 	**/
 	public function mycryptocheckout_payment_complete( $payment )
 	{
-		$this->do_with_payment( $payment, function( $order_id )
+		$this->do_with_payment( $payment, function( $order_id, $payment )
 		{
 			if ( ! function_exists( 'WC' ) )
 				return;

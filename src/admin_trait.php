@@ -17,8 +17,11 @@ trait admin_trait
 	public function activate()
 	{
 		wp_schedule_event( time(), 'hourly', 'mycryptocheckout_hourly' );
+
 		// We need to run this as soon as the plugin is active.
-		wp_schedule_single_event( time(), 'mycryptocheckout_hourly' );
+		$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
+		wp_unschedule_event( $next, 'mycryptocheckout_retrieve_account' );
+		wp_schedule_single_event( time(), 'mycryptocheckout_retrieve_account' );
 	}
 
 	/**
@@ -97,7 +100,7 @@ trait admin_trait
 		}
 
 		$table = $this->table();
-		$table->caption()->text( __( 'Information about your account on mycryptocheckout.com', 'mycryptocheckout' ) );
+		$table->caption()->text( __( 'Your MyCryptoCheckout account details', 'mycryptocheckout' ) );
 
 		$row = $table->head()->row()->hidden();
 		// Table column name
@@ -117,7 +120,7 @@ trait admin_trait
 		}
 
 		$row = $table->head()->row();
-		$row->th( 'key' )->text( __( 'Account data updated', 'mycryptocheckout' ) );
+		$row->th( 'key' )->text( __( 'Account data refreshed', 'mycryptocheckout' ) );
 		$row->td( 'details' )->text( static::wordpress_ago( $account->data->updated ) );
 
 		if ( $account->has_license() )
@@ -140,9 +143,9 @@ trait admin_trait
 			$text =  __( 'Purchase a license for unlimited payments', 'mycryptocheckout' );
 		$row->th( 'key' )->text( $text );
 		$url = $this->api()->get_purchase_url();
-		$url = sprintf( '<a href="%s">%s</a>',
+		$url = sprintf( '<a href="%s">%s</a> &rArr;',
 			$url,
-			__( 'MyCryptoCheckout pricing', 'mycryptocheckout' )
+			__( 'MyCryptoCheckout.com pricing page', 'mycryptocheckout' )
 		);
 		$row->td( 'details' )->text( $url );
 

@@ -57,21 +57,6 @@ trait misc_methods_trait
 	}
 
 	/**
-		@brief		Retrieve the admin's email.
-		@since		2017-12-25 09:03:56
-	**/
-	public function get_admin_email()
-	{
-		if ( ! $this->is_network )
-			$admin_email = get_bloginfo( 'admin_email' );
-		else
-			// Use the admin email of blog 1.
-			$admin_email = get_blog_option( 1, 'admin_email' );
-
-		return $admin_email;
-	}
-
-	/**
 		@brief		Get the options
 		@since		2018-01-05 19:58:46
 	**/

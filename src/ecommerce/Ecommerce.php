@@ -37,7 +37,7 @@ class Ecommerce
 		);
 		$results = $wpdb->get_col( $query );
 		foreach( $results as $order_id )
-			$function( $order_id );
+			$function( $order_id, $payment );
 
 		if ( $switched_blog > 0 )
 			restore_current_blog();

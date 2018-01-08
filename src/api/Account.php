@@ -193,7 +193,6 @@ class Account
 			set_site_transient( static::$account_retrieve_transient_key, $retrieve_key, 60 );
 			$result = MyCryptoCheckout()->api()->send_post( 'account/retrieve',
 				[
-					'admin_email' => MyCryptoCheckout()->get_admin_email(),
 					'domain' => base64_encode( MyCryptoCheckout()->get_server_name() ),
 					'retrieve_key' => $retrieve_key,
 				] );
