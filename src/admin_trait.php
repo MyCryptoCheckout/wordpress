@@ -510,10 +510,6 @@ trait admin_trait
 			->size( 6, 6 )
 			->value( $this->get_site_option( 'markup_percent' ) );
 
-		$fs = $form->fieldset( 'fs_payments' );
-		// Label for fieldset
-		$fs->legend->label( __( 'Payment options', 'mycryptocheckout' ) );
-
 		$this->add_debug_settings_to_form( $form );
 
 		$save = $form->primary_button( 'save' )
