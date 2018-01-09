@@ -307,11 +307,20 @@ class Easy_Digital_Downloads
 		{
 			$transaction_id = get_post_meta( $post_id, '_mcc_transaction_id', true );
 			if ( $transaction_id )
+			{
 				$status = __( 'Payment complete', 'mycryptocheckout' );
+				$transaction_id_span = sprintf( '<span title="%s">%s...</span>',
+					$transaction_id,
+					substr( $transaction_id, 0, 10 )
+				);
+			}
 			else
 			{
 				$status = __( 'Awaiting blockchain transaction', 'mycryptocheckout' );
 				$transaction_id = __( 'Pending', 'mycryptocheckout' );
+				$transaction_id_span = sprintf( '<span>%s</span>',
+					$transaction_id
+				);
 			}
 		}
 		else
@@ -366,7 +375,7 @@ class Easy_Digital_Downloads
 						<div class="column">
 							<p>
 								<strong class="mcc_transaction_id"><?php _e( 'Transaction ID', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( $transaction_id ); ?></span>
+								<?php _e( $transaction_id_span ); ?>
 							</p>
 						</div>
 					<?php
