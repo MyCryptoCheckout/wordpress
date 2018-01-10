@@ -72,6 +72,11 @@ class WooCommerce
 			$order = wc_get_order( $order_id );
 			if ( ! $order )
 				return;
+
+			// Only cancel is the order is unpaid.
+			if ( $order->get_status() != 'on-hold' )
+				return MyCryptoCheckout()->debug( 'WC order %d on blog %d is not unpaid. Can not cancel.', $order_id, get_current_blog_id() );
+
 			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as cancelled.', $order_id, get_current_blog_id() );
 			update_post_meta( $order_id, '_mcc_payment_id', -1 );
 			$order->update_status( 'cancelled', 'Payment timed out.' );
