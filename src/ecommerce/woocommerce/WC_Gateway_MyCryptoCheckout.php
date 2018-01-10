@@ -12,10 +12,14 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function __construct()
 	{
-		$this->id                 = \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
-		$this->method_title       = $this->get_method_title();
-		$this->method_description = $this->get_method_description();
-		$this->has_fields         = true;
+		$plugin_dir = plugin_dir_url(__FILE__);
+
+		$this->id					= \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
+		$icon_file = $plugin_dir . 'icons.svg';
+		$this->icon					= apply_filters( 'woocommerce_gateway_icon', $icon_file );
+		$this->method_title			= $this->get_method_title();
+		$this->method_description	= $this->get_method_description();
+		$this->has_fields			= true;
 
 		$this->init_form_fields();
 		$this->init_settings();
