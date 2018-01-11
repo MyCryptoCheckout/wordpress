@@ -74,6 +74,6 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
-= 1 20180110 =
+= 1 20180112 =
 
 Initial release.
