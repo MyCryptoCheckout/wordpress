@@ -208,6 +208,14 @@ trait admin_trait
 			$row = $table->body()->row();
 			$table->bulk_actions()->cb( $row, $index );
 			$currency = $this->currencies()->get( $wallet->get_currency_id() );
+
+			if ( ! $currency )
+			{
+				$wallets->forget( $index );
+				$wallets->save();
+				continue;
+			}
+
 			$currency_text = sprintf( '%s %s', $currency->get_name(), $currency->get_id() );
 			$row->td( 'currency' )->text( $currency_text );
 
