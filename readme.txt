@@ -34,7 +34,6 @@ The following cryptocurrencies are supported:
 - Bitcoin Cash BCH
 - Ethereum ETH
 - Litecoin LTC
-- Ripple XRP
 
 After checkout, payment instructions are automatically included in the purchase receipt.
 
