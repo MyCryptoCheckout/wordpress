@@ -5,7 +5,7 @@ License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
 Stable tag: trunk
-Tags: cryptocurrency, checkout, payment, gateway, woocommerce, easydigitaldownloads
+Tags: cryptocurrency, checkout, gateway, woocommerce, easydigitaldownloads, bitcoin
 Tested up to: 4.9.1
 
 Cryptocurrency payment gateway for WooCommerce and EasyDigitalDownloads.
