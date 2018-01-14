@@ -51,7 +51,10 @@ class Easy_Digital_Downloads
 	**/
 	public function edd_add_email_tags()
 	{
-		edd_add_email_tag( 'mcc_instructions', $this->get_option_or_default( 'payment_instructions_description' ), function( $payment_id )
+		// We only want the first sentence of the instructions desc.
+		$instruction_text = $this->get_option_or_default( 'payment_instructions_description' );
+		$instruction_text = preg_replace( '/\..*/', '.', $instruction_text );
+		edd_add_email_tag( 'mcc_instructions', $instruction_text, function( $payment_id )
 		{
 			$payment = new \EDD_Payment( $payment_id );
 			// Don't show the payment instructions is the payment is paid.

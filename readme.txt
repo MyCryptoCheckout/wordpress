@@ -75,8 +75,9 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
-= x =
+= 1.1 20180115 =
 
+* Fix: Better EDD installation instruction text for e-mail tag.
 * Fix: Display currency ID when editing the wallet.
 
 = 1 20180112 =
