@@ -80,11 +80,16 @@ trait menu_trait
 
 		if ( $tabs->get_is( 'edit_wallet' ) )
 		{
+			$wallet_id = $_GET[ 'wallet_id' ];
+			$wallets = $this->wallets();
+			$wallet = $wallets->get( $wallet_id );
 			$tabs->tab( 'edit_wallet' )
 				->callback_this( 'admin_edit_wallet' )
+				// Editing BTC wallet
+				->heading( sprintf(  __( 'Editing %s wallet', 'mycryptocheckout' ), $wallet->get_currency_id() ) )
 				// Name of tab
 				->name( __( 'Edit wallet', 'mycryptocheckout' ) )
-				->parameters( $_GET[ 'wallet_id' ] );
+				->parameters( $wallet_id );
 		}
 
 		echo $tabs->render();

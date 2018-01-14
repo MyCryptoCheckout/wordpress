@@ -60,6 +60,8 @@ If your server cannot be reached by the API server this plugin will not function
 6. Visit your WooCommerce payment gateway settings
 7. Visit your EasyDigitalDownloads payment gateway settings
 
+To configure EDD, edit your purchase receipt e-mail and add the {mcc_instructions} tag.
+
 == Screenshots ==
 
 1. WooCommerce checkout
@@ -73,6 +75,10 @@ If your server cannot be reached by the API server this plugin will not function
 9. Payment info in EasyDigitalDownloads
 
 == Changelog ==
+
+= x =
+
+* Fix: Display currency ID when editing the wallet.
 
 = 1 20180112 =
 
