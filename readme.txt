@@ -75,6 +75,10 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+= 1.2 20180116 =
+
+* Fix: Allow for temporary account locking if a payment is unable to be sent to the API server. Account will automatically unlock when contact is reestablished.
+
 = 1.1 20180115 =
 
 * Fix: Better EDD installation instruction text for e-mail tag.
