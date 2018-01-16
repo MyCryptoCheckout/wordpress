@@ -57,6 +57,8 @@ class Payments
 	{
 		$attempts = intval( get_post_meta( $post_id, '_mcc_attempts', true ) );
 
+		MyCryptoCheckout()->api()->account()->lock()->save();
+
 		try
 		{
 			$payment = static::generate_payment_from_order( $post_id );

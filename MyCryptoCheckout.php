@@ -3,7 +3,7 @@
 Author:			edward_plainview
 Author Email:	edward@plainviewplugins.com
 Author URI:		https://plainviewplugins.com
-Description:	Broadcast / multipost posts, with attachments, custom fields and taxonomies to other blogs in the network.
+Description:	Cryptocurrency payment gateway using the MyCryptoCheckout.com service.
 Domain Path:	/lang
 Plugin Name:	MyCryptoCheckout
 Plugin URI:		https://mycryptocheckout.com
@@ -44,6 +44,7 @@ namespace mycryptocheckout
 
 namespace
 {
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 1.1 );
 	/**
 		@brief		Return the instance of ThreeWP Broadcast.
 		@since		2014-10-18 14:48:37

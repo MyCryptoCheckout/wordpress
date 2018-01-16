@@ -130,6 +130,9 @@ class Account
 	**/
 	public function is_available_for_payment()
 	{
+		if ( isset( $this->data->locked ) )
+			throw new Exception( 'The account is locked, probably due to a payment not being able to be send to the API server. The account will unlock upon next contact with the API server.' );
+
 		// The account needs payments available.
 		if ( ! $this->has_payments_left() )
 			throw new Exception( 'Your account does not have any payments left this month. Either wait until next month or purchase an unlimited license using the link on your MyCryptoCheckout settings account page.' );
@@ -165,6 +168,16 @@ class Account
 	}
 
 	/**
+		@brief		Lock the account from sending anything new to the API.
+		@since		2018-01-16 19:42:08
+	**/
+	public function lock()
+	{
+		$this->data->locked = true;
+		return $this;
+	}
+
+	/**
 		@brief		Load the data from the option.
 		@since		2017-12-24 11:17:31
 	**/
@@ -194,6 +207,7 @@ class Account
 			$result = MyCryptoCheckout()->api()->send_post( 'account/retrieve',
 				[
 					'domain' => base64_encode( MyCryptoCheckout()->get_server_name() ),
+					'plugin_version' => MYCRYPTOCHECKOUT_PLUGIN_VERSION,
 					'retrieve_key' => $retrieve_key,
 				] );
 			if ( ! $result )
@@ -217,6 +231,26 @@ class Account
 			MyCryptoCheckout()->debug( 'WARNING: Unable to retrieve our account details: %s', $e->get_message() );
 			return false;
 		}
+	}
+
+	/**
+		@brief		Save this new data.
+		@since		2018-01-16 19:46:51
+	**/
+	public function save()
+	{
+		MyCryptoCheckout()->update_site_option( 'account_data', json_encode( $this->data ) );
+		return $this;
+	}
+
+	/**
+		@brief		Set the new data.
+		@since		2018-01-16 20:02:38
+	**/
+	public function set_data( $data )
+	{
+		$this->data = $data;
+		return $this;
 	}
 
 }

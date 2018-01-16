@@ -136,7 +136,8 @@ class API
 			// Everything looks good to go.
 			$new_account_data = (object) (array) $message->account;
 			MyCryptoCheckout()->debug( 'Setting new account data: %s', json_encode( $new_account_data ) );
-			MyCryptoCheckout()->update_site_option( 'account_data', json_encode( $new_account_data ) );
+			MyCryptoCheckout()->api()->account()->set_data( $new_account_data )
+				->save();
 		}
 
 		$account = $this->account();
@@ -204,6 +205,7 @@ class API
 	{
 		$account = $this->account();
 		// Merge the domain key.
+		$data[ 'domain' ] = MyCryptoCheckout()->get_server_name();
 		$data[ 'domain_key' ] = $account->get_domain_key();
 		return $this->send_post( $url, $data );
 	}
