@@ -75,6 +75,10 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+= 1.3 20180123 =
+
+* Fix: Do not unnecessarily create payment data for non-crypto payments in WooCommerce.
+
 = 1.2 20180116 =
 
 * Fix: Allow for temporary account locking if a payment is unable to be sent to the API server. Account will automatically unlock when contact is reestablished.

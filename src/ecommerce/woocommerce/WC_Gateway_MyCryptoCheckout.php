@@ -237,9 +237,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function woocommerce_admin_order_data_after_order_details( $order )
 	{
-		$amount = $order->get_meta( '_mcc_amount' );
-		if ( ! $amount )
+		if ( $this->id != $order->get_payment_method() )
 			return;
+
+		$amount = $order->get_meta( '_mcc_amount' );
 
 		$r = '';
 		$r .= sprintf( '<h3>%s</h3>',
@@ -298,7 +299,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function woocommerce_checkout_create_order( $order, $data )
 	{
-		if ( ! isset( $_POST[ 'mcc_currency_id' ] ) )
+		if ( $this->id != $order->get_payment_method() )
 			return;
 
 		$currency_id = sanitize_text_field( $_POST[ 'mcc_currency_id' ] );
