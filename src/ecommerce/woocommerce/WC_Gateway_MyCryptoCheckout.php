@@ -173,6 +173,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		] );
 	}
 
+	/**
+		@brief		Internal method.
+		@since		2018-01-26 14:00:58
+	**/
 	function process_payment( $order_id )
 	{
 		global $woocommerce;

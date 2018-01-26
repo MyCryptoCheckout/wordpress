@@ -75,6 +75,10 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+= 1.4 20180126 =
+
+* Code: Cleanup checkout code for WooCommerce.
+
 = 1.3 20180123 =
 
 * Fix: Do not unnecessarily create payment data for non-crypto payments in WooCommerce.
