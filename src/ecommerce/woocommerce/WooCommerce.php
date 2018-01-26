@@ -26,8 +26,11 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_payment_complete' );
+		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
+		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
 		$this->add_filter( 'woocommerce_payment_gateways' );
+		$this->add_action( 'woocommerce_thankyou_mycryptocheckout' );
 	}
 
 	/**
@@ -102,15 +105,110 @@ class WooCommerce
 	}
 
 	/**
+		@brief		woocommerce_admin_order_data_after_order_details
+		@since		2017-12-14 20:35:48
+	**/
+	public function woocommerce_admin_order_data_after_order_details( $order )
+	{
+		if ( $order->get_payment_method() != static::$gateway_id )
+			return;
+
+		$amount = $order->get_meta( '_mcc_amount' );
+
+		$r = '';
+		$r .= sprintf( '<h3>%s</h3>',
+			__( 'MyCryptoCheckout details', 'woocommerce' )
+		);
+
+		if ( $order->is_paid() )
+			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+				// Received 123 BTC to xyzabc
+				sprintf( __( 'Received %s&nbsp;%s<br/>to %s', 'mycryptocheckout'),
+					$amount,
+					$order->get_meta( '_mcc_currency_id' ),
+					$order->get_meta( '_mcc_to' )
+				)
+			);
+		else
+		{
+			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+				// Expecting 123 BTC to xyzabc
+				sprintf( __( 'Expecting %s&nbsp;%s<br/>to %s', 'mycryptocheckout'),
+					$amount,
+					$order->get_meta( '_mcc_currency_id' ),
+					$order->get_meta( '_mcc_to' )
+				)
+			);
+
+			$attempts = $order->get_meta( '_mcc_attempts' );
+			$payment_id = $order->get_meta( '_mcc_payment_id' );
+
+			if ( $payment_id > 0 )
+			{
+				$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+					// Expecting 123 BTC to xyzabc
+					sprintf( __( 'MyCryptoCheckout payment ID: %d', 'mycryptocheckout'),
+						$payment_id
+					)
+				);
+			}
+			else
+			{
+				if ( $attempts > 0 )
+					$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+						sprintf( __( '%d attempts made to contact the API server.', 'mycryptocheckout'),
+							$attempts
+						)
+					);
+			}
+		}
+
+		echo $r;
+	}
+
+	/**
+		@brief		Add the meta fields.
+		@since		2017-12-10 21:35:29
+	**/
+	public function woocommerce_checkout_create_order( $order, $data )
+	{
+		if ( $order->get_payment_method() != static::$gateway_id )
+			return;
+
+		$currency_id = sanitize_text_field( $_POST[ 'mcc_currency_id' ] );
+
+		// All of the below is just to calculate the amount.
+		$mcc = MyCryptoCheckout();
+
+		$order_total = $order->get_total();
+		$currencies = $mcc->currencies();
+		$currency = $currencies->get( $currency_id );
+		$wallet = $mcc->wallets()->get_dustiest_wallet( $currency_id );
+
+		$wallet->use();
+		$mcc->wallets()->save();
+
+		$woocommerce_currency = get_woocommerce_currency();
+		$amount = $mcc->markup_amount( $order_total );
+		$amount = $currency->convert( $woocommerce_currency, $amount );
+		$amount = $currency->find_next_available_amount( $amount );
+
+		$order->update_meta_data( '_mcc_amount', $amount );
+		$order->update_meta_data( '_mcc_currency_id', $currency_id );
+		$order->update_meta_data( '_mcc_confirmations', $wallet->confirmations );
+		$order->update_meta_data( '_mcc_created_at', time() );
+		$order->update_meta_data( '_mcc_payment_id', 0 );		// 0 = not sent.
+		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
+	}
+
+	/**
 		@brief		Maybe send this order to the API.
 		@since		2017-12-25 16:21:06
 	**/
 	public function woocommerce_checkout_update_order_meta( $order_id )
 	{
 		$order = wc_get_order( $order_id );
-		$payment_method = $order->get_payment_method();
-		// This must be a MCC checkout.
-		if ( $payment_method != static::$gateway_id )
+		if ( $order->get_payment_method() != static::$gateway_id )
 			return;
 		do_action( 'mycryptocheckout_send_payment', $order_id );
 	}
@@ -124,5 +222,17 @@ class WooCommerce
 		require_once( __DIR__ . '/WC_Gateway_MyCryptoCheckout.php' );
 		$gateways []= 'WC_Gateway_MyCryptoCheckout';
 		return $gateways;
+	}
+
+	/**
+		@brief		woocommerce_thankyou_mycryptocheckout
+		@since		2017-12-10 21:44:51
+	**/
+	public function woocommerce_thankyou_mycryptocheckout( $order_id )
+	{
+		$instructions = $this->get_instructions( $order_id );
+		if ( ! $instructions )
+			return;
+		echo wpautop( wptexturize( $instructions ) );
 	}
 }

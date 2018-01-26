@@ -27,11 +27,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$this->title = $this->get_option( 'title' );
 		$this->description = $this->get_option( 'description' );
 
-		add_action( 'woocommerce_admin_order_data_after_order_details', [ $this, 'woocommerce_admin_order_data_after_order_details' ] );
-		add_action( 'woocommerce_checkout_create_order', [ $this, 'woocommerce_checkout_create_order' ], 10, 2 );
 		add_action( 'woocommerce_email_before_order_table', [ $this, 'woocommerce_email_before_order_table' ], 10, 3 );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'post_process_admin_options' ] );
-		add_action( 'woocommerce_thankyou_' . $this->id, [ $this, 'woocommerce_thankyou' ] );
 	}
 
 	/**
@@ -232,115 +229,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		woocommerce_admin_order_data_after_order_details
-		@since		2017-12-14 20:35:48
-	**/
-	public function woocommerce_admin_order_data_after_order_details( $order )
-	{
-		if ( $this->id != $order->get_payment_method() )
-			return;
-
-		$amount = $order->get_meta( '_mcc_amount' );
-
-		$r = '';
-		$r .= sprintf( '<h3>%s</h3>',
-			__( 'MyCryptoCheckout details', 'woocommerce' )
-		);
-
-		if ( $order->is_paid() )
-			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-				// Received 123 BTC to xyzabc
-				sprintf( __( 'Received %s&nbsp;%s<br/>to %s', 'mycryptocheckout'),
-					$amount,
-					$order->get_meta( '_mcc_currency_id' ),
-					$order->get_meta( '_mcc_to' )
-				)
-			);
-		else
-		{
-			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-				// Expecting 123 BTC to xyzabc
-				sprintf( __( 'Expecting %s&nbsp;%s<br/>to %s', 'mycryptocheckout'),
-					$amount,
-					$order->get_meta( '_mcc_currency_id' ),
-					$order->get_meta( '_mcc_to' )
-				)
-			);
-
-			$attempts = $order->get_meta( '_mcc_attempts' );
-			$payment_id = $order->get_meta( '_mcc_payment_id' );
-
-			if ( $payment_id > 0 )
-			{
-				$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-					// Expecting 123 BTC to xyzabc
-					sprintf( __( 'MyCryptoCheckout payment ID: %d', 'mycryptocheckout'),
-						$payment_id
-					)
-				);
-			}
-			else
-			{
-				if ( $attempts > 0 )
-					$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-						sprintf( __( '%d attempts made to contact the API server.', 'mycryptocheckout'),
-							$attempts
-						)
-					);
-			}
-		}
-
-		echo $r;
-	}
-
-	/**
-		@brief		Add the meta fields.
-		@since		2017-12-10 21:35:29
-	**/
-	public function woocommerce_checkout_create_order( $order, $data )
-	{
-		if ( $this->id != $order->get_payment_method() )
-			return;
-
-		$currency_id = sanitize_text_field( $_POST[ 'mcc_currency_id' ] );
-
-		// All of the below is just to calculate the amount.
-		$mcc = MyCryptoCheckout();
-
-		$order_total = $order->get_total();
-		$currencies = $mcc->currencies();
-		$currency = $currencies->get( $currency_id );
-		$wallet = $mcc->wallets()->get_dustiest_wallet( $currency_id );
-
-		$wallet->use();
-		$mcc->wallets()->save();
-
-		$woocommerce_currency = get_woocommerce_currency();
-		$amount = $mcc->markup_amount( $order_total );
-		$amount = $currency->convert( $woocommerce_currency, $amount );
-		$amount = $currency->find_next_available_amount( $amount );
-
-		$order->update_meta_data( '_mcc_amount', $amount );
-		$order->update_meta_data( '_mcc_currency_id', $currency_id );
-		$order->update_meta_data( '_mcc_confirmations', $wallet->confirmations );
-		$order->update_meta_data( '_mcc_created_at', time() );
-		$order->update_meta_data( '_mcc_payment_id', 0 );		// 0 = not sent.
-		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
-	}
-
-	/**
-		@brief		woocommerce_thankyou
-		@since		2017-12-10 21:44:51
-	**/
-	public function woocommerce_thankyou( $order_id )
-	{
-		$instructions = $this->get_instructions( $order_id );
-		if ( ! $instructions )
-			return;
-		echo wpautop( wptexturize( $instructions ) );
-	}
-
-	/**
 		@brief		woocommerce_email_before_order_table
 		@since		2017-12-10 21:53:27
 	**/
@@ -348,7 +236,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	{
 		if ( $sent_to_admin )
 			return;
-		if ( $this->id != $order->get_payment_method() )
+
+		if ( $order->get_payment_method() != $this->id )
 			return;
 
 		// If paid, do not do anything.
