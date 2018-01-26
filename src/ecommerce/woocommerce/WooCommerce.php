@@ -30,7 +30,6 @@ class WooCommerce
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
 		$this->add_filter( 'woocommerce_payment_gateways' );
-		$this->add_action( 'woocommerce_thankyou_mycryptocheckout' );
 	}
 
 	/**
@@ -199,6 +198,9 @@ class WooCommerce
 		$order->update_meta_data( '_mcc_created_at', time() );
 		$order->update_meta_data( '_mcc_payment_id', 0 );		// 0 = not sent.
 		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
+
+		// We want to keep the account locked, but still enable the is_available gateway check to work for the rest of this session.
+		$this->__just_used = true;
 	}
 
 	/**
@@ -222,17 +224,5 @@ class WooCommerce
 		require_once( __DIR__ . '/WC_Gateway_MyCryptoCheckout.php' );
 		$gateways []= 'WC_Gateway_MyCryptoCheckout';
 		return $gateways;
-	}
-
-	/**
-		@brief		woocommerce_thankyou_mycryptocheckout
-		@since		2017-12-10 21:44:51
-	**/
-	public function woocommerce_thankyou_mycryptocheckout( $order_id )
-	{
-		$instructions = $this->get_instructions( $order_id );
-		if ( ! $instructions )
-			return;
-		echo wpautop( wptexturize( $instructions ) );
 	}
 }

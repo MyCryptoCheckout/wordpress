@@ -29,23 +29,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		add_action( 'woocommerce_email_before_order_table', [ $this, 'woocommerce_email_before_order_table' ], 10, 3 );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'post_process_admin_options' ] );
-	}
-
-	/**
-	 * Change payment complete order status to completed for MCC orders.
-	 *
-	 * @since  3.1.0
-	 * @param  string $status
-	 * @param  int $order_id
-	 * @param  WC_Order $order
-	 * @return string
-	 */
-	public function change_payment_complete_order_status( $status, $order_id = 0, $order = false )
-	{
-		if ( $order )
-			if ( \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id === $order->get_payment_method() )
-				$status = 'completed';
-		return $status;
+		add_action( 'woocommerce_thankyou_mycryptocheckout', [ $this, 'woocommerce_thankyou_mycryptocheckout' ] );
 	}
 
 	/**
@@ -153,9 +137,14 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function is_available()
 	{
+		$mcc = MyCryptoCheckout();
+		// This is to keep the account locked, but still enable checkouts, since this is called twice during the checkout process.
+		if ( isset( $mcc->woocommerce->__just_used ) )
+			return true;
+
 		try
 		{
-			MyCryptoCheckout()->woocommerce->is_available_for_payment();
+			$mcc->woocommerce->is_available_for_payment();
 			return true;
 		}
 		catch ( Exception $e )
@@ -246,5 +235,17 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		$instructions = $this->get_instructions( $order->get_id() );
 		echo wpautop( wptexturize( $instructions ) ) . PHP_EOL;
+	}
+
+	/**
+		@brief		woocommerce_thankyou_mycryptocheckout
+		@since		2017-12-10 21:44:51
+	**/
+	public function woocommerce_thankyou_mycryptocheckout( $order_id )
+	{
+		$instructions = $this->get_instructions( $order_id );
+		if ( ! $instructions )
+			return;
+		echo wpautop( wptexturize( $instructions ) );
 	}
 }
