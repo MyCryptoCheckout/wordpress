@@ -82,18 +82,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Return the instructions for this order.
-		@since		2017-12-14 19:45:28
-	**/
-	public function get_instructions( $order_id )
-	{
-		$instructions = $this->get_option( 'instructions' );
-		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
-		$instructions = $payment->replace_shortcodes( $instructions );
-		return $instructions;
-	}
-
-	/**
 		@brief		Return the description of this gateway.
 		@since		2017-12-30 21:40:51
 	**/
@@ -243,7 +231,9 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( $order->is_paid() )
 			return;
 
-		$instructions = $this->get_instructions( $order->get_id() );
+		$instructions = $this->get_option( 'email_instructions' );
+		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order->get_id() );
+		$instructions = $payment->replace_shortcodes( $instructions );
 		echo wpautop( wptexturize( $instructions ) ) . PHP_EOL;
 	}
 

@@ -19,8 +19,14 @@ jQuery( document ).ready( function( $ )
 		var $clipboard = $( '<img src="data:image/svg+xml;base64,' + clipboard_svg + '" />' );
 		$clipboard.click( function()
 		{
+			var old_value = $input.attr( 'value' );
+			var new_value = old_value.replace( / .*/, '' );
+			console.log( new_value );
+			$input.attr( 'value', new_value );
 			$input.select();
 			document.execCommand( "copy" );
+			$input.attr( 'value', old_value );
+			$input.select();
 		} );
 
 		$item.html( $input );
