@@ -52,7 +52,7 @@ class Easy_Digital_Downloads
 	public function edd_add_email_tags()
 	{
 		// We only want the first sentence of the instructions desc.
-		$instruction_text = $this->get_option_or_default( 'payment_instructions_description' );
+		$instruction_text = $this->get_option_or_default( 'email_payment_instructions_description' );
 		$instruction_text = preg_replace( '/\..*/', '.', $instruction_text );
 		edd_add_email_tag( 'mcc_instructions', $instruction_text, function( $payment_id )
 		{
@@ -61,7 +61,7 @@ class Easy_Digital_Downloads
 			if ( $payment->status == 'publish' )
 				return;
 
-			$instructions = $this->get_option_or_default( 'payment_instructions' );
+			$instructions = $this->get_option_or_default( 'email_payment_instructions' );
 			$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
 			$instructions = $payment->replace_shortcodes( $instructions );
 			return $instructions;
@@ -224,11 +224,11 @@ class Easy_Digital_Downloads
 				'size' => 'regular',
 				'type' => 'text',
 			],
-			'mcc_payment_instructions' => array(
-				'id' 	=> 'mcc_payment_instructions',
+			'mcc_email_payment_instructions' => array(
+				'id' 	=> 'mcc_email_payment_instructions',
 				'name'       => __( 'Instructions', 'mycryptocheckout' ),
 				'type'        => 'textarea',
-				'desc' => $this->get_option_or_default( 'payment_instructions_description' ),
+				'desc' => $this->get_option_or_default( 'email_payment_instructions_description' ),
 			),
 			'mcc_leave_edd_receipt_shortcode_alone' =>
 			[
@@ -499,7 +499,7 @@ class Easy_Digital_Downloads
 
 		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
 
-		$instructions = $this->get_option_or_default( 'payment_instructions' );
+		$instructions = $this->get_option_or_default( 'email_payment_instructions' );
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
 		$instructions = $payment->replace_shortcodes( $instructions );
 

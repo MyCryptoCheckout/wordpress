@@ -51,8 +51,10 @@ trait misc_methods_trait
 		$r = $this->collection();
 		$r->set( 'currency_selection_text', __( 'Please select the currency with which you wish to pay', 'mycryptocheckout' ) );
 		$r->set( 'gateway_name', __( 'Cryptocurrency', 'mycryptocheckout' ) );
-		$r->set( 'payment_instructions', __( 'Please complete your order by transferring<br/><strong>[AMOUNT] [CURRENCY]</strong><br />to <strong>[TO]</strong>', 'mycryptocheckout' ) );
-		$r->set( 'payment_instructions_description', __( 'Instructions for payment that will be added to the receipt and purchase confirmation page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
+		$r->set( 'online_payment_instructions_description', __( 'Instructions for payment that will be shown on the purchase confirmation page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
+		$r->set( 'online_payment_instructions', $this->wpautop_file( 'online_payment_instructions' ) );
+		$r->set( 'email_payment_instructions', $this->wpautop_file( 'email_payment_instructions' ) );
+		$r->set( 'email_payment_instructions_description', __( 'Instructions for payment that will be added to the e-mail receipt. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
 		return $r;
 	}
 
@@ -302,5 +304,16 @@ trait misc_methods_trait
 			'wallets' => false,
 
 		], parent::site_options() );
+	}
+
+	/**
+		@brief		Return the contents of a text file using wpautop.
+		@since		2018-01-28 09:39:00
+	**/
+	public function wpautop_file( $key )
+	{
+		$file = __DIR__ . '/static/texts/' . $key . '.txt';
+		$text = file_get_contents( $file );
+		return wpautop( $text );
 	}
 }

@@ -48,11 +48,17 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'description' => '',
 				'default'     => 'no',
 			],
-			'instructions' => array(
-				'title'       => __( 'Instructions', 'mycryptocheckout' ),
+			'email_instructions' => array(
+				'title'       => __( 'E-mail Instructions', 'mycryptocheckout' ),
 				'type'        => 'textarea',
-				'description' => $strings->get( 'payment_instructions_description' ),
-				'default' => $strings->get( 'payment_instructions' ),
+				'description' => $strings->get( 'email_payment_instructions_description' ),
+				'default' => $strings->get( 'email_payment_instructions' ),
+			),
+			'online_instructions' => array(
+				'title'       => __( 'Online instructions', 'mycryptocheckout' ),
+				'type'        => 'textarea',
+				'description' => $strings->get( 'online_payment_instructions_description' ),
+				'default' => $strings->get( 'online_payment_instructions' ),
 			),
 			'title' => [
 				'title' => __( 'Payment type name', 'mycryptocheckout' ),
@@ -247,7 +253,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function woocommerce_thankyou_mycryptocheckout( $order_id )
 	{
-		$instructions = $this->get_instructions( $order_id );
+		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/mycryptocheckout.js', [ 'jquery' ] );
+		$instructions = $this->get_option( 'online_instructions' );
+		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
+		$instructions = $payment->replace_shortcodes( $instructions );
 		if ( ! $instructions )
 			return;
 		echo wpautop( wptexturize( $instructions ) );
