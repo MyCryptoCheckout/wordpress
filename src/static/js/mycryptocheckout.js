@@ -17,6 +17,7 @@ jQuery( document ).ready( function( $ )
 
 		// Add a clipboard image.
 		var $clipboard = $( '<img src="data:image/svg+xml;base64,' + clipboard_svg + '" />' );
+		$clipboard.attr( 'title', 'Copy to clipboard' );
 		$clipboard.click( function()
 		{
 			var old_value = $input.attr( 'value' );

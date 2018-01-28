@@ -226,9 +226,15 @@ class Easy_Digital_Downloads
 			],
 			'mcc_email_payment_instructions' => array(
 				'id' 	=> 'mcc_email_payment_instructions',
-				'name'       => __( 'Instructions', 'mycryptocheckout' ),
+				'name'       => __( 'E-mail instructions', 'mycryptocheckout' ),
 				'type'        => 'textarea',
 				'desc' => $this->get_option_or_default( 'email_payment_instructions_description' ),
+			),
+			'mcc_online_payment_instructions' => array(
+				'id' 	=> 'mcc_online_payment_instructions',
+				'name'       => __( 'Online instructions', 'mycryptocheckout' ),
+				'type'        => 'textarea',
+				'desc' => $this->get_option_or_default( 'online_payment_instructions_description' ),
 			),
 			'mcc_leave_edd_receipt_shortcode_alone' =>
 			[
@@ -497,9 +503,11 @@ class Easy_Digital_Downloads
 		if ( ! isset( $payment_key ) )
 			return;
 
+		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/mycryptocheckout.js', [ 'jquery' ] );
+
 		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
 
-		$instructions = $this->get_option_or_default( 'email_payment_instructions' );
+		$instructions = $this->get_option_or_default( 'online_payment_instructions' );
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
 		$instructions = $payment->replace_shortcodes( $instructions );
 
