@@ -243,7 +243,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function woocommerce_thankyou_mycryptocheckout( $order_id )
 	{
-		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/mycryptocheckout.js', [ 'jquery' ] );
+		MyCryptoCheckout()->enqueue_js();
+		MyCryptoCheckout()->enqueue_css();
 		$instructions = $this->get_option( 'online_instructions' );
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
 		$instructions = $payment->replace_shortcodes( $instructions );

@@ -503,7 +503,8 @@ class Easy_Digital_Downloads
 		if ( ! isset( $payment_key ) )
 			return;
 
-		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/mycryptocheckout.js', [ 'jquery' ] );
+		MyCryptoCheckout()->enqueue_js();
+		MyCryptoCheckout()->enqueue_css();
 
 		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
 

@@ -43,6 +43,24 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Enqueue the MCC CSS.
+		@since		2018-01-29 09:40:03
+	**/
+	public function enqueue_css()
+	{
+		wp_enqueue_style( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/css/mycryptocheckout.css' );
+	}
+
+	/**
+		@brief		Enqueue the MCC JS.
+		@since		2018-01-29 09:40:03
+	**/
+	public function enqueue_js()
+	{
+		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/mycryptocheckout.js', [ 'jquery' ] );
+	}
+
+	/**
 		@brief		Return some default gateway strings that are useful here and there.
 		@since		2018-01-02 18:28:52
 	**/
