@@ -22,12 +22,25 @@ jQuery( document ).ready( function( $ )
 		{
 			var old_value = $input.attr( 'value' );
 			var new_value = old_value.replace( / .*/, '' );
-			console.log( new_value );
-			$input.attr( 'value', new_value );
-			$input.select();
+
+			// Create an invisible input just to copy the value.
+			var $temp_input = $( '<input value="' + new_value + '" />' );
+			$temp_input.css( {
+				'position' : 'absolute',
+				'left' : '-1000000px',
+				'top' : '-1000000px',
+			} );
+			$temp_input.appendTo( $item );
+			$temp_input.attr( 'value', new_value );
+			$temp_input.select();
 			document.execCommand( "copy" );
-			$input.attr( 'value', old_value );
-			$input.select();
+
+			$input.attr( 'value', 'Copied!' );
+			setTimeout( function()
+			{
+				$input.attr( 'value', old_value );
+				$input.select();
+			}, 1500 );
 		} );
 
 		$item.html( $input );
