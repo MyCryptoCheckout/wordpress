@@ -32,14 +32,6 @@ jQuery( document ).ready( function( $ )
 
 		$item.html( $input );
 
-		var height = $input.height();
-
-		$clipboard.css( {
-			'height' : height + 'px',
-			'margin-left' : '0.25em',
-			'margin-right' : '0.25em',
-			'vertical-align' : 'top',
-		} );
 		$clipboard.appendTo( $item );
 	} );
 } );
