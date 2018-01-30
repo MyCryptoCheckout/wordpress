@@ -75,6 +75,10 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+* New: Amount and address on order confirmation page can now be copied using javascript!
+* Fix: Link to wallet recommendation page on Wallets page.
+* Fix: ETH decimals are now 8 due to Coinbase not liking many decimals.
+
 = 1.4 20180126 =
 
 * Code: Cleanup checkout code for WooCommerce.

@@ -16,8 +16,7 @@ class ETH
 	public function get_decimal_precision()
 	{
 		// It actually has 18, but some wallets will unnecessarily round such small amounts off, making payments impossible.
-		// 14 seems to work much better.
-		return 14;
+		return 8;
 	}
 
 	/**
