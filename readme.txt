@@ -72,12 +72,17 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 7. EasyDigitalDownloads gateway settings
 8. Payment info in WooCommerce
 9. Payment info in EasyDigitalDownloads
+10. WooCommerce purchase confirmation page with payment data
 
 == Changelog ==
 
-* New: Amount and address on order confirmation page can now be copied using javascript!
+= 1.5 20180130 =
+
+* New: Amount and address on order confirmation page can now be copied using buttons (javascript)!
+* New: Add "Hide order overview" to Woocommerce gateway settings. This hides the order overview table, allowing the payment instructions to be shown higher up on the page. This function uses javascript.
 * Fix: Link to wallet recommendation page on Wallets page.
-* Fix: ETH decimals are now 8 due to Coinbase not liking many decimals.
+* Fix: ETH decimals are now 8 due to Coinbase restrictions.
+* Fix: Split payment instructions into instructions for e-mail and online (order confirmation page). Check your gateway settings after updating!
 
 = 1.4 20180126 =
 
