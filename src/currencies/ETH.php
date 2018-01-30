@@ -4,21 +4,12 @@ namespace mycryptocheckout\currencies;
 
 /**
 	@brief		Etherium
+	@details	It actually has 18 decimal places, but some wallets (Coinbase) will unnecessarily round such small amounts off, making payments impossible.
 	@since		2017-12-09 20:01:50
 **/
 class ETH
 	extends Currency
 {
-	/**
-		@brief		Return the decimal precision of this currency.
-		@since		2018-01-06 06:34:38
-	**/
-	public function get_decimal_precision()
-	{
-		// It actually has 18, but some wallets will unnecessarily round such small amounts off, making payments impossible.
-		return 8;
-	}
-
 	/**
 		@brief		Return the name of this currency.
 		@since		2017-12-09 20:05:36
