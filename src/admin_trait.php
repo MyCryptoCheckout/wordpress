@@ -338,13 +338,17 @@ trait admin_trait
 
 		$r .= wpautop( __( 'You can have several wallets in the same currency. The wallets will be used in sequential order.', 'mycryptocheckout' ) );
 
-		$r .= wpautop( sprintf(
+		$wallets_text = sprintf(
 			// perhaps <a>we can ...you</a>
-			__( 'If you do not have a wallet yet, perhaps %swe can recommend some wallets for you%s?', 'mycryptocheckout' ),
-			'<a href="https://mycryptocheckout.com/doc/recommended-wallets-exchanges/">',
+			__( "If you don't have a wallet address to use, perhaps %swe can recommend some wallets for you%s?", 'mycryptocheckout' ),
+			'<a href="https://mycryptocheckout.com/doc/recommended-wallets-exchanges/" target="_blank">',
 			'</a>'
-			)
 		);
+
+		if ( count( $wallets ) < 1 )
+			$wallets_text = '<strong>' . $wallets_text . '</strong>';
+		$r .= wpautop( $wallets_text );
+
 
 		$r .= $form->open_tag();
 		$r .= $table;
