@@ -5,7 +5,7 @@
 	font-size: 17px;
 }
 .mcc.online_payment_instructions .to .to_input input {
-	max-width: 500px;
+	max-width: 510px;
 }
 .mcc.online_payment_instructions .amount .to_input input {
 	max-width: 275px;

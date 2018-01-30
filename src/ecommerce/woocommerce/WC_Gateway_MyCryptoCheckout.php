@@ -60,6 +60,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'description' => $strings->get( 'online_payment_instructions_description' ),
 				'default' => $strings->get( 'online_payment_instructions' ),
 			),
+			'hide_woocommerce_order_overview' => [
+				'title'			=> __( 'Hide order overview', 'mycryptocheckout' ),
+				'type'			=> 'checkbox',
+				'default'     => 'yes',
+				'description'	=> __( 'The order overview is usually placed above crypto payment instructions. Use this option to hide the overview and show the payment instructions higher up.', 'mycryptocheckout' ),
+			],
 			'title' => [
 				'title' => __( 'Payment type name', 'mycryptocheckout' ),
 				'type' => 'text',
@@ -250,6 +256,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$instructions = $payment->replace_shortcodes( $instructions );
 		if ( ! $instructions )
 			return;
+
+		if ( $this->get_option( 'hide_woocommerce_order_overview' ) )
+			echo '<div class="hide_woocommerce_order_overview"></div>';
+
 		echo wpautop( wptexturize( $instructions ) );
 	}
 }

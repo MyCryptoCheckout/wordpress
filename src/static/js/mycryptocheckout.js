@@ -47,4 +47,9 @@ jQuery( document ).ready( function( $ )
 
 		$clipboard.appendTo( $item );
 	} );
+
+	// Maybe hide the purchase details
+	var $hide_woocommerce_order_overview = $( '.hide_woocommerce_order_overview' );
+	if ( $hide_woocommerce_order_overview.length > 0 )
+		$( '.woocommerce-order-overview' ).hide();
 } );
