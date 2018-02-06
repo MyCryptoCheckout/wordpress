@@ -76,6 +76,9 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+* Fix: Rename a method to prevent a PHP error. The method name use() is apparently reserved in PHP 5.5, but not in PHP 7. Renamed to use_it().
+* Fix: Some servers don't report the content type of requests. Work around that.
+
 = 1.5 20180130 =
 
 * New: Amount and address on order confirmation page can now be copied using buttons (javascript)!

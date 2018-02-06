@@ -38,8 +38,9 @@ trait api_trait
 	**/
 	public function api_template_redirect()
 	{
-		if ( $_SERVER[ 'CONTENT_TYPE' ] != 'application/json' )
-			return;
+		if ( isset( $_SERVER[ 'CONTENT_TYPE' ] ) )
+			if ( $_SERVER[ 'CONTENT_TYPE' ] != 'application/json' )
+				return;
 		// Retrieve the body of the request.
 		$json = file_get_contents('php://input');
 		$json = json_decode( $json );

@@ -164,7 +164,7 @@ class Wallet
 		@brief		Touch the uses of thie wallet.
 		@since		2017-12-27 11:54:28
 	**/
-	public function use()
+	public function use_it()
 	{
 		$this->last_used = time();
 		$this->times_used++;

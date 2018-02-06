@@ -184,7 +184,7 @@ class WooCommerce
 		$currency = $currencies->get( $currency_id );
 		$wallet = $mcc->wallets()->get_dustiest_wallet( $currency_id );
 
-		$wallet->use();
+		$wallet->use_it();
 		$mcc->wallets()->save();
 
 		$woocommerce_currency = get_woocommerce_currency();

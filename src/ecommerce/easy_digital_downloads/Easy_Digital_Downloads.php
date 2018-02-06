@@ -89,7 +89,7 @@ class Easy_Digital_Downloads
 
 		// Good to go.
 
-		$wallet->use();
+		$wallet->use_it();
 		$mcc->wallets()->save();
 
 		$payment_data = array(
