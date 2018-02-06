@@ -76,6 +76,8 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+= 1.6 20180206 =
+
 * Fix: Rename a method to prevent a PHP error. The method name use() is apparently reserved in PHP 5.5, but not in PHP 7. Renamed to use_it().
 * Fix: Some servers don't report the content type of requests. Work around that.
 
