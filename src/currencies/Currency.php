@@ -37,15 +37,15 @@ abstract class Currency
 	}
 
 	/**
-		@brief		Find the next available payment amount that has not been used.
+		@brief		Find the next available payment amount for this currency.
 		@since		2018-01-06 09:04:51
 	**/
 	public function find_next_available_amount( $amount )
 	{
+		$account = MyCryptoCheckout()->api()->account();
 		$precision = $this->get_decimal_precision();
 
-		$account = MyCryptoCheckout()->api()->account();
-
+		// Keep incrementing the account until a "free" amount is found.
 		while( ! $account->is_payment_amount_available( $this->get_id(), $amount ) )
 			$amount = MyCryptoCheckout()->increase_floating_point_number( $amount, $precision );
 
