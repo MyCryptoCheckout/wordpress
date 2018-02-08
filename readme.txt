@@ -6,7 +6,7 @@ Requires at least: 4.9
 Requires PHP: 5.4
 Stable tag: trunk
 Tags: cryptocurrency, checkout, gateway, woocommerce, easydigitaldownloads, bitcoin
-Tested up to: 4.9.1
+Tested up to: 4.9.4
 
 Cryptocurrency payment gateway for WooCommerce and EasyDigitalDownloads.
 

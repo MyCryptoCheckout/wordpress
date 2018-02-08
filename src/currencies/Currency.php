@@ -46,7 +46,6 @@ abstract class Currency
 
 		$account = MyCryptoCheckout()->api()->account();
 
-		$counter = 0;
 		while( ! $account->is_payment_amount_available( $this->get_id(), $amount ) )
 			$amount = MyCryptoCheckout()->increase_floating_point_number( $amount, $precision );
 
