@@ -76,6 +76,10 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+= 1.7 20180213 =
+
+* New: Added a test mode allowing you to make purchases without having to use any monthly payments. This will allow you to edit the payment instructions until they suit your business better. The orders are created but will never be marked as paid.
+
 = 1.6 20180206 =
 
 * Fix: Rename a method to prevent a PHP error. The method name use() is apparently reserved in PHP 5.5, but not in PHP 7. Renamed to use_it().

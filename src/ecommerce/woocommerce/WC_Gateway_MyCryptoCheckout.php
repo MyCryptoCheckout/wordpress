@@ -48,6 +48,13 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'description' => '',
 				'default'     => 'no',
 			],
+			'test_mode' => [
+				'title'       => __( 'Test mode', 'woocommerce' ),
+				'label'       => __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server.', 'mycryptocheckout' ),
+				'type'        => 'checkbox',
+				'description' => '',
+				'default'     => 'no',
+			],
 			'email_instructions' => array(
 				'title'       => __( 'E-mail Instructions', 'mycryptocheckout' ),
 				'type'        => 'textarea',
@@ -129,6 +136,17 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function init_form_fields()
 	{
 		$this->form_fields = $this->get_form_fields();
+	}
+
+	/**
+		@brief		Return our instance.
+		@since		2018-02-09 18:42:13
+	**/
+	public static function instance()
+	{
+		$gateways = \WC_Payment_Gateways::instance();
+		$gateway = $gateways->payment_gateways();
+		return $gateway[ 'mycryptocheckout' ];
 	}
 
 	/**

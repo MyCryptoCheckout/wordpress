@@ -23,6 +23,7 @@ class Easy_Digital_Downloads
 	**/
 	public function _construct()
 	{
+		$this->add_filter( 'do_shortcode_tag', 10, 4 );
 		$this->add_action( 'edd_add_email_tags' );
 		$this->add_action( 'edd_gateway_' . static::$gateway_id );
 		$this->add_action( 'edd_mycryptocheckout_cc_form' );
@@ -33,7 +34,45 @@ class Easy_Digital_Downloads
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_payment_complete' );
-		$this->add_filter( 'do_shortcode_tag', 10, 4 );
+	}
+
+	/**
+		@brief		Insert our payment info into the edd_receipt shortcode.
+		@since		2018-01-03 11:57:26
+	**/
+	public function do_shortcode_tag( $output, $tag, $p3, $p4 )
+	{
+		if ( $tag != 'edd_receipt' )
+			return $output;
+
+		$leave = edd_get_option( 'mcc_leave_edd_receipt_shortcode_alone' );
+		if ( $leave )
+			return $output;
+
+		$session = edd_get_purchase_session();
+		if ( isset( $_GET['payment_key'] ) ){
+			$payment_key = urldecode( $_GET['payment_key'] );
+		} else if ( $session ) {
+			$payment_key = $session['purchase_key'];
+		} elseif ( $edd_receipt_args['payment_key'] ) {
+			$payment_key = $edd_receipt_args['payment_key'];
+		}
+
+		// No key found
+		if ( ! isset( $payment_key ) )
+			return;
+
+		MyCryptoCheckout()->enqueue_js();
+		MyCryptoCheckout()->enqueue_css();
+
+		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
+
+		$instructions = $this->get_option_or_default( 'online_payment_instructions' );
+		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
+		$instructions = $payment->replace_shortcodes( $instructions );
+
+		$output = wpautop( $instructions ) . $output;
+		return $output;
 	}
 
 	/**
@@ -111,10 +150,22 @@ class Easy_Digital_Downloads
 		edd_update_payment_meta( $payment_id, '_mcc_currency_id', $currency_id  );
 		edd_update_payment_meta( $payment_id, '_mcc_confirmations', $wallet->confirmations );
 		edd_update_payment_meta( $payment_id, '_mcc_created_at', time() );
-		edd_update_payment_meta( $payment_id, '_mcc_payment_id', 0 );
+
+		$test_mode = edd_get_option( 'mcc_test_mode' );
+		if ( $test_mode )
+		{
+			MyCryptoCheckout()->debug( 'In test mode. Not creating payment for EDD order %s', $payment_id );
+			$mcc_payment_id = 1;
+		}
+		else
+			$mcc_payment_id = 0;
+
+		edd_update_payment_meta( $payment_id, '_mcc_payment_id', $mcc_payment_id );
 		edd_update_payment_meta( $payment_id, '_mcc_to', $wallet->get_address() );
 
-		do_action( 'mycryptocheckout_send_payment', $payment_id );
+		// Only send it if we are not in test mode.
+		if ( $mcc_payment_id < 1 )
+			do_action( 'mycryptocheckout_send_payment', $mcc_payment_id );
 
 		edd_empty_cart();
 		edd_send_to_success_page();
@@ -216,6 +267,12 @@ class Easy_Digital_Downloads
 				'desc' => __( "If left empty, the texts below will use the MyCryptoCheckout defaults.", 'mycryptocheckout' ),
 				'type' => 'descriptive_text',
 			),
+			'mcc_test_mode' => [
+				'id'	=> 'mcc_test_mode',
+				'name'	=> __( 'Test mode', 'woocommerce' ),
+				'type'	=> 'checkbox',
+				'desc'	=> __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server.', 'mycryptocheckout' ),
+			],
 			'mcc_gateway_name' =>
 			[
 				'id'   => 'mcc_gateway_name',
@@ -325,8 +382,16 @@ class Easy_Digital_Downloads
 			}
 			else
 			{
-				$status = __( 'Awaiting blockchain transaction', 'mycryptocheckout' );
-				$transaction_id = __( 'Pending', 'mycryptocheckout' );
+				if ( $payment_id == 1 )
+				{
+					$status = __( 'Test', 'mycryptocheckout' );
+					$transaction_id = __( 'Test', 'mycryptocheckout' );
+				}
+				else
+				{
+					$status = __( 'Awaiting blockchain transaction', 'mycryptocheckout' );
+					$transaction_id = __( 'Pending', 'mycryptocheckout' );
+				}
 				$transaction_id_span = sprintf( '<span>%s</span>',
 					$transaction_id
 				);
@@ -343,6 +408,9 @@ class Easy_Digital_Downloads
 			break;
 			case 0:
 				$api_payment_id = __( 'Pending', 'mycryptocheckout' );
+			break;
+			case 1:
+				$api_payment_id = __( 'Test', 'mycryptocheckout' );
 			break;
 		}
 
@@ -475,44 +543,5 @@ class Easy_Digital_Downloads
 			update_post_meta( $order_id, '_mcc_transaction_id', $payment->transaction_id );
 			edd_update_payment_status( $order_id, 'publish' );
 		} );
-	}
-
-	/**
-		@brief		Insert our payment info into the edd_receipt shortcode.
-		@since		2018-01-03 11:57:26
-	**/
-	public function do_shortcode_tag( $output, $tag, $p3, $p4 )
-	{
-		if ( $tag != 'edd_receipt' )
-			return $output;
-
-		$leave = edd_get_option( 'mcc_leave_edd_receipt_shortcode_alone' );
-		if ( $leave )
-			return $output;
-
-		$session = edd_get_purchase_session();
-		if ( isset( $_GET['payment_key'] ) ){
-			$payment_key = urldecode( $_GET['payment_key'] );
-		} else if ( $session ) {
-			$payment_key = $session['purchase_key'];
-		} elseif ( $edd_receipt_args['payment_key'] ) {
-			$payment_key = $edd_receipt_args['payment_key'];
-		}
-
-		// No key found
-		if ( ! isset( $payment_key ) )
-			return;
-
-		MyCryptoCheckout()->enqueue_js();
-		MyCryptoCheckout()->enqueue_css();
-
-		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
-
-		$instructions = $this->get_option_or_default( 'online_payment_instructions' );
-		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
-		$instructions = $payment->replace_shortcodes( $instructions );
-
-		$output = wpautop( $instructions ) . $output;
-		return $output;
 	}
 }

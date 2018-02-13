@@ -144,9 +144,11 @@ class WooCommerce
 
 			if ( $payment_id > 0 )
 			{
+				if ( $payment_id == 1 )
+					$payment_id = __( 'Test', 'mycryptocheckout' );
 				$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
 					// Expecting 123 BTC to xyzabc
-					sprintf( __( 'MyCryptoCheckout payment ID: %d', 'mycryptocheckout'),
+					sprintf( __( 'MyCryptoCheckout payment ID: %s', 'mycryptocheckout'),
 						$payment_id
 					)
 				);
@@ -196,7 +198,19 @@ class WooCommerce
 		$order->update_meta_data( '_mcc_currency_id', $currency_id );
 		$order->update_meta_data( '_mcc_confirmations', $wallet->confirmations );
 		$order->update_meta_data( '_mcc_created_at', time() );
-		$order->update_meta_data( '_mcc_payment_id', 0 );		// 0 = not sent.
+
+		// Get the gateway instance.
+		$gateway = \WC_Gateway_MyCryptoCheckout::instance();
+		$test_mode = $gateway->get_option( 'test_mode' );
+		if ( $test_mode == 'yes' )
+		{
+			$mcc->debug( 'WooCommerce gateway is in test mode.' );
+			$payment_id = 1;		// Nobody will ever have 1 again, so it's safe to use.
+		}
+		else
+			$payment_id = 0;		// 0 = not sent.
+
+		$order->update_meta_data( '_mcc_payment_id', $payment_id );
 		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
 
 		// We want to keep the account locked, but still enable the is_available gateway check to work for the rest of this session.
@@ -211,6 +225,8 @@ class WooCommerce
 	{
 		$order = wc_get_order( $order_id );
 		if ( $order->get_payment_method() != static::$gateway_id )
+			return;
+		if ( $order->get_meta( '_mcc_payment_id' ) != 0 )
 			return;
 		do_action( 'mycryptocheckout_send_payment', $order_id );
 	}
