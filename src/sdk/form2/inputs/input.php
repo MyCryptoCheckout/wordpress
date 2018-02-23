@@ -140,10 +140,10 @@ class input
 	public function assemble_input_string( $o )
 	{
 		$r = '';
-		$r .= $o->indent . $o->label . "\n";
-		$r .= $o->indent . $o->input . "\n";
+		$r .= $o->indent . '<div class="label_container">' . $o->label . "</div>\n";
+		$r .= $o->indent . '<div class="input_container">' . $o->input . "</div>\n";
 		if ( isset( $o->description ) )
-			$r .= $o->indent . $o->description . "\n";
+			$r .= $o->indent . '<div class="description_container">' . $o->description . "</div>\n";
 		return $r;
 	}
 
@@ -165,12 +165,13 @@ class input
 	**/
 	public function description( $text )
 	{
-		call_user_func_array( array( $this->description, 'label' ), func_get_args() );
+		call_user_func_array( [ $this->description, 'label' ], func_get_args() );
 		return $this;
 	}
 
 	/**
 		@brief		Translate and set the description for this input.
+		@deprecated	Since 20180207
 		@param		string		$text		The text to translate and set as the description.
 		@return		this		Object chaining.
 		@since		20130524
@@ -209,6 +210,8 @@ class input
 				$input->set_attribute( 'aria-describedby', $input->description->get_attribute( 'id' ) );
 
 		$input->css_class( isset( $this->type ) ? $this->type : $this->tag );
+
+		$input->css_class( 'input_' . $input->get_name() );
 
 		if ( $input->is_required() )
 			$input->css_class( 'required' );
@@ -270,6 +273,7 @@ class input
 	{
 		$r = new \plainview\sdk_mcc\html\div();
 		$r->css_class( 'form_item' )
+			->css_class( 'form_item_' . $this->get_name() )
 			->css_class( 'form_item_' . $this->make_id() );
 		if ( isset( $this->type ) )
 			$r->css_class( 'form_item_' . $this->type );
@@ -346,17 +350,38 @@ class input
 	}
 
 	/**
+		@brief		Set the title of this input.
+		@since		2018-02-07 11:54:49
+	**/
+	public function set_title( $title )
+	{
+		$title = \plainview\sdk_mcc\form2\form::filter_text( $title );
+		return $this->set_unfiltered_title( $title );
+	}
+
+	/**
+		@brief		Set the title of this input without filtering it.
+		@since		2018-02-07 11:54:49
+	**/
+	public function set_unfiltered_title( $title )
+	{
+		$this->label->title( $title );
+		$this->set_attribute( 'title', $title );
+		return $this;
+	}
+
+	/**
 		@brief		Set the title attribute.
 		@details	Also sets the title attribute of the label.
 		@return		this		Object chaining.
 		@since		20131001
 	**/
-	public function title( $title )
+	public function title( $text )
 	{
-		$title = \plainview\sdk_mcc\form2\form::filter_text( $title );
-		$this->label->title( $title );
-		$this->set_attribute( 'title', $title );
-		return $this;
+		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		if ( $result == '' )
+			$result = $text;
+		return $this->set_title( $result );
 	}
 
 	/**
@@ -368,5 +393,17 @@ class input
 	{
 		$title = call_user_func_array( array( $this->container, '_' ), func_get_args() );
 		return $this->title( $title );
+	}
+
+	/**
+		@brief		Set the title of this input without filtering it.
+		@since		2018-02-07 12:18:04
+	**/
+	public function unfiltered_title( $text )
+	{
+		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		if ( $result == '' )
+			$result = $text;
+		return $this->set_unfiltered_title( $result );
 	}
 }

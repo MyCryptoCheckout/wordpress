@@ -49,8 +49,7 @@ class radios
 		{
 			// Find the first option.
 			$input = reset( $this->inputs );
-			$text = $this->form()->_( 'Please fill in %s.', '<em>' . $this->get_label()->content . '</em>' );
-			$input->validation_error()->set_unfiltered_label_( $text );
+			$input->validation_error()->unfiltered_label( 'Please fill in %s.', '<em>' . $this->get_label()->content . '</em>' );
 		}
 		return $this;
 	}

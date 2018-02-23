@@ -35,14 +35,15 @@ trait placeholder
 	**/
 	public function placeholder( $placeholder )
 	{
-		$this->placeholder = @call_user_func_array( 'sprintf' , func_get_args() );
-		if ( $this->placeholder == '' && $placeholder != '' )
-			$this->placeholder = $placeholder;
-		return $this->set_placeholder( $placeholder );
+		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		if ( $result == '' )
+			$result = $placeholder;
+		return $this->set_placeholder( $result );
 	}
 
 	/**
 		@brief		Translate and set the placeholder attribute.
+		@deprecated	Since 20180207
 		@details	The placeholder text is filtered.
 		@param		string		$placeholder		The new placeholder text.
 		@return		this		Object chaining.
@@ -70,4 +71,3 @@ trait placeholder
 	}
 
 }
-

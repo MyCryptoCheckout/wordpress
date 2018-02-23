@@ -261,7 +261,11 @@ trait db_aware_object
 	public static function unserialize_keys( $object )
 	{
 		foreach( $object->keys_to_serialize() as $key )
+		{
+			// Do not unserialize if the key is already an object.
+			if ( is_object( $object->$key ) )
+				continue;
 			$object->$key = @unserialize( base64_decode( $object->$key ) );
+		}
 	}
 }
-

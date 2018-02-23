@@ -29,10 +29,10 @@ class checkbox
 	public function assemble_input_string( $o )
 	{
 		$r = '';
-		$r .= $o->indent . $o->input . "\n";
-		$r .= $o->indent . $o->label . "\n";
+		$r .= $o->indent . '<div class="input_container">' . $o->input . "</div>\n";
+		$r .= $o->indent . '<div class="label_container">' . $o->label . "</div>\n";
 		if ( isset( $o->description ) )
-			$r .= $o->indent . $o->description . "\n";
+			$r .= $o->indent . '<div class="description_container">' . $o->description . "</div>\n";
 		return $r;
 	}
 

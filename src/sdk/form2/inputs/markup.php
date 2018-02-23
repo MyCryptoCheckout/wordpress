@@ -56,13 +56,17 @@ class markup
 		@return		this		Object chaining.
 		@since		20130524
 	**/
-	public function p( $markup )
+	public function p( $text )
 	{
-		return $this->markup( \plainview\sdk_mcc\base::wpautop( $markup ) );
+		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		if ( $result == '' )
+			$result = $text;
+		return $this->markup( \plainview\sdk_mcc\base::wpautop( $result ) );
 	}
 
 	/**
 		@brief		Convenience method to first translate and then wpautop the markup before setting it.
+		@deprecated	Since 20180207
 		@param		string		$markup
 		@return		this		Object chaining.
 		@since		20130524

@@ -41,26 +41,26 @@ trait debug
 		$instance = self::instance();
 
 		$fs = $form->fieldset( 'fs_debug' );
-		$fs->legend->label_( 'Debugging' );
+		$fs->legend->label( 'Debugging' );
 
 		// You are currently NOT in debug mode.
 		$not = $this->_( 'not' );
 
 		$fs->markup( 'debug_info' )
-			->p_( "According to the settings below, you are currently%s in debug mode. Don't forget to reload this page after saving the settings.", $this->debugging() ? '' : " <strong>$not</strong>" );
+			->p( "According to the settings below, you are currently%s in debug mode. Don't forget to reload this page after saving the settings.", $this->debugging() ? '' : " <strong>$not</strong>" );
 
 		$debug = $fs->checkbox( 'debug' )
-			->description_( 'Show debugging information in various places.' )
-			->label_( 'Enable debugging' )
+			->description( 'Show debugging information in various places.' )
+			->label( 'Enable debugging' )
 			->checked( $instance->get_site_option( 'debug', false ) );
 
 		$fs->checkbox( 'debug_to_browser' )
-			->description_( 'Show the debugging information in the browser.' )
-			->label_( 'Show debug in the browser' )
+			->description( 'Show the debugging information in the browser.' )
+			->label( 'Show debug in the browser' )
 			->checked( $instance->get_site_option( 'debug_to_browser', false ) );
 
 		$debug_to_file = $fs->checkbox( 'debug_to_file' )
-			->label_( 'Save debug to file' )
+			->label( 'Save debug to file' )
 			->checked( $instance->get_site_option( 'debug_to_file', false ) );
 
 		// We need to set the description unescaped due to the link.
@@ -76,13 +76,13 @@ trait debug
 			->content = $description;
 
 		$fs->checkbox( 'delete_debug_file' )
-			->description_( 'Delete the contents of the debug file now after saving the settings.' )
-			->label_( 'Delete debug file' )
+			->description( 'Delete the contents of the debug file now after saving the settings.' )
+			->label( 'Delete debug file' )
 			->checked( false );
 
 		$fs->textarea( 'debug_ips' )
-			->description_( 'Only show debugging info to specific IP addresses. Use spaces between IPs. You can also specify part of an IP address. Your address is %s', $_SERVER[ 'REMOTE_ADDR' ] )
-			->label_( 'Debug IPs' )
+			->description( 'Only show debugging info to specific IP addresses. Use spaces between IPs. You can also specify part of an IP address. Your address is %s', $_SERVER[ 'REMOTE_ADDR' ] )
+			->label( 'Debug IPs' )
 			->rows( 5, 16 )
 			->trim()
 			->value( $instance->get_site_option( 'debug_ips', '' ) );

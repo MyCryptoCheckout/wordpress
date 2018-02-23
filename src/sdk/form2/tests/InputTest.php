@@ -33,6 +33,20 @@ class InputTest extends TestCase
 		$this->assertStringContainsRegexp( '/\<div.*class.*' . $css_class . '.*\<input.*class.*' . $css_class . '/s', $text );
 	}
 
+	/**
+		@brief		Test a placeholder.
+		@since		2018-02-07 11:40:14
+	**/
+	public function test_placeholder()
+	{
+		$input = $this->form()->text( 'placeholdertest' );
+		$input->placeholder( 'This is %s', 'great' );
+		$this->assertStringContains( 'This is great', $input->display_input() );
+
+		$input->set_placeholder( 'This is bad' );
+		$this->assertStringContains( 'This is bad', $input->display_input() );
+	}
+
 	public function text()
 	{
 		return $this->form()->text( 'text_test' );

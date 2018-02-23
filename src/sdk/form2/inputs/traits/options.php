@@ -11,6 +11,59 @@ namespace plainview\sdk_mcc\form2\inputs\traits;
 trait options
 {
 	/**
+		@brief		Create or return an option.
+		@details
+
+		If using only $value the existing option will be returned.
+
+		If using both $value and $label, an option will be created.
+
+		For example:
+
+		@code
+			// Create the select
+			$form->select( 'best_friend' )
+				->label( 'Your best friend' )
+				->title( 'Click on your best friend' );
+
+			// This will create the option 'eric'.
+			$form->select( 'best_friend' )->opt( 'eric', 'Eric the Half-A-Bee' );
+
+			// This will return the option 'eric'.
+			$eric = $form->select( 'best_friend' )->opt( 'eric' );
+		@endcode
+
+		@param		string		$value	The value of the new option.
+		@param		string		$label	The label of the new option.
+		@param		option		The newly-created option.
+		@since		2018-02-07 11:12:11
+	**/
+	public function opt( $value, $label = null )
+	{
+		if ( $label === null )
+			return $this->get_option( $value );
+
+		$o = new \stdClass();
+		$o->container = $this->container;
+		$o->id = $this->get_id() . '_' . $value;
+		$o->container_name = $this->get_attribute( 'name' );
+		$o->name = $value;
+
+		// Try to sprintf the label.
+		$args = func_get_args();
+		// First arg is the value, and not wanted.
+		array_shift( $args );
+		$result = call_user_func_array( 'sprintf', $args );
+		if ( $result == '' )
+			$result = $label;
+		$o->label = $result;
+
+		$o->value = $value;
+		$option = $this->new_option( $o );
+		return $this->add_option( $option );
+	}
+
+	/**
 		@brief		Return or create an option.
 		@details
 
@@ -56,31 +109,8 @@ trait options
 	}
 
 	/**
-		@brief		Convenience method to create an option using sprintf.
-		@details
-
-		Instead of sprintf'ing a string and then sending it to option(), this convenience method can be used.
-
-		The first parameter is the string, the following parameters are parameters to be passed to sprintf, and the last parameter is the actual value.
-
-		@param		string		$p1		The string to be passed to sprintf
-		@param		mixed		$p2		Either replacement values for sprintf, or the value of the option.
-		@see		option()
-		@see		option_()
-		@since		20130524
-	**/
-	public function optionf( $p1, $p2 )
-	{
-		$args = func_get_args();
-		// The last argument is the actual value. Save it and pop it off the end else sprintf will become grumpy.
-		$value = end( $args );
-		array_pop( $args );
-		$label = call_user_func_array( 'sprintf', $args );
-		return $this->option( $label, $value );
-	}
-
-	/**
 		@brief		Translate and create an option.
+		@deprecated	Since 20180207
 		@details
 
 		Strings are sprintf'd before translation. If the string has any sprintf keywords like %s or %d, then insert the replacement values as extra parameters between the $label and the $value parameters.
@@ -117,6 +147,18 @@ trait options
 	{
 		foreach( $array as $label => $key )
 			$this->option( $label, $key );
+		return $this;
+	}
+
+	/**
+		@brief		Add several options at once.
+		@details	Uses key => value format.
+		@since		2018-02-07 11:09:15
+	**/
+	public function opts( $array )
+	{
+		foreach( $array as $key => $value )
+			$this->opt( $key, $value );
 		return $this;
 	}
 
@@ -186,6 +228,4 @@ trait options
 			}
 		return $this;
 	}
-
 }
-

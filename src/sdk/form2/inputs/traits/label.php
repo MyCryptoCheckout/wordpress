@@ -27,34 +27,24 @@ trait label
 	}
 
 	/**
-		@brief		Sets the label.
-		@details	In the name of consistence setting the label should be using set_label() instead of this method, but label() is really, really shorthand.
-		@param		string		$label
-		@return		this		Object chaining.
-		@since		20130524
-	**/
-	public function label( $label )
-	{
-		return $this->set_label( $label );
-	}
-
-	/**
 		@brief		Convenience function to first sprintf the label and then set it.
+		@deprecated	Since 20180207
 		@details	Uses the same parameters as sprintf().
 		@param		string		$label
 		@return		this		Object chaining.
 		@since		20130524
 	**/
-	public function labelf( $label )
+	public function label( $text )
 	{
-		$labelf = @call_user_func_array( 'sprintf' , func_get_args() );
-		if ( $labelf != '' )
-			$label = $labelf;
-		return $this->set_label( $label );
+		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		if ( $result == '' )
+			$result = $text;
+		return $this->set_label( $result );
 	}
 
 	/**
 		@brief		Convenience method function to first translate and then set the label.
+		@deprecated	Since 20180207
 		@param		string		$label		Label to translate and then set.
 		@return		this		Object chaining.
 		@since		20130524
@@ -90,6 +80,7 @@ trait label
 
 	/**
 		@brief		Convenience method to translate and then set the label directly. Does not filter the label.
+		@deprecated	Since 20180207
 		@param		string		$label		Label to translate and set.
 		@return		this		Object chaining.
 		@since		20130524
@@ -98,5 +89,17 @@ trait label
 	{
 		$label = call_user_func_array( array( $this->container->form(), '_' ), func_get_args() );
 		return $this->set_unfiltered_label( $label );
+	}
+
+	/**
+		@brief		Set the unfiltered label after running it through sprintf.
+		@since		2018-02-07 10:05:45
+	**/
+	public function unfiltered_label( $text )
+	{
+		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		if ( $result == '' )
+			$result = $text;
+		return $this->set_unfiltered_label( $result );
 	}
 }

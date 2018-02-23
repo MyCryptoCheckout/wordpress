@@ -30,9 +30,6 @@ trait max
 		$value = floatval( $this->validation_value );
 		$max = $this->get_attribute( 'max' );
 		if ( $value > $max )
-		{
-			$text = $this->form()->_( 'The value in %s (%s) is larger than the allowed maximum of %s.', '<em>' . $this->get_label()->content . '</em>', $value, $max );
-			$this->validation_error()->set_unfiltered_label_( $text );
-		}
+			$this->validation_error()->unfiltered_label( 'The value in %s (%s) is larger than the allowed maximum of %s.', '<em>' . $this->get_label()->content . '</em>', $value, $max );
 	}
 }

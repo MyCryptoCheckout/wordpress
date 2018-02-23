@@ -30,10 +30,7 @@ trait min
 		$value = floatval( $this->validation_value );
 		$min = $this->get_attribute( 'min' );
 		if ( $value < $min )
-		{
-			$text = $this->form()->_( 'The value in %s (%s) is smaller than the allowed minimum of %s.', '<em>' . $this->get_label()->content . '</em>', $value, $min );
-			$this->validation_error()->set_unfiltered_label_( $text );
-		}
+			$this->validation_error()->unfiltered_label( 'The value in %s (%s) is smaller than the allowed minimum of %s.', '<em>' . $this->get_label()->content . '</em>', $value, $min );
 	}
 }
 

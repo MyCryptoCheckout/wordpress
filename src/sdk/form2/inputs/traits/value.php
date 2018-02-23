@@ -202,9 +202,11 @@ trait value
 		@see		set_value()
 		@since		20130524
 	**/
-	public function value( $value )
+	public function value( $text )
 	{
-		$value = $this->apply_value_filters( $value );
-		return $this->set_value( $value );
+		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		if ( $result == '' )
+			$result = $text;
+		return $this->set_value( $result );
 	}
 }

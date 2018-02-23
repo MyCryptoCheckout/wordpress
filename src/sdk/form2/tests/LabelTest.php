@@ -10,6 +10,14 @@ class LabelTest extends TestCase
 		$label = $text->display_label();
 		$this->assertStringContains( '>Nice label<', $label );
 		$this->assertStringContains( '<label', $label );
+
+		$text = $this->form()->text( 'text' )->label( 'Hello %d 2 3', 1 );
+		$label = $text->display_label();
+		$this->assertStringContains( '1 2 3', $label );
+
+		$text = $this->form()->text( 'text' )->unfiltered_label( 'Hello %s 2 3', 'x' );
+		$label = $text->display_label();
+		$this->assertStringContains( 'x 2 3', $label );
 	}
 
 	public function test_html_label()
@@ -27,8 +35,10 @@ class LabelTest extends TestCase
 	{
 		$select = $this->form()->select( 'LabelTest' );
 		$select->label( 'Select label' )
-			->option( 'Option label', 'optionlabel' );
+			->option( 'Option label', 'optionlabel1' );
 		$options = $select->display_input();
 		$this->assertStringDoesNotContain( '</label>', $options );
+		$this->assertStringContains( 'value="optionlabel1"', $options );
+		$this->assertStringContains( 'Option label', $options );
 	}
 }

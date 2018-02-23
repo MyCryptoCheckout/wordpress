@@ -25,4 +25,3 @@ class submit
 		return $this->get_post_value() !== null;
 	}
 }
-

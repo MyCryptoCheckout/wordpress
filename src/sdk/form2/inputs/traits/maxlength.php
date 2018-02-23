@@ -27,10 +27,7 @@ trait maxlength
 	{
 		$maxlength = $this->get_attribute( 'maxlength' );
 		if ( strlen( $this->validation_value ) > $maxlength )
-		{
-			$text = $this->form()->_( 'The text in %s is too long!', '<em>' . $this->get_label()->content . '</em>' );
-			$this->validation_error()->set_unfiltered_label_( $text );
-		}
+			$this->validation_error()->unfiltered_label( 'The text in %s is too long!', '<em>' . $this->get_label()->content . '</em>' );
 	}
 }
 

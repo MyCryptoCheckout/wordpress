@@ -25,10 +25,7 @@ class email
 		if ( $value == '' && ! $this->is_required() )
 			return;
 		if ( ! \plainview\sdk_mcc\base::is_email( $value ) )
-		{
-			$text = $this->form()->_( 'The e-mail address in %s is not valid!', '<em>' . $this->get_label()->content . '</em>' );
-			$this->validation_error()->set_unfiltered_label_( $text );
-		}
+			$this->validation_error()->unfiltered_label( 'The e-mail address in %s is not valid!', '<em>' . $this->get_label()->content . '</em>' );
 	}
 }
 

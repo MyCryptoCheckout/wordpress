@@ -43,7 +43,7 @@ class base
 		@since		20130416
 		@var		$paths
 	**/
-	public $paths = array();
+	public $paths = [];
 
 	/**
 		@brief		The version of the plugin.
@@ -78,11 +78,11 @@ class base
 			// Was this run from the command line?
 			if ( isset( $_SERVER[ 'argc'] ) )
 			{
-				$this->paths = array(
+				$this->paths = [
 					'__FILE__' => $__FILE__,
 					'name' => get_class( $this ),
 					'filename' => basename( $__FILE__ ),
-				);
+				];
 				$this->do_cli();
 			}
 			else
@@ -108,7 +108,7 @@ class base
 			$path_from_plugin_directory = dirname( str_replace( $wp_plugin_dir, '', $__FILE__ ) );
 			$__FILE___from_plugin_directory = $path_from_plugin_directory . DIRECTORY_SEPARATOR . basename( $__FILE__ );
 
-			$this->paths = array(
+			$this->paths = [
 				'__FILE__' => $__FILE__,
 				'name' => get_class( $this ),
 				'filename' => basename( $__FILE__ ),
@@ -116,12 +116,12 @@ class base
 				'path_from_plugin_directory' => $path_from_plugin_directory,
 				'path_from_base_directory' => str_replace( $base_dir, '', $wp_plugin_dir ) . $path_from_plugin_directory,
 				'url' => plugins_url() . str_replace( DIRECTORY_SEPARATOR, '/', $path_from_plugin_directory ),
-			);
+			];
 		}
 		else
 		{
 			// Everything else except Windows.
-			$this->paths = array(
+			$this->paths = [
 				'__FILE__' => $__FILE__,
 				'name' => get_class( $this ),
 				'filename' => basename( $__FILE__ ),
@@ -129,11 +129,11 @@ class base
 				'path_from_plugin_directory' => str_replace( WP_PLUGIN_DIR, '', dirname( $__FILE__ ) ),
 				'path_from_base_directory' => dirname( str_replace( ABSPATH, '', $__FILE__ ) ),
 				'url' => plugins_url() . str_replace( WP_PLUGIN_DIR, '', dirname( $__FILE__ ) ),
-			);
+			];
 		}
 
-		register_activation_hook( $this->paths( 'filename_from_plugin_directory' ),	array( $this, 'activate_internal' ) );
-		register_deactivation_hook( $this->paths( 'filename_from_plugin_directory' ),	array( $this, 'deactivate_internal' ) );
+		register_activation_hook( $this->paths( 'filename_from_plugin_directory' ),	[ $this, 'activate_internal' ] );
+		register_deactivation_hook( $this->paths( 'filename_from_plugin_directory' ), [ $this, 'deactivate_internal' ] );
 
 		$this->_construct();
 	}
@@ -214,10 +214,10 @@ class base
 		$form->prefix( get_class( $this ) );
 
 		$form->markup( 'uninstall_info' )
-			->p_( 'This page will remove all the plugin tables and settings from the database and then deactivate the plugin.' );
+			->p( 'This page will remove all the plugin tables and settings from the database and then deactivate the plugin.' );
 
 		$form->checkbox( 'sure' )
-			->label_( "Yes, I'm sure I want to remove all the plugin tables and settings." )
+			->label( "Yes, I'm sure I want to remove all the plugin tables and settings." )
 			->required();
 
 		$form->primary_button( 'uninstall' )
@@ -586,7 +586,7 @@ class base
 	public function message_( $string, $args = '' )
 	{
 		$args = func_get_args();
-		$string = call_user_func_array( array( &$this, '_' ), $args );
+		$string = call_user_func_array( [ &$this, '_' ], $args );
 		return $this->message( $string );
 	}
 
@@ -611,7 +611,7 @@ class base
 	public function error_( $string, $args = null )
 	{
 		$args = func_get_args();
-		$string = call_user_func_array( array( &$this, '_' ), $args );
+		$string = call_user_func_array( [ &$this, '_' ], $args );
 		return $this->error( $string );
 	}
 
@@ -1061,17 +1061,17 @@ class base
 	public function cli_pot()
 	{
 		$basedir = dirname( $this->paths(  '__FILE__' ) ) . '/';
-		$files = array_merge( array(
+		$files = array_merge( [
 			basename( $this->paths( '__FILE__' ) ),									// subclass.php
 			str_replace( $basedir, '', dirname( dirname( __FILE__ ) ) . '/*php' ),	// plainview/*php
 			str_replace( $basedir, '', dirname( dirname( __FILE__ ) ) . '/form2/inputs/*php' ),
 			str_replace( $basedir, '', dirname( dirname( __FILE__ ) ) . '/form2/inputs/traits/*php' ),
 			str_replace( $basedir, '', dirname( __FILE__ ) . '/*php' ),				// plainview_sdk/wordpress/*.php
-		), $this->pot_files() );
+		], $this->pot_files() );
 
 		$filename = preg_replace( '/\.php/', '.pot', $this->paths( '__FILE__' ) );
 
-		$keywords = array_merge( array(
+		$keywords = array_merge( [
 			'_',
 			'error_',
 			'description_',	// form2
@@ -1083,7 +1083,7 @@ class base
 			'p_',
 			'text_',		// table
 			'value_',		// form2
-		), $this->pot_keywords() );
+		], $this->pot_keywords() );
 
 		$pot = dirname( $filename ) . '/lang/' . basename( $filename );
 
@@ -1158,7 +1158,7 @@ class base
 	**/
 	public function long_options()
 	{
-		return array();
+		return [];
 	}
 
 	/**
@@ -1225,6 +1225,7 @@ class base
 
 	/**
 		@brief		Translate and wpautop a string, using sprintf to replace arguments.
+		@deprecated	Since 20180207
 		@param		string		$string		String to translate and then wpautop.
 		@param		mixed		$args		Optional arguments to sprintf.
 		@return		The translated, wpautop'd string.
@@ -1255,7 +1256,7 @@ class base
 	**/
 	public function pot_files()
 	{
-		return array();
+		return [];
 	}
 
 	/**
@@ -1265,7 +1266,7 @@ class base
 	**/
 	public function pot_keywords()
 	{
-		return array();
+		return [];
 	}
 
 	/**
