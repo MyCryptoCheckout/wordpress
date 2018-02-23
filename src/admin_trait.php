@@ -244,8 +244,8 @@ trait admin_trait
 		$wallet_currency = $fs->select( 'currency' )
 			->description( __( 'Which currency shall the new wallet belong to?', 'mycryptocheckout' ) )
 			// Input label
-			->label( __( 'Currency', 'mycryptocheckout' ) )
-			->options( $this->currencies()->as_options() );
+			->label( __( 'Currency', 'mycryptocheckout' ) );
+		$this->currencies()->add_to_select_options( $wallet_currency );
 
 		$wallet_address = $fs->text( 'wallet_address' )
 			->description( __( 'The address of your wallet to which you want to receive funds.', 'mycryptocheckout' ) )

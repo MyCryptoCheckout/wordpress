@@ -20,15 +20,67 @@ class Currencies
 	}
 
 	/**
+		@brief		Add all of the currencies to the Plainview Form select input.
+		@details	Group the currencies nicely.
+		@since		2018-02-23 15:21:12
+	**/
+	public function add_to_select_options( $select )
+	{
+		$groups = Groups::load( $this );
+		$groups->sort_now();
+		$this->sort_by( function( $item )
+		{
+			return $item->get_id() . '_' . $item->get_name();
+		} );
+		foreach( $groups as $group )
+		{
+			// Add the group itself.
+			$optgroup = $select->optgroup( $group->name )
+				->label( $group->name );
+			foreach( $this as $currency_id => $currency )
+			{
+				if ( $currency->get_group()->name != $group->name )
+					continue;
+				$optgroup->opt( $currency_id, sprintf( '%s %s', $currency_id, $currency->get_name() ) );
+			}
+		}
+	}
+
+	/**
 		@brief		Load all available currencies.
 		@since		2017-12-09 20:02:56
 	**/
 	public function load()
 	{
+		// Main blockchains
 		$this->add( new BCH() );
 		$this->add( new BTC() );
 		$this->add( new ETH() );
 		$this->add( new LTC() );
+
+		foreach( [
+			'BAT',
+			'BNT',
+			'DGD',
+			'EOS',
+			'FUN',
+			'GNT',
+			'ICX',
+			'KNC',
+			'MKR',
+			'OMG',
+			'PPT',
+			'QASH',
+			'QTUM',
+			'REP',
+			'SNT',
+			'TRX',
+			'ZRX',
+		] as $token )
+		{
+			$class = __NAMESPACE__ . '\\erc20\\' . $token;
+			$this->add( new $class() );
+		}
 	}
 
 	/**

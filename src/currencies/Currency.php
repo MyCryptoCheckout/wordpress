@@ -72,6 +72,19 @@ abstract class Currency
 	}
 
 	/**
+		@brief		Return the group of the currency.
+		@details	This is used mainly for ETH tokens.
+		@since		2018-02-23 15:16:24
+	**/
+	public function get_group()
+	{
+		$g = new Group();
+		$g->name = __( 'Main blockchains', 'mycryptocheckout' );
+		$g->sort_order = 25;	// First!
+		return $g;
+	}
+
+	/**
 		@brief		Return the ID of this currency.
 		@since		2017-12-09 20:05:36
 	**/
