@@ -349,6 +349,7 @@ trait admin_trait
 			$wallets_text = '<strong>' . $wallets_text . '</strong>';
 		$r .= wpautop( $wallets_text );
 
+		$r .= $this->h2( __( 'Current currencies / wallets', 'mycryptocheckout' ) );
 
 		$r .= $form->open_tag();
 		$r .= $table;
