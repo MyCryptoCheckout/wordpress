@@ -3,7 +3,7 @@
 namespace mycryptocheckout\currencies\erc20;
 
 /**
-	@brief		ERC20 SNT
+	@brief		ERC20 Status Network
 	@since		2018-02-23 15:15:46
 **/
 class SNT

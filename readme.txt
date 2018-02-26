@@ -35,6 +35,26 @@ The following cryptocurrencies are supported:
 - Ethereum ETH
 - Litecoin LTC
 
+The following ERC20 tokens are supported:
+
+- Basic Attention Token BAT
+- Bancor BNT
+- Digix Global DGD
+- EOS
+- FunFair FUN
+- Golem GNT
+- Icon ICX
+- Kyber Network Crystal KNC
+- Maker MKR
+- Omisego OMG
+- Populous PPT
+- QASH
+- QTUM
+- Augur REP
+- Status Network SNT
+- Tronix TRX
+- 0xProject ZRX
+
 After checkout, payment instructions are automatically included in the purchase receipt.
 
 The instructions included in EasyDigitalDownloads e-mails can be included using the {mcc_instructions} e-mail tag. The text is taken from the EDD MCC payment gateway option "Instructions".
@@ -75,6 +95,28 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 10. WooCommerce purchase confirmation page with payment data
 
 == Changelog ==
+
+= 1.8 20180226 =
+
+* New: ERC20 tokens introduced. The most popular tokens added were:
+
+- Basic Attention Token BAT
+- Bancor BNT
+- Digix Global DGD
+- EOS
+- FunFair FUN
+- Golem GNT
+- Icon ICX
+- Kyber Network Crystal KNC
+- Maker MKR
+- Omisego OMG
+- Populous PPT
+- QASH
+- QTUM
+- Augur REP
+- Status Network SNT
+- Tronix TRX
+- 0xProject ZRX
 
 = 1.7 20180213 =
 
