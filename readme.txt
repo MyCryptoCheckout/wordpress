@@ -63,9 +63,11 @@ The instructions included in WooCommerce e-mails is taken from the WC MCC gatewa
 
 = Technical disclosure =
 
-Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your Wordpress install's public URL.
+Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your Wordpress install's public URL and the plugin version.
 
 The URL is used by the API server to know where to send updated account info (license status, payment statistics), exchange rates and purchase notifications.
+
+The plugin version is used to help answer requests made by the plugin.
 
 If your server cannot be reached by the API server this plugin will not function.
 
