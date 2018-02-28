@@ -24,6 +24,10 @@ class BTC
 	**/
 	public static function get_address_length()
 	{
-		return [ 34, 62 ];	// And segwit.
+		return [
+			34,		// Original
+			42,		// Segwit
+			62,		// Segwit
+		];
 	}
 }

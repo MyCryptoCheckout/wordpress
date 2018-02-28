@@ -100,6 +100,10 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+= 1.9 20180228 =
+
+* New: Added support for BitCoin Segwit addresses (42 and 62 characters long).
+
 = 1.8 20180226 =
 
 * New: ERC20 tokens introduced. The most popular tokens added were:
@@ -121,14 +125,6 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 - Status Network SNT
 - Tronix TRX
 - 0xProject ZRX
-
-= xxx =
-
-* New: Added support for BitCoin Segwit addresses (62 characters long).
-
-= 1.8 20180226 =
-
-* New: Added ERC20 tokens.
 
 = 1.7 20180213 =
 
