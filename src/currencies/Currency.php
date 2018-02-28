@@ -142,10 +142,12 @@ abstract class Currency
 	**/
 	public static function validate_address_length( $address, $length )
 	{
-		if ( strlen( $address ) != $length )
+		if ( ! is_array( $length ) )
+			$length = [ $length ];
+		if ( ! in_array( strlen( $address ), $length ) )
 			throw new Exception( sprintf(
-				__( 'The address must be exactly %d characters long.', 'mycryptocheckout' ),
-				$length
+				__( 'The address must be exactly %s characters long.', 'mycryptocheckout' ),
+				implode( ' or ', $length )
 			) );
 	}
 }

@@ -19,6 +19,8 @@ MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and EasyDig
 - Use any wallet(s) you want: desktop, mobile or online
 - Visitors stay on your site during checkout
 
+See the <a href="https://mycryptocheckout.com/comparison/">feature comparison page on the our website</a> to see why you should use MyCryptoCheckout instead of other crypto payment gateways.
+
 With the free license you can process three sales per month. If you require more, a flat rate license can be purchased for your account.
 
 Transaction processing is free! Unlike other payment gateways we do not charge any percentages nor fixed amounts per transaction. The license cost is the same whether you have 10 or 10,000 sales a month.
@@ -30,7 +32,7 @@ The following webshops are supported:
 
 The following cryptocurrencies are supported:
 
-- Bitcoin BTC
+- Bitcoin BTC (original and Segwit addresses)
 - Bitcoin Cash BCH
 - Ethereum ETH
 - Litecoin LTC
@@ -120,40 +122,14 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 - Tronix TRX
 - 0xProject ZRX
 
+= xxx =
+
+* New: Added support for BitCoin Segwit addresses (62 characters long).
+
+= 1.8 20180226 =
+
+* New: Added ERC20 tokens.
+
 = 1.7 20180213 =
 
 * New: Added a test mode allowing you to make purchases without having to use any monthly payments. This will allow you to edit the payment instructions until they suit your business better. The orders are created but will never be marked as paid.
-
-= 1.6 20180206 =
-
-* Fix: Rename a method to prevent a PHP error. The method name use() is apparently reserved in PHP 5.5, but not in PHP 7. Renamed to use_it().
-* Fix: Some servers don't report the content type of requests. Work around that.
-
-= 1.5 20180130 =
-
-* New: Amount and address on order confirmation page can now be copied using buttons (javascript)!
-* New: Add "Hide order overview" to Woocommerce gateway settings. This hides the order overview table, allowing the payment instructions to be shown higher up on the page. This function uses javascript.
-* Fix: Link to wallet recommendation page on Wallets page.
-* Fix: ETH decimals are now 8 due to Coinbase restrictions.
-* Fix: Split payment instructions into instructions for e-mail and online (order confirmation page). Check your gateway settings after updating!
-
-= 1.4 20180126 =
-
-* Code: Cleanup checkout code for WooCommerce.
-
-= 1.3 20180123 =
-
-* Fix: Do not unnecessarily create payment data for non-crypto payments in WooCommerce.
-
-= 1.2 20180116 =
-
-* Fix: Allow for temporary account locking if a payment is unable to be sent to the API server. Account will automatically unlock when contact is reestablished.
-
-= 1.1 20180115 =
-
-* Fix: Better EDD installation instruction text for e-mail tag.
-* Fix: Display currency ID when editing the wallet.
-
-= 1 20180112 =
-
-Initial release.

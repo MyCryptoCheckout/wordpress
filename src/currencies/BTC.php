@@ -17,4 +17,13 @@ class BTC
 	{
 		return 'Bitcoin';
 	}
+
+	/**
+		@brief		Return the length of the wallet address.
+		@since		2017-12-24 10:58:43
+	**/
+	public static function get_address_length()
+	{
+		return [ 34, 62 ];	// And segwit.
+	}
 }

@@ -1,0 +1,33 @@
+= 1.6 20180206 =
+
+* Fix: Rename a method to prevent a PHP error. The method name use() is apparently reserved in PHP 5.5, but not in PHP 7. Renamed to use_it().
+* Fix: Some servers don't report the content type of requests. Work around that.
+
+= 1.5 20180130 =
+
+* New: Amount and address on order confirmation page can now be copied using buttons (javascript)!
+* New: Add "Hide order overview" to Woocommerce gateway settings. This hides the order overview table, allowing the payment instructions to be shown higher up on the page. This function uses javascript.
+* Fix: Link to wallet recommendation page on Wallets page.
+* Fix: ETH decimals are now 8 due to Coinbase restrictions.
+* Fix: Split payment instructions into instructions for e-mail and online (order confirmation page). Check your gateway settings after updating!
+
+= 1.4 20180126 =
+
+* Code: Cleanup checkout code for WooCommerce.
+
+= 1.3 20180123 =
+
+* Fix: Do not unnecessarily create payment data for non-crypto payments in WooCommerce.
+
+= 1.2 20180116 =
+
+* Fix: Allow for temporary account locking if a payment is unable to be sent to the API server. Account will automatically unlock when contact is reestablished.
+
+= 1.1 20180115 =
+
+* Fix: Better EDD installation instruction text for e-mail tag.
+* Fix: Display currency ID when editing the wallet.
+
+= 1 20180112 =
+
+Initial release.

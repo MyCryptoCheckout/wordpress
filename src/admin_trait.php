@@ -252,7 +252,7 @@ trait admin_trait
 			// Input label
 			->label( __( 'Address', 'mycryptocheckout' ) )
 			->required()
-			->size( 64, 256 )
+			->size( 64, 128 )
 			->trim();
 
 		$save = $form->primary_button( 'save' )
@@ -382,12 +382,22 @@ trait admin_trait
 		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
 
+		$length = $currency->get_address_length();
+		if ( is_array( $length ) )
+		{
+			// Figure out the max length.
+			$max = 0;
+			foreach( $length as $int )
+				$max = max( $max, $int );
+			$length = $max;
+		}
+
 		$wallet_address = $form->text( 'wallet_address' )
 			->description( __( 'The address of your wallet to which you want to receive funds.', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Address', 'mycryptocheckout' ) )
 			->required()
-			->size( $currency->get_address_length(), $currency->get_address_length() )
+			->size( $length, $length )
 			->trim()
 			->value( $wallet->get_address() );
 
