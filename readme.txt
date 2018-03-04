@@ -100,6 +100,8 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+* New: Display exchange rates for your used currencies in the account info tab.
+
 = 1.9 20180228 =
 
 * New: Added support for BitCoin Segwit addresses (42 and 62 characters long).

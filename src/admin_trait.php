@@ -165,6 +165,30 @@ trait admin_trait
 		$row->th( 'key' )->text( __( 'Cryptocurrency exchange rates updated', 'mycryptocheckout' ) );
 		$row->td( 'details' )->text( static::wordpress_ago( $account->data->virtual_exchange_rates->timestamp ) );
 
+		$wallets = $this->wallets();
+		if ( count( $wallets ) > 0 )
+		{
+			$currencies = $this->currencies();
+			$exchange_rates = [];
+			foreach( $wallets as $index => $wallet )
+			{
+				$id = $wallet->get_currency_id();
+				if ( isset( $exchange_rates[ $id ] ) )
+					continue;
+				$currency = $currencies->get( $id );
+				$exchange_rates[ $id ] = sprintf( '%s %s', $currency->convert( 'USD', 1 ), $id );
+			}
+			ksort( $exchange_rates );
+			$exchange_rates = implode( "\n", $exchange_rates );
+			$exchange_rates = wpautop( $exchange_rates );
+		}
+		else
+			$exchange_rates = 'n/a';
+
+		$row = $table->head()->row();
+		$row->th( 'key' )->text( __( '1 USD in your wallet currencies', 'mycryptocheckout' ) );
+		$row->td( 'details' )->text( $exchange_rates );
+
 		$r .= $table;
 
 		return $r;
