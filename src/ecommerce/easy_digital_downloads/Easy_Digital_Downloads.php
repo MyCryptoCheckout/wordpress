@@ -32,8 +32,8 @@ class Easy_Digital_Downloads
 		$this->add_filter( 'edd_settings_sections_gateways' );
 		$this->add_action( 'edd_view_order_details_billing_after' );
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
+		$this->add_action( 'mycryptocheckout_complete_payment' );
 		$this->add_action( 'mycryptocheckout_hourly' );
-		$this->add_action( 'mycryptocheckout_payment_complete' );
 	}
 
 	/**
@@ -165,7 +165,7 @@ class Easy_Digital_Downloads
 
 		// Only send it if we are not in test mode.
 		if ( $mcc_payment_id < 1 )
-			do_action( 'mycryptocheckout_send_payment', $mcc_payment_id );
+			do_action( 'mycryptocheckout_send_payment', $payment_id );
 
 		edd_empty_cart();
 		edd_send_to_success_page();
@@ -512,12 +512,15 @@ class Easy_Digital_Downloads
 		@brief		Payment was abanadoned.
 		@since		2018-01-06 15:59:11
 	**/
-	public function mycryptocheckout_cancel_payment( $payment )
+	public function mycryptocheckout_cancel_payment( $action )
 	{
-		$this->do_with_payment( $payment, function( $order_id )
+		$this->do_with_payment_action( $action, function( $action, $order_id )
 		{
 			if ( ! function_exists( 'EDD' ) )
 				return;
+
+			// Consider this action finished as soon as we find the order.
+			$action->applied++;
 
 			$post = get_post( $order_id );
 			if ( $post->post_status != 'pending' )
@@ -530,17 +533,21 @@ class Easy_Digital_Downloads
 	}
 
 	/**
-		@brief		mycryptocheckout_payment_complete
+		@brief		mycryptocheckout_complete_payment
 		@since		2018-01-02 21:54:53
 	**/
-	public function mycryptocheckout_payment_complete( $payment )
+	public function mycryptocheckout_complete_payment( $payment )
 	{
-		$this->do_with_payment( $payment, function( $order_id, $payment )
+		$this->do_with_payment_action( $payment, function( $action, $order_id )
 		{
 			if ( ! function_exists( 'EDD' ) )
 				return;
+
+			// Consider this action finished as soon as we find the order.
+			$action->applied++;
+
 			MyCryptoCheckout()->debug( 'Marking EDD payment %s on blog %d as complete.', $order_id, get_current_blog_id() );
-			update_post_meta( $order_id, '_mcc_transaction_id', $payment->transaction_id );
+			update_post_meta( $order_id, '_mcc_transaction_id', $action->payment->transaction_id );
 			edd_update_payment_status( $order_id, 'publish' );
 		} );
 	}

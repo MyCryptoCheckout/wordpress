@@ -151,24 +151,33 @@ class API
 		// Handle the messages, one by one.
 		foreach( $json->messages as $message )
 		{
+			// complete_payment is more logical, but the server can't be updated.
+			if ( $message->type == 'payment_complete' )
+				$message->type = 'complete_payment';
+
 			MyCryptoCheckout()->debug( '(%d) Processing a %s message: %s', get_current_blog_id(), $message->type, json_encode( $message ) );
+
 			switch( $message->type )
 			{
 				case 'retrieve_account':
 					// Already handled above.
 				break;
 				case 'cancel_payment':
-					// This payment timed out and was cancelled.
-					do_action( 'mycryptocheckout_cancel_payment', $message->payment );
-				break;
-				case 'payment_complete':
-					// Send out info about this completed payment.
-					do_action( 'mycryptocheckout_payment_complete', $message->payment );
+				case 'complete_payment':
+					$action = MyCryptoCheckout()->new_action( $message->type );
+					$action->payment = $message->payment;
+					$action->execute();
+					if ( $action->applied < 1 )
+						throw new Exception( sprintf( 'Unable to apply %s for payment ID %s.', $message->type, json_encode( $message->payment ) ) );
+					MyCryptoCheckout()->debug( '%s action applied %s times.', $message->type, $action->applied );
 				break;
 				case 'update_account':
 					$new_account_data = (object) (array) $message->account;
 					MyCryptoCheckout()->update_site_option( 'account_data', json_encode( $new_account_data ) );
 				break;
+				default:
+					throw new Exception( sprintf( 'Unknown message type: %s', $message->type ) );
+					break;
 			}
 		}
 	}

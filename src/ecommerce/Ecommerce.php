@@ -10,11 +10,12 @@ class Ecommerce
 	extends \plainview\sdk_mcc\wordpress\base
 {
 	/**
-		@brief		do_with_payment
+		@brief		Find all post IDs with this payment ID and apply the action on them.
 		@since		2018-01-06 16:03:22
 	**/
-	public function do_with_payment( $payment, $function )
+	public function do_with_payment_action( $action, $function )
 	{
+		$payment = $action->payment;
 		$switched_blog = 0;
 		if ( isset( $payment->data ) )
 		{
@@ -37,7 +38,7 @@ class Ecommerce
 		);
 		$results = $wpdb->get_col( $query );
 		foreach( $results as $order_id )
-			$function( $order_id, $payment );
+			$function( $action, $order_id );
 
 		if ( $switched_blog > 0 )
 			restore_current_blog();

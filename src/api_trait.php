@@ -57,6 +57,7 @@ trait api_trait
 		}
 		catch ( api\Exception $e )
 		{
+			$this->debug( 'API failure: %s', $e->get_message() );
 			wp_send_json( [ 'result' => 'fail', 'message' => $e->get_message() ] );
 		}
 		exit;

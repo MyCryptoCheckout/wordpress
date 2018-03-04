@@ -25,7 +25,7 @@ class WooCommerce
 	{
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
-		$this->add_action( 'mycryptocheckout_payment_complete' );
+		$this->add_action( 'mycryptocheckout_complete_payment' );
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
@@ -65,15 +65,19 @@ class WooCommerce
 		@brief		Payment was abanadoned.
 		@since		2018-01-06 15:59:11
 	**/
-	public function mycryptocheckout_cancel_payment( $payment )
+	public function mycryptocheckout_cancel_payment( $action )
 	{
-		$this->do_with_payment( $payment, function( $order_id )
+		$this->do_with_payment_action( $action, function( $action, $order_id )
 		{
 			if ( ! function_exists( 'WC' ) )
 				return;
+
 			$order = wc_get_order( $order_id );
 			if ( ! $order )
 				return;
+
+			// Consider this action finished as soon as we find the order.
+			$action->applied++;
 
 			// Only cancel is the order is unpaid.
 			if ( $order->get_status() != 'on-hold' )
@@ -86,18 +90,25 @@ class WooCommerce
 	}
 
 	/**
-		@brief		mycryptocheckout_payment_complete
+		@brief		mycryptocheckout_complete_payment
 		@since		2017-12-26 10:17:13
 	**/
-	public function mycryptocheckout_payment_complete( $payment )
+	public function mycryptocheckout_complete_payment( $payment )
 	{
-		$this->do_with_payment( $payment, function( $order_id, $payment )
+		$this->do_with_payment_action( $payment, function( $action, $order_id )
 		{
 			if ( ! function_exists( 'WC' ) )
 				return;
+
 			$order = wc_get_order( $order_id );
 			if ( ! $order )
 				return;
+
+			// Consider this action finished as soon as we find the order.
+			$action->applied++;
+
+			$payment = $action->payment;
+
 			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as complete.', $order_id, get_current_blog_id() );
 			$order->payment_complete( $payment->transaction_id );
 		} );

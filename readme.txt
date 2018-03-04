@@ -101,6 +101,9 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 == Changelog ==
 
 * New: Display exchange rates for your used currencies in the account info tab.
+* Fix: EDD orders were not being sent to the API server the first try.
+* Fix: More robust cancellation handling, will now report non-existent orders to the API server.
+* Code: Replaced the old wordpress mycryptocheckout_payment_complete and mycryptocheckout_cancel_payment with their newer object equivalents: mycryptocheckout_cancel_payment and  mycryptocheckout_complete_payment. See the src/actions directory.
 
 = 1.9 20180228 =
 
