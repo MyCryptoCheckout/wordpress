@@ -130,7 +130,3 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 - Status Network SNT
 - Tronix TRX
 - 0xProject ZRX
-
-= 1.7 20180213 =
-
-* New: Added a test mode allowing you to make purchases without having to use any monthly payments. This will allow you to edit the payment instructions until they suit your business better. The orders are created but will never be marked as paid.
