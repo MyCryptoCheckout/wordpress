@@ -176,7 +176,7 @@ trait admin_trait
 				if ( isset( $exchange_rates[ $id ] ) )
 					continue;
 				$currency = $currencies->get( $id );
-				$exchange_rates[ $id ] = sprintf( '%s %s', $currency->convert( 'USD', 1 ), $id );
+				$exchange_rates[ $id ] = sprintf( '1 USD = %s %s', $currency->convert( 'USD', 1 ), $id );
 			}
 			ksort( $exchange_rates );
 			$exchange_rates = implode( "\n", $exchange_rates );
@@ -186,7 +186,7 @@ trait admin_trait
 			$exchange_rates = 'n/a';
 
 		$row = $table->head()->row();
-		$row->th( 'key' )->text( __( '1 USD in your wallet currencies', 'mycryptocheckout' ) );
+		$row->th( 'key' )->text( __( 'Exchange rates for your currencies', 'mycryptocheckout' ) );
 		$row->td( 'details' )->text( $exchange_rates );
 
 		$r .= $table;
