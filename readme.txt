@@ -56,6 +56,7 @@ The following ERC20 tokens are supported:
 - Status Network SNT
 - Tronix TRX
 - 0xProject ZRX
+- your custom token?
 
 We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
@@ -69,7 +70,7 @@ The instructions included in WooCommerce e-mails is taken from the WC MCC gatewa
 
 Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your Wordpress install's public URL and the plugin version.
 
-The URL is used by the API server to know where to send updated account info (license status, payment statistics), exchange rates and purchase notifications.
+The URL is used by the API server to know where to send updated account info (license status, payment statistics), exchange rates and completed purchase notifications.
 
 The plugin version is used to help answer requests made by the plugin.
 
