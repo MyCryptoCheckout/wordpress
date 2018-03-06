@@ -21,7 +21,7 @@ MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and EasyDig
 
 See the <a href="https://mycryptocheckout.com/comparison/">feature comparison page on the our website</a> to see why you should use MyCryptoCheckout instead of other crypto payment gateways.
 
-With the free license you can process three sales per month. If you require more, a flat rate license can be purchased for your account.
+With the free license you can process three sales per month. If you require more, a <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account. There are also <a href="https://mycryptocheckout.com/bulk-pricing/">bulk pricing options</a> available if you need to use MyCryptoCheckout on several domains.
 
 Transaction processing is free! Unlike other payment gateways we do not charge any percentages nor fixed amounts per transaction. The license cost is the same whether you have 10 or 10,000 sales a month.
 
@@ -56,6 +56,8 @@ The following ERC20 tokens are supported:
 - Status Network SNT
 - Tronix TRX
 - 0xProject ZRX
+
+We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
 After checkout, payment instructions are automatically included in the purchase receipt.
 
@@ -100,10 +102,16 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+= 1.10 20180306 =
+
 * New: Display exchange rates for your used currencies in the account info tab.
 * Fix: EDD orders were not being sent to the API server the first try.
 * Fix: More robust cancellation handling, will now report non-existent orders to the API server.
-* Code: Replaced the old wordpress mycryptocheckout_payment_complete and mycryptocheckout_cancel_payment with their newer object equivalents: mycryptocheckout_cancel_payment and  mycryptocheckout_complete_payment. See the src/actions directory.
+* Code: Replaced the old wordpress mycryptocheckout_payment_complete and mycryptocheckout_cancel_payment actions with their newer object equivalents: mycryptocheckout_cancel_payment and  mycryptocheckout_complete_payment. See the src/actions directory.
+
+<a href="https://mycryptocheckout.com/bulk-pricing/">Bulk license pricing</a> is now available.
+
+We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
 = 1.9 20180228 =
 
