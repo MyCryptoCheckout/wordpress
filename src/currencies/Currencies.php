@@ -55,6 +55,7 @@ class Currencies
 		// Main blockchains
 		$this->add( new BCH() );
 		$this->add( new BTC() );
+		$this->add( new DASH() );
 		$this->add( new ETH() );
 		$this->add( new LTC() );
 
