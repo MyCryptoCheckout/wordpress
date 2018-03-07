@@ -104,6 +104,8 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 
 == Changelog ==
 
+= 1.11 20180307 =
+
 * New: Added DASH coin.
 
 = 1.10 20180306 =
