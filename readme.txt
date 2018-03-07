@@ -34,6 +34,7 @@ The following cryptocurrencies are supported:
 
 - Bitcoin BTC (original and Segwit addresses)
 - Bitcoin Cash BCH
+- Dash DASH
 - Ethereum ETH
 - Litecoin LTC
 
@@ -102,6 +103,8 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 10. WooCommerce purchase confirmation page with payment data
 
 == Changelog ==
+
+* New: Added DASH coin.
 
 = 1.10 20180306 =
 
