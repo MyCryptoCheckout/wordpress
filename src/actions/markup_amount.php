@@ -3,8 +3,7 @@
 namespace mycryptocheckout\actions;
 
 /**
-	@brief		Return the dustiest wallet for this currency.
-	@details	This is called during checkout to find the "dustiest" = the one used first. Or least used, or whatever.
+	@brief		Modify the amount / price of an item with these markup percent and fixed values.
 	@since		2018-01-05 16:11:46
 **/
 class markup_amount
