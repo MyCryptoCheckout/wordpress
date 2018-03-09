@@ -12,7 +12,7 @@ Cryptocurrency payment gateway for WooCommerce and EasyDigitalDownloads.
 
 == Description ==
 
-MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and EasyDigitalDownloads. It allows you to receive funds directly into the wallet of your choice, without exposing yourself to a risk by having to use a highly vulnerable online wallet service. Other features:
+MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and EasyDigitalDownloads. It allows you to receive funds directly into the wallet of your choice, without exposing yourself to a risk by having to use a highly vulnerable online wallet service. The payments are detected automatically and the plugin can differentiate between different buyers buying the same item. Other features:
 
 - 0% transaction fees
 - No product restrictions
@@ -57,9 +57,7 @@ The following ERC20 tokens are supported:
 - Status Network SNT
 - Tronix TRX
 - 0xProject ZRX
-- your custom token?
-
-We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
+- <a href="https://mycryptocheckout.com/custom-token/">your custom token</a>?
 
 After checkout, payment instructions are automatically included in the purchase receipt.
 
