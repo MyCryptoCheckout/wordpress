@@ -47,45 +47,6 @@ class Currencies
 	}
 
 	/**
-		@brief		Load all available currencies.
-		@since		2017-12-09 20:02:56
-	**/
-	public function load()
-	{
-		// Main blockchains
-		$this->add( new BCH() );
-		$this->add( new BTC() );
-		$this->add( new DASH() );
-		$this->add( new ETH() );
-		$this->add( new LTC() );
-
-		foreach( [
-			'BAT',
-			'BNT',
-			'DGD',
-			'EOS',
-			'FUN',
-			'GNT',
-			'ICX',
-			'KNC',
-			'MKR',
-			'OMG',
-			'PPT',
-			'QASH',
-			'QTUM',
-			'REP',
-			'SNT',
-			'STAKE',
-			'TRX',
-			'ZRX',
-		] as $token )
-		{
-			$class = __NAMESPACE__ . '\\erc20\\' . $token;
-			$this->add( new $class() );
-		}
-	}
-
-	/**
 		@brief		Return all of the currencies as an array for a select options class.
 		@since		2017-12-09 19:59:39
 	**/

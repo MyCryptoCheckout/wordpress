@@ -8,7 +8,7 @@ use \Exception;
 	@brief		The base currency that is loaded into the Currencies collection.
 	@since		2017-12-09 20:00:32
 **/
-abstract class Currency
+class Currency
 {
 	/**
 		@brief		Convert this amount to this currency.
@@ -78,6 +78,8 @@ abstract class Currency
 	**/
 	public function get_group()
 	{
+		if ( isset( $this->group ) )
+			return $this->group;
 		$g = new Group();
 		$g->name = __( 'Main blockchains', 'mycryptocheckout' );
 		$g->sort_order = 25;	// First!
@@ -90,6 +92,8 @@ abstract class Currency
 	**/
 	public function get_id()
 	{
+		if ( isset( $this->id ) )
+			return $this->id;
 		$class = get_called_class();
 		$class = preg_replace( '/.*\\\/', '', $class );
 		return $class;
@@ -97,9 +101,45 @@ abstract class Currency
 
 	/**
 		@brief		Return the name of this currency.
+		@details	You'll want to override this in your own currency.
 		@since		2017-12-09 20:05:36
 	**/
-	public abstract function get_name();
+	public function get_name()
+	{
+		if ( isset( $this->name ) )
+			return $this->name;
+		return $this->get_id();
+	}
+
+	/**
+		@brief		Set the group of the currency.
+		@since		2018-03-11 22:10:26
+	**/
+	public function set_group( $group )
+	{
+		$this->group = $group;
+		return $this;
+	}
+
+	/**
+		@brief		Override the ID of this class.
+		@since		2018-03-11 22:03:41
+	**/
+	public function set_id( $id )
+	{
+		$this->id = $id;
+		return $this;
+	}
+
+	/**
+		@brief		Set the name of the currency.
+		@since		2018-03-11 22:10:26
+	**/
+	public function set_name( $name )
+	{
+		$this->name = $name;
+		return $this;
+	}
 
 	/**
 		@brief		Does this currency support confirmations?
