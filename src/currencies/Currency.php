@@ -56,8 +56,10 @@ class Currency
 		@brief		Return the length of the wallet address.
 		@since		2017-12-24 10:58:43
 	**/
-	public static function get_address_length()
+	public function get_address_length()
 	{
+		if ( isset( $this->address_length ) )
+			return $this->address_length;
 		return 34;	// This is the default for a lot of coins.
 	}
 
@@ -67,7 +69,9 @@ class Currency
 	**/
 	public function get_decimal_precision()
 	{
-		// BTC is 8.
+		if ( isset( $this->decimal_precision ) )
+			return $this->decimal_precision;
+		// 8 is very common.
 		return 8;
 	}
 
@@ -112,6 +116,26 @@ class Currency
 	}
 
 	/**
+		@brief		Set the decimal precision of the currency.
+		@since		2018-03-11 22:10:26
+	**/
+	public function set_address_length( $address_length )
+	{
+		$this->address_length = $address_length;
+		return $this;
+	}
+
+	/**
+		@brief		Set the decimal precision of the currency.
+		@since		2018-03-11 22:10:26
+	**/
+	public function set_decimal_precision( $decimal_precision )
+	{
+		$this->decimal_precision = $decimal_precision;
+		return $this;
+	}
+
+	/**
 		@brief		Set the group of the currency.
 		@since		2018-03-11 22:10:26
 	**/
@@ -147,6 +171,8 @@ class Currency
 	**/
 	public function supports_confirmations()
 	{
+		if ( isset( $this->supports_confirmations ) )
+			return $this->supports_confirmations;
 		return true;
 	}
 
@@ -172,9 +198,9 @@ class Currency
 		@brief		Validate that this address looks normal.
 		@since		2017-12-09 20:09:17
 	**/
-	public static function validate_address( $address )
+	public function validate_address( $address )
 	{
-		static::validate_address_length( $address, static::get_address_length() );
+		$this->validate_address_length( $address, $this->get_address_length() );
 		return true;
 	}
 
@@ -182,7 +208,7 @@ class Currency
 		@brief		Check that the address length is exactly x characters.
 		@since		2017-12-09 20:21:55
 	**/
-	public static function validate_address_length( $address, $length )
+	public function validate_address_length( $address, $length )
 	{
 		if ( ! is_array( $length ) )
 			$length = [ $length ];

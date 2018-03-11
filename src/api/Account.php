@@ -31,6 +31,15 @@ class Account
 	}
 
 	/**
+		@brief		Return the currency data array.
+		@since		2018-03-11 23:00:17
+	**/
+	public function get_currency_data()
+	{
+		return $this->data->currency_data;
+	}
+
+	/**
 		@brief		Get the domain key.
 		@since		2017-12-12 11:18:05
 	**/

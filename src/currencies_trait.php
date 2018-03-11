@@ -43,48 +43,23 @@ trait currencies_trait
 	{
 		$currencies = $action->currencies;		// Convenience
 
-		$namespace = get_class( $currencies );
-		$namespace = substr( $namespace, 0, strrpos( $namespace, "\\" ) );
-
-		// The main and ERC20 tokens are handled separately due to the different namespace.
-
-		// Main currencies.
-		foreach( [
-			'BCH',
-			'BTC',
-			'DASH',
-			'ETH',
-			'LTC',
-		] as $blockchain )
+		$account = $account = $this->api()->account();
+		foreach( $account->get_currency_data() as $currency_id => $currency_data )
 		{
-			$class = $namespace . '\\' . $blockchain;
-			$currencies->add( new $class() );
-		}
-
-		// ERC20 tokens.
-		foreach( [
-			'BAT',
-			'BNT',
-			'DGD',
-			'EOS',
-			'FUN',
-			'GNT',
-			'ICX',
-			'KNC',
-			'MKR',
-			'OMG',
-			'PPT',
-			'QASH',
-			'QTUM',
-			'REP',
-			'SNT',
-			'STAKE',
-			'TRX',
-			'ZRX',
-		] as $token )
-		{
-			$class = $namespace . '\\erc20\\' . $token;
-			$currencies->add( new $class() );
+			$currency = new \mycryptocheckout\currencies\Currency();
+			$currency->set_id( $currency_id );
+			$currency->set_name( $currency_data->name );
+			if ( isset( $currency_data->address_length ) )
+				$currency->set_address_length( $currency_data->address_length );
+			if ( isset( $currency_data->decimal_precision ) )
+				$currency->set_decimal_precision( $currency_data->decimal_precision );
+			if ( isset( $currency_data->group ) )
+			{
+				$group = new \mycryptocheckout\currencies\Group();
+				$group->name = $currency_data->group;
+				$currency->set_group( $group );
+			}
+			$currencies->add( $currency );
 		}
 	}
 }

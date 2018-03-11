@@ -16,7 +16,7 @@ class API
 		@brief		The API server address.
 		@since		2017-12-11 14:07:24
 	**/
-	public static $api_url = 'https://api.mycryptocheckout.com/v1/';
+	public static $api_url = 'https://api.mycryptocheckout.com/v2/';
 
 	/**
 		@brief		Should the components work with their caches?
