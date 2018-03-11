@@ -24,6 +24,9 @@ class BCH
 	**/
 	public static function get_address_length()
 	{
-		return 34;	// This is the default for a lot of coins.
+		return [
+			34,		// Original
+			42,		// bitcoincash: prefix.
+		];
 	}
 }

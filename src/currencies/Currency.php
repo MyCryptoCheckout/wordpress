@@ -123,6 +123,8 @@ abstract class Currency
 			substr( $amount, 0, $decimal ),
 			substr( $amount, $decimal + 1, $this->get_decimal_precision() )
 		);
+		if ( strrpos( $amount, '.' ) == strlen( $amount ) - 1 )
+			$amount = rtrim( $amount, '.' );
 		return $amount;
 	}
 

@@ -75,6 +75,7 @@ class Currencies
 			'QTUM',
 			'REP',
 			'SNT',
+			'STAKE',
 			'TRX',
 			'ZRX',
 		] as $token )

@@ -54,6 +54,7 @@ The following ERC20 tokens are supported:
 - QASH
 - QTUM
 - Augur REP
+- <a href="https://www.stake-it.com/">STAKE</a>
 - Status Network SNT
 - Tronix TRX
 - 0xProject ZRX
@@ -101,6 +102,9 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 10. WooCommerce purchase confirmation page with payment data
 
 == Changelog ==
+
+* New ERC20 token: <a href="https://www.stake-it.com/">STAKE</a>
+* Fix: Nicer rounding of amounts.
 
 = 1.11 20180307 =
 
