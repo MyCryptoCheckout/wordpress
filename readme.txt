@@ -14,7 +14,7 @@ Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads.
 
 MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. It allows you to receive coins directly into the wallet of your choice.
 
-= Key Features & Highlights=
+= Key Features & Highlights =
 
 - 0% transaction fees
 - No product restrictions
