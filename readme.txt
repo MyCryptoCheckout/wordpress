@@ -60,7 +60,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Status Network SNT
 - Tronix TRX
 - 0xProject ZRX
-- We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a!
+- We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
 = Technical disclosure =
 
