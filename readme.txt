@@ -5,40 +5,42 @@ License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
 Stable tag: trunk
-Tags: cryptocurrency, checkout, gateway, woocommerce, easydigitaldownloads, bitcoin
+Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.4
 
-Cryptocurrency payment gateway for WooCommerce and EasyDigitalDownloads.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads.
 
 == Description ==
 
-MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and EasyDigitalDownloads. It allows you to receive funds directly into the wallet of your choice, without exposing yourself to a risk by having to use a highly vulnerable online wallet service. The payments are detected automatically and the plugin can differentiate between different buyers buying the same item. Other features:
+MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. It allows you to receive coins directly into the wallet of your choice.
+
+= Key Features & Highlights=
 
 - 0% transaction fees
 - No product restrictions
 - Use any wallet(s) you want: desktop, mobile or online
-- Visitors stay on your site during checkout
+- Fully automated peer-to-peer transactions
+- No redirection to 3rd parties, no iframes nor modal windows
+- See the <a href="https://mycryptocheckout.com/comparison/">feature comparison table</a> on our website to see why you should use MyCryptoCheckout instead of other crypto payment gateways.
 
-See the <a href="https://mycryptocheckout.com/comparison/">feature comparison page on the our website</a> to see why you should use MyCryptoCheckout instead of other crypto payment gateways.
+The free license can process three sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account if you require more. The flat rate license includes unlimited transactions. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
 
-With the free license you can process three sales per month. If you require more, a <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account. There are also <a href="https://mycryptocheckout.com/bulk-pricing/">bulk pricing options</a> available if you need to use MyCryptoCheckout on several domains.
+After checkout, payment instructions are automatically included in the purchase receipt.
 
-Transaction processing is free! Unlike other payment gateways we do not charge any percentages nor fixed amounts per transaction. The license cost is the same whether you have 10 or 10,000 sales a month.
+= Webshops supported =
 
-The following webshops are supported:
-
-- EasyDigitalDownloads
+- Easy Digital Downloads
 - WooCommerce
 
-The following cryptocurrencies are supported:
+= Cryptocurrencies supported: =
 
-- Bitcoin BTC (original and Segwit addresses)
+- Bitcoin BTC (Including SegWit addresses)
 - Bitcoin Cash BCH
 - Dash DASH
 - Ethereum ETH
 - Litecoin LTC
 
-The following ERC20 tokens are supported:
+= ERC20 tokens supported: =
 
 - Basic Attention Token BAT
 - Bancor BNT
@@ -58,21 +60,15 @@ The following ERC20 tokens are supported:
 - Status Network SNT
 - Tronix TRX
 - 0xProject ZRX
-- <a href="https://mycryptocheckout.com/custom-token/">your custom token</a>?
-
-After checkout, payment instructions are automatically included in the purchase receipt.
-
-The instructions included in EasyDigitalDownloads e-mails can be included using the {mcc_instructions} e-mail tag. The text is taken from the EDD MCC payment gateway option "Instructions".
-
-The instructions included in WooCommerce e-mails is taken from the WC MCC gateway "Instructions" option.
+- We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a!
 
 = Technical disclosure =
 
-Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your Wordpress install's public URL and the plugin version.
+Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version.
 
 The URL is used by the API server to know where to send updated account info (license status, payment statistics), exchange rates and completed purchase notifications.
 
-The plugin version is used to help answer requests made by the plugin.
+The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently).
 
 If your server cannot be reached by the API server this plugin will not function.
 
@@ -83,8 +79,9 @@ If your server cannot be reached by the API server this plugin will not function
 3. Check that your account looks ok
 4. Visit the currencies tab
 5. Set up one or more currencies
-6. Visit your WooCommerce payment gateway settings
-7. Visit your EasyDigitalDownloads payment gateway settings
+6. Visit your WooCommerce payment gateway settings. The instructions included in receipt e-mails are taken from the WC MCC gateway instructions text boxes.
+7. Visit your EasyDigitalDownloads payment gateway settings. The instructions included in receipt e-mails can be included using the {mcc_instructions} e-mail tag. The text is taken from the EDD MCC payment gateway instructions text boxes.
+
 
 To configure EDD, edit your purchase receipt e-mail and add the {mcc_instructions} tag.
 
