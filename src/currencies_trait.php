@@ -36,7 +36,7 @@ trait currencies_trait
 	}
 
 	/**
-		@brief		Load our currencies.
+		@brief		Load our currencies from the account data.
 		@since		2018-03-11 21:44:32
 	**/
 	public function mycryptocheckout_get_currencies( $action )
@@ -46,6 +46,10 @@ trait currencies_trait
 		$account = $account = $this->api()->account();
 		foreach( $account->get_currency_data() as $currency_id => $currency_data )
 		{
+			// Needed for testing.
+			if ( isset( $currency_data->beta ) )
+				continue;
+
 			$currency = new \mycryptocheckout\currencies\Currency();
 			$currency->set_id( $currency_id );
 			$currency->set_name( $currency_data->name );
