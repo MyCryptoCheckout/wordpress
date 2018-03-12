@@ -30,6 +30,7 @@ class WooCommerce
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
 		$this->add_filter( 'woocommerce_payment_gateways' );
+		$this->add_action( 'woocommerce_review_order_before_payment' );
 	}
 
 	/**
@@ -251,5 +252,14 @@ class WooCommerce
 		require_once( __DIR__ . '/WC_Gateway_MyCryptoCheckout.php' );
 		$gateways []= 'WC_Gateway_MyCryptoCheckout';
 		return $gateways;
+	}
+
+	/**
+		@brief		Apply a width fix for some themes. Otherwise the width (incl amount) gets way too long.
+		@since		2018-03-12 19:09:01
+	**/
+	public function woocommerce_review_order_before_payment()
+	{
+		echo '<style>.wc_payment_method #mcc_currency_id_field select#mcc_currency_id { width: 100%; }</style>';
 	}
 }

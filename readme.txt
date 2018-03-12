@@ -35,7 +35,7 @@ After checkout, payment instructions are automatically included in the purchase 
 = Cryptocurrencies supported: =
 
 - Bitcoin BTC (Including SegWit addresses)
-- Bitcoin Cash BCH
+- Bitcoin Cash BCH (Including SegWit addresses)
 - Dash DASH
 - Ethereum ETH
 - Litecoin LTC
@@ -101,6 +101,7 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 == Changelog ==
 
 * New ERC20 token: <a href="https://www.stake-it.com/">STAKE</a>
+* Fix: Add CSS to prevent the WooCommerce currency selection box from growing too big on some themes.
 * Fix: Incorrect wallets key in the options table. Your wallet info will remain untouched if upgrading normally. Else: deactivate and reactive the plugin.
 * Fix: Nicer rounding of amounts.
 
