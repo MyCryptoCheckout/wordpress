@@ -130,6 +130,6 @@ class Wallets
 	**/
 	public static function store_key()
 	{
-		return '';
+		return 'wallets';
 	}
 }
