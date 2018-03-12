@@ -109,7 +109,10 @@ class Wallets
 		use ( $currencies )
 		{
 			$currency = $currencies->get( $wallet->get_currency_id() );
-			return sprintf( '%s_%s', $currency->get_name(), $wallet->get_address() );
+			if ( $currency )
+				return sprintf( '%s_%s', $currency->get_name(), $wallet->get_address() );
+			else
+				return '';
 		} );
 		$this->trait_save();
 	}

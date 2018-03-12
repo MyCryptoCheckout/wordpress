@@ -176,7 +176,10 @@ trait admin_trait
 				if ( isset( $exchange_rates[ $id ] ) )
 					continue;
 				$currency = $currencies->get( $id );
-				$exchange_rates[ $id ] = sprintf( '1 USD = %s %s', $currency->convert( 'USD', 1 ), $id );
+				if ( $currency )
+					$exchange_rates[ $id ] = sprintf( '1 USD = %s %s', $currency->convert( 'USD', 1 ), $id );
+				else
+					$exchange_rates[ $id ] = sprintf( 'Currency %s is no longer available!', $id );
 			}
 			ksort( $exchange_rates );
 			$exchange_rates = implode( "\n", $exchange_rates );
@@ -203,6 +206,14 @@ trait admin_trait
 		$form = $this->form();
 		$form->id( 'broadcast_settings' );
 		$r = '';
+
+		$account = $this->api()->account();
+		if ( ! $account->is_valid() )
+		{
+			$r .= $this->error_message_box()->_( __( 'You cannot modify your currencies until you have a valid account. Please see the Accounts tab.', 'mycryptocheckout' ) );
+			echo $r;
+			return;
+		}
 
 		$table = $this->table();
 
@@ -233,6 +244,7 @@ trait admin_trait
 			$table->bulk_actions()->cb( $row, $index );
 			$currency = $this->currencies()->get( $wallet->get_currency_id() );
 
+			// If the currency is no longer available, delete the wallet.
 			if ( ! $currency )
 			{
 				$wallets->forget( $index );
