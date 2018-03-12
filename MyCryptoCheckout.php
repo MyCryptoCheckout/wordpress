@@ -53,7 +53,7 @@ namespace mycryptocheckout
 			if ( $this->is_network )
 				$wpdb->update( $wpdb->sitemeta, [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_wallets' ], [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_' ] );
 			else
-				$wpdb->update( $wpdb->sitemeta, [ 'meta_key' => 'MyCryptoCheckout_wallets' ], [ 'meta_key' => 'MyCryptoCheckout_' ] );
+				$wpdb->update( $wpdb->options, [ 'option_name' => 'MyCryptoCheckout_wallets' ], [ 'option_name' => 'MyCryptoCheckout_' ] );
 		}
 	}
 }

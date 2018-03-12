@@ -101,6 +101,7 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 == Changelog ==
 
 * New ERC20 token: <a href="https://www.stake-it.com/">STAKE</a>
+* Fix: Incorrect wallets key in the options table. Your wallet info will remain untouched if upgrading normally. Else: deactivate and reactive the plugin.
 * Fix: Nicer rounding of amounts.
 
 = 1.11 20180307 =
