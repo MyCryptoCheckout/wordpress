@@ -53,10 +53,13 @@ trait currencies_trait
 			$currency = new \mycryptocheckout\currencies\Currency();
 			$currency->set_id( $currency_id );
 			$currency->set_name( $currency_data->name );
+
 			if ( isset( $currency_data->address_length ) )
 				$currency->set_address_length( $currency_data->address_length );
+
 			if ( isset( $currency_data->decimal_precision ) )
 				$currency->set_decimal_precision( $currency_data->decimal_precision );
+
 			if ( isset( $currency_data->group ) )
 			{
 				$group = new \mycryptocheckout\currencies\Group();
