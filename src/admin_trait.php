@@ -16,6 +16,14 @@ trait admin_trait
 	**/
 	public function activate()
 	{
+		global $wpdb;
+
+		// Rename the wallets key.
+		if ( $this->is_network )
+			$wpdb->update( $wpdb->sitemeta, [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_wallets' ], [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_' ] );
+		else
+			$wpdb->update( $wpdb->options, [ 'option_name' => 'MyCryptoCheckout_wallets' ], [ 'option_name' => 'MyCryptoCheckout_' ] );
+
 		wp_schedule_event( time(), 'hourly', 'mycryptocheckout_hourly' );
 
 		// We need to run this as soon as the plugin is active.

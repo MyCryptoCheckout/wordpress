@@ -40,21 +40,6 @@ namespace mycryptocheckout
 			$this->easy_digital_downloads = new ecommerce\easy_digital_downloads\Easy_Digital_Downloads();
 			$this->woocommerce = new ecommerce\woocommerce\WooCommerce();
 		}
-
-		/**
-			@brief		Activate
-			@since		2018-03-12 14:34:43
-		**/
-		public function activate()
-		{
-			global $wpdb;
-
-			// Rename the wallets key.
-			if ( $this->is_network )
-				$wpdb->update( $wpdb->sitemeta, [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_wallets' ], [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_' ] );
-			else
-				$wpdb->update( $wpdb->options, [ 'option_name' => 'MyCryptoCheckout_wallets' ], [ 'option_name' => 'MyCryptoCheckout_' ] );
-		}
 	}
 }
 
