@@ -61,12 +61,6 @@ trait admin_trait
 		$save = $form->secondary_button( 'retrieve_account' )
 			->value( __( 'Refresh your account data', 'mycryptocheckout' ) );
 
-		if ( $form->is_posting() )
-		{
-			$form->post();
-			$form->use_post_values();
-		}
-
 		$r .= $form->open_tag();
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
