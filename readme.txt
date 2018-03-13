@@ -82,9 +82,6 @@ If your server cannot be reached by the API server this plugin will not function
 6. Visit your WooCommerce payment gateway settings. The instructions included in receipt e-mails are taken from the WC MCC gateway instructions text boxes.
 7. Visit your EasyDigitalDownloads payment gateway settings. The instructions included in receipt e-mails can be included using the {mcc_instructions} e-mail tag. The text is taken from the EDD MCC payment gateway instructions text boxes.
 
-
-To configure EDD, edit your purchase receipt e-mail and add the {mcc_instructions} tag.
-
 == Screenshots ==
 
 1. WooCommerce checkout
