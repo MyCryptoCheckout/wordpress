@@ -8,7 +8,7 @@ Domain Path:	/lang
 Plugin Name:	MyCryptoCheckout
 Plugin URI:		https://mycryptocheckout.com
 Text Domain:	mcc
-Version:		1.11
+Version:		2
 */
 
 namespace mycryptocheckout
@@ -60,7 +60,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 1.11 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2 );
 	/**
 		@brief		Return the instance of ThreeWP Broadcast.
 		@since		2014-10-18 14:48:37

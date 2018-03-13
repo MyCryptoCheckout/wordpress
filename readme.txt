@@ -38,7 +38,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Bitcoin Cash BCH (Including SegWit addresses)
 - Dash DASH
 - Ethereum ETH
-- Litecoin LTC
+- Litecoin LTC (Including SegWit addresses)
 
 = ERC20 tokens supported: =
 
@@ -75,7 +75,7 @@ If your server cannot be reached by the API server this plugin will not function
 == Installation ==
 
 1. Activate the plugin
-2. Visit settings > MyCryptoCheckout
+2. Visit Admin > Settings > MyCryptoCheckout
 3. Check that your account looks ok
 4. Visit the currencies tab
 5. Set up one or more currencies
@@ -99,6 +99,8 @@ To configure EDD, edit your purchase receipt e-mail and add the {mcc_instruction
 10. WooCommerce purchase confirmation page with payment data
 
 == Changelog ==
+
+= 2.0 20180313 =
 
 * New ERC20 token: <a href="https://www.stake-it.com/">STAKE</a>
 * Fix: LiteCoin addresses can now be Segwith length (43 chars).
