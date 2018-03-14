@@ -2,7 +2,7 @@
 
 <h2>To complete your order</h2>
 
-Send <strong class="amount"><span class="to_input">[AMOUNT] [CURRENCY]</span></strong>
-To <strong class="to"><span class="to_input">[TO]</span></strong>
+Send <span class="amount"><span class="to_input">[AMOUNT] [CURRENCY]</span></span>
+To <span class="to"><span class="to_input">[TO]</span></span>
 
 </div>
