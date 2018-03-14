@@ -18,6 +18,12 @@ namespace mycryptocheckout
 	class MyCryptoCheckout
 		extends \plainview\sdk_mcc\wordpress\base
 	{
+		/**
+			@brief		Plugin version.
+			@since		2018-03-14 19:04:03
+		**/
+		public $plugin_version = MYCRYPTOCHECKOUT_PLUGIN_VERSION;
+
 		use \plainview\sdk_mcc\wordpress\traits\debug;
 
 		use admin_trait;
