@@ -44,9 +44,12 @@ jQuery( document ).ready( function( $ )
 		} );
 
 		$item.html( $input );
+
+		// Add the clipboard to the item that now contains the new input.
 		$clipboard.appendTo( $item );
+
+		// Adjust the size and position of the invisible clipboard div to match the input.
 		var input_height = $input.outerHeight();
-		console.log( input_height );
 		$clipboard.css( {
 			'height' : input_height,
 			'width' : input_height,

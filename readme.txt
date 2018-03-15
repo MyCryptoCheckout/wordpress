@@ -97,6 +97,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+= 2.01 20180315 =
+
 * Fix: Use a different way of displaying the copy-to-clipboard icon on the checkout page, making it compatible with more themes.
 
 = 2.0 20180313 =
