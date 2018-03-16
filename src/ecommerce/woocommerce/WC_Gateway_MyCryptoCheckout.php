@@ -15,7 +15,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$plugin_dir = plugin_dir_url(__FILE__);
 
 		$this->id					= \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
-		$icon_file = $plugin_dir . 'icons.svg';
+		$icon_file					= $this->generate_icon_file( $plugin_dir );
 		$this->icon					= apply_filters( 'woocommerce_gateway_icon', $icon_file );
 		$this->method_title			= $this->get_method_title();
 		$this->method_description	= $this->get_method_description();
@@ -30,6 +30,87 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		add_action( 'woocommerce_email_before_order_table', [ $this, 'woocommerce_email_before_order_table' ], 10, 3 );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'post_process_admin_options' ] );
 		add_action( 'woocommerce_thankyou_mycryptocheckout', [ $this, 'woocommerce_thankyou_mycryptocheckout' ] );
+	}
+
+	/**
+		@brief		Generate the SVG icon file dynamically.
+		@since		2018-03-16 03:29:14
+	**/
+	public function generate_icon_file( $dir )
+	{
+		$svg_details = [
+			'BTC' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
+			'BCH' => [
+				'width' => 160,
+				'offset_left' => 2.5,
+			],
+			'ETH' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
+			'ERC20' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
+			'LTC' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
+		];
+		$wallet_options = $this->get_wallet_options();
+		$output = file_get_contents( $dir . 'base.svg' );
+		$mcc_width = 0;
+		$mcc_icons = '';
+		$output_filename = 'icons';
+		$handled_currencies = [];
+		$currency_data = MyCryptoCheckout()->api()->account()->get_currency_data();
+		foreach( $wallet_options as $currency_id => $ignore )
+		{
+			// If not found in the array, is this an erc20?
+			if ( ! isset( $svg_details[ $currency_id ] ) )
+				if ( isset( $currency_data->$currency_id ) )
+				{
+					$data = $currency_data->$currency_id;
+					if ( isset( $data->erc20 ) )
+						$currency_id = 'ERC20';
+				}
+
+			// Have we already handled this currency?
+			if ( isset( $handled_currencies[ $currency_id ] ) )
+				continue;
+
+			// We must know about this currency.
+			if ( ! isset( $svg_details[ $currency_id ] ) )
+				continue;
+
+			// Handle this currency!
+			$handled_currencies[ $currency_id ] = true;
+
+			$output_filename .= '_' . $currency_id;
+			$svg = $svg_details[ $currency_id ];
+			$offset = $mcc_width + $svg[ 'offset_left' ];
+
+			// Insert the icon from disk.
+			$icon_svg = file_get_contents( $dir . 'icon_' . $currency_id . '.svg' );
+			$icon_svg = str_replace( 'MCCOFFSET', $offset, $icon_svg );
+
+			$mcc_icons .= $icon_svg;
+			$mcc_width += $svg[ 'width' ];
+		}
+
+		$output = str_replace( 'MCCWIDTH', $mcc_width, $output );
+		$output = str_replace( 'MCCICONS', $mcc_icons, $output );
+
+		$output_filename .= '.svg';
+		$output_path = __DIR__ . '/' . $output_filename;
+		$output_url = $dir . $output_filename;
+
+		if ( ! file_exists( $output_path ) )
+			file_put_contents( $output_path, $output );
+		return $output_url;
 	}
 
 	/**
@@ -130,6 +211,19 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
+		@brief		Get the possible wallets as an array of select options.
+		@since		2018-03-16 03:30:21
+	**/
+	public function get_wallet_options()
+	{
+		return MyCryptoCheckout()->get_checkout_wallet_options( [
+			'amount' => WC()->cart->cart_contents_total,
+			'original_currency' => get_woocommerce_currency(),
+		] );
+
+	}
+
+	/**
 		@brief		Init the form fields.
 		@since		2017-12-09 22:05:11
 	**/
@@ -177,17 +271,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	function payment_fields()
 	{
-		$wallet_options = MyCryptoCheckout()->get_checkout_wallet_options( [
-			'amount' => WC()->cart->cart_contents_total,
-			'original_currency' => get_woocommerce_currency(),
-		] );
-
 		woocommerce_form_field( 'mcc_currency_id',
 		[
 			'type' => 'select',
 			'class' => [ 'mcc_currency' ],
 			'label' =>esc_html__( $this->get_option( 'currency_selection_text' ) ),
-			'options' => $wallet_options,
+			'options' => $this->get_wallet_options(),
 		] );
 	}
 
