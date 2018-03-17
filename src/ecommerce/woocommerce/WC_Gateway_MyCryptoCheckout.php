@@ -12,10 +12,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function __construct()
 	{
-		$plugin_dir = plugin_dir_url(__FILE__);
+		$plugin_dir = plugin_dir_url( __FILE__ );
 
 		$this->id					= \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
-		$icon_file					= $this->generate_icon_file( $plugin_dir );
+		$icon_file					= $this->generate_icon_file( __DIR__ );
 		$this->icon					= apply_filters( 'woocommerce_gateway_icon', $icon_file );
 		$this->method_title			= $this->get_method_title();
 		$this->method_description	= $this->get_method_description();
@@ -61,7 +61,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			],
 		];
 		$wallet_options = $this->get_wallet_options();
-		$output = file_get_contents( $dir . 'base.svg' );
+		$output = file_get_contents( $dir . '/icon_base.svg' );
 		$mcc_width = 0;
 		$mcc_icons = '';
 		$output_filename = 'icons';
@@ -94,7 +94,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			$offset = $mcc_width + $svg[ 'offset_left' ];
 
 			// Insert the icon from disk.
-			$icon_svg = file_get_contents( $dir . 'icon_' . $currency_id . '.svg' );
+			$icon_svg = file_get_contents( $dir . '/icon_' . $currency_id . '.svg' );
 			$icon_svg = str_replace( 'MCCOFFSET', $offset, $icon_svg );
 
 			$mcc_icons .= $icon_svg;
@@ -106,7 +106,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		$output_filename .= '.svg';
 		$output_path = __DIR__ . '/' . $output_filename;
-		$output_url = $dir . $output_filename;
+		$output_url = $dir . '/' . $output_filename;
 
 		if ( ! file_exists( $output_path ) )
 			file_put_contents( $output_path, $output );
@@ -166,6 +166,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'description' => __( 'This is the text for the currency selection input.', 'mycryptocheckout' ),
 				'default' => $strings->get( 'currency_selection_text' ),
 			],
+			'payment_timeout_hours' => [
+				'title'			=> __( 'Payment timeout hours', 'mycryptocheckout' ),
+				'type'			=> 'text',
+				'default'     => '72',
+				'description'	=> __( 'How many hours to wait for payment before automatically cancelling the order. The default value is 72 hours (3 days).', 'mycryptocheckout' ),
+			],
 			'reset_to_defaults' => [
 				'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
 				'type'			=> 'checkbox',
@@ -216,8 +222,14 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function get_wallet_options()
 	{
+		$cart = WC()->cart;
+		if ( ! $cart )
+			$amount = 0;
+		else
+			$amount = WC()->cart->cart_contents_total;
+
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
-			'amount' => WC()->cart->cart_contents_total,
+			'amount' => $amount,
 			'original_currency' => get_woocommerce_currency(),
 		] );
 

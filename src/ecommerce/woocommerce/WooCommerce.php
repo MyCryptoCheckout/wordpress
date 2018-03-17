@@ -222,6 +222,12 @@ class WooCommerce
 		else
 			$payment_id = 0;		// 0 = not sent.
 
+		// Save the non-default payment timeout hours.
+		$payment_timeout_hours = $gateway->get_option( 'payment_timeout_hours' );
+		$payment_timeout_hours = intval( $payment_timeout_hours );
+		if ( $payment_timeout_hours != 0 )
+			$order->update_meta_data( '_mcc_payment_timeout_hours', $payment_timeout_hours );
+
 		$order->update_meta_data( '_mcc_payment_id', $payment_id );
 		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
 
