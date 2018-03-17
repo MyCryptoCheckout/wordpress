@@ -77,38 +77,46 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$output_filename = 'icons';
 		$handled_currencies = [];
 		$currency_data = MyCryptoCheckout()->api()->account()->get_currency_data();
-		foreach( $wallet_options as $currency_id => $ignore )
+		// We do svg_details first and then wallet options in order to get the correct icon order. BTC before BCH, for example.
+		foreach( $svg_details as $svg_currency_id => $svg_data )
 		{
-			// If not found in the array, is this an erc20?
-			if ( ! isset( $svg_details[ $currency_id ] ) )
-				if ( isset( $currency_data->$currency_id ) )
-				{
-					$data = $currency_data->$currency_id;
-					if ( isset( $data->erc20 ) )
-						$currency_id = 'ERC20';
-				}
+			foreach( $wallet_options as $currency_id => $ignore )
+			{
+				// If not found in the array, is this an erc20?
+				if ( ! isset( $svg_details[ $currency_id ] ) )
+					if ( isset( $currency_data->$currency_id ) )
+					{
+						$data = $currency_data->$currency_id;
+						if ( isset( $data->erc20 ) )
+							$currency_id = 'ERC20';
+					}
 
-			// Have we already handled this currency?
-			if ( isset( $handled_currencies[ $currency_id ] ) )
-				continue;
+				// Looking for the currencies in the correct order.
+				if ( $svg_currency_id != $currency_id )
+					continue;
 
-			// We must know about this currency.
-			if ( ! isset( $svg_details[ $currency_id ] ) )
-				continue;
+				// Have we already handled this currency?
+				if ( isset( $handled_currencies[ $currency_id ] ) )
+					continue;
 
-			// Handle this currency!
-			$handled_currencies[ $currency_id ] = true;
+				// We must know about this currency.
+				if ( ! isset( $svg_details[ $currency_id ] ) )
+					continue;
 
-			$output_filename .= '_' . $currency_id;
-			$svg = $svg_details[ $currency_id ];
-			$offset = $mcc_width + $svg[ 'offset_left' ];
+				// Handle this currency!
+				$handled_currencies[ $currency_id ] = true;
 
-			// Insert the icon from disk.
-			$icon_svg = file_get_contents( $dir . 'icon_' . $currency_id . '.svg' );
-			$icon_svg = str_replace( 'MCC_OFFSET', $offset, $icon_svg );
+				$output_filename .= '_' . $currency_id;
+				$svg = $svg_details[ $currency_id ];
+				$offset = $mcc_width + $svg[ 'offset_left' ];
 
-			$mcc_icons .= $icon_svg;
-			$mcc_width += $svg[ 'width' ];
+				// Insert the icon from disk.
+				$icon_svg = file_get_contents( $dir . 'icon_' . $currency_id . '.svg' );
+				$icon_svg = str_replace( 'MCC_OFFSET', $offset, $icon_svg );
+
+				$mcc_icons .= $icon_svg;
+				$mcc_width += $svg[ 'width' ];
+			}
 		}
 
 		$output = str_replace( 'MCC_WIDTH', $mcc_width, $output );
@@ -118,7 +126,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$output_path = __DIR__ . '/' . $output_filename;
 		$output_url = $dir . $output_filename;
 
-		if ( ! file_exists( $output_path ) )
+		//if ( ! file_exists( $output_path ) )
 			file_put_contents( $output_path, $output );
 
 		return $output_filename;
