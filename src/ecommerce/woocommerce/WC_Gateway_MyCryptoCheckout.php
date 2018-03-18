@@ -353,15 +353,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( $reset != 'yes' )
 			return;
 		// Reset all of the settings!
-		$settings = $this->get_form_fields();
-		$new_settings = [];
-		foreach( $settings as $key => $field )
-		{
-			if ( ! isset( $field[ 'default' ] ) )
-				continue;
-			$default = $field[ 'default' ];
-		}
-		update_option( $this->get_option_key(), apply_filters( 'woocommerce_settings_api_sanitized_fields_' . $this->id, $new_settings ) );
+		update_option( $this->get_option_key(), apply_filters( 'woocommerce_settings_api_sanitized_fields_' . $this->id, [] ) );
 	}
 
 	/**
