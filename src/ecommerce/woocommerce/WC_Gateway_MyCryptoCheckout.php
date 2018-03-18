@@ -185,6 +185,18 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'description' => __( 'This is the text for the currency selection input.', 'mycryptocheckout' ),
 				'default' => $strings->get( 'currency_selection_text' ),
 			],
+			'payment_timeout_hours' => [
+				'title' => __( 'Payment timeout', 'mycryptocheckout' ),
+				'type' => 'number',
+				'description' => __( 'How many hours to wait for the payment to come through before marking the order as abandoned.', 'mycryptocheckout' ),
+				'default' => 72,
+				'custom_attributes' =>
+				[
+					'max' => 72,
+					'min' => 1,
+					'step' => 1,
+				],
+			],
 			'reset_to_defaults' => [
 				'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
 				'type'			=> 'checkbox',
@@ -235,8 +247,13 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function get_wallet_options()
 	{
+		$cart = WC()->cart;
+		if ( $cart )
+			$total = $cart->cart_contents_total;
+		else
+			$total = 0;
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
-			'amount' => WC()->cart->cart_contents_total,
+			'amount' => $total,
 			'original_currency' => get_woocommerce_currency(),
 		] );
 
