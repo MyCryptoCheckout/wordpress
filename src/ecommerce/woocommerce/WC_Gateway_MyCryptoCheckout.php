@@ -387,6 +387,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$order = wc_get_order( $order_id );
 		if ( $order->is_paid() )
 			return;
+
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
 		$instructions = $this->get_option( 'online_instructions' );
