@@ -369,7 +369,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			return;
 
 		// If paid, do not do anything.
-		if ( $order->is_paid() )
+		if ( ! $order->needs_payment() )
 			return;
 
 		$instructions = $this->get_option( 'email_instructions' );
@@ -385,7 +385,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function woocommerce_thankyou_mycryptocheckout( $order_id )
 	{
 		$order = wc_get_order( $order_id );
-		if ( $order->is_paid() )
+		if ( ! $order->needs_payment() )
 			return;
 
 		MyCryptoCheckout()->enqueue_js();
