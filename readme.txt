@@ -97,6 +97,11 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New: Show QR code for the wallet address when checking out. If you are upgrading and want to enable the QR, you can either reset your EDD or WC MyCryptoCheckout settings (in order to get the new text) or add the following to your online instructions text area:
+
+Before the final </div> in the online instructions, add: <div class="mcc_qr_code"></div>
+
+* Fix: Currency icons in WooCoommerce checkout box are now dynamic, showing only the currencies that are available.
 * Fix: No more rounding error when using BTC as main WooCommerce currency, and trying to pay in BTC.
 
 = 2.01 20180315 =
