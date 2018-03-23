@@ -16,7 +16,7 @@ trait api_trait
 	{
 		$this->add_action( 'mycryptocheckout_retrieve_account' );
 		$this->add_action( 'mycryptocheckout_send_payment' );
-		$this->add_action( 'template_redirect', 'api_template_redirect' );
+		$this->add_action( 'template_redirect', 'api_template_redirect', 1 );
 	}
 
 	/**

@@ -104,6 +104,7 @@ Before the final </div> in the online instructions, add: <div class="mcc_qr_code
 * New: Added payment timeout setting for WooCommerce. The default is 3 days, but can be changed if you want your orders to be automatically cancelled before that.
 * Fix: Currency icons in WooCoommerce checkout box are now dynamic, showing only the currencies that are available.
 * Fix: No more rounding error when using BTC as main WooCommerce currency, and trying to pay in BTC.
+* Fix: Try to intercept API calls earlier by raising the priority of the template_redirect hook.
 
 = 2.01 20180315 =
 
