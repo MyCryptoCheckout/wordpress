@@ -97,6 +97,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Fix: No more rounding error when using BTC as main WooCommerce currency, and trying to pay in BTC.
+
 = 2.01 20180315 =
 
 * Fix: Use a different way of displaying the copy-to-clipboard icon on the checkout page, making it compatible with more themes.
