@@ -81,7 +81,7 @@ class WooCommerce
 			$action->applied++;
 
 			// Only cancel is the order is unpaid.
-			if ( $order->get_status() != 'on-hold' )
+			if ( $order->get_status() != 'pending' )
 				return MyCryptoCheckout()->debug( 'WC order %d on blog %d is not unpaid. Can not cancel.', $order_id, get_current_blog_id() );
 
 			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as cancelled.', $order_id, get_current_blog_id() );
@@ -221,6 +221,12 @@ class WooCommerce
 		}
 		else
 			$payment_id = 0;		// 0 = not sent.
+
+		// Save the non-default payment timeout hours.
+		$payment_timeout_hours = $gateway->get_option( 'payment_timeout_hours' );
+		$payment_timeout_hours = intval( $payment_timeout_hours );
+		if ( $payment_timeout_hours != 0 )
+			$order->update_meta_data( '_mcc_payment_timeout_hours', $payment_timeout_hours );
 
 		$order->update_meta_data( '_mcc_payment_id', $payment_id );
 		$order->update_meta_data( '_mcc_to', $wallet->get_address() );

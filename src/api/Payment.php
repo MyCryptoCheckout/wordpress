@@ -39,6 +39,13 @@ class Payment
 	public $data;
 
 	/**
+		@brief		The payment timeout in hours.
+		@details	0 is the default, which takes the API default.
+		@since		2018-03-16 15:57:26
+	**/
+	public $timeout_hours = 0;
+
+	/**
 		@brief		The address to which we are expecting payment.
 		@since		2017-12-21 23:36:54
 	**/
@@ -77,6 +84,7 @@ class Payment
 			'created_at' => $this->created_at,
 			'currency_id' => $this->currency_id,
 			'data' => $this->data,
+			'timeout_hours' => $this->timeout_hours,
 			'to' => $this->to,
 		];
 	}

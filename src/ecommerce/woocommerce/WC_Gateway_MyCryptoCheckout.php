@@ -12,10 +12,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function __construct()
 	{
-		$plugin_dir = plugin_dir_url(__FILE__);
-
 		$this->id					= \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
-		$icon_file					= $this->generate_icon_file( $plugin_dir );
+		$icon_file					= $this->generate_icon_file();
+		$plugin_dir = plugin_dir_url( __FILE__ );
+		$icon_file = $plugin_dir . $icon_file;
 		$this->icon					= apply_filters( 'woocommerce_gateway_icon', $icon_file );
 		$this->method_title			= $this->get_method_title();
 		$this->method_description	= $this->get_method_description();
@@ -36,8 +36,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		@brief		Generate the SVG icon file dynamically.
 		@since		2018-03-16 03:29:14
 	**/
-	public function generate_icon_file( $dir )
+	public function generate_icon_file()
 	{
+		$dir = MyCryptoCheckout()->paths( '__FILE__' );
+		$dir = dirname( $dir ) . '/src/static/images/';
 		$svg_details = [
 			'BTC' => [
 				'width' => 100,
@@ -47,11 +49,11 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'width' => 160,
 				'offset_left' => 2.5,
 			],
-			'ETH' => [
+			'DASH' => [
 				'width' => 100,
 				'offset_left' => 2.5,
 			],
-			'ERC20' => [
+			'ETH' => [
 				'width' => 100,
 				'offset_left' => 2.5,
 			],
@@ -59,58 +61,75 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'width' => 100,
 				'offset_left' => 2.5,
 			],
+			'ERC20' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
+			'STAKE' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
 		];
 		$wallet_options = $this->get_wallet_options();
-		$output = file_get_contents( $dir . 'base.svg' );
+		$output = file_get_contents( $dir . 'icon_base.svg' );
 		$mcc_width = 0;
 		$mcc_icons = '';
 		$output_filename = 'icons';
 		$handled_currencies = [];
 		$currency_data = MyCryptoCheckout()->api()->account()->get_currency_data();
-		foreach( $wallet_options as $currency_id => $ignore )
+		// We do svg_details first and then wallet options in order to get the correct icon order. BTC before BCH, for example.
+		foreach( $svg_details as $svg_currency_id => $svg_data )
 		{
-			// If not found in the array, is this an erc20?
-			if ( ! isset( $svg_details[ $currency_id ] ) )
-				if ( isset( $currency_data->$currency_id ) )
-				{
-					$data = $currency_data->$currency_id;
-					if ( isset( $data->erc20 ) )
-						$currency_id = 'ERC20';
-				}
+			foreach( $wallet_options as $currency_id => $ignore )
+			{
+				// If not found in the array, is this an erc20?
+				if ( ! isset( $svg_details[ $currency_id ] ) )
+					if ( isset( $currency_data->$currency_id ) )
+					{
+						$data = $currency_data->$currency_id;
+						if ( isset( $data->erc20 ) )
+							$currency_id = 'ERC20';
+					}
 
-			// Have we already handled this currency?
-			if ( isset( $handled_currencies[ $currency_id ] ) )
-				continue;
+				// Looking for the currencies in the correct order.
+				if ( $svg_currency_id != $currency_id )
+					continue;
 
-			// We must know about this currency.
-			if ( ! isset( $svg_details[ $currency_id ] ) )
-				continue;
+				// Have we already handled this currency?
+				if ( isset( $handled_currencies[ $currency_id ] ) )
+					continue;
 
-			// Handle this currency!
-			$handled_currencies[ $currency_id ] = true;
+				// We must know about this currency.
+				if ( ! isset( $svg_details[ $currency_id ] ) )
+					continue;
 
-			$output_filename .= '_' . $currency_id;
-			$svg = $svg_details[ $currency_id ];
-			$offset = $mcc_width + $svg[ 'offset_left' ];
+				// Handle this currency!
+				$handled_currencies[ $currency_id ] = true;
 
-			// Insert the icon from disk.
-			$icon_svg = file_get_contents( $dir . 'icon_' . $currency_id . '.svg' );
-			$icon_svg = str_replace( 'MCCOFFSET', $offset, $icon_svg );
+				$output_filename .= '_' . $currency_id;
+				$svg = $svg_details[ $currency_id ];
+				$offset = $mcc_width + $svg[ 'offset_left' ];
 
-			$mcc_icons .= $icon_svg;
-			$mcc_width += $svg[ 'width' ];
+				// Insert the icon from disk.
+				$icon_svg = file_get_contents( $dir . 'icon_' . $currency_id . '.svg' );
+				$icon_svg = str_replace( 'MCC_OFFSET', $offset, $icon_svg );
+
+				$mcc_icons .= $icon_svg;
+				$mcc_width += $svg[ 'width' ];
+			}
 		}
 
-		$output = str_replace( 'MCCWIDTH', $mcc_width, $output );
-		$output = str_replace( 'MCCICONS', $mcc_icons, $output );
+		$output = str_replace( 'MCC_WIDTH', $mcc_width, $output );
+		$output = str_replace( 'MCC_ICONS', $mcc_icons, $output );
 
 		$output_filename .= '.svg';
 		$output_path = __DIR__ . '/' . $output_filename;
 		$output_url = $dir . $output_filename;
 
-		if ( ! file_exists( $output_path ) )
+		//if ( ! file_exists( $output_path ) )
 			file_put_contents( $output_path, $output );
-		return $output_url;
+
+		return $output_filename;
 	}
 
 	/**
@@ -166,6 +185,18 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'description' => __( 'This is the text for the currency selection input.', 'mycryptocheckout' ),
 				'default' => $strings->get( 'currency_selection_text' ),
 			],
+			'payment_timeout_hours' => [
+				'title' => __( 'Payment timeout', 'mycryptocheckout' ),
+				'type' => 'number',
+				'description' => __( 'How many hours to wait for the payment to come through before marking the order as abandoned.', 'mycryptocheckout' ),
+				'default' => 72,
+				'custom_attributes' =>
+				[
+					'max' => 72,
+					'min' => 1,
+					'step' => 1,
+				],
+			],
 			'reset_to_defaults' => [
 				'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
 				'type'			=> 'checkbox',
@@ -216,8 +247,13 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function get_wallet_options()
 	{
+		$cart = WC()->cart;
+		if ( $cart )
+			$total = $cart->cart_contents_total;
+		else
+			$total = 0;
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
-			'amount' => WC()->cart->cart_contents_total,
+			'amount' => $total,
 			'original_currency' => get_woocommerce_currency(),
 		] );
 
@@ -290,7 +326,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$order = new WC_Order( $order_id );
 
 		// Mark as on-hold (we're awaiting the payment)
-		$order->update_status('on-hold', __( 'Awaiting cryptocurrency payment', 'mycryptocheckout' ) );
+		$order->update_status( 'pending', __( 'Awaiting cryptocurrency payment', 'mycryptocheckout' ) );
 
 		// Reduce stock levels
 		wc_reduce_stock_levels( $order_id );
@@ -317,15 +353,18 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( $reset != 'yes' )
 			return;
 		// Reset all of the settings!
-		$settings = $this->get_form_fields();
-		$new_settings = [];
-		foreach( $settings as $key => $field )
-		{
-			if ( ! isset( $field[ 'default' ] ) )
-				continue;
-			$default = $field[ 'default' ];
-		}
-		update_option( $this->get_option_key(), apply_filters( 'woocommerce_settings_api_sanitized_fields_' . $this->id, $new_settings ) );
+		update_option( $this->get_option_key(), apply_filters( 'woocommerce_settings_api_sanitized_fields_' . $this->id, [] ) );
+	}
+
+	/**
+		@brief		Prevent the online payment instructions from losing its data-HTML.
+		@since		2018-03-23 10:26:07
+	**/
+	public function validate_textarea_field( $key, $value )
+	{
+		if ( in_array( $key, [ 'online_instructions' ] ) )
+			return trim( stripslashes( $value ) );
+		return $this->validate_text_field( $key, $value );
 	}
 
 	/**
@@ -341,7 +380,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			return;
 
 		// If paid, do not do anything.
-		if ( $order->is_paid() )
+		if ( ! $order->needs_payment() )
 			return;
 
 		$instructions = $this->get_option( 'email_instructions' );
@@ -356,6 +395,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function woocommerce_thankyou_mycryptocheckout( $order_id )
 	{
+		$order = wc_get_order( $order_id );
+		if ( ! $order->needs_payment() )
+			return;
+
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
 		$instructions = $this->get_option( 'online_instructions' );
@@ -366,6 +409,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		if ( $this->get_option( 'hide_woocommerce_order_overview' ) )
 			echo '<div class="hide_woocommerce_order_overview"></div>';
+
+		// If there is a QRcode div in the text, include the qrcode js.
+		if ( strpos( $instructions, 'mcc_qr_code' ) !== false )
+			wp_enqueue_script( 'mcc_qrcode', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/qrcode.js', [ 'mycryptocheckout' ], MyCryptoCheckout()->plugin_version );
 
 		echo wpautop( wptexturize( $instructions ) );
 	}

@@ -61,4 +61,20 @@ jQuery( document ).ready( function( $ )
 	var $hide_woocommerce_order_overview = $( '.hide_woocommerce_order_overview' );
 	if ( $hide_woocommerce_order_overview.length > 0 )
 		$( '.woocommerce-order-overview' ).hide();
+
+	// Generate a QR code?
+	var $qr_code = $( '.mcc.online_payment_instructions .mcc_qr_code' );
+	if ( $qr_code.length > 0 )
+	{
+		var to = $qr_code.data( 'to' );
+		var qr_code = new QRCode( $qr_code[ 0 ],
+		{
+			text: to,
+			//width: '300',
+			//height: '300',
+			colorDark : "#000000",
+			colorLight : "#ffffff",
+			correctLevel : QRCode.CorrectLevel.H
+		} );
+	}
 } );
