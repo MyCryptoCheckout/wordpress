@@ -70,8 +70,6 @@ jQuery( document ).ready( function( $ )
 		var qr_code = new QRCode( $qr_code[ 0 ],
 		{
 			text: to,
-			//width: '300',
-			//height: '300',
 			colorDark : "#000000",
 			colorLight : "#ffffff",
 			correctLevel : QRCode.CorrectLevel.H
