@@ -18,6 +18,11 @@ class Currency
 	{
 		// The exchange rates are stored in the account.
 		$account = MyCryptoCheckout()->api()->account();
+
+		// Do not convert if we are trying to convert from BTC to BTC.
+		if( $currency == $this->get_id() )
+			return $amount;
+
 		// Convert to USD.
 		if ( $currency != 'USD' )
 		{
