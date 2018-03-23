@@ -326,7 +326,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$order = new WC_Order( $order_id );
 
 		// Mark as on-hold (we're awaiting the payment)
-		$order->update_status('on-hold', __( 'Awaiting cryptocurrency payment', 'mycryptocheckout' ) );
+		$order->update_status( 'pending', __( 'Awaiting cryptocurrency payment', 'mycryptocheckout' ) );
 
 		// Reduce stock levels
 		wc_reduce_stock_levels( $order_id );
@@ -354,6 +354,17 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			return;
 		// Reset all of the settings!
 		update_option( $this->get_option_key(), apply_filters( 'woocommerce_settings_api_sanitized_fields_' . $this->id, [] ) );
+	}
+
+	/**
+		@brief		Prevent the online payment instructions from losing its data-HTML.
+		@since		2018-03-23 10:26:07
+	**/
+	public function validate_textarea_field( $key, $value )
+	{
+		if ( in_array( $key, [ 'online_instructions' ] ) )
+			return trim( stripslashes( $value ) );
+		return $this->validate_text_field( $key, $value );
 	}
 
 	/**
@@ -398,6 +409,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		if ( $this->get_option( 'hide_woocommerce_order_overview' ) )
 			echo '<div class="hide_woocommerce_order_overview"></div>';
+
+		// If there is a QRcode div in the text, include the qrcode js.
+		if ( strpos( $instructions, 'mcc_qr_code' ) !== false )
+			wp_enqueue_script( 'mcc_qrcode', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/qrcode.js', [ 'mycryptocheckout' ], MyCryptoCheckout()->plugin_version );
 
 		echo wpautop( wptexturize( $instructions ) );
 	}

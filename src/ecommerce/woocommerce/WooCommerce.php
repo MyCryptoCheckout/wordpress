@@ -81,7 +81,7 @@ class WooCommerce
 			$action->applied++;
 
 			// Only cancel is the order is unpaid.
-			if ( $order->get_status() != 'on-hold' )
+			if ( $order->get_status() != 'pending' )
 				return MyCryptoCheckout()->debug( 'WC order %d on blog %d is not unpaid. Can not cancel.', $order_id, get_current_blog_id() );
 
 			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as cancelled.', $order_id, get_current_blog_id() );
