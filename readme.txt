@@ -51,6 +51,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Icon ICX
 - Kyber Network Crystal KNC
 - Maker MKR
+- MetalPay MTL
 - Omisego OMG
 - Populous PPT
 - QASH
@@ -102,7 +103,7 @@ If your server cannot be reached by the API server this plugin will not function
 Before the final </div> in the online instructions, add: <div class="mcc_qr_code"></div>
 
 * New: Added payment timeout setting for WooCommerce. The default is 3 days, but can be changed if you want your orders to be automatically cancelled before that.
-* New: Setting to change the status of the order when payment is complete. Use this to set your paid orders to complete if your products don't need to be processed manually.
+* New: Added setting to change the status of the order when payment is complete. Use this to set your paid orders to complete if your products don't need to be processed manually.
 * Fix: Currency icons in WooCoommerce checkout box are now dynamic, showing only the currencies that are available.
 * Fix: No more rounding error when using BTC as main WooCommerce currency, and trying to pay in BTC.
 * Fix: Try to intercept API calls earlier by raising the priority of the template_redirect hook.
