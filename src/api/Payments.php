@@ -27,6 +27,16 @@ class Payments
 	}
 
 	/**
+		@brief		Cancel a payment.
+		@since		2018-03-25 22:30:37
+	**/
+	public function cancel( $payment_id )
+	{
+		$json = $this->api->send_post_with_account( 'payment/cancel/' . $payment_id, [] );
+		return true;
+	}
+
+	/**
 		@brief		Generate a Payment class from an order.
 		@since		2017-12-21 23:47:17
 	**/

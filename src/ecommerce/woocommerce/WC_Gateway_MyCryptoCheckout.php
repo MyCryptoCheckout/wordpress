@@ -185,6 +185,18 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'description' => __( 'This is the text for the currency selection input.', 'mycryptocheckout' ),
 				'default' => $strings->get( 'currency_selection_text' ),
 			],
+			'payment_complete_status' => [
+				'title' => __( 'Payment complete status', 'mycryptocheckout' ),
+				'type' => 'select',
+				'options' => [
+					// Order status
+					'' => __( 'Processing', 'mycryptocheckout' ),
+					// Order status
+					'wc-completed' => __( 'Completed', 'mycryptocheckout' ),
+				],
+				'description' => __( 'After payment is complete, change the order to this status.', 'mycryptocheckout' ),
+				'default' => '',
+			],
 			'payment_timeout_hours' => [
 				'title' => __( 'Payment timeout', 'mycryptocheckout' ),
 				'type' => 'number',

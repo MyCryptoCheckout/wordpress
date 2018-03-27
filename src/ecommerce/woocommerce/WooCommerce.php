@@ -27,6 +27,7 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
+		$this->add_action( 'woocommerce_order_status_cancelled' );
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
 		$this->add_filter( 'woocommerce_payment_gateways' );
@@ -110,8 +111,23 @@ class WooCommerce
 
 			$payment = $action->payment;
 
-			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as complete.', $order_id, get_current_blog_id() );
+			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as paid.', $order_id, get_current_blog_id() );
 			$order->payment_complete( $payment->transaction_id );
+
+			// Since WC is not yet loaded properly, we have to load the gateway settings ourselves.
+			$options = get_option( 'woocommerce_mycryptocheckout_settings', true );
+			$options = maybe_unserialize( $options );
+			MyCryptoCheckout()->debug( '2' );
+			if ( isset( $options[ 'payment_complete_status' ] ) )
+				switch( $options[ 'payment_complete_status' ] )
+				{
+					// The default is '', which means don't do anything.
+					case 'wc-completed':
+						MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as wc-completed.', $order_id, get_current_blog_id() );
+						$order->set_status( 'wc-completed' );
+						$order->save();
+					break;
+				}
 		} );
 	}
 
@@ -177,6 +193,20 @@ class WooCommerce
 		}
 
 		echo $r;
+	}
+
+	/**
+		@brief		Cancel an order on the server.
+		@since		2018-03-25 22:28:25
+	**/
+	public function woocommerce_order_status_cancelled( $order_id )
+	{
+		$order = wc_get_order( $order_id );
+		$payment_id = $order->get_meta( '_mcc_payment_id' );
+		if ( $payment_id < 2 )		// 1 is for test mode.
+			return;
+		MyCryptoCheckout()->debug( 'Cancelling payment %d for order %s', $payment_id, $order_id );
+		MyCryptoCheckout()->api()->payments()->cancel( $payment_id );
 	}
 
 	/**
