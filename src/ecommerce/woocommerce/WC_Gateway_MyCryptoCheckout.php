@@ -45,6 +45,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'width' => 100,
 				'offset_left' => 2.5,
 			],
+			'BTG' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
 			'BCH' => [
 				'width' => 160,
 				'offset_left' => 2.5,
@@ -58,6 +62,14 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'offset_left' => 2.5,
 			],
 			'LTC' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
+			'NEO' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
+			'ZEC' => [
 				'width' => 100,
 				'offset_left' => 2.5,
 			],
