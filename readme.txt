@@ -36,9 +36,12 @@ After checkout, payment instructions are automatically included in the purchase 
 
 - Bitcoin BTC (Including SegWit addresses)
 - Bitcoin Cash BCH (Including SegWit addresses)
+- Bitcoin Gold BTG
 - Dash DASH
 - Ethereum ETH
 - Litecoin LTC (Including SegWit addresses)
+- Neo Smart Economy NEO
+- Zcash ZEC
 
 = ERC20 tokens supported: =
 
@@ -100,6 +103,10 @@ If your server cannot be reached by the API server this plugin will not function
 
 = 2.02 20180328 =
 
+* New currency: Bitcoin Gold BTG
+* New currency: MetalPay MTL
+* New currency: Neo Smart Economy NEO
+* New currency: Zcash ZEC
 * New: Show QR code for the wallet address when checking out. If you are upgrading and want to enable the QR, you can either (1) reset your EDD or WC MyCryptoCheckout settings (in order to get the new text) or add the following to your online instructions text area before the final </div>:
 
 `<div class="mcc_qr_code"></div>`
