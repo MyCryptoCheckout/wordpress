@@ -1,3 +1,44 @@
+= 1.11 20180307 =
+
+* New: Added DASH coin.
+
+= 1.10 20180306 =
+
+* New: Display exchange rates for your used currencies in the account info tab.
+* Fix: EDD orders were not being sent to the API server the first try.
+* Fix: More robust cancellation handling, will now report non-existent orders to the API server.
+* Code: Replaced the old wordpress mycryptocheckout_payment_complete and mycryptocheckout_cancel_payment actions with their newer object equivalents: mycryptocheckout_cancel_payment and  mycryptocheckout_complete_payment. See the src/actions directory.
+
+<a href="https://mycryptocheckout.com/bulk-pricing/">Bulk license pricing</a> is now available.
+
+We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
+
+= 1.9 20180228 =
+
+* New: Added support for BitCoin Segwit addresses (42 and 62 characters long).
+
+= 1.8 20180226 =
+
+* New: ERC20 tokens introduced. The most popular tokens added were:
+
+- Basic Attention Token BAT
+- Bancor BNT
+- Digix Global DGD
+- EOS
+- FunFair FUN
+- Golem GNT
+- Icon ICX
+- Kyber Network Crystal KNC
+- Maker MKR
+- Omisego OMG
+- Populous PPT
+- QASH
+- QTUM
+- Augur REP
+- Status Network SNT
+- Tronix TRX
+- 0xProject ZRX
+
 = 1.7 20180213 =
 
 * New: Added a test mode allowing you to make purchases without having to use any monthly payments. This will allow you to edit the payment instructions until they suit your business better. The orders are created but will never be marked as paid.
