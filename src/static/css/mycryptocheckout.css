@@ -49,6 +49,12 @@
 	width: 10em;
 }
 
+#payment .wc_payment_methods .payment_method_mycryptocheckout img {
+	max-height: 1.618em;
+	height: 100%;
+	width: auto;
+}
+
 /**
 	@brief		7 Theme
 	@since		2018-03-14 20:01:56
