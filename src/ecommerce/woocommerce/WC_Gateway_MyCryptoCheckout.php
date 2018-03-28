@@ -331,11 +331,13 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	function payment_fields()
 	{
+		MyCryptoCheckout()->enqueue_js();
+		MyCryptoCheckout()->enqueue_css();
 		woocommerce_form_field( 'mcc_currency_id',
 		[
 			'type' => 'select',
 			'class' => [ 'mcc_currency' ],
-			'label' =>esc_html__( $this->get_option( 'currency_selection_text' ) ),
+			'label' => esc_html__( $this->get_option( 'currency_selection_text' ) ),
 			'options' => $this->get_wallet_options(),
 		] );
 	}

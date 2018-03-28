@@ -101,6 +101,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Fix: Load CSS on the checkout page for those themes that don't have WooCommerce support.
+
 = 2.02 20180328 =
 
 * New currency: Bitcoin Gold BTG
