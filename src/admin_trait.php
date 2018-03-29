@@ -445,6 +445,12 @@ trait admin_trait
 			// Input label
 			->label( __( 'Enabled', 'mycryptocheckout' ) );
 
+		$preselected = $form->checkbox( 'preselected' )
+			->checked( $wallet->get( 'preselected', false ) )
+			->description( __( 'Make this the default currency that is selected during checkout.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Select as default', 'mycryptocheckout' ) );
+
 		if ( $currency->supports_confirmations() )
 			$confirmations = $form->number( 'confirmations' )
 				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer.', 'mycryptocheckout' ) )
@@ -497,6 +503,7 @@ trait admin_trait
 					$currency->validate_address( $wallet->address );
 
 					$wallet->enabled = $wallet_enabled->is_checked();
+					$wallet->set( 'preselected', $preselected->is_checked() );
 					if ( $currency->supports_confirmations() )
 						$wallet->confirmations = $confirmations->get_filtered_post_value();
 
