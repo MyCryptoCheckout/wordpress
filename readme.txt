@@ -90,18 +90,17 @@ If your server cannot be reached by the API server this plugin will not function
 
 1. WooCommerce checkout
 2. EasyDigitalDownloads checkout
-3. Account tab
-4. Currencies tab
-5. Settings tab
-6. WooCommerce gateway settings
-7. EasyDigitalDownloads gateway settings
-8. Payment info in WooCommerce
-9. Payment info in EasyDigitalDownloads
-10. WooCommerce purchase confirmation page with payment data
+3. WooCommerce purchase confirmation page with payment data
+4. Account tab
+5. Currencies tab
+6. Settings tab
+7. WooCommerce gateway settings
+8. EasyDigitalDownloads gateway settings
 
 == Changelog ==
 
 * Fix: Load CSS on the checkout page for those themes that don't have WooCommerce support.
+* Fix: Default WooCommerce payment timeout is now 6 hours instead of 72.
 
 = 2.02 20180328 =
 
@@ -109,9 +108,9 @@ If your server cannot be reached by the API server this plugin will not function
 * New currency: MetalPay MTL
 * New currency: Neo Smart Economy NEO
 * New currency: Zcash ZEC
-* New: Show QR code for the wallet address when checking out. If you are upgrading and want to enable the QR, you can either (1) reset your EDD or WC MyCryptoCheckout settings (in order to get the new text) or add the following to your online instructions text area before the final </div>:
+* New: Show QR code for the wallet address when checking out. If you are upgrading and want to enable the QR, you can either (1) reset your EDD or WC MyCryptoCheckout settings (in order to get the new text) or add the following to your online instructions text area before the final &lt;/div&gt;:
 
-`<div class="mcc_qr_code"></div>`
+&lt;div class="mcc_qr_code"&gt;&lt;/div&gt;
 
 * New: Added payment timeout setting for WooCommerce. The default is 3 days, but can be changed if you want your orders to be automatically cancelled before that. The default will be changed to 6 hours in a few versions' time.
 * New: Added setting to change the status of the order when payment is complete. Use this to set your paid orders to complete if your products don't need to be processed manually.

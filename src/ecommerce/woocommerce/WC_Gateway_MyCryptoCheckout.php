@@ -213,7 +213,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'title' => __( 'Payment timeout', 'mycryptocheckout' ),
 				'type' => 'number',
 				'description' => __( 'How many hours to wait for the payment to come through before marking the order as abandoned.', 'mycryptocheckout' ),
-				'default' => 72,
+				'default' => 6,
 				'custom_attributes' =>
 				[
 					'max' => 72,
