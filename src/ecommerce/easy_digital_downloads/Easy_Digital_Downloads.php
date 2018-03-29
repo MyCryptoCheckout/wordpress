@@ -150,6 +150,8 @@ class Easy_Digital_Downloads
 		edd_update_payment_meta( $payment_id, '_mcc_currency_id', $currency_id  );
 		edd_update_payment_meta( $payment_id, '_mcc_confirmations', $wallet->confirmations );
 		edd_update_payment_meta( $payment_id, '_mcc_created_at', time() );
+		$payment_timeout_hours = edd_get_option( 'mcc_payment_timeout_hours' );
+		edd_update_payment_meta( $payment_id, '_mcc_payment_timeout_hours', $payment_timeout_hours );
 
 		$test_mode = edd_get_option( 'mcc_test_mode' );
 		if ( $test_mode )
@@ -308,6 +310,18 @@ class Easy_Digital_Downloads
 				'size' => 'regular',
 				'type' => 'text',
 			],
+			'mcc_payment_timeout_hours' =>
+			[
+				'id'   => 'mcc_payment_timeout_hours',
+				'default' => 6,
+				'desc' => __( 'How many hours to wait for the payment to come through before marking the order as abandoned.', 'mycryptocheckout' ),
+				'name' => __( 'Payment timeout', 'mycryptocheckout' ),
+				'size' => 'regular',
+				'type' => 'number',
+				'max' => 72,
+				'min' => 1,
+				'step' => 1,
+			],
 			'mcc_reset_to_defaults' => [
 				'id'	=> 'mcc_reset_to_defaults',
 				'name'	=> __( 'Reset to defaults', 'mycryptocheckout' ),
@@ -328,6 +342,10 @@ class Easy_Digital_Downloads
 				// Yepp. EDD requires a prefix. WC doesn't. Smart WC.
 				$small_key = str_replace( 'mcc_', '', $key );
 				$default = static::get_gateway_string( $small_key );
+
+				if ( isset( $settings[ $key ][ 'default' ] ) )
+					$default = $settings[ $key ][ 'default' ];
+
 				if ( $default == '' )
 					continue;
 

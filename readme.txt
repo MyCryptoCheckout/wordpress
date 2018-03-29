@@ -99,6 +99,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New: Add payment timeout hours option to EDD.
 * Fix: Load CSS on the checkout page for those themes that don't have WooCommerce support.
 * Fix: Default WooCommerce payment timeout is now 6 hours instead of 72.
 
