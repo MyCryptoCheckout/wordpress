@@ -99,6 +99,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+= 2.03 20180331 =
+
 * New: Add payment timeout hours option to EDD.
 * New: Added option to choose default currencies on checkout.
 * Fix: Load CSS on the checkout page for those themes that don't have WooCommerce support.
