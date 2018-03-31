@@ -4,7 +4,6 @@ Author:			edward_plainview
 Author Email:	edward@plainviewplugins.com
 Author URI:		https://plainviewplugins.com
 Description:	Cryptocurrency payment gateway using the MyCryptoCheckout.com service.
-Domain Path:	/lang
 Plugin Name:	MyCryptoCheckout
 Plugin URI:		https://mycryptocheckout.com
 Text Domain:	mcc
