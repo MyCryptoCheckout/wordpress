@@ -47,26 +47,36 @@ After checkout, payment instructions are automatically included in the purchase 
 
 = ERC20 tokens supported: =
 
+- 0xProject ZRX
+- Aeternity (AE)
+- Augur REP
 - Basic Attention Token BAT
 - Bancor BNT
 - Digix Global DGD
+- Dragonchain (DRGN)
 - EOS
 - FunFair FUN
+- Gifto (GTO)
 - Golem GNT
 - Icon ICX
 - Kyber Network Crystal KNC
 - Maker MKR
 - MetalPay MTL
+- Nebulas (NAS)
 - Omisego OMG
 - Populous PPT
 - QASH
 - QTUM
-- Augur REP
+- Request Network (REQ)
+- SALT (SALT)
 - <a href="https://www.stake-it.com/">STAKE</a>
 - Status Network SNT
+- Storm (STORM)
 - Tronix TRX
-- 0xProject ZRX
+- VeChain (VEN)
+- Veritaseum (VERI)
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
+
 
 = Technical disclosure =
 
@@ -100,6 +110,16 @@ If your server cannot be reached by the API server this plugin will not function
 8. EasyDigitalDownloads gateway settings
 
 == Changelog ==
+
+* New currency: Aeternity (AE)
+* New currency: Dragonchain (DRGN)
+* New currency: Gifto (GTO)
+* New currency: Nebulas (NAS)
+* New currency: Request Network (REQ)
+* New currency: SALT (SALT)
+* New currency: Storm (STORM)
+* New currency: VeChain (VEN)
+* New currency: Veritaseum (VERI)
 
 = 2.04 20180403 =
 
