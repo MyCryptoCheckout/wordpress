@@ -38,7 +38,9 @@ After checkout, payment instructions are automatically included in the purchase 
 - Bitcoin Cash BCH (Including SegWit addresses)
 - Bitcoin Gold BTG
 - Dash DASH
+- Decred DCR
 - Ethereum ETH
+- Ethereum Classic ETC
 - Litecoin LTC (Including SegWit addresses)
 - Neo Smart Economy NEO
 - Zcash ZEC
@@ -98,6 +100,8 @@ If your server cannot be reached by the API server this plugin will not function
 8. EasyDigitalDownloads gateway settings
 
 == Changelog ==
+
+= 2.04 20180403 =
 
 * New currency: Ethereum Classic ETC
 * New currency: Decred DCR
