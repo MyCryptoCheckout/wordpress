@@ -99,6 +99,9 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New currency: Ethereum Classic ETC
+* New currency: Decred DCR
+
 = 2.03 20180331 =
 
 * New: Add payment timeout hours option to EDD.

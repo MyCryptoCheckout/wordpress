@@ -57,6 +57,14 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'width' => 100,
 				'offset_left' => 2.5,
 			],
+			'DCR' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
+			'ETC' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
 			'ETH' => [
 				'width' => 100,
 				'offset_left' => 2.5,
@@ -138,7 +146,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$output_path = __DIR__ . '/' . $output_filename;
 		$output_url = $dir . $output_filename;
 
-		//if ( ! file_exists( $output_path ) )
+		if ( ! file_exists( $output_path ) )
 			file_put_contents( $output_path, $output );
 
 		return $output_filename;
