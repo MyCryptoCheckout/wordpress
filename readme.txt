@@ -48,33 +48,33 @@ After checkout, payment instructions are automatically included in the purchase 
 = ERC20 tokens supported: =
 
 - 0xProject ZRX
-- Aeternity (AE)
+- Aeternity AE
 - Augur REP
-- Basic Attention Token BAT
 - Bancor BNT
+- Basic Attention Token BAT
 - Digix Global DGD
-- Dragonchain (DRGN)
+- Dragonchain DRGN
 - EOS
 - FunFair FUN
-- Gifto (GTO)
+- Gifto GTO
 - Golem GNT
 - Icon ICX
 - Kyber Network Crystal KNC
 - Maker MKR
 - MetalPay MTL
-- Nebulas (NAS)
+- Nebulas NAS
 - Omisego OMG
 - Populous PPT
-- QASH
-- QTUM
-- Request Network (REQ)
-- SALT (SALT)
-- <a href="https://www.stake-it.com/">STAKE</a>
+- Qash
+- Qtum
+- Request Network REQ
+- Salt
+- StakeIt STAKE
 - Status Network SNT
-- Storm (STORM)
+- Storm
 - Tronix TRX
-- VeChain (VEN)
-- Veritaseum (VERI)
+- VeChain VEN
+- Veritaseum VERI
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
 
