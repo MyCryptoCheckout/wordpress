@@ -52,6 +52,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Augur REP
 - Bancor BNT
 - Basic Attention Token BAT
+- Dai Stablecoin DAI
 - Digix Global DGD
 - Dragonchain DRGN
 - EOS
@@ -112,6 +113,7 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * New currency: Aeternity (AE)
+* New currency: Dai Stablecoin (DAI)
 * New currency: Dragonchain (DRGN)
 * New currency: Gifto (GTO)
 * New currency: Nebulas (NAS)
