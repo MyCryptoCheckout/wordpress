@@ -1,5 +1,26 @@
 .mcc.online_payment_instructions {
 	display: block;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+.mcc.online_payment_instructions h2 {
+	background: #ccc;
+	padding: 5px 10px;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+.mcc.online_payment_instructions .mcc_online_pay_box {
+	padding: 10px;
+}
+.mcc_payment_timer {
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+}
+img.mcc_reload {
+	width: 150px;
+	height:auto;
 }
 .mcc.online_payment_instructions p {
 	font-size: 17px;
@@ -46,7 +67,10 @@
 {
 	height: 10em;
 	margin-bottom: 1em;
+	margin-right: 20px;
 	width: 10em;
+	display: inline-block;
+	vertical-align: top;
 }
 
 #payment .wc_payment_methods .payment_method_mycryptocheckout img {
