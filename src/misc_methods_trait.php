@@ -63,6 +63,19 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Generate a javascript object containing information for the checkout JS to build the QR code and all that.
+		@since		2018-04-25 15:47:05
+	**/
+	public function generate_checkout_js()
+	{
+		$action = $this->new_action( 'generate_checkout_javascript_data' );
+		$action->data = $this->collection();
+		$action->execute();
+
+		return $action->render();
+	}
+
+	/**
 		@brief		Get the options
 		@since		2018-01-05 19:58:46
 	**/
@@ -303,6 +316,18 @@ trait misc_methods_trait
 				@since		2017-12-14 16:50:25
 			**/
 			'markup_percent' => 0,
+
+			/**
+				@brief		Enable the timer on the checkout page?
+				@since		2018-04-23 16:29:12
+			**/
+			'payment_timer_enabled' => true,
+
+			/**
+				@brief		User's HTML div for the payment timer.
+				@since		2018-04-23 16:29:12
+			**/
+			'payment_timer_html' => '',
 
 			/**
 				@brief		The Wallets collection in which all wallet info is stored.

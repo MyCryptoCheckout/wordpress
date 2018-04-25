@@ -567,6 +567,7 @@ trait admin_trait
 			->p( __( 'If you wish to charge (or discount) visitors for using MyCryptoCheckout as the payment gateway, you can enter the fixed or percentage amounts in the boxes below. The cryptocurrency checkout price will be modified in accordance with the combined values below. These are applied to the original currency.', 'mycryptocheckout' ) );
 
 		$markup_amount = $fs->number( 'markup_amount' )
+			// Input description.
 			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the fixed amount in this box.', 'mycryptocheckout' ) )
 			// Input label.
 			->label( __( 'Markup amount', 'mycryptocheckout' ) )
@@ -577,6 +578,7 @@ trait admin_trait
 			->value( $this->get_site_option( 'markup_amount' ) );
 
 		$markup_percent = $fs->number( 'markup_percent' )
+			// Input description.
 			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the percentage in this box.', 'mycryptocheckout' ) )
 			// Input label.
 			->label( __( 'Markup %', 'mycryptocheckout' ) )
@@ -585,6 +587,25 @@ trait admin_trait
 			->step( 0.01 )
 			->size( 6, 6 )
 			->value( $this->get_site_option( 'markup_percent' ) );
+
+		$fs = $form->fieldset( 'fs_timer' );
+		// Label for fieldset
+		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
+
+		$payment_timer_enabled = $fs->checkbox( 'payment_timer_enabled' )
+			->checked( $this->get_site_option( 'payment_timer_enabled' ) )
+			// Input description.
+			->description( __( 'Show a timer on the checkout page showing how much time is left before the payment is marked as abandoned.', 'mycryptocheckout' ) )
+			// Input label.
+			->label( __( 'Payment timer', 'mycryptocheckout' ) );
+
+		$payment_timer_html = $fs->textarea( 'payment_timer_html' )
+			// Input description.
+			->description( __( 'If you wish to customize your timer, modify the HTML in this text box. To restore it to the default, leave it empty and save.', 'mycryptocheckout' ) )
+			// Input label.
+			->label( __( 'Timer HTML', 'mycryptocheckout' ) )
+			->rows( 5, 40 )
+			->value( $this->get_site_option( 'payment_timer_html' ) );
 
 		$this->add_debug_settings_to_form( $form );
 
@@ -598,6 +619,12 @@ trait admin_trait
 
 			$this->update_site_option( 'markup_amount', $markup_amount->get_filtered_post_value() );
 			$this->update_site_option( 'markup_percent', $markup_percent->get_filtered_post_value() );
+
+			$this->update_site_option( 'payment_timer_enabled', $payment_timer_enabled->is_checked() );
+			$html = $payment_timer_html->get_filtered_post_value();
+			if ( $html == '' )
+				$html = $this->wpautop_file( 'payment_timer_html' );
+			$this->update_site_option( 'payment_timer_html', $html );
 
 			$this->save_debug_settings_from_form( $form );
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
