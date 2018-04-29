@@ -87,19 +87,36 @@ jQuery( document ).ready( function( $ )
 		**/
 		$$.maybe_generate_qr_code = function()
 		{
-			// Generate a QR code?
 			var $qr_code = $( '.mcc_qr_code', $$.$div );
-			if ( $qr_code.length > 0 )
+
+			if ( $$.data.qr_code_html === undefined )
+				return $qr_code.remove();		// Kill any existing qr code.
+
+			var $html = $( $$.data.qr_code_html );
+
+			// If it does not exist, add it.
+			if ( $qr_code.length < 1 )
 			{
-				var to = $qr_code.data( 'to' );
-				var qr_code = new QRCode( $qr_code[ 0 ],
-				{
-					text: to,
-					colorDark : "#000000",
-					colorLight : "#ffffff",
-					correctLevel : QRCode.CorrectLevel.H
-				} );
+				// Add the HTML.
+				console.log( 'adding html' );
+				$qr_code = $html;
+				$qr_code.appendTo( $$.$online_pay_box );
 			}
+			else
+			{
+				// If it does exist, replace it.
+				console.log( 'Replace existing.' );
+				$qr_code.html( $html.html() );
+			}
+
+			// Generate a QR code?
+			var qr_code = new QRCode( $qr_code[ 0 ],
+			{
+				text: $$.data.to,
+				colorDark : "#000000",
+				colorLight : "#ffffff",
+				correctLevel : QRCode.CorrectLevel.H
+			} );
 		}
 
 		/**
@@ -133,7 +150,7 @@ jQuery( document ).ready( function( $ )
 			// If there is a QR div, put it in there also.
 			$( '.mcc_qr_code', $$.$div ).appendTo( $$.$online_pay_box );
 
-			// Instructions div is now upgraded!
+			// Instructions div is now upgraded to version 2.05.
 		}
 
 		$$.init();

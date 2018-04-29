@@ -340,6 +340,11 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function mycryptocheckout_generate_checkout_javascript_data( $action )
 	{
+		$payment = $this->__current_payment;
+		$action->data->set( 'amount', $payment->amount );
+		$action->data->set( 'currency_id', $payment->currency_id );
+		$action->data->set( 'to', $payment->to );
+
 		if ( $this->get_option( 'hide_woocommerce_order_overview' ) )
 			$action->data->set( 'hide_woocommerce_order_overview', true );
 
@@ -454,16 +459,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		MyCryptoCheckout()->enqueue_css();
 		$instructions = $this->get_option( 'online_instructions' );
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
+		$this->__current_payment = $payment;
 		$instructions = $payment->replace_shortcodes( $instructions );
 		if ( ! $instructions )
 			return;
 
-		// If there is a QRcode div in the text, include the qrcode js.
-		if ( strpos( $instructions, 'mcc_qr_code' ) !== false )
-			wp_enqueue_script( 'mcc_qrcode', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/qrcode.js', [ 'mycryptocheckout' ], MyCryptoCheckout()->plugin_version );
-
 		echo MyCryptoCheckout()->generate_checkout_js();
-
 		echo wpautop( wptexturize( $instructions ) );
 	}
 }

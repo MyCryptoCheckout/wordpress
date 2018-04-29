@@ -541,19 +541,53 @@ trait admin_trait
 	}
 
 	/**
-		@brief		Admin the license settings.
-		@since		2017-12-09 08:19:11
+		@brief		Local settings.
+		@since		2018-04-26 16:14:39
 	**/
-	public function admin_license()
+	public function admin_local_settings()
 	{
-		echo 'license status and links to purchase';
+		$form = $this->form();
+		$form->css_class( 'plainview_form_auto_tabs' );
+		$form->local_settings = true;
+		$r = '';
+
+		$fs = $form->fieldset( 'fs_qr_code' );
+		// Label for fieldset
+		$fs->legend->label( __( 'QR code', 'mycryptocheckout' ) );
+
+		$this->add_qr_code_inputs( $fs );
+
+		$save = $form->primary_button( 'save' )
+			->value( __( 'Save settings', 'mycryptocheckout' ) );
+
+		if ( $form->is_posting() )
+		{
+			$form->post();
+			$form->use_post_values();
+
+			$this->save_qr_code_inputs( $form );
+
+			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
+
+			echo $r;
+			$_POST = [];
+			$function = __FUNCTION__;
+			echo $this->$function();
+			return;
+		}
+
+		$r .= $form->open_tag();
+		$r .= $form->display_form_table();
+		$r .= $form->close_tag();
+
+		echo $r;
 	}
 
 	/**
 		@brief		Show the settings.
 		@since		2017-12-09 07:14:33
 	**/
-	public function admin_settings()
+	public function admin_global_settings()
 	{
 		$form = $this->form();
 		$form->css_class( 'plainview_form_auto_tabs' );
@@ -588,24 +622,16 @@ trait admin_trait
 			->size( 6, 6 )
 			->value( $this->get_site_option( 'markup_percent' ) );
 
-		$fs = $form->fieldset( 'fs_timer' );
+		$fs = $form->fieldset( 'fs_qr_code' );
 		// Label for fieldset
-		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
+		$fs->legend->label( __( 'QR code', 'mycryptocheckout' ) );
 
-		$payment_timer_enabled = $fs->checkbox( 'payment_timer_enabled' )
-			->checked( $this->get_site_option( 'payment_timer_enabled' ) )
-			// Input description.
-			->description( __( 'Show a timer on the checkout page showing how much time is left before the payment is marked as abandoned.', 'mycryptocheckout' ) )
-			// Input label.
-			->label( __( 'Payment timer', 'mycryptocheckout' ) );
+		if ( $this->is_network )
+			$fs->global_settings = true;
+		else
+			$fs->local_settings = true;
 
-		$payment_timer_html = $fs->textarea( 'payment_timer_html' )
-			// Input description.
-			->description( __( 'If you wish to customize your timer, modify the HTML in this text box. To restore it to the default, leave it empty and save.', 'mycryptocheckout' ) )
-			// Input label.
-			->label( __( 'Timer HTML', 'mycryptocheckout' ) )
-			->rows( 5, 40 )
-			->value( $this->get_site_option( 'payment_timer_html' ) );
+		$this->add_qr_code_inputs( $fs );
 
 		$this->add_debug_settings_to_form( $form );
 
@@ -620,11 +646,7 @@ trait admin_trait
 			$this->update_site_option( 'markup_amount', $markup_amount->get_filtered_post_value() );
 			$this->update_site_option( 'markup_percent', $markup_percent->get_filtered_post_value() );
 
-			$this->update_site_option( 'payment_timer_enabled', $payment_timer_enabled->is_checked() );
-			$html = $payment_timer_html->get_filtered_post_value();
-			if ( $html == '' )
-				$html = $this->wpautop_file( 'payment_timer_html' );
-			$this->update_site_option( 'payment_timer_html', $html );
+			$this->save_qr_code_inputs( $form );
 
 			$this->save_debug_settings_from_form( $form );
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
