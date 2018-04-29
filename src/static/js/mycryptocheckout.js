@@ -58,7 +58,7 @@ jQuery( document ).ready( function( $ )
 					$temp_input.select();
 					document.execCommand( "copy" );
 
-					$input.attr( 'value', 'Copied!' );
+					$input.attr( 'value', $$.data.strings_copied );
 					setTimeout( function()
 					{
 						$input.attr( 'value', old_value );

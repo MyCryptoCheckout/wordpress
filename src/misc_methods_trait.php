@@ -349,6 +349,8 @@ trait misc_methods_trait
 	**/
 	public function mycryptocheckout_generate_checkout_javascript_data( $action )
 	{
+		// Message after clicking the copied-to-clipoard button.
+		$action->data->set( 'strings_copied', __( 'Copied!', 'mycryptocheckout' ) );
 		$this->qrcode_generate_checkout_javascript_data( $action );
 	}
 
