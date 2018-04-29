@@ -342,7 +342,9 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	{
 		$payment = $this->__current_payment;
 		$action->data->set( 'amount', $payment->amount );
+		$action->data->set( 'created_at', $payment->created_at );
 		$action->data->set( 'currency_id', $payment->currency_id );
+		$action->data->set( 'timeout_hours', $payment->timeout_hours );
 		$action->data->set( 'to', $payment->to );
 
 		if ( $this->get_option( 'hide_woocommerce_order_overview' ) )
