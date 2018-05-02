@@ -1,11 +1,46 @@
 jQuery( document ).ready( function( $ )
 {
-	var mycryptocheckout_checkout_javascript = function()
+	var mycryptocheckout_checkout_javascript = function( data )
 	{
 		var $$ = this;
-		$$.data = mycryptocheckout_checkout_data;
+		$$.data = data;
 		$$.$div = $( '.mcc.online_payment_instructions' );
 		$$.$online_pay_box = $( '.mcc_online_pay_box', $$.$div );
+
+		/**
+			@brief		Check to see whether the order was paid, and cleanup in that case.
+			@since		2018-05-02 21:02:30
+		**/
+		$$.check_for_payment = function()
+		{
+			var url = document.location;
+
+			$.ajax( {
+				'type' : 'get',
+				'url' : url,
+			} )
+			.done( function( page )
+			{
+				var $page = $( page );
+				var $mycryptocheckout_checkout_data = $( '#mycryptocheckout_checkout_data', $page );
+				if ( $mycryptocheckout_checkout_data.length < 1 )
+				{
+					// Something went wrong.
+					document.location( url );
+				}
+
+				var mycryptocheckout_checkout_data = $mycryptocheckout_checkout_data.data( 'mycryptocheckout_checkout_data' );
+				mycryptocheckout_checkout_data = atob( mycryptocheckout_checkout_data );
+				mycryptocheckout_checkout_data = jQuery.parseJSON( mycryptocheckout_checkout_data );
+				if ( mycryptocheckout_checkout_data[ 'paid' ] === undefined )
+					return;
+
+				// Stop the countdown and show the paid div.
+				clearInterval( $$.payment_timer.timeout_interval );
+				$( '.paid', $$.payment_timer ).show();
+				$( '.timer', $$.payment_timer ).hide();
+			} );
+		}
 
 		$$.init = function()
 		{
@@ -13,8 +48,9 @@ jQuery( document ).ready( function( $ )
 				return;
 			$$.clipboard_inputs();
 			$$.maybe_hide_woocommerce_order_overview();
-			$$.maybe_generate_qr_code();
 			$$.maybe_upgrade_divs();
+			$$.maybe_generate_qr_code();
+			$$.maybe_generate_payment_timer();
 		}
 
 		/**
@@ -98,14 +134,12 @@ jQuery( document ).ready( function( $ )
 			if ( $qr_code.length < 1 )
 			{
 				// Add the HTML.
-				console.log( 'adding html' );
 				$qr_code = $html;
 				$qr_code.appendTo( $$.$online_pay_box );
 			}
 			else
 			{
 				// If it does exist, replace it.
-				console.log( 'Replace existing.' );
 				$qr_code.html( $html.html() );
 			}
 
@@ -117,6 +151,63 @@ jQuery( document ).ready( function( $ )
 				colorLight : "#ffffff",
 				correctLevel : QRCode.CorrectLevel.H
 			} );
+		}
+
+		/**
+			@brief		Generate the payment timer.
+			@since		2018-05-01 22:18:19
+		**/
+		$$.maybe_generate_payment_timer = function()
+		{
+			$$.payment_timer = $( $$.data.payment_timer_html );
+			if ( $$.payment_timer === undefined )
+				return;
+			$$.payment_timer.appendTo( $$.$online_pay_box );
+
+			var timeout = $$.data.timeout_hours * 60 * 60;
+			var timeout_time = parseInt( $$.data.created_at ) + timeout;
+
+			$$.payment_timer.$hours_minutes = $( '.hours_minutes', $$.payment_timer );
+
+			// Fetch the page once a minute to see if it has been paid.
+			$$.payment_timer.status_interval = setInterval( function()
+			{
+				$$.check_for_payment();
+			}, 1000 * 15 );
+			$$.check_for_payment();
+
+			// Update the timer every second.
+			$$.payment_timer.timeout_interval = setInterval( function()
+			{
+				var current_time = Math.round( ( new Date() ).getTime() / 1000 );
+				var seconds_left = timeout_time - current_time;
+
+				if ( seconds_left < 1 )
+				{
+					clearInterval( $$.payment_timer.timeout_interval );
+					$$.payment_timer.update_status();
+				}
+
+				// Convert to hours.
+				var hours = Math.floor( seconds_left / 60 / 60 );
+				if ( hours < 10 )
+					hours = '0' + hours;
+
+				var minutes = ( seconds_left - ( hours * 3600 ) ) / 60;
+				minutes = Math.floor( minutes );
+				if ( minutes < 10 )
+					minutes = '0' + minutes;
+
+				var seconds = ( seconds_left - ( hours * 3600 ) ) % 60;
+				if ( seconds < 10 )
+					seconds = '0' + seconds;
+
+				var text = '';
+				if ( hours > 0 )
+					text += hours + ':';
+				text += minutes + ':' + seconds;
+				$$.payment_timer.$hours_minutes.html( text );
+			}, 1000 );
 		}
 
 		/**
@@ -155,5 +246,13 @@ jQuery( document ).ready( function( $ )
 
 		$$.init();
 	}
-	mycryptocheckout_checkout_javascript();
+
+	var $mycryptocheckout_checkout_data = $( '#mycryptocheckout_checkout_data' );
+	if ( $mycryptocheckout_checkout_data.length < 1 )
+		return;
+
+	var mycryptocheckout_checkout_data = $mycryptocheckout_checkout_data.data( 'mycryptocheckout_checkout_data' );
+	mycryptocheckout_checkout_data = atob( mycryptocheckout_checkout_data );
+	mycryptocheckout_checkout_data = jQuery.parseJSON( mycryptocheckout_checkout_data );
+	mycryptocheckout_checkout_javascript( mycryptocheckout_checkout_data );
 } );

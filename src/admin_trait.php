@@ -194,6 +194,23 @@ trait admin_trait
 		$row->th( 'key' )->text( __( 'Exchange rates for your currencies', 'mycryptocheckout' ) );
 		$row->td( 'details' )->text( $exchange_rates );
 
+		if ( $this->debugging() )
+		{
+			$row = $table->head()->row();
+			$row->th( 'key' )->text( __( 'Reserved amounts', 'mycryptocheckout' ) );
+			$text = '';
+			foreach( $account->data->payment_amounts as $currency_id => $amounts )
+			{
+				$text .= sprintf( '<p>%s<ul>', $currency_id );
+				$amounts = (array)$amounts;
+				ksort( $amounts );
+				foreach( $amounts as $amount => $ignore )
+					$text .= sprintf( '<li>%s</li>', $amount );
+				$text .= '</ul>';
+			}
+			$row->td( 'details' )->text( $text );
+		}
+
 		$r .= $table;
 
 		return $r;
@@ -557,6 +574,12 @@ trait admin_trait
 
 		$this->add_qr_code_inputs( $fs );
 
+		$fs = $form->fieldset( 'fs_payment_timer' );
+		// Label for fieldset
+		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
+
+		$this->add_payment_timer_inputs( $fs );
+
 		$save = $form->primary_button( 'save' )
 			->value( __( 'Save settings', 'mycryptocheckout' ) );
 
@@ -566,6 +589,7 @@ trait admin_trait
 			$form->use_post_values();
 
 			$this->save_qr_code_inputs( $form );
+			$this->save_payment_timer_inputs( $form );
 
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
 
@@ -633,6 +657,17 @@ trait admin_trait
 
 		$this->add_qr_code_inputs( $fs );
 
+		$fs = $form->fieldset( 'fs_payment_timer' );
+		// Label for fieldset
+		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
+
+		if ( $this->is_network )
+			$fs->global_settings = true;
+		else
+			$fs->local_settings = true;
+
+		$this->add_payment_timer_inputs( $fs );
+
 		$this->add_debug_settings_to_form( $form );
 
 		$save = $form->primary_button( 'save' )
@@ -646,6 +681,7 @@ trait admin_trait
 			$this->update_site_option( 'markup_amount', $markup_amount->get_filtered_post_value() );
 			$this->update_site_option( 'markup_percent', $markup_percent->get_filtered_post_value() );
 
+			$this->save_payment_timer_inputs( $form );
 			$this->save_qr_code_inputs( $form );
 
 			$this->save_debug_settings_from_form( $form );

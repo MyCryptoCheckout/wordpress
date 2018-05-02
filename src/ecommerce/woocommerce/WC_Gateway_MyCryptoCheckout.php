@@ -344,6 +344,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$action->data->set( 'amount', $payment->amount );
 		$action->data->set( 'created_at', $payment->created_at );
 		$action->data->set( 'currency_id', $payment->currency_id );
+
+		if ( isset( $payment->paid ) )
+			$action->data->set( 'paid', true );
+
 		$action->data->set( 'timeout_hours', $payment->timeout_hours );
 		$action->data->set( 'to', $payment->to );
 
@@ -454,19 +458,22 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function woocommerce_thankyou_mycryptocheckout( $order_id )
 	{
 		$order = wc_get_order( $order_id );
-		if ( ! $order->needs_payment() )
-			return;
-
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
 		$instructions = $this->get_option( 'online_instructions' );
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
 		$this->__current_payment = $payment;
+		if ( $order->is_paid() )
+			$payment->paid = true;
 		$instructions = $payment->replace_shortcodes( $instructions );
 		if ( ! $instructions )
 			return;
 
 		echo MyCryptoCheckout()->generate_checkout_js();
+
+		if ( ! $order->needs_payment() )
+			return;
+
 		echo wpautop( wptexturize( $instructions ) );
 	}
 }

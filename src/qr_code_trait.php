@@ -5,14 +5,14 @@ namespace mycryptocheckout;
 use \Exception;
 
 /**
-	@brief		Handles admin things such as settings and currencies.
-	@since		2017-12-09 07:05:04
+	@brief		For the handling of QR codes.
+	@since		2018-05-01 20:42:45
 **/
 trait qr_code_trait
 {
 	/**
 		@brief		Add the QR code inputs to the settings form.
-		@details	Set $form->local_settings or global_settings depending on what we're setting.
+		@details	Set $form->local_settings if local. Else global is assumed.
 		@since		2018-04-26 17:24:27
 	**/
 	public function add_qr_code_inputs( $form )
@@ -59,52 +59,11 @@ trait qr_code_trait
 		@brief		Add QR code data to the js.
 		@since		2018-04-29 19:23:47
 	**/
-	public function qrcode_generate_checkout_javascript_data( $action )
+	public function qr_code_generate_checkout_javascript_data( $action )
 	{
-		$qr_code_enabled = $this->get_local_option( 'qr_code_enabled' );
-		switch( $qr_code_enabled )
-		{
-			case 'auto':
-				$enabled = 'auto';
-			break;
-			case 'disabled':
-				$enabled = false;
-			break;
-			case 'enabled':
-				$enabled = true;
-			break;
-		}
-
-		if ( $enabled !== false )
-			$html = $this->get_local_global_file_option( 'qr_code_html' );
-
-		if ( $this->is_network )
-		{
-			$qr_code_enabled = $this->get_site_option( 'qr_code_enabled' );
-			switch( $qr_code_enabled )
-			{
-				case 'disabled_all':
-					$enabled = false;
-				break;
-				case 'enabled_all':
-					$enabled = true;
-					// Forcing enabled also forces the global html.
-					$html = $this->get_global_file_option( 'qr_code_html' );
-				break;
-				case 'default_disabled':
-					if ( $enabled === 'auto' )
-						$enabled = false;
-				break;
-				case 'default_enabled':
-					if ( $enabled === 'auto' )
-						$enabled = true;
-				break;
-			}
-		}
-
-		if ( ! $enabled )
+		$html = $this->maybe_enable_option_html( 'qr_code_enabled', 'qr_code_html' );
+		if ( ! $html )
 			return;
-
 		$action->data->set( 'qr_code_html', $html );
 		wp_enqueue_script( 'mcc_qrcode', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/qrcode.js', [ 'mycryptocheckout' ], MyCryptoCheckout()->plugin_version );
 	}

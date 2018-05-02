@@ -1,0 +1,9 @@
+<div class="mcc_payment_timer">
+	<div class="timer">
+		<p>This is the payment timer html.</p>
+		<span class="hours_minutes"></span>
+	</div>
+	<div class="paid hidden" style="display: none">
+		<p>Payment complete!</p>
+	</div>
+</div>

@@ -21,8 +21,8 @@ class generate_checkout_javascript_data
 	**/
 	public function render()
 	{
-		return sprintf( '<script type="text/javascript">var mycryptocheckout_checkout_data = %s;</script>',
-			json_encode( $this->data->to_array() )
+		return sprintf( '<div id="mycryptocheckout_checkout_data" type="text/javascript" data-mycryptocheckout_checkout_data=%s></div>',
+			base64_encode( json_encode( $this->data->to_array() ) )
 		);
 	}
 }

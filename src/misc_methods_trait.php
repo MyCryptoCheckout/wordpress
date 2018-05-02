@@ -344,6 +344,54 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Decide whether to return the HTML for this qrcode / payment timer / whatever.
+		@since		2018-05-01 22:20:26
+	**/
+	public function maybe_enable_option_html( $key, $html_key )
+	{
+		$enabled = $this->get_local_option( $key );
+		$html = $this->get_local_global_file_option( $html_key );
+		switch( $enabled )
+		{
+			case 'disabled':
+				$enabled = false;
+			break;
+			case 'enabled':
+				$enabled = true;
+			break;
+		}
+
+		if ( $this->is_network )
+		{
+			$enabled = $this->get_site_option( $key );
+			switch( $enabled )
+			{
+				case 'disabled_all':
+					$enabled = false;
+				break;
+				case 'enabled_all':
+					$enabled = true;
+					// Forcing enabled also forces the global html.
+					$html = $this->get_global_file_option( $html_key );
+				break;
+				case 'default_disabled':
+					if ( $enabled === 'auto' )
+						$enabled = false;
+				break;
+				case 'default_enabled':
+					if ( $enabled === 'auto' )
+						$enabled = true;
+				break;
+			}
+		}
+
+		if ( ! $enabled )
+			return false;
+
+		return $html;
+	}
+
+	/**
 		@brief		mycryptocheckout_generate_checkout_javascript_data
 		@since		2018-04-29 19:21:11
 	**/
@@ -351,7 +399,8 @@ trait misc_methods_trait
 	{
 		// Message after clicking the copied-to-clipoard button.
 		$action->data->set( 'strings_copied', __( 'Copied!', 'mycryptocheckout' ) );
-		$this->qrcode_generate_checkout_javascript_data( $action );
+		$this->payment_timer_generate_checkout_javascript_data( $action );
+		$this->qr_code_generate_checkout_javascript_data( $action );
 	}
 
 	/**

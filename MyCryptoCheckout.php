@@ -32,6 +32,7 @@ namespace mycryptocheckout
 		use menu_trait;
 		use misc_methods_trait;
 		use qr_code_trait;
+		use payment_timer_trait;
 
 		/**
 			@brief		Constructor.
