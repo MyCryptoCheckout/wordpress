@@ -651,9 +651,9 @@ trait admin_trait
 		$fs->legend->label( __( 'QR code', 'mycryptocheckout' ) );
 
 		if ( $this->is_network )
-			$fs->global_settings = true;
+			$form->global_settings = true;
 		else
-			$fs->local_settings = true;
+			$form->local_settings = true;
 
 		$this->add_qr_code_inputs( $fs );
 
@@ -662,9 +662,9 @@ trait admin_trait
 		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
 
 		if ( $this->is_network )
-			$fs->global_settings = true;
+			$form->global_settings = true;
 		else
-			$fs->local_settings = true;
+			$form->local_settings = true;
 
 		$this->add_payment_timer_inputs( $fs );
 
