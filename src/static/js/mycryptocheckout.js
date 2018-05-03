@@ -165,7 +165,7 @@ jQuery( document ).ready( function( $ )
 			$$.payment_timer.appendTo( $$.$online_pay_box );
 
 			var timeout = $$.data.timeout_hours * 60 * 60;
-			var timeout_time = parseInt( $$.data.created_at ) + timeout;
+			$$.payment_timer.timeout_time = parseInt( $$.data.created_at ) + timeout;
 
 			$$.payment_timer.$hours_minutes = $( '.hours_minutes', $$.payment_timer );
 
@@ -179,35 +179,9 @@ jQuery( document ).ready( function( $ )
 			// Update the timer every second.
 			$$.payment_timer.timeout_interval = setInterval( function()
 			{
-				var current_time = Math.round( ( new Date() ).getTime() / 1000 );
-				var seconds_left = timeout_time - current_time;
-
-				if ( seconds_left < 1 )
-				{
-					clearInterval( $$.payment_timer.timeout_interval );
-					$$.payment_timer.update_status();
-				}
-
-				// Convert to hours.
-				var hours = Math.floor( seconds_left / 60 / 60 );
-				if ( hours < 10 )
-					hours = '0' + hours;
-
-				var minutes = ( seconds_left - ( hours * 3600 ) ) / 60;
-				minutes = Math.floor( minutes );
-				if ( minutes < 10 )
-					minutes = '0' + minutes;
-
-				var seconds = ( seconds_left - ( hours * 3600 ) ) % 60;
-				if ( seconds < 10 )
-					seconds = '0' + seconds;
-
-				var text = '';
-				if ( hours > 0 )
-					text += hours + ':';
-				text += minutes + ':' + seconds;
-				$$.payment_timer.$hours_minutes.html( text );
+				$$.update_payment_timer();
 			}, 1000 );
+			$$.update_payment_timer();
 		}
 
 		/**
@@ -242,6 +216,42 @@ jQuery( document ).ready( function( $ )
 			$( '.mcc_qr_code', $$.$div ).appendTo( $$.$online_pay_box );
 
 			// Instructions div is now upgraded to version 2.05.
+		}
+
+		/**
+			@brief		Update the payment timer countdown div.
+			@since		2018-05-03 07:12:24
+		**/
+		$$.update_payment_timer = function()
+		{
+			var current_time = Math.round( ( new Date() ).getTime() / 1000 );
+			var seconds_left = $$.payment_timer.timeout_time - current_time;
+
+			if ( seconds_left < 1 )
+			{
+				clearInterval( $$.payment_timer.timeout_interval );
+				$$.payment_timer.update_status();
+			}
+
+			// Convert to hours.
+			var hours = Math.floor( seconds_left / 60 / 60 );
+			if ( hours < 10 )
+				hours = '0' + hours;
+
+			var minutes = ( seconds_left - ( hours * 3600 ) ) / 60;
+			minutes = Math.floor( minutes );
+			if ( minutes < 10 )
+				minutes = '0' + minutes;
+
+			var seconds = ( seconds_left - ( hours * 3600 ) ) % 60;
+			if ( seconds < 10 )
+				seconds = '0' + seconds;
+
+			var text = '';
+			if ( hours > 0 )
+				text += hours + ':';
+			text += minutes + ':' + seconds;
+			$$.payment_timer.$hours_minutes.html( text );
 		}
 
 		$$.init();
