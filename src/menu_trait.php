@@ -24,6 +24,8 @@ trait menu_trait
 	**/
 	public function admin_menu()
 	{
+		$this->enqueue_js();
+
 		// For normal admin.
 		add_submenu_page(
 			'options-general.php',
