@@ -5,6 +5,4 @@
 Send <span class="amount"><span class="to_input">[AMOUNT] [CURRENCY]</span></span>
 To <span class="to"><span class="to_input">[TO]</span></span>
 
-<div class="mcc_qr_code" data-to="[TO]" data-amount="[AMOUNT]" data-currency="[CURRENCY]"></div>
-
 </div>

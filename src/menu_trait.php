@@ -56,12 +56,20 @@ trait menu_trait
 			// Name of tab
 			->name( __( 'Account', 'mycryptocheckout' ) );
 
-		$tabs->tab( 'settings' )
-			->callback_this( 'admin_settings' )
+		if ( $this->is_network )
+			$tabs->tab( 'local_settings' )
+				->callback_this( 'admin_local_settings' )
+				// Tab heading
+				->heading( __( 'MyCryptoCheckout Local Settings', 'mycryptocheckout' ) )
+				// Name of tab
+				->name( __( 'Local Settings', 'mycryptocheckout' ) );
+
+		$tabs->tab( 'global_settings' )
+			->callback_this( 'admin_global_settings' )
 			// Tab heading
-			->heading( __( 'MyCryptoCheckout Settings', 'mycryptocheckout' ) )
+			->heading( __( 'MyCryptoCheckout Global Settings', 'mycryptocheckout' ) )
 			// Name of tab
-			->name( __( 'Settings', 'mycryptocheckout' ) );
+			->name( __( 'Global Settings', 'mycryptocheckout' ) );
 
 		$tabs->tab( 'tools' )
 			->callback_this( 'admin_tools' )

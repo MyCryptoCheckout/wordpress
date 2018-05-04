@@ -27,6 +27,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$this->title = $this->get_option( 'title' );
 		$this->description = $this->get_option( 'description' );
 
+		add_action( 'mycryptocheckout_generate_checkout_javascript_data', [ $this, 'mycryptocheckout_generate_checkout_javascript_data' ] );
 		add_action( 'woocommerce_email_before_order_table', [ $this, 'woocommerce_email_before_order_table' ], 10, 3 );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'post_process_admin_options' ] );
 		add_action( 'woocommerce_thankyou_mycryptocheckout', [ $this, 'woocommerce_thankyou_mycryptocheckout' ] );
@@ -334,6 +335,29 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
+		@brief		Add our stuff to the checkout data.
+		@since		2018-04-25 15:58:40
+	**/
+	public function mycryptocheckout_generate_checkout_javascript_data( $action )
+	{
+		$payment = $this->__current_payment;
+		$action->data->set( 'amount', $payment->amount );
+		$action->data->set( 'created_at', $payment->created_at );
+		$action->data->set( 'currency_id', $payment->currency_id );
+
+		if ( isset( $payment->paid ) )
+			$action->data->set( 'paid', true );
+
+		$action->data->set( 'timeout_hours', $payment->timeout_hours );
+		$action->data->set( 'to', $payment->to );
+
+		if ( $this->get_option( 'hide_woocommerce_order_overview' ) )
+			$action->data->set( 'hide_woocommerce_order_overview', true );
+
+		return $action;
+	}
+
+	/**
 		@brief		Show the extra MCC payment fields on the checkout form.
 		@since		2017-12-14 19:16:46
 	**/
@@ -434,23 +458,21 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function woocommerce_thankyou_mycryptocheckout( $order_id )
 	{
 		$order = wc_get_order( $order_id );
-		if ( ! $order->needs_payment() )
-			return;
-
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
 		$instructions = $this->get_option( 'online_instructions' );
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
+		$this->__current_payment = $payment;
+		if ( $order->is_paid() )
+			$payment->paid = true;
 		$instructions = $payment->replace_shortcodes( $instructions );
 		if ( ! $instructions )
 			return;
 
-		if ( $this->get_option( 'hide_woocommerce_order_overview' ) )
-			echo '<div class="hide_woocommerce_order_overview"></div>';
+		echo MyCryptoCheckout()->generate_checkout_js();
 
-		// If there is a QRcode div in the text, include the qrcode js.
-		if ( strpos( $instructions, 'mcc_qr_code' ) !== false )
-			wp_enqueue_script( 'mcc_qrcode', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/qrcode.js', [ 'mycryptocheckout' ], MyCryptoCheckout()->plugin_version );
+		if ( ! $order->needs_payment() )
+			return;
 
 		echo wpautop( wptexturize( $instructions ) );
 	}

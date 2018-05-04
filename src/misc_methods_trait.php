@@ -63,6 +63,19 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Generate a javascript object containing information for the checkout JS to build the QR code and all that.
+		@since		2018-04-25 15:47:05
+	**/
+	public function generate_checkout_js()
+	{
+		$action = $this->new_action( 'generate_checkout_javascript_data' );
+		$action->data = $this->collection();
+		$action->execute();
+
+		return $action->render();
+	}
+
+	/**
 		@brief		Get the options
 		@since		2018-01-05 19:58:46
 	**/
@@ -112,6 +125,33 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Return the local, global, or disk option.
+		@since		2018-04-26 22:19:04
+	**/
+	public function get_local_global_file_option( $key )
+	{
+		$value = $this->get_local_option( $key );
+		if ( $value == '' )
+			$value = $this->get_global_file_option( $key );
+		return $value;
+	}
+
+	/**
+		@brief		Convenience method to return a global option or its data from disk.
+		@since		2018-04-26 22:19:04
+	**/
+	public function get_global_file_option( $key )
+	{
+		if ( $this->is_network )
+			$value = $this->get_site_option( $key );
+		else
+			$value = '';
+		if ( $value == '' )
+			$value = $this->get_static_file( $key );
+		return $value;
+	}
+
+	/**
 		@brief		Return the shortest possible name of this server.
 		@since		2017-12-11 14:23:01
 	**/
@@ -153,6 +193,18 @@ trait misc_methods_trait
 			$r[ $unsorted_site[ 0 ] ] = $unsorted_site[ 1 ];
 
 		return $r;
+	}
+
+	/**
+		@brief		Return the text of a static file.
+		@since		2018-04-26 22:24:29
+	**/
+	public function get_static_file( $key )
+	{
+		$file = __DIR__ . '/static/texts/' . $key . '.txt';
+		$text = file_get_contents( $file );
+		$text = trim( $text );
+		return $text;
 	}
 
 	/**
@@ -210,6 +262,15 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Init this trait.
+		@since		2018-04-29 19:20:55
+	**/
+	public function init_misc_methods_trait()
+	{
+		$this->add_action( 'mycryptocheckout_generate_checkout_javascript_data' );
+	}
+
+	/**
 		@brief		Return this timestamp in the blog's date time format.
 		@since		2017-12-27 16:07:00
 	**/
@@ -227,6 +288,27 @@ trait misc_methods_trait
 	public function local_datetime( $timestamp )
 	{
 		return $this->local_date( $timestamp ) . ' ' . $this->local_time( $timestamp );
+	}
+
+	/**
+		@brief		The local options.
+		@since		2018-04-26 16:15:35
+	**/
+	public function local_options()
+	{
+		return array_merge( [
+			/**
+				@brief		Is the QR code enabled? true, false, auto = use global setting.
+				@since		2018-04-26 16:15:56
+			**/
+			'qr_code_enabled' => 'auto',
+
+			/**
+				@brief		Override the global QR-code HTML with a custom value?
+				@since		2018-04-26 16:15:56
+			**/
+			'qr_code_html' => '',
+		], parent::local_options() );
 	}
 
 	/**
@@ -262,6 +344,66 @@ trait misc_methods_trait
 		$action->execute();
 
 		return $action->marked_up_amount;
+	}
+
+	/**
+		@brief		Decide whether to return the HTML for this qrcode / payment timer / whatever.
+		@since		2018-05-01 22:20:26
+	**/
+	public function maybe_enable_option_html( $key, $html_key )
+	{
+		$enabled = $this->get_local_option( $key );
+		$html = $this->get_local_global_file_option( $html_key );
+		switch( $enabled )
+		{
+			case 'disabled':
+				$enabled = false;
+			break;
+			case 'enabled':
+				$enabled = true;
+			break;
+		}
+
+		if ( $this->is_network )
+		{
+			$enabled = $this->get_site_option( $key );
+			switch( $enabled )
+			{
+				case 'disabled_all':
+					$enabled = false;
+				break;
+				case 'enabled_all':
+					$enabled = true;
+					// Forcing enabled also forces the global html.
+					$html = $this->get_global_file_option( $html_key );
+				break;
+				case 'default_disabled':
+					if ( $enabled === 'auto' )
+						$enabled = false;
+				break;
+				case 'default_enabled':
+					if ( $enabled === 'auto' )
+						$enabled = true;
+				break;
+			}
+		}
+
+		if ( ! $enabled )
+			return false;
+
+		return $html;
+	}
+
+	/**
+		@brief		mycryptocheckout_generate_checkout_javascript_data
+		@since		2018-04-29 19:21:11
+	**/
+	public function mycryptocheckout_generate_checkout_javascript_data( $action )
+	{
+		// Message after clicking the copied-to-clipoard button.
+		$action->data->set( 'strings_copied', __( 'Copied!', 'mycryptocheckout' ) );
+		$this->payment_timer_generate_checkout_javascript_data( $action );
+		$this->qr_code_generate_checkout_javascript_data( $action );
 	}
 
 	/**
@@ -305,6 +447,24 @@ trait misc_methods_trait
 			'markup_percent' => 0,
 
 			/**
+				@brief		Enable the timer on the checkout page?
+				@since		2018-04-23 16:29:12
+			**/
+			'payment_timer_enabled' => true,
+
+			/**
+				@brief		User's HTML div for the payment timer.
+				@since		2018-04-23 16:29:12
+			**/
+			'payment_timer_html' => '',
+
+			/**
+				@brief		The status of the QR code globally.
+				@since		2018-04-26 22:09:12
+			**/
+			'qr_code_enabled' => 'default_enabled',
+
+			/**
 				@brief		The Wallets collection in which all wallet info is stored.
 				@see		Wallets()
 				@since		2017-12-09 09:15:52
@@ -312,6 +472,38 @@ trait misc_methods_trait
 			'wallets' => false,
 
 		], parent::site_options() );
+	}
+
+	/**
+		@brief		Save this local option if it differs from the disk option.
+		@since		2018-04-29 18:38:39
+	**/
+	public function update_global_disk_option( $form, $key )
+	{
+		$form_value = $form->input( $key )->get_post_value();
+		// Remove the DOS newlines.
+		$form_value = str_replace( "\r", '' , $form_value );
+		$form_value = trim( $form_value );
+		// If this is the same value as the global or file, save it as nothing.
+		if ( $form_value == $this->get_static_file( $key ) )
+			$form_value = '';
+		$this->update_site_option( $key, $form_value );
+	}
+
+	/**
+		@brief		Save this local option if it differs from the global option.
+		@since		2018-04-29 18:38:39
+	**/
+	public function update_local_global_disk_option( $form, $key )
+	{
+		$form_value = $form->input( $key )->get_post_value();
+		// Remove the DOS newlines.
+		$form_value = str_replace( "\r", '' , $form_value );
+		$form_value = trim( $form_value );
+		// If this is the same value as the global or file, save it as nothing.
+		if ( $form_value == $this->get_global_file_option( $key ) )
+			$form_value = '';
+		$this->update_local_option( $key, $form_value );
 	}
 
 	/**
@@ -334,8 +526,7 @@ trait misc_methods_trait
 	**/
 	public function wpautop_file( $key )
 	{
-		$file = __DIR__ . '/static/texts/' . $key . '.txt';
-		$text = file_get_contents( $file );
+		$text = $this->get_static_file( $key );
 		return wpautop( $text );
 	}
 }

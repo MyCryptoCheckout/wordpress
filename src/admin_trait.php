@@ -558,19 +558,60 @@ trait admin_trait
 	}
 
 	/**
-		@brief		Admin the license settings.
-		@since		2017-12-09 08:19:11
+		@brief		Local settings.
+		@since		2018-04-26 16:14:39
 	**/
-	public function admin_license()
+	public function admin_local_settings()
 	{
-		echo 'license status and links to purchase';
+		$form = $this->form();
+		$form->css_class( 'plainview_form_auto_tabs' );
+		$form->local_settings = true;
+		$r = '';
+
+		$fs = $form->fieldset( 'fs_qr_code' );
+		// Label for fieldset
+		$fs->legend->label( __( 'QR code', 'mycryptocheckout' ) );
+
+		$this->add_qr_code_inputs( $fs );
+
+		$fs = $form->fieldset( 'fs_payment_timer' );
+		// Label for fieldset
+		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
+
+		$this->add_payment_timer_inputs( $fs );
+
+		$save = $form->primary_button( 'save' )
+			->value( __( 'Save settings', 'mycryptocheckout' ) );
+
+		if ( $form->is_posting() )
+		{
+			$form->post();
+			$form->use_post_values();
+
+			$this->save_qr_code_inputs( $form );
+			$this->save_payment_timer_inputs( $form );
+
+			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
+
+			echo $r;
+			$_POST = [];
+			$function = __FUNCTION__;
+			echo $this->$function();
+			return;
+		}
+
+		$r .= $form->open_tag();
+		$r .= $form->display_form_table();
+		$r .= $form->close_tag();
+
+		echo $r;
 	}
 
 	/**
 		@brief		Show the settings.
 		@since		2017-12-09 07:14:33
 	**/
-	public function admin_settings()
+	public function admin_global_settings()
 	{
 		$form = $this->form();
 		$form->css_class( 'plainview_form_auto_tabs' );
@@ -584,6 +625,7 @@ trait admin_trait
 			->p( __( 'If you wish to charge (or discount) visitors for using MyCryptoCheckout as the payment gateway, you can enter the fixed or percentage amounts in the boxes below. The cryptocurrency checkout price will be modified in accordance with the combined values below. These are applied to the original currency.', 'mycryptocheckout' ) );
 
 		$markup_amount = $fs->number( 'markup_amount' )
+			// Input description.
 			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the fixed amount in this box.', 'mycryptocheckout' ) )
 			// Input label.
 			->label( __( 'Markup amount', 'mycryptocheckout' ) )
@@ -594,6 +636,7 @@ trait admin_trait
 			->value( $this->get_site_option( 'markup_amount' ) );
 
 		$markup_percent = $fs->number( 'markup_percent' )
+			// Input description.
 			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the percentage in this box.', 'mycryptocheckout' ) )
 			// Input label.
 			->label( __( 'Markup %', 'mycryptocheckout' ) )
@@ -602,6 +645,28 @@ trait admin_trait
 			->step( 0.01 )
 			->size( 6, 6 )
 			->value( $this->get_site_option( 'markup_percent' ) );
+
+		$fs = $form->fieldset( 'fs_qr_code' );
+		// Label for fieldset
+		$fs->legend->label( __( 'QR code', 'mycryptocheckout' ) );
+
+		if ( $this->is_network )
+			$form->global_settings = true;
+		else
+			$form->local_settings = true;
+
+		$this->add_qr_code_inputs( $fs );
+
+		$fs = $form->fieldset( 'fs_payment_timer' );
+		// Label for fieldset
+		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
+
+		if ( $this->is_network )
+			$form->global_settings = true;
+		else
+			$form->local_settings = true;
+
+		$this->add_payment_timer_inputs( $fs );
 
 		$this->add_debug_settings_to_form( $form );
 
@@ -615,6 +680,9 @@ trait admin_trait
 
 			$this->update_site_option( 'markup_amount', $markup_amount->get_filtered_post_value() );
 			$this->update_site_option( 'markup_percent', $markup_percent->get_filtered_post_value() );
+
+			$this->save_payment_timer_inputs( $form );
+			$this->save_qr_code_inputs( $form );
 
 			$this->save_debug_settings_from_form( $form );
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );

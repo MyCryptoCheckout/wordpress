@@ -1,5 +1,28 @@
 .mcc.online_payment_instructions {
 	display: block;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	background: #fff;
+}
+.mcc.online_payment_instructions h2 {
+	background: #ccc;
+	padding: 5px 10px;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+.mcc.online_payment_instructions .mcc_online_pay_box {
+	padding: 10px;
+}
+.mcc_payment_timer {
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 15px;
+}
+img.mcc_reload {
+	width: 150px;
+	height:auto;
 }
 .mcc.online_payment_instructions p {
 	font-size: 17px;
@@ -41,18 +64,44 @@
 .mcc.online_payment_instructions br {
 	margin-bottom: 15px;
 }
-
 .mcc.online_payment_instructions .mcc_qr_code
 {
 	height: 10em;
 	margin-bottom: 1em;
+	margin-right: 20px;
 	width: 10em;
+	display: inline-block;
+	vertical-align: top;
 }
-
 #payment .wc_payment_methods .payment_method_mycryptocheckout img {
 	max-height: 1.618em;
 	height: 100%;
 	width: auto;
+}
+.mcc_payment_timer .paid.hidden {
+	display: none;
+}
+.mcc_payment_timer .timer p {
+	margin-bottom: 20px;
+	line-height: 1;
+}
+.mcc_payment_timer .timer .timer_check_text {
+    font-size: 15px;
+    font-style: italic;
+}
+.mcc_payment_timer .timer .hours_minutes {
+	font-size: 17px;
+	background: #333;
+	padding: 7px;
+	border-radius: 5px;
+	color: #fff;
+}
+#icon-check {
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiMwMDgwMDE7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTg4LDMwLjNMNzUuMSwxNy40Yy0wLjUtMC41LTEuMS0wLjctMS43LTAuN2MtMC42LDAtMS4zLDAuMy0xLjcsMC43TDM3LjQsNTEuN2wtOS4xLTkuMWMtMC45LTAuOS0yLjUtMC45LTMuNCwwTDEyLDU1LjVjLTAuNSwwLjUtMC43LDEuMS0wLjcsMS43czAuMywxLjMsMC43LDEuN2wyMy42LDIzLjZjMC41LDAuNSwxLjEsMC43LDEuNywwLjdjMCwwLDAuMSwwLDAuMSwwYzAsMCwwLDAsMC4xLDBjMC42LDAsMS4yLTAuMiwxLjctMC43TDg4LDMzLjdDODksMzIuOCw4OSwzMS4zLDg4LDMwLjN6Ii8+PC9zdmc+);
 }
 
 /**
