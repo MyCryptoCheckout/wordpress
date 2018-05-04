@@ -142,7 +142,10 @@ trait misc_methods_trait
 	**/
 	public function get_global_file_option( $key )
 	{
-		$value = $this->get_site_option( $key );
+		if ( $this->is_network )
+			$value = $this->get_site_option( $key );
+		else
+			$value = '';
 		if ( $value == '' )
 			$value = $this->get_static_file( $key );
 		return $value;

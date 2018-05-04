@@ -36,6 +36,7 @@ jQuery( document ).ready( function( $ )
 					return;
 
 				// Stop the countdown and show the paid div.
+				clearInterval( $$.payment_timer.status_interval );
 				clearInterval( $$.payment_timer.timeout_interval );
 				$( '.paid', $$.payment_timer ).show();
 				$( '.timer', $$.payment_timer ).hide();
