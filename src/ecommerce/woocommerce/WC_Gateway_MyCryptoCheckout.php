@@ -54,6 +54,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'width' => 160,
 				'offset_left' => 2.5,
 			],
+			'COLX' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
 			'DASH' => [
 				'width' => 100,
 				'offset_left' => 2.5,

@@ -52,6 +52,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Augur REP
 - Bancor BNT
 - Basic Attention Token BAT
+- ColossusXT COLX
 - Dai Stablecoin DAI
 - Digix Global DGD
 - Dragonchain DRGN
@@ -77,7 +78,6 @@ After checkout, payment instructions are automatically included in the purchase 
 - VeChain VEN
 - Veritaseum VERI
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
-
 
 = Technical disclosure =
 
@@ -106,13 +106,19 @@ If your server cannot be reached by the API server this plugin will not function
 3. WooCommerce purchase confirmation page with payment data
 4. Account tab
 5. Currencies tab
-6. Settings tab
-7. WooCommerce gateway settings
-8. EasyDigitalDownloads gateway settings
+6. Global settings tab for network and single installs
+6. Local settings tab for network installs
+8. WooCommerce gateway settings
+9. EasyDigitalDownloads gateway settings
 
 == Changelog ==
 
+= 2.05 20180505 =
+
+* New: Added global / local QR-code settings.
+* New: Added payment countdown timer with global / local settings.
 * New currency: Aeternity (AE)
+* New currency: ColossusXT (COLX)
 * New currency: Dai Stablecoin (DAI)
 * New currency: Dragonchain (DRGN)
 * New currency: Gifto (GTO)
