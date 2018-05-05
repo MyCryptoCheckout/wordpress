@@ -37,6 +37,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Bitcoin BTC (Including SegWit addresses)
 - Bitcoin Cash BCH (Including SegWit addresses)
 - Bitcoin Gold BTG
+- ColossusXT COLX
 - Dash DASH
 - Decred DCR
 - Ethereum ETH
@@ -52,7 +53,6 @@ After checkout, payment instructions are automatically included in the purchase 
 - Augur REP
 - Bancor BNT
 - Basic Attention Token BAT
-- ColossusXT COLX
 - Dai Stablecoin DAI
 - Digix Global DGD
 - Dragonchain DRGN
