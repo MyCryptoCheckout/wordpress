@@ -66,6 +66,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'width' => 100,
 				'offset_left' => 2.5,
 			],
+			'DGB' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
 			'ETC' => [
 				'width' => 100,
 				'offset_left' => 2.5,
