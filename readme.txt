@@ -44,6 +44,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Ethereum Classic ETC
 - Litecoin LTC (Including SegWit addresses)
 - Neo Smart Economy NEO
+- Solaris XLR
 - Zcash ZEC
 
 = ERC20 tokens supported: =
@@ -118,6 +119,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 * Fix: When using cryptocurrencies as the primary WooCommerce currency, do not try to convert to fiat first.
 * New currency: Aragon (ANT)
+* New currency: Solaris (XLR)
 
 = 2.05 20180505 =
 

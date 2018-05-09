@@ -94,6 +94,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'width' => 100,
 				'offset_left' => 2.5,
 			],
+			'XLR' => [
+				'width' => 100,
+				'offset_left' => 2.5,
+			],
 		];
 		$wallet_options = $this->get_wallet_options();
 		$output = file_get_contents( $dir . 'icon_base.svg' );
