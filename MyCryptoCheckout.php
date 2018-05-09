@@ -6,8 +6,8 @@ Author URI:		https://plainviewplugins.com
 Description:	Cryptocurrency payment gateway using the MyCryptoCheckout.com service.
 Plugin Name:	MyCryptoCheckout
 Plugin URI:		https://mycryptocheckout.com
-Text Domain:	mcc
-Version:		2.05
+Text Domain:	mycryptocheckout
+Version:		2.06
 */
 
 namespace mycryptocheckout
@@ -53,7 +53,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.05 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.06 );
 	/**
 		@brief		Return the instance of ThreeWP Broadcast.
 		@since		2014-10-18 14:48:37

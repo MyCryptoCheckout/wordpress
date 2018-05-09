@@ -2,8 +2,6 @@
 
 namespace mycryptocheckout\api;
 
-use Exception;
-
 /**
 	@brief		Payment handling.
 	@since		2017-12-21 23:28:34

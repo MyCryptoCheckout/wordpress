@@ -26,6 +26,9 @@ class Currency
 		// Convert to USD.
 		if ( $currency != 'USD' )
 		{
+			$exchange_rate = $account->get_physical_exchange_rate( $currency );
+			if ( $exchange_rate == 0 )
+				return PHP_INT_MAX;
 			$usd = $amount / $account->get_physical_exchange_rate( $currency );
 			$usd = round( $usd, 2 );
 		}

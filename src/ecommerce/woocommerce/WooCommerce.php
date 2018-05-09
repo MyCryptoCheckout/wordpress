@@ -46,8 +46,12 @@ class WooCommerce
 
 		// We need to be able to convert this currency.
 		$wc_currency = get_woocommerce_currency();
-		if ( ! $account->get_physical_exchange_rate( $wc_currency ) )
-			throw new Exception( sprintf( 'Your WooCommerce installation is using an unknown currency: %s', $wc_currency ) );
+
+		// Do we know about this virtual currency?
+		$wallet = MyCryptoCheckout()->wallets()->get_dustiest_wallet( $wc_currency );
+		if ( ! $wallet )
+			if ( ! $account->get_physical_exchange_rate( $wc_currency ) )
+				throw new Exception( sprintf( 'Your WooCommerce installation is using an unknown currency: %s', $wc_currency ) );
 
 		return true;
 	}

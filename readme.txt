@@ -50,6 +50,7 @@ After checkout, payment instructions are automatically included in the purchase 
 
 - 0xProject ZRX
 - Aeternity AE
+- Aragon ANT
 - Augur REP
 - Bancor BNT
 - Basic Attention Token BAT
@@ -112,6 +113,11 @@ If your server cannot be reached by the API server this plugin will not function
 9. EasyDigitalDownloads gateway settings
 
 == Changelog ==
+
+= 2.06 20180509 =
+
+* Fix: When using cryptocurrencies as the primary WooCommerce currency, do not try to convert to fiat first.
+* New currency: Aragon (ANT)
 
 = 2.05 20180505 =
 
