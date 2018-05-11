@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: trunk
+Stable tag: 2.07
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.4
 
@@ -116,6 +116,8 @@ If your server cannot be reached by the API server this plugin will not function
 9. EasyDigitalDownloads gateway settings
 
 == Changelog ==
+
+= 2.07 20180511 =
 
 * New currency: Flix (FLIX)
 * New currency: Digibyte (DGB)
