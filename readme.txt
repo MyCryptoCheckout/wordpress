@@ -115,6 +115,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New currency: Flix (FLIX)
+
 = 2.06 20180509 =
 
 * Fix: When using cryptocurrencies as the primary WooCommerce currency, do not try to convert to fiat first.
