@@ -46,6 +46,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Neo Smart Economy NEO
 - Solaris XLR
 - Zcash ZEC
+- We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
 = ERC20 tokens supported: =
 
@@ -59,6 +60,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Digix Global DGD
 - Dragonchain DRGN
 - EOS
+- Flix FLIX
 - FunFair FUN
 - Gifto GTO
 - Golem GNT
