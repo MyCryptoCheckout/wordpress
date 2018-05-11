@@ -41,67 +41,29 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	{
 		$dir = MyCryptoCheckout()->paths( '__FILE__' );
 		$dir = dirname( $dir ) . '/src/static/images/';
+		$svg_default = [
+			'width' => 100,
+			'offset_left' => 2.5,
+		];
 		$svg_details = [
-			'BTC' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'BTG' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
+			'BTC' => [],
+			'BTG' => [],
 			'BCH' => [
 				'width' => 160,
-				'offset_left' => 2.5,
 			],
-			'COLX' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'DASH' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'DCR' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'DGB' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'ETC' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'ETH' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'LTC' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'NEO' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'ZEC' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'ERC20' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'STAKE' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
-			'XLR' => [
-				'width' => 100,
-				'offset_left' => 2.5,
-			],
+			'COLX' => [],
+			'DASH' => [],
+			'DCR' => [],
+			'DGB' => [],
+			'ETC' => [],
+			'ETH' => [],
+			'FLIX' => [],
+			'LTC' => [],
+			'NEO' => [],
+			'ZEC' => [],
+			'ERC20' => [],
+			'STAKE' => [],
+			'XLR' => [],
 		];
 		$wallet_options = $this->get_wallet_options();
 		$output = file_get_contents( $dir . 'icon_base.svg' );
@@ -141,6 +103,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 				$output_filename .= '_' . $currency_id;
 				$svg = $svg_details[ $currency_id ];
+				$svg = array_merge( $svg_default, $svg );
 				$offset = $mcc_width + $svg[ 'offset_left' ];
 
 				// Insert the icon from disk.
