@@ -121,7 +121,6 @@ class WooCommerce
 			// Since WC is not yet loaded properly, we have to load the gateway settings ourselves.
 			$options = get_option( 'woocommerce_mycryptocheckout_settings', true );
 			$options = maybe_unserialize( $options );
-			MyCryptoCheckout()->debug( '2' );
 			if ( isset( $options[ 'payment_complete_status' ] ) )
 				switch( $options[ 'payment_complete_status' ] )
 				{
