@@ -39,7 +39,7 @@ trait admin_trait
 	public function admin_account()
 	{
 		$form = $this->form();
-		$form->id( 'broadcast_settings' );
+		$form->id( 'account' );
 		$r = '';
 
 		if ( isset( $_POST[ 'retrieve_account' ] ) )
@@ -223,7 +223,7 @@ trait admin_trait
 	public function admin_currencies()
 	{
 		$form = $this->form();
-		$form->id( 'broadcast_settings' );
+		$form->id( 'currencies' );
 		$r = '';
 
 		$account = $this->api()->account();
@@ -433,7 +433,7 @@ trait admin_trait
 		$currencies = $this->currencies();
 		$currency = $currencies->get( $wallet->get_currency_id() );
 		$form = $this->form();
-		$form->id( 'broadcast_settings' );
+		$form->id( 'edit_wallet' );
 		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
 
@@ -792,7 +792,7 @@ trait admin_trait
 			$url = admin_url( 'options-general.php?page=mycryptocheckout' );
 		$links []= sprintf( '<a href="%s">%s</a>',
 			$url,
-			__( 'Settings', 'threewp_broadcast' )
+			__( 'Settings', 'mycryptocheckout' )
 		);
 		return $links;
 	}
