@@ -216,9 +216,8 @@ trait donations_trait
 
 		$html = str_replace( '##DATA##', $data, $html );
 
-		ddd( htmlspecialchars( $html ) );
-
 		$this->enqueue_js();
+		$this->enqueue_css();
 
 		return $html;
 
