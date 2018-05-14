@@ -1,4 +1,4 @@
-<div class="mcc_donations" id="mycryptocheckout_donations_data" data-mycryptocheckout_donations_data="##DATA##">
+<div class="mcc_donations" data-mycryptocheckout_donations_data="##DATA##">
 	<div class="currency_icons hidden" style="display: none">
 	</div>
 	<div class="currency_selector hidden" style="display: none">

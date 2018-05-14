@@ -111,3 +111,19 @@ img.mcc_reload {
 .wf-wrap .wf-container-main #content .woocommerce .wc-complete-wrap .wc-side-column .mcc.online_payment_instructions .to .to_input.clipboardable {
 	font-size: 12px;
 }
+
+/**
+	@brief		Donations
+	@since		2018-05-14 09:14:47
+**/
+#mcc_donations img.icon {
+	width: 40px;
+	height: auto;
+	display: inline-block;
+	margin-right: 8px;
+}
+
+#mcc_donations img.icon:hover {
+	cursor: pointer;
+	opacity: .6;
+}
