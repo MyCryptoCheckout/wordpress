@@ -11,7 +11,12 @@
             return this.each( function()
             {
                 var $item = $(this);
+
+                if ( $item.hasClass( 'clipboarded' ) )
+                	return;
+
 				$item.addClass( 'clipboardable' );
+				$item.addClass( 'clipboarded' );
 
 				// How big should the input be?
 				var text = $item.html();
@@ -29,7 +34,6 @@
 				{
 					var old_value = $input.attr( 'value' );
 					var new_value = old_value.replace( / .*/, '' );
-					console.log( old_value, new_value );
 
 					// Create an invisible input just to copy the value.
 					var $temp_input = $( '<input value="' + new_value + '" />' );

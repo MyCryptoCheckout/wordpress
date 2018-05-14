@@ -116,14 +116,14 @@ img.mcc_reload {
 	@brief		Donations
 	@since		2018-05-14 09:14:47
 **/
-#mcc_donations img.icon {
+.mcc_donations img.mcc_donation_icon {
 	width: 40px;
 	height: auto;
 	display: inline-block;
 	margin-right: 8px;
 }
 
-#mcc_donations img.icon:hover {
+.mcc_donations img.mcc_donation_icon:hover {
 	cursor: pointer;
 	opacity: .6;
 }

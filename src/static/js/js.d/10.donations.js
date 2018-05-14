@@ -90,7 +90,7 @@
                 	$.each( $$.div_data[ 'currencies' ], function( index, currency )
                 	{
                 		var $icon = $( '<img>' );
-                		$icon.addClass( 'icon' );
+                		$icon.addClass( 'mcc_donation_icon' );
                 		$icon.attr( 'src', currency.icon );
                 		$icon.appendTo( $$.icons );
 

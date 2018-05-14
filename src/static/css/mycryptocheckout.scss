@@ -1,0 +1,150 @@
+.mycryptocheckout.online_payment_instructions {
+	display: block;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	background: #fff;
+
+	/**
+	@brief Payment page title
+	**/
+	h2 {
+		background: #ccc;
+		padding: 5px 10px;
+		margin-top: 0;
+		margin-bottom: 10px;
+	}
+	/**
+	@brief Payment page paragraph
+	**/
+	p {
+		font-size: 17px;
+	}
+	/**
+	@brief Payment page line break spacing
+	**/
+	br {
+		margin-bottom: 15px;
+	}
+	/**
+	@brief Payment page payment box inner padding
+	**/
+	.mcc_online_pay_box {
+		padding: 10px;
+	}
+	/**
+	@brief Payment page timer
+	**/
+	.mcc_payment_timer {
+		text-align: center;
+		display: inline-block;
+		vertical-align: top;
+		margin-bottom: 15px;
+
+		.paid.hidden {
+			display: none;
+		}
+		.timer {
+			p {
+				margin-bottom: 20px;
+				line-height: 1;
+			}
+			.timer_check_text {
+				font-size: 15px;
+				font-style: italic;
+			}
+			.hours_minutes {
+				font-size: 17px;
+				background: #333;
+				padding: 7px;
+				border-radius: 5px;
+				color: #fff;
+			}
+		}
+	}
+	#icon-check {
+		width: 100px;
+		height: 100px;
+		margin: 0 auto;
+		background-repeat: no-repeat;
+		background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiMwMDgwMDE7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTg4LDMwLjNMNzUuMSwxNy40Yy0wLjUtMC41LTEuMS0wLjctMS43LTAuN2MtMC42LDAtMS4zLDAuMy0xLjcsMC43TDM3LjQsNTEuN2wtOS4xLTkuMWMtMC45LTAuOS0yLjUtMC45LTMuNCwwTDEyLDU1LjVjLTAuNSwwLjUtMC43LDEuMS0wLjcsMS43czAuMywxLjMsMC43LDEuN2wyMy42LDIzLjZjMC41LDAuNSwxLjEsMC43LDEuNywwLjdjMCwwLDAuMSwwLDAuMSwwYzAsMCwwLDAsMC4xLDBjMC42LDAsMS4yLTAuMiwxLjctMC43TDg4LDMzLjdDODksMzIuOCw4OSwzMS4zLDg4LDMwLjN6Ii8+PC9zdmc+);
+	}
+	/**
+	@brief Payment page QR code
+	**/
+	.mcc_qr_code {
+		height: 10em;
+		margin-bottom: 1em;
+		margin-right: 20px;
+		width: 10em;
+		display: inline-block;
+		vertical-align: top;
+	}
+	/**
+	@brief Payment page address and amount inputs
+	**/
+	.to .to_input input {
+		max-width: 510px;
+		margin-bottom: 5px;
+	}
+	.amount .to_input input {
+		max-width: 275px;
+		margin-bottom: 10px;
+	}
+	.to_input input {
+		width: 100%;
+		height: 35px;
+		padding-right: 33px;
+		padding-left: 5px;
+		border: 1px solid #aaa;
+		box-shadow: inset 0px 0px 1px 1px rgba(0,0,0,0.1);
+		border-radius: 3px;
+		box-sizing: border-box;
+	}
+	.to_input.clipboardable {
+		position: relative;
+	}
+	.to_input.clipboardable input {
+		background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnDQogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iDQogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIg0KICAgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIg0KICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyINCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyINCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCINCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIg0KICAgaGVpZ2h0PSIyODRtbSINCiAgIHdpZHRoPSIyNTcuMDY2NjhtbSINCiAgIHZlcnNpb249IjEuMSINCiAgIGlkPSJzdmc0NTM1Ig0KICAgc29kaXBvZGk6ZG9jbmFtZT0iY2xpcGJvYXJkMi5zdmciDQogICBpbmtzY2FwZTp2ZXJzaW9uPSIwLjkyLjEgcjE1MzcxIj4NCiAgPG1ldGFkYXRhDQogICAgIGlkPSJtZXRhZGF0YTQ1NDEiPg0KICAgIDxyZGY6UkRGPg0KICAgICAgPGNjOldvcmsNCiAgICAgICAgIHJkZjphYm91dD0iIj4NCiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+DQogICAgICAgIDxkYzp0eXBlDQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+DQogICAgICAgIDxkYzp0aXRsZT48L2RjOnRpdGxlPg0KICAgICAgPC9jYzpXb3JrPg0KICAgIDwvcmRmOlJERj4NCiAgPC9tZXRhZGF0YT4NCiAgPGRlZnMNCiAgICAgaWQ9ImRlZnM0NTM5IiAvPg0KICA8c29kaXBvZGk6bmFtZWR2aWV3DQogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiINCiAgICAgYm9yZGVyY29sb3I9IiM2NjY2NjYiDQogICAgIGJvcmRlcm9wYWNpdHk9IjEiDQogICAgIG9iamVjdHRvbGVyYW5jZT0iMTAiDQogICAgIGdyaWR0b2xlcmFuY2U9IjEwIg0KICAgICBndWlkZXRvbGVyYW5jZT0iMTAiDQogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwIg0KICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIg0KICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjI1NjAiDQogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjE1NDUiDQogICAgIGlkPSJuYW1lZHZpZXc0NTM3Ig0KICAgICBzaG93Z3JpZD0iZmFsc2UiDQogICAgIHVuaXRzPSJtbSINCiAgICAgZml0LW1hcmdpbi10b3A9IjIwIg0KICAgICBmaXQtbWFyZ2luLWxlZnQ9IjEwIg0KICAgICBmaXQtbWFyZ2luLXJpZ2h0PSIxMCINCiAgICAgZml0LW1hcmdpbi1ib3R0b209IjEwIg0KICAgICBpbmtzY2FwZTp6b29tPSIwLjY0NTUwNzgxIg0KICAgICBpbmtzY2FwZTpjeD0iNDEuODc1NjkxIg0KICAgICBpbmtzY2FwZTpjeT0iNTI3LjI0NDg4Ig0KICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCINCiAgICAgaW5rc2NhcGU6d2luZG93LXk9IjI1Ig0KICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIg0KICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmc0NTM1IiAvPg0KICA8cGF0aA0KICAgICBkPSJtIDE2NS43OTUyOCw4NDMuNTkwNTYgaCAyNTYgdiA2NCBoIC0yNTYgeiBtIDMyMCwtMzg0IGggLTMyMCB2IDY0IGggMzIwIHogbSAxMjgsMTkyIHYgLTEyOCBsIC0xOTIsMTkyIDE5MiwxOTIgdiAtMTI4IGggMzIwIHYgLTEyOCB6IG0gLTI4OCwtNjQgaCAtMTYwIHYgNjQgaCAxNjAgeiBtIC0xNjAsMTkyIGggMTYwIHYgLTY0IGggLTE2MCB6IG0gNTc2LDY0IGggNjQgdiAxMjggYyAtMSwxOCAtNywzMy4wMDAwNCAtMTksNDUuMDAwMDQgLTEyLDEyIC0yNywxOCAtNDUsMTkgaCAtNjQwIGMgLTM1LjAwMDAwNCwwIC02NC4wMDAwMDQsLTI5IC02NC4wMDAwMDQsLTY0LjAwMDA0IHYgLTcwNCBjIDAsLTM1IDI5LC02NCA2NC4wMDAwMDQsLTY0IGggMTkyIGMgMCwtNzEuMDAwMDEgNTcsLTEyOC4wMDAwMDkgMTI4LC0xMjguMDAwMDA5IDcxLDAgMTI4LDU2Ljk5OTk5OSAxMjgsMTI4LjAwMDAwOSBoIDE5MiBjIDM1LDAgNjQsMjkgNjQsNjQgdiAzMjAgaCAtNjQgdiAtMTkyIGggLTY0MCB2IDU3NiBoIDY0MCB6IG0gLTU3NiwtNTEyIGggNTEyIGMgMCwtMzUgLTI5LC02NCAtNjQsLTY0IGggLTY0IGMgLTM1LDAgLTY0LC0yOSAtNjQsLTY0IDAsLTM1IC0yOSwtNjQgLTY0LC02NCAtMzUsMCAtNjQsMjkgLTY0LDY0IDAsMzUgLTI5LDY0IC02NCw2NCBoIC02NCBjIC0zNSwwIC02NCwyOSAtNjQsNjQgeiINCiAgICAgaWQ9InBhdGg0NTMzIg0KICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIiAvPg0KPC9zdmc+);
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-position: right;
+	}
+	.mcc_woocommerce_clipboard {
+		cursor: pointer;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	/**
+	@brief 7 Theme styles
+	**/
+	.wf-wrap .wf-container-main #content .woocommerce .wc-complete-wrap .wc-side-column .mycryptocheckout .to .to_input.clipboardable {
+		font-size: 12px;
+	}
+}
+
+/**
+	@brief WooCommerce checkout page icons
+**/
+#payment .wc_payment_methods .payment_method_mycryptocheckout img {
+	max-height: 1.618em;
+	height: 100%;
+	width: auto;
+}
+
+/**
+	@brief Donations
+**/
+#mcc_donations {
+	img.icon {
+		width: 40px;
+		height: auto;
+		display: inline-block;
+		margin-right: 8px;
+	}
+	img.icon:hover {
+		cursor: pointer;
+		opacity: .6;
+	}
+}
