@@ -62,11 +62,11 @@ trait donations_trait
 			// Input label
 			->label( __( 'Show QR code', 'mycryptocheckout' ) );
 
-		$qr_code_width = $form->number( 'qr_code_width' )
+		$qr_code_max_width = $form->number( 'qr_code_max_width' )
 			// Input description
 			->description( __( 'The width is specified in pixels. The height is the same as the width.', 'mycryptocheckout' ) )
 			// Input label
-			->label( __( 'QR code width', 'mycryptocheckout' ) )
+			->label( __( 'QR code max width', 'mycryptocheckout' ) )
 			->value( 100 );
 
 		$save = $form->primary_button( 'save' )
@@ -91,7 +91,7 @@ trait donations_trait
 					if ( $qr_code_enabled->is_checked() )
 					{
 						$options[ 'qr_code_enabled' ] = true;
-						$options[ 'qr_code_width' ] = $qr_code_width->get_filtered_post_value();
+						$options[ 'qr_code_max_width' ] = $qr_code_max_width->get_filtered_post_value();
 					}
 
 					$shortcode = '[mcc_donations';
@@ -138,7 +138,7 @@ trait donations_trait
 			'show_currencies_as_select' => false,
 			'show_address' => true,
 			'qr_code_enabled' => false,
-			'qr_code_width' => 100,
+			'qr_code_max_width' => 100,
 		], $atts );
 
 		// This is a base64 encoded json object, in the end.
@@ -203,9 +203,9 @@ trait donations_trait
 		{
 			$this->qr_code_enqueue_js();
 			$data->set( 'qr_code_enabled', true );
-			$qr_code_width = intval( $atts[ 'qr_code_width' ] );
-			$qr_code_width = max( $qr_code_width, 100 );
-			$data->set( 'qr_code_width', $qr_code_width );
+			$qr_code_max_width = intval( $atts[ 'qr_code_max_width' ] );
+			$qr_code_max_width = max( $qr_code_max_width, 100 );
+			$data->set( 'qr_code_max_width', $qr_code_max_width );
 		}
 		else
 			$data->set( 'qr_code_enabled', false );

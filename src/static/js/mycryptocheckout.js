@@ -113,10 +113,10 @@
             			return;
             		var $qr_code = $( '.qr_code', $$ );
             		// Set the div size.
-            		var width = $$.div_data[ 'qr_code_width' ];
+            		var width = $$.div_data[ 'qr_code_max_width' ];
             		$qr_code.css( {
-            			'height' : width,
-            			'width' : width,
+            			'height' : 'auto',
+            			'max-width' : width,
             		} );
             		$qr_code.html( '' );
 					var qr_code = new QRCode( $qr_code[ 0 ],
