@@ -1,11 +1,11 @@
-<div class="mcc_donations" data-mycryptocheckout_donations_data="##DATA##">
+<div class="mycryptocheckout mcc_donations" data-mycryptocheckout_donations_data="##DATA##">
 	<div class="currency_icons hidden" style="display: none">
 	</div>
 	<div class="currency_selector hidden" style="display: none">
 		<select size="1">
 		</select>
 	</div>
-	<div class="address hidden" style="display: none">
+	<div class="address hidden to_input" style="display: none">
 		12345
 	</div>
 	<div class="qr_code hidden" style="display: none">

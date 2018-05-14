@@ -167,6 +167,8 @@ trait donations_trait
 		foreach( $currencies_to_show as $currency_id => $array )
 		{
 			$dustiest = $wallets->get_dustiest_wallet( $currency_id );
+			if ( ! $dustiest )
+				continue;
 			$currencies_to_show[ $currency_id ] = [
 				'address' => $dustiest->get_address(),
 				'currency_id' => $currency_id,

@@ -63,7 +63,6 @@
                 	{
                 		var $option = $( '<option>' );
                 		$option.html( currency.currency_name );
-                		console.log( currency.currency_name );
                 		$option.attr( 'value', currency.currency_id );
                 		$option.appendTo( $$.currency_selector );
                 	} );
