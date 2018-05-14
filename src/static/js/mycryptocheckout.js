@@ -1,4 +1,139 @@
 /**
+	@brief		Convert a text into a copy-pastable input.
+	@since		2018-05-14 19:38:22
+**/
+;(function( $ )
+{
+    $.fn.extend(
+    {
+        mcc_make_clipboard : function()
+        {
+            return this.each( function()
+            {
+                var $item = $(this);
+
+                if ( $item.hasClass( 'clipboarded' ) )
+                	return;
+
+				$item.addClass( 'clipboardable' );
+				$item.addClass( 'clipboarded' );
+
+				// How big should the input be?
+				var text = $item.html();
+				var length = text.length;
+				// Create an input.
+				var $input = $( '<input readonly="readonly">' );
+				// Add a clipboard image to each input.
+				$input.attr( 'size', length );
+				$input.attr( 'value', text );
+
+				// Make a clipboard input that hides above the clipboard.
+				var $clipboard = $( '<span class="mcc_woocommerce_clipboard">' );
+
+				$clipboard.click( function()
+				{
+					var old_value = $input.attr( 'value' );
+					var new_value = old_value.replace( / .*/, '' );
+
+					// Create an invisible input just to copy the value.
+					var $temp_input = $( '<input value="' + new_value + '" />' );
+					$temp_input.css( {
+						'position' : 'absolute',
+						'left' : '-1000000px',
+						'top' : '-1000000px',
+					} );
+					$temp_input.appendTo( $item );
+					$temp_input.attr( 'value', new_value );
+					$temp_input.select();
+					document.execCommand( "copy" );
+
+					$input.attr( 'value', 'OK!' );
+					setTimeout( function()
+					{
+						$input.attr( 'value', old_value );
+						$input.select();
+					}, 1500 );
+				} );
+
+				$item.html( $input );
+
+				// Add the clipboard to the item that now contains the new input.
+				$clipboard.appendTo( $item );
+
+				// Adjust the size and position of the invisible clipboard div to match the input.
+				var input_height = $input.outerHeight();
+				$clipboard.css( {
+					'height' : input_height,
+					'width' : input_height,
+					'top' : - ( $input.outerHeight() - $item.outerHeight() ) / 2,
+				} );
+
+				} ); // return this.each( function()
+        } // plugin: function()
+    } ); // $.fn.extend({
+} )( jQuery );
+;
+/**
+	@brief		Convert the form fieldsets in a form2 table to ajaxy tabs.
+	@since		2015-07-11 19:47:46
+**/
+;(function( $ )
+{
+    $.fn.extend(
+    {
+        plainview_form_auto_tabs : function()
+        {
+            return this.each( function()
+            {
+                var $this = $(this);
+
+                if ( $this.hasClass( 'auto_tabbed' ) )
+                	return;
+
+                $this.addClass( 'auto_tabbed' );
+
+				var $fieldsets = $( 'div.fieldset', $this );
+				// At least two fieldsets for this to make sense.
+				if ( $fieldsets.length < 2 )
+					return;
+
+				$this.prepend( '<div style="clear: both"></div>' );
+				// Create the "tabs", which are normal Wordpress tabs.
+				var $subsubsub = $( '<ul class="subsubsub">' )
+					.prependTo( $this );
+
+				$.each( $fieldsets, function( index, item )
+				{
+					var $item = $(item);
+					var $h3 = $( 'h3.title', $item );
+					var $a = $( '<a href="#">' ).html( $h3.html() );
+					$h3.remove();
+					var $li = $( '<li>' );
+					$a.appendTo( $li );
+					$li.appendTo( $subsubsub );
+
+					// We add a separator if we are not the last li.
+					if ( index < $fieldsets.length - 1 )
+						$li.append( '<span class="sep">&emsp;|&emsp;</span>' );
+
+					// When clicking on a tab, show it
+					$a.click( function()
+					{
+						$( 'li a', $subsubsub ).removeClass( 'current' );
+						$(this).addClass( 'current' );
+						$fieldsets.hide();
+						$item.show();
+					} );
+
+				} );
+
+				$( 'li a', $subsubsub ).first().click();
+            } ); // return this.each( function()
+        } // plugin: function()
+    } ); // $.fn.extend({
+} )( jQuery );
+;
+/**
 	@brief		Handle the donations div.
 	@since		2018-05-12 21:24:33
 **/
@@ -152,144 +287,11 @@
                 	if ( $$.div_data[ 'show_address' ] != '1' )
             			return;
             		$$.address.html( address ).show();
+            		$$.address.removeClass( 'clipboarded' );
+            		$( '.mycryptocheckout .to_input' ).mcc_make_clipboard();
                 }
 
                 $$.init();
-            } ); // return this.each( function()
-        } // plugin: function()
-    } ); // $.fn.extend({
-} )( jQuery );
-;
-/**
-	@brief		Convert a text into a copy-pastable input.
-	@since		2018-05-14 19:38:22
-**/
-;(function( $ )
-{
-    $.fn.extend(
-    {
-        mcc_make_clipboard : function()
-        {
-            return this.each( function()
-            {
-                var $item = $(this);
-
-                if ( $item.hasClass( 'clipboarded' ) )
-                	return;
-
-				$item.addClass( 'clipboardable' );
-				$item.addClass( 'clipboarded' );
-
-				// How big should the input be?
-				var text = $item.html();
-				var length = text.length;
-				// Create an input.
-				var $input = $( '<input readonly="readonly">' );
-				// Add a clipboard image to each input.
-				$input.attr( 'size', length );
-				$input.attr( 'value', text );
-
-				// Make a clipboard input that hides above the clipboard.
-				var $clipboard = $( '<span class="mcc_woocommerce_clipboard">' );
-
-				$clipboard.click( function()
-				{
-					var old_value = $input.attr( 'value' );
-					var new_value = old_value.replace( / .*/, '' );
-
-					// Create an invisible input just to copy the value.
-					var $temp_input = $( '<input value="' + new_value + '" />' );
-					$temp_input.css( {
-						'position' : 'absolute',
-						'left' : '-1000000px',
-						'top' : '-1000000px',
-					} );
-					$temp_input.appendTo( $item );
-					$temp_input.attr( 'value', new_value );
-					$temp_input.select();
-					document.execCommand( "copy" );
-
-					$input.attr( 'value', 'OK!' );
-					setTimeout( function()
-					{
-						$input.attr( 'value', old_value );
-						$input.select();
-					}, 1500 );
-				} );
-
-				$item.html( $input );
-
-				// Add the clipboard to the item that now contains the new input.
-				$clipboard.appendTo( $item );
-
-				// Adjust the size and position of the invisible clipboard div to match the input.
-				var input_height = $input.outerHeight();
-				$clipboard.css( {
-					'height' : input_height,
-					'width' : input_height,
-					'top' : - ( $input.outerHeight() - $item.outerHeight() ) / 2,
-				} );
-
-				} ); // return this.each( function()
-        } // plugin: function()
-    } ); // $.fn.extend({
-} )( jQuery );
-;
-/**
-	@brief		Convert the form fieldsets in a form2 table to ajaxy tabs.
-	@since		2015-07-11 19:47:46
-**/
-;(function( $ )
-{
-    $.fn.extend(
-    {
-        plainview_form_auto_tabs : function()
-        {
-            return this.each( function()
-            {
-                var $this = $(this);
-
-                if ( $this.hasClass( 'auto_tabbed' ) )
-                	return;
-
-                $this.addClass( 'auto_tabbed' );
-
-				var $fieldsets = $( 'div.fieldset', $this );
-				// At least two fieldsets for this to make sense.
-				if ( $fieldsets.length < 2 )
-					return;
-
-				$this.prepend( '<div style="clear: both"></div>' );
-				// Create the "tabs", which are normal Wordpress tabs.
-				var $subsubsub = $( '<ul class="subsubsub">' )
-					.prependTo( $this );
-
-				$.each( $fieldsets, function( index, item )
-				{
-					var $item = $(item);
-					var $h3 = $( 'h3.title', $item );
-					var $a = $( '<a href="#">' ).html( $h3.html() );
-					$h3.remove();
-					var $li = $( '<li>' );
-					$a.appendTo( $li );
-					$li.appendTo( $subsubsub );
-
-					// We add a separator if we are not the last li.
-					if ( index < $fieldsets.length - 1 )
-						$li.append( '<span class="sep">&emsp;|&emsp;</span>' );
-
-					// When clicking on a tab, show it
-					$a.click( function()
-					{
-						$( 'li a', $subsubsub ).removeClass( 'current' );
-						$(this).addClass( 'current' );
-						$fieldsets.hide();
-						$item.show();
-					} );
-
-				} );
-
-				$( 'li a', $subsubsub ).first().click();
             } ); // return this.each( function()
         } // plugin: function()
     } ); // $.fn.extend({

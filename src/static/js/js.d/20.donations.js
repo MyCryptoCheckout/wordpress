@@ -152,6 +152,8 @@
                 	if ( $$.div_data[ 'show_address' ] != '1' )
             			return;
             		$$.address.html( address ).show();
+            		$$.address.removeClass( 'clipboarded' );
+            		$( '.mycryptocheckout .to_input' ).mcc_make_clipboard();
                 }
 
                 $$.init();
