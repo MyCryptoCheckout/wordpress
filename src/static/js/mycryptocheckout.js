@@ -298,7 +298,9 @@
                 **/
                 $$.show_currency_name = function( currency_name )
                 {
-                	$( '.selected_currency', $$ ).html( currency_name );
+                	if ( $$.div_data[ 'show_currency_as_text' ] != '1' )
+            			return;
+                	$( '.selected_currency', $$ ).html( currency_name ).show();
                 }
 
                 $$.init();

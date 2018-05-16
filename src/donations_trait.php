@@ -50,6 +50,12 @@ trait donations_trait
 			// Input label
 			->label( __( 'User selects currency with a dropdown box', 'mycryptocheckout' ) );
 
+		$show_currency_as_text = $form->checkbox( 'show_currency_as_text' )
+			// Input description
+			->description( __( 'Show the name of the currently selected currency.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Show the currency name', 'mycryptocheckout' ) );
+
 		$qr_code_enabled = $form->checkbox( 'qr_code_enabled' )
 			// Input description
 			->description( __( 'Show a QR code for the wallet address.', 'mycryptocheckout' ) )
@@ -87,6 +93,7 @@ trait donations_trait
 					$options[ 'primary_currency' ] = $primary_currency->get_post_value();
 					$options[ 'show_currencies_as_icons' ] = $show_currencies_as_icons->is_checked();
 					$options[ 'show_currencies_as_select' ] = $show_currencies_as_select->is_checked();
+					$options[ 'show_currency_as_text' ] = $show_currency_as_text->is_checked();
 					$options[ 'show_address' ] = $show_address->is_checked();
 					if ( $qr_code_enabled->is_checked() )
 					{
@@ -194,6 +201,7 @@ trait donations_trait
 		foreach( [
 			'show_currencies_as_icons',
 			'show_currencies_as_select',
+			'show_currency_as_text',
 			'show_address',
 		] as $key )
 			$data->set( $key, $atts[ $key ] );
