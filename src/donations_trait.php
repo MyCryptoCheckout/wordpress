@@ -67,7 +67,7 @@ trait donations_trait
 			->description( __( 'The width is specified in pixels. The height is the same as the width.', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'QR code max width', 'mycryptocheckout' ) )
-			->value( 100 );
+			->value( 180 );
 
 		$save = $form->primary_button( 'save' )
 			->value( __( 'Generate shortcode', 'mycryptocheckout' ) );
