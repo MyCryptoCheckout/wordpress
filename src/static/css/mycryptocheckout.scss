@@ -5,36 +5,26 @@
 	margin-bottom: 20px;
 	background: #fff;
 
-	/**
-	@brief Payment page title
-	**/
+	// Payment page title
 	h2 {
 		background: #ccc;
 		padding: 5px 10px;
 		margin-top: 0;
 		margin-bottom: 10px;
 	}
-	/**
-	@brief Payment page paragraph
-	**/
+	// Payment page paragraph
 	p {
 		font-size: 17px;
 	}
-	/**
-	@brief Payment page line break spacing
-	**/
+	//Payment page line break spacing
 	br {
 		margin-bottom: 15px;
 	}
-	/**
-	@brief Payment page payment box inner padding
-	**/
+	// Payment page payment box inner padding
 	.mcc_online_pay_box {
 		padding: 10px;
 	}
-	/**
-	@brief Payment page timer
-	**/
+	// Payment page timer
 	.mcc_payment_timer {
 		text-align: center;
 		display: inline-block;
@@ -69,9 +59,7 @@
 		background-repeat: no-repeat;
 		background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiMwMDgwMDE7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTg4LDMwLjNMNzUuMSwxNy40Yy0wLjUtMC41LTEuMS0wLjctMS43LTAuN2MtMC42LDAtMS4zLDAuMy0xLjcsMC43TDM3LjQsNTEuN2wtOS4xLTkuMWMtMC45LTAuOS0yLjUtMC45LTMuNCwwTDEyLDU1LjVjLTAuNSwwLjUtMC43LDEuMS0wLjcsMS43czAuMywxLjMsMC43LDEuN2wyMy42LDIzLjZjMC41LDAuNSwxLjEsMC43LDEuNywwLjdjMCwwLDAuMSwwLDAuMSwwYzAsMCwwLDAsMC4xLDBjMC42LDAsMS4yLTAuMiwxLjctMC43TDg4LDMzLjdDODksMzIuOCw4OSwzMS4zLDg4LDMwLjN6Ii8+PC9zdmc+);
 	}
-	/**
-	@brief Payment page QR code
-	**/
+	// Payment page QR code
 	.mcc_qr_code {
 		height: 10em;
 		margin-bottom: 1em;
@@ -80,9 +68,14 @@
 		display: inline-block;
 		vertical-align: top;
 	}
-	/**
-	@brief Payment page address and amount inputs
-	**/
+	// 7 Theme styles
+	.wf-wrap .wf-container-main #content .woocommerce .wc-complete-wrap .wc-side-column .mycryptocheckout .to .to_input.clipboardable {
+		font-size: 12px;
+	}
+}
+
+// Payment page address and amount inputs
+.mycryptocheckout {
 	.to .to_input input {
 		max-width: 510px;
 		margin-bottom: 5px;
@@ -109,6 +102,10 @@
 		background-repeat: no-repeat;
 		background-size: contain;
 		background-position: right;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
 	}
 	.mcc_woocommerce_clipboard {
 		cursor: pointer;
@@ -116,35 +113,32 @@
 		right: 0;
 		top: 0;
 	}
-	/**
-	@brief 7 Theme styles
-	**/
-	.wf-wrap .wf-container-main #content .woocommerce .wc-complete-wrap .wc-side-column .mycryptocheckout .to .to_input.clipboardable {
-		font-size: 12px;
-	}
 }
 
-/**
-	@brief WooCommerce checkout page icons
-**/
+// WooCommerce checkout page icons
 #payment .wc_payment_methods .payment_method_mycryptocheckout img {
 	max-height: 1.618em;
 	height: 100%;
 	width: auto;
 }
 
-/**
-	@brief Donations
-**/
-#mcc_donations {
-	img.icon {
+// Donations
+.mycryptocheckout.mcc_donations {
+	img.mcc_donation_icon {
 		width: 40px;
 		height: auto;
 		display: inline-block;
 		margin-right: 8px;
 	}
-	img.icon:hover {
+	img.mcc_donation_icon:hover {
 		cursor: pointer;
 		opacity: .6;
+	}
+	.selected_currency {
+		font-size: 14px;
+		line-height: 24px;
+	}
+	.qr_code {
+		margin-bottom: 10px;
 	}
 }

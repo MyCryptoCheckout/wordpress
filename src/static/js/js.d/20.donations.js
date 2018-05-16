@@ -140,6 +140,7 @@
                 	var address = $$.div_data[ 'currencies' ][ currency_id ][ 'address' ];
                 	$$.currency_selector.val( currency_id );
 					$$.show_address( address );
+                	$$.show_currency_name( $$.div_data[ 'currencies' ][ currency_id ][ 'currency_name' ] );
 					$$.qr_code( address );
                 }
 
@@ -154,6 +155,15 @@
             		$$.address.html( address ).show();
             		$$.address.removeClass( 'clipboarded' );
             		$( '.mycryptocheckout .to_input' ).mcc_make_clipboard();
+                }
+
+                /**
+                	@brief		Show the name of the currency.
+                	@since		2018-05-14 23:09:54
+                **/
+                $$.show_currency_name = function( currency_name )
+                {
+                	$( '.selected_currency', $$ ).html( currency_name );
                 }
 
                 $$.init();

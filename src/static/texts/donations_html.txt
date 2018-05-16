@@ -5,9 +5,11 @@
 		<select size="1">
 		</select>
 	</div>
-	<div class="address hidden to_input" style="display: none">
-		12345
+	<div class="selected_currency">
+		<span class="selected_currency_text">Bitcoin</span>
 	</div>
 	<div class="qr_code hidden" style="display: none">
+	</div>
+	<div class="address hidden to_input" style="display: none">
 	</div>
 </div>
