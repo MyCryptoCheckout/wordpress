@@ -50,12 +50,6 @@ trait donations_trait
 			// Input label
 			->label( __( 'User selects currency with a dropdown box', 'mycryptocheckout' ) );
 
-		$show_address = $form->checkbox( 'show_address' )
-			// Input description
-			->description( __( 'Show the address of the wallet as a text string.', 'mycryptocheckout' ) )
-			// Input label
-			->label( __( 'Show the wallet address', 'mycryptocheckout' ) );
-
 		$qr_code_enabled = $form->checkbox( 'qr_code_enabled' )
 			// Input description
 			->description( __( 'Show a QR code for the wallet address.', 'mycryptocheckout' ) )
@@ -68,6 +62,12 @@ trait donations_trait
 			// Input label
 			->label( __( 'QR code max width', 'mycryptocheckout' ) )
 			->value( 180 );
+
+		$show_address = $form->checkbox( 'show_address' )
+			// Input description
+			->description( __( 'Show the address of the wallet as a text string.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Show the wallet address', 'mycryptocheckout' ) );
 
 		$save = $form->primary_button( 'save' )
 			->value( __( 'Generate shortcode', 'mycryptocheckout' ) );
