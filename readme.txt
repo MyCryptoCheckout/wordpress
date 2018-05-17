@@ -117,6 +117,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Fix: Allow MCC to ignore currencies that have been disabled / removed.
+
 = 2.07 20180511 =
 
 * New currency: Flix (FLIX)
