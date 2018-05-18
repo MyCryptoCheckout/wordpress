@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.07
+Stable tag: 2.08
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.4
 
@@ -22,6 +22,7 @@ MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and Easy Di
 - Fully automated peer-to-peer transactions
 - No redirection to 3rd parties, no iframes nor modal windows
 - See the <a href="https://mycryptocheckout.com/comparison/">feature comparison table</a> on our website to see why you should use MyCryptoCheckout instead of other crypto payment gateways.
+- Donations shortcode generator you can use in widgets and pages to show your users how to send cryptocurrency donations.
 
 The free license can process three sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account if you require more. The flat rate license includes unlimited transactions. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
 
@@ -83,6 +84,17 @@ After checkout, payment instructions are automatically included in the purchase 
 - Veritaseum VERI
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
+= Cryptocurrency Donations Widget =
+
+Helps you to receive donations in any or all the cryptocurrencies supported by MyCryptoCheckout. Just generate the widget using our simple and easy shortcode generator and add the shortcode into a text widget or text editor.
+
+Shortcode generation options:
+- select currencies to show
+- select primary currency
+- show currencies with icons or a dropdown box
+- show QR code
+- show wallet address text
+
 = Technical disclosure =
 
 Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version.
@@ -114,8 +126,14 @@ If your server cannot be reached by the API server this plugin will not function
 6. Local settings tab for network installs
 8. WooCommerce gateway settings
 9. EasyDigitalDownloads gateway settings
+10. Donations generator form
 
 == Changelog ==
+
+= 2.08 20180518 =
+
+* New: Donations shortcode to allow your users to send you donations via cryptocurrency.
+* Fix: Allow MCC to ignore currencies that have been disabled / removed.
 
 = 2.07 20180511 =
 

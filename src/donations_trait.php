@@ -21,6 +21,9 @@ trait donations_trait
 		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
 
+		$form->markup( 'm_donations' )
+			->markup( __( 'Use the form below to customize a shortcode that can be placed in your posts or a HTML widget.', 'mycryptocheckout' ) );
+
 		$wallets = $this->wallets();
 		$wallets_enabled = $wallets->enabled_on_this_site();
 
