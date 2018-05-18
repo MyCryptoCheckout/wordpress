@@ -7,7 +7,7 @@ Description:	Cryptocurrency payment gateway using the MyCryptoCheckout.com servi
 Plugin Name:	MyCryptoCheckout
 Plugin URI:		https://mycryptocheckout.com
 Text Domain:	mycryptocheckout
-Version:		2.07
+Version:		2.08
 */
 
 namespace mycryptocheckout
@@ -28,6 +28,7 @@ namespace mycryptocheckout
 		use admin_trait;
 		use api_trait;
 		use currencies_trait;
+		use donations_trait;
 		use wallets_trait;
 		use menu_trait;
 		use misc_methods_trait;
@@ -43,6 +44,7 @@ namespace mycryptocheckout
 			$this->init_admin_trait();
 			$this->init_api_trait();
 			$this->init_currencies_trait();
+			$this->init_donations_trait();
 			$this->init_menu_trait();
 			$this->init_misc_methods_trait();
 			$this->easy_digital_downloads = new ecommerce\easy_digital_downloads\Easy_Digital_Downloads();
@@ -53,7 +55,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.07 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.08 );
 	/**
 		@brief		Return the instance of ThreeWP Broadcast.
 		@since		2014-10-18 14:48:37

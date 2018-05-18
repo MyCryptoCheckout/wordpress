@@ -2,8 +2,6 @@
 
 namespace mycryptocheckout;
 
-use \Exception;
-
 /**
 	@brief		For the handling of QR codes.
 	@since		2018-05-01 20:42:45
@@ -56,6 +54,15 @@ trait qr_code_trait
 	}
 
 	/**
+		@brief		Enqueue the JS.
+		@since		2018-05-12 20:35:23
+	**/
+	public function qr_code_enqueue_js()
+	{
+		wp_enqueue_script( 'mcc_qrcode', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/qrcode.js', [ 'mycryptocheckout' ], MyCryptoCheckout()->plugin_version );
+	}
+
+	/**
 		@brief		Add QR code data to the js.
 		@since		2018-04-29 19:23:47
 	**/
@@ -65,7 +72,7 @@ trait qr_code_trait
 		if ( ! $html )
 			return;
 		$action->data->set( 'qr_code_html', $html );
-		wp_enqueue_script( 'mcc_qrcode', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/qrcode.js', [ 'mycryptocheckout' ], MyCryptoCheckout()->plugin_version );
+		$this->qr_code_enqueue_js();
 	}
 
 	/**

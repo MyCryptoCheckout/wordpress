@@ -58,6 +58,13 @@ trait menu_trait
 			// Name of tab
 			->name( __( 'Account', 'mycryptocheckout' ) );
 
+		$tabs->tab( 'donations' )
+			->callback_this( 'admin_donations' )
+			// Tab heading
+			->heading( __( 'MyCryptoCheckout Donations', 'mycryptocheckout' ) )
+			// Name of tab
+			->name( __( 'Donations', 'mycryptocheckout' ) );
+
 		if ( $this->is_network )
 			$tabs->tab( 'local_settings' )
 				->callback_this( 'admin_local_settings' )

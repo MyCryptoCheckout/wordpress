@@ -1,0 +1,15 @@
+<div class="mycryptocheckout mcc_donations" data-mycryptocheckout_donations_data="##DATA##">
+	<div class="currency_icons" style="display: none">
+	</div>
+	<div class="currency_selector" style="display: none">
+		<select size="1">
+		</select>
+	</div>
+	<div class="selected_currency" style="display: none">
+		<span class="selected_currency_text"></span>
+	</div>
+	<div class="qr_code" style="display: none">
+	</div>
+	<div class="address to_input" style="display: none">
+	</div>
+</div>
