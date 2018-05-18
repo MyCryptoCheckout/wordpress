@@ -41,6 +41,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - ColossusXT COLX
 - Dash DASH
 - Decred DCR
+- Digibyte DGB
 - Ethereum ETH
 - Ethereum Classic ETC
 - Litecoin LTC (Including SegWit addresses)
