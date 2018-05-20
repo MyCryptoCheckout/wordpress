@@ -128,6 +128,7 @@ If your server cannot be reached by the API server this plugin will not function
 8. WooCommerce gateway settings
 9. EasyDigitalDownloads gateway settings
 10. Donations generator form
+11. Donations widget
 
 == Changelog ==
 
