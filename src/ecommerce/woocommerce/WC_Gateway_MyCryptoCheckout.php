@@ -60,10 +60,13 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'FLIX' => [],
 			'LTC' => [],
 			'NEO' => [],
+			'NYC' => [],
 			'ZEC' => [],
 			'ERC20' => [],
 			'STAKE' => [],
 			'XLR' => [],
+			'XVG' => [],
+			'WRD1' => [],
 		];
 		$wallet_options = $this->get_wallet_options();
 		$output = file_get_contents( $dir . 'icon_base.svg' );

@@ -46,7 +46,9 @@ After checkout, payment instructions are automatically included in the purchase 
 - Ethereum Classic ETC
 - Litecoin LTC (Including SegWit addresses)
 - Neo Smart Economy NEO
+- New York Coin NYC
 - Solaris XLR
+- Verge XVG
 - Zcash ZEC
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
@@ -83,6 +85,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Tronix TRX
 - VeChain VEN
 - Veritaseum VERI
+- Worldcoin1 WRD1
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
 = Cryptocurrency Donations Widget =
@@ -131,6 +134,10 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations widget
 
 == Changelog ==
+
+* New currency: New York Coin (NYC)
+* New currency: Verge (XVG)
+* New currency: Worldcoin1 (WRD1)
 
 = 2.08 20180518 =
 
