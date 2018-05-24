@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.08
+Stable tag: 2.09
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.4
 
@@ -77,6 +77,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Populous PPT
 - Qash
 - Qtum
+- Raiden RDN
 - Request Network REQ
 - Salt
 - StakeIt STAKE
@@ -135,6 +136,9 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+= 2.09 20180524 =
+
+* New currency: Raiden (RDN)
 * New currency: New York Coin (NYC)
 * New currency: Verge (XVG)
 * New currency: Worldcoin1 (WRD1)
