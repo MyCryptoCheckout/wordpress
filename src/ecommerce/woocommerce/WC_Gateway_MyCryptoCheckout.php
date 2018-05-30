@@ -148,8 +148,15 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'default'     => 'no',
 			],
 			'test_mode' => [
-				'title'       => __( 'Test mode', 'woocommerce' ),
+				'title'       => __( 'Test mode', 'mycryptocheckout' ),
 				'label'       => __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server.', 'mycryptocheckout' ),
+				'type'        => 'checkbox',
+				'description' => '',
+				'default'     => 'no',
+			],
+			'send_new_order_invoice' => [
+				'title'       => __( 'Send invoice', 'mycryptocheckout' ),
+				'label'       => __( 'Send an e-mail invoice to the customer after purchase with the order details and payment instructions.', 'mycryptocheckout' ),
 				'type'        => 'checkbox',
 				'description' => '',
 				'default'     => 'no',
