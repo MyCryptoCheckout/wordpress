@@ -72,6 +72,18 @@ trait qr_code_trait
 		if ( ! $html )
 			return;
 		$action->data->set( 'qr_code_html', $html );
+
+		// Assemble all of the qr codes for the various currencies.
+		$account = $this->api()->account();
+		$qr_codes = [];
+		foreach( $account->get_currency_data() as $currency_id => $currency_data )
+			if ( ! isset( $currency_data->qr_code ) )
+				continue;
+			else
+				$qr_codes[ $currency_id ] = $currency_data->qr_code;
+
+		$action->data->set( 'qr_codes', $qr_codes );
+
 		$this->qr_code_enqueue_js();
 	}
 

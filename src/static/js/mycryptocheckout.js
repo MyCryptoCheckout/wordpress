@@ -402,10 +402,26 @@ var mycryptocheckout_checkout_javascript = function( data )
 			$qr_code.html( $html.html() );
 		}
 
+		var qr_code_text = $$.data.to;
+		if ( $$.data.qr_codes !== undefined )
+		{
+			if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
+			{
+				var qr_code_text = $$.data.qr_codes[ $$.data.currency_id ];
+				// Replace the values.
+				qr_code_text = qr_code_text
+					.replace( '[MCC_TO]', $$.data.to )
+					.replace( '[MCC_AMOUNT]', $$.data.amount )
+					;
+			}
+		}
+
+		console.log( 'MCC QR code text is: ', qr_code_text );
+
 		// Generate a QR code?
 		var qr_code = new QRCode( $qr_code[ 0 ],
 		{
-			text: $$.data.to,
+			text: qr_code_text,
 			colorDark : "#000000",
 			colorLight : "#ffffff",
 			correctLevel : QRCode.CorrectLevel.H
