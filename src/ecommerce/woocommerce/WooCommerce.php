@@ -280,6 +280,12 @@ class WooCommerce
 		if ( $order->get_meta( '_mcc_payment_id' ) != 0 )
 			return;
 		do_action( 'mycryptocheckout_send_payment', $order_id );
+		do_action( 'mycryptocheckout_woocommerce_order_created', $order );
+
+		$gateway = \WC_Gateway_MyCryptoCheckout::instance();
+		$send_new_order_invoice = $gateway->get_option( 'send_new_order_invoice' );
+		if ( $send_new_order_invoice )
+			WC()->mailer()->customer_invoice( $order );
 	}
 
 	/**
