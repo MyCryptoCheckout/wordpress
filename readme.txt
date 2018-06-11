@@ -36,7 +36,7 @@ After checkout, payment instructions are automatically included in the purchase 
 = Cryptocurrencies supported: =
 
 - Bitcoin BTC (Including SegWit addresses)
-- Bitcoin Cash BCH (Including SegWit addresses)
+- Bitcoin Cash BCH
 - Bitcoin Gold BTG
 - ColossusXT COLX
 - Dash DASH
