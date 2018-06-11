@@ -196,19 +196,22 @@ trait admin_trait
 
 		if ( $this->debugging() )
 		{
-			$row = $table->head()->row();
-			$row->th( 'key' )->text( __( 'Reserved amounts', 'mycryptocheckout' ) );
-			$text = '';
-			foreach( $account->data->payment_amounts as $currency_id => $amounts )
+			if ( count( (array)$account->data->payment_amounts ) > 0 )
 			{
-				$text .= sprintf( '<p>%s<ul>', $currency_id );
-				$amounts = (array)$amounts;
-				ksort( $amounts );
-				foreach( $amounts as $amount => $ignore )
-					$text .= sprintf( '<li>%s</li>', $amount );
-				$text .= '</ul>';
+				$row = $table->head()->row();
+				$row->th( 'key' )->text( __( 'Reserved amounts', 'mycryptocheckout' ) );
+				$text = '';
+				foreach( $account->data->payment_amounts as $currency_id => $amounts )
+				{
+					$text .= sprintf( '<p>%s<ul>', $currency_id );
+					$amounts = (array)$amounts;
+					ksort( $amounts );
+					foreach( $amounts as $amount => $ignore )
+						$text .= sprintf( '<li>%s</li>', $amount );
+					$text .= '</ul>';
+				}
+				$row->td( 'details' )->text( $text );
 			}
-			$row->td( 'details' )->text( $text );
 		}
 
 		$r .= $table;
