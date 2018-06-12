@@ -217,6 +217,9 @@ trait misc_methods_trait
 	**/
 	public static function increase_floating_point_number( $number, $precision )
 	{
+		// Convert the number to a nice string.
+		$number = number_format( $number, $precision );
+
 		$decimal = strpos( $number, '.');
 		if ( $decimal === false )
 		{
