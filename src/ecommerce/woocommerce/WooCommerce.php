@@ -27,7 +27,6 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
-		$this->add_action( 'woocommerce_cart_calculate_fees' );
 		$this->add_action( 'woocommerce_order_status_cancelled' );
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
@@ -200,27 +199,6 @@ class WooCommerce
 	}
 
 	/**
-		@brief		woocommerce_cart_calculate_fees
-		@since		2018-06-12 12:58:17
-	**/
-	public function woocommerce_cart_calculate_fees()
-	{
-		if ( is_admin() && ! defined( 'DOING_AJAX' ) )
-			return;
-
-		// We only add the fee if
-		// 1. The WC currency is the same as the chosen currency.
-		// 2. The WC amount is not the same as the final amount sent to MCC.
-
-		$wc_currency = get_woocommerce_currency();
-		$fee = 0.00000001;
-
-		WC()->cart->add_fee( 'Cryptocurrency handling', $fee, TRUE, 'standard' );
-
-		//ddd( WC()->cart ); exit;
-    }
-
-	/**
 		@brief		Cancel an order on the server.
 		@since		2018-03-25 22:28:25
 	**/
@@ -260,6 +238,14 @@ class WooCommerce
 		$amount = $mcc->markup_amount( $order_total );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
 		$amount = $currency->find_next_available_amount( $amount );
+
+		// Are we paying in the same currency as the native currency?
+		if ( $currency_id == get_woocommerce_currency() )
+		{
+			// Make sure the order total matches our expected amount.
+			$order->set_total( $amount );
+			$order->save();
+		}
 
 		$order->update_meta_data( '_mcc_amount', $amount );
 		$order->update_meta_data( '_mcc_currency_id', $currency_id );
