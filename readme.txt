@@ -137,6 +137,7 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * Fix: Ensure that small amounts of virtual currency (0.00000001 BTC) are displayed as small amounts, and not in scientific notation.
+* Fix: When using a virtual currency as the native WC currency, ensure that the order amount is the same as the amount MCC is expecting to receive.
 
 = 2.09 20180524 =
 
