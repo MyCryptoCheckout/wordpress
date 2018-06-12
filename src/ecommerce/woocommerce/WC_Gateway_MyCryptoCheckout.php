@@ -259,10 +259,11 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function get_wallet_options()
 	{
 		$cart = WC()->cart;
-		if ( $cart )
+		$total = 0;
+
+		if ( ! $cart->is_empty() )
 			$total = $cart->cart_contents_total;
-		else
-			$total = 0;
+
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
 			'amount' => $total,
 			'original_currency' => get_woocommerce_currency(),
