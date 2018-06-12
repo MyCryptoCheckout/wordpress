@@ -136,6 +136,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Fix: Ensure that small amounts of virtual currency (0.00000001 BTC) are displayed as small amounts, and not in scientific notation.
+
 = 2.09 20180524 =
 
 * New currency: Raiden (RDN)
