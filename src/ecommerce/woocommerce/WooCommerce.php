@@ -30,6 +30,7 @@ class WooCommerce
 		$this->add_action( 'woocommerce_order_status_cancelled' );
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
+		$this->add_filter( 'woocommerce_get_checkout_payment_url', 10, 2 );
 		$this->add_filter( 'woocommerce_payment_gateways' );
 		$this->add_action( 'woocommerce_review_order_before_payment' );
 	}
@@ -239,6 +240,14 @@ class WooCommerce
 		$amount = $currency->convert( $woocommerce_currency, $amount );
 		$amount = $currency->find_next_available_amount( $amount );
 
+		// Are we paying in the same currency as the native currency?
+		if ( $currency_id == get_woocommerce_currency() )
+		{
+			// Make sure the order total matches our expected amount.
+			$order->set_total( $amount );
+			$order->save();
+		}
+
 		$order->update_meta_data( '_mcc_amount', $amount );
 		$order->update_meta_data( '_mcc_currency_id', $currency_id );
 		$order->update_meta_data( '_mcc_confirmations', $wallet->confirmations );
@@ -280,6 +289,18 @@ class WooCommerce
 		if ( $order->get_meta( '_mcc_payment_id' ) != 0 )
 			return;
 		do_action( 'mycryptocheckout_send_payment', $order_id );
+	}
+
+	/**
+		@brief		woocommerce_get_checkout_payment_url
+		@since		2018-06-12 21:05:04
+	**/
+	public function woocommerce_get_checkout_payment_url( $url, $order )
+	{
+		// We only override the payment URL for orders that are handled by us.
+		if ( $order->get_meta( '_mcc_payment_id' ) < 1 )
+			return $url;
+		return $order->get_checkout_order_received_url();
 	}
 
 	/**

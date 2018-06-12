@@ -261,8 +261,9 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$cart = WC()->cart;
 		$total = 0;
 
-		if ( ! $cart->is_empty() )
-			$total = $cart->cart_contents_total;
+		if ( is_object( $cart ) )
+			if ( ! $cart->is_empty() )
+				$total = $cart->cart_contents_total;
 
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
 			'amount' => $total,
