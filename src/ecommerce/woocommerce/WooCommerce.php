@@ -304,7 +304,7 @@ class WooCommerce
 	public function woocommerce_get_checkout_payment_url( $url, $order )
 	{
 		// We only override the payment URL for orders that are handled by us.
-		if ( $order->get_meta( '_mcc_payment_id' ) < 1 )
+		if ( $order->get_meta( '_mcc_payment_id' ) === false )
 			return $url;
 		return $order->get_checkout_order_received_url();
 	}
