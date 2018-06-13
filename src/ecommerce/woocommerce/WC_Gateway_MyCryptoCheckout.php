@@ -270,7 +270,11 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		if ( is_object( $cart ) )
 			if ( ! $cart->is_empty() )
-				$total = $cart->cart_contents_total;
+			{
+				$total = $cart->get_total();
+				// Extract only numbers.
+				$total = preg_replace( '/[^0-9\.]/', '', $total );
+			}
 
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
 			'amount' => $total,
