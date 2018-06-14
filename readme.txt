@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.09
+Stable tag: 2.10
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.4
 
@@ -136,8 +136,14 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+= 2.10 20180614 =
+
+* New: Some currency QR codes will also include the amount to pay. Bitcoin Cash, Bitcoin, Ethereum, LiteCoin.
+* New: WooCommerce; option for sending invoice to customer upon purchase, in addition to after payment.
 * Fix: Ensure that small amounts of virtual currency (0.00000001 BTC) are displayed as small amounts, and not in scientific notation.
-* Fix: When using a virtual currency as the native WC currency, ensure that the order amount is the same as the amount MCC is expecting to receive.
+* Fix: WooCommerce; when using a virtual currency as the native currency, ensure that the order amount is the same as the amount MCC is expecting to receive.
+* Fix: WooCommerce; when using a virtual currency as the native currency, show a warning if the WooCommerce currency decimals don't match the capabilities of the virtual currency in MCC.
+* Fix: WooCommerce; during checkout, also include shipping in the virtual currency preview amount.
 
 = 2.09 20180524 =
 
