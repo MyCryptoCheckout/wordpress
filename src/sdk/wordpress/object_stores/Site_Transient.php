@@ -10,7 +10,7 @@ trait Site_Transient
 {
 	use Transient;
 
-	public static function delete()
+	public function delete()
 	{
 		delete_site_transient( static::store_key() );
 	}

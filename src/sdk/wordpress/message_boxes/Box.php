@@ -25,6 +25,7 @@ class Box
 
 	/**
 		@brief		Return a message box with this error message.
+		@deprecated	Since 20180207
 		@since		2015-12-21 20:33:24
 	**/
 	public function _()
@@ -55,5 +56,17 @@ class Box
 	{
 		// Updated is the default.
 		return 'updated notice is-dismissible';
+	}
+
+	/**
+		@brief		Display a box with this text.
+		@since		2018-03-02 00:36:53
+	**/
+	public function text( $text )
+	{
+		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		if ( $result == '' )
+			$result = $text;
+		return $this->get_box( $result );
 	}
 }

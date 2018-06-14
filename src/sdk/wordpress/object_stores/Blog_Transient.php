@@ -10,7 +10,7 @@ trait Blog_Transient
 {
 	use Transient;
 
-	public static function delete()
+	public function delete()
 	{
 		delete_transient( static::store_key() );
 	}

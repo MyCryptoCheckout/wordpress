@@ -14,7 +14,7 @@ trait Store
 		@brief		Delete the object completely.
 		@since		2015-10-23 10:54:49
 	**/
-	public static function delete()
+	public function delete()
 	{
 		throw new Exception( 'Please override the delete_from_store method.' );
 	}

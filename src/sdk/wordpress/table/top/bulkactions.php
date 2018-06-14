@@ -111,10 +111,10 @@ class bulkactions
 		$form = clone( $form );
 
 		$this->bulk_actions_button = $form->secondary_button( 'bulk_actions_apply' )
-			->value( _( 'Apply' ) );
+			->value( __( 'Apply' ) );
 		$this->bulk_actions_input = $form->select( 'bulk_actions' )
-			->label( _( 'Bulk actions' ) )
-			->option( _( 'Bulk Actions' ), '' );
+			->label( __( 'Bulk actions' ) )
+			->option( __( 'Bulk Actions' ), '' );
 
 		// The default should always be first.
 		$this->bulk_actions_input->option( '' )

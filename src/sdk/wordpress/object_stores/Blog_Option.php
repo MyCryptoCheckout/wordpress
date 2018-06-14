@@ -10,7 +10,7 @@ trait Blog_Option
 {
 	use Option;
 
-	public static function delete()
+	public function delete()
 	{
 		static::store_container()->delete_local_option( static::store_key() );
 	}

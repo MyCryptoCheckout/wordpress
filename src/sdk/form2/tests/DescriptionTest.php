@@ -18,6 +18,10 @@ class DescriptionTest extends TestCase
 		$this->assertFalse( $input->description->is_empty() );
 		$this->assertStringContainsRegExp( '/.*class="description.*' . $description . '.*/', $input );
 
+		// Test sprintf.
+		$input->description( 'Test 1 %s 3', 2 );
+		$this->assertStringContainsRegExp( '/.*Test 1 2 3.*/', $input );
+
 		$description = 'This is a %s looking description';
 		$input->description( $description, 'better' );
 		$this->assertStringContainsRegExp( '/.*class="description.*This is a better looking description.*/', $input );

@@ -24,13 +24,6 @@ class select
 
 	public $_value = array();
 
-	public function __toString()
-	{
-		$div = $this->get_display_div();
-		$div->content = $this->indent() . $this->display_label() . $this->display_input();
-		return $div . '';
-	}
-
 	/**
 		@brief		Sets the size of the select to fit the amount of options.
 		@return		$this		Method chaining.

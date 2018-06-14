@@ -122,12 +122,21 @@ trait debug
 		if ( strlen( $microtime ) < 4 )
 			$microtime = '0' . $microtime;
 
-		// Date class: string
-		$text = sprintf( '%s.%s <em>%s</em>: %s<br/>',
-			date( 'Y-m-d H:i:s' ),
-			$microtime,
-			$this->get_debug_class_name( $class_name ),
-			$text, "\n" );
+		// Assemble the debug text.
+		$data = [
+			'timestamp' => date( 'Y-m-d H:i:s' ) . '.' . $microtime,
+			'class_name' => $this->get_debug_class_name( $class_name ),
+			'text' => $text . "<br/>\n",
+		];
+		$data = (object) $data;
+		// Allow other classes to modify the text. Or decide not to log it at all.
+		$filter = $class_name . '_debug_text';
+		$data = apply_filters( $filter, $data );
+		// Empty text = do not log.
+		if ( $data->text == '' )
+			return;
+
+		$text = sprintf( "%s %s: %s", $data->timestamp, $data->class_name, $data->text );
 
 		$plugin = self::instance();
 

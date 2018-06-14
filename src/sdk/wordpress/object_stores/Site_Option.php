@@ -10,7 +10,7 @@ trait Site_Option
 {
 	use Option;
 
-	public static function delete()
+	public function delete()
 	{
 		static::store_container()->delete_site_option( static::store_key() );
 	}

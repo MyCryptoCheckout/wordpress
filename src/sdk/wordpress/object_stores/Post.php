@@ -125,7 +125,7 @@ trait Post
 		return $this;
 	}
 
-	public static function delete()
+	public function delete()
 	{
 		wp_delete_post( $this->id );
 	}
