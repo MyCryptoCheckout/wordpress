@@ -33,6 +33,24 @@ class WooCommerce
 		$this->add_filter( 'woocommerce_get_checkout_payment_url', 10, 2 );
 		$this->add_filter( 'woocommerce_payment_gateways' );
 		$this->add_action( 'woocommerce_review_order_before_payment' );
+		$this->add_action( 'woocommerce_sections_general' );
+	}
+
+	/**
+		@brief		Check to see if WC has the correct amount of decimals set.
+		@since		2018-06-14 12:43:58
+	**/
+	public function check_decimal_setting()
+	{
+		$wc_currency = get_woocommerce_currency();
+		$currency = MyCryptoCheckout()->currencies()->get( $wc_currency );
+		if ( ! $currency )
+			return;
+		// Get the WC decimal precision.
+		$wc_decimals = woocommerce_settings_get_option( 'woocommerce_price_num_decimals' );
+		if ( $wc_decimals == $currency->decimal_precision )
+			return;
+		throw new Exception( sprintf( "Since you are using virtual currency %s as your WooCommerce currency, please change the decimal precision from %s to match MyCyyptoCheckout's: %s", $wc_currency, $wc_decimals, $currency->decimal_precision ) );
 	}
 
 	/**
@@ -307,6 +325,22 @@ class WooCommerce
 		if ( $order->get_meta( '_mcc_payment_id' ) === false )
 			return $url;
 		return $order->get_checkout_order_received_url();
+	}
+
+	/**
+		@brief		woocommerce_sections_general
+		@since		2018-06-14 15:10:12
+	**/
+	public function woocommerce_sections_general()
+	{
+		try
+		{
+			MyCryptoCheckout()->woocommerce->check_decimal_setting();
+		}
+		catch ( Exception $e )
+		{
+			echo MyCryptoCheckout()->error_message_box()->text( $e->getMessage() );
+		}
 	}
 
 	/**

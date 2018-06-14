@@ -137,91 +137,92 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	**/
 	public function get_form_fields()
 	{
+		$r = [];
 		$strings = MyCryptoCheckout()->gateway_strings();
 
-		return [
-			'enabled' => [
-				'title'       => __( 'Enable/Disable', 'woocommerce' ),
-				'label'       => __( 'Enable MyCryptoCheckout', 'mycryptocheckout' ),
-				'type'        => 'checkbox',
-				'description' => '',
-				'default'     => 'no',
+		$r[ 'enabled' ] = [
+			'title'       => __( 'Enable/Disable', 'woocommerce' ),
+			'label'       => __( 'Enable MyCryptoCheckout', 'mycryptocheckout' ),
+			'type'        => 'checkbox',
+			'description' => '',
+			'default'     => 'no',
+		];
+		$r[ 'test_mode' ] = [
+			'title'       => __( 'Test mode', 'mycryptocheckout' ),
+			'label'       => __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server.', 'mycryptocheckout' ),
+			'type'        => 'checkbox',
+			'description' => '',
+			'default'     => 'no',
+		];
+		$r[ 'send_new_order_invoice' ] = [
+			'title'       => __( 'Send invoice', 'mycryptocheckout' ),
+			'label'       => __( 'Send an e-mail invoice to the customer after purchase with the order details and payment instructions.', 'mycryptocheckout' ),
+			'type'        => 'checkbox',
+			'description' => '',
+			'default'     => 'no',
+		];
+		$r[ 'email_instructions' ] = [
+			'title'       => __( 'E-mail Instructions', 'mycryptocheckout' ),
+			'type'        => 'textarea',
+			'description' => $strings->get( 'email_payment_instructions_description' ),
+			'default' => $strings->get( 'email_payment_instructions' ),
+		];
+		$r[ 'online_instructions' ] = [
+			'title'       => __( 'Online instructions', 'mycryptocheckout' ),
+			'type'        => 'textarea',
+			'description' => $strings->get( 'online_payment_instructions_description' ),
+			'default' => $strings->get( 'online_payment_instructions' ),
+		];
+		$r[ 'hide_woocommerce_order_overview' ] = [
+			'title'			=> __( 'Hide order overview', 'mycryptocheckout' ),
+			'type'			=> 'checkbox',
+			'default'     => 'yes',
+			'description'	=> __( 'The order overview is usually placed above crypto payment instructions. Use this option to hide the overview and show the payment instructions higher up.', 'mycryptocheckout' ),
+		];
+		$r[ 'title' ] = [
+			'title' => __( 'Payment type name', 'mycryptocheckout' ),
+			'type' => 'text',
+			'description' => __( 'This is the name of the payment option the user will see during checkout.', 'mycryptocheckout' ),
+			'default' => $strings->get( 'gateway_name' )
+		];
+		$r[ 'currency_selection_text' ] = [
+			'title' => __( 'Text for currency selection', 'mycryptocheckout' ),
+			'type' => 'text',
+			'description' => __( 'This is the text for the currency selection input.', 'mycryptocheckout' ),
+			'default' => $strings->get( 'currency_selection_text' ),
+		];
+		$r[ 'payment_complete_status' ] = [
+			'title' => __( 'Payment complete status', 'mycryptocheckout' ),
+			'type' => 'select',
+			'options' => [
+				// Order status
+				'' => __( 'Processing', 'mycryptocheckout' ),
+				// Order status
+				'wc-completed' => __( 'Completed', 'mycryptocheckout' ),
 			],
-			'test_mode' => [
-				'title'       => __( 'Test mode', 'mycryptocheckout' ),
-				'label'       => __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server.', 'mycryptocheckout' ),
-				'type'        => 'checkbox',
-				'description' => '',
-				'default'     => 'no',
+			'description' => __( 'After payment is complete, change the order to this status.', 'mycryptocheckout' ),
+			'default' => '',
+		];
+		$r[ 'payment_timeout_hours' ] = [
+			'title' => __( 'Payment timeout', 'mycryptocheckout' ),
+			'type' => 'number',
+			'description' => __( 'How many hours to wait for the payment to come through before marking the order as abandoned.', 'mycryptocheckout' ),
+			'default' => 6,
+			'custom_attributes' =>
+			[
+				'max' => 72,
+				'min' => 1,
+				'step' => 1,
 			],
-			'send_new_order_invoice' => [
-				'title'       => __( 'Send invoice', 'mycryptocheckout' ),
-				'label'       => __( 'Send an e-mail invoice to the customer after purchase with the order details and payment instructions.', 'mycryptocheckout' ),
-				'type'        => 'checkbox',
-				'description' => '',
-				'default'     => 'no',
-			],
-			'email_instructions' => array(
-				'title'       => __( 'E-mail Instructions', 'mycryptocheckout' ),
-				'type'        => 'textarea',
-				'description' => $strings->get( 'email_payment_instructions_description' ),
-				'default' => $strings->get( 'email_payment_instructions' ),
-			),
-			'online_instructions' => array(
-				'title'       => __( 'Online instructions', 'mycryptocheckout' ),
-				'type'        => 'textarea',
-				'description' => $strings->get( 'online_payment_instructions_description' ),
-				'default' => $strings->get( 'online_payment_instructions' ),
-			),
-			'hide_woocommerce_order_overview' => [
-				'title'			=> __( 'Hide order overview', 'mycryptocheckout' ),
-				'type'			=> 'checkbox',
-				'default'     => 'yes',
-				'description'	=> __( 'The order overview is usually placed above crypto payment instructions. Use this option to hide the overview and show the payment instructions higher up.', 'mycryptocheckout' ),
-			],
-			'title' => [
-				'title' => __( 'Payment type name', 'mycryptocheckout' ),
-				'type' => 'text',
-				'description' => __( 'This is the name of the payment option the user will see during checkout.', 'mycryptocheckout' ),
-				'default' => $strings->get( 'gateway_name' )
-			],
-			'currency_selection_text' => [
-				'title' => __( 'Text for currency selection', 'mycryptocheckout' ),
-				'type' => 'text',
-				'description' => __( 'This is the text for the currency selection input.', 'mycryptocheckout' ),
-				'default' => $strings->get( 'currency_selection_text' ),
-			],
-			'payment_complete_status' => [
-				'title' => __( 'Payment complete status', 'mycryptocheckout' ),
-				'type' => 'select',
-				'options' => [
-					// Order status
-					'' => __( 'Processing', 'mycryptocheckout' ),
-					// Order status
-					'wc-completed' => __( 'Completed', 'mycryptocheckout' ),
-				],
-				'description' => __( 'After payment is complete, change the order to this status.', 'mycryptocheckout' ),
-				'default' => '',
-			],
-			'payment_timeout_hours' => [
-				'title' => __( 'Payment timeout', 'mycryptocheckout' ),
-				'type' => 'number',
-				'description' => __( 'How many hours to wait for the payment to come through before marking the order as abandoned.', 'mycryptocheckout' ),
-				'default' => 6,
-				'custom_attributes' =>
-				[
-					'max' => 72,
-					'min' => 1,
-					'step' => 1,
-				],
-			],
-			'reset_to_defaults' => [
-				'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
-				'type'			=> 'checkbox',
-				'default'     => 'no',
-				'description'	=> __( 'If you wish to reset all of these settings to the defaults, check this box and save your changes.', 'mycryptocheckout' ),
-			],
-    	];
+		];
+		$r[ 'reset_to_defaults' ] = [
+			'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
+			'type'			=> 'checkbox',
+			'default'     => 'no',
+			'description'	=> __( 'If you wish to reset all of these settings to the defaults, check this box and save your changes.', 'mycryptocheckout' ),
+		];
+
+    	return $r;
 	}
 
 	/**
@@ -246,6 +247,18 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
 			'</a>'
 		);
+
+
+		$r = __( 'Accept cryptocurrency payments directly into your wallet using the MyCryptoCheckout service.', 'mycryptocheckout' );
+
+		try
+		{
+			MyCryptoCheckout()->woocommerce->check_decimal_setting();
+		}
+		catch ( Exception $e )
+		{
+			$r .= MyCryptoCheckout()->error_message_box()->text( $e->getMessage() );
+		}
 
 		return $r;
 	}
