@@ -272,8 +272,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			if ( ! $cart->is_empty() )
 			{
 				$total = $cart->get_total();
+				// BTC is an html entity that needs to go.
+				$total = html_entity_decode( $total );
 				// Extract only numbers.
-				$total = preg_replace( '/[^0-9\.]/', '', $total );
+				$total = preg_replace( '/[^0-9\.]+/', '', $total );
 			}
 
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
