@@ -63,7 +63,6 @@ After checkout, payment instructions are automatically included in the purchase 
 - Dai Stablecoin DAI
 - Digix Global DGD
 - Dragonchain DRGN
-- EOS
 - Flix FLIX
 - FunFair FUN
 - Gifto GTO
@@ -83,7 +82,6 @@ After checkout, payment instructions are automatically included in the purchase 
 - StakeIt STAKE
 - Status Network SNT
 - Storm
-- Tronix TRX
 - VeChain VEN
 - Veritaseum VERI
 - Worldcoin1 WRD1
