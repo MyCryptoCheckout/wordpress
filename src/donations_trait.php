@@ -78,6 +78,16 @@ trait donations_trait
 			// Input label
 			->label( __( 'Show the wallet address', 'mycryptocheckout' ) );
 
+		$alignment = $form->select( 'alignment' )
+			// Input description
+			->description( __( 'How to align the widget on the page.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Alignment', 'mycryptocheckout' ) )
+			->opt( '', __( 'None', 'mycryptocheckout' ) )
+			->opt( 'left', __( 'Left', 'mycryptocheckout' ) )
+			->opt( 'center', __( 'Center', 'mycryptocheckout' ) )
+			->opt( 'right', __( 'Right', 'mycryptocheckout' ) );
+
 		$save = $form->primary_button( 'save' )
 			->value( __( 'Generate shortcode', 'mycryptocheckout' ) );
 
@@ -92,6 +102,7 @@ trait donations_trait
 				{
 					$options = [];
 
+					$options[ 'alignment' ] = $alignment->get_post_value();
 					$options[ 'currencies' ] = implode( ',', $currencies->get_post_value() );
 					$options[ 'primary_currency' ] = $primary_currency->get_post_value();
 					$options[ 'show_currencies_as_icons' ] = $show_currencies_as_icons->is_checked();
@@ -202,6 +213,7 @@ trait donations_trait
 
 		// Copy over these settings as they are.
 		foreach( [
+			'alignment',
 			'show_currencies_as_icons',
 			'show_currencies_as_select',
 			'show_currency_as_text',

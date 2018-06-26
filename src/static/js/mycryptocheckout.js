@@ -180,6 +180,7 @@
                 	// Set the first available currency.
                 	var primary_currency = $$.div_data[ 'primary_currency' ];
                 	$$.set_currency_id( primary_currency );
+                	$$.addClass( 'alignment_' + $$.div_data[ 'alignment' ] );
                 }
 
                 /**
