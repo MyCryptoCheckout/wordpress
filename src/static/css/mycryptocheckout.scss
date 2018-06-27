@@ -145,4 +145,22 @@
 		max-width: 100%;
 		margin: 4px 0;
 	}
+	&.alignment_center {
+		text-align: center;
+		.qr_code {
+			margin: 5px auto;
+		}
+	}
+	&.alignment_left {
+		text-align: left;
+		.qr_code {
+			margin: 5px auto 10px 0;
+		}
+	}
+	&.alignment_right {
+		text-align: right;
+		.qr_code {
+			margin: 5px 0 10px auto;
+		}
+	}
 }

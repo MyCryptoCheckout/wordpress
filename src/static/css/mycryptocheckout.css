@@ -103,3 +103,17 @@
 .mycryptocheckout.mcc_donations .currency_selector select {
   max-width: 100%;
   margin: 4px 0; }
+.mycryptocheckout.mcc_donations.alignment_center {
+  text-align: center; }
+  .mycryptocheckout.mcc_donations.alignment_center .qr_code {
+    margin: 5px auto; }
+.mycryptocheckout.mcc_donations.alignment_left {
+  text-align: left; }
+  .mycryptocheckout.mcc_donations.alignment_left .qr_code {
+    margin: 5px auto 10px 0; }
+.mycryptocheckout.mcc_donations.alignment_right {
+  text-align: right; }
+  .mycryptocheckout.mcc_donations.alignment_right .qr_code {
+    margin: 5px 0 10px auto; }
+
+/*# sourceMappingURL=mycryptocheckout.css.map */
