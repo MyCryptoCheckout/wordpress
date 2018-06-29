@@ -46,7 +46,11 @@ trait admin_trait
 		{
 			$result = $this->mycryptocheckout_retrieve_account();
 			if ( $result )
+			{
 				$r .= $this->info_message_box()->_( __( 'Account data refreshed!', 'mycryptocheckout' ) );
+				// Another safeguard to ensure that unsent payments are sent as soon as possible.
+				MyCryptoCheckout()->api()->payments()->send_unsent_payments();
+			}
 			else
 				$r .= $this->error_message_box()->_( __( 'Error refreshing your account data. Please enable debug mode to find the error.', 'mycryptocheckout' ) );
 		}
