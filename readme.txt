@@ -134,6 +134,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New: Allow alignment selection for donations widget.
 * Fix: Conflict between CSS classes that prevented the "payment complete" tick from appearing. CSS class "hidden" renamed to "mcc_hidden".
 
 = 2.10 20180614 =
