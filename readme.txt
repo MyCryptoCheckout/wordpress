@@ -134,6 +134,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Fix: Conflict between CSS classes that prevented the "payment complete" tick from appearing. CSS class "hidden" renamed to "mcc_hidden".
+
 = 2.10 20180614 =
 
 * New: Some currency QR codes will also include the amount to pay. Bitcoin Cash, Bitcoin, Ethereum, LiteCoin.
