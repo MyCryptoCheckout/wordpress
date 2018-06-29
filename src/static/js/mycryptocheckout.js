@@ -339,7 +339,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			if ( $mycryptocheckout_checkout_data.length < 1 )
 			{
 				// Something went wrong.
-				document.location( url );
+				document.location = url;
 			}
 
 			var mycryptocheckout_checkout_data = $mycryptocheckout_checkout_data.data( 'mycryptocheckout_checkout_data' );

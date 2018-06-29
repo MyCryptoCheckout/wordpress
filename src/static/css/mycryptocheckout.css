@@ -20,7 +20,7 @@
     display: inline-block;
     vertical-align: top;
     margin-bottom: 15px; }
-    .mycryptocheckout.online_payment_instructions .mcc_payment_timer .paid.hidden {
+    .mycryptocheckout.online_payment_instructions .mcc_payment_timer .paid.mcc_hidden {
       display: none; }
     .mycryptocheckout.online_payment_instructions .mcc_payment_timer .timer p {
       margin-bottom: 20px;

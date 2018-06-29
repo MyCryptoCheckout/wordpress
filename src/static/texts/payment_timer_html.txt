@@ -4,7 +4,7 @@
 		<span class="timer_check_text">(checked every 15 secs)</span></p>
 		<span class="hours_minutes">--:--</span>
 	</div>
-	<div class="paid hidden">
+	<div class="paid mcc_hidden">
 		<div id="icon-check"></div>
 		<p>Payment complete!</p>
 	</div>

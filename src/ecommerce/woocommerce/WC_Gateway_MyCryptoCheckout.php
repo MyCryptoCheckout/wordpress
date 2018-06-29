@@ -469,7 +469,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$instructions = $this->get_option( 'online_instructions' );
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
 		$this->__current_payment = $payment;
-		if ( $order->is_paid() )
+		if ( ! $order->needs_payment() )
 			$payment->paid = true;
 		$instructions = $payment->replace_shortcodes( $instructions );
 		if ( ! $instructions )
