@@ -463,6 +463,21 @@ trait admin_trait
 			->trim()
 			->value( $wallet->get_address() );
 
+		if ( $currency->supports( 'btc_hd_public_key' ) )
+		{
+			if ( ! function_exists( 'gmp_abs' ) )
+				$form->markup( 'm_btc_hd_public_key' )
+					->markup( __( 'This wallet supports HD public keys, but your system is missing the required PHP GMP libary.', 'mycryptocheckout' ) );
+			else
+				$btc_hd_public_key = $form->text( 'btc_hd_public_key' )
+					->description( __( 'If you have an HD wallet and want to generate a new address after each purchase, enter your XPUB, YPUB or ZPUB public key here.', 'mycryptocheckout' ) )
+					// Input label
+					->label( __( 'HD public key', 'mycryptocheckout' ) )
+					->trim()
+					->size( 128 )
+					->value( $wallet->get( 'btc_hd_public_key' ) );
+		}
+
 		$wallet_enabled = $form->checkbox( 'wallet_enabled' )
 			->checked( $wallet->enabled )
 			->description( __( 'Is this wallet enabled and ready to receive funds?', 'mycryptocheckout' ) )
@@ -475,7 +490,7 @@ trait admin_trait
 			// Input label
 			->label( __( 'Select as default', 'mycryptocheckout' ) );
 
-		if ( $currency->supports_confirmations() )
+		if ( $currency->supports( 'confirmations' ) )
 			$confirmations = $form->number( 'confirmations' )
 				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer.', 'mycryptocheckout' ) )
 				// Input label
@@ -528,8 +543,12 @@ trait admin_trait
 
 					$wallet->enabled = $wallet_enabled->is_checked();
 					$wallet->set( 'preselected', $preselected->is_checked() );
-					if ( $currency->supports_confirmations() )
+					if ( $currency->supports( 'confirmations' ) )
 						$wallet->confirmations = $confirmations->get_filtered_post_value();
+
+					if ( $currency->supports( 'btc_hd_public_key' ) )
+						if ( function_exists( 'gmp_abs' ) )
+							$wallet->set( 'btc_hd_public_key', $btc_hd_public_key->get_filtered_post_value() );
 
 					if ( $this->is_network && is_super_admin() )
 					{
@@ -538,6 +557,7 @@ trait admin_trait
 					}
 
 					$wallets->save();
+
 					$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
 					$reshow = true;
 				}

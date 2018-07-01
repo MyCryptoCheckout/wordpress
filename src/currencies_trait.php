@@ -33,6 +33,7 @@ trait currencies_trait
 	public function init_currencies_trait()
 	{
 		$this->add_action( 'mycryptocheckout_get_currencies', 5 );		// Before everyone else.
+		$this->add_action( 'mycryptocheckout_use_wallet' );
 	}
 
 	/**
@@ -66,7 +67,23 @@ trait currencies_trait
 				$group->name = $currency_data->group;
 				$currency->set_group( $group );
 			}
+
+			// Anything that is a supports gets put in.
+			foreach( $currency_data as $key => $data )
+				if ( strpos( $key, 'supports' ) === 0 )
+					$currency->$key = $data;
+
 			$currencies->add( $currency );
 		}
+	}
+
+	/**
+		@brief		mycryptocheckout_use_wallet
+		@since		2018-07-01 14:25:15
+	**/
+	public function mycryptocheckout_use_wallet( $action )
+	{
+		// Since the currency can't hook anything itself, we have to do it for it.
+		$action->currency->use_wallet( $action );
 	}
 }

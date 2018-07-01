@@ -8,4 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'plainview\\sdk_mcc\\' => array($baseDir . '/src/sdk'),
     'mycryptocheckout\\' => array($baseDir . '/src'),
+    'Mdanter\\Ecc\\' => array($vendorDir . '/mdanter/ecc/src'),
+    'FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),
+    'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
+    'BitWasp\\Buffertools\\' => array($vendorDir . '/bitwasp/buffertools/src/Buffertools'),
+    'BitWasp\\Bitcoin\\' => array($vendorDir . '/bitwasp/bitcoin/src'),
 );

@@ -164,12 +164,21 @@ class Wallet
 	}
 
 	/**
-		@brief		Touch the uses of thie wallet.
+		@brief		Touch the uses of this wallet.
 		@since		2017-12-27 11:54:28
 	**/
 	public function use_it()
 	{
 		$this->last_used = time();
 		$this->times_used++;
+
+		$action = MyCryptoCheckout()->new_action( 'use_wallet' );
+		$action->currencies = MyCryptoCheckout()->currencies();
+		$action->currency = $action->currencies->get( $this->currency_id );
+		$action->wallets = MyCryptoCheckout()->wallets();
+		foreach( $action->wallets as $wallet )
+			if ( $wallet == $this )
+				$action->wallet = $wallet;
+		$action->execute();
 	}
 }
