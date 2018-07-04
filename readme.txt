@@ -137,6 +137,7 @@ If your server cannot be reached by the API server this plugin will not function
 * New: Allow alignment selection for donations widget.
 * Fix: Conflict between CSS classes that prevented the "payment complete" tick from appearing. CSS class "hidden" renamed to "mcc_hidden".
 * Fix: Be more insistent sending unsent payments to the API server.
+* Fix: Normalize currency amounts using commas before converting them to crypto amounts.
 
 = 2.10 20180614 =
 

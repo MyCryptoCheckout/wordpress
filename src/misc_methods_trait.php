@@ -100,7 +100,8 @@ trait misc_methods_trait
 			// Currency is gone? Ignore.
 			if ( ! $currency )
 				continue;
-			$amount = $this->markup_amount( $options->amount );
+			$amount = $currency->normalize_amount( $options->amount );
+			$amount = $this->markup_amount( $amount );
 			$cryptocurrency_amount = $currency->convert( $options->original_currency, $amount );
 			$cryptocurrency_amount = $currency->find_next_available_amount( $cryptocurrency_amount );
 

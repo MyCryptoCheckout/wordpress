@@ -23,6 +23,8 @@ class Currency
 		if( $currency == $this->get_id() )
 			return $amount;
 
+		$amount = static::normalize_amount( $amount );
+
 		// Convert to USD.
 		if ( $currency != 'USD' )
 		{
@@ -121,6 +123,38 @@ class Currency
 		if ( isset( $this->name ) )
 			return $this->name;
 		return $this->get_id();
+	}
+
+	/**
+		@brief		Normalize the amount into something that PHP likes to work with.
+		@since		2018-07-04 15:27:07
+	**/
+	public static function normalize_amount( $amount )
+	{
+		$comma = strpos( $amount, ',');
+		$point = strpos( $amount, '.');
+
+		// Is a comma used?
+		if ( $comma !== false )
+		{
+			// Is a point also used?
+			if ( $point !== false )
+			{
+				// The comma is a thousands sep. Remove it.
+				$amount = str_replace( ',', '', $amount );
+			}
+			else
+			{
+				// No point.
+				// Here we are assuming that a ,00 is actually a point in most currencies.
+				if( strrpos( $amount, ',' ) == strlen( $amount ) - 3 )
+				{
+					$amount = str_replace( ',', '.', $amount );
+				}
+				$amount = str_replace( ',', '', $amount );
+			}
+		}
+		return $amount;
 	}
 
 	/**
