@@ -506,7 +506,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( seconds_left < 1 )
 		{
 			clearInterval( $$.payment_timer.timeout_interval );
-			$$.payment_timer.update_status();
+			$$.check_for_payment();
 		}
 
 		// Convert to hours.
