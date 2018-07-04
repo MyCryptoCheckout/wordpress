@@ -12,6 +12,7 @@ use BitWasp\Bitcoin\Key\KeyToScript\KeyToScriptHelper;
 use BitWasp\Bitcoin\Network\NetworkFactory;
 use BitWasp\Bitcoin\Serializer\Key\HierarchicalKey\Base58ExtendedKeySerializer;
 use BitWasp\Bitcoin\Serializer\Key\HierarchicalKey\ExtendedKeySerializer;
+use Exception;
 
 /**
 	@brief		Trait to handle the generation of HD addresses.
@@ -36,19 +37,30 @@ trait btc_hd_public_key_trait
 
 		$adapter = Bitcoin::getEcAdapter();
 		$slip132 = new Slip132(new KeyToScriptHelper($adapter));
-		$bitcoin_prefixes = new BitcoinRegistry();
+
+		switch( $wallet->get_currency_id() )
+		{
+			case 'LTC':
+				$network = NetworkFactory::litecoin();
+				$prefixes = new BitcoinRegistry();
+			break;
+			default:
+				$network = NetworkFactory::bitcoin();
+				$prefixes = new BitcoinRegistry();
+			break;
+		}
 
 		$pubPrefix = '';
 		switch( substr( $public_key, 0, 4 ) )
 		{
 			case 'xpub':
-				$pubPrefix = $slip132->p2pkh($bitcoin_prefixes);
+				$pubPrefix = $slip132->p2pkh($prefixes);
 			break;
 			case 'ypub':
-				$pubPrefix = $slip132->p2shP2wpkh($bitcoin_prefixes);
+				$pubPrefix = $slip132->p2shP2wpkh($prefixes);
 			break;
 			case 'zpub':
-				$pubPrefix = $slip132->p2wpkh($bitcoin_prefixes);
+				$pubPrefix = $slip132->p2wpkh($prefixes);
 			break;
 		}
 
@@ -56,9 +68,9 @@ trait btc_hd_public_key_trait
 			return $address;
 
 		// Max is 2^31 - 1
-		$path = '0/' . rand( 1, 2147483647 );
-
-		$network = NetworkFactory::bitcoin();
+		$path_key = 'btc_hd_public_key_generate_address_path';
+		$path_value = $wallet->get( $path_key, 0 );
+		$path = '0/' . $path_value;
 
 		$config = new GlobalPrefixConfig( [
 		  new NetworkConfig( $network, [
@@ -83,8 +95,20 @@ trait btc_hd_public_key_trait
 	**/
 	public function btc_hd_public_key_use_wallet( $action )
 	{
-		$new_address = $this->btc_hd_public_key_generate_address( $action->wallet );
-		ddd( '%s %s', $action->wallet->address, $new_address );
+		$new_address = $action->wallet->get_address();
+		try
+		{
+			$new_address = $this->btc_hd_public_key_generate_address( $action->wallet );
+		}
+		catch ( Exception $e )
+		{
+		}
 		$action->wallet->address = $new_address;
+
+		// Increse the path value.
+		$path_key = 'btc_hd_public_key_generate_address_path';
+		$path_value = $action->wallet->get( $path_key, 0 );
+		$path_value++;
+		$action->wallet->set( $path_key, $path_value );
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace mycryptocheckout\currencies;
 
-use \Exception;
+use Exception;
 
 /**
 	@brief		The base currency that is loaded into the Currencies collection.

@@ -249,6 +249,7 @@ class WooCommerce
 		$currencies = $mcc->currencies();
 		$currency = $currencies->get( $currency_id );
 		$wallet = $mcc->wallets()->get_dustiest_wallet( $currency_id );
+		$address = $wallet->get_address();
 		$wallet->use_it();
 		$mcc->wallets()->save();
 
@@ -288,7 +289,7 @@ class WooCommerce
 			$order->update_meta_data( '_mcc_payment_timeout_hours', $payment_timeout_hours );
 
 		$order->update_meta_data( '_mcc_payment_id', $payment_id );
-		$order->update_meta_data( '_mcc_to', $wallet->get_address() );
+		$order->update_meta_data( '_mcc_to', $address );
 
 		// We want to keep the account locked, but still enable the is_available gateway check to work for the rest of this session.
 		$this->__just_used = true;
