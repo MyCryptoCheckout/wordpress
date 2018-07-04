@@ -48,6 +48,7 @@ After checkout, payment instructions are automatically included in the purchase 
 - Neo Smart Economy NEO
 - New York Coin NYC
 - Solaris XLR
+- intimate ITM
 - Verge XVG
 - Zcash ZEC
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
@@ -134,6 +135,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New currency: intimate (ITM)
 * New: Allow alignment selection for donations widget.
 * Fix: Conflict between CSS classes that prevented the "payment complete" tick from appearing. CSS class "hidden" renamed to "mcc_hidden".
 * Fix: Be more insistent sending unsent payments to the API server.

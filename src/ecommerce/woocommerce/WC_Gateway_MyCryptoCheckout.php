@@ -58,6 +58,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'ETC' => [],
 			'ETH' => [],
 			'FLIX' => [],
+			'ITM' => [],
 			'LTC' => [],
 			'NEO' => [],
 			'NYC' => [],
