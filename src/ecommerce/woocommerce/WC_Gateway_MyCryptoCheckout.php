@@ -46,6 +46,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'offset_left' => 2.5,
 		];
 		$svg_details = [
+			'1337' => [],
 			'BTC' => [],
 			'BTG' => [],
 			'BCH' => [
@@ -65,6 +66,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'ZEC' => [],
 			'ERC20' => [],
 			'STAKE' => [],
+			'TPAY' => [],
 			'XLR' => [],
 			'XVG' => [],
 			'WRD1' => [],
