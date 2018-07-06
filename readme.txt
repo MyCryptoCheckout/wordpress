@@ -42,6 +42,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Dash DASH
 - Decred DCR
 - Digibyte DGB
+- Elite 1337
 - Ethereum ETH
 - Ethereum Classic ETC
 - Litecoin LTC (Including SegWit addresses)
@@ -49,6 +50,8 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - New York Coin NYC
 - Solaris XLR
 - intimate ITM
+- Straks STAK
+- TokenPay TPAY
 - Verge XVG
 - Zcash ZEC
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
@@ -135,7 +138,10 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
-* New currency: intimate (ITM)
+* New currency: Elite 1337
+* New currency: intimate ITM
+* New currency: Straks STAK
+* New currency: TokenPay TPAY
 * New: Allow alignment selection for donations widget.
 * Fix: Conflict between CSS classes that prevented the "payment complete" tick from appearing. CSS class "hidden" renamed to "mcc_hidden".
 * Fix: Be more insistent sending unsent payments to the API server.
