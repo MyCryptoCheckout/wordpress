@@ -456,7 +456,6 @@ trait admin_trait
 		$currency = $currencies->get( $wallet->get_currency_id() );
 		$form = $this->form();
 		$form->id( 'edit_wallet' );
-		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
 
 		$length = $currency->get_address_length();
@@ -494,6 +493,14 @@ trait admin_trait
 			// Input label
 			->label( __( 'Select as default', 'mycryptocheckout' ) );
 
+		if ( $currency->supports( 'confirmations' ) )
+			$confirmations = $fs->number( 'confirmations' )
+				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer.', 'mycryptocheckout' ) )
+				// Input label
+				->label( __( 'Confirmations', 'mycryptocheckout' ) )
+				->min( 1, 100 )
+				->value( $wallet->confirmations );
+
 		if ( $currency->supports( 'btc_hd_public_key' ) )
 		{
 			if ( ! function_exists( 'gmp_abs' ) )
@@ -530,14 +537,6 @@ trait admin_trait
 		$fs = $form->fieldset( 'fs_optional' );
 		// Fieldset legend
 		$fs->legend->label( __( 'Optional settings', 'mycryptocheckout' ) );
-
-		if ( $currency->supports( 'confirmations' ) )
-			$confirmations = $fs->number( 'confirmations' )
-				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer.', 'mycryptocheckout' ) )
-				// Input label
-				->label( __( 'Confirmations', 'mycryptocheckout' ) )
-				->min( 1, 100 )
-				->value( $wallet->confirmations );
 
 		if ( $this->is_network && is_super_admin() )
 		{
