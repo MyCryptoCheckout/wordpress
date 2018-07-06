@@ -140,6 +140,7 @@ If your server cannot be reached by the API server this plugin will not function
 * Fix: Conflict between CSS classes that prevented the "payment complete" tick from appearing. CSS class "hidden" renamed to "mcc_hidden".
 * Fix: Be more insistent sending unsent payments to the API server.
 * Fix: Normalize currency amounts using commas before converting them to crypto amounts.
+* Fix: Only override payment URL if using MCC. Fixes conflict with some other payment methods.
 
 = 2.10 20180614 =
 
