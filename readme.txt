@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.10
+Stable tag: 2.11
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.4
 
@@ -137,6 +137,8 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations widget
 
 == Changelog ==
+
+= 2.11 20180706 =
 
 * New currency: Elite 1337
 * New currency: intimate ITM
