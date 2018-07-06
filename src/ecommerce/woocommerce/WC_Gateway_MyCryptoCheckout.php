@@ -66,6 +66,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'NYC' => [],
 			'ZEC' => [],
 			'ERC20' => [],
+			'STAK' => [],
 			'STAKE' => [],
 			'TPAY' => [],
 			'XLR' => [],
