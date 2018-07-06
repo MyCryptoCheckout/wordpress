@@ -5,5 +5,8 @@
 			"mycryptocheckout\\" : "src/",
 			"plainview\\sdk_mcc\\" : "src/sdk/"
 		}
+	},
+	"require": {
+		"bitwasp/bitcoin": "^0.0.35"
 	}
 }

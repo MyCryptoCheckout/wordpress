@@ -2,7 +2,7 @@
 
 namespace mycryptocheckout\currencies;
 
-use \Exception;
+use Exception;
 
 /**
 	@brief		The base currency that is loaded into the Currencies collection.
@@ -10,6 +10,7 @@ use \Exception;
 **/
 class Currency
 {
+	use btc_hd_public_key_trait;
 	/**
 		@brief		Convert this amount to this currency.
 		@since		2017-12-10 20:05:14
@@ -208,14 +209,12 @@ class Currency
 	}
 
 	/**
-		@brief		Does this currency support confirmations?
-		@since		2018-01-05 13:46:45
+		@brief		Does this currency support a specific feature?
+		@since		2018-06-30 18:30:33
 	**/
-	public function supports_confirmations()
+	public function supports( $feature )
 	{
-		if ( isset( $this->supports_confirmations ) )
-			return $this->supports_confirmations;
-		return true;
+		return isset( $this->supports->$feature );
 	}
 
 	/**
@@ -259,5 +258,15 @@ class Currency
 				__( 'The address must be exactly %s characters long.', 'mycryptocheckout' ),
 				implode( ' or ', $length )
 			) );
+	}
+
+	/**
+		@brief		Receive the use_wallet action to modify the wallet if necessary.
+		@since		2018-07-01 14:37:48
+	**/
+	public function use_wallet( $action )
+	{
+		if ( $this->supports( 'btc_hd_public_key' ) )
+			$this->btc_hd_public_key_use_wallet( $action );
 	}
 }
