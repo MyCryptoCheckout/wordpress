@@ -47,6 +47,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		];
 		$svg_details = [
 			'1337' => [],
+			'BNB' => [],
 			'BTC' => [],
 			'BTG' => [],
 			'BCH' => [
