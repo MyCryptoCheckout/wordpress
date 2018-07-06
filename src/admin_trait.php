@@ -250,7 +250,9 @@ trait admin_trait
 			// Bulk action for wallets
 			->add( __( 'Disable', 'mycryptocheckout' ), 'disable' )
 			// Bulk action for wallets
-			->add( __( 'Enable', 'mycryptocheckout' ), 'enable' );
+			->add( __( 'Enable', 'mycryptocheckout' ), 'enable' )
+			// Bulk action for wallets
+			->add( __( 'Mark as used', 'mycryptocheckout' ), 'mark_as_used' );
 
 		// Assemble the current wallets into the table.
 		$row = $table->head()->row();
@@ -309,8 +311,11 @@ trait admin_trait
 			->label( __( 'Currency', 'mycryptocheckout' ) );
 		$this->currencies()->add_to_select_options( $wallet_currency );
 
+		$text = __( 'The address of your wallet to which you want to receive funds.', 'mycryptocheckout' );
+		$text .= ' ';
+		$text .= __( 'If your currency has HD wallet support, you can add your public key when editing the wallet.', 'mycryptocheckout' );
 		$wallet_address = $fs->text( 'wallet_address' )
-			->description( __( 'The address of your wallet to which you want to receive funds.', 'mycryptocheckout' ) )
+			->description( $text )
 			// Input label
 			->label( __( 'Address', 'mycryptocheckout' ) )
 			->required()
@@ -357,6 +362,16 @@ trait admin_trait
 						}
 						$wallets->save();
 						$r .= $this->info_message_box()->_( __( 'The selected wallets have been disabled.', 'mycryptocheckout' ) );
+					break;
+					case 'mark_as_used':
+						$ids = $table->bulk_actions()->get_rows();
+						foreach( $ids as $id )
+						{
+							$wallet = $wallets->get( $id );
+							$wallet->use_it();
+						}
+						$wallets->save();
+						$r .= $this->info_message_box()->_( __( 'The selected wallets have been marked as used.', 'mycryptocheckout' ) );
 					break;
 				}
 				$reshow = true;
@@ -454,7 +469,11 @@ trait admin_trait
 			$length = $max;
 		}
 
-		$wallet_address = $form->text( 'wallet_address' )
+		$fs = $form->fieldset( 'fs_basic' );
+		// Fieldset legend
+		$fs->legend->label( __( 'Basic settings', 'mycryptocheckout' ) );
+
+		$wallet_address = $fs->text( 'wallet_address' )
 			->description( __( 'The address of your wallet to which you want to receive funds.', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Address', 'mycryptocheckout' ) )
@@ -463,6 +482,18 @@ trait admin_trait
 			->trim()
 			->value( $wallet->get_address() );
 
+		$wallet_enabled = $fs->checkbox( 'wallet_enabled' )
+			->checked( $wallet->enabled )
+			->description( __( 'Is this wallet enabled and ready to receive funds?', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Enabled', 'mycryptocheckout' ) );
+
+		$preselected = $fs->checkbox( 'preselected' )
+			->checked( $wallet->get( 'preselected', false ) )
+			->description( __( 'Make this the default currency that is selected during checkout.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Select as default', 'mycryptocheckout' ) );
+
 		if ( $currency->supports( 'btc_hd_public_key' ) )
 		{
 			if ( ! function_exists( 'gmp_abs' ) )
@@ -470,40 +501,38 @@ trait admin_trait
 					->markup( __( 'This wallet supports HD public keys, but your system is missing the required PHP GMP libary.', 'mycryptocheckout' ) );
 			else
 			{
-				$btc_hd_public_key = $form->text( 'btc_hd_public_key' )
+				$fs = $form->fieldset( 'fs_btc_hd_public_key' );
+				// Fieldset legend
+				$fs->legend->label( __( 'HD wallet settings', 'mycryptocheckout' ) );
+
+				$btc_hd_public_key = $fs->text( 'btc_hd_public_key' )
 					->description( __( 'If you have an HD wallet and want to generate a new address after each purchase, enter your XPUB, YPUB or ZPUB public key here.', 'mycryptocheckout' ) )
 					// Input label
 					->label( __( 'HD public key', 'mycryptocheckout' ) )
 					->trim()
 					->size( 128 )
 					->value( $wallet->get( 'btc_hd_public_key' ) );
+
 				$path = $wallet->get( 'btc_hd_public_key_generate_address_path', 0 );
-				$btc_hd_public_key_generate_address_path = $form->number( 'btc_hd_public_key_generate_address_path' )
-					->description( __( 'The index of the next public wallet address to use. The default is 0 and gets increased each time the wallet is used.', 'mycryptocheckout' ) )
+				$btc_hd_public_key_generate_address_path = $fs->number( 'btc_hd_public_key_generate_address_path' )
+					->description( __( "The index of the next public wallet address to use. The default is 0 and gets increased each time the wallet is used. This is related to your wallet's gap length.", 'mycryptocheckout' ) )
 					// Input label
 					->label( __( 'Wallet index', 'mycryptocheckout' ) )
 					->min( 0 )
 					->value( $path );
+
 				$new_address = $currency->btc_hd_public_key_generate_address( $wallet );
-				$form->markup( 'm_btc_hd_public_key_generate_address_path' )
+				$fs->markup( 'm_btc_hd_public_key_generate_address_path' )
 					->p( __( 'The address at index %d is %s.', 'mycryptocheckout' ), $path, $new_address );
 			}
 		}
 
-		$wallet_enabled = $form->checkbox( 'wallet_enabled' )
-			->checked( $wallet->enabled )
-			->description( __( 'Is this wallet enabled and ready to receive funds?', 'mycryptocheckout' ) )
-			// Input label
-			->label( __( 'Enabled', 'mycryptocheckout' ) );
-
-		$preselected = $form->checkbox( 'preselected' )
-			->checked( $wallet->get( 'preselected', false ) )
-			->description( __( 'Make this the default currency that is selected during checkout.', 'mycryptocheckout' ) )
-			// Input label
-			->label( __( 'Select as default', 'mycryptocheckout' ) );
+		$fs = $form->fieldset( 'fs_optional' );
+		// Fieldset legend
+		$fs->legend->label( __( 'Optional settings', 'mycryptocheckout' ) );
 
 		if ( $currency->supports( 'confirmations' ) )
-			$confirmations = $form->number( 'confirmations' )
+			$confirmations = $fs->number( 'confirmations' )
 				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer.', 'mycryptocheckout' ) )
 				// Input label
 				->label( __( 'Confirmations', 'mycryptocheckout' ) )
@@ -512,13 +541,13 @@ trait admin_trait
 
 		if ( $this->is_network && is_super_admin() )
 		{
-			$wallet_on_network = $form->checkbox( 'wallet_on_network' )
+			$wallet_on_network = $fs->checkbox( 'wallet_on_network' )
 				->checked( $wallet->network )
 				->description( __( 'Do you want the wallet to be available on the whole network?', 'mycryptocheckout' ) )
 				// Input label
 				->label( __( 'Network wallet', 'mycryptocheckout' ) );
 
-			$sites = $form->select( 'site_ids' )
+			$sites = $fs->select( 'site_ids' )
 				->description( __( 'If not network enabled, on which sites this wallet should be available.', 'mycryptocheckout' ) )
 				// Input label
 				->label( __( 'Sites', 'mycryptocheckout' ) )
