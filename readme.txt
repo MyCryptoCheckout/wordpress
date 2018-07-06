@@ -18,15 +18,15 @@ MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and Easy Di
 
 - 0% transaction fees
 - No product restrictions
+- Peer-to-peer transactions
 - Use any wallet(s) you want: desktop, mobile or online
-- Fully automated peer-to-peer transactions
+- Automagically detect unique payments from an endless amount of customers using one wallet address
+- Optional Electrum HD wallet support for Bitcoin
 - No redirection to 3rd parties, no iframes nor modal windows
-- See the <a href="https://mycryptocheckout.com/comparison/">feature comparison table</a> on our website to see why you should use MyCryptoCheckout instead of other crypto payment gateways.
-- Donations shortcode generator you can use in widgets and pages to show your users how to send cryptocurrency donations.
+- Donations shortcode generator you can use in widgets and pages to show your users how to send cryptocurrency donations
+- See the full <a href="https://mycryptocheckout.com/comparison/">feature comparison table</a> on our website to see why you should use MyCryptoCheckout instead of other crypto payment gateways
 
 The free license can process three sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account if you require more. The flat rate license includes unlimited transactions. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
-
-After checkout, payment instructions are automatically included in the purchase receipt.
 
 = Webshops supported =
 
@@ -35,7 +35,7 @@ After checkout, payment instructions are automatically included in the purchase 
 
 = Cryptocurrencies supported: =
 
-- Bitcoin BTC (Including SegWit addresses)
+- Bitcoin BTC (Including SegWit addresses, Electrum HD wallet)
 - Bitcoin Cash BCH
 - Bitcoin Gold BTG
 - ColossusXT COLX
