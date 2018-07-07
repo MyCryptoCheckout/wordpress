@@ -534,12 +534,12 @@ trait admin_trait
 			}
 		}
 
-		$fs = $form->fieldset( 'fs_optional' );
-		// Fieldset legend
-		$fs->legend->label( __( 'Optional settings', 'mycryptocheckout' ) );
-
 		if ( $this->is_network && is_super_admin() )
 		{
+			$fs = $form->fieldset( 'fs_network' );
+			// Fieldset legend
+			$fs->legend->label( __( 'Network settings', 'mycryptocheckout' ) );
+
 			$wallet_on_network = $fs->checkbox( 'wallet_on_network' )
 				->checked( $wallet->network )
 				->description( __( 'Do you want the wallet to be available on the whole network?', 'mycryptocheckout' ) )
