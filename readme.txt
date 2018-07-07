@@ -46,6 +46,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Ethereum ETH
 - Ethereum Classic ETC
 - Litecoin LTC (Including SegWit addresses)
+- MarsCoin MARS
 - Neo Smart Economy NEO
 - New York Coin NYC
 - Solaris XLR
@@ -142,6 +143,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 * New currency: Elite 1337
 * New currency: intimate ITM
+* New currency: MarsCoin MARS
 * New currency: Straks STAK
 * New currency: TokenPay TPAY
 * New: Allow alignment selection for donations widget.
