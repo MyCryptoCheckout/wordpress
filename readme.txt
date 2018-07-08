@@ -21,7 +21,7 @@ MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and Easy Di
 - Peer-to-peer transactions
 - Use any wallet(s) you want: desktop, mobile or online
 - Automagically detect unique payments from an endless amount of customers using one wallet address
-- Optional Electrum HD wallet support for Bitcoin
+- Optional hierarchically deterministic (HD) wallet support
 - No redirection to 3rd parties, no iframes nor modal windows
 - Donations shortcode generator you can use in widgets and pages to show your users how to send cryptocurrency donations
 - See the full <a href="https://mycryptocheckout.com/comparison/">feature comparison table</a> on our website to see why you should use MyCryptoCheckout instead of other crypto payment gateways
@@ -65,6 +65,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Augur REP
 - Bancor BNT
 - Basic Attention Token BAT
+- Binance Coin BNB
 - Dai Stablecoin DAI
 - Digix Global DGD
 - Dragonchain DRGN
@@ -142,6 +143,7 @@ If your server cannot be reached by the API server this plugin will not function
 = 2.11 20180706 =
 
 * New currency: Elite 1337
+* New currency: Binance Coin BNB
 * New currency: intimate ITM
 * New currency: MarsCoin MARS
 * New currency: Straks STAK
