@@ -9,31 +9,36 @@ namespace mycryptocheckout\api;
 class Payment
 {
 	/**
-		@brief		The amount to watch for as a string.
+		@brief		The cryptocurrency amount to watch for as a string.
+		@details	"4.223432" or "12" or "5000000"
+					We use strings since floats are awfully unreliable.
 		@since		2017-12-21 23:36:58
 	**/
 	public $amount;
 
 	/**
 		@brief		How many confirmations to require to be regarded as paid.
+		@details	Default is 1.
 		@since		2017-12-24 12:14:06
 	**/
 	public $confirmations;
 
 	/**
-		@brief		When this payment was created.
+		@brief		Unix time when this payment was created.
 		@since		2017-12-24 11:46:54
 	**/
 	public $created_at;
 
 	/**
-		@brief		The ID of the currency we are expecting the payment in.
+		@brief		The ID of the currency we are expecting the payment in: BTC, ETH, etc.
 		@since		2017-12-21 23:36:56
 	**/
 	public $currency_id;
 
 	/**
 		@brief		Any extra data we want to send to the server.
+		@see		data()
+		@see		Payment_Data
 		@since		2017-12-30 19:41:56
 	**/
 	public $data;
@@ -46,13 +51,14 @@ class Payment
 	public $timeout_hours = 0;
 
 	/**
-		@brief		The address to which we are expecting payment.
+		@brief		The wallet address to which we are expecting payment.
 		@since		2017-12-21 23:36:54
 	**/
 	public $to;
 
 	/**
-		@brief		Return the data handling object for this payment.
+		@brief		Convenience method to return the data handling object for this payment.
+		@see		Payment_Data
 		@since		2017-12-30 19:45:00
 	**/
 	public function data()
@@ -62,6 +68,7 @@ class Payment
 
 	/**
 		@brief		Replace the instruction shortcodes in this instruction string.
+		@details	Used to replace shortcodes in webshop payment instructions.
 		@since		2018-01-03 12:05:12
 	**/
 	public function replace_shortcodes( $instructions )

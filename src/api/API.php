@@ -218,17 +218,4 @@ class API
 		$data[ 'domain_key' ] = $account->get_domain_key();
 		return $this->send_post( $url, $data );
 	}
-
-	/**
-		@brief		Return the transactions component.
-		@since		2017-12-11 14:05:32
-	**/
-	public function transactions()
-	{
-		if ( isset( $this->__transactions ) )
-			return $this->__transactions;
-
-		$this->__transactions = new Transactions( $this );
-		return $this->__transactions;
-	}
 }
