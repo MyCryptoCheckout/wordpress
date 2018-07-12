@@ -79,6 +79,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - MetalPay MTL
 - Nebulas NAS
 - Omisego OMG
+- onG.social ONG
 - Populous PPT
 - Qash
 - Qtum
@@ -139,6 +140,8 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations widget
 
 == Changelog ==
+
+* New currency: onG.social ONG
 
 = 2.11 20180706 =
 
