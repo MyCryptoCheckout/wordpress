@@ -1,0 +1,28 @@
+<g
+   transform="matrix(1,0,0,1,MCC_OFFSET,8.95)">
+      <circle
+         style="stroke-width:2.96875"
+         id="circle4548"
+         r="47.5"
+         cy="42.588928"
+         cx="50" />
+      <circle
+         id="circle4550"
+         r="7.534688"
+         cy="16.856936"
+         cx="50"
+         class="cls-1"
+         style="fill:#ffffff;stroke-width:2.96875" />
+      <path
+         id="path4552"
+         d="m 69.451846,47.85637 c 0.05167,-0.55219 0.08254,-1.1097 0.08254,-1.67437 A 19.097079,19.097079 0 0 0 50.000019,27.55456 19.097079,19.097079 0 0 0 30.465641,46.1811 c 0,0.56405 0.02967,1.12218 0.08253,1.67437 z"
+         class="cls-1"
+         inkscape:connector-curvature="0"
+         style="fill:#ffffff;stroke-width:2.96875" />
+      <path
+         id="path4554"
+         d="M 69.251754,47.85637 A 18.754485,18.754485 0 0 1 50.000004,63.08844 18.754485,18.754485 0 0 1 30.748251,47.85637 H 15.370126 A 34.835907,34.835907 0 0 0 50.000004,75.85553 34.835907,34.835907 0 0 0 84.628985,47.85637 Z"
+         class="cls-1"
+         inkscape:connector-curvature="0"
+         style="fill:#ffffff;stroke-width:2.96875" />
+    </g>
