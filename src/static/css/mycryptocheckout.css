@@ -87,6 +87,9 @@
   height: 100%;
   width: auto; }
 
+.woocommerce-checkout #payment ul.wc_payment_methods li.payment_method_mycryptocheckout label {
+  overflow: auto; }
+
 .mycryptocheckout.mcc_donations img.mcc_donation_icon {
   width: 40px;
   height: auto;
