@@ -50,7 +50,6 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Neo Smart Economy NEO
 - New York Coin NYC
 - Solaris XLR
-- intimate ITM
 - Straks STAK
 - TokenPay TPAY
 - Verge XVG
@@ -74,13 +73,17 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Gifto GTO
 - Golem GNT
 - Icon ICX
+- intimate ITM
 - Kyber Network Crystal KNC
+- Loom
 - Maker MKR
 - MetalPay MTL
+- Monaco MCO
 - Nebulas NAS
 - Omisego OMG
 - onG.social ONG
 - Populous PPT
+- Pundi X Token NPXS
 - Qash
 - Raiden RDN
 - Request Network REQ
@@ -88,6 +91,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - StakeIt STAKE
 - Status Network SNT
 - Storm
+- TenXPay PAY
 - Veritaseum VERI
 - Worldcoin1 WRD1
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
@@ -138,6 +142,11 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations widget
 
 == Changelog ==
+
+* New currency: Loom
+* New currency: Monaco MCO
+* New currency: TenXPay PAY
+* New currency: Pundi X Token PNXS
 
 = 2.12 20180713 =
 

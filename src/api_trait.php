@@ -53,12 +53,18 @@ trait api_trait
 		try
 		{
 			$this->api()->process_messages( $json );
-			wp_send_json( [ 'result' => 'ok' ] );
+			// wp_send_json( [ 'result' => 'ok' ] );
+			@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+			echo wp_json_encode( [ 'result' => 'ok' ] );
+			exit;
 		}
 		catch ( api\Exception $e )
 		{
 			$this->debug( 'API failure: %s', $e->get_message() );
-			wp_send_json( [ 'result' => 'fail', 'message' => $e->get_message() ] );
+			// wp_send_json( [ 'result' => 'fail', 'message' => $e->get_message() ] );
+			@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+			echo wp_json_encode( [ 'result' => 'fail', 'message' => $e->get_message() ] );
+			exit;
 		}
 		exit;
 	}
