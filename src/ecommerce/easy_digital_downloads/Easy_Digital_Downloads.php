@@ -313,7 +313,7 @@ class Easy_Digital_Downloads
 			'mcc_payment_timeout_hours' =>
 			[
 				'id'   => 'mcc_payment_timeout_hours',
-				'default' => 6,
+				'default' => 2,
 				'desc' => __( 'How many hours to wait for the payment to come through before marking the order as abandoned.', 'mycryptocheckout' ),
 				'name' => __( 'Payment timeout', 'mycryptocheckout' ),
 				'size' => 'regular',

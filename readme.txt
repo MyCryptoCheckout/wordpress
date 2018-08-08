@@ -147,6 +147,7 @@ If your server cannot be reached by the API server this plugin will not function
 * New currency: Monaco MCO
 * New currency: TenXPay PAY
 * New currency: Pundi X Token PNXS
+* Default payment timer for new installs is now 2 hours instead of 6.
 
 = 2.12 20180713 =
 
