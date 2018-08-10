@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.12
+Stable tag: 2.13
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.4
 
@@ -47,6 +47,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Ethereum Classic ETC
 - Litecoin LTC (Including SegWit addresses)
 - MarsCoin MARS
+- NEM XEM
 - Neo Smart Economy NEO
 - New York Coin NYC
 - Solaris XLR
@@ -145,6 +146,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 * New currency: Loom
 * New currency: Monaco MCO
+* New currency: NEM XEM
 * New currency: TenXPay PAY
 * New currency: Pundi X Token PNXS
 * Default payment timer for new installs is now 2 hours instead of 6.
