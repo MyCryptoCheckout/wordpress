@@ -47,7 +47,7 @@ class WooCommerce
 		if ( ! $currency )
 			return;
 		// Get the WC decimal precision.
-		$wc_decimals = woocommerce_settings_get_option( 'woocommerce_price_num_decimals' );
+		$wc_decimals = get_option( 'woocommerce_price_num_decimals' );
 		if ( $wc_decimals == $currency->decimal_precision )
 			return;
 		throw new Exception( sprintf( "Since you are using virtual currency %s as your WooCommerce currency, please change the decimal precision from %s to match MyCyyptoCheckout's: %s", $wc_currency, $wc_decimals, $currency->decimal_precision ) );

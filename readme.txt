@@ -145,6 +145,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Fix woocommerce_settings_get_option error on some installs.
+
 = 2.14 20180813 =
 
 * New currency: Tron TRX
