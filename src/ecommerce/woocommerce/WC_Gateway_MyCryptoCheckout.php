@@ -75,6 +75,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'STAK' => [],
 			'STAKE' => [],
 			'TPAY' => [],
+			'TRX' => [],
 			'XEM' => [],
 			'XLR' => [],
 			'XVG' => [],

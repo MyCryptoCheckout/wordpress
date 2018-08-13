@@ -53,6 +53,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Solaris XLR
 - Straks STAK
 - TokenPay TPAY
+- Tron TRX
 - Verge XVG
 - Zcash ZEC
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
@@ -143,6 +144,10 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations widget
 
 == Changelog ==
+
+* New currency: Tron TRX
+
+= 2.13 20180810 =
 
 * New currency: Loom
 * New currency: Monaco MCO
