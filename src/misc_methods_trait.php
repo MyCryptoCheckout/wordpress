@@ -218,14 +218,26 @@ trait misc_methods_trait
 	**/
 	public static function increase_floating_point_number( $number, $precision )
 	{
+		// Remove the thousands separator if there is one.
+		if ( strpos( $number, ',' ) !== false )
+			if ( strpos( $number, '.' ) !== false )
+				$number = str_replace( ',', '', $number );
+
 		// Convert the number to a nice string.
-		$number = number_format( $number, $precision );
+		$number = number_format( $number, $precision, '.', '' );
 
 		$decimal = strpos( $number, '.');
 		if ( $decimal === false )
 		{
 			// No decimals = easy increase.
-			$padded_precision = str_pad( 1, $precision, '0', STR_PAD_LEFT );
+			if ( $precision == 0 )
+			{
+				$number++;
+				$padded_precision = '';
+			}
+			else
+				$padded_precision = str_pad( 1, $precision, '0', STR_PAD_LEFT );
+
 			$number = $number . '.' . $padded_precision;
 		}
 		else
@@ -257,7 +269,6 @@ trait misc_methods_trait
 				if ( $fraction == 0 )
 					$whole++;
 			}
-
 
 			$number = sprintf( '%s.%s', $whole, $fraction );
 		}

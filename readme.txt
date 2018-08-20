@@ -147,6 +147,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 * Fix woocommerce_settings_get_option error on some installs.
 * Currency disabled: NEO
+* Fix removal of thousands separator when sending the amount to the API.
 
 = 2.14 20180813 =
 
