@@ -99,7 +99,7 @@ trait admin_trait
 		catch ( Exception $e )
 		{
 			$message = sprintf( '%s: %s',
-				__( 'Payments using MyCryptoCheckout are currently not available', 'woocommerce' ),
+				__( 'Payments using MyCryptoCheckout are currently not available', 'mycryptocheckout' ),
 				$e->getMessage()
 			);
 			$r .= $this->error_message_box()->_( $message );
