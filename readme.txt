@@ -146,6 +146,7 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * Fix woocommerce_settings_get_option error on some installs.
+* Currency disabled: NEO
 
 = 2.14 20180813 =
 
