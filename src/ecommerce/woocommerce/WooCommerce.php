@@ -311,7 +311,7 @@ class WooCommerce
 
 		$gateway = \WC_Gateway_MyCryptoCheckout::instance();
 		$send_new_order_invoice = $gateway->get_option( 'send_new_order_invoice' );
-		if ( $send_new_order_invoice )
+		if ( $send_new_order_invoice != 'no' )
 			WC()->mailer()->customer_invoice( $order );
 	}
 

@@ -14,6 +14,8 @@ Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads.
 
 MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. It allows you to receive coins directly into the wallet of your choice.
 
+https://www.youtube.com/watch?v=nUoJ9ziaAJQ
+
 = Key Features & Highlights =
 
 - 0% transaction fees
@@ -70,6 +72,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Dai Stablecoin DAI
 - Digix Global DGD
 - Dragonchain DRGN
+- eBitcoin EBTC
 - Flix FLIX
 - FunFair FUN
 - Gifto GTO
@@ -145,6 +148,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New currency: eBitcoin EBTC
 * Fix woocommerce_settings_get_option error on some installs.
 * Currency disabled: NEO
 * Fix removal of thousands separator when sending the amount to the API.
