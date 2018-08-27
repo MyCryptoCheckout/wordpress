@@ -395,6 +395,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'default' => reset( $preselected_currencies ),
 			'label' => esc_html__( $this->get_option( 'currency_selection_text' ) ),
 			'options' => $this->get_wallet_options(),
+			'required' => true,
 		] );
 	}
 
