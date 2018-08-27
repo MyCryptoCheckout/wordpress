@@ -8,11 +8,11 @@ Stable tag: 2.14
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.4
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 55+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
-MyCryptoCheckout is a cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. It allows you to receive coins directly into the wallet of your choice.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 55+ coins: Bitcoin, Ethereum, Litecoin, and more. Receive coins directly into the wallet of your choice.
 
 https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 
@@ -150,6 +150,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 * New currency: eBitcoin EBTC
 * Fix woocommerce_settings_get_option error on some installs.
+* Fix Woocommerce checkout "optional" text. It should be required, of course.
 * Currency disabled: NEO
 * Fix removal of thousands separator when sending the amount to the API.
 
