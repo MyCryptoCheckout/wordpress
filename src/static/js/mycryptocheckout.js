@@ -319,6 +319,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 	$$.data = data;
 	$$.$div = $( '.mcc.online_payment_instructions' );
 	$$.$online_pay_box = $( '.mcc_online_pay_box', $$.$div );
+	$$.mycryptocheckout_checkout_data = false;
 
 	/**
 		@brief		Check to see whether the order was paid, and cleanup in that case.
@@ -342,9 +343,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 				document.location = url;
 			}
 
-			var mycryptocheckout_checkout_data = $mycryptocheckout_checkout_data.data( 'mycryptocheckout_checkout_data' );
-			mycryptocheckout_checkout_data = atob( mycryptocheckout_checkout_data );
-			mycryptocheckout_checkout_data = jQuery.parseJSON( mycryptocheckout_checkout_data );
+			var mycryptocheckout_checkout_data = $$.extract_data( $mycryptocheckout_checkout_data );
 			if ( mycryptocheckout_checkout_data[ 'paid' ] === undefined )
 				return;
 
@@ -355,14 +354,28 @@ var mycryptocheckout_checkout_javascript = function( data )
 		} );
 	}
 
+	/**
+		@brief		Extract and convert the checkout data into a json object.
+		@since		2018-08-27 20:54:33
+	**/
+	$$.extract_data = function( $div )
+	{
+		var data = $div.data( 'mycryptocheckout_checkout_data' );
+		data = atob( data );
+		data = jQuery.parseJSON( data );
+		return data;
+	}
+
 	$$.init = function()
 	{
 		if ( $$.$div.length < 1 )
 			return;
 		$$.$div.addClass( 'mycryptocheckout' );
+		$$.mycryptocheckout_checkout_data = $$.extract_data( $( '#mycryptocheckout_checkout_data' ) );
 		$$.clipboard_inputs();
 		$$.maybe_hide_woocommerce_order_overview();
 		$$.maybe_upgrade_divs();
+		$$.maybe_metamask();
 		$$.maybe_generate_qr_code();
 		$$.maybe_generate_payment_timer();
 	}
@@ -469,6 +482,51 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( $$.data.hide_woocommerce_order_overview === undefined )
 			return;
 		$( '.woocommerce-order-overview' ).hide();
+	}
+
+	/**
+		@brief		Maybe generate a metamask payment link.
+		@since		2018-08-27 20:42:19
+	**/
+	$$.maybe_metamask = function()
+	{
+		if ( $$.$online_pay_box.length < 1 )
+			return;
+
+		// web3 must be supported.
+		if ( typeof web3 === 'undefined' )
+			return;
+
+		// The data must support metamask.
+		if( typeof $$.mycryptocheckout_checkout_data.supports === 'undefined' )
+			return;
+		if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined' )
+			return;
+
+		// User must have at least one account enabled.
+		if ( web3.eth.accounts.length < 1 )
+			return;
+
+		var $div = $( '<div class="metamask_payment">Pay with Metamask</div>' );
+		$div.appendTo( $$.$online_pay_box );
+
+		$div.click( function()
+		{
+			var user_address = web3.eth.accounts[0];
+			web3.eth.sendTransaction(
+			{
+				from: user_address,
+				to: $$.mycryptocheckout_checkout_data.to,
+				value: web3.toWei(
+					$$.mycryptocheckout_checkout_data.amount,
+					$$.mycryptocheckout_checkout_data.supports.metamask_currency
+				),
+			}, function (err, transactionHash )
+			{
+				// No error logging for now.
+			}
+			);
+		} );
 	}
 
 	/**
