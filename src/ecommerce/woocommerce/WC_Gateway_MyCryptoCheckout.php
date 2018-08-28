@@ -58,6 +58,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'DCR' => [],
 			'DGB' => [],
 			'EBTC' => [],
+			'ERC20' => [],
 			'ETC' => [],
 			'ETH' => [],
 			'FLIX' => [],
@@ -71,8 +72,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'NYC' => [],
 			'ONG' => [],
 			'PAY' => [],
-			'ZEC' => [],
-			'ERC20' => [],
+			'SHEL' => [],
 			'STAK' => [],
 			'STAKE' => [],
 			'TPAY' => [],
@@ -81,6 +81,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'XLR' => [],
 			'XVG' => [],
 			'WRD1' => [],
+			'ZEC' => [],
 		];
 		$wallet_options = $this->get_wallet_options();
 		$output = file_get_contents( $dir . 'icon_base.svg' );
@@ -370,7 +371,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$action->data->set( 'supports', $currency->supports );
 
 		if ( isset( $payment->paid ) )
-			$action->data->set( 'paid', true );
+			$action->data->set( 'paid', $payment->paid );
 
 		$action->data->set( 'timeout_hours', $payment->timeout_hours );
 		$action->data->set( 'to', $payment->to );
@@ -490,7 +491,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
 		$this->__current_payment = $payment;
 		if ( ! $order->needs_payment() )
-			$payment->paid = true;
+			$payment->paid = $order->is_paid();
 		$instructions = $payment->replace_shortcodes( $instructions );
 		if ( ! $instructions )
 			return;

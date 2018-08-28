@@ -341,11 +341,18 @@ var mycryptocheckout_checkout_javascript = function( data )
 			{
 				// Something went wrong.
 				document.location = url;
+				return;
 			}
 
 			var mycryptocheckout_checkout_data = $$.extract_data( $mycryptocheckout_checkout_data );
 			if ( mycryptocheckout_checkout_data[ 'paid' ] === undefined )
 				return;
+
+			if ( mycryptocheckout_checkout_data[ 'paid' ] === false )
+			{
+				document.location = url;
+				return;
+			}
 
 			// Stop the countdown and show the paid div.
 			clearInterval( $$.payment_timer.timeout_interval );
@@ -375,9 +382,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.clipboard_inputs();
 		$$.maybe_hide_woocommerce_order_overview();
 		$$.maybe_upgrade_divs();
-		$$.maybe_metamask();
 		$$.maybe_generate_qr_code();
 		$$.maybe_generate_payment_timer();
+		$$.maybe_metamask();
 	}
 
 	/**
@@ -503,11 +510,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined' )
 			return;
 
-		// User must have at least one account enabled.
-		if ( web3.eth.accounts.length < 1 )
-			return;
-
-		var $div = $( '<div class="metamask_payment">Pay with Metamask</div>' );
+		var $div = $( '<div class="metamask_payment"></div>' );
 		$div.appendTo( $$.$online_pay_box );
 
 		$div.click( function()
@@ -515,7 +518,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			var user_address = web3.eth.accounts[0];
 			web3.eth.sendTransaction(
 			{
-				from: user_address,
+				// From is not necessary.
 				to: $$.mycryptocheckout_checkout_data.to,
 				value: web3.toWei(
 					$$.mycryptocheckout_checkout_data.amount,
