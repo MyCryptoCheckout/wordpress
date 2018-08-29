@@ -1,12 +1,12 @@
-=== MyCryptoCheckout - Accept 55+ coins: Bitcoin, Ethereum, Litecoin, and more ===
+=== MyCryptoCheckout - Accept 55+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.14
+Stable tag: 2.15
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 4.9.4
+Tested up to: 4.9.8
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 55+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -153,8 +153,11 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+= 2.15 20180829 =
+
 * New currency: eBitcoin EBTC
 * New currency: shelterDAO SHEL
+* New: WooCommerce Metamask payment support on checkout. The MetaMask button is automatically shown during checkout if detected.
 * Fix woocommerce_settings_get_option error on some installs.
 * Fix Woocommerce checkout "optional" text. It should be required, of course.
 * Fix removal of thousands separator when sending the amount to the API.
