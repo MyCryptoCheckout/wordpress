@@ -156,6 +156,7 @@ If your server cannot be reached by the API server this plugin will not function
 * New currency: eBitcoin EBTC
 * Fix woocommerce_settings_get_option error on some installs.
 * Fix Woocommerce checkout "optional" text. It should be required, of course.
+* Fix WooCommerce showing canceled orders as paid on the front-end if the user waits until the order times out.
 * Currency disabled: NEO
 * Fix removal of thousands separator when sending the amount to the API.
 
