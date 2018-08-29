@@ -6,7 +6,7 @@ Requires at least: 4.9
 Requires PHP: 5.4
 Stable tag: 2.14
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 4.9.4
+Tested up to: 4.9.8
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 55+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -100,6 +100,11 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Veritaseum VERI
 - Worldcoin1 WRD1
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
+
+= NEM Mosaic tokens supported: =
+
+- shelterDAO SHEL
+- We can now add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
 = Cryptocurrency Donations Widget =
 
