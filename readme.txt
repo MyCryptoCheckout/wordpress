@@ -6,7 +6,7 @@ Requires at least: 4.9
 Requires PHP: 5.4
 Stable tag: 2.14
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 4.9.8
+Tested up to: 4.9.4
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 55+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -154,11 +154,11 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * New currency: eBitcoin EBTC
+* New currency: shelterDAO SHEL
 * Fix woocommerce_settings_get_option error on some installs.
 * Fix Woocommerce checkout "optional" text. It should be required, of course.
-* Fix WooCommerce showing canceled orders as paid on the front-end if the user waits until the order times out.
-* Currency disabled: NEO
 * Fix removal of thousands separator when sending the amount to the API.
+* Currency disabled: NEO
 
 = 2.14 20180813 =
 
