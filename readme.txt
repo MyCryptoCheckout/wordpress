@@ -45,7 +45,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Decred DCR
 - Digibyte DGB
 - Elite 1337
-- Ethereum ETH
+- Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
 - Litecoin LTC (Including SegWit addresses)
 - MarsCoin MARS
