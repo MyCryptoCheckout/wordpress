@@ -43,7 +43,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - ColossusXT COLX
 - Dash DASH
 - Decred DCR
-- Digibyte DGB
+- Digibyte DGB (Including SegWit addresses)
 - Elite 1337
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
@@ -77,6 +77,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - FunFair FUN
 - Gifto GTO
 - Golem GNT
+- Huobi Token HT
 - Icon ICX
 - intimate ITM
 - Kyber Network Crystal KNC
