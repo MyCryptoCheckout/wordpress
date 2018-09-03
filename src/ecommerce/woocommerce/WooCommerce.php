@@ -111,6 +111,7 @@ class WooCommerce
 			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as cancelled.', $order_id, get_current_blog_id() );
 			update_post_meta( $order_id, '_mcc_payment_id', -1 );
 			$order->update_status( 'cancelled', 'Payment timed out.' );
+			do_action( 'woocommerce_cancelled_order', $order->get_id() );
 		} );
 	}
 

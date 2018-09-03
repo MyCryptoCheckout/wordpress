@@ -154,6 +154,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Fix: Woocommerce: Fire woocommerce_cancelled_order action upon cancelling the order.
+
 = 2.15 20180829 =
 
 * New currency: eBitcoin EBTC
