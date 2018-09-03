@@ -57,7 +57,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - TokenPay TPAY
 - Tron TRX
 - Verge XVG
-- ViaToken VIA
+- Viacoin VIA
 - Zcash ZEC
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
@@ -95,6 +95,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Raiden RDN
 - Request Network REQ
 - Salt
+- shelterDAO SHEL
 - StakeIt STAKE
 - Status Network SNT
 - Storm
@@ -156,7 +157,7 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * New currency: Huobi Token HT
-* New currency: ViaToken VIA
+* New currency: Viacoin VIA
 * Fix: Woocommerce: Fire woocommerce_cancelled_order action upon cancelling the order.
 
 = 2.15 20180829 =
