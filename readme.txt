@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.15
+Stable tag: 2.16
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
@@ -95,6 +95,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Raiden RDN
 - Request Network REQ
 - Salt
+- shelterDAO SHEL
 - StakeIt STAKE
 - Status Network SNT
 - Storm
@@ -107,6 +108,9 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 
 - shelterDAO SHEL
 - We can now add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
+
+= TRON TRC-20 Tokens supported: =
+- We can now add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON TRC-20 tokens</a>!
 
 = Cryptocurrency Donations Widget =
 
@@ -155,9 +159,14 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+= 2.16 20180904 =
+
 * New currency: Huobi Token HT
 * New currency: Viacoin VIA
 * Fix: Woocommerce: Fire woocommerce_cancelled_order action upon cancelling the order.
+* Fix: EDD: Fix checkout QR code.
+* Fix: EDD: Don't show MCC checkout boxes when using test payments.
+* Fix: Fatal error with GoURL fixed, but double currencies won't allow MCC to work.
 
 = 2.15 20180829 =
 
