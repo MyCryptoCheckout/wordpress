@@ -159,6 +159,8 @@ If your server cannot be reached by the API server this plugin will not function
 * New currency: Huobi Token HT
 * New currency: Viacoin VIA
 * Fix: Woocommerce: Fire woocommerce_cancelled_order action upon cancelling the order.
+* Fix: EDD: Fix checkout QR code.
+* Fix: EDD: Don't show MCC checkout boxes when using test payments.
 
 = 2.15 20180829 =
 

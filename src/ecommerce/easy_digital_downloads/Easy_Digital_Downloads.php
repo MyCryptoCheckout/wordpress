@@ -33,6 +33,7 @@ class Easy_Digital_Downloads
 		$this->add_action( 'edd_view_order_details_billing_after' );
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
+		$this->add_action( 'mycryptocheckout_generate_checkout_javascript_data' );
 		$this->add_action( 'mycryptocheckout_hourly' );
 	}
 
@@ -62,16 +63,28 @@ class Easy_Digital_Downloads
 		if ( ! isset( $payment_key ) )
 			return;
 
+		if ( $session[ 'gateway' ] != 'mycryptocheckout' )
+			return;
+
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
 
 		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
 
 		$instructions = $this->get_option_or_default( 'online_payment_instructions' );
+
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
+
+		$edd_payment = new \EDD_Payment( $payment_id );
+		if ( $edd_payment->status == 'publish' )
+			$payment->paid = true;
+
+		$this->__current_payment = $payment;		// For the javascript later.
+
 		$instructions = $payment->replace_shortcodes( $instructions );
 
 		$output = wpautop( $instructions ) . $output;
+		$output .= MyCryptoCheckout()->generate_checkout_js();
 		return $output;
 	}
 
@@ -513,6 +526,30 @@ class Easy_Digital_Downloads
 		if ( $r == '' )
 			$r = static::get_gateway_string( $key );
 		return $r;
+	}
+
+	/**
+		@brief		mycryptocheckout_generate_checkout_javascript_data
+		@since		2018-09-04 09:45:31
+	**/
+	public function mycryptocheckout_generate_checkout_javascript_data( $action )
+	{
+		$payment = $this->__current_payment;
+		$action->data->set( 'amount', $payment->amount );
+		$action->data->set( 'created_at', $payment->created_at );
+		$action->data->set( 'currency_id', $payment->currency_id );
+
+		$currencies = MyCryptoCheckout()->currencies();
+		$currency = $currencies->get( $payment->currency_id );
+		$action->data->set( 'supports', $currency->supports );
+
+		if ( isset( $payment->paid ) )
+			$action->data->set( 'paid', $payment->paid );
+
+		$action->data->set( 'timeout_hours', $payment->timeout_hours );
+		$action->data->set( 'to', $payment->to );
+
+		return $action;
 	}
 
 	/**
