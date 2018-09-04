@@ -109,6 +109,9 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - shelterDAO SHEL
 - We can now add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
+= TRON TRC-20 Tokens supported: =
+- We can now add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON TRC-20 tokens</a>!
+
 = Cryptocurrency Donations Widget =
 
 Receive donations in any of the cryptocurrencies supported by MyCryptoCheckout. Generate a widget using our simple shortcode generator and add it into any text widget or text editor. Shortcode generation options:
