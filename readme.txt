@@ -166,6 +166,7 @@ If your server cannot be reached by the API server this plugin will not function
 * Fix: Woocommerce: Fire woocommerce_cancelled_order action upon cancelling the order.
 * Fix: EDD: Fix checkout QR code.
 * Fix: EDD: Don't show MCC checkout boxes when using test payments.
+* Fix: Fatal error with GoURL fixed, but double currencies won't allow MCC to work.
 
 = 2.15 20180829 =
 
