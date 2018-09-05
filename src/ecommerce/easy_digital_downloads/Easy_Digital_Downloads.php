@@ -534,6 +534,8 @@ class Easy_Digital_Downloads
 	**/
 	public function mycryptocheckout_generate_checkout_javascript_data( $action )
 	{
+		if ( ! isset( $this->__current_payment ) )
+			return;
 		$payment = $this->__current_payment;
 		$action->data->set( 'amount', $payment->amount );
 		$action->data->set( 'created_at', $payment->created_at );
