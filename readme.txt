@@ -159,6 +159,9 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Allow Metamask checkout for ERC20 tokens.
+* Fix Woocommerce: Allow for different checkout icons for different sites in the network.
+
 = 2.16 20180904 =
 
 * New currency: Huobi Token HT

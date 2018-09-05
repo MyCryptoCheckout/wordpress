@@ -52,6 +52,11 @@ trait currencies_trait
 				continue;
 
 			$currency = new \mycryptocheckout\currencies\Currency();
+
+			// Use everything.
+			foreach( $currency_data as $key => $data )
+				$currency->$key = $data;
+
 			$currency->set_id( $currency_id );
 			$currency->set_name( $currency_data->name );
 
@@ -67,11 +72,6 @@ trait currencies_trait
 				$group->name = $currency_data->group;
 				$currency->set_group( $group );
 			}
-
-			// Anything that is a supports gets put in.
-			foreach( $currency_data as $key => $data )
-				if ( strpos( $key, 'supports' ) === 0 )
-					$currency->$key = $data;
 
 			$currencies->add( $currency );
 		}

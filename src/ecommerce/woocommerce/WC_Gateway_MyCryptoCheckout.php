@@ -13,7 +13,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function __construct()
 	{
 		$this->id					= \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
-		$icon_file					= plugin_dir_url( __FILE__ ) . '/mycryptocheckout.svg';
+		$icon_file					= plugin_dir_url( __FILE__ ) . '/mycryptocheckout.' . get_current_blog_id() . '.svg';
 		$this->icon					= apply_filters( 'woocommerce_gateway_icon', $icon_file );
 		$this->method_title			= $this->get_method_title();
 		$this->method_description	= $this->get_method_description();
@@ -141,13 +141,18 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$output_path = __DIR__ . '/' . $output_filename;
 		$output_url = $dir . $output_filename;
 
-		$hash_file = __DIR__ . '/icon.hash.' . md5( $output_path );
+		$hash_file = __DIR__ . '/icon.' . get_current_blog_id() . '.hash.' . md5( $output_path );
 
 		if ( file_exists( $hash_file ) )
 			return;
 
+		// Remove all existing hash files.
+		$hash_files = glob( __DIR__ . '/icon.' . get_current_blog_id() . '.hash.*' );
+		foreach( $hash_files as $hash_file )
+			unlink( $hash_file );
+
 		file_put_contents( $hash_file, '' );
-		file_put_contents( __DIR__ . '/mycryptocheckout.svg', $output );
+		file_put_contents( __DIR__ . '/mycryptocheckout.' . get_current_blog_id() . '.svg', $output );
 	}
 
 	/**
@@ -242,15 +247,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		];
 
     	return $r;
-	}
-
-	/**
-		@brief		Return the filename of the payment gateway icon.
-		@since		2018-09-03 20:24:20
-	**/
-	public function get_icon_file()
-	{
-		return __DIR__ . '/mycryptocheckout.svg';
 	}
 
 	/**
@@ -381,6 +377,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		$currencies = MyCryptoCheckout()->currencies();
 		$currency = $currencies->get( $payment->currency_id );
+		$action->data->set( 'currency', $currency );
 		$action->data->set( 'supports', $currency->supports );
 
 		if ( isset( $payment->paid ) )

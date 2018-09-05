@@ -192,28 +192,57 @@ var mycryptocheckout_checkout_javascript = function( data )
 		// The data must support metamask.
 		if( typeof $$.mycryptocheckout_checkout_data.supports === 'undefined' )
 			return;
-		if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined' )
-			return;
+
+		var contractInstance = false;
+		if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined' )
+		{
+			var Contract = web3.eth.contract( JSON.parse( $$.mycryptocheckout_checkout_data.supports.metamask_abi ) );
+			contractInstance = Contract.at( $$.mycryptocheckout_checkout_data.currency.contract )
+		}
+
+		if ( contractInstance === false )
+			if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined' )
+				return;
 
 		var $div = $( '<div class="metamask_payment"></div>' );
 		$div.appendTo( $$.$online_pay_box );
 
 		$div.click( function()
 		{
-			var user_address = web3.eth.accounts[0];
-			web3.eth.sendTransaction(
+			if ( contractInstance === false )
 			{
-				// From is not necessary.
-				to: $$.mycryptocheckout_checkout_data.to,
-				value: web3.toWei(
-					$$.mycryptocheckout_checkout_data.amount,
-					$$.mycryptocheckout_checkout_data.supports.metamask_currency
-				),
-			}, function (err, transactionHash )
-			{
-				// No error logging for now.
+				web3.eth.sendTransaction(
+				{
+					// From is not necessary.
+					to: $$.mycryptocheckout_checkout_data.to,
+					value: web3.toWei(
+						$$.mycryptocheckout_checkout_data.amount,
+						$$.mycryptocheckout_checkout_data.supports.metamask_currency
+					),
+				}, function (err, transactionHash )
+				{
+					// No error logging for now.
+				}
+				);
 			}
-			);
+			else
+			{
+				contractInstance.transfer(
+					$$.mycryptocheckout_checkout_data.to,
+					$$.mycryptocheckout_checkout_data.amount * 1000000000000000000,		// This is ETH's decimal system.
+					{
+						'from' : web3.eth.accounts[0],		// First available.
+					},
+					( function(err,result)
+					{
+						if( ! err )
+						{
+							console.log( result )
+						}
+					}
+					)
+				);
+			}
 		} );
 	}
 
