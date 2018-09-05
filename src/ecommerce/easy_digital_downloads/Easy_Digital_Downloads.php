@@ -537,20 +537,7 @@ class Easy_Digital_Downloads
 		if ( ! isset( $this->__current_payment ) )
 			return;
 		$payment = $this->__current_payment;
-		$action->data->set( 'amount', $payment->amount );
-		$action->data->set( 'created_at', $payment->created_at );
-		$action->data->set( 'currency_id', $payment->currency_id );
-
-		$currencies = MyCryptoCheckout()->currencies();
-		$currency = $currencies->get( $payment->currency_id );
-		$action->data->set( 'supports', $currency->supports );
-
-		if ( isset( $payment->paid ) )
-			$action->data->set( 'paid', $payment->paid );
-
-		$action->data->set( 'timeout_hours', $payment->timeout_hours );
-		$action->data->set( 'to', $payment->to );
-
+		$payment->add_to_checkout_javascript_data( $action );
 		return $action;
 	}
 

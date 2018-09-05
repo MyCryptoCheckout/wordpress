@@ -57,6 +57,29 @@ class Payment
 	public $to;
 
 	/**
+		@brief		Add our data to the javascript checkout data.
+		@details	This is a convenience function, shared by the e-commerce integrations, to add payment info into the javascript checkout data object.
+		@since		2018-09-05 23:22:47
+	**/
+	public function add_to_checkout_javascript_data( $action )
+	{
+		$action->data->set( 'amount', $this->amount );
+		$action->data->set( 'created_at', $this->created_at );
+		$action->data->set( 'currency_id', $this->currency_id );
+
+		$currencies = MyCryptoCheckout()->currencies();
+		$currency = $currencies->get( $this->currency_id );
+		$action->data->set( 'currency', $currency );
+		$action->data->set( 'supports', $currency->supports );
+
+		if ( isset( $this->paid ) )
+			$action->data->set( 'paid', $this->paid );
+
+		$action->data->set( 'timeout_hours', $this->timeout_hours );
+		$action->data->set( 'to', $this->to );
+	}
+
+	/**
 		@brief		Convenience method to return the data handling object for this payment.
 		@see		Payment_Data
 		@since		2017-12-30 19:45:00

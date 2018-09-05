@@ -371,22 +371,9 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function mycryptocheckout_generate_checkout_javascript_data( $action )
 	{
 		$payment = $this->__current_payment;
-		$action->data->set( 'amount', $payment->amount );
-		$action->data->set( 'created_at', $payment->created_at );
-		$action->data->set( 'currency_id', $payment->currency_id );
+		$payment->add_to_checkout_javascript_data( $action );
 
-		$currencies = MyCryptoCheckout()->currencies();
-		$currency = $currencies->get( $payment->currency_id );
-		$action->data->set( 'currency', $currency );
-		$action->data->set( 'supports', $currency->supports );
-
-		if ( isset( $payment->paid ) )
-			$action->data->set( 'paid', $payment->paid );
-
-		$action->data->set( 'timeout_hours', $payment->timeout_hours );
-		$action->data->set( 'to', $payment->to );
-
-
+		// This is unique for WooCommerce.
 		if ( $this->get_option( 'hide_woocommerce_order_overview' ) )
 			$action->data->set( 'hide_woocommerce_order_overview', true );
 
