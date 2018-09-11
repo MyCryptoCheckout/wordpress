@@ -82,6 +82,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Icon ICX
 - intimate ITM
 - Kyber Network Crystal KNC
+- Latino Token LATINO
 - Loom
 - Maker MKR
 - MetalPay MTL
@@ -159,8 +160,9 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
-* Allow Metamask checkout for ERC20 tokens.
+* Allow Metamask checkout for some ERC20 tokens.
 * Fix Woocommerce: Allow for different checkout icons for different sites in the network.
+* New currency: Latino Token LATINO
 
 = 2.16 20180904 =
 

@@ -62,6 +62,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'FLIX' => [],
 			'HT' => [],
 			'ITM' => [],
+			'LATINO' => [],
 			'LOOM' => [],
 			'LTC' => [],
 			'MARS' => [],
