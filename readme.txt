@@ -40,6 +40,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bitcoin BTC (Including SegWit addresses, Electrum HD wallet)
 - Bitcoin Cash BCH
 - Bitcoin Gold BTG
+- Bits'mdo' BSD
 - ColossusXT COLX
 - Dash DASH
 - Decred DCR
@@ -158,10 +159,6 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations widget
 
 == Changelog ==
-
-* Allow Metamask checkout for some ERC20 tokens.
-* Fix Woocommerce: Allow for different checkout icons for different sites in the network.
-* New currency: Latino Token LATINO
 
 = 2.16 20180904 =
 
