@@ -61,17 +61,17 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Zcash ZEC
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
-= ERC20 tokens supported: =
+= ERC20 tokens supported (Including MetaMask): =
 
-- 0xProject ZRX
+- 0x ZRX
 - Aeternity AE
 - Aragon ANT
 - Augur REP
 - Bancor BNT
 - Basic Attention Token BAT
 - Binance Coin BNB
-- Dai Stablecoin DAI
-- Digix Global DGD
+- Dai DAI
+- DigixDAO DGD
 - Dragonchain DRGN
 - eBitcoin EBTC
 - Flix FLIX
@@ -81,9 +81,8 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Huobi Token HT
 - Icon ICX
 - intimate ITM
-- Kyber Network Crystal KNC
-- Latino Token LATINO
-- Loom
+- Kyber Network KNC
+- Loom LOOM
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
@@ -91,15 +90,15 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Omisego OMG
 - onG.social ONG
 - Populous PPT
-- Pundi X Token NPXS
-- Qash
+- Pundi X NPXS
+- QASH
 - Raiden RDN
 - Request Network REQ
-- Salt
+- SALT
 - shelterDAO SHEL
 - StakeIt STAKE
-- Status Network SNT
-- Storm
+- Status SNT
+- Storm STORM
 - TenXPay PAY
 - Veritaseum VERI
 - Worldcoin1 WRD1
