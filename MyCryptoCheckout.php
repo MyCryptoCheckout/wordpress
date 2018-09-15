@@ -55,7 +55,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.16 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.17 );
 	/**
 		@brief		Return the instance of ThreeWP Broadcast.
 		@since		2014-10-18 14:48:37

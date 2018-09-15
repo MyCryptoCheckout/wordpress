@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.16
+Stable tag: 2.17
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
@@ -159,6 +159,10 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations widget
 
 == Changelog ==
+
+* New currency: Bits'mdo' BSD
+* New: Added MetaMask support for all ERC20 tokens except Flix.
+* Fix: Wordpress: Checkout icon generated on a per blog basis.
 
 = 2.16 20180904 =
 
