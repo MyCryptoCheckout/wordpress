@@ -59,7 +59,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Tron TRX
 - Verge XVG
 - Viacoin VIA
-- Zcash ZEC
+- Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
 = ERC20 tokens supported (Including MetaMask): =
