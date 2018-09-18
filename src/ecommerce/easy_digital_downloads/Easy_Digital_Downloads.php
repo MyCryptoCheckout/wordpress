@@ -61,10 +61,10 @@ class Easy_Digital_Downloads
 
 		// No key found
 		if ( ! isset( $payment_key ) )
-			return;
+			return $output;
 
 		if ( $session[ 'gateway' ] != 'mycryptocheckout' )
-			return;
+			return $output;
 
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
