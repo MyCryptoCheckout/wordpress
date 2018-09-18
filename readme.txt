@@ -57,6 +57,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Straks STAK
 - TokenPay TPAY
 - Tron TRX
+- TurtleNetwork TN
 - Verge XVG
 - Viacoin VIA
 - Zcash ZEC (T-address recipients only)
@@ -163,6 +164,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 * New currency: Bits'mdo' BSD
 * New currency: Latino Token LATINO
+* New currency: TurtleNetwork TN
 * New: Added MetaMask support for all ERC20 tokens except Flix.
 * Fix: EDD: Show receipt when _not_ using MCC on checkout.
 * Fix: Wordpress: Checkout icon generated on a per blog basis.

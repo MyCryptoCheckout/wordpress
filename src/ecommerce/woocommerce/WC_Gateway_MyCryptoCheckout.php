@@ -77,6 +77,9 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'SHEL_NEM' => [],
 			'STAK' => [],
 			'STAKE' => [],
+			'TN' => [
+				'width' => 85,
+			],
 			'TPAY' => [],
 			'TRX' => [],
 			'VIA' => [],
