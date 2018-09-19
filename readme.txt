@@ -41,6 +41,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bitcoin Cash BCH
 - Bitcoin Gold BTG
 - Bits'mdo' BSD
+- CatoCoin CATO
 - ColossusXT COLX
 - Dash DASH
 - Decred DCR
@@ -110,6 +111,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 = NEM Mosaic tokens supported: =
 
 - shelterDAO SHEL
+- TRONBITCOIN TBTC
 - We can now add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
 = TRON TRC-20 Tokens supported: =
@@ -163,7 +165,9 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * New currency: Bits'mdo' BSD
+* New currency: CatoCoin CATO
 * New currency: Latino Token LATINO
+* New currency: TRONBITCOIN TBTC
 * New currency: TurtleNetwork TN
 * New: Added MetaMask support for all ERC20 tokens except Flix.
 * Fix: EDD: Show receipt when _not_ using MCC on checkout.
