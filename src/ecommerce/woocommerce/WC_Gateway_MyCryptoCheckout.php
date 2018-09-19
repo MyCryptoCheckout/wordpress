@@ -78,6 +78,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'SHEL_NEM' => [],
 			'STAK' => [],
 			'STAKE' => [],
+			'TBTC' => [],
 			'TN' => [
 				'width' => 85,
 			],
