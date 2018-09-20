@@ -164,11 +164,14 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
-* New currency: Bits'mdo' BSD
 * New currency: CatoCoin CATO
-* New currency: Latino Token LATINO
 * New currency: TRONBITCOIN TBTC
 * New currency: TurtleNetwork TN
+
+= 2.17 20180915 =
+
+* New currency: Bits'mdo' BSD
+* New currency: Latino Token LATINO
 * New: Added MetaMask support for all ERC20 tokens except Flix.
 * Fix: EDD: Show receipt when _not_ using MCC on checkout.
 * Fix: Wordpress: Checkout icon generated on a per blog basis.
