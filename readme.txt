@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 55+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 65+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
@@ -8,7 +8,7 @@ Stable tag: 2.17
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 55+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 65+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -111,10 +111,11 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 = NEM Mosaic tokens supported: =
 
 - shelterDAO SHEL
-- TRONBITCOIN TBTC
 - We can now add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
 = TRON TRC-20 Tokens supported: =
+
+- TRONBITCOIN TBTC
 - We can now add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON TRC-20 tokens</a>!
 
 = Cryptocurrency Donations Widget =
@@ -168,6 +169,8 @@ If your server cannot be reached by the API server this plugin will not function
 * New currency: TRONBITCOIN TBTC
 * New currency: TurtleNetwork TN
 * Fix: EDD: Show receipt when _not_ using MCC on checkout.
+* Fix: QRcode CSS on payment page.
+* Test: Used BrowserStack to test payment page across browsers, operating systems, and mobile devices.
 
 = 2.17 20180915 =
 
