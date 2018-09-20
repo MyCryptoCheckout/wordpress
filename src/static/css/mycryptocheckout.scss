@@ -61,12 +61,14 @@
 	}
 	// Payment page QR code
 	.mcc_qr_code {
-		height: 10em;
 		margin-bottom: 1em;
 		margin-right: 20px;
-		width: 10em;
 		display: inline-block;
 		vertical-align: top;
+		img {
+			height: 10em;
+			width: auto;
+		}
 	}
 	// 7 Theme styles
 	.wf-wrap .wf-container-main #content .woocommerce .wc-complete-wrap .wc-side-column .mycryptocheckout .to .to_input.clipboardable {

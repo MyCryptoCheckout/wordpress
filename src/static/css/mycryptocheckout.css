@@ -41,12 +41,13 @@
     background-repeat: no-repeat;
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiMwMDgwMDE7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTg4LDMwLjNMNzUuMSwxNy40Yy0wLjUtMC41LTEuMS0wLjctMS43LTAuN2MtMC42LDAtMS4zLDAuMy0xLjcsMC43TDM3LjQsNTEuN2wtOS4xLTkuMWMtMC45LTAuOS0yLjUtMC45LTMuNCwwTDEyLDU1LjVjLTAuNSwwLjUtMC43LDEuMS0wLjcsMS43czAuMywxLjMsMC43LDEuN2wyMy42LDIzLjZjMC41LDAuNSwxLjEsMC43LDEuNywwLjdjMCwwLDAuMSwwLDAuMSwwYzAsMCwwLDAsMC4xLDBjMC42LDAsMS4yLTAuMiwxLjctMC43TDg4LDMzLjdDODksMzIuOCw4OSwzMS4zLDg4LDMwLjN6Ii8+PC9zdmc+); }
   .mycryptocheckout.online_payment_instructions .mcc_qr_code {
-    height: 10em;
     margin-bottom: 1em;
     margin-right: 20px;
-    width: 10em;
     display: inline-block;
     vertical-align: top; }
+    .mycryptocheckout.online_payment_instructions .mcc_qr_code img {
+      height: 10em;
+      width: auto; }
   .mycryptocheckout.online_payment_instructions .wf-wrap .wf-container-main #content .woocommerce .wc-complete-wrap .wc-side-column .mycryptocheckout .to .to_input.clipboardable {
     font-size: 12px; }
 
