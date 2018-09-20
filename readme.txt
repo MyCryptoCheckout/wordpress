@@ -52,7 +52,6 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Litecoin LTC (Including SegWit addresses)
 - MarsCoin MARS
 - NEM XEM
-- Neo Smart Economy NEO
 - New York Coin NYC
 - Solaris XLR
 - Straks STAK
