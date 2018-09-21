@@ -87,6 +87,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'VIA' => [],
 			'XEM' => [],
 			'XLR' => [],
+			'XMR' => [],
 			'XVG' => [],
 			'WRD1' => [],
 			'ZEC' => [],

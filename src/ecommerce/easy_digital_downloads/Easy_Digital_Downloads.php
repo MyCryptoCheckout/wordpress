@@ -144,7 +144,7 @@ class Easy_Digital_Downloads
 		$wallet->use_it();
 		$mcc->wallets()->save();
 
-		$payment_data = array(
+		$edd_payment_data = array(
 			'price'         => $purchase_data['price'],
 			'date'          => $purchase_data['date'],
 			'user_email'    => $purchase_data['user_email'],
@@ -157,14 +157,12 @@ class Easy_Digital_Downloads
 			'status'        => 'pending',
 		);
 
-		$payment_id = edd_insert_payment( $payment_data );
+		$payment_id = edd_insert_payment( $edd_payment_data );
 
-		edd_update_payment_meta( $payment_id, '_mcc_amount', $amount );
-		edd_update_payment_meta( $payment_id, '_mcc_currency_id', $currency_id  );
-		edd_update_payment_meta( $payment_id, '_mcc_confirmations', $wallet->confirmations );
-		edd_update_payment_meta( $payment_id, '_mcc_created_at', time() );
-		$payment_timeout_hours = edd_get_option( 'mcc_payment_timeout_hours' );
-		edd_update_payment_meta( $payment_id, '_mcc_payment_timeout_hours', $payment_timeout_hours );
+		$payment = MyCryptoCheckout()->api()->payments()->create_new( $payment_id );
+		$payment->amount = $amount;
+		$payment->currency_id = $currency_id;
+		$payment->timeout_hours = edd_get_option( 'mcc_payment_timeout_hours' );
 
 		$test_mode = edd_get_option( 'mcc_test_mode' );
 		if ( $test_mode )
@@ -176,7 +174,10 @@ class Easy_Digital_Downloads
 			$mcc_payment_id = 0;
 
 		edd_update_payment_meta( $payment_id, '_mcc_payment_id', $mcc_payment_id );
-		edd_update_payment_meta( $payment_id, '_mcc_to', $wallet->get_address() );
+
+		$wallet->apply_to_payment( $payment );
+
+		$payment->save( $payment_id );
 
 		// Only send it if we are not in test mode.
 		if ( $mcc_payment_id < 1 )

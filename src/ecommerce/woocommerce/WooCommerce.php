@@ -267,10 +267,9 @@ class WooCommerce
 			$order->save();
 		}
 
-		$order->update_meta_data( '_mcc_amount', $amount );
-		$order->update_meta_data( '_mcc_currency_id', $currency_id );
-		$order->update_meta_data( '_mcc_confirmations', $wallet->confirmations );
-		$order->update_meta_data( '_mcc_created_at', time() );
+		$payment = MyCryptoCheckout()->api()->payments()->create_new();
+		$payment->amount = $amount;
+		$payment->currency_id = $currency_id;
 
 		// Get the gateway instance.
 		$gateway = \WC_Gateway_MyCryptoCheckout::instance();
@@ -282,15 +281,21 @@ class WooCommerce
 		}
 		else
 			$payment_id = 0;		// 0 = not sent.
+		$order->update_meta_data( '_mcc_payment_id', $payment_id );
 
 		// Save the non-default payment timeout hours.
-		$payment_timeout_hours = $gateway->get_option( 'payment_timeout_hours' );
-		$payment_timeout_hours = intval( $payment_timeout_hours );
-		if ( $payment_timeout_hours != 0 )
-			$order->update_meta_data( '_mcc_payment_timeout_hours', $payment_timeout_hours );
+		$payment->timeout_hours = intval( $gateway->get_option( 'payment_timeout_hours' ) );
 
-		$order->update_meta_data( '_mcc_payment_id', $payment_id );
-		$order->update_meta_data( '_mcc_to', $address );
+		$wallet->apply_to_payment( $payment );
+
+		// This stuff should be handled by the Payment object, but the order doesn't exist yet...
+		$order->update_meta_data( '_mcc_amount', $payment->amount );
+		$order->update_meta_data( '_mcc_confirmations', $payment->confirmations );
+		$order->update_meta_data( '_mcc_created_at', $payment->created_at );
+		$order->update_meta_data( '_mcc_currency_id', $payment->currency_id );
+		$order->update_meta_data( '_mcc_payment_timeout_hours', $payment->timeout_hours );
+		$order->update_meta_data( '_mcc_to', $payment->to );
+		$order->update_meta_data( '_mcc_payment_data', $payment->data );
 
 		// We want to keep the account locked, but still enable the is_available gateway check to work for the rest of this session.
 		$this->__just_used = true;

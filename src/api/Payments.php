@@ -35,6 +35,25 @@ class Payments
 	}
 
 	/**
+		@brief		Convenience method to create a new payment.
+		@since		2018-09-20 20:58:53
+	**/
+	public function create_new()
+	{
+		$payment = new Payment();
+		$payment->created_at = time();
+
+		// If we are on a network, then note down the site data.
+		if ( MULTISITE )
+		{
+			$payment->data()->set( 'site_id', get_current_blog_id() );
+			$payment->data()->set( 'site_url', get_option( 'siteurl' ) );
+		}
+
+		return $payment;
+	}
+
+	/**
 		@brief		Generate a Payment class from an order.
 		@since		2017-12-21 23:47:17
 	**/
@@ -47,6 +66,8 @@ class Payments
 		$payment->currency_id = get_post_meta( $post_id,  '_mcc_currency_id', true );
 		$payment->timeout_hours = get_post_meta( $post_id,  '_mcc_payment_timeout_hours', true );
 		$payment->to = get_post_meta( $post_id,  '_mcc_to', true );
+
+		$payment->data = get_post_meta( $post_id,  '_mcc_payment_data', true );
 
 		// If we are on a network, then note down the site data.
 		if ( MULTISITE )

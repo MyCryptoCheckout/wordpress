@@ -22,7 +22,8 @@ class Wallets
 	public function add( $wallet )
 	{
 		$key = md5( $wallet->get_currency_id() . $wallet->get_address() . AUTH_SALT );
-		return $this->set( $key, $wallet );
+		$this->set( $key, $wallet );
+		return $key;
 	}
 
 	/**

@@ -74,6 +74,45 @@
 } )( jQuery );
 ;
 /**
+	@brief		Handle the new currency / wallet form.
+	@since		2018-09-21 17:49:39
+**/
+;(function( $ )
+{
+    $.fn.extend(
+    {
+        mycryptocheckout_new_currency : function()
+        {
+            return this.each( function()
+            {
+                var $this = $(this);
+
+                if ( $this.hasClass( 'mycryptocheckout_new_currency' ) )
+                	return;
+                $this.addClass( 'mycryptocheckout_new_currency' );
+
+                // Find the currency selector.
+                $this.$currency_id = $( '.currency_id', $this );
+
+               	var $currencies = $( '.only_for_currency', $this );
+               	$currencies.parentsUntil( 'tr' ).parent().hide();
+
+                $this.$currency_id.change( function()
+                {
+                	// Hide all currencies.
+                	$currencies.parentsUntil( 'tr' ).parent().hide();
+                	// And show only the selected one.
+                	var currency_id = $this.$currency_id.val();
+                	var selector = '.only_for_currency.' + currency_id;
+                	$( selector, $this ).parentsUntil( 'tr' ).parent().show();
+                } )
+                .change();
+            } ); // return this.each( function()
+        } // plugin: function()
+    } ); // $.fn.extend({
+} )( jQuery );
+;
+/**
 	@brief		Convert the form fieldsets in a form2 table to ajaxy tabs.
 	@since		2015-07-11 19:47:46
 **/
@@ -644,6 +683,8 @@ mycryptocheckout_convert_data( 'mycryptocheckout_checkout_data', function( data 
 } );
 $( 'form.plainview_form_auto_tabs' ).plainview_form_auto_tabs();
 $( '.mcc_donations' ).mycryptocheckout_donations_javascript();
+
+$( 'form#currencies' ).mycryptocheckout_new_currency();
 
 /**
 	@brief		Make these texts into clipboard inputs.

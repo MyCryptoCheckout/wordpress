@@ -61,6 +61,35 @@ class Wallet
 	public $times_used = 0;
 
 	/**
+		@brief		Apply this wallet's data to the Payment.
+		@since		2018-09-20 21:02:03
+	**/
+	public function apply_to_payment( $payment )
+	{
+		$payment->confirmations = $this->confirmations;
+		$payment->to = $this->get_address();
+
+		// Find this wallet in the user's wallets.
+		$currencies = MyCryptoCheckout()->currencies();
+		$currency = $currencies->get( $this->currency_id );
+		$wallets = MyCryptoCheckout()->wallets();
+		foreach( $wallets as $wallet )
+		{
+			if ( $wallet != $this )
+				continue;
+			// We have found ourself!
+			if ( $currency->supports( 'monero_private_view_key' ) )
+			{
+				$monero_private_view_key = $this->get( 'monero_private_view_key' );
+				if ( $monero_private_view_key != '' )
+				{
+					$payment->data()->set( 'monero_private_view_key', $this->get( 'monero_private_view_key' ) );
+				}
+			}
+		}
+	}
+
+	/**
 		@brief		Return the address.
 		@since		2017-12-09 18:50:18
 	**/

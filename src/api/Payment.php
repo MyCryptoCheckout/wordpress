@@ -103,6 +103,21 @@ class Payment
 	}
 
 	/**
+		@brief		Save ourself to the post's meta.
+		@since		2018-09-20 20:53:30
+	**/
+	public function save( $post_id )
+	{
+		update_post_meta( $post_id, '_mcc_amount', $this->amount );
+		update_post_meta( $post_id, '_mcc_confirmations', $this->confirmations );
+		update_post_meta( $post_id, '_mcc_created_at', $this->created_at );
+		update_post_meta( $post_id, '_mcc_currency_id', $this->currency_id );
+		update_post_meta( $post_id, '_mcc_payment_timeout_hours', $this->timeout_hours );
+		update_post_meta( $post_id, '_mcc_to', $this->to );
+		update_post_meta( $post_id, '_mcc_payment_data', $this->data );
+	}
+
+	/**
 		@brief		Return this object as an array.
 		@since		2017-12-21 23:37:48
 	**/

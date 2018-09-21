@@ -306,6 +306,7 @@ trait admin_trait
 		$fs->legend->label( __( 'Add new currency / wallet', 'mycryptocheckout' ) );
 
 		$wallet_currency = $fs->select( 'currency' )
+			->css_class( 'currency_id' )
 			->description( __( 'Which currency shall the new wallet belong to?', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Currency', 'mycryptocheckout' ) );
@@ -320,6 +321,23 @@ trait admin_trait
 			->label( __( 'Address', 'mycryptocheckout' ) )
 			->required()
 			->size( 64, 128 )
+			->trim();
+
+		// This is an ugly hack for Monero. Ideally it would be hidden away in the wallet settings, but for the user it's much nicer here.
+		$wallet_address = $fs->text( 'wallet_address' )
+			->description( $text )
+			// Input label
+			->label( __( 'Address', 'mycryptocheckout' ) )
+			->required()
+			->size( 64, 128 )
+			->trim();
+
+		$monero_private_view_key = $fs->text( 'monero_private_view_key' )
+			->css_class( 'only_for_currency XMR' )
+			->description( __( 'Your private view key that is used to see the amounts in private transactions to your wallet.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Monero private view key', 'mycryptocheckout' ) )
+			->size( 64, 64 )
 			->trim();
 
 		$save = $form->primary_button( 'save' )
@@ -388,10 +406,14 @@ trait admin_trait
 					$currency = $this->currencies()->get( $chosen_currency );
 					$currency->validate_address( $wallet->address );
 
+					if ( $currency->supports( 'monero_private_view_key' ) )
+						$wallet->set( 'monero_private_view_key', $form->input( 'monero_private_view_key' )->get_filtered_post_value() );
+
 					$wallet->currency_id = $chosen_currency;
 
-					$wallets->add( $wallet );
+					$index = $wallets->add( $wallet );
 					$wallets->save();
+
 					$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
 					$reshow = true;
 				}
@@ -534,6 +556,18 @@ trait admin_trait
 			}
 		}
 
+		if ( $currency->supports( 'monero_private_view_key' ) )
+		{
+			$monero_private_view_key = $fs->text( 'monero_private_view_key' )
+				->description( __( 'Your private view key that is used to see the amounts in private transactions to your wallet.', 'mycryptocheckout' ) )
+				// Input label
+				->label( __( 'Monero private view key', 'mycryptocheckout' ) )
+				->required()
+				->size( 64, 64 )
+				->trim()
+				->value( $wallet->get( 'monero_private_view_key' ) );
+		}
+
 		if ( $this->is_network && is_super_admin() )
 		{
 			$fs = $form->fieldset( 'fs_network' );
@@ -597,6 +631,12 @@ trait admin_trait
 					{
 						$wallet->network = $wallet_on_network->is_checked();
 						$wallet->sites = $sites->get_post_value();
+					}
+
+					if ( $currency->supports( 'monero_private_view_key' ) )
+					{
+						foreach( [ 'monero_private_view_key' ] as $key )
+							$wallet->set( $key, $$key->get_filtered_post_value() );
 					}
 
 					$wallets->save();
