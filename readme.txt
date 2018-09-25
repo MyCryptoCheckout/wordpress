@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.18
+Stable tag: 2.19
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
@@ -51,6 +51,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Ethereum Classic ETC
 - Litecoin LTC (Including SegWit addresses)
 - MarsCoin MARS
+- Monero XMR
 - NEM XEM
 - New York Coin NYC
 - Solaris XLR
@@ -155,14 +156,19 @@ If your server cannot be reached by the API server this plugin will not function
 3. WooCommerce purchase confirmation page with payment data
 4. Account tab
 5. Currencies tab
-6. Global settings tab for network and single installs
-6. Local settings tab for network installs
-8. WooCommerce gateway settings
-9. EasyDigitalDownloads gateway settings
-10. Donations generator form
-11. Donations widget
+6. Adding a Monero wallet
+7. Global settings tab for network and single installs
+8. Local settings tab for network installs
+9. WooCommerce gateway settings
+10. EasyDigitalDownloads gateway settings
+11. Donations generator form
+12. Donations widget
 
 == Changelog ==
+
+= 2.19 20180925 =
+
+* New currency: Monero XMR
 
 = 2.18 20180920 =
 
