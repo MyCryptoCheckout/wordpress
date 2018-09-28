@@ -40,7 +40,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bitcoin BTC (Including SegWit addresses, Electrum HD wallet)
 - Bitcoin Cash BCH
 - Bitcoin Gold BTG
-- Bits'mdo' BSD
+- Bitsmdo BSD
 - CatoCoin CATO
 - ColossusXT COLX
 - Dash DASH
@@ -181,7 +181,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 = 2.17 20180915 =
 
-* New currency: Bits'mdo' BSD
+* New currency: Bitsmdo BSD
 * New currency: Latino Token LATINO
 * New: Added MetaMask support for all ERC20 tokens except Flix.
 * Fix: Wordpress: Checkout icon generated on a per blog basis.
