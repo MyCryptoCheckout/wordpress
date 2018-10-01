@@ -43,6 +43,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bits'mdo' BSD
 - CatoCoin CATO
 - ColossusXT COLX
+- CrypticCoin CRYP
 - Dash DASH
 - Decred DCR
 - Digibyte DGB (Including SegWit addresses)
@@ -168,6 +169,7 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * New currency: ADULTEUM ADULT
+* New currency: CrypticCoin CRYP
 
 = 2.19 20180925 =
 

@@ -55,6 +55,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			],
 			'CATO' => [],
 			'COLX' => [],
+			'CRYP' => [],
 			'DASH' => [],
 			'DCR' => [],
 			'DGB' => [],
