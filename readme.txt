@@ -40,7 +40,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bitcoin BTC (Including SegWit addresses, Electrum HD wallet)
 - Bitcoin Cash BCH
 - Bitcoin Gold BTG
-- Bitsmdo BSD
+- Bits'mdo' BSD
 - CatoCoin CATO
 - ColossusXT COLX
 - Dash DASH
@@ -67,6 +67,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 = ERC20 tokens supported (Including MetaMask): =
 
 - 0x ZRX
+- ADULTEUM ADULT
 - Aeternity AE
 - Aragon ANT
 - Augur REP
@@ -166,6 +167,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New currency: ADULTEUM ADULT
+
 = 2.19 20180925 =
 
 * New currency: Monero XMR
@@ -181,7 +184,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 = 2.17 20180915 =
 
-* New currency: Bitsmdo BSD
+* New currency: Bits'mdo' BSD
 * New currency: Latino Token LATINO
 * New: Added MetaMask support for all ERC20 tokens except Flix.
 * Fix: Wordpress: Checkout icon generated on a per blog basis.
