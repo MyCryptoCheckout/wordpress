@@ -64,6 +64,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			return;
 		$$.$div.addClass( 'mycryptocheckout' );
 		$$.mycryptocheckout_checkout_data = $$.extract_data( $( '#mycryptocheckout_checkout_data' ) );
+		console.log( 'MCC checkout data', $$.mycryptocheckout_checkout_data );
 		$$.clipboard_inputs();
 		$$.maybe_hide_woocommerce_order_overview();
 		$$.maybe_upgrade_divs();
