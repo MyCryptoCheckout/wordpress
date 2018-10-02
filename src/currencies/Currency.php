@@ -31,8 +31,12 @@ class Currency
 		{
 			$exchange_rate = $account->get_physical_exchange_rate( $currency );
 			if ( $exchange_rate == 0 )
-				return PHP_INT_MAX;
-			$usd = $amount / $account->get_physical_exchange_rate( $currency );
+			{
+				$exchange_rate = $account->get_virtual_exchange_rate( $currency );
+				if ( $exchange_rate == 0 )
+					return PHP_INT_MAX;
+			}
+			$usd = $amount / $exchange_rate;
 			$usd = round( $usd, 2 );
 		}
 		else
