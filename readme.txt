@@ -88,6 +88,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - intimate ITM
 - Kyber Network KNC
 - Latino Token LATINO
+- L'île LILE
 - Loom LOOM
 - Maker MKR
 - MetalPay MTL
@@ -171,6 +172,7 @@ If your server cannot be reached by the API server this plugin will not function
 * Fix: WooCommerce and EDD: allow having virtual currency as base currency.
 * New currency: ADULTEUM ADULT
 * New currency: CrypticCoin CRYP
+* New currency: L'île LILE
 
 = 2.19 20180925 =
 
