@@ -103,7 +103,6 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Request Network REQ
 - SALT
 - shelterDAO SHEL
-- StakeIt STAKE
 - Status SNT
 - Storm STORM
 - TenXPay PAY
