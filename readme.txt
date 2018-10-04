@@ -168,12 +168,13 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
-* Fix: WooCommerce and EDD: allow having virtual currency as base currency.
-* Fix: EDD: Override checkout payment method name to match checkout method name.
-* Fix: Metamask: Use different dividers for different currencies.
 * New currency: ADULTEUM ADULT
 * New currency: CrypticCoin CRYP
 * New currency: L'île LILE
+* Fix: WooCommerce and EDD: allow having virtual currency as base currency.
+* Fix: EDD: Override checkout payment method name to match checkout method name.
+* Fix: Metamask: Use different dividers for different currencies.
+* New snippet: <a href="https://mycryptocheckout.com/doc/snippets/refresh-page-after-payment-complete/">Refresh page after payment complete</a>
 
 = 2.19 20180925 =
 
