@@ -228,9 +228,16 @@ var mycryptocheckout_checkout_javascript = function( data )
 			}
 			else
 			{
+				var amount = $$.mycryptocheckout_checkout_data.amount;
+				// If there is a divider, use it.
+				if ( typeof $$.mycryptocheckout_checkout_data.currency.divider !== 'undefined' )
+					amount *= $$.mycryptocheckout_checkout_data.currency.divider;
+				else
+					amount *= 1000000000000000000;		// This is ETH's decimal system.
+
 				contractInstance.transfer(
 					$$.mycryptocheckout_checkout_data.to,
-					$$.mycryptocheckout_checkout_data.amount * 1000000000000000000,		// This is ETH's decimal system.
+					amount,
 					{
 						'from' : web3.eth.accounts[0],		// First available.
 					},
