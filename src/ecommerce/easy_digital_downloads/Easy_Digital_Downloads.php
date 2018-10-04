@@ -26,6 +26,7 @@ class Easy_Digital_Downloads
 		$this->add_filter( 'do_shortcode_tag', 10, 4 );
 		$this->add_action( 'edd_add_email_tags' );
 		$this->add_action( 'edd_gateway_' . static::$gateway_id );
+		$this->add_filter( 'edd_gateway_checkout_label', 10, 2 );
 		$this->add_action( 'edd_mycryptocheckout_cc_form' );
 		$this->add_filter( 'edd_payment_gateways' );
 		$this->add_filter( 'edd_settings_gateways' );
@@ -66,10 +67,10 @@ class Easy_Digital_Downloads
 		if ( $session[ 'gateway' ] != 'mycryptocheckout' )
 			return $output;
 
+		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
+
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
-
-		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
 
 		$instructions = $this->get_option_or_default( 'online_payment_instructions' );
 
@@ -118,6 +119,17 @@ class Easy_Digital_Downloads
 			$instructions = $payment->replace_shortcodes( $instructions );
 			return $instructions;
 		} );
+	}
+
+	/**
+		@brief		edd_gateway_checkout_label
+		@since		2018-10-04 16:42:32
+	**/
+	public function edd_gateway_checkout_label( $label, $gateway )
+	{
+		if ( $gateway != static::$gateway_id )
+			return $label;
+		return $this->get_option_or_default( 'gateway_name' );
 	}
 
 	/**

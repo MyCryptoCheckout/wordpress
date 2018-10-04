@@ -169,6 +169,7 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * Fix: WooCommerce and EDD: allow having virtual currency as base currency.
+* Fix: EDD: Override checkout payment method name to match checkout method name.
 * New currency: ADULTEUM ADULT
 * New currency: CrypticCoin CRYP
 * New currency: L'île LILE
