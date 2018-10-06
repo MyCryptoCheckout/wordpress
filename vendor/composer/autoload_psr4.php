@@ -11,6 +11,8 @@ return array(
     'Mdanter\\Ecc\\' => array($vendorDir . '/mdanter/ecc/src'),
     'FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
+    'CashAddr\\' => array($vendorDir . '/btccom/cashaddress/src'),
+    'Btccom\\BitcoinCash\\' => array($vendorDir . '/btccom/bitwasp-bitcoin-bch-addon/src'),
     'BitWasp\\Buffertools\\' => array($vendorDir . '/bitwasp/buffertools/src/Buffertools'),
     'BitWasp\\Bitcoin\\' => array($vendorDir . '/bitwasp/bitcoin/src'),
 );

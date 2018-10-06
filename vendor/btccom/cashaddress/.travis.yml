@@ -1,0 +1,46 @@
+language: php
+
+branches:
+  only:
+    - "master"
+
+php:
+  - 5.6
+  - hhvm
+  - 7.0
+  - 7.1
+  - 7.2
+  - nightly
+
+dist: trusty
+
+matrix:
+  include:
+    - php: 5.6
+      env: COVERAGE=true
+
+install:
+    - composer update
+
+before_script:
+    - |
+        if [ "${COVERAGE}" != "true" ] && [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "nightly" ]; then
+            phpenv config-rm xdebug.ini && echo "xdebug disabled"
+        fi
+
+script:
+    - |
+        if [ "${COVERAGE}" = "true" ]; then
+            vendor/bin/phpunit --coverage-clover=build/coverage.clover -c phpunit.xml
+        else
+            vendor/bin/phpunit -c phpunit.xml
+        fi
+    - vendor/bin/phpcs -n --standard=PSR1,PSR2 src test examples
+    - ./validate_examples.sh
+
+after_script:
+    - |
+        if [ "${COVERAGE}" = "true" ]; then
+          wget https://scrutinizer-ci.com/ocular.phar
+          php ocular.phar code-coverage:upload --format=php-clover build/coverage.clover;
+        fi

@@ -38,7 +38,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 = Cryptocurrencies supported: =
 
 - Bitcoin BTC (Including SegWit addresses, Electrum HD wallet)
-- Bitcoin Cash BCH
+- Bitcoin Cash BCH (Including Electrum HD wallet)
 - Bitcoin Gold BTG
 - Bits'mdo' BSD
 - CatoCoin CATO
@@ -50,7 +50,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Elite 1337
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
-- Litecoin LTC (Including SegWit addresses)
+- Litecoin LTC (Including SegWit addresses, Electrum HD wallet)
 - MarsCoin MARS
 - Monero XMR
 - NEM XEM

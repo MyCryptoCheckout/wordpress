@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2030e5025ff0cd05bb11c78fdc8cda8b
+class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
 {
     public static $files = array (
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
@@ -32,9 +32,11 @@ class ComposerStaticInit2030e5025ff0cd05bb11c78fdc8cda8b
         'C' => 
         array (
             'Composer\\Semver\\' => 16,
+            'CashAddr\\' => 9,
         ),
         'B' => 
         array (
+            'Btccom\\BitcoinCash\\' => 19,
             'BitWasp\\Buffertools\\' => 20,
             'BitWasp\\Bitcoin\\' => 16,
         ),
@@ -61,6 +63,14 @@ class ComposerStaticInit2030e5025ff0cd05bb11c78fdc8cda8b
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
+        'CashAddr\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/btccom/cashaddress/src',
+        ),
+        'Btccom\\BitcoinCash\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/btccom/bitwasp-bitcoin-bch-addon/src',
+        ),
         'BitWasp\\Buffertools\\' => 
         array (
             0 => __DIR__ . '/..' . '/bitwasp/buffertools/src/Buffertools',
@@ -84,9 +94,9 @@ class ComposerStaticInit2030e5025ff0cd05bb11c78fdc8cda8b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2030e5025ff0cd05bb11c78fdc8cda8b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2030e5025ff0cd05bb11c78fdc8cda8b::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit2030e5025ff0cd05bb11c78fdc8cda8b::$prefixesPsr0;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

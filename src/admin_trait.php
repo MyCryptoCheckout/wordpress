@@ -535,7 +535,7 @@ trait admin_trait
 				$fs->legend->label( __( 'HD wallet settings', 'mycryptocheckout' ) );
 
 				$btc_hd_public_key = $fs->text( 'btc_hd_public_key' )
-					->description( __( 'If you have an HD wallet and want to generate a new address after each purchase, enter your XPUB, YPUB or ZPUB public key here.', 'mycryptocheckout' ) )
+					->description( __( 'If you have an HD wallet and want to generate a new address after each purchase, enter your XPUB / YPUB / ZPUB public key here.', 'mycryptocheckout' ) )
 					// Input label
 					->label( __( 'HD public key', 'mycryptocheckout' ) )
 					->trim()

@@ -40,6 +40,10 @@ trait btc_hd_public_key_trait
 
 		switch( $wallet->get_currency_id() )
 		{
+			case 'BCH':
+				$network = \Btccom\BitcoinCash\Network\NetworkFactory::bitcoinCash();
+				$prefixes = new BitcoinRegistry();
+			break;
 			case 'LTC':
 				$network = NetworkFactory::litecoin();
 				$prefixes = new BitcoinRegistry();
@@ -85,7 +89,25 @@ trait btc_hd_public_key_trait
 		$key = $serializer->parse( $network, $public_key );
 		$child_key = $key->derivePath( $path );
 
-		$address = $child_key->getAddress( new AddressCreator() )->getAddress();
+		switch( $wallet->get_currency_id() )
+		{
+			case 'BTC':
+				$address = $child_key->getAddress( new AddressCreator() )->getAddress();
+			break;
+			case 'LTC':
+				$address = $child_key->getAddress( new AddressCreator() )->getAddress( $network );
+			break;
+			case 'BCH':
+				$address = $child_key->getAddress( new AddressCreator() )->getAddress();
+				$dir = dirname( MyCryptoCheckout()->paths( '__FILE__' ) );
+				$dir = $dir . '/src/3rdparty/CashAddress.php';
+				require_once( $dir );
+				$ca = new \CashAddress\CashAddress();
+				$address = $ca->old2new( $address );
+				$address = preg_replace( '/.*:/', '', $address );
+			break;
+		}
+
 		return $address;
 	}
 

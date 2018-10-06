@@ -1,0 +1,30 @@
+{
+  "name": "btccom/cashaddr",
+  "description": "Implementation of bitcoin cash base32 addresses",
+  "homepage": "https://github.com/btccom/cashaddr-php",
+  "type": "library",
+  "keywords": ["bitcoin cash", "base32", "cashaddr"],
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/btccom/cashaddr-php/issues",
+    "source": "https://github.com/btccom/cashaddr-php"
+  },
+  "autoload": {
+    "psr-4": {
+      "CashAddr\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\CashAddr\\": "test/"
+    }
+  },
+  "require": {
+    "ext-gmp": "*"
+  },
+  "require-dev": {
+    "ext-json": "*",
+    "phpunit/phpunit": "^5.7",
+    "squizlabs/php_codesniffer": "^3.2"
+  }
+}

@@ -70,6 +70,7 @@ class Payment
 
 	/**
 		@brief		Set the amount for the expected payment.
+		@details	"4.223432" or "12" or "5000000"
 		@since		2018-10-05 18:44:19
 	**/
 	public function set_amount( $amount )
