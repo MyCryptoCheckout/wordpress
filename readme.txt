@@ -168,6 +168,9 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New: HD wallet support for Bitcoin Cash BCH
+* New: HD wallet support for Litecoin LTC
+
 = 2.20 20181004 =
 
 * New currency: ADULTEUM ADULT
