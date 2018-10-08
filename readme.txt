@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.20
+Stable tag: 2.21
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
@@ -167,6 +167,8 @@ If your server cannot be reached by the API server this plugin will not function
 12. Donations widget
 
 == Changelog ==
+
+= 2.21 20181006 =
 
 * New: HD wallet support for Bitcoin Cash BCH
 * New: HD wallet support for Litecoin LTC
