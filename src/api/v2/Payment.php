@@ -5,6 +5,8 @@ namespace mycryptocheckout\api\v2;
 /**
 	@brief		Payment object that is sent to the MCC API server.
 	@details	MCC will then watch for this payment and inform the client if the transaction is detected.
+				The most important parts are the amount and to address.
+				Data is used to store things like Monero view keys.
 	@since		2018-10-05 18:25:42
 **/
 class Payment

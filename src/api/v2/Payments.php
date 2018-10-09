@@ -1,10 +1,10 @@
 <?php
 
-namespace mycryptocheckout\api;
+namespace mycryptocheckout\api\v2;
 
 /**
-	@brief		Payment handling.
-	@since		2017-12-21 23:28:34
+	@brief		Handles payments to the server.
+	@since		2018-10-08 20:38:27
 **/
 class Payments
 	extends Component
