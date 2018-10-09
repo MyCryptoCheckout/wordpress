@@ -42,8 +42,20 @@ trait admin_trait
 		$form->id( 'account' );
 		$r = '';
 
+		$public_listing = $form->checkbox( 'public_listing' )
+			->checked( $this->get_site_option( 'public_listing' ) )
+			->description( __( 'If you want to list your webshop on mycryptocheckout.com, check the box and update your account.', 'mycryptocheckout' ) )
+			->label( __( 'List webshop publically', 'mycryptocheckout' ) );
+
 		if ( isset( $_POST[ 'retrieve_account' ] ) )
 		{
+			$form->post();
+			$form->use_post_values();
+			if ( $public_listing->is_checked() )
+				MyCryptoCheckout()->update_site_option( 'public_listing', true );
+			else
+				MyCryptoCheckout()->delete_site_option( 'public_listing' );
+
 			$result = $this->mycryptocheckout_retrieve_account();
 			if ( $result )
 			{
@@ -219,6 +231,8 @@ trait admin_trait
 		}
 
 		$r .= $table;
+
+
 
 		return $r;
 	}

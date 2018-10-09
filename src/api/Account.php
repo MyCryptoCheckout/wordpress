@@ -213,12 +213,31 @@ class Account
 			// Set a retrieve key so we know that the retrieve_account data is ours.
 			$retrieve_key = hash( 'md5', microtime() . AUTH_SALT . rand( 0, PHP_INT_MAX ) );
 			set_site_transient( static::$account_retrieve_transient_key, $retrieve_key, 60 );
-			$result = MyCryptoCheckout()->api()->send_post( 'account/retrieve',
-				[
-					'domain' => base64_encode( MyCryptoCheckout()->get_server_name() ),
-					'plugin_version' => MYCRYPTOCHECKOUT_PLUGIN_VERSION,
-					'retrieve_key' => $retrieve_key,
-				] );
+			$data = [
+				'domain' => base64_encode( MyCryptoCheckout()->get_server_name() ),
+				'plugin_version' => MYCRYPTOCHECKOUT_PLUGIN_VERSION,
+				'retrieve_key' => $retrieve_key,
+			];
+
+			// List the site publically?
+			$public_listing = MyCryptoCheckout()->get_site_option( 'public_listing' );
+			if ( $public_listing )
+			{
+				if ( MULTISITE )
+				{
+					// Fetch the name of the parent blog.
+					switch_to_blog( 1 );
+					$public_listing = get_bloginfo( 'name' );
+					restore_current_blog();
+				}
+				else
+					$public_listing = get_bloginfo( 'name' );
+				$data[ 'public_listing' ] = [
+					'description' => $public_listing,
+				];
+			}
+
+			$result = MyCryptoCheckout()->api()->send_post( 'account/retrieve', $data );
 			if ( ! $result )
 				throw new Exception( 'No valid answer from the API server.' );
 
