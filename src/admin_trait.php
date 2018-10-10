@@ -44,7 +44,7 @@ trait admin_trait
 
 		$public_listing = $form->checkbox( 'public_listing' )
 			->checked( $this->get_site_option( 'public_listing' ) )
-			->description( __( 'Check the box and refresh your account if you want your webshop listed in the upcoming store directory on mycryptocheckout.com.', 'mycryptocheckout' ) )
+			->description( __( 'Check the box and refresh your account if you want your webshop listed in the upcoming store directory on mycryptocheckout.com. Your store name and URL will be listed.', 'mycryptocheckout' ) )
 			->label( __( 'Be featured in the MCC store directory?', 'mycryptocheckout' ) );
 
 		if ( isset( $_POST[ 'retrieve_account' ] ) )
