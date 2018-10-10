@@ -176,6 +176,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 * New currency: Invacio INV
 * New: Want your webshop publically listed in our upcoming store directory? There's a checkbox for that in the account overview tab.
+* New: Added Monero private view key input placeholder text
 
 = 2.21 20181006 =
 

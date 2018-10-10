@@ -351,6 +351,7 @@ trait admin_trait
 			->description( __( 'Your private view key that is used to see the amounts in private transactions to your wallet.', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Monero private view key', 'mycryptocheckout' ) )
+			->placeholder( '157e74dc4e2961c872f87aaf43461f6d0f596f2f116a51fbace1b693a8e3020a' )
 			->size( 64, 64 )
 			->trim();
 
