@@ -168,6 +168,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New: Want your webshop publically listed in our upcoming store directory? There's a checkbox for that in the account overview tab.
+
 = 2.21 20181006 =
 
 * New: HD wallet support for Bitcoin Cash BCH
