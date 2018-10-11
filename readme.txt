@@ -124,6 +124,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 
 = WAVES Tokens supported: =
 
+- CoffeeCoin COF
 - We can now add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
 = Cryptocurrency Donations Widget =
@@ -174,6 +175,7 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New currency: CoffeeCoin COF
 * New currency: Invacio INV
 * New: Want your webshop publically listed in our upcoming store directory? There's a checkbox for that in the account overview tab.
 * New: Added Monero private view key input placeholder text
