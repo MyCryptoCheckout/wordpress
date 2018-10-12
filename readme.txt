@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.21
+Stable tag: 2.22
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
@@ -175,10 +175,13 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+= 2.22 20181012 =
+
+* We now accept <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 * New currency: CoffeeCoin COF
 * New currency: Invacio INV
 * New: Want your webshop publically listed in our upcoming store directory? There's a checkbox for that in the account overview tab.
-* New: Added Monero private view key input placeholder text
+* New: Added Monero private view key input placeholder text.
 
 = 2.21 20181006 =
 
