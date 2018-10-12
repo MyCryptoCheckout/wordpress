@@ -42,8 +42,20 @@ trait admin_trait
 		$form->id( 'account' );
 		$r = '';
 
+		$public_listing = $form->checkbox( 'public_listing' )
+			->checked( $this->get_site_option( 'public_listing' ) )
+			->description( __( 'Check the box and refresh your account if you want your webshop listed in the upcoming store directory on mycryptocheckout.com. Your store name and URL will be listed.', 'mycryptocheckout' ) )
+			->label( __( 'Be featured in the MCC store directory?', 'mycryptocheckout' ) );
+
 		if ( isset( $_POST[ 'retrieve_account' ] ) )
 		{
+			$form->post();
+			$form->use_post_values();
+			if ( $public_listing->is_checked() )
+				MyCryptoCheckout()->update_site_option( 'public_listing', true );
+			else
+				MyCryptoCheckout()->delete_site_option( 'public_listing' );
+
 			$result = $this->mycryptocheckout_retrieve_account();
 			if ( $result )
 			{
@@ -220,6 +232,8 @@ trait admin_trait
 
 		$r .= $table;
 
+
+
 		return $r;
 	}
 
@@ -337,6 +351,7 @@ trait admin_trait
 			->description( __( 'Your private view key that is used to see the amounts in private transactions to your wallet.', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Monero private view key', 'mycryptocheckout' ) )
+			->placeholder( '157e74dc4e2961c872f87aaf43461f6d0f596f2f116a51fbace1b693a8e3020a' )
 			->size( 64, 64 )
 			->trim();
 

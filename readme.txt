@@ -1,14 +1,14 @@
-=== MyCryptoCheckout - Accept 65+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 70+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.21
+Stable tag: 2.22
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 65+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 70+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -21,12 +21,13 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - 0% transaction fees
 - No product restrictions
 - Peer-to-peer transactions
-- Use any wallet(s) you want: desktop, mobile or online
-- Automagically detect unique payments from an endless amount of customers using one wallet address
+- Use any wallet(s) you want: desktop, mobile, or online
+- Automagically detect unique payments from customers using one wallet address
 - Optional hierarchically deterministic (HD) wallet support
-- No redirection to 3rd parties, no iframes nor modal windows
-- Donations shortcode generator you can use in widgets and pages to show your users how to send cryptocurrency donations
-- See the full <a href="https://mycryptocheckout.com/comparison/">feature comparison table</a> on our website to see why you should use MyCryptoCheckout instead of other crypto payment gateways
+- No redirection to 3rd parties, no iframes, no modal windows
+- Optional donations widget shortcode generator
+- See the <a href="https://mycryptocheckout.com/comparison/">feature comparison table</a> to see why you should use MyCryptoCheckout instead of other crypto gateways
+- How to auto convert received <a href="https://mycryptocheckout.com/doc/auto-convert-crypto-to-fiat/">Bitcoin/Altcoin to USD/EUR/etc</a>
 
 The free license can process three sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account if you require more. The flat rate license includes unlimited transactions. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
 
@@ -58,10 +59,11 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Solaris XLR
 - Straks STAK
 - TokenPay TPAY
-- Tron TRX
+- TRON TRX
 - TurtleNetwork TN
 - Verge XVG
 - Viacoin VIA
+- Waves WAVES
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
@@ -86,6 +88,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Huobi Token HT
 - Icon ICX
 - intimate ITM
+- Invacio INV
 - Kyber Network KNC
 - Latino Token LATINO
 - L'île LILE
@@ -119,6 +122,11 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 
 - TRONBITCOIN TBTC
 - We can now add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON TRC-20 tokens</a>!
+
+= WAVES Tokens supported: =
+
+- CoffeeCoin COF
+- We can now add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
 = Cryptocurrency Donations Widget =
 
@@ -167,6 +175,14 @@ If your server cannot be reached by the API server this plugin will not function
 12. Donations widget
 
 == Changelog ==
+
+= 2.22 20181012 =
+
+* We now accept <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
+* New currency: CoffeeCoin COF
+* New currency: Invacio INV
+* New: Want your webshop publically listed in our upcoming store directory? There's a checkbox for that in the account overview tab.
+* New: Added Monero private view key input placeholder text.
 
 = 2.21 20181006 =
 

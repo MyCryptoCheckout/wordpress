@@ -44,56 +44,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'offset_left' => 2.5,
 		];
 		$svg_details = [
-			'1337' => [],
-			'ADULT' => [],
-			'BNB' => [],
-			'BSD' => [],
-			'BTC' => [],
-			'BTG' => [],
 			'BCH' => [
 				'width' => 160,
 			],
-			'CATO' => [],
-			'COLX' => [],
-			'CRYP' => [],
-			'DASH' => [],
-			'DCR' => [],
-			'DGB' => [],
-			'EBTC' => [],
-			'ERC20' => [],
-			'ETC' => [],
-			'ETH' => [],
-			'FLIX' => [],
-			'HT' => [],
-			'ITM' => [],
-			'LATINO' => [],
-			'LILE' => [],
-			'LOOM' => [],
-			'LTC' => [],
-			'MARS' => [],
-			'MCO' => [],
-			'NEO' => [],
-			'NPXS' => [],
-			'NYC' => [],
-			'ONG' => [],
-			'PAY' => [],
-			'SHEL' => [],
-			'SHEL_NEM' => [],
-			'STAK' => [],
-			'STAKE' => [],
-			'TBTC' => [],
 			'TN' => [
 				'width' => 85,
 			],
-			'TPAY' => [],
-			'TRX' => [],
-			'VIA' => [],
-			'XEM' => [],
-			'XLR' => [],
-			'XMR' => [],
-			'XVG' => [],
-			'WRD1' => [],
-			'ZEC' => [],
 		];
 		$wallet_options = $this->get_wallet_options();
 		$output = file_get_contents( $dir . 'icon_base.svg' );
@@ -102,47 +58,35 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$output_filename = 'icons';
 		$handled_currencies = [];
 		$currency_data = MyCryptoCheckout()->api()->account()->get_currency_data();
-		// We do svg_details first and then wallet options in order to get the correct icon order. BTC before BCH, for example.
-		foreach( $svg_details as $svg_currency_id => $svg_data )
+		foreach( $wallet_options as $currency_id => $ignore )
 		{
-			foreach( $wallet_options as $currency_id => $ignore )
-			{
-				// If not found in the array, is this an erc20?
-				if ( ! isset( $svg_details[ $currency_id ] ) )
-					if ( isset( $currency_data->$currency_id ) )
-					{
-						$data = $currency_data->$currency_id;
-						if ( isset( $data->erc20 ) )
-							$currency_id = 'ERC20';
-					}
-
-				// Looking for the currencies in the correct order.
-				if ( $svg_currency_id != $currency_id )
-					continue;
-
-				// Have we already handled this currency?
-				if ( isset( $handled_currencies[ $currency_id ] ) )
-					continue;
-
-				// We must know about this currency.
-				if ( ! isset( $svg_details[ $currency_id ] ) )
-					continue;
-
-				// Handle this currency!
-				$handled_currencies[ $currency_id ] = true;
-
-				$output_filename .= '_' . $currency_id;
+			if ( isset( $svg_details[ $currency_id ] ) )
 				$svg = $svg_details[ $currency_id ];
-				$svg = array_merge( $svg_default, $svg );
-				$offset = $mcc_width + $svg[ 'offset_left' ];
+			else
+				$svg = [];
+			$svg = array_merge( $svg_default, $svg );
 
-				// Insert the icon from disk.
-				$icon_svg = file_get_contents( $dir . 'icon_' . $currency_id . '.svg' );
-				$icon_svg = str_replace( 'MCC_OFFSET', $offset, $icon_svg );
+			// If there is no icon file, don't bother.
+			$icon_file = $dir . 'icon_' . $currency_id . '.svg';
+			if ( ! is_readable( $icon_file ) )
+				continue;
 
-				$mcc_icons .= $icon_svg;
-				$mcc_width += $svg[ 'width' ];
-			}
+			// Have we already handled this currency?
+			if ( isset( $handled_currencies[ $currency_id ] ) )
+				continue;
+
+			$handled_currencies[ $currency_id ] = true;
+
+			$output_filename .= '_' . $currency_id;
+
+			$offset = $mcc_width + $svg[ 'offset_left' ];
+
+			// Insert the icon from disk.
+			$icon_svg = file_get_contents( $icon_file );
+			$icon_svg = str_replace( 'MCC_OFFSET', $offset, $icon_svg );
+
+			$mcc_icons .= $icon_svg;
+			$mcc_width += $svg[ 'width' ];
 		}
 
 		$output = str_replace( 'MCC_WIDTH', $mcc_width, $output );
