@@ -1,13 +1,13 @@
 <?php
 
-namespace mycryptocheckout\api;
+namespace mycryptocheckout\api\v2\wordpress;
 
 /**
 	@brief		This component handles the account.
 	@since		2017-12-11 19:16:22
 **/
 class Account
-	extends v2\Component
+	extends \mycryptocheckout\api\v2\Account
 {
 	/**
 		@brief		The transient key for storing the account retrieval key.

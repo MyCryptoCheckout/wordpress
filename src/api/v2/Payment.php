@@ -82,6 +82,17 @@ class Payment
 	}
 
 	/**
+		@brief		Sets the ID which is used when handling messages from the API marking payments complete.
+		@details	Used for handling cancel_payment and complete_payment messages.
+		@since		2018-10-13 13:25:43
+	**/
+	public function set_id( $id )
+	{
+		$this->payment_id = $id;
+		return $this;
+	}
+
+	/**
 		@brief		Set the recipient wallet address for the expected payment.
 		@since		2018-10-05 18:44:19
 	**/
@@ -89,5 +100,33 @@ class Payment
 	{
 		$this->to = $to;
 		return $this;
+	}
+
+	/**
+		@brief		Sets the transaction ID which is used when handling messages from the API marking payments complete.
+		@details	Used for handling complete_payment messages.
+		@since		2018-10-13 13:25:43
+	**/
+	public function set_transaction_id( $transaction_id )
+	{
+		$this->transaction_id = $transaction_id;
+		return $this;
+	}
+
+	/**
+		@brief		Return this object as an array.
+		@since		2017-12-21 23:37:48
+	**/
+	public function to_array()
+	{
+		return [
+			'amount' => $this->amount,
+			'confirmations' => $this->confirmations,
+			'created_at' => $this->created_at,
+			'currency_id' => $this->currency_id,
+			'data' => $this->data,
+			'timeout_hours' => $this->timeout_hours,
+			'to' => $this->to,
+		];
 	}
 }

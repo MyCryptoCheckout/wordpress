@@ -326,7 +326,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function mycryptocheckout_generate_checkout_javascript_data( $action )
 	{
 		$payment = $this->__current_payment;
-		$payment->add_to_checkout_javascript_data( $action );
+		MyCryptoCheckout()->api()->payments()->add_to_checkout_javascript_data( $action, $payment );
 
 		// This is unique for WooCommerce.
 		if ( $this->get_option( 'hide_woocommerce_order_overview' ) )
@@ -428,7 +428,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		$instructions = $this->get_option( 'email_instructions' );
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order->get_id() );
-		$instructions = $payment->replace_shortcodes( $instructions );
+		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment, $instructions );
 		echo wpautop( wptexturize( $instructions ) ) . PHP_EOL;
 	}
 
@@ -446,7 +446,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$this->__current_payment = $payment;
 		if ( ! $order->needs_payment() )
 			$payment->paid = $order->is_paid();
-		$instructions = $payment->replace_shortcodes( $instructions );
+		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment,  $instructions );
 		if ( ! $instructions )
 			return;
 

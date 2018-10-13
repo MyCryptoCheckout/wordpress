@@ -6,7 +6,7 @@ namespace mycryptocheckout\api\v2;
 	@brief		Handles payments to the server.
 	@since		2018-10-08 20:38:27
 **/
-class Payments
+abstract class Payments
 	extends Component
 {
 	/**
@@ -25,7 +25,7 @@ class Payments
 	}
 
 	/**
-		@brief		Cancel a payment.
+		@brief		Cancel a payment on the API.
 		@since		2018-03-25 22:30:37
 	**/
 	public function cancel( $payment_id )
@@ -35,79 +35,34 @@ class Payments
 	}
 
 	/**
+		@brief		Cancel a local payment.
+		@since		2018-10-13 11:53:18
+	**/
+	public abstract function cancel_local( Payment $payment );
+
+	/**
+		@brief		Complete a local payment.
+		@since		2018-10-13 11:53:39
+	**/
+	public abstract function complete_local( Payment $payment );
+
+	/**
 		@brief		Convenience method to create a new payment.
+		@param		$data	object/array	Data to insert into the payment.
+		@return		Payment
 		@since		2018-09-20 20:58:53
 	**/
-	public function create_new()
+	public static function create_new( $data = null )
 	{
 		$payment = new Payment();
 		$payment->created_at = time();
 
-		// If we are on a network, then note down the site data.
-		if ( MULTISITE )
-		{
-			$payment->data()->set( 'site_id', get_current_blog_id() );
-			$payment->data()->set( 'site_url', get_option( 'siteurl' ) );
-		}
+		// Shoudl we extract old data?
+		if ( $data !== null )
+			foreach( (array) $data as $key => $value )
+				$payment->$key = $value;
 
 		return $payment;
-	}
-
-	/**
-		@brief		Generate a Payment class from an order.
-		@since		2017-12-21 23:47:17
-	**/
-	public static function generate_payment_from_order( $post_id )
-	{
-		$payment = new Payment();
-		$payment->amount = get_post_meta( $post_id,  '_mcc_amount', true );
-		$payment->confirmations = get_post_meta( $post_id,  '_mcc_confirmations', true );
-		$payment->created_at = get_post_meta( $post_id,  '_mcc_created_at', true );
-		$payment->currency_id = get_post_meta( $post_id,  '_mcc_currency_id', true );
-		$payment->timeout_hours = get_post_meta( $post_id,  '_mcc_payment_timeout_hours', true );
-		$payment->to = get_post_meta( $post_id,  '_mcc_to', true );
-
-		$payment->data = get_post_meta( $post_id,  '_mcc_payment_data', true );
-
-		// If we are on a network, then note down the site data.
-		if ( MULTISITE )
-		{
-			$payment->data()->set( 'site_id', get_current_blog_id() );
-			$payment->data()->set( 'site_url', get_option( 'siteurl' ) );
-		}
-
-		return $payment;
-	}
-
-	/**
-		@brief		Send a payment for a post ID.
-		@since		2018-01-02 19:16:06
-	**/
-	public function send( $post_id )
-	{
-		$attempts = intval( get_post_meta( $post_id, '_mcc_attempts', true ) );
-
-		MyCryptoCheckout()->api()->account()->lock()->save();
-
-		try
-		{
-			$payment = static::generate_payment_from_order( $post_id );
-			$payment_id = $this->add( $payment );
-			update_post_meta( $post_id, '_mcc_payment_id', $payment_id );
-			MyCryptoCheckout()->debug( 'Payment for order %d has been added as payment #%d.', $post_id, $payment_id );
-		}
-		catch ( Exception $e )
-		{
-			$attempts++;
-			update_post_meta( $post_id, '_mcc_attempts', $attempts );
-			MyCryptoCheckout()->debug( 'Failure #%d trying to send the payment for order %d. %s', $attempts, $post_id, $e->getMessage() );
-			if ( $attempts > 48 )	// 48 hours, since this is usually run on the hourly cron.
-			{
-				// TODO: Give up and inform the admin of the failure.
-				MyCryptoCheckout()->debug( 'We have now given up on trying to send the payment for order %d.', $post_id );
-				update_post_meta( $post_id,  '_mcc_payment_id', -1 );
-			}
-		}
 	}
 
 	/**

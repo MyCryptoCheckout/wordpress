@@ -28,6 +28,15 @@ abstract class API
 	}
 
 	/**
+		@brief		Output this string to the debug log.
+		@details	Optimally, run the arguments through an sprintf.
+		@since		2018-10-13 11:48:29
+	**/
+	public function debug( $string )
+	{
+	}
+
+	/**
 		@brief		Return the API url.
 		@since		2017-12-21 23:31:39
 	**/
@@ -40,7 +49,7 @@ abstract class API
 	}
 
 	/**
-		@brief		Return data from storage.
+		@brief		Return data from persistent storage.
 		@since		2018-10-08 20:14:21
 	**/
 	public abstract function get_data( $key, $default = false );
@@ -54,9 +63,23 @@ abstract class API
 	{
 		$url = 'https://mycryptocheckout.com/pricing/';
 		return add_query_arg( [
-			'domain' => base64_encode( MyCryptoCheckout()->get_server_name() ),
+			'domain' => base64_encode( $this->get_server_name() ),
 		], $url );
 	}
+
+	/**
+		@brief		Return the name of the server we are on.
+		@since		2018-10-13 11:46:01
+	**/
+	public abstract function get_server_name();
+
+	/**
+		@brief		Check that this account retrieval key is the one we sent to the server a few moments ago.
+		@details	Before a account_retrieve message is sent, we set a temporary retrieve_key.
+					This is to ensure that the account we are getting from the API belongs to us.
+		@since		2018-10-13 12:49:04
+	**/
+	public abstract function is_retrieve_key_valid( $retrieve_key );
 
 	/**
 		@brief		Create a new account component.
@@ -120,33 +143,29 @@ abstract class API
 	{
 		// This must be an array.
 		if ( ! is_array( $json->messages ) )
-			return MyCryptoCheckout()->debug( 'JSON does not contain a messages array.' );
+			return $this->debug( 'JSON does not contain a messages array.' );
 
 		// First check for a retrieve_account message.
 		foreach( $json->messages as $message )
 		{
 			if ( $message->type != 'retrieve_account' )
 				continue;
-			$transient_value = get_site_transient( Account::$account_retrieve_transient_key );
-			if ( ! $transient_value )
-				throw new Exception( 'No retrieve key is set. Not expecting an account retrieval.' );
-			// Does it match the one we got?
-			if ( $transient_value != $message->retrieve_key )
+			if ( ! $this->is_retrieve_key_valid( $message->retrieve_key ) )
 				throw new Exception( sprintf( 'Retrieve keys do not match. Expecting %s but got %s.', $transient_value, $message->retrieve_key ) );
 			// Everything looks good to go.
 			$new_account_data = (object) (array) $message->account;
-			MyCryptoCheckout()->debug( 'Setting new account data: %s', json_encode( $new_account_data ) );
-			MyCryptoCheckout()->api()->account()->set_data( $new_account_data )
+			$this->debug( 'Setting new account data: %s', json_encode( $new_account_data ) );
+			$this->account()->set_data( $new_account_data )
 				->save();
 		}
 
 		$account = $this->account();
 		if ( ! $account->is_valid() )
-			return MyCryptoCheckout()->debug( 'No account data found. Ignoring messages.' );
+			return $this->debug( 'No account data found. Ignoring messages.' );
 
 		// Check that the domain key matches ours.
 		if ( $account->get_domain_key() != $json->mycryptocheckout )
-			return MyCryptoCheckout()->debug( 'Invalid domain key. Received %s', $json->mycryptocheckout );
+			return $this->debug( 'Invalid domain key. Received %s', $json->mycryptocheckout );
 
 		// Handle the messages, one by one.
 		foreach( $json->messages as $message )
@@ -155,7 +174,16 @@ abstract class API
 			if ( $message->type == 'payment_complete' )
 				$message->type = 'complete_payment';
 
-			MyCryptoCheckout()->debug( '(%d) Processing a %s message: %s', get_current_blog_id(), $message->type, json_encode( $message ) );
+			$this->debug( '(%d) Processing a %s message: %s', get_current_blog_id(), $message->type, json_encode( $message ) );
+
+			if ( isset( $message->payment ) )
+			{
+				// Create a payment object that is used to transfer the completion / cancellation data from the server to whoever handles the message.
+				$payment = $this->payments()->create_new( $message->payment );
+				$payment->set_id( $message->payment->payment_id );		// This is already set during create_new(), but we want to be extra clear.
+				if ( isset( $message->payment->transaction_id ) )		// Completions require this.
+					$payment->set_transaction_id( $message->payment->transaction_id );	// This is already set during create_new(), but we want to be extra clear.
+			}
 
 			switch( $message->type )
 			{
@@ -163,17 +191,17 @@ abstract class API
 					// Already handled above.
 				break;
 				case 'cancel_payment':
+					// Mark the local payment as canceled.
+					$this->payments()->cancel_local( $payment );
+					break;
 				case 'complete_payment':
-					$action = MyCryptoCheckout()->new_action( $message->type );
-					$action->payment = $message->payment;
-					$action->execute();
-					if ( $action->applied < 1 )
-						throw new Exception( sprintf( 'Unable to apply %s for payment ID %s.', $message->type, json_encode( $message->payment ) ) );
-					MyCryptoCheckout()->debug( '%s action applied %s times.', $message->type, $action->applied );
+					// Mark the local payment as complete.
+					$this->payments()->complete_local( $payment );
 				break;
 				case 'update_account':
+					// Save our new account data.
 					$new_account_data = (object) (array) $message->account;
-					MyCryptoCheckout()->update_site_option( 'account_data', json_encode( $new_account_data ) );
+					$this->save_data( 'account_data', json_encode( $new_account_data ) );
 				break;
 				default:
 					throw new Exception( sprintf( 'Unknown message type: %s', $message->type ) );
@@ -183,7 +211,7 @@ abstract class API
 	}
 
 	/**
-		@brief		Save this data.
+		@brief		Save this data to persisent storage.
 		@since		2018-10-08 19:30:01
 	**/
 	public abstract function save_data( $key, $data );
@@ -208,7 +236,7 @@ abstract class API
 	{
 		$account = $this->account();
 		// Merge the domain key.
-		$data[ 'domain' ] = MyCryptoCheckout()->get_server_name();
+		$data[ 'domain' ] = $this->get_server_name();
 		$data[ 'domain_key' ] = $account->get_domain_key();
 		return $this->send_post( $url, $data );
 	}

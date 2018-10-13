@@ -82,7 +82,7 @@ class Easy_Digital_Downloads
 
 		$this->__current_payment = $payment;		// For the javascript later.
 
-		$instructions = $payment->replace_shortcodes( $instructions );
+		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment, $instructions );
 
 		$output = wpautop( $instructions ) . $output;
 		$output .= MyCryptoCheckout()->generate_checkout_js();
@@ -116,7 +116,7 @@ class Easy_Digital_Downloads
 
 			$instructions = $this->get_option_or_default( 'email_payment_instructions' );
 			$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
-			$instructions = $payment->replace_shortcodes( $instructions );
+			$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment, $instructions );
 			return $instructions;
 		} );
 	}
@@ -189,7 +189,7 @@ class Easy_Digital_Downloads
 
 		$wallet->apply_to_payment( $payment );
 
-		$payment->save( $payment_id );
+		$mcc->api()->payments()->save( $payment_id, $payment );
 
 		// Only send it if we are not in test mode.
 		if ( $mcc_payment_id < 1 )
@@ -550,7 +550,7 @@ class Easy_Digital_Downloads
 		if ( ! isset( $this->__current_payment ) )
 			return;
 		$payment = $this->__current_payment;
-		$payment->add_to_checkout_javascript_data( $action );
+		MyCryptoCheckout()->api()->payments()->add_to_checkout_javascript_data( $action, $payment );
 		return $action;
 	}
 

@@ -28,7 +28,7 @@ trait api_trait
 		if ( isset( $this->__api ) )
 			return $this->__api;
 
-		$this->__api = new api\API();
+		$this->__api = new api\v2\wordpress\API();
 		return $this->__api;
 	}
 
