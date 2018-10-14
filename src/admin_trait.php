@@ -134,7 +134,7 @@ trait admin_trait
 
 			$row = $table->head()->row();
 			$row->th( 'key' )->text( __( 'Server name', 'mycryptocheckout' ) );
-			$row->td( 'details' )->text( $this->get_server_name() );
+			$row->td( 'details' )->text( $this->get_client_url() );
 		}
 
 		$row = $table->head()->row();
@@ -217,14 +217,14 @@ trait admin_trait
 				$row = $table->head()->row();
 				$row->th( 'key' )->text( __( 'Reserved amounts', 'mycryptocheckout' ) );
 				$text = '';
-				foreach( $account->data->payment_amounts as $currency_id => $amounts )
+				$payment_amounts = (array) $account->data->payment_amounts;
+				ksort( $payment_amounts );
+				foreach( $payment_amounts as $currency_id => $amounts )
 				{
-					$text .= sprintf( '<p>%s<ul>', $currency_id );
 					$amounts = (array)$amounts;
 					ksort( $amounts );
-					foreach( $amounts as $amount => $ignore )
-						$text .= sprintf( '<li>%s</li>', $amount );
-					$text .= '</ul>';
+					$amounts = implode( ', ', array_keys( $amounts ) );
+					$text .= sprintf( '<p>%s: %s</p>', $currency_id, $amounts );
 				}
 				$row->td( 'details' )->text( $text );
 			}

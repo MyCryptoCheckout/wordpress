@@ -159,7 +159,7 @@ trait misc_methods_trait
 		@brief		Return the shortest possible name of this server.
 		@since		2017-12-11 14:23:01
 	**/
-	public function get_server_name()
+	public function get_client_url()
 	{
 		if ( ! $this->is_network )
 			$server_name = get_bloginfo( 'url' );
