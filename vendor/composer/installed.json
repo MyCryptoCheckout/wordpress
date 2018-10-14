@@ -496,6 +496,39 @@
         ]
     },
     {
+        "name": "mycryptocheckout/api",
+        "version": "0.1",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://bitbucket.org/mycryptocheckout/api.git",
+            "reference": "87e0269a2cecd6685a488750945fd27b65f9102e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://bitbucket.org/mycryptocheckout/api/get/87e0269a2cecd6685a488750945fd27b65f9102e.zip",
+            "reference": "87e0269a2cecd6685a488750945fd27b65f9102e",
+            "shasum": ""
+        },
+        "time": "2018-10-13T15:54:25+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "mycryptocheckout\\api\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0-only"
+        ],
+        "description": "MyCryptoCheckout API for communicating with the API server.",
+        "homepage": "https://mycryptocheckout.com/",
+        "keywords": [
+            "mycryptocheckout"
+        ]
+    },
+    {
         "name": "paragonie/random_compat",
         "version": "v2.0.17",
         "version_normalized": "2.0.17.0",

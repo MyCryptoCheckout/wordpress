@@ -8,6 +8,7 @@
 	},
 	"require": {
 		"bitwasp/bitcoin": "0.0.35.0",
-		"btccom/bitwasp-bitcoin-bch-addon" : "dev-master"
+		"btccom/bitwasp-bitcoin-bch-addon" : "dev-master",
+		"mycryptocheckout/api": "^0.1.0"
 	}
 }

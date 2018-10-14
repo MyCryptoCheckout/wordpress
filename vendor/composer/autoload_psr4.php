@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'plainview\\sdk_mcc\\' => array($baseDir . '/src/sdk'),
+    'mycryptocheckout\\api\\' => array($vendorDir . '/mycryptocheckout/api/src'),
     'mycryptocheckout\\' => array($baseDir . '/src'),
     'Mdanter\\Ecc\\' => array($vendorDir . '/mdanter/ecc/src'),
     'FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),

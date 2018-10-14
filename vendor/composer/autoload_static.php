@@ -19,6 +19,7 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         ),
         'm' => 
         array (
+            'mycryptocheckout\\api\\' => 21,
             'mycryptocheckout\\' => 17,
         ),
         'M' => 
@@ -46,6 +47,10 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         'plainview\\sdk_mcc\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/sdk',
+        ),
+        'mycryptocheckout\\api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mycryptocheckout/api/src',
         ),
         'mycryptocheckout\\' => 
         array (

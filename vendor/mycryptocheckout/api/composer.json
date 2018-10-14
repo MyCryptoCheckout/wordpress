@@ -1,0 +1,14 @@
+{
+    "name": "mycryptocheckout/api",
+    "type": "library",
+    "description": "MyCryptoCheckout API for communicating with the API server.",
+    "keywords": ["mycryptocheckout"],
+    "homepage": "https://mycryptocheckout.com/",
+    "license": "GPL-2.0-only",
+    "autoload":
+	{
+		"psr-4": {
+			"mycryptocheckout\\api\\" : "src/"
+		}
+	}
+}
