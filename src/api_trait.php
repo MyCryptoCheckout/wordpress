@@ -38,35 +38,7 @@ trait api_trait
 	**/
 	public function api_template_redirect()
 	{
-		if ( isset( $_SERVER[ 'CONTENT_TYPE' ] ) )
-			if ( $_SERVER[ 'CONTENT_TYPE' ] != 'application/json' )
-				return;
-		// Retrieve the body of the request.
-		$json = file_get_contents('php://input');
-		$json = json_decode( $json );
-		if ( ! $json )
-			return;
-
-		if ( ! isset( $json->mycryptocheckout ) )
-			return;
-
-		try
-		{
-			$this->api()->process_messages( $json );
-			// wp_send_json( [ 'result' => 'ok' ] );
-			@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
-			echo wp_json_encode( [ 'result' => 'ok' ] );
-			exit;
-		}
-		catch ( api\Exception $e )
-		{
-			$this->debug( 'API failure: %s', $e->get_message() );
-			// wp_send_json( [ 'result' => 'fail', 'message' => $e->get_message() ] );
-			@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
-			echo wp_json_encode( [ 'result' => 'fail', 'message' => $e->get_message() ] );
-			exit;
-		}
-		exit;
+		$this->api()->maybe_process_messages();
 	}
 
 	/**
