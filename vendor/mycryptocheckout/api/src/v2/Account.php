@@ -25,6 +25,18 @@ abstract class Account
 	}
 
 	/**
+		@brief		Delete the account from storage.
+		@details	This is used mostly for debugging.
+		@since		2018-10-14 15:08:45
+	**/
+	public function delete()
+	{
+		$this->api()->delete_data( static::$account_data_site_option_key );
+		$this->load_data();
+		return $this;
+	}
+
+	/**
 		@brief		Return the currency data array.
 		@since		2018-03-11 23:00:17
 	**/
@@ -34,7 +46,8 @@ abstract class Account
 	}
 
 	/**
-		@brief		Get the domain key.
+		@brief		Get the domain key that is the private key for this installation.
+		@details	It is used by the client to decide whether a message sent from the API server is valid, since only the API server knows our domain key.
 		@since		2017-12-12 11:18:05
 	**/
 	public function get_domain_key()
@@ -53,7 +66,7 @@ abstract class Account
 	}
 
 	/**
-		@brief		Return the payments left.
+		@brief		Return the amount of payments left.
 		@since		2017-12-23 09:03:56
 	**/
 	public function get_payments_left()
@@ -76,7 +89,7 @@ abstract class Account
 	}
 
 	/**
-		@brief		Return the payments used.
+		@brief		Return the amount of payments used.
 		@since		2017-12-23 09:03:56
 	**/
 	public function get_payments_used()
@@ -88,10 +101,10 @@ abstract class Account
 		@brief		Convenience method to return a physical exchange rate.
 		@since		2017-12-14 17:11:13
 	**/
-	public function get_physical_exchange_rate( $currency )
+	public function get_physical_exchange_rate( $currency_id )
 	{
-		if ( isset( $this->data->physical_exchange_rates->rates->$currency ) )
-			return $this->data->physical_exchange_rates->rates->$currency;
+		if ( isset( $this->data->physical_exchange_rates->rates->$currency_id ) )
+			return $this->data->physical_exchange_rates->rates->$currency_id;
 		else
 			return false;
 	}
@@ -100,16 +113,16 @@ abstract class Account
 		@brief		Convenience method to return a virtual exchange rate.
 		@since		2017-12-14 17:11:13
 	**/
-	public function get_virtual_exchange_rate( $currency )
+	public function get_virtual_exchange_rate( $currency_id )
 	{
-		if ( isset( $this->data->virtual_exchange_rates->rates->$currency ) )
-			return $this->data->virtual_exchange_rates->rates->$currency;
+		if ( isset( $this->data->virtual_exchange_rates->rates->$currency_id ) )
+			return $this->data->virtual_exchange_rates->rates->$currency_id;
 		else
 			return false;
 	}
 
 	/**
-		@brief		Does the account have any payments left this month?
+		@brief		Convenience method to return the amount of payments left this month.
 		@since		2017-12-23 08:59:11
 	**/
 	public function has_payments_left()
@@ -140,10 +153,7 @@ abstract class Account
 		if ( ! $this->has_payments_left() )
 			throw new Exception( 'Your account does not have any payments left this month. Either wait until next month or purchase an unlimited license using the link on your MyCryptoCheckout settings account page.' );
 
-		// We need at least one wallet.
-		$wallets = MyCryptoCheckout()->wallets()->enabled_on_this_site();
-		if ( count( $wallets ) < 1 )
-			throw new Exception( 'There are no currencies enabled on this site.' );
+		return true;
 	}
 
 	/**
@@ -169,6 +179,14 @@ abstract class Account
 	{
 		return isset( $this->data->domain_key );
 	}
+
+	/**
+		@brief		Check that this account retrieval key is the one we sent to the server a few moments ago.
+		@details	Before a account_retrieve message is sent, we set a retrieve_key.
+					This is to ensure that the account we are getting from the API belongs to us.
+		@since		2018-10-13 12:49:04
+	**/
+	public abstract function is_retrieve_key_valid( $retrieve_key );
 
 	/**
 		@brief		Lock the account from sending anything new to the API.
@@ -219,7 +237,7 @@ abstract class Account
 					3. Generate the Client_Account_Data.
 					This object contains the retrieve key, domain, etc.
 					4. Send the Client_Account_Data to the server.
-					5. The server will, in another thread, reply with the new account data to be stored.
+					5. The server will, in another thread, reply with the new account data to be stored and the retrieve key.
 
 					After this you should clear any caches in order to access the new account data.
 
@@ -238,7 +256,6 @@ abstract class Account
 			$result = $this->send_client_account_data( $client_account_data );
 
 			$this->load_data();
-			MyCryptoCheckout()->debug( 'Account updated from server.' );
 			if ( ! $this->is_valid() )
 				throw new Exception( 'Unable to retrieve new account data.' );
 			if ( ! $this->get_domain_key() )
@@ -275,8 +292,8 @@ abstract class Account
 	}
 
 	/**
-		@brief		Set the temporary retrieve_key used to send our Client_Account_Data to the server.
-		@details	Put this value into temporary (1 minute) storage, enough for the API server to reply with the new account data.
+		@brief		Set the retrieve_key used to send our Client_Account_Data to the server.
+		@details	Put this value into storage, enough for the API server to reply with the new account data.
 		@since		2018-10-13 15:29:51
 	**/
 	public abstract function set_retrieve_key( $retrieve_key );

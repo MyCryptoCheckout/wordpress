@@ -176,6 +176,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New: The plugin is now using the <a href="https://mycryptocheckout.com/doc/developers/">official MCC API</a>!
+
 = 2.22 20181012 =
 
 * We now accept <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!

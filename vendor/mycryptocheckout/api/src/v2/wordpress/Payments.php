@@ -2,6 +2,8 @@
 
 namespace mycryptocheckout\api\v2\wordpress;
 
+use mycryptocheckout\api\v2\Exception;
+
 /**
 	@brief		Payment handling.
 	@since		2017-12-21 23:28:34

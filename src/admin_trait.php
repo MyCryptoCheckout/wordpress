@@ -47,24 +47,41 @@ trait admin_trait
 			->description( __( 'Check the box and refresh your account if you want your webshop listed in the upcoming store directory on mycryptocheckout.com. Your store name and URL will be listed.', 'mycryptocheckout' ) )
 			->label( __( 'Be featured in the MCC store directory?', 'mycryptocheckout' ) );
 
-		if ( isset( $_POST[ 'retrieve_account' ] ) )
+		$retrieve_account = $form->secondary_button( 'retrieve_account' )
+			->value( __( 'Refresh your account data', 'mycryptocheckout' ) );
+
+		if ( $this->debugging() )
+			$delete_account = $form->secondary_button( 'delete_account' )
+				->value( __( 'Delete account data', 'mycryptocheckout' ) );
+
+		if ( $form->is_posting() )
 		{
 			$form->post();
 			$form->use_post_values();
-			if ( $public_listing->is_checked() )
-				MyCryptoCheckout()->update_site_option( 'public_listing', true );
-			else
-				MyCryptoCheckout()->delete_site_option( 'public_listing' );
 
-			$result = $this->mycryptocheckout_retrieve_account();
-			if ( $result )
+			if ( $this->debugging() )
+				if ( $delete_account->pressed() )
+				{
+					$this->api()->account()->delete();
+				}
+
+			if ( $retrieve_account->pressed() )
 			{
-				$r .= $this->info_message_box()->_( __( 'Account data refreshed!', 'mycryptocheckout' ) );
-				// Another safeguard to ensure that unsent payments are sent as soon as possible.
-				MyCryptoCheckout()->api()->payments()->send_unsent_payments();
+				if ( $public_listing->is_checked() )
+					MyCryptoCheckout()->update_site_option( 'public_listing', true );
+				else
+					MyCryptoCheckout()->delete_site_option( 'public_listing' );
+
+				$result = $this->mycryptocheckout_retrieve_account();
+				if ( $result )
+				{
+					$r .= $this->info_message_box()->_( __( 'Account data refreshed!', 'mycryptocheckout' ) );
+					// Another safeguard to ensure that unsent payments are sent as soon as possible.
+					MyCryptoCheckout()->api()->payments()->send_unsent_payments();
+				}
+				else
+					$r .= $this->error_message_box()->_( __( 'Error refreshing your account data. Please enable debug mode to find the error.', 'mycryptocheckout' ) );
 			}
-			else
-				$r .= $this->error_message_box()->_( __( 'Error refreshing your account data. Please enable debug mode to find the error.', 'mycryptocheckout' ) );
 		}
 
 		$account = $this->api()->account();
@@ -73,9 +90,6 @@ trait admin_trait
 			$r .= $this->admin_account_invalid();
 		else
 			$r .= $this->admin_account_valid( $account );
-
-		$save = $form->secondary_button( 'retrieve_account' )
-			->value( __( 'Refresh your account data', 'mycryptocheckout' ) );
 
 		$r .= $form->open_tag();
 		$r .= $form->display_form_table();
@@ -227,6 +241,11 @@ trait admin_trait
 					$text .= sprintf( '<p>%s: %s</p>', $currency_id, $amounts );
 				}
 				$row->td( 'details' )->text( $text );
+
+				$row = $table->head()->row();
+				$row->th( 'key' )->text( __( 'Next scheduled account data update', 'mycryptocheckout' ) );
+				$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
+				$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $next ) );
 			}
 		}
 
@@ -896,8 +915,8 @@ trait admin_trait
 	public function mycryptocheckout_hourly()
 	{
 		// Schedule an account retrieval sometime.
-		// The timestamp shoule be anywhere between now and 45 minutes later.
-		$timestamp = rand( 0, 45 ) * 60;
+		// The timestamp shoule be anywhere between soon and 50 minutes later.
+		$timestamp = rand( 5, 50 ) * 60;
 		$timestamp = time() + $timestamp;
 		$this->debug( 'Scheduled for %s', $this->local_datetime( $timestamp ) );
 		wp_schedule_single_event( $timestamp, 'mycryptocheckout_retrieve_account' );

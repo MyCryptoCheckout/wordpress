@@ -37,6 +37,12 @@ abstract class API
 	}
 
 	/**
+		@brief		Delete this data from persistent storage.
+		@since		2018-10-14 15:09:47
+	**/
+	public abstract function delete_data( $key );
+
+	/**
 		@brief		Return the API url.
 		@since		2017-12-21 23:31:39
 	**/
@@ -73,14 +79,6 @@ abstract class API
 		@since		2018-10-13 11:46:01
 	**/
 	public abstract function get_client_url();
-
-	/**
-		@brief		Check that this account retrieval key is the one we sent to the server a few moments ago.
-		@details	Before a account_retrieve message is sent, we set a temporary retrieve_key.
-					This is to ensure that the account we are getting from the API belongs to us.
-		@since		2018-10-13 12:49:04
-	**/
-	public abstract function is_retrieve_key_valid( $retrieve_key );
 
 	/**
 		@brief		Echo a json object.
@@ -192,11 +190,11 @@ abstract class API
 		{
 			if ( $message->type != 'retrieve_account' )
 				continue;
-			if ( ! $this->is_retrieve_key_valid( $message->retrieve_key ) )
+			if ( ! $this->account()->is_retrieve_key_valid( $message->retrieve_key ) )
 				throw new Exception( sprintf( 'Retrieve keys do not match: %s.', $message->retrieve_key ) );
 			// Everything looks good to go.
 			$new_account_data = (object) (array) $message->account;
-			$this->debug( 'Setting new account data: %s', json_encode( $new_account_data ) );
+			$this->debug( 'Setting new account data: %d bytes', strlen( json_encode( $new_account_data ) ) );
 			$this->account()->set_data( $new_account_data )
 				->save();
 		}
@@ -216,7 +214,7 @@ abstract class API
 			if ( $message->type == 'payment_complete' )
 				$message->type = 'complete_payment';
 
-			$this->debug( '(%d) Processing a %s message: %s', get_current_blog_id(), $message->type, json_encode( $message ) );
+			$this->debug( '(%d) Processing a %s message.', get_current_blog_id(), $message->type );
 
 			if ( isset( $message->payment ) )
 			{

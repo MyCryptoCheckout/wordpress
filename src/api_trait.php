@@ -28,7 +28,7 @@ trait api_trait
 		if ( isset( $this->__api ) )
 			return $this->__api;
 
-		$this->__api = new api\v2\wordpress\API();
+		$this->__api = new \mycryptocheckout\api\v2\wordpress\API();
 		return $this->__api;
 	}
 
@@ -48,6 +48,7 @@ trait api_trait
 	**/
 	public function mycryptocheckout_retrieve_account()
 	{
+		$this->debug( 'Action mycryptocheckout_retrieve_account called!' );
 		return $this->api()->account()->retrieve();
 	}
 

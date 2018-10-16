@@ -82,6 +82,16 @@ class Payment
 	}
 
 	/**
+		@brief		Set the currency ID of this payment.
+		@since		2018-10-14 19:38:00
+	**/
+	public function set_currency_id( $currency_id )
+	{
+		$this->currency_id = $currency_id;
+		return $this;
+	}
+
+	/**
 		@brief		Sets the ID which is used when handling messages from the API marking payments complete.
 		@details	Used for handling cancel_payment and complete_payment messages.
 		@since		2018-10-13 13:25:43

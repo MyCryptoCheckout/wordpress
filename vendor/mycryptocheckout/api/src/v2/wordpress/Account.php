@@ -2,6 +2,8 @@
 
 namespace mycryptocheckout\api\v2\wordpress;
 
+use mycryptocheckout\api\v2\Exception;
+
 /**
 	@brief		This component handles the account.
 	@since		2017-12-11 19:16:22
@@ -10,10 +12,10 @@ class Account
 	extends \mycryptocheckout\api\v2\Account
 {
 	/**
-		@brief		The transient key for storing the account retrieval key.
+		@brief		The data key for storing the account retrieval key.
 		@since		2017-12-22 00:22:36
 	**/
-	public static $account_retrieve_transient_key = 'mycryptocheckout_account_retrieve_key';
+	public static $account_retrieve_key = 'account_retrieve_key';
 
 	/**
 		@brief		Generate an Account_Data object that we send to the server during a retrieve_account request.
@@ -46,19 +48,43 @@ class Account
 	}
 
 	/**
+		@brief		Is MCC available for payment?
+		@return		True if avaiable, else an exception containing the reason why it is not.
+		@since		2017-12-23 09:22:12
+	**/
+	public function is_available_for_payment()
+	{
+		parent::is_available_for_payment();
+
+		// We need at least one wallet.
+		$wallets = MyCryptoCheckout()->wallets()->enabled_on_this_site();
+		if ( count( $wallets ) < 1 )
+			throw new Exception( 'There are no currencies enabled on this site.' );
+		return true;
+	}
+
+	/**
+		@brief		Check that this account retrieval key is the one we sent to the server a few moments ago.
+		@since		2018-10-13 12:49:04
+	**/
+	public function is_retrieve_key_valid( $retrieve_key )
+	{
+		$stored_value = $this->api()->get_data( static::$account_retrieve_key );
+		if ( ! $stored_value )
+			throw new Exception( 'No retrieve key is set. Not expecting an account retrieval.' );
+		// Does it match the one we got?
+		return ( $stored_value == $retrieve_key );
+	}
+
+	/**
 		@brief		Send the Client_Account_Data object to the API server.
-		@details	This is very complicated due to how Wordpress caches transient values.
-					After the other thread receives the new account data, we have to clear the options in the cache, in order to load the new values.
+		@details	After the other thread receives the new account data, we have to clear the options in the cache, in order to load the new values.
 		@since		2018-10-13 15:33:50
 	**/
 	public function send_client_account_data( \mycryptocheckout\api\v2\Client_Account_Data $client_account_data )
 	{
 		$result = parent::send_client_account_data( $client_account_data );
-		// Clear the option caches, since the options are modified in another thread (due to the api server communicating with back with us).
-		$option_key = MyCryptoCheckout()->fix_option_name( static::$account_data_site_option_key );
-		$cache_key = get_current_network_id() . ':' . $option_key;
-		wp_cache_delete( $cache_key, 'site-options' );
-		wp_cache_delete( $option_key, 'options' );
+		wp_cache_flush();
 		return $result;
 	}
 
@@ -69,7 +95,7 @@ class Account
 	**/
 	public function set_retrieve_key( $retrieve_key )
 	{
-		set_site_transient( static::$account_retrieve_transient_key, $retrieve_key, 60 );
+		$this->api()->save_data( static::$account_retrieve_key, $retrieve_key );
 	}
 
 }

@@ -2,6 +2,8 @@
 
 namespace mycryptocheckout\api\v2\wordpress;
 
+use mycryptocheckout\api\v2\Exception;
+
 /**
 	@brief		Liason between Wordpress and the API.
 	@since		2018-10-08 19:51:25
@@ -17,6 +19,16 @@ class API
 	public function debug( $string )
 	{
 		return call_user_func_array( [ MyCryptoCheckout(), 'debug' ], func_get_args() );
+	}
+
+	/**
+		@brief		Delete this data from persistent storage.
+		@since		2018-10-14 15:09:47
+	**/
+	public function delete_data( $key )
+	{
+		MyCryptoCheckout()->delete_site_option( $key );
+		return $this;
 	}
 
 	/**
@@ -49,19 +61,6 @@ class API
 			'timeout' => 60,
 		], $args );
 		return $r;
-	}
-
-	/**
-		@brief		Check that this account retrieval key is the one we sent to the server a few moments ago.
-		@since		2018-10-13 12:49:04
-	**/
-	public function is_retrieve_key_valid( $retrieve_key )
-	{
-		$transient_value = get_site_transient( Account::$account_retrieve_transient_key );
-		if ( ! $transient_value )
-			throw new Exception( 'No retrieve key is set. Not expecting an account retrieval.' );
-		// Does it match the one we got?
-		return ( $transient_value == $retrieve_key );
 	}
 
 	/**

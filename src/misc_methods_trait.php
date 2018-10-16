@@ -451,6 +451,12 @@ trait misc_methods_trait
 			'account_data' => '',
 
 			/**
+				@brief		The account retrieval key used to assure us that only the official server can send us account updates.
+				@since		2018-10-15 11:01:19
+			**/
+			'account_retrieve_key' => '',
+
+			/**
 				@brief		Fixed amount markup of products for using MyCryptoCheckout as the payment.
 				@since		2017-12-14 16:50:25
 			**/
