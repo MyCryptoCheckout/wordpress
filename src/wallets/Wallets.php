@@ -124,7 +124,7 @@ class Wallets
 		{
 			$currency = $currencies->get( $wallet->get_currency_id() );
 			if ( $currency )
-				return sprintf( '%s_%s', $currency->get_name(), $wallet->get_address() );
+				return sprintf( '%s_%s_%s', $wallet->get_order(), $currency->get_name(), $wallet->get_address() );
 			else
 				return '';
 		} );

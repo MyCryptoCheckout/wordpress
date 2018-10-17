@@ -266,6 +266,8 @@ trait admin_trait
 		$form->id( 'currencies' );
 		$r = '';
 
+		wp_enqueue_script( 'jquery-ui-sortable' );
+
 		$account = $this->api()->account();
 		if ( ! $account->is_valid() )
 		{
@@ -275,6 +277,9 @@ trait admin_trait
 		}
 
 		$table = $this->table();
+		$table->css_class( 'currencies' );
+
+		$table->data( 'nonce', wp_create_nonce( 'mycryptocheckout_sort_wallets' ) );
 
 		$table->bulk_actions()
 			->form( $form )
@@ -285,7 +290,9 @@ trait admin_trait
 			// Bulk action for wallets
 			->add( __( 'Enable', 'mycryptocheckout' ), 'enable' )
 			// Bulk action for wallets
-			->add( __( 'Mark as used', 'mycryptocheckout' ), 'mark_as_used' );
+			->add( __( 'Mark as used', 'mycryptocheckout' ), 'mark_as_used' )
+			// Bulk action for wallets
+			->add( __( 'Reset sorting', 'mycryptocheckout' ), 'reset_sorting' );
 
 		// Assemble the current wallets into the table.
 		$row = $table->head()->row();
@@ -302,6 +309,7 @@ trait admin_trait
 		foreach( $wallets as $index => $wallet )
 		{
 			$row = $table->body()->row();
+			$row->data( 'index', $index );
 			$table->bulk_actions()->cb( $row, $index );
 			$currency = $this->currencies()->get( $wallet->get_currency_id() );
 
@@ -425,6 +433,16 @@ trait admin_trait
 						$wallets->save();
 						$r .= $this->info_message_box()->_( __( 'The selected wallets have been marked as used.', 'mycryptocheckout' ) );
 					break;
+					case 'reset_sorting':
+						$ids = $table->bulk_actions()->get_rows();
+						foreach( $ids as $id )
+						{
+							$wallet = $wallets->get( $id );
+							$wallet->set_order();
+						}
+						$wallets->save();
+						$r .= $this->info_message_box()->_( __( 'The selected wallets have had their sort order reset.', 'mycryptocheckout' ) );
+					break;
 				}
 				$reshow = true;
 			}
@@ -481,6 +499,8 @@ trait admin_trait
 		if ( count( $wallets ) < 1 )
 			$wallets_text = '<strong>' . $wallets_text . '</strong>';
 		$r .= wpautop( $wallets_text );
+
+		$r .= wpautop( __( 'The wallets can be sorted by dragging their currency name up and down.', 'mycryptocheckout' ) );
 
 		$r .= $this->h2( __( 'Current currencies / wallets', 'mycryptocheckout' ) );
 
@@ -906,6 +926,9 @@ trait admin_trait
 		// The plugin table.
 		$this->add_filter( 'network_admin_plugin_action_links', 'plugin_action_links', 10, 4 );
 		$this->add_filter( 'plugin_action_links', 'plugin_action_links', 10, 4 );
+
+		// Sort the wallets.
+		$this->add_action( 'wp_ajax_mycryptocheckout_sort_wallets' );
 	}
 
 	/**
@@ -939,5 +962,34 @@ trait admin_trait
 			__( 'Settings', 'mycryptocheckout' )
 		);
 		return $links;
+	}
+
+	/**
+		@brief		Allow the user to sort the wallets via ajax.
+		@since		2018-10-17 18:54:22
+	**/
+	public function wp_ajax_mycryptocheckout_sort_wallets()
+	{
+		if ( ! isset( $_REQUEST[ 'nonce' ] ) )
+			wp_die( 'No nonce.' );
+		$nonce = $_REQUEST[ 'nonce' ];
+
+		if ( ! wp_verify_nonce( $nonce, 'mycryptocheckout_sort_wallets' ) )
+			wp_die( 'Invalid nonce.' );
+
+		// Load the wallets.
+		$wallets = $this->wallets();
+
+		foreach( $wallets as $wallet_id => $wallet )
+		{
+			foreach( $_POST[ 'wallets' ] as $wallet_order => $post_wallet_id )
+			{
+				if ( $wallet_id != $post_wallet_id )
+					continue;
+				$wallet->set_order( $wallet_order );
+			}
+		}
+
+		$wallets->save();
 	}
 }

@@ -48,6 +48,12 @@ class Wallet
 	public $network = true;
 
 	/**
+		@brief		The order in which to display this wallet.
+		@since		2018-10-17 19:10:17
+	**/
+	public $order = '00';
+
+	/**
 		@brief		On which sites is the wallet available?
 		@details	This is only taken into account when $network is false.
 		@since		2017-12-09 09:07:04
@@ -168,6 +174,17 @@ class Wallet
 	}
 
 	/**
+		@brief		Return the order of this wallet.
+		@since		2018-10-17 19:12:57
+	**/
+	public function get_order()
+	{
+		if ( ! isset( $this->order ) )
+			$this->order = 0;
+		return $this->order;
+	}
+
+	/**
 		@brief		Convenience method that returns whether this wallet is enabled on the current site.
 		@since		2017-12-10 19:14:14
 	**/
@@ -189,6 +206,19 @@ class Wallet
 	public function set_enabled( $status = true )
 	{
 		$this->enabled = $status;
+		return $this;
+	}
+
+	/**
+		@brief		Set the order / priority for this wallet.
+		@details	0 comes before 10.
+		@since		2018-10-17 19:08:04
+	**/
+	public function set_order( $order = '00' )
+	{
+		if ( strlen( $order ) < 2 )
+			$order = '0' . $order;
+		$this->order = $order;
 		return $this;
 	}
 

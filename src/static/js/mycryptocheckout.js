@@ -173,6 +173,62 @@
 } )( jQuery );
 ;
 /**
+	@brief		Handle the new currency / wallet form.
+	@since		2018-09-21 17:49:39
+**/
+;(function( $ )
+{
+    $.fn.extend(
+    {
+        mycryptocheckout_sort_wallets : function()
+        {
+            return this.each( function()
+            {
+                var $this = $(this);
+
+                if ( $this.hasClass( 'sortable' ) )
+                	return;
+                $this.addClass( 'sortable' );
+
+                $this.data( 'nonce', $this.parent().data( 'nonce' ) );
+
+                // Make it sortable.
+				$this.sortable( {
+					update : function( event, ui )
+					{
+						$this.fadeTo( 250, 0.25 );
+						var wallets = [];
+						// Find all of the rows.
+						var $rows = $( 'tr', $this );
+						$.each( $rows, function( index, row )
+						{
+							var $row = $( row );
+							wallets[ index ] = $row.data( 'index' );
+						} );
+
+						var data = {
+							'action' : 'mycryptocheckout_sort_wallets',
+							'nonce' : $this.data( 'nonce' ),
+							'wallets' : wallets,
+						};
+
+						// Now send the new order to the server.
+						$.post( {
+							'data' : data,
+							'url' : ajaxurl,
+							'success' : function()
+							{
+								$this.fadeTo( 250, 1 );
+							},
+						} );
+					},
+				} );
+            } ); // return this.each( function()
+        } // plugin: function()
+    } ); // $.fn.extend({
+} )( jQuery );
+;
+/**
 	@brief		Handle the donations div.
 	@since		2018-05-12 21:24:33
 **/
@@ -699,6 +755,11 @@ $( 'form#currencies' ).mycryptocheckout_new_currency();
 	@since		2018-05-14 19:44:07
 **/
 $( '.mycryptocheckout .to_input' ).mcc_make_clipboard();
-;
+
+/**
+	@brief		Make the wallets sortable.
+	@since		2018-10-17 17:38:58
+**/
+$( 'table.currencies tbody' ).mycryptocheckout_sort_wallets();;
 } );
 ;
