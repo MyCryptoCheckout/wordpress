@@ -53,7 +53,7 @@ trait misc_methods_trait
 	public function gateway_strings()
 	{
 		$r = $this->collection();
-		$r->set( 'currency_selection_text', __( 'Please select the currency with which you wish to pay', 'mycryptocheckout' ) );
+		$r->set( 'currency_selection_text', __( 'Please select a currency', 'mycryptocheckout' ) );
 		$r->set( 'gateway_name', __( 'Cryptocurrency', 'mycryptocheckout' ) );
 		$r->set( 'online_payment_instructions_description', __( 'Instructions for payment that will be shown on the purchase confirmation page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
 		$r->set( 'online_payment_instructions', $this->wpautop_file( 'online_payment_instructions' ) );
