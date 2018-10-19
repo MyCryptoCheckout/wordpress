@@ -13,8 +13,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function __construct()
 	{
 		$this->id					= \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
-		$icon_file					= plugin_dir_url( __FILE__ ) . '/mycryptocheckout.' . get_current_blog_id() . '.svg';
-		$this->icon					= apply_filters( 'woocommerce_gateway_icon', $icon_file );
 		$this->method_title			= $this->get_method_title();
 		$this->method_description	= $this->get_method_description();
 		$this->has_fields			= true;
@@ -27,87 +25,9 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		add_action( 'mycryptocheckout_generate_checkout_javascript_data', [ $this, 'mycryptocheckout_generate_checkout_javascript_data' ] );
 		add_action( 'woocommerce_email_before_order_table', [ $this, 'woocommerce_email_before_order_table' ], 10, 3 );
+		add_filter( 'woocommerce_gateway_icon', [ $this, 'woocommerce_gateway_icon' ], 10, 2 );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'post_process_admin_options' ] );
 		add_action( 'woocommerce_thankyou_mycryptocheckout', [ $this, 'woocommerce_thankyou_mycryptocheckout' ] );
-	}
-
-	/**
-		@brief		Generate the SVG icon file dynamically.
-		@since		2018-03-16 03:29:14
-	**/
-	public function generate_icon_file()
-	{
-		$dir = MyCryptoCheckout()->paths( '__FILE__' );
-		$dir = dirname( $dir ) . '/src/static/images/';
-		$svg_default = [
-			'width' => 100,
-			'offset_left' => 2.5,
-		];
-		$svg_details = [
-			'BCH' => [
-				'width' => 160,
-			],
-			'TN' => [
-				'width' => 85,
-			],
-		];
-		$wallet_options = $this->get_wallet_options();
-		$output = file_get_contents( $dir . 'icon_base.svg' );
-		$mcc_width = 0;
-		$mcc_icons = '';
-		$output_filename = 'icons';
-		$handled_currencies = [];
-		$currency_data = MyCryptoCheckout()->api()->account()->get_currency_data();
-		foreach( $wallet_options as $currency_id => $ignore )
-		{
-			if ( isset( $svg_details[ $currency_id ] ) )
-				$svg = $svg_details[ $currency_id ];
-			else
-				$svg = [];
-			$svg = array_merge( $svg_default, $svg );
-
-			// If there is no icon file, don't bother.
-			$icon_file = $dir . 'icon_' . $currency_id . '.svg';
-			if ( ! is_readable( $icon_file ) )
-				continue;
-
-			// Have we already handled this currency?
-			if ( isset( $handled_currencies[ $currency_id ] ) )
-				continue;
-
-			$handled_currencies[ $currency_id ] = true;
-
-			$output_filename .= '_' . $currency_id;
-
-			$offset = $mcc_width + $svg[ 'offset_left' ];
-
-			// Insert the icon from disk.
-			$icon_svg = file_get_contents( $icon_file );
-			$icon_svg = str_replace( 'MCC_OFFSET', $offset, $icon_svg );
-
-			$mcc_icons .= $icon_svg;
-			$mcc_width += $svg[ 'width' ];
-		}
-
-		$output = str_replace( 'MCC_WIDTH', $mcc_width, $output );
-		$output = str_replace( 'MCC_ICONS', $mcc_icons, $output );
-
-		$output_filename .= '.svg';
-		$output_path = __DIR__ . '/' . $output_filename;
-		$output_url = $dir . $output_filename;
-
-		$hash_file = __DIR__ . '/icon.' . get_current_blog_id() . '.hash.' . md5( $output_path );
-
-		if ( file_exists( $hash_file ) )
-			return;
-
-		// Remove all existing hash files.
-		$hash_files = glob( __DIR__ . '/icon.' . get_current_blog_id() . '.hash.*' );
-		foreach( $hash_files as $hash_file )
-			unlink( $hash_file );
-
-		file_put_contents( $hash_file, '' );
-		file_put_contents( __DIR__ . '/mycryptocheckout.' . get_current_blog_id() . '.svg', $output );
 	}
 
 	/**
@@ -355,8 +275,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'options' => $this->get_wallet_options(),
 			'required' => true,
 		] );
-
-		$this->generate_icon_file();
 	}
 
 	/**
@@ -430,6 +348,35 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order->get_id() );
 		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment, $instructions );
 		echo wpautop( wptexturize( $instructions ) ) . PHP_EOL;
+	}
+
+	/**
+		@brief		Override the img tag with a div with fonts.
+		@since		2018-10-18 17:11:54
+	**/
+	public function woocommerce_gateway_icon( $icon, $id )
+	{
+		if ( $id != $this->id )
+			return $icon;
+
+		$r = '<div class="mcc_currency_icons">';
+
+		$wallet_options = $this->get_wallet_options();
+		$handled_currencies = [];
+		foreach( $wallet_options as $currency_id => $ignore )
+		{
+			// Have we already handled this currency?
+			if ( isset( $handled_currencies[ $currency_id ] ) )
+				continue;
+
+			$handled_currencies[ $currency_id ] = true;
+
+			$r .= sprintf( '<i class="mcc-%s"></i>', $currency_id );
+		}
+
+		$r .= '</div>';
+
+		return $r;
 	}
 
 	/**
