@@ -126,9 +126,6 @@ class Wallet
 		if ( ! $this->enabled )
 			$r []= __( 'This wallet is disabled.', 'mycryptocheckout' );
 
-		if ( $this->get( 'preselected' ) )
-			$r []= __( 'Selected as default', 'mycryptocheckout' );
-
 		if ( ! $this->network )
 		{
 			if ( count( $this->sites ) < 1 )

@@ -378,3 +378,12 @@
   content: "\e946"; }
 
 /*# sourceMappingURL=mycryptocheckout.css.map */
+
+.settings_page_mycryptocheckout form#currencies td#currency
+{
+	cursor: move;
+}
+.settings_page_mycryptocheckout form#currencies .ui-sortable-helper {
+	border: 1px solid #ccc;
+	background: #FAFAFA;
+}

@@ -177,6 +177,7 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * New: The plugin is now using the <a href="https://mycryptocheckout.com/doc/developers/">official MCC API</a>!
+* New: Wallets can be manually sorted by dragging them up and down in the wallet list. This replaces the wallet's default / preselected option.
 * Fix: WooCommerce: Use font instead of SVG icons for checkout box.
 
 = 2.22 20181012 =

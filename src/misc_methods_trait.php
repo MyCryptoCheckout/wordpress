@@ -81,11 +81,8 @@ trait misc_methods_trait
 	**/
 	public function get_checkout_wallet_options( $options )
 	{
-		$preselected = $this->wallets()->get_preselected_currency_ids();
-		$preselected = reset( $preselected );
 		$options = array_merge( [
 			'as_html' => false,
-			'default' => $preselected,
 		], $options );
 		$options = (object) $options;
 
@@ -108,7 +105,7 @@ trait misc_methods_trait
 			if ( $options->as_html )
 				$value = sprintf( '<option value="%s"%s>%s (%s %s)</option>',
 					$currency_id,
-					( $currency_id == $preselected ? ' selected="selected"' : '' ),
+					( count( $wallet_options[ $currency_id ] ) == 0 ? ' selected="selected"' : '' ),		// Select the first.
 					$currency->get_name(),
 					$cryptocurrency_amount,
 					$currency_id

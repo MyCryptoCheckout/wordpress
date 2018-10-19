@@ -58,19 +58,6 @@ class Wallets
 	}
 
 	/**
-		@brief		Return an array of all currency IDs that are preselected, as per the setting in each wallet.
-		@since		2018-03-29 22:04:57
-	**/
-	public function get_preselected_currency_ids()
-	{
-		$r = [];
-		foreach( $this as $wallet )
-			if ( $wallet->get( 'preselected', false ) )
-				$r []= $wallet->currency_id;
-		return $r;
-	}
-
-	/**
 		@brief		Find the wallet of this currency that has been used the least.
 		@since		2017-12-14 18:43:04
 	**/

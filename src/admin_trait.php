@@ -511,6 +511,8 @@ trait admin_trait
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
+		$this->enqueue_css();
+
 		echo $r;
 	}
 
@@ -562,12 +564,6 @@ trait admin_trait
 			->description( __( 'Is this wallet enabled and ready to receive funds?', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Enabled', 'mycryptocheckout' ) );
-
-		$preselected = $fs->checkbox( 'preselected' )
-			->checked( $wallet->get( 'preselected', false ) )
-			->description( __( 'Make this the default currency that is selected during checkout.', 'mycryptocheckout' ) )
-			// Input label
-			->label( __( 'Select as default', 'mycryptocheckout' ) );
 
 		if ( $currency->supports( 'confirmations' ) )
 			$confirmations = $fs->number( 'confirmations' )
@@ -670,7 +666,6 @@ trait admin_trait
 					$currency->validate_address( $wallet->address );
 
 					$wallet->enabled = $wallet_enabled->is_checked();
-					$wallet->set( 'preselected', $preselected->is_checked() );
 					if ( $currency->supports( 'confirmations' ) )
 						$wallet->confirmations = $confirmations->get_filtered_post_value();
 

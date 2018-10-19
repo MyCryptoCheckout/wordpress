@@ -264,15 +264,16 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
 
-		$preselected_currencies = MyCryptoCheckout()->wallets()->get_preselected_currency_ids();
+		$options = $this->get_wallet_options();
+		$currencies = array_keys( $options );
 
 		woocommerce_form_field( 'mcc_currency_id',
 		[
 			'type' => 'select',
 			'class' => [ 'mcc_currency' ],
-			'default' => reset( $preselected_currencies ),
+			'default' => reset( $currencies ),
 			'label' => esc_html__( $this->get_option( 'currency_selection_text' ) ),
-			'options' => $this->get_wallet_options(),
+			'options' => $options,
 			'required' => true,
 		] );
 	}

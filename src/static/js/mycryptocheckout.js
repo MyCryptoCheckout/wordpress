@@ -194,7 +194,8 @@
 
                 // Make it sortable.
 				$this.sortable( {
-					update : function( event, ui )
+					'placeholder' : 'ui-sortable-helper',
+					'update' : function( event, ui )
 					{
 						$this.fadeTo( 250, 0.25 );
 						var wallets = [];
