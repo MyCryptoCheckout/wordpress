@@ -138,7 +138,7 @@
   width: auto; }
 
 .woocommerce-checkout #payment ul.wc_payment_methods li.payment_method_mycryptocheckout label .mcc_currency_icons {
-  display: inline-block;
+  display: inline;
   margin-left: 5px;
   word-break: break-all; }
 
