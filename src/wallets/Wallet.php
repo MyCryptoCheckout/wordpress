@@ -51,7 +51,7 @@ class Wallet
 		@brief		The order in which to display this wallet.
 		@since		2018-10-17 19:10:17
 	**/
-	public $order = '00';
+	public $order = 99;
 
 	/**
 		@brief		On which sites is the wallet available?
@@ -211,10 +211,8 @@ class Wallet
 		@details	0 comes before 10.
 		@since		2018-10-17 19:08:04
 	**/
-	public function set_order( $order = '00' )
+	public function set_order( $order = 99 )
 	{
-		if ( strlen( $order ) < 2 )
-			$order = '0' . $order;
 		$this->order = $order;
 		return $this;
 	}

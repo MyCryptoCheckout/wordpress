@@ -528,6 +528,7 @@ trait admin_trait
 			echo 'Invalid wallet ID!';
 			return;
 		}
+		$this->enqueue_css();
 		$wallet = $wallets->get( $wallet_id );
 
 		$currencies = $this->currencies();
@@ -589,7 +590,7 @@ trait admin_trait
 					// Input label
 					->label( __( 'HD public key', 'mycryptocheckout' ) )
 					->trim()
-					->size( 128 )
+					->maxlength( 128 )
 					->value( $wallet->get( 'btc_hd_public_key' ) );
 
 				$path = $wallet->get( 'btc_hd_public_key_generate_address_path', 0 );

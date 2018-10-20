@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.22
+Stable tag: 2.23
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
@@ -175,6 +175,8 @@ If your server cannot be reached by the API server this plugin will not function
 12. Donations widget
 
 == Changelog ==
+
+= 2.23 20181020 =
 
 * New: The plugin is now using the <a href="https://mycryptocheckout.com/doc/developers/">official MCC API</a>!
 * New: Wallets can be manually sorted by dragging them up and down in the wallet list. This replaces the wallet's default / preselected option.

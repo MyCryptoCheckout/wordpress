@@ -194,8 +194,9 @@
 
                 // Make it sortable.
 				$this.sortable( {
-					'placeholder' : 'ui-sortable-helper',
-					'update' : function( event, ui )
+					'handle' : 'td:first',
+					placeholder: "wallet_placeholder",
+        			'update' : function( event, ui )
 					{
 						$this.fadeTo( 250, 0.25 );
 						var wallets = [];
@@ -204,7 +205,7 @@
 						$.each( $rows, function( index, row )
 						{
 							var $row = $( row );
-							wallets[ index ] = $row.data( 'index' );
+							wallets[ index + 10 ] = $row.data( 'index' );
 						} );
 
 						var data = {
@@ -223,7 +224,8 @@
 							},
 						} );
 					},
-				} );
+				} )
+				;//.disableSelection();
             } ); // return this.each( function()
         } // plugin: function()
     } ); // $.fn.extend({

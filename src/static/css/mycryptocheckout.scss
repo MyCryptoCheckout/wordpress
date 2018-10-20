@@ -436,3 +436,11 @@
 .mcc-ZRX:before {
   content: "\e946";
 }
+
+// settings page styles
+.settings_page_mycryptocheckout {
+	#plainview_sdk_mcc_form2_inputs_text_btc_hd_public_key {
+		width: 100%;
+		max-width: 1000px;
+	}
+}
