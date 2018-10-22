@@ -380,5 +380,12 @@
 .settings_page_mycryptocheckout #plainview_sdk_mcc_form2_inputs_text_btc_hd_public_key {
   width: 100%;
   max-width: 1000px; }
+.settings_page_mycryptocheckout form#currencies td#currency {
+  cursor: move; }
+.settings_page_mycryptocheckout form#currencies .ui-sortable-helper {
+  border: 1px solid #ccc;
+  background: #FAFAFA; }
+.settings_page_mycryptocheckout form#currencies .wallet_placeholder {
+  background: #d8d8d8; }
 
 /*# sourceMappingURL=mycryptocheckout.css.map */

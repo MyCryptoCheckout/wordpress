@@ -443,4 +443,16 @@
 		width: 100%;
 		max-width: 1000px;
 	}
+	form#currencies {
+		td#currency {
+			cursor: move;
+		}
+		.ui-sortable-helper {
+			border: 1px solid #ccc;
+			background: #FAFAFA;
+		}
+		.wallet_placeholder {
+			background: #d8d8d8;
+		}
+	}
 }

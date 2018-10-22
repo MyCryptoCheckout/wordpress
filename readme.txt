@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.23
+Stable tag: 2.24
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
@@ -175,6 +175,10 @@ If your server cannot be reached by the API server this plugin will not function
 12. Donations widget
 
 == Changelog ==
+
+= 2.24 20181022 =
+
+* Fix: Change mouse cursor to hand to show that the wallets are draggable.
 
 = 2.23 20181020 =
 
