@@ -164,6 +164,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-WAVESWORLD:before {
+  content: "\e949"; }
+
+.mcc-TUSD:before {
+  content: "\e947"; }
+
+.mcc-GUSD:before {
+  content: "\e948"; }
+
 .mcc-1337:before {
   content: "\e900"; }
 

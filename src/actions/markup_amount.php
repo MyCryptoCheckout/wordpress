@@ -10,6 +10,11 @@ class markup_amount
 	extends action
 {
 	/**
+		@brief		IN: The symbol / ID of the cryptocurrency that is going to be used.
+		@since		2018-10-22 20:46:51
+	**/
+	public $currency_id;
+	/**
 		@brief		IN: The fixed amount to mark up.
 		@since		2018-01-05 16:30:37
 	**/

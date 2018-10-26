@@ -255,7 +255,10 @@ class WooCommerce
 		$mcc->wallets()->save();
 
 		$woocommerce_currency = get_woocommerce_currency();
-		$amount = $mcc->markup_amount( $order_total );
+		$amount = $mcc->markup_amount( [
+			'amount' => $order_total,
+			'currency_id' => $currency_id,
+		] );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
 		$amount = $currency->find_next_available_amount( $amount );
 

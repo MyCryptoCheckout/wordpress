@@ -83,6 +83,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - eBitcoin EBTC
 - Flix FLIX
 - FunFair FUN
+- Gemini Dollar GUSD
 - Gifto GTO
 - Golem GNT
 - Huobi Token HT
@@ -109,6 +110,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Status SNT
 - Storm STORM
 - TenXPay PAY
+- TrueUSD TUSD
 - Veritaseum VERI
 - Worldcoin1 WRD1
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
@@ -126,6 +128,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 = WAVES Tokens supported: =
 
 - CoffeeCoin COF
+- Waves World WAVESWORLD
 - We can now add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
 = Cryptocurrency Donations Widget =
@@ -175,6 +178,11 @@ If your server cannot be reached by the API server this plugin will not function
 12. Donations widget
 
 == Changelog ==
+
+* New currency: Gemini Dollar GUSD
+* New currency: TrueUSD TUSD
+* New currency: Waves World WAVESWORLD
+* Dev: Add currency_id to the markup_amount action.
 
 = 2.24 20181022 =
 

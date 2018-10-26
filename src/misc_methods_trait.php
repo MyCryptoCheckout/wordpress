@@ -98,7 +98,10 @@ trait misc_methods_trait
 			if ( ! $currency )
 				continue;
 			$amount = $currency->normalize_amount( $options->amount );
-			$amount = $this->markup_amount( $amount );
+			$amount = $this->markup_amount( [
+				'amount' => $amount,
+				'currency_id' => $currency_id,
+			] );
 			$cryptocurrency_amount = $currency->convert( $options->original_currency, $amount );
 			$cryptocurrency_amount = $currency->find_next_available_amount( $cryptocurrency_amount );
 
@@ -341,8 +344,10 @@ trait misc_methods_trait
 		@brief		Calculate the final price of this purchase, with markup.
 		@since		2017-12-14 17:00:15
 	**/
-	public static function markup_amount( $amount )
+	public static function markup_amount( $options )
 	{
+		$amount = $options[ 'amount' ];
+
 		$marked_up_amount = $amount;
 
 		$markup_amount = MyCryptoCheckout()->get_site_option( 'markup_amount' );
@@ -352,6 +357,7 @@ trait misc_methods_trait
 		$marked_up_amount = $marked_up_amount * ( 1 + ( $markup_percent / 100 ) );
 
 		$action = MyCryptoCheckout()->new_action( 'markup_amount' );
+		$action->currency_id = $options[ 'currency_id' ];
 		$action->markup_amount = $markup_amount;
 		$action->markup_percent = $markup_percent;
 		$action->marked_up_amount = $marked_up_amount;

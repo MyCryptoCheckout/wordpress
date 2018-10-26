@@ -148,6 +148,11 @@ class Easy_Digital_Downloads
 
 		$amount = edd_get_cart_total();
 		$edd_currency = edd_get_currency();
+		$amount = $mcc->markup_amount( [
+			'amount' => $order_total,
+			'currency_id' => $currency_id,
+		] );
+		$amount = $currency->convert( $woocommerce_currency, $amount );
 		$amount = $currency->convert( $edd_currency, $amount );
 		$amount = $currency->find_next_available_amount( $amount );
 
