@@ -41,7 +41,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bitcoin BTC (Including SegWit addresses, Electrum HD wallet)
 - Bitcoin Cash BCH (Including Electrum HD wallet)
 - Bitcoin Gold BTG
-- Bitsmdo' BSD
+- Bitsmdo BSD
 - CatoCoin CATO
 - ColossusXT COLX
 - CrypticCoin CRYP
