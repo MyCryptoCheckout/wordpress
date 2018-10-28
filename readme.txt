@@ -142,13 +142,15 @@ Receive donations in any of the cryptocurrencies supported by MyCryptoCheckout. 
 - show QR code
 - show wallet address text
 
+= Security =
+
+Disable the MCC currencies tab: after you have wallets setup you can prevent them from being edited in the WordPress admin. Add the following code to your wp-config file-
+
+<code>define( 'MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR', true );</code>
+
 = Technical disclosure =
 
-Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version.
-
-The URL is used by the API server to know where to send updated account info (license status, payment statistics), exchange rates and completed purchase notifications.
-
-The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently).
+Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version. The URL is used by the API server to know where to send updated account info (license status, payment statistics), exchange rates, and completed purchase notifications. The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently).
 
 If your server cannot be reached by the API server this plugin will not function.
 
@@ -357,9 +359,9 @@ If your server cannot be reached by the API server this plugin will not function
 * New currency: MetalPay MTL
 * New currency: Neo Smart Economy NEO
 * New currency: Zcash ZEC
-* New: Show QR code for the wallet address when checking out. If you are upgrading and want to enable the QR, you can either (1) reset your EDD or WC MyCryptoCheckout settings (in order to get the new text) or add the following to your online instructions text area before the final &lt;/div&gt;:
+* New: Show QR code for the wallet address when checking out. If you are upgrading and want to enable the QR, you can either (1) reset your EDD or WC MyCryptoCheckout settings (in order to get the new text) or add the following to your online instructions text area before the final </div>:
 
-&lt;div class="mcc_qr_code"&gt;&lt;/div&gt;
+<div class="mcc_qr_code"></div>
 
 * New: Added payment timeout setting for WooCommerce. The default is 3 days, but can be changed if you want your orders to be automatically cancelled before that. The default will be changed to 6 hours in a few versions' time.
 * New: Added setting to change the status of the order when payment is complete. Use this to set your paid orders to complete if your products don't need to be processed manually.
