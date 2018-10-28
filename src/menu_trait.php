@@ -44,12 +44,29 @@ trait menu_trait
 	{
 		$tabs = $this->tabs();
 
-		$tabs->tab( 'currencies' )
-			->callback_this( 'admin_currencies' )
-			// Tab heading
-			->heading( __( 'MyCryptoCheckout Currencies', 'mycryptocheckout' ) )
-			// Name of tab
-			->name( __( 'Currencies', 'mycryptocheckout' ) );
+		if ( ! defined( 'MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR' ) )
+		{
+			$tabs->tab( 'currencies' )
+				->callback_this( 'admin_currencies' )
+				// Tab heading
+				->heading( __( 'MyCryptoCheckout Currencies', 'mycryptocheckout' ) )
+				// Name of tab
+				->name( __( 'Currencies', 'mycryptocheckout' ) );
+
+			if ( $tabs->get_is( 'edit_wallet' ) )
+			{
+				$wallet_id = $_GET[ 'wallet_id' ];
+				$wallets = $this->wallets();
+				$wallet = $wallets->get( $wallet_id );
+				$tabs->tab( 'edit_wallet' )
+					->callback_this( 'admin_edit_wallet' )
+					// Editing BTC wallet
+					->heading( sprintf(  __( 'Editing %s wallet', 'mycryptocheckout' ), $wallet->get_currency_id() ) )
+					// Name of tab
+					->name( __( 'Edit wallet', 'mycryptocheckout' ) )
+					->parameters( $wallet_id );
+			}
+		}
 
 		$tabs->tab( 'account' )
 			->callback_this( 'admin_account' )
@@ -94,20 +111,6 @@ trait menu_trait
 			// Name of tab
 			->name( __( 'Uninstall', 'mycryptocheckout' ) )
 			->sort_order( 90 );		// Always last.
-
-		if ( $tabs->get_is( 'edit_wallet' ) )
-		{
-			$wallet_id = $_GET[ 'wallet_id' ];
-			$wallets = $this->wallets();
-			$wallet = $wallets->get( $wallet_id );
-			$tabs->tab( 'edit_wallet' )
-				->callback_this( 'admin_edit_wallet' )
-				// Editing BTC wallet
-				->heading( sprintf(  __( 'Editing %s wallet', 'mycryptocheckout' ), $wallet->get_currency_id() ) )
-				// Name of tab
-				->name( __( 'Edit wallet', 'mycryptocheckout' ) )
-				->parameters( $wallet_id );
-		}
 
 		echo $tabs->render();
 	}

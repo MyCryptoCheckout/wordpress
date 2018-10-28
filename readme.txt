@@ -179,6 +179,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New: Added MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR define to disable editing of wallets. This is a last-resort security feature to prevent intruders from modifying your wallet addresses.
+
 = 2.25 20181027 =
 
 * New currency: Gemini Dollar GUSD
