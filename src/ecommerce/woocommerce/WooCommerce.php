@@ -142,14 +142,16 @@ class WooCommerce
 			$options = get_option( 'woocommerce_mycryptocheckout_settings', true );
 			$options = maybe_unserialize( $options );
 			if ( isset( $options[ 'payment_complete_status' ] ) )
-				switch( $options[ 'payment_complete_status' ] )
+				if ( $options[ 'payment_complete_status' ] != '' )
 				{
 					// The default is '', which means don't do anything.
-					case 'wc-completed':
-						MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as wc-completed.', $order_id, get_current_blog_id() );
-						$order->set_status( 'wc-completed' );
-						$order->save();
-					break;
+					MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as %s.',
+						$order_id,
+						get_current_blog_id(),
+						$options[ 'payment_complete_status' ]
+					);
+					$order->set_status( $options[ 'payment_complete_status' ] );
+					$order->save();
 				}
 		} );
 	}

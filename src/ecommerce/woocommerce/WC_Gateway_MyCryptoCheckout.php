@@ -95,9 +95,13 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'type' => 'select',
 			'options' => [
 				// Order status
-				'' => __( 'Processing', 'mycryptocheckout' ),
+				'wc-completed'  => __( 'Completed', 'woocommerce' ),
 				// Order status
-				'wc-completed' => __( 'Completed', 'mycryptocheckout' ),
+				'wc-on-hold'    => __( 'On hold', 'woocommerce' ),
+				// Order status
+				'wc-pending'    => __( 'Pending payment', 'woocommerce' ),
+				// Order status
+				''				=> __( 'Processing', 'woocommerce' ),
 			],
 			'description' => __( 'After payment is complete, change the order to this status.', 'mycryptocheckout' ),
 			'default' => '',
