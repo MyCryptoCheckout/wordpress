@@ -232,6 +232,9 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( isset( $mcc->woocommerce->__just_used ) )
 			return true;
 
+		if ( $this->get_option( 'enabled' ) != 'yes' )
+			return;
+
 		try
 		{
 			$mcc->woocommerce->is_available_for_payment();
