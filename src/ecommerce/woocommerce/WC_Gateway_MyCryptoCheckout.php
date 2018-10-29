@@ -300,6 +300,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		// Reduce stock levels
 		wc_reduce_stock_levels( $order_id );
 
+		MyCryptoCheckout()->check_for_valid_payment_id( [
+			'post_id' => $order_id,
+		] );
+
 		// Remove cart
 		$woocommerce->cart->empty_cart();
 

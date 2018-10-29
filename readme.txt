@@ -182,6 +182,7 @@ If your server cannot be reached by the API server this plugin will not function
 == Changelog ==
 
 * Fix: WooCommerce: Allow gateway to be disabled from the gateway overview.
+* New: Add automatic API connection check after placed orders. If MCC is unable to contact the API server, admin will receive an e-mail after 5 minutes.
 * New: Woocommerce: Added more payment complete statuses: on hold and pending payment.
 * New: Added MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR define to disable editing of wallets. This is a last-resort security feature to prevent intruders from modifying your wallet addresses.
 

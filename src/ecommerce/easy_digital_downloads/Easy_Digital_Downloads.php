@@ -200,6 +200,10 @@ class Easy_Digital_Downloads
 		if ( $mcc_payment_id < 1 )
 			do_action( 'mycryptocheckout_send_payment', $payment_id );
 
+		MyCryptoCheckout()->check_for_valid_payment_id( [
+			'post_id' => $payment_id,
+		] );
+
 		edd_empty_cart();
 		edd_send_to_success_page();
 	}

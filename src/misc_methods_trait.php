@@ -2,6 +2,8 @@
 
 namespace mycryptocheckout;
 
+use Exception;
+
 /**
 	@brief		Vraious methods that didn't fit anywhere else.
 	@since		2017-12-11 14:22:41
@@ -17,6 +19,22 @@ trait misc_methods_trait
 		$gmt_offset = get_option( 'gmt_offset' );
 		$timestamp += 3600 * $gmt_offset;
 		return $timestamp;
+	}
+
+	/**
+		@brief		Check that an order (post) has received a valid payment ID.
+		@details	This is used as a safeguard in case MCC can't contact the API server.
+		@since		2018-10-29 22:01:23
+	**/
+	public function check_for_valid_payment_id( $options )
+	{
+		$options = (object) $options;		// Easier to access.
+		$options->blog_id = get_current_blog_id();
+		// We want all our args in just one array, instead of getting the options split into several parameters (thanks Wordpress).
+		$options = json_encode( $options );
+		// And we want to avoid the json from being unintentionally unencoded.
+		$options = base64_encode( $options );
+		wp_schedule_single_event( time() + ( 5 * MINUTE_IN_SECONDS ), 'mycryptocheckout_check_for_valid_payment_id', [ $options ] );
 	}
 
 	/**
@@ -285,6 +303,7 @@ trait misc_methods_trait
 	**/
 	public function init_misc_methods_trait()
 	{
+		$this->add_action( 'mycryptocheckout_check_for_valid_payment_id' );
 		$this->add_action( 'mycryptocheckout_generate_checkout_javascript_data' );
 	}
 
@@ -413,6 +432,54 @@ trait misc_methods_trait
 			return false;
 
 		return $html;
+	}
+
+	/**
+		@brief		mycryptocheckout_check_for_valid_payment_id
+		@since		2018-10-29 22:03:57
+	**/
+	public function mycryptocheckout_check_for_valid_payment_id( $args )
+	{
+		$args = base64_decode( $args );
+		$args = json_decode( $args );
+		switch_to_blog( $args->blog_id );
+
+		// Find the meta.
+		$post_id = $args->post_id;
+
+		try
+		{
+			$post = get_post( $post_id );
+			if ( ! $post )
+				throw new Exception( sprintf( 'Post %s does not exist.', $post_id ) );
+
+			$payment_id = get_post_meta( $post_id, '_mcc_payment_id', true );
+			if ( $payment_id <= 1 )
+			{
+				$mail = $this->mail();
+				$admin_email = get_option( 'admin_email' );
+				$mail->to( $admin_email );
+				$mail->from( $admin_email );
+				$mail->subject( 'MyCryptoCheckout: Unable to contact the API server for order %s.', $post_id );
+				$url = sprintf( '<a href="%s">%s</a>', get_permalink( $post_id ), $post->post_title );
+				$text = '';
+				$text .= "Dear admin!\n";
+				$text .= "\n";
+				$text .= sprintf( "MyCryptoCheckout was unable to contact the API server in order to retrieve a payment ID for order %s.\n", $url );
+				$text .= "\n";
+				$text .= "Please log in and try refreshing your MyCryptoCheckout account settings.\n";
+				$text = wpautop( $text );
+				$mail->html( $text );
+				$mail->send();
+				throw new Exception( sprintf( 'Admin %s e-mailed for post %s.', $admin_email, $post_id ) );
+			}
+		}
+		catch ( Exception $e )
+		{
+			$this->debug( 'Error while checking for valid payment ID: %s', $e->getMessage() );
+		}
+
+		restore_current_blog();
 	}
 
 	/**
