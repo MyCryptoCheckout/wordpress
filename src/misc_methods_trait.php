@@ -31,10 +31,11 @@ trait misc_methods_trait
 		$options = (object) $options;		// Easier to access.
 		$options->blog_id = get_current_blog_id();
 		// We want all our args in just one array, instead of getting the options split into several parameters (thanks Wordpress).
+		$this->debug( 'Scheduling check_for_valid_payment_id: %s', $options );
 		$options = json_encode( $options );
 		// And we want to avoid the json from being unintentionally unencoded.
 		$options = base64_encode( $options );
-		wp_schedule_single_event( time() + ( 5 * MINUTE_IN_SECONDS ), 'mycryptocheckout_check_for_valid_payment_id', [ $options ] );
+		wp_schedule_single_event( time() + ( 15 * MINUTE_IN_SECONDS ), 'mycryptocheckout_check_for_valid_payment_id', [ $options ] );
 	}
 
 	/**
@@ -460,12 +461,12 @@ trait misc_methods_trait
 				$admin_email = get_option( 'admin_email' );
 				$mail->to( $admin_email );
 				$mail->from( $admin_email );
-				$mail->subject( 'MyCryptoCheckout: Unable to contact the API server for order %s.', $post_id );
+				$mail->subject( 'MyCryptoCheckout: Unable to contact the API server' );
 				$url = sprintf( '<a href="%s">%s</a>', get_permalink( $post_id ), $post->post_title );
 				$text = '';
 				$text .= "Dear admin!\n";
 				$text .= "\n";
-				$text .= sprintf( "MyCryptoCheckout was unable to contact the API server in order to retrieve a payment ID for order %s.\n", $url );
+				$text .= "MyCryptoCheckout was recently unable to contact the API server in order to retrieve a payment ID. The plugin will continue to attempt to contact the API. The gateway will be unable to process payments until it has re-established a connection.\n";
 				$text .= "\n";
 				$text .= "Please log in and try refreshing your MyCryptoCheckout account settings.\n";
 				$text = wpautop( $text );
