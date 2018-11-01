@@ -156,11 +156,17 @@ class Payments
 			$attempts++;
 			update_post_meta( $post_id, '_mcc_attempts', $attempts );
 			$this->api()->debug( 'Failure #%d trying to send the payment for order %d. %s', $attempts, $post_id, $e->getMessage() );
-			if ( $attempts > 48 )	// 48 hours, since this is usually run on the hourly cron.
+			if ( $attempts > 24 * 60 )	// 24 hours, 60 times an hour, since this is usually run on the hourly cron.
 			{
 				// TODO: Give up and inform the admin of the failure.
 				$this->api()->debug( 'We have now given up on trying to send the payment for order %d.', $post_id );
 				update_post_meta( $post_id,  '_mcc_payment_id', -1 );
+			}
+			else
+			{
+				// Try again in 5 minutes.
+				wp_schedule_single_event( time() + 60, 'mycryptocheckout_send_payment', [ $post_id, microtime() ] );
+				$this->api()->debug( 'Will try to send payment %d again.', $post_id );
 			}
 		}
 	}
