@@ -443,7 +443,9 @@ trait misc_methods_trait
 	{
 		$args = base64_decode( $args );
 		$args = json_decode( $args );
-		switch_to_blog( $args->blog_id );
+		// This might not be a multisite.
+		if ( function_exists( 'switch_to_blog' ) )
+			switch_to_blog( $args->blog_id );
 
 		// Find the meta.
 		$post_id = $args->post_id;
@@ -480,7 +482,9 @@ trait misc_methods_trait
 			$this->debug( 'Error while checking for valid payment ID: %s', $e->getMessage() );
 		}
 
-		restore_current_blog();
+		// This might not be a multisite.
+		if ( function_exists( 'switch_to_blog' ) )
+			restore_current_blog();
 	}
 
 	/**
