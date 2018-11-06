@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 70+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 75+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
@@ -8,7 +8,7 @@ Stable tag: 2.26
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 70+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 75+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -26,6 +26,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Optional hierarchically deterministic (HD) wallet support
 - No redirection to 3rd parties, no iframes, no modal windows
 - Optional donations widget shortcode generator
+- Built in support for shops with .onion addresses on Tor
 - See the <a href="https://mycryptocheckout.com/comparison/">feature comparison table</a> to see why you should use MyCryptoCheckout instead of other crypto gateways
 - How to auto convert received <a href="https://mycryptocheckout.com/doc/auto-convert-crypto-to-fiat/">Bitcoin/Altcoin to USD/EUR/etc</a>
 
@@ -111,6 +112,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Storm STORM
 - TenXPay PAY
 - TrueUSD TUSD
+- TuneTrade TXT
 - Veritaseum VERI
 - Worldcoin1 WRD1
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
