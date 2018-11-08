@@ -181,6 +181,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Fix: EDD: Conversion between fiat and crypto fixed on order received page.
+
 = 2.26 20181105 =
 
 * New currency: TuneTrade TXT
