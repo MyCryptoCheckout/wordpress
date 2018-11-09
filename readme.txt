@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.26
+Stable tag: 2.27
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 4.9.8
 
@@ -180,6 +180,8 @@ If your server cannot be reached by the API server this plugin will not function
 12. Donations widget
 
 == Changelog ==
+
+= 2.27 20181105 =
 
 * Fix: EDD: Conversion between fiat and crypto fixed on order received page.
 

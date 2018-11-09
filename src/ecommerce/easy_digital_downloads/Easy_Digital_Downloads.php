@@ -153,7 +153,6 @@ class Easy_Digital_Downloads
 			'currency_id' => $currency_id,
 		] );
 		$amount = $currency->convert( $edd_currency, $amount );
-		$amount = $currency->convert( $edd_currency, $amount );
 		$amount = $currency->find_next_available_amount( $amount );
 
 		// Good to go.
