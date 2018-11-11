@@ -421,7 +421,7 @@ trait admin_trait
 							$wallet->set_enabled( true );
 						}
 						$wallets->save();
-						$r .= $this->info_message_box()->_( __( 'The selected wallets have been disabled.', 'mycryptocheckout' ) );
+						$r .= $this->info_message_box()->_( __( 'The selected wallets have been enabled.', 'mycryptocheckout' ) );
 					break;
 					case 'mark_as_used':
 						$ids = $table->bulk_actions()->get_rows();

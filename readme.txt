@@ -181,6 +181,8 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* Fix: Typo: "wallets disabled" -> "wallets enabled".
+
 = 2.27 20181105 =
 
 * Fix: EDD: Conversion between fiat and crypto fixed on order received page.
