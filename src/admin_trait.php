@@ -177,7 +177,7 @@ trait admin_trait
 		$url = $this->api()->get_purchase_url();
 		$url = sprintf( '<a href="%s">%s</a> &rArr;',
 			$url,
-			__( 'MyCryptoCheckout.com pricing page', 'mycryptocheckout' )
+			__( 'Add an unlimited license to my cart', 'mycryptocheckout' )
 		);
 		$row->td( 'details' )->text( $url );
 
