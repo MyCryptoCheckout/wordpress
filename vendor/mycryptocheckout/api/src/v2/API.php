@@ -68,7 +68,10 @@ abstract class API
 	**/
 	public function get_purchase_url()
 	{
-		$url = 'https://mycryptocheckout.com/pricing/';
+		if ( defined( 'MYCRYPTOCHECKOUT_PRICING_URL' ) )
+			$url = MYCRYPTOCHECKOUT_PRICING_URL;
+		else
+			$url = 'https://mycryptocheckout.com/pricing/';
 		return add_query_arg( [
 			'domain' => base64_encode( $this->get_client_url() ),
 		], $url );
