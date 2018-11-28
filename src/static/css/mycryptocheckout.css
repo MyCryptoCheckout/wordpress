@@ -132,6 +132,17 @@
 .metamask_payment:active {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.19); }
 
+.settings_page_mycryptocheckout #plainview_sdk_mcc_form2_inputs_text_btc_hd_public_key {
+  width: 100%;
+  max-width: 1000px; }
+.settings_page_mycryptocheckout form#currencies td#currency {
+  cursor: move; }
+.settings_page_mycryptocheckout form#currencies .ui-sortable-helper {
+  border: 1px solid #ccc;
+  background: #FAFAFA; }
+.settings_page_mycryptocheckout form#currencies .wallet_placeholder {
+  background: #d8d8d8; }
+
 #payment .wc_payment_methods .payment_method_mycryptocheckout img {
   max-height: 1.618em;
   height: 100%;
@@ -389,15 +400,153 @@
 .mcc-ZRX:before {
   content: "\e946"; }
 
-.settings_page_mycryptocheckout #plainview_sdk_mcc_form2_inputs_text_btc_hd_public_key {
-  width: 100%;
-  max-width: 1000px; }
-.settings_page_mycryptocheckout form#currencies td#currency {
-  cursor: move; }
-.settings_page_mycryptocheckout form#currencies .ui-sortable-helper {
-  border: 1px solid #ccc;
-  background: #FAFAFA; }
-.settings_page_mycryptocheckout form#currencies .wallet_placeholder {
-  background: #d8d8d8; }
+.mcc_currency_icons.color i.mcc-1337 {
+  color: #4C1515; }
+.mcc_currency_icons.color i.mcc-ADULT {
+  color: #4F606A; }
+.mcc_currency_icons.color i.mcc-AE {
+  color: #DE3F6B; }
+.mcc_currency_icons.color i.mcc-ANT {
+  color: #1cb7c4; }
+.mcc_currency_icons.color i.mcc-BAT {
+  color: #9e1f63; }
+.mcc_currency_icons.color i.mcc-BCH {
+  color: #00B400; }
+.mcc_currency_icons.color i.mcc-BNB {
+  color: #F5BC00; }
+.mcc_currency_icons.color i.mcc-BNT {
+  color: #000D2B; }
+.mcc_currency_icons.color i.mcc-BSD {
+  color: #D1A41B; }
+.mcc_currency_icons.color i.mcc-BTC {
+  color: #F7931A; }
+.mcc_currency_icons.color i.mcc-BTG {
+  color: #eba809; }
+.mcc_currency_icons.color i.mcc-CATO {
+  color: #082D53; }
+.mcc_currency_icons.color i.mcc-COF {
+  color: #35B629; }
+.mcc_currency_icons.color i.mcc-COLX {
+  color: #000; }
+.mcc_currency_icons.color i.mcc-CRYP {
+  color: #000; }
+.mcc_currency_icons.color i.mcc-DAI {
+  color: #f8bb14; }
+.mcc_currency_icons.color i.mcc-DASH {
+  color: #1c75bc; }
+.mcc_currency_icons.color i.mcc-DCR {
+  color: #3b7cfb; }
+.mcc_currency_icons.color i.mcc-DGB {
+  color: #0066cc; }
+.mcc_currency_icons.color i.mcc-DGD {
+  color: #D8A24A; }
+.mcc_currency_icons.color i.mcc-DRGN {
+  color: #C91111; }
+.mcc_currency_icons.color i.mcc-EBTC {
+  color: #F37721; }
+.mcc_currency_icons.color i.mcc-ETH {
+  color: #282828; }
+.mcc_currency_icons.color i.mcc-FLIX {
+  color: #7D0A7F; }
+.mcc_currency_icons.color i.mcc-FUN {
+  color: #ED1968; }
+.mcc_currency_icons.color i.mcc-GNT {
+  color: #001D57; }
+.mcc_currency_icons.color i.mcc-GTO {
+  color: #7F27FF; }
+.mcc_currency_icons.color i.mcc-GUSD {
+  color: #07c4e1; }
+.mcc_currency_icons.color i.mcc-HT {
+  color: #1C2143; }
+.mcc_currency_icons.color i.mcc-ICX {
+  color: #1FC5C9; }
+.mcc_currency_icons.color i.mcc-INV {
+  color: #35C1C7; }
+.mcc_currency_icons.color i.mcc-ITM {
+  color: #4AAAE0; }
+.mcc_currency_icons.color i.mcc-KNC {
+  color: #188C92; }
+.mcc_currency_icons.color i.mcc-LATINO {
+  color: #1eb7eb; }
+.mcc_currency_icons.color i.mcc-LILE {
+  color: #deb846; }
+.mcc_currency_icons.color i.mcc-LOOM {
+  color: #08839D; }
+.mcc_currency_icons.color i.mcc-LTC {
+  color: #838383; }
+.mcc_currency_icons.color i.mcc-MARS {
+  color: #D13914; }
+.mcc_currency_icons.color i.mcc-MCO {
+  color: #103F68; }
+.mcc_currency_icons.color i.mcc-MKR {
+  color: #1abc9c; }
+.mcc_currency_icons.color i.mcc-MTL {
+  color: #1E1F25; }
+.mcc_currency_icons.color i.mcc-NAS {
+  color: #222; }
+.mcc_currency_icons.color i.mcc-NPXS {
+  color: #221E22; }
+.mcc_currency_icons.color i.mcc-NYC {
+  color: #6D6E71; }
+.mcc_currency_icons.color i.mcc-OMG {
+  color: #1A53F0; }
+.mcc_currency_icons.color i.mcc-ONG {
+  color: #000000; }
+.mcc_currency_icons.color i.mcc-PAY {
+  color: #302C2C; }
+.mcc_currency_icons.color i.mcc-PPT {
+  color: #152743; }
+.mcc_currency_icons.color i.mcc-QASH {
+  color: #1347E8; }
+.mcc_currency_icons.color i.mcc-RDN {
+  color: #2A2A2A; }
+.mcc_currency_icons.color i.mcc-REP {
+  color: #602A52; }
+.mcc_currency_icons.color i.mcc-REQ {
+  color: #075073; }
+.mcc_currency_icons.color i.mcc-SALT {
+  color: #0baba4; }
+.mcc_currency_icons.color i.mcc-SHEL {
+  color: #000000; }
+.mcc_currency_icons.color i.mcc-SNT {
+  color: #5B6DEE; }
+.mcc_currency_icons.color i.mcc-STAK {
+  color: #F29514; }
+.mcc_currency_icons.color i.mcc-STORM {
+  color: #080D98; }
+.mcc_currency_icons.color i.mcc-TBTC {
+  color: #000; }
+.mcc_currency_icons.color i.mcc-TN {
+  color: #000; }
+.mcc_currency_icons.color i.mcc-TPAY {
+  color: #3058A6; }
+.mcc_currency_icons.color i.mcc-TRX {
+  color: #000; }
+.mcc_currency_icons.color i.mcc-TUSD {
+  color: #5ca4f5; }
+.mcc_currency_icons.color i.mcc-TXT {
+  color: #000000; }
+.mcc_currency_icons.color i.mcc-VERI {
+  color: #FF9933; }
+.mcc_currency_icons.color i.mcc-VIA {
+  color: #000000; }
+.mcc_currency_icons.color i.mcc-WAVES {
+  color: #0155FF; }
+.mcc_currency_icons.color i.mcc-WAVESWORLD {
+  color: #3609F9; }
+.mcc_currency_icons.color i.mcc-WRD1 {
+  color: #221F1F; }
+.mcc_currency_icons.color i.mcc-XEM {
+  color: #67B2E8; }
+.mcc_currency_icons.color i.mcc-XLR {
+  color: #000; }
+.mcc_currency_icons.color i.mcc-XMR {
+  color: #FF6600; }
+.mcc_currency_icons.color i.mcc-XVG {
+  color: #00bbeb; }
+.mcc_currency_icons.color i.mcc-ZEC {
+  color: #e29f27; }
+.mcc_currency_icons.color i.mcc-ZRX {
+  color: #302C2C; }
 
 /*# sourceMappingURL=mycryptocheckout.css.map */
