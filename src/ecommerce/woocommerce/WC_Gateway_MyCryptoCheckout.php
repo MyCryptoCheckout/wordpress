@@ -90,6 +90,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'description' => __( 'This is the text for the currency selection input.', 'mycryptocheckout' ),
 			'default' => $strings->get( 'currency_selection_text' ),
 		];
+		$r[ 'colorize_icons' ] = [
+			'title'			=> __( 'Colorize icons', 'mycryptocheckout' ),
+			'type'			=> 'checkbox',
+			'default'     => 'no',
+			'description'	=> __( 'Show the cryptocurrency icons on the checkout page in color instead of just black.', 'mycryptocheckout' ),
+		];
 		$r[ 'payment_complete_status' ] = [
 			'title' => __( 'Payment complete status', 'mycryptocheckout' ),
 			'type' => 'select',
@@ -371,7 +377,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( $id != $this->id )
 			return $icon;
 
-		$r = '<div class="mcc_currency_icons">';
+		$color = '';
+		if ( $this->get_option( 'colorize_icons' ) == 'yes' )
+			$color = ' color';
+		$r = sprintf( '<div class="mcc_currency_icons%s">', $color );
 
 		$wallet_options = $this->get_wallet_options();
 		$handled_currencies = [];
