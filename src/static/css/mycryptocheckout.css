@@ -149,6 +149,29 @@
   -webkit-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.19); }
 
+.open_wallet_payment {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 280px;
+  height: 82px;
+  background-size: cover;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTU2NiA0OTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE1NjYgNDkyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6IzI4QTc0NTt9LnN0MXtmaWxsOiNGQUY5Rjk7fS5zdDJ7ZmlsbDojNzYzRTFBO30uc3Qze2ZvbnQtZmFtaWx5OidSb2JvdG8tQm9sZCc7fS5zdDR7Zm9udC1zaXplOjExOHB4O30uc3Q1e2ZpbGw6I0ZGRkZGRjt9LnN0Nntmb250LWZhbWlseTonUm9ib3RvLU1lZGl1bSc7fS5zdDd7Zm9udC1zaXplOjE3NXB4O308L3N0eWxlPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02LDBoMTU2MHY0OTJINlYweiIvPjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0wLDBoNDc0djQ5MkgwVjB6Ii8+PHBhdGggY2xhc3M9InN0MCIgZD0iTTQxNy4xNiwxMTQuNzZ2NzEuNjcxYzAsMTIuMDE4LTE0LjUzOCwxNy45MDktMjIuOTQ0LDkuNTA0bC0xOS45OTYtMTkuOTk3TDIzNy44NDcsMzEyLjMxMWMtNS4yNDksNS4yNDktMTMuNzU4LDUuMjQ5LTE5LjAwNywwbC0xMi42NzEtMTIuNjcxYy01LjI0OS01LjI0OS01LjI0OS0xMy43NTksMC0xOS4wMDdsMTM2LjM3NC0xMzYuMzc0bC0xOS45OTQtMTkuOTk1Yy04LjQ0LTguNDQtMi40NjItMjIuOTQ0LDkuNTA0LTIyLjk0NGg3MS42NjdDNDExLjE0MywxMDEuMzIsNDE3LjE2LDEwNy4zMzcsNDE3LjE2LDExNC43NnogTTMyMi41MzYsMjUyLjk2NWwtOC45Niw4Ljk2Yy0yLjUyMSwyLjUyMS0zLjkzNiw1LjkzOS0zLjkzNiw5LjUwNFYzNTIuMmgtMTc5LjJWMTczaDE0Ny44NGMzLjU2NCwwLDYuOTgzLTEuNDE2LDkuNTAzLTMuOTM2bDguOTYtOC45NmM4LjQ2Ny04LjQ2NywyLjQ3LTIyLjk0NC05LjUwMy0yMi45NDRIMTIxLjQ4Yy0xNC44NDYsMC0yNi44OCwxMi4wMzQtMjYuODgsMjYuODh2MTk3LjEyYzAsMTQuODQ2LDEyLjAzNCwyNi44OCwyNi44OCwyNi44OEgzMTguNmMxNC44NDYsMCwyNi44OC0xMi4wMzQsMjYuODgtMjYuODh2LTk4LjY5MkMzNDUuNDgsMjUwLjQ5NCwzMzEuMDAzLDI0NC40OTcsMzIyLjUzNiwyNTIuOTY1eiIvPjx0ZXh0IHRyYW5zZm9ybT0ibWF0cml4KDEgMCAwIDEgNTY0IDE5MC40MikiIGNsYXNzPSJzdDIgc3QzIHN0NCI+T1BFTiBJTjwvdGV4dD48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAxIDU3Ny4xIDM3MC40MDk1KSIgY2xhc3M9InN0NSBzdDYgc3Q3Ij5XQUxMRVQ8L3RleHQ+PC9zdmc+); }
+
+.open_wallet_payment:hover {
+  -webkit-box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 10px 20px 0 rgba(0, 0, 0, 0.19); }
+
+.open_wallet_payment:active {
+  -webkit-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.19); }
+
 .settings_page_mycryptocheckout #plainview_sdk_mcc_form2_inputs_text_btc_hd_public_key {
   width: 100%;
   max-width: 1000px; }
