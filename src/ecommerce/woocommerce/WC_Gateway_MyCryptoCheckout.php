@@ -91,10 +91,20 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'default' => $strings->get( 'currency_selection_text' ),
 		];
 		$r[ 'colorize_icons' ] = [
+			'default'     => '',
+			'description'	=> __( 'Show the cryptocurrency icons on the checkout page in various colors instead of the default black.', 'mycryptocheckout' ),
+			'options' => [
+				// WooCommerce checkout icon coloring
+				''  => __( 'Black', 'mycryptocheckout' ),
+				// WooCommerce checkout icon coloring
+				'color'  => __( 'Brand colors', 'mycryptocheckout' ),
+				// WooCommerce checkout icon coloring
+				'orange'  => __( 'Orange', 'mycryptocheckout' ),
+				// WooCommerce checkout icon coloring
+				'white'  => __( 'White', 'mycryptocheckout' ),
+			],
 			'title'			=> __( 'Colorize icons', 'mycryptocheckout' ),
-			'type'			=> 'checkbox',
-			'default'     => 'no',
-			'description'	=> __( 'Show the cryptocurrency icons on the checkout page in color instead of just black.', 'mycryptocheckout' ),
+			'type'			=> 'select',
 		];
 		$r[ 'payment_complete_status' ] = [
 			'title' => __( 'Payment complete status', 'mycryptocheckout' ),
@@ -378,9 +388,18 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			return $icon;
 
 		$color = '';
-		if ( $this->get_option( 'colorize_icons' ) == 'yes' )
-			$color = ' color';
-		$r = sprintf( '<div class="mcc_currency_icons%s">', $color );
+		$value = $this->get_option( 'colorize_icons' );
+		switch ( $value )
+		{
+			case 'color':
+			case 'yes':
+				$color = "color";
+				break;
+			case 'orange':
+			case 'white':
+				$color = $value;
+		}
+		$r = sprintf( '<div class="mcc_currency_icons %s">', $color );
 
 		$wallet_options = $this->get_wallet_options();
 		$handled_currencies = [];
