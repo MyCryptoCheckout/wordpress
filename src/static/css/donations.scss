@@ -1,0 +1,42 @@
+// Donations
+.mycryptocheckout.mcc_donations {
+	img.mcc_donation_icon {
+		width: 40px;
+		height: auto;
+		display: inline-block;
+		margin-right: 8px;
+	}
+	img.mcc_donation_icon:hover {
+		cursor: pointer;
+		opacity: .6;
+	}
+	.selected_currency {
+		font-size: 14px;
+		line-height: 24px;
+	}
+	.qr_code {
+		margin-bottom: 10px;
+	}
+	.currency_selector select {
+		max-width: 100%;
+		margin: 4px 0;
+	}
+	&.alignment_center {
+		text-align: center;
+		.qr_code {
+			margin: 5px auto;
+		}
+	}
+	&.alignment_left {
+		text-align: left;
+		.qr_code {
+			margin: 5px auto 10px 0;
+		}
+	}
+	&.alignment_right {
+		text-align: right;
+		.qr_code {
+			margin: 5px 0 10px auto;
+		}
+	}
+}

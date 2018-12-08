@@ -1,0 +1,240 @@
+// Preset white for icon font
+.mcc_currency_icons.white {
+	i {
+		color: #FFF;
+	}
+}
+// Preset orange for icon font
+.mcc_currency_icons.orange {
+	i {
+		color: #F7931B;
+	}
+}
+
+// Preset brand colors for icon font
+.mcc_currency_icons.color {
+	i {
+		&.mcc-1337 {
+			color: #4C1515;
+		}
+		&.mcc-ADULT {
+			color: #4F606A;
+		}
+		&.mcc-AE {
+			color: #DE3F6B;
+		}
+		&.mcc-ANT {
+			color: #1cb7c4;
+		}
+		&.mcc-BAT {
+			color: #9e1f63;
+		}
+		&.mcc-BCH {
+			color: #00B400;
+		}
+		&.mcc-BNB {
+			color: #F5BC00;
+		}
+		&.mcc-BNT {
+			color: #000D2B;
+		}
+		&.mcc-BSD {
+			color: #D1A41B;
+		}
+		&.mcc-BTC {
+			color: #F7931A;
+		}
+		&.mcc-BTG {
+			color: #eba809;
+		}
+		&.mcc-CATO {
+			color: #082D53;
+		}
+		&.mcc-COF {
+			color: #35B629;
+		}
+		&.mcc-COLX {
+			color: #000;
+		}
+		&.mcc-CRYP {
+			color: #000;
+		}
+		&.mcc-DAI {
+			color: #f8bb14;
+		}
+		&.mcc-DASH {
+			color: #1c75bc;
+		}
+		&.mcc-DCR {
+			color: #3b7cfb;
+		}
+		&.mcc-DGB {
+			color: #0066cc;
+		}
+		&.mcc-DGD {
+			color: #D8A24A;
+		}
+		&.mcc-DRGN {
+			color: #C91111;
+		}
+		&.mcc-EBTC {
+			color: #F37721;
+		}
+		&.mcc-ETH {
+			color: #282828;
+		}
+		&.mcc-FLIX {
+			color: #7D0A7F;
+		}
+		&.mcc-FUN {
+			color: #ED1968;
+		}
+		&.mcc-GNT {
+			color: #001D57;
+		}
+		&.mcc-GTO {
+			color: #7F27FF;
+		}
+		&.mcc-GUSD {
+			color: #07c4e1;
+		}
+		&.mcc-HT {
+			color: #1C2143;
+		}
+		&.mcc-ICX {
+			color: #1FC5C9;
+		}
+		&.mcc-INV {
+			color: #35C1C7;
+		}
+		&.mcc-ITM {
+			color: #4AAAE0;
+		}
+		&.mcc-KNC {
+			color: #188C92;
+		}
+		&.mcc-LATINO {
+			color: #1eb7eb;
+		}
+		&.mcc-LILE {
+			color: #deb846;
+		}
+		&.mcc-LOOM {
+			color: #08839D;
+		}
+		&.mcc-LTC {
+			color: #838383;
+		}
+		&.mcc-MARS {
+			color: #D13914;
+		}
+		&.mcc-MCO {
+			color: #103F68;
+		}
+		&.mcc-MKR {
+			color: #1abc9c;
+		}
+		&.mcc-MTL {
+			color: #1E1F25;
+		}
+		&.mcc-NAS {
+			color: #222;
+		}
+		&.mcc-NPXS {
+			color: #221E22;
+		}
+		&.mcc-NYC {
+			color: #6D6E71;
+		}
+		&.mcc-OMG {
+			color: #1A53F0;
+		}
+		&.mcc-ONG {
+			color: #000000;
+		}
+		&.mcc-PAY {
+			color: #302C2C;
+		}
+		&.mcc-PPT {
+			color: #152743;
+		}
+		&.mcc-QASH {
+			color: #1347E8;
+		}
+		&.mcc-RDN {
+			color: #2A2A2A;
+		}
+		&.mcc-REP {
+			color: #602A52;
+		}
+		&.mcc-REQ {
+			color: #075073;
+		}
+		&.mcc-SALT {
+			color: #0baba4;
+		}
+		&.mcc-SHEL {
+			color: #000000;
+		}
+		&.mcc-SNT {
+			color: #5B6DEE;
+		}
+		&.mcc-STAK {
+			color: #F29514;
+		}
+		&.mcc-STORM {
+			color: #080D98;
+		}
+		&.mcc-TBTC {
+			color: #000;
+		}
+		&.mcc-TN {
+			color: #000;
+		}
+		&.mcc-TPAY {
+			color: #3058A6;
+		}
+		&.mcc-TRX {
+			color: #000;
+		}
+		&.mcc-TUSD {
+			color: #5ca4f5;
+		}
+		&.mcc-TXT {
+			color: #000000;
+		}
+		&.mcc-VERI {
+			color: #FF9933;
+		}
+		&.mcc-VIA {
+			color: #000000;
+		}
+		&.mcc-WAVES {
+			color: #0155FF;
+		}
+		&.mcc-WAVESWORLD {
+			color: #3609F9;
+		}
+		&.mcc-WRD1 {
+			color: #221F1F;
+		}
+		&.mcc-XEM {
+			color: #67B2E8;
+		}
+		&.mcc-XLR {
+			color: #000;
+		}
+		&.mcc-XMR {
+			color: #FF6600;
+		}
+		&.mcc-XVG {
+			color: #00bbeb;
+		}
+		&.mcc-ZEC {
+			color: #e29f27;
+		}
+		&.mcc-ZRX {
+			color: #302C2C;
+		}
+	}
+}

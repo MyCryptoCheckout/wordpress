@@ -1,0 +1,264 @@
+// Icon font for checkout page
+// old icon style remove in later version
+#payment .wc_payment_methods .payment_method_mycryptocheckout img {
+	max-height: 1.618em;
+	height: 100%;
+	width: auto;
+}
+// current icon styles
+.woocommerce-checkout #payment ul.wc_payment_methods li.payment_method_mycryptocheckout label {
+	.mcc_currency_icons {
+		display: inline;
+		margin-left: 5px;
+		word-break: break-all;
+	}
+}
+@font-face {
+	font-family: 'mcc';
+	src:  url('../fonts/mcc.ttf?hqq0o6') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="mcc-"], [class*=" mcc-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'mcc' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	color: #000;
+	font-size: 22px;
+	margin: 0 1px;
+	vertical-align: middle;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.mcc-TXT:before {
+  content: "\e94a";
+}
+.mcc-WAVESWORLD:before {
+  content: "\e949";
+}
+.mcc-TUSD:before {
+  content: "\e947";
+}
+.mcc-GUSD:before {
+  content: "\e948";
+}
+.mcc-1337:before {
+  content: "\e900";
+}
+.mcc-ADULT:before {
+  content: "\e901";
+}
+.mcc-AE:before {
+  content: "\e902";
+}
+.mcc-ANT:before {
+  content: "\e903";
+}
+.mcc-BAT:before {
+  content: "\e904";
+}
+.mcc-BCH:before {
+  content: "\e905";
+}
+.mcc-BNB:before {
+  content: "\e906";
+}
+.mcc-BNT:before {
+  content: "\e907";
+}
+.mcc-BSD:before {
+  content: "\e908";
+}
+.mcc-BTC:before {
+  content: "\e909";
+}
+.mcc-BTG:before {
+  content: "\e90a";
+}
+.mcc-CATO:before {
+  content: "\e90b";
+}
+.mcc-COF:before {
+  content: "\e90c";
+}
+.mcc-COLX:before {
+  content: "\e90d";
+}
+.mcc-CRYP:before {
+  content: "\e90e";
+}
+.mcc-DAI:before {
+  content: "\e90f";
+}
+.mcc-DASH:before {
+  content: "\e910";
+}
+.mcc-DCR:before {
+  content: "\e911";
+}
+.mcc-DGB:before {
+  content: "\e912";
+}
+.mcc-DGD:before {
+  content: "\e913";
+}
+.mcc-DRGN:before {
+  content: "\e914";
+}
+.mcc-EBTC:before {
+  content: "\e915";
+}
+.mcc-ETC:before {
+  content: "\e916";
+}
+.mcc-ETH:before {
+  content: "\e917";
+}
+.mcc-FLIX:before {
+  content: "\e918";
+}
+.mcc-FUN:before {
+  content: "\e919";
+}
+.mcc-GNT:before {
+  content: "\e91a";
+}
+.mcc-GTO:before {
+  content: "\e91b";
+}
+.mcc-HT:before {
+  content: "\e91c";
+}
+.mcc-ICX:before {
+  content: "\e91d";
+}
+.mcc-INV:before {
+  content: "\e91e";
+}
+.mcc-ITM:before {
+  content: "\e91f";
+}
+.mcc-KNC:before {
+  content: "\e920";
+}
+.mcc-LATINO:before {
+  content: "\e921";
+}
+.mcc-LILE:before {
+  content: "\e922";
+}
+.mcc-LOOM:before {
+  content: "\e923";
+}
+.mcc-LTC:before {
+  content: "\e924";
+}
+.mcc-MARS:before {
+  content: "\e925";
+}
+.mcc-MCO:before {
+  content: "\e926";
+}
+.mcc-MKR:before {
+  content: "\e927";
+}
+.mcc-MTL:before {
+  content: "\e928";
+}
+.mcc-NAS:before {
+  content: "\e929";
+}
+.mcc-NPXS:before {
+  content: "\e92a";
+}
+.mcc-NYC:before {
+  content: "\e92b";
+}
+.mcc-OMG:before {
+  content: "\e92c";
+}
+.mcc-ONG:before {
+  content: "\e92d";
+}
+.mcc-PAY:before {
+  content: "\e92e";
+}
+.mcc-PPT:before {
+  content: "\e92f";
+}
+.mcc-QASH:before {
+  content: "\e930";
+}
+.mcc-RDN:before {
+  content: "\e931";
+}
+.mcc-REP:before {
+  content: "\e932";
+}
+.mcc-REQ:before {
+  content: "\e933";
+}
+.mcc-SALT:before {
+  content: "\e934";
+}
+.mcc-SHEL:before {
+  content: "\e935";
+}
+.mcc-SNT:before {
+  content: "\e936";
+}
+.mcc-STAK:before {
+  content: "\e937";
+}
+.mcc-STORM:before {
+  content: "\e938";
+}
+.mcc-TBTC:before {
+  content: "\e939";
+}
+.mcc-TN:before {
+  content: "\e93a";
+}
+.mcc-TPAY:before {
+  content: "\e93b";
+}
+.mcc-TRX:before {
+  content: "\e93c";
+}
+.mcc-VERI:before {
+  content: "\e93d";
+}
+.mcc-VIA:before {
+  content: "\e93e";
+}
+.mcc-WAVES:before {
+  content: "\e93f";
+}
+.mcc-WRD1:before {
+  content: "\e940";
+}
+.mcc-XEM:before {
+  content: "\e941";
+}
+.mcc-XLR:before {
+  content: "\e942";
+}
+.mcc-XMR:before {
+  content: "\e943";
+}
+.mcc-XVG:before {
+  content: "\e944";
+}
+.mcc-ZEC:before {
+  content: "\e945";
+}
+.mcc-ZRX:before {
+  content: "\e946";
+}
