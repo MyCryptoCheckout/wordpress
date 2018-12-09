@@ -505,6 +505,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 	**/
 	$$.maybe_browser_link = function()
 	{
+		// If metamask, then don't do anything.
+		if ( typeof $$.$metamask !== 'undefined' )
+			return;
 		// Extract the currency name from the qr code, if possible.
 		var currency_name = $$.mycryptocheckout_checkout_data.currency_id;
 		if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
@@ -640,10 +643,10 @@ var mycryptocheckout_checkout_javascript = function( data )
 			if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined' )
 				return;
 
-		var $div = $( '<div class="metamask_payment"></div>' );
-		$div.appendTo( $$.$payment_buttons );
+		$$.$metamask = $( '<div class="metamask_payment"></div>' );
+		$$.$metamask.appendTo( $$.$payment_buttons );
 
-		$div.click( function()
+		$$.$metamask.click( function()
 		{
 			if ( contractInstance === false )
 			{
