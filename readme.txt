@@ -4,9 +4,9 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.27
+Stable tag: 2.28
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 4.9.8
+Tested up to: 5.0
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 75+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -183,6 +183,9 @@ If your server cannot be reached by the API server this plugin will not function
 
 == Changelog ==
 
+* New: "open in wallet" button on payment page allows customers to click and prefill address and amount in their wallet.
+* New: improved CSS browser prefixes
+* New: WooCommerce: prestyled colors options forcheckout icons.
 * Fix: Typo: "wallets disabled" -> "wallets enabled".
 
 = 2.27 20181105 =
