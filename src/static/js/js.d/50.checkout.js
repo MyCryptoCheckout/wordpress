@@ -4,6 +4,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 	$$.data = data;
 	$$.$div = $( '.mcc.online_payment_instructions' );
 	$$.$online_pay_box = $( '.mcc_online_pay_box', $$.$div );
+	$$.$payment_buttons = $( '<div class="payment_buttons">' );
 	$$.mycryptocheckout_checkout_data = false;
 
 	/**
@@ -70,6 +71,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_upgrade_divs();
 		$$.maybe_generate_qr_code();
 		$$.maybe_generate_payment_timer();
+		$$.$payment_buttons.appendTo( $$.$online_pay_box );
 		$$.maybe_metamask();
 		$$.maybe_browser_link();
 	}
@@ -100,7 +102,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		html = html.replace( 'MCC_TO', $$.mycryptocheckout_checkout_data.to );
 		var $div = $( '<div>' );
 		$div.html( html );
-		$div.appendTo( $$.$online_pay_box );
+		$div.appendTo( $$.$payment_buttons );
 	}
 
 	/**
@@ -226,7 +228,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 				return;
 
 		var $div = $( '<div class="metamask_payment"></div>' );
-		$div.appendTo( $$.$online_pay_box );
+		$div.appendTo( $$.$payment_buttons );
 
 		$div.click( function()
 		{
