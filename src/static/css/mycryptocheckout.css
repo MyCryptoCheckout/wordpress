@@ -126,8 +126,11 @@
   .mycryptocheckout.mcc_donations.alignment_right .qr_code {
     margin: 5px 0 10px auto; }
 
+.payment_buttons {
+  display: block; }
+
 .metamask_payment {
-  display: block;
+  display: inline-block;
   margin-top: 5px;
   margin-bottom: 10px;
   width: 250px;
@@ -150,7 +153,7 @@
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.19); }
 
 .open_wallet_payment {
-  display: block;
+  display: inline-block;
   margin-top: 5px;
   margin-bottom: 10px;
   width: 250px;
