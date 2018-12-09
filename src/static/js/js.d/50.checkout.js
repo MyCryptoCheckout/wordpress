@@ -71,6 +71,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_generate_qr_code();
 		$$.maybe_generate_payment_timer();
 		$$.maybe_metamask();
+		$$.maybe_browser_link();
 	}
 
 	/**
@@ -81,6 +82,25 @@ var mycryptocheckout_checkout_javascript = function( data )
 	{
 		// On the purchase confirmation page, convert the amount and address to a copyable input.
 		$( '.to_input', $$.$div ).mcc_make_clipboard();
+	}
+
+	/**
+		@brief		Add a payment link for the browser.
+		@since		2018-12-09 12:08:06
+	**/
+	$$.maybe_browser_link = function()
+	{
+		// Extract the currency name from the qr code, if possible.
+		var currency_name = $$.mycryptocheckout_checkout_data.currency_id;
+		if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
+			currency_name = $$.data.qr_codes[ $$.data.currency_id ].replace( /:.*/, '' );
+		var html = '<a href="MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT"><div class="open_wallet_payment"></div></a>';
+		html = html.replace( 'MCC_AMOUNT', $$.mycryptocheckout_checkout_data.amount );
+		html = html.replace( 'MCC_CURRENCY', currency_name );
+		html = html.replace( 'MCC_TO', $$.mycryptocheckout_checkout_data.to );
+		var $div = $( '<div>' );
+		$div.html( html );
+		$div.appendTo( $$.$online_pay_box );
 	}
 
 	/**
@@ -186,28 +206,13 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( $$.$online_pay_box.length < 1 )
 			return;
 
+		// web3 must be supported.
+		if ( typeof web3 === 'undefined' )
+			return;
+
 		// The data must support metamask.
 		if( typeof $$.mycryptocheckout_checkout_data.supports === 'undefined' )
 			return;
-
-		var $div = $( '<div class="metamask_payment"></div>' );
-		$div.appendTo( $$.$online_pay_box );
-
-		// web3 must be supported.
-		if ( typeof web3 === 'undefined' )
-		{
-			// Extract the currency name from the qr code, if possible.
-			var currency_name = $$.mycryptocheckout_checkout_data.currency_id;
-			if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
-				currency_name = $$.data.qr_codes[ $$.data.currency_id ].replace( /:.*/, '' );
-			var html = '<a href="MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT"><div class="open_wallet_payment"></div></a>';
-			html = html.replace( 'MCC_AMOUNT', $$.mycryptocheckout_checkout_data.amount );
-			html = html.replace( 'MCC_CURRENCY', currency_name );
-			html = html.replace( 'MCC_TO', $$.mycryptocheckout_checkout_data.to );
-			$div.html( html );
-			console.log( $$.mycryptocheckout_checkout_data );
-			return;
-		}
 
 		var contractInstance = false;
 		if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined' )
@@ -219,6 +224,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( contractInstance === false )
 			if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined' )
 				return;
+
+		var $div = $( '<div class="metamask_payment"></div>' );
+		$div.appendTo( $$.$online_pay_box );
 
 		$div.click( function()
 		{
