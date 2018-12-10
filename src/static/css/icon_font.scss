@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-SPND:before {
+  content: "\e94b";
+}
 .mcc-TXT:before {
   content: "\e94a";
 }

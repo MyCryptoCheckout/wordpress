@@ -222,6 +222,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-SPND:before {
+  content: "\e94b"; }
+
 .mcc-TXT:before {
   content: "\e94a"; }
 
@@ -617,6 +620,9 @@
 
 .mcc_currency_icons.color i.mcc-SNT {
   color: #5B6DEE; }
+
+.mcc_currency_icons.color i.mcc-SPND {
+  color: #000; }
 
 .mcc_currency_icons.color i.mcc-STAK {
   color: #F29514; }
