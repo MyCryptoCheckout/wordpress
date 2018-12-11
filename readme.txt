@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.28
+Stable tag: 2.29
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -108,6 +108,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Request Network REQ
 - SALT
 - shelterDAO SHEL
+- Spendcoin SPND
 - Status SNT
 - Storm STORM
 - TenXPay PAY
@@ -169,19 +170,24 @@ If your server cannot be reached by the API server this plugin will not function
 == Screenshots ==
 
 1. WooCommerce checkout
-2. EasyDigitalDownloads checkout
-3. WooCommerce purchase confirmation page with payment data
-4. Account tab
+2. WooCommerce checkout icon colors
+3. Payment page w/ payment data
+4. Account overview tab
 5. Currencies tab
 6. Adding a Monero wallet
-7. Global settings tab for network and single installs
-8. Local settings tab for network installs
-9. WooCommerce gateway settings
-10. EasyDigitalDownloads gateway settings
+7. WooCommerce gateway settings
+8. Easy Digital Downloads checkout
+9. Easy Digital Downloads gateway settings
+10. Donations widget
 11. Donations generator form
-12. Donations widget
 
 == Changelog ==
+
+= 2.29 20181211 =
+
+* New currency: Spendcoin SPND
+
+= 2.28 20181209 =
 
 * New: "open in wallet" button on payment page allows customers to click and prefill address and amount in their wallet.
 * New: improved CSS browser prefixes
