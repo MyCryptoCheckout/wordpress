@@ -27,7 +27,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - No redirection to 3rd parties, no iframes, no modal windows
 - Optional donations widget shortcode generator
 - Built in support for shops with .onion addresses on Tor
-- See the <a href="https://mycryptocheckout.com/comparison/">feature comparison table</a> to compare MyCryptoCheckout to other crypto gateways
+- Compare MyCryptoCheckout to several other traditional and cryptocurrency merchant solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
 - How to auto convert received <a href="https://mycryptocheckout.com/doc/auto-convert-crypto-to-fiat/">Bitcoin/Altcoin to USD/EUR/etc</a>
 
 The free license can process three sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account if you require more. The flat rate license includes unlimited transactions. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
