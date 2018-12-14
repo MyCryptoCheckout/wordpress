@@ -37,6 +37,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-USDC:before {
+  content: "\e94c";
+}
+.mcc-TKS:before {
+  content: "\e94d";
+}
 .mcc-SPND:before {
   content: "\e94b";
 }

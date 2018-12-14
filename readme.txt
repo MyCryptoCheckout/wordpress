@@ -114,6 +114,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - TenXPay PAY
 - TrueUSD TUSD
 - TuneTrade TXT
+- USD Coin USDC
 - Veritaseum VERI
 - Worldcoin1 WRD1
 - We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
@@ -131,6 +132,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 = WAVES Tokens supported: =
 
 - CoffeeCoin COF
+- Tokes TKS
 - Waves World WAVESWORLD
 - We can now add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
