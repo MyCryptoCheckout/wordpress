@@ -32,6 +32,12 @@ class Payments
 
 		$action->data->set( 'timeout_hours', $payment->timeout_hours );
 		$action->data->set( 'to', $payment->to );
+
+		if ( isset( $currency->waves ) )
+		{
+			$action->data->set( 'token_id', $currency->token_id );
+			$action->data->set( 'waves', true );
+		}
 	}
 
 	/**

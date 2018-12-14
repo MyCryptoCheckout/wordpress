@@ -487,6 +487,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.$payment_buttons.appendTo( $$.$online_pay_box );
 		$$.maybe_metamask();
 		$$.maybe_browser_link();
+		$$.maybe_waves_link();
 	}
 
 	/**
@@ -513,9 +514,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
 			currency_name = $$.data.qr_codes[ $$.data.currency_id ].replace( /:.*/, '' );
 		var html = '<a href="MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT"><div class="open_wallet_payment"></div></a>';
-		html = html.replace( 'MCC_AMOUNT', $$.mycryptocheckout_checkout_data.amount );
+		html = $$.replace_keywords( html );
 		html = html.replace( 'MCC_CURRENCY', currency_name );
-		html = html.replace( 'MCC_TO', $$.mycryptocheckout_checkout_data.to );
 		var $div = $( '<div>' );
 		$div.html( html );
 		$div.appendTo( $$.$payment_buttons );
@@ -713,6 +713,46 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$( '.mcc_qr_code', $$.$div ).appendTo( $$.$online_pay_box );
 
 		// Instructions div is now upgraded to version 2.05.
+	}
+
+	/**
+		@brief		Maybe add a waves payment link.
+		@since		2018-12-14 17:50:20
+	**/
+	$$.maybe_waves_link = function()
+	{
+		var add_waves = false;
+		var currency = 'WAVES';
+		if ( typeof ( $$.mycryptocheckout_checkout_data.waves ) !== 'undefined' )
+		{
+			add_waves = true;
+			console.log( $$.mycryptocheckout_checkout_data );
+			currency = $$.mycryptocheckout_checkout_data.token_id;
+		}
+		if ( $.data.currency_id == 'WAVES' )
+			add_waves = true;
+		if ( ! add_waves )
+			return;
+
+		console.log( 'waves' );
+		var url = 'https://client.wavesplatform.com/#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&referrer=' + encodeURIComponent( document.location ) + '&strict';
+		url = $$.replace_keywords( url );
+		var html = '<a href="' + url + '"><div class="waves_payment"></div></a>';
+		var $div = $( '<div>' );
+		$div.html( html );
+		$div.appendTo( $$.$payment_buttons );
+	}
+
+	/**
+		@brief		Replace the MCC keywords in this string.
+		@details	Replaces TO, AMOUNT, etc.
+		@since		2018-12-14 17:54:59
+	**/
+	$$.replace_keywords = function( string )
+	{
+		string = string.replace( 'MCC_AMOUNT', $$.mycryptocheckout_checkout_data.amount );
+		string = string.replace( 'MCC_TO', $$.mycryptocheckout_checkout_data.to );
+		return string;
 	}
 
 	/**
