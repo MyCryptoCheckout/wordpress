@@ -421,6 +421,12 @@ var mycryptocheckout_checkout_javascript = function( data )
 	$$.mycryptocheckout_checkout_data = false;
 
 	/**
+		@brief		Show the browser link button.
+		@since		2018-12-14 22:59:03
+	**/
+	$$.show_browser_link = true;
+
+	/**
 		@brief		Check to see whether the order was paid, and cleanup in that case.
 		@since		2018-05-02 21:02:30
 	**/
@@ -486,8 +492,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_generate_payment_timer();
 		$$.$payment_buttons.appendTo( $$.$online_pay_box );
 		$$.maybe_metamask();
-		$$.maybe_browser_link();
 		$$.maybe_waves_link();
+		$$.maybe_browser_link();
 	}
 
 	/**
@@ -506,8 +512,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 	**/
 	$$.maybe_browser_link = function()
 	{
-		// If metamask, then don't do anything.
-		if ( typeof $$.$metamask !== 'undefined' )
+		if ( ! $$.show_browser_link )
 			return;
 		// Extract the currency name from the qr code, if possible.
 		var currency_name = $$.mycryptocheckout_checkout_data.currency_id;
@@ -632,6 +637,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if( typeof $$.mycryptocheckout_checkout_data.supports === 'undefined' )
 			return;
 
+		$$.show_browser_link = false;
+
 		var contractInstance = false;
 		if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined' )
 		{
@@ -729,12 +736,13 @@ var mycryptocheckout_checkout_javascript = function( data )
 			console.log( $$.mycryptocheckout_checkout_data );
 			currency = $$.mycryptocheckout_checkout_data.token_id;
 		}
-		if ( $.data.currency_id == 'WAVES' )
+		if ( $$.data.currency_id == 'WAVES' )
 			add_waves = true;
 		if ( ! add_waves )
 			return;
 
-		console.log( 'waves' );
+		$$.show_browser_link = false;
+
 		var url = 'https://client.wavesplatform.com/#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&referrer=' + encodeURIComponent( document.location ) + '&strict';
 		url = $$.replace_keywords( url );
 		var html = '<a href="' + url + '"><div class="waves_payment"></div></a>';
