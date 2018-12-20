@@ -126,6 +126,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 
 = TRON TRC-20 Tokens supported: =
 
+- ActivEightCoin ACTIV
 - TRONBITCOIN TBTC
 - We can now add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON TRC-20 tokens</a>!
 
@@ -184,6 +185,13 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations generator form
 
 == Changelog ==
+
+= 2.30 20181221 =
+
+* New currency: USD Coin USDC
+* New currency: Tokes TKS
+* New currency: ActivEightCoin ACTIV
+* New: "open in waves" button. The button uses the Waves payments API and opens the Waves client either desktop or online version. 
 
 = 2.29 20181211 =
 
