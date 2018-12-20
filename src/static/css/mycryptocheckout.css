@@ -245,6 +245,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-ACTIV:before {
+  content: "\e94e"; }
+
 .mcc-USDC:before {
   content: "\e94c"; }
 
@@ -487,6 +490,9 @@
 
 .mcc_currency_icons.color i.mcc-1337 {
   color: #4C1515; }
+
+.mcc_currency_icons.color i.mcc-ACTIV {
+  color: #ccaf3c; }
 
 .mcc_currency_icons.color i.mcc-ADULT {
   color: #4F606A; }
