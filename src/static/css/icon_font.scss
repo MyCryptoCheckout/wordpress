@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-CLOAK:before {
+  content: "\e94f";
+}
 .mcc-ACTIV:before {
   content: "\e94e";
 }
