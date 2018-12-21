@@ -44,6 +44,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bitcoin Gold BTG
 - Bitsmdo BSD
 - CatoCoin CATO
+- CloakCoin CLOAK
 - ColossusXT COLX
 - CrypticCoin CRYP
 - Dash DASH
