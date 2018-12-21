@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.29
+Stable tag: 2.30
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -191,7 +191,7 @@ If your server cannot be reached by the API server this plugin will not function
 * New currency: USD Coin USDC
 * New currency: Tokes TKS
 * New currency: ActivEightCoin ACTIV
-* New: "open in waves" button. The button uses the Waves payments API and opens the Waves client either desktop or online version. 
+* New: "open in waves" button. The button uses the Waves payments API and opens the Waves client either desktop or online version.
 
 = 2.29 20181211 =
 
