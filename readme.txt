@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.30
+Stable tag: 2.31
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -186,6 +186,8 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations generator form
 
 == Changelog ==
+
+= 2.31 20181228 =
 
 * New currency: CloakCoin CLOAK
 
