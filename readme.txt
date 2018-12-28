@@ -44,6 +44,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bitcoin Gold BTG
 - Bitsmdo BSD
 - CatoCoin CATO
+- CloakCoin CLOAK
 - ColossusXT COLX
 - CrypticCoin CRYP
 - Dash DASH
@@ -185,6 +186,8 @@ If your server cannot be reached by the API server this plugin will not function
 11. Donations generator form
 
 == Changelog ==
+
+* New currency: CloakCoin CLOAK
 
 = 2.30 20181221 =
 
