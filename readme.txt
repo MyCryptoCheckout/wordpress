@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 75+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 80+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
@@ -8,7 +8,7 @@ Stable tag: 2.31
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 75+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 80+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -169,7 +169,10 @@ If your server cannot be reached by the API server this plugin will not function
 4. Visit the currencies tab
 5. Set up one or more currencies
 6. Visit your WooCommerce payment gateway settings. The instructions included in receipt e-mails are taken from the WC MCC gateway instructions text boxes.
-7. Visit your EasyDigitalDownloads payment gateway settings. The instructions included in receipt e-mails can be included using the {mcc_instructions} e-mail tag. The text is taken from the EDD MCC payment gateway instructions text boxes.
+7. Or visit your EasyDigitalDownloads payment gateway settings. The instructions included in receipt e-mails can be included using the {mcc_instructions} e-mail tag. The text is taken from the EDD MCC payment gateway instructions text boxes.
+
+View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installation/">installation guide</a>
+
 
 == Screenshots ==
 
