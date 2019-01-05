@@ -37,6 +37,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-GRS:before {
+  content: "\e950";
+}
+.mcc-BLXS:before {
+  content: "\e951";
+}
 .mcc-CLOAK:before {
   content: "\e94f";
 }
