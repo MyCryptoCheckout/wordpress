@@ -15,7 +15,7 @@ use DateTime;
 use DateTimeZone;
 use Exception;
 
-abstract class AbstractTime extends Object
+abstract class AbstractTime extends ASNObject
 {
     /** @var DateTime */
     protected $value;
@@ -32,7 +32,7 @@ abstract class AbstractTime extends Object
             }
             $dateTime = $dateTimeObject;
         } elseif (!$dateTime instanceof DateTime) {
-            throw new Exception('Invalid first argument for some instance of ASN_AbstractTime constructor');
+            throw new Exception('Invalid first argument for some instance of AbstractTime constructor');
         }
 
         $this->value = $dateTime;

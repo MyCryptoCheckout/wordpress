@@ -1,94 +1,76 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Buffertools\Types;
 
 use BitWasp\Buffertools\ByteOrder;
 use BitWasp\Buffertools\Parser;
-use Mdanter\Ecc\Math\GmpMathInterface;
 
 class VarInt extends AbstractType
 {
-    private $sizeInfo = [];
-
-    /**
-     * @param GmpMathInterface $math
-     * @param int                  $byteOrder
-     */
-    public function __construct(GmpMathInterface $math, $byteOrder = ByteOrder::BE)
-    {
-        parent::__construct($math, $byteOrder);
-        $two = gmp_init(2, 10);
-        $this->sizeInfo = [
-            [Uint16::class, $math->pow($two, 16), gmp_init(0xfd)],
-            [Uint32::class, $math->pow($two, 32), gmp_init(0xfe)],
-            [Uint64::class, $math->pow($two, 64), gmp_init(0xff)],
-        ];
-    }
+    private $formatUint8 = "C";
+    private $formatUint16LE = "v";
+    private $formatUint32LE = "V";
+    private $formatUint64LE = "P";
 
     /**
      * @param \GMP $integer
      * @return array
+     * @deprecated
      */
     public function solveWriteSize(\GMP $integer)
     {
-        $math = $this->getMath();
-
-        foreach ($this->sizeInfo as $config) {
-            list($uint, $limit, $prefix) = $config;
-            if ($math->cmp($integer, $limit) < 0) {
-                return [
-                    new $uint($math, ByteOrder::LE),
-                    $prefix
-                ];
-            }
+        if (gmp_cmp($integer, gmp_pow(gmp_init(2), 16)) < 0) {
+            return [new Uint16(ByteOrder::LE), 0xfd];
+        } else if (gmp_cmp($integer, gmp_pow(gmp_init(2), 32)) < 0) {
+            return [new Uint32(ByteOrder::LE), 0xfe];
+        } else if (gmp_cmp($integer, gmp_pow(gmp_init(2), 64)) < 0) {
+            return [new Uint64(ByteOrder::LE), 0xff];
+        } else {
+            throw new \InvalidArgumentException('Integer too large, exceeds 64 bit');
         }
-
-        throw new \InvalidArgumentException('Integer too large, exceeds 64 bit');
     }
 
     /**
      * @param \GMP $givenPrefix
      * @return UintInterface[]
      * @throws \InvalidArgumentException
+     * @deprecated
      */
     public function solveReadSize(\GMP $givenPrefix)
     {
-        $math = $this->getMath();
-
-        foreach ($this->sizeInfo as $config) {
-            $uint = $config[0];
-            $prefix = $config[2];
-            if ($math->cmp($givenPrefix, $prefix) === 0) {
-                return [
-                    new $uint($math, ByteOrder::LE)
-                ];
-            }
+        if (gmp_cmp($givenPrefix, 0xfd) === 0) {
+            return [new Uint16(ByteOrder::LE)];
+        } else if (gmp_cmp($givenPrefix, 0xfe) === 0) {
+            return [new Uint32(ByteOrder::LE)];
+        } else if (gmp_cmp($givenPrefix, 0xff) === 0) {
+            return [new Uint64(ByteOrder::LE)];
         }
 
-        throw new \InvalidArgumentException('Integer too large, exceeds 64 bit');
+        throw new \InvalidArgumentException('Unknown varint prefix');
     }
 
     /**
      * {@inheritdoc}
-     * @see \BitWasp\Buffertools\Types\TypeInterface::write()
+     * @see \BitWasp\Buffertools\Types\TypeInterface::read()
      */
-    public function write($integer)
+    public function write($integer): string
     {
-        $math = $this->getMath();
-
-        $gmp = gmp_init($integer, 10);
-        $uint8 = new Uint8($math);
-        if ($math->cmp($gmp, gmp_init(0xfd, 10)) < 0) {
-            $int = $uint8;
-        } else {
-            list ($int, $prefix) = $this->solveWriteSize($gmp);
-            $prefix = gmp_strval($prefix, 10);
+        if ($integer < 0xfd) {
+            return pack($this->formatUint8, $integer);
         }
 
-        $prefix = isset($prefix) ? $uint8->write($prefix) : '';
-        $bits = $prefix . $int->write($integer);
+        $gmpInt = gmp_init($integer);
+        if (gmp_cmp($gmpInt, gmp_sub(gmp_pow(2, 16), 1)) <= 0) {
+            return pack("{$this->formatUint8}{$this->formatUint16LE}", 0xfd, $integer);
+        } else if (gmp_cmp($gmpInt, gmp_sub(gmp_pow(2, 32), 1)) <= 0) {
+            return pack("{$this->formatUint8}{$this->formatUint32LE}", 0xfe, $integer);
+        } else if (gmp_cmp($gmpInt, gmp_sub(gmp_pow(2, 63), 1)) <= 0) {
+            return pack("{$this->formatUint8}{$this->formatUint64LE}", 0xff, $integer);
+        }
 
-        return $bits;
+        throw new \RuntimeException("Unable to serialize varint, exceeds maximum value");
     }
 
     /**
@@ -97,15 +79,16 @@ class VarInt extends AbstractType
      */
     public function read(Parser $parser)
     {
-        $math = $this->getMath();
-        $uint8 = new Uint8($math);
-        $int = gmp_init($uint8->readBits($parser), 10);
-
-        if ($math->cmp($int, gmp_init(0xfd, 10)) < 0) {
-            return gmp_strval($int, 10);
+        $byte = unpack($this->formatUint8, $parser->readBytes(1)->getBinary())[1];
+        if ($byte < 0xfd) {
+            return $byte;
+        } else if ($byte === 0xfd) {
+            return unpack($this->formatUint16LE, $parser->readBytes(2)->getBinary())[1];
+        } else if ($byte === 0xfe) {
+            return unpack($this->formatUint32LE, $parser->readBytes(4)->getBinary())[1];
         } else {
-            $uint = $this->solveReadSize($int)[0];
-            return $uint->read($parser);
+            $uint64 = new Uint64(ByteOrder::LE);
+            return $uint64->read($parser);
         }
     }
 }

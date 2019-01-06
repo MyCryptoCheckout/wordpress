@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Key\KeyToScript;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
@@ -9,18 +11,12 @@ use BitWasp\Bitcoin\Key\KeyToScript\Decorator\P2shP2wshScriptDecorator;
 use BitWasp\Bitcoin\Key\KeyToScript\Decorator\P2shScriptDecorator;
 use BitWasp\Bitcoin\Key\KeyToScript\Decorator\P2wshScriptDecorator;
 use BitWasp\Bitcoin\Key\KeyToScript\Factory\KeyToScriptDataFactory;
+use BitWasp\Bitcoin\Key\KeyToScript\Factory\MultisigScriptDataFactory;
 use BitWasp\Bitcoin\Key\KeyToScript\Factory\P2pkhScriptDataFactory;
 use BitWasp\Bitcoin\Key\KeyToScript\Factory\P2wpkhScriptDataFactory;
-use BitWasp\Bitcoin\Script\ScriptType;
 
 class KeyToScriptHelper
 {
-
-    /**
-     * @var mixed
-     */
-    private $cache = [];
-
     /**
      * @var PublicKeySerializerInterface
      */
@@ -36,77 +32,59 @@ class KeyToScriptHelper
     }
 
     /**
-     * @param array ...$scriptPaths
-     * @return string
+     * @return P2pkhScriptDataFactory
      */
-    private function makeScriptKey(... $scriptPaths)
+    public function getP2pkhFactory(): P2pkhScriptDataFactory
     {
-        return implode("|", $scriptPaths);
+        return new P2pkhScriptDataFactory($this->pubKeySer);
     }
 
     /**
-     * @return P2pkhScriptDataFactory
+     * @param int $numSignatures
+     * @param int $numKeys
+     * @param bool $sortCosignKeys
+     * @return MultisigScriptDataFactory
      */
-    public function getP2pkhFactory()
+    public function getMultisigFactory(int $numSignatures, int $numKeys, bool $sortCosignKeys): MultisigScriptDataFactory
     {
-        $key = ScriptType::P2PKH;
-        if (!array_key_exists($key, $this->cache)) {
-            $this->cache[$key] = new P2pkhScriptDataFactory($this->pubKeySer);
-        }
-        return $this->cache[$key];
+        return new MultisigScriptDataFactory($numSignatures, $numKeys, $sortCosignKeys, $this->pubKeySer);
     }
 
     /**
      * @return P2wpkhScriptDataFactory
      */
-    public function getP2wpkhFactory()
+    public function getP2wpkhFactory(): P2wpkhScriptDataFactory
     {
-        $key = ScriptType::P2WKH;
-        if (!array_key_exists($key, $this->cache)) {
-            $this->cache[$key] = new P2wpkhScriptDataFactory($this->pubKeySer);
-        }
-        return $this->cache[$key];
+        return new P2wpkhScriptDataFactory($this->pubKeySer);
     }
 
     /**
      * @param KeyToScriptDataFactory $scriptFactory
-     * @return P2shScriptDecorator
+     * @return ScriptDataFactory
      * @throws \BitWasp\Bitcoin\Exceptions\DisallowedScriptDataFactoryException
      */
-    public function getP2shFactory(KeyToScriptDataFactory $scriptFactory)
+    public function getP2shFactory(KeyToScriptDataFactory $scriptFactory): ScriptDataFactory
     {
-        $key = $this->makeScriptKey(ScriptType::P2SH, $scriptFactory->getScriptType());
-        if (!array_key_exists($key, $this->cache)) {
-            $this->cache[$key] = new P2shScriptDecorator($scriptFactory);
-        }
-        return $this->cache[$key];
+        return new P2shScriptDecorator($scriptFactory);
     }
 
     /**
      * @param KeyToScriptDataFactory $scriptFactory
-     * @return P2wshScriptDecorator
+     * @return ScriptDataFactory
      * @throws \BitWasp\Bitcoin\Exceptions\DisallowedScriptDataFactoryException
      */
-    public function getP2wshFactory(KeyToScriptDataFactory $scriptFactory)
+    public function getP2wshFactory(KeyToScriptDataFactory $scriptFactory): ScriptDataFactory
     {
-        $key = $this->makeScriptKey(ScriptType::P2WSH, $scriptFactory->getScriptType());
-        if (!array_key_exists($key, $this->cache)) {
-            $this->cache[$key] = new P2wshScriptDecorator($scriptFactory);
-        }
-        return $this->cache[$key];
+        return new P2wshScriptDecorator($scriptFactory);
     }
 
     /**
      * @param KeyToScriptDataFactory $scriptFactory
-     * @return P2shP2wshScriptDecorator
+     * @return ScriptDataFactory
      * @throws \BitWasp\Bitcoin\Exceptions\DisallowedScriptDataFactoryException
      */
-    public function getP2shP2wshFactory(KeyToScriptDataFactory $scriptFactory)
+    public function getP2shP2wshFactory(KeyToScriptDataFactory $scriptFactory): ScriptDataFactory
     {
-        $key = $this->makeScriptKey(ScriptType::P2SH, ScriptType::P2WSH, $scriptFactory->getScriptType());
-        if (!array_key_exists($key, $this->cache)) {
-            $this->cache[$key] = new P2shP2wshScriptDecorator($scriptFactory);
-        }
-        return $this->cache[$key];
+        return new P2shP2wshScriptDecorator($scriptFactory);
     }
 }

@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Transaction\Factory;
 
 use BitWasp\Bitcoin\Script\ScriptInterface;
+use BitWasp\Bitcoin\Script\WitnessScript;
 
 class SignData
 {
-    // Todo: review for useful exception?
-
     /**
      * @var ScriptInterface
      */
@@ -24,11 +25,19 @@ class SignData
     protected $signaturePolicy = null;
 
     /**
+     * @var bool[]
+     */
+    protected $logicalPath = null;
+
+    /**
      * @param ScriptInterface $redeemScript
      * @return $this
      */
     public function p2sh(ScriptInterface $redeemScript)
     {
+        if ($redeemScript instanceof WitnessScript) {
+            throw new \InvalidArgumentException("Cannot pass WitnessScript as a redeemScript");
+        }
         $this->redeemScript = $redeemScript;
         return $this;
     }
@@ -36,7 +45,7 @@ class SignData
     /**
      * @return bool
      */
-    public function hasRedeemScript()
+    public function hasRedeemScript(): bool
     {
         return $this->redeemScript instanceof ScriptInterface;
     }
@@ -44,7 +53,7 @@ class SignData
     /**
      * @return ScriptInterface
      */
-    public function getRedeemScript()
+    public function getRedeemScript(): ScriptInterface
     {
         if (null === $this->redeemScript) {
             throw new \RuntimeException('Redeem script requested but not set');
@@ -52,6 +61,7 @@ class SignData
 
         return $this->redeemScript;
     }
+
     /**
      * @param ScriptInterface $witnessScript
      * @return $this
@@ -65,7 +75,7 @@ class SignData
     /**
      * @return bool
      */
-    public function hasWitnessScript()
+    public function hasWitnessScript(): bool
     {
         return $this->witnessScript instanceof ScriptInterface;
     }
@@ -73,7 +83,7 @@ class SignData
     /**
      * @return ScriptInterface
      */
-    public function getWitnessScript()
+    public function getWitnessScript(): ScriptInterface
     {
         if (null === $this->witnessScript) {
             throw new \RuntimeException('Witness script requested but not set');
@@ -86,7 +96,7 @@ class SignData
      * @param int $flags
      * @return $this
      */
-    public function signaturePolicy($flags)
+    public function signaturePolicy(int $flags)
     {
         $this->signaturePolicy = $flags;
         return $this;
@@ -95,7 +105,7 @@ class SignData
     /**
      * @return bool
      */
-    public function hasSignaturePolicy()
+    public function hasSignaturePolicy(): bool
     {
         return $this->signaturePolicy !== null;
     }
@@ -103,11 +113,47 @@ class SignData
     /**
      * @return int
      */
-    public function getSignaturePolicy()
+    public function getSignaturePolicy(): int
     {
         if (null === $this->signaturePolicy) {
             throw new \RuntimeException('Signature policy requested but not set');
         }
         return $this->signaturePolicy;
+    }
+
+    /**
+     * @param bool[] $vfPathTaken
+     * @return $this
+     */
+    public function logicalPath(array $vfPathTaken)
+    {
+        foreach ($vfPathTaken as $value) {
+            if (!is_bool($value)) {
+                throw new \RuntimeException("Invalid values for logical path, must be a boolean array");
+            }
+        }
+
+        $this->logicalPath = $vfPathTaken;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLogicalPath(): bool
+    {
+        return is_array($this->logicalPath);
+    }
+
+    /**
+     * @return bool[]
+     */
+    public function getLogicalPath(): array
+    {
+        if (null === $this->logicalPath) {
+            throw new \RuntimeException("Logical path requested but not set");
+        }
+
+        return $this->logicalPath;
     }
 }

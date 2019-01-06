@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Serializer\Signature;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
@@ -8,6 +10,7 @@ use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Signature\Signature;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Serializer\Signature\DerSignatureSerializerInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface;
 use BitWasp\Buffertools\Buffer;
+use BitWasp\Buffertools\BufferInterface;
 use BitWasp\Buffertools\Parser;
 use BitWasp\Buffertools\Template;
 use BitWasp\Buffertools\TemplateFactory;
@@ -37,9 +40,9 @@ class DerSignatureSerializer implements DerSignatureSerializerInterface
 
     /**
      * @param Signature $signature
-     * @return Buffer
+     * @return BufferInterface
      */
-    private function doSerialize(Signature $signature)
+    private function doSerialize(Signature $signature): BufferInterface
     {
         $signatureOut = '';
         if (!secp256k1_ecdsa_signature_serialize_der($this->ecAdapter->getContext(), $signatureOut, $signature->getResource())) {
@@ -51,9 +54,9 @@ class DerSignatureSerializer implements DerSignatureSerializerInterface
 
     /**
      * @param SignatureInterface $signature
-     * @return Buffer
+     * @return BufferInterface
      */
-    public function serialize(SignatureInterface $signature)
+    public function serialize(SignatureInterface $signature): BufferInterface
     {
         /** @var Signature $signature */
         return $this->doSerialize($signature);
@@ -84,22 +87,22 @@ class DerSignatureSerializer implements DerSignatureSerializerInterface
     }
 
     /**
-     * @param string $data
+     * @param BufferInterface $derSignature
      * @return SignatureInterface
      */
-    public function parse($data)
+    public function parse(BufferInterface $derSignature): SignatureInterface
     {
-        $buffer = (new Parser($data))->getBuffer();
-        $binary = $buffer->getBinary();
+        $derSignature = (new Parser($derSignature))->getBuffer();
+        $binary = $derSignature->getBinary();
 
-        $sig_t = '';
+        $sig_t = null;
         /** @var resource $sig_t */
         if (!ecdsa_signature_parse_der_lax($this->ecAdapter->getContext(), $sig_t, $binary)) {
             throw new \RuntimeException('Secp256k1: parse der failure');
         }
 
         // Unfortunately, we need to use the Parser here to get r and s :/
-        list (, $inner) = $this->getOuterTemplate()->parse(new Parser($buffer));
+        list (, $inner) = $this->getOuterTemplate()->parse(new Parser($derSignature));
         list (, $r, , $s) = $this->getInnerTemplate()->parse(new Parser($inner));
         /** @var Buffer $r */
         /** @var Buffer $s */

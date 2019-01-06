@@ -1,13 +1,10 @@
 language: php
 
-dist: trusty 
 php:
-    - 5.6
     - 7.0
     - 7.1
-    - hhvm
-
-dist: trusty 
+    - 7.2
+    - nightly
 
 env:
     # The default env behaviour: phpunit, no coverage, no style checks
@@ -17,30 +14,32 @@ matrix:
   fast_finish: true
 
   exclude:
-      # Disable phpunit test on 5.6, reenable with COVERAGE
-    - php: 5.6
+      # Disable standard phpunit test on 7.0, reenable with FULL, and with COVERAGE
+    - php: 7.2
       env: PHPUNIT=true
-
   include:
-      # This reenables php5.6/phpunit test with COVERAGE
-    - php: 5.6
-      env: PHPUNIT=true COVERAGE_SHARDS=10 COVERAGE=true
-
-      # This runs phpcs on php7.0 - only code style
-    - php: 5.6
-      env: CODESTYLE=true
+      # This reenables php7.0/phpunit test with COVERAGE
+    - php: 7.2
+      env: PHPUNIT=true COVERAGE_SHARDS=5 COVERAGE=true
+      # This reenables php7.0/phpunit test with extended tests (wycheproof)
+    - php: 7.2
+      env: FULL=true
+      # This runs phpcs on php7.0 - only code style and examples
+    - php: 7.0
+      env: CODESTYLE=true EXAMPLES=true
 
 sudo: false
 
 before_script:
     - travis_retry composer selfupdate
     - travis_retry composer install --prefer-source
-    - if [ "${COVERAGE}" != "true" ]; then phpenv config-rm xdebug.ini && echo "xdebug disabled" || echo "xdebug wasn't enabled"; fi
+    - if [ "${COVERAGE}" != "true" ] && [ "${TRAVIS_PHP_VERSION}" != "nightly" ]; then phpenv config-rm xdebug.ini && echo "xdebug disabled"; fi
 
 script:
-    - if [ "${PHPUNIT}" = "true" ]; then vendor/bin/phpunit --coverage-text --coverage-clover=tests/output/coverage.clover; fi
-    - ./validate_examples.sh
+    - if [ "${PHPUNIT}" = "true" ]; then make phpunit-ci; fi
+    - if [ "${FULL}" = "true" ]; then make phpunit-full-ci; fi
+    - if [ "${CODESTYLE}" = "true" ]; then make phpcs && echo "PHPCS OK"; fi
+    - if [ "${EXAMPLES}" = "true" ]; then make test-examples && echo "Examples OK"; fi
 
 after_success:
-    - wget https://scrutinizer-ci.com/ocular.phar
-    - if [ "${COVERAGE}" = "true" ] && [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "nightly" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi;
+    - if [ "${COVERAGE}" = "true" ]; then make scrutinizer; fi

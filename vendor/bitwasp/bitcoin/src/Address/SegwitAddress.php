@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Address;
 
 use BitWasp\Bitcoin\Bitcoin;
 use BitWasp\Bitcoin\Network\NetworkInterface;
+use BitWasp\Bitcoin\Script\ScriptInterface;
 use BitWasp\Bitcoin\Script\WitnessProgram;
-use BitWasp\Bitcoin\SegwitBech32;
 
 class SegwitAddress extends Address implements Bech32AddressInterface
 {
@@ -27,38 +29,38 @@ class SegwitAddress extends Address implements Bech32AddressInterface
 
     /**
      * @param NetworkInterface|null $network
-     * @return bool
+     * @return string
      */
-    public function getHRP(NetworkInterface $network = null)
+    public function getHRP(NetworkInterface $network = null): string
     {
         $network = $network ?: Bitcoin::getNetwork();
         return $network->getSegwitBech32Prefix();
     }
 
     /**
-     * @return \BitWasp\Bitcoin\Script\ScriptInterface
+     * @return WitnessProgram
      */
-    public function getScriptPubKey()
+    public function getWitnessProgram(): WitnessProgram
     {
-        return $this->witnessProgram->getScript();
+        return $this->witnessProgram;
     }
 
     /**
-     * @return WitnessProgram
+     * @return ScriptInterface
      */
-    public function getWitnessProgram()
+    public function getScriptPubKey(): ScriptInterface
     {
-        return $this->witnessProgram;
+        return $this->witnessProgram->getScript();
     }
 
     /**
      * @param NetworkInterface|null $network
      * @return string
      */
-    public function getAddress(NetworkInterface $network = null)
+    public function getAddress(NetworkInterface $network = null): string
     {
         $network = $network ?: Bitcoin::getNetwork();
 
-        return SegwitBech32::encode($this->witnessProgram, $network);
+        return \BitWasp\Bech32\encodeSegwit($network->getSegwitBech32Prefix(), $this->witnessProgram->getVersion(), $this->witnessProgram->getProgram()->getBinary());
     }
 }

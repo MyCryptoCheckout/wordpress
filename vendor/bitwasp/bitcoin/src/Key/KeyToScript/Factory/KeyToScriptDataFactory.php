@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Key\KeyToScript\Factory;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\EcSerializer;
@@ -31,22 +33,25 @@ abstract class KeyToScriptDataFactory extends ScriptDataFactory
     }
 
     /**
-     * @param PublicKeyInterface $publicKey
+     * @param PublicKeyInterface ...$keys
      * @return ScriptAndSignData
      */
-    abstract protected function convertKeyToScriptData(PublicKeyInterface $publicKey);
+    abstract protected function convertKeyToScriptData(PublicKeyInterface ...$keys): ScriptAndSignData;
 
     /**
-     * @param KeyInterface $key
+     * @param KeyInterface ...$keys
      * @return ScriptAndSignData
      */
-    public function convertKey(KeyInterface $key)
+    public function convertKey(KeyInterface... $keys): ScriptAndSignData
     {
-        if ($key->isPrivate()) {
-            /** @var PrivateKeyInterface $key */
-            $key = $key->getPublicKey();
+        $pubs = [];
+        foreach ($keys as $key) {
+            if ($key instanceof PrivateKeyInterface) {
+                $key = $key->getPublicKey();
+            }
+            $pubs[] = $key;
         }
-        /** @var PublicKeyInterface $key */
-        return $this->convertKeyToScriptData($key);
+
+        return $this->convertKeyToScriptData(...$pubs);
     }
 }

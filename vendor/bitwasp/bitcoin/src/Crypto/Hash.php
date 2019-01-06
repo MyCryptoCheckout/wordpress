@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Crypto;
 
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\BufferInterface;
+use lastguest\Murmur;
 
 class Hash
 {
@@ -13,7 +16,7 @@ class Hash
      * @param BufferInterface $data
      * @return BufferInterface
      */
-    public static function sha256ripe160(BufferInterface $data)
+    public static function sha256ripe160(BufferInterface $data): BufferInterface
     {
         return new Buffer(hash('ripemd160', hash('sha256', $data->getBinary(), true), true), 20);
     }
@@ -24,7 +27,7 @@ class Hash
      * @param BufferInterface $data
      * @return BufferInterface
      */
-    public static function sha256(BufferInterface $data)
+    public static function sha256(BufferInterface $data): BufferInterface
     {
         return new Buffer(hash('sha256', $data->getBinary(), true), 32);
     }
@@ -35,7 +38,7 @@ class Hash
      * @param BufferInterface $data
      * @return BufferInterface
      */
-    public static function sha256d(BufferInterface $data)
+    public static function sha256d(BufferInterface $data): BufferInterface
     {
         return new Buffer(hash('sha256', hash('sha256', $data->getBinary(), true), true), 32);
     }
@@ -46,7 +49,7 @@ class Hash
      * @param BufferInterface $data
      * @return BufferInterface
      */
-    public static function ripemd160(BufferInterface $data)
+    public static function ripemd160(BufferInterface $data): BufferInterface
     {
         return new Buffer(hash('ripemd160', $data->getBinary(), true), 20);
     }
@@ -57,7 +60,7 @@ class Hash
      * @param BufferInterface $data
      * @return BufferInterface
      */
-    public static function ripemd160d(BufferInterface $data)
+    public static function ripemd160d(BufferInterface $data): BufferInterface
     {
         return new Buffer(hash('ripemd160', hash('ripemd160', $data->getBinary(), true), true), 20);
     }
@@ -68,7 +71,7 @@ class Hash
      * @param BufferInterface $data
      * @return BufferInterface
      */
-    public static function sha1(BufferInterface $data)
+    public static function sha1(BufferInterface $data): BufferInterface
     {
         return new Buffer(hash('sha1', $data->getBinary(), true), 20);
     }
@@ -84,7 +87,7 @@ class Hash
      * @return BufferInterface
      * @throws \Exception
      */
-    public static function pbkdf2($algorithm, BufferInterface $password, BufferInterface $salt, $count, $keyLength)
+    public static function pbkdf2(string $algorithm, BufferInterface $password, BufferInterface $salt, int $count, int $keyLength): BufferInterface
     {
         if ($keyLength < 0) {
             throw new \InvalidArgumentException('Cannot have a negative key-length for PBKDF2');
@@ -108,9 +111,9 @@ class Hash
      * @param int $seed
      * @return BufferInterface
      */
-    public static function murmur3(BufferInterface $data, $seed)
+    public static function murmur3(BufferInterface $data, int $seed): BufferInterface
     {
-        return new Buffer(pack('N', murmurhash3_int($data->getBinary(), (int)$seed)), 4);
+        return new Buffer(pack('N', Murmur::hash3_int($data->getBinary(), $seed)), 4);
     }
 
     /**
@@ -121,7 +124,7 @@ class Hash
      * @param BufferInterface $salt
      * @return BufferInterface
      */
-    public static function hmac($algo, BufferInterface $data, BufferInterface $salt)
+    public static function hmac(string $algo, BufferInterface $data, BufferInterface $salt): BufferInterface
     {
         return new Buffer(hash_hmac($algo, $data->getBinary(), $salt->getBinary(), true));
     }

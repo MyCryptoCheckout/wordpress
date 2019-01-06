@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Block;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -12,18 +14,33 @@ use BitWasp\Bitcoin\Serializer\Transaction\OutPointSerializer;
 use BitWasp\Bitcoin\Serializer\Transaction\TransactionInputSerializer;
 use BitWasp\Bitcoin\Serializer\Transaction\TransactionOutputSerializer;
 use BitWasp\Bitcoin\Serializer\Transaction\TransactionSerializer;
+use BitWasp\Buffertools\Buffer;
+use BitWasp\Buffertools\BufferInterface;
 
 class BlockFactory
 {
     /**
-     * @param \BitWasp\Buffertools\BufferInterface|string $string
-     * @param Math $math
+     * @param string $string
+     * @param Math|null $math
      * @return BlockInterface
+     * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
+     * @throws \Exception
      */
-    public static function fromHex($string, Math $math = null)
+    public static function fromHex(string $string, Math $math = null): BlockInterface
+    {
+        return self::fromBuffer(Buffer::hex($string), $math);
+    }
+
+    /**
+     * @param BufferInterface $buffer
+     * @param Math|null $math
+     * @return BlockInterface
+     * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
+     */
+    public static function fromBuffer(BufferInterface $buffer, Math $math = null): BlockInterface
     {
         $opcodes = new Opcodes();
-        return (new BlockSerializer(
+        $serializer = new BlockSerializer(
             $math ?: Bitcoin::getMath(),
             new BlockHeaderSerializer(),
             new TransactionSerializer(
@@ -31,7 +48,8 @@ class BlockFactory
                 new TransactionOutputSerializer($opcodes),
                 new ScriptWitnessSerializer()
             )
-        ))
-            ->parse($string);
+        );
+
+        return $serializer->parse($buffer);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Transaction\Factory\Checker;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
@@ -48,5 +50,5 @@ abstract class CheckerCreatorBase
      * @param TransactionOutputInterface $txOut
      * @return CheckerBase
      */
-    abstract public function create(TransactionInterface $tx, $nInput, TransactionOutputInterface $txOut);
+    abstract public function create(TransactionInterface $tx, int $nInput, TransactionOutputInterface $txOut): CheckerBase;
 }

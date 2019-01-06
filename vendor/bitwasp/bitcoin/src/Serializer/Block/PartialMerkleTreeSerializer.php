@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Serializer\Block;
 
-use BitWasp\Bitcoin\Bitcoin;
 use BitWasp\Bitcoin\Block\PartialMerkleTree;
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\BufferInterface;
 use BitWasp\Buffertools\Parser;
+use BitWasp\Buffertools\Template;
 use BitWasp\Buffertools\TemplateFactory;
 
 class PartialMerkleTreeSerializer
@@ -25,9 +27,9 @@ class PartialMerkleTreeSerializer
     }
 
     /**
-     * @return \BitWasp\Buffertools\Template
+     * @return Template
      */
-    public function getTemplate()
+    public function getTemplate(): Template
     {
         return (new TemplateFactory())
             ->uint32le()
@@ -45,7 +47,7 @@ class PartialMerkleTreeSerializer
      * @param BufferInterface[] $vBytes
      * @return array
      */
-    private function buffersToBitArray($last, array $vBytes)
+    private function buffersToBitArray($last, array $vBytes): array
     {
         $size = count($vBytes) * 8;
         $vBits = [];
@@ -63,7 +65,7 @@ class PartialMerkleTreeSerializer
      * @param Parser $parser
      * @return PartialMerkleTree
      */
-    public function fromParser(Parser $parser)
+    public function fromParser(Parser $parser): PartialMerkleTree
     {
         list ($txCount, $vHash, $vBits) = $this->template->parse($parser);
 
@@ -75,22 +77,21 @@ class PartialMerkleTreeSerializer
     }
 
     /**
-     * @param $data
+     * @param BufferInterface $buffer
      * @return PartialMerkleTree
      */
-    public function parse($data)
+    public function parse(BufferInterface $buffer): PartialMerkleTree
     {
-        return $this->fromParser(new Parser($data));
+        return $this->fromParser(new Parser($buffer));
     }
 
     /**
      * @param array $bits
      * @return array
      */
-    private function bitsToBuffers(array $bits)
+    private function bitsToBuffers(array $bits): array
     {
-        $math = Bitcoin::getMath();
-        $vBuffers = str_split(str_pad('', (count($bits)+7)/8, '0', STR_PAD_LEFT));
+        $vBuffers = str_split(str_pad('', (int)((count($bits)+7)/8), '0', STR_PAD_LEFT));
         $nBits = count($bits);
 
         for ($p = 0; $p < $nBits; $p++) {
@@ -99,7 +100,7 @@ class PartialMerkleTreeSerializer
         }
 
         foreach ($vBuffers as &$value) {
-            $value = Buffer::int($value, null, $math);
+            $value = Buffer::int($value);
         }
         unset($value);
 
@@ -108,9 +109,9 @@ class PartialMerkleTreeSerializer
 
     /**
      * @param PartialMerkleTree $tree
-     * @return \BitWasp\Buffertools\Buffer
+     * @return BufferInterface
      */
-    public function serialize(PartialMerkleTree $tree)
+    public function serialize(PartialMerkleTree $tree): BufferInterface
     {
         return $this->template->write([
             $tree->getTxCount(),

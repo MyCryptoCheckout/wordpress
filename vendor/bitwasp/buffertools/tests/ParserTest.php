@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Buffertools\Tests;
 
 use \BitWasp\Buffertools\Buffer;
 use \BitWasp\Buffertools\Parser;
+use PHPUnit\Framework\TestCase;
 
-class ParserTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
     public function testParserEmpty()
     {

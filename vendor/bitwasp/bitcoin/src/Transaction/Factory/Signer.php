@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Transaction\Factory;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -45,14 +47,24 @@ class Signer
     private $tolerateInvalidPublicKey = false;
 
     /**
-     * @var InputSignerInterface[]
+     * @var bool
      */
-    private $signatureCreator = [];
+    private $padUnsignedMultisigs = false;
+
+    /**
+     * @var bool
+     */
+    private $allowComplexScripts = false;
 
     /**
      * @var CheckerCreatorBase
      */
     private $checkerCreator;
+
+    /**
+     * @var InputSignerInterface[]
+     */
+    private $signatureCreator = [];
 
     /**
      * TxWitnessSigner constructor.
@@ -69,32 +81,47 @@ class Signer
     }
 
     /**
-     * @param CheckerCreatorBase $checkerCreator
+     * @param CheckerCreatorBase $checker
      * @return $this
      * @throws SignerException
      */
-    public function setCheckerCreator(CheckerCreatorBase $checkerCreator)
+    public function setCheckerCreator(CheckerCreatorBase $checker)
     {
-        if (empty($this->signatureCreator)) {
-            $this->checkerCreator = $checkerCreator;
+        if (null === $this->signatureCreator) {
+            $this->checkerCreator = $checker;
             return $this;
+        } else {
+            throw new SignerException("Cannot change CheckerCreator after inputs have been parsed");
         }
-
-        throw new SignerException("Cannot change CheckerCreator after inputs have been parsed");
     }
 
     /**
      * @param bool $setting
      * @return $this
      */
-    public function tolerateInvalidPublicKey($setting)
+    public function padUnsignedMultisigs(bool $setting)
     {
-        if (!is_bool($setting)) {
-            throw new \InvalidArgumentException("Boolean value expected");
-        }
+        $this->padUnsignedMultisigs = $setting;
+        return $this;
+    }
 
+    /**
+     * @param bool $setting
+     * @return $this
+     */
+    public function tolerateInvalidPublicKey(bool $setting)
+    {
         $this->tolerateInvalidPublicKey = $setting;
+        return $this;
+    }
 
+    /**
+     * @param bool $setting
+     * @return $this
+     */
+    public function allowComplexScripts(bool $setting)
+    {
+        $this->allowComplexScripts = $setting;
         return $this;
     }
 
@@ -106,10 +133,11 @@ class Signer
      * @param int $sigHashType
      * @return $this
      */
-    public function sign($nIn, PrivateKeyInterface $key, TransactionOutputInterface $txOut, SignData $signData = null, $sigHashType = SigHash::ALL)
+    public function sign(int $nIn, PrivateKeyInterface $key, TransactionOutputInterface $txOut, SignData $signData = null, int $sigHashType = SigHash::ALL)
     {
-        if (!$this->input($nIn, $txOut, $signData)->sign($key, $sigHashType)) {
-            throw new \RuntimeException('Unsignable script');
+        $input = $this->input($nIn, $txOut, $signData);
+        foreach ($input->getSteps() as $idx => $step) {
+            $input->sign($key, $sigHashType);
         }
 
         return $this;
@@ -121,7 +149,7 @@ class Signer
      * @param SignData|null $signData
      * @return InputSignerInterface
      */
-    public function input($nIn, TransactionOutputInterface $txOut, SignData $signData = null)
+    public function input(int $nIn, TransactionOutputInterface $txOut, SignData $signData = null): InputSignerInterface
     {
         if (null === $signData) {
             $signData = new SignData();
@@ -129,9 +157,11 @@ class Signer
 
         if (!isset($this->signatureCreator[$nIn])) {
             $checker = $this->checkerCreator->create($this->tx, $nIn, $txOut);
-            $input = (new InputSigner($this->ecAdapter, $this->tx, $nIn, $txOut, $signData, $checker, $this->sigSerializer, $this->pubKeySerializer))
-                ->tolerateInvalidPublicKey($this->tolerateInvalidPublicKey)
-                ->extract();
+            $input = new InputSigner($this->ecAdapter, $this->tx, $nIn, $txOut, $signData, $checker, $this->sigSerializer, $this->pubKeySerializer);
+            $input->padUnsignedMultisigs($this->padUnsignedMultisigs);
+            $input->tolerateInvalidPublicKey($this->tolerateInvalidPublicKey);
+            $input->allowComplexScripts($this->allowComplexScripts);
+            $input->extract();
 
             $this->signatureCreator[$nIn] = $input;
         }
@@ -142,7 +172,7 @@ class Signer
     /**
      * @return TransactionInterface
      */
-    public function get()
+    public function get(): TransactionInterface
     {
         $mutable = TransactionFactory::mutate($this->tx);
         $witnesses = [];
@@ -158,7 +188,6 @@ class Signer
             $mutable->witness($witnesses);
         }
 
-        $new = $mutable->done();
-        return $new;
+        return $mutable->done();
     }
 }

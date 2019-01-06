@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Script\Interpreter;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -20,13 +22,13 @@ class Number extends Serializable
     private $math;
 
     /**
-     * @var int
+     * @var int|string
      */
     private $number;
 
     /**
      * Number constructor.
-     * @param int $number
+     * @param int|string $number
      * @param Math $math
      */
     public function __construct($number, Math $math)
@@ -36,7 +38,7 @@ class Number extends Serializable
     }
 
     /**
-     * @param int $number
+     * @param int|string $number
      * @param Math|null $math
      * @return self
      */
@@ -77,7 +79,6 @@ class Number extends Serializable
 
         if ($fRequireMinimal && $size > 0) {
             $binary = $vch->getBinary();
-            //$chars = array_values(unpack("C*", $binary));
             if ((ord($binary[$size - 1]) & 0x7f) === 0) {
                 if ($size <= 1 || (ord($binary[$size - 2]) & 0x80) === 0) {
                     throw new \RuntimeException('Non-minimally encoded script number');
@@ -93,9 +94,9 @@ class Number extends Serializable
 
     /**
      * @param BufferInterface $buffer
-     * @return int
+     * @return string
      */
-    private function parseBuffer(BufferInterface $buffer)
+    private function parseBuffer(BufferInterface $buffer): string
     {
         $size = $buffer->getSize();
         if ($size === 0) {
@@ -122,7 +123,7 @@ class Number extends Serializable
     /**
      * @return BufferInterface
      */
-    private function serialize()
+    private function serialize(): BufferInterface
     {
         if ((int) $this->number === 0) {
             return new Buffer('', 0);
@@ -145,18 +146,13 @@ class Number extends Serializable
             $result[count($result) - 1] |= 0x80;
         }
 
-        $s = '';
-        foreach ($result as $i) {
-            $s .= chr($i);
-        }
-
-        return new Buffer($s, null, $this->math);
+        return new Buffer(pack("C*", ...$result));
     }
 
     /**
      * @return BufferInterface
      */
-    public function getBuffer()
+    public function getBuffer(): BufferInterface
     {
         return $this->serialize();
     }
@@ -164,7 +160,7 @@ class Number extends Serializable
     /**
      * @return int
      */
-    public function getInt()
+    public function getInt(): int
     {
         if ($this->math->cmp(gmp_init($this->number, 10), gmp_init(self::MAX)) > 0) {
             return self::MAX;
@@ -172,7 +168,7 @@ class Number extends Serializable
             return self::MIN;
         }
 
-        return $this->number;
+        return (int) $this->number;
     }
 
     /**

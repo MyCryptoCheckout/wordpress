@@ -1,17 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace Mdanter\Ecc\Curves;
 
+use Mdanter\Ecc\Exception\UnknownCurveException;
+use Mdanter\Ecc\Exception\UnsupportedCurveException;
 use Mdanter\Ecc\Math\GmpMathInterface;
 use Mdanter\Ecc\Math\MathAdapterFactory;
+use Mdanter\Ecc\Primitives\GeneratorPoint;
 
 class CurveFactory
 {
     /**
-     * @param $name
-     * @return NamedCurveFp|\Mdanter\Ecc\Primitives\CurveFp|\Mdanter\Ecc\Primitives\CurveFpInterface
+     * @param string $name
+     * @return NamedCurveFp
      */
-    public static function getCurveByName($name)
+    public static function getCurveByName(string $name): NamedCurveFp
     {
         $adapter = MathAdapterFactory::getAdapter();
         $nistFactory = self::getNistFactory($adapter);
@@ -39,15 +43,17 @@ class CurveFactory
             case SecgCurve::NAME_SECP_384R1:
                 return $secpFactory->curve384r1();
             default:
-                throw new \RuntimeException('Unknown curve.');
+                $error = new UnsupportedCurveException('Unknown curve.');
+                $error->setCurveName($name);
+                throw $error;
         }
     }
 
     /**
-     * @param $name
-     * @return \Mdanter\Ecc\Primitives\GeneratorPoint
+     * @param string $name
+     * @return GeneratorPoint
      */
-    public static function getGeneratorByName($name)
+    public static function getGeneratorByName(string $name): GeneratorPoint
     {
         $adapter = MathAdapterFactory::getAdapter();
         $nistFactory = self::getNistFactory($adapter);
@@ -75,22 +81,26 @@ class CurveFactory
             case SecgCurve::NAME_SECP_384R1:
                 return $secpFactory->generator384r1();
             default:
-                throw new \RuntimeException('Unknown generator.');
+                $error = new UnsupportedCurveException('Unknown generator.');
+                $error->setCurveName($name);
+                throw $error;
         }
     }
 
     /**
+     * @param GmpMathInterface $math
      * @return NistCurve
      */
-    private static function getNistFactory(GmpMathInterface $math)
+    private static function getNistFactory(GmpMathInterface $math): NistCurve
     {
         return new NistCurve($math);
     }
 
     /**
+     * @param GmpMathInterface $math
      * @return SecgCurve
      */
-    private static function getSecpFactory(GmpMathInterface $math)
+    private static function getSecpFactory(GmpMathInterface $math): SecgCurve
     {
         return new SecgCurve($math);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Script\Interpreter;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -56,8 +58,8 @@ class Interpreter implements InterpreterInterface
     {
         $ecAdapter = $ecAdapter ?: Bitcoin::getEcAdapter();
         $this->math = $ecAdapter->getMath();
-        $this->vchFalse = new Buffer("", 0, $this->math);
-        $this->vchTrue = new Buffer("\x01", 1, $this->math);
+        $this->vchFalse = new Buffer("", 0);
+        $this->vchTrue = new Buffer("\x01", 1);
     }
 
     /**
@@ -66,7 +68,7 @@ class Interpreter implements InterpreterInterface
      * @param BufferInterface $value
      * @return bool
      */
-    public function castToBool(BufferInterface $value)
+    public function castToBool(BufferInterface $value): bool
     {
         $val = $value->getBinary();
         for ($i = 0, $size = strlen($val); $i < $size; $i++) {
@@ -85,7 +87,7 @@ class Interpreter implements InterpreterInterface
      * @param BufferInterface $signature
      * @return bool
      */
-    public function isValidSignatureEncoding(BufferInterface $signature)
+    public function isValidSignatureEncoding(BufferInterface $signature): bool
     {
         try {
             TransactionSignature::isDERSignature($signature);
@@ -103,7 +105,7 @@ class Interpreter implements InterpreterInterface
      * @return bool
      * @throws \Exception
      */
-    public function checkMinimalPush($opCode, BufferInterface $pushData)
+    public function checkMinimalPush($opCode, BufferInterface $pushData): bool
     {
         $pushSize = $pushData->getSize();
         $binary = $pushData->getBinary();
@@ -133,7 +135,7 @@ class Interpreter implements InterpreterInterface
      * @param int $count
      * @return $this
      */
-    private function checkOpcodeCount($count)
+    private function checkOpcodeCount(int $count)
     {
         if ($count > 201) {
             throw new \RuntimeException('Error: Script op code count');
@@ -146,10 +148,10 @@ class Interpreter implements InterpreterInterface
      * @param WitnessProgram $witnessProgram
      * @param ScriptWitnessInterface $scriptWitness
      * @param int $flags
-     * @param Checker $checker
+     * @param CheckerBase $checker
      * @return bool
      */
-    private function verifyWitnessProgram(WitnessProgram $witnessProgram, ScriptWitnessInterface $scriptWitness, $flags, Checker $checker)
+    private function verifyWitnessProgram(WitnessProgram $witnessProgram, ScriptWitnessInterface $scriptWitness, int $flags, CheckerBase $checker): bool
     {
         $witnessCount = count($scriptWitness);
 
@@ -213,11 +215,11 @@ class Interpreter implements InterpreterInterface
      * @param ScriptWitnessInterface|null $witness
      * @return bool
      */
-    public function verify(ScriptInterface $scriptSig, ScriptInterface $scriptPubKey, $flags, CheckerBase $checker, ScriptWitnessInterface $witness = null)
+    public function verify(ScriptInterface $scriptSig, ScriptInterface $scriptPubKey, int $flags, CheckerBase $checker, ScriptWitnessInterface $witness = null): bool
     {
         static $emptyWitness = null;
         if ($emptyWitness === null) {
-            $emptyWitness = new ScriptWitness([]);
+            $emptyWitness = new ScriptWitness();
         }
 
         $witness = is_null($witness) ? $emptyWitness : $witness;
@@ -341,7 +343,7 @@ class Interpreter implements InterpreterInterface
      * @param bool $value
      * @return bool
      */
-    private function checkExec(Stack $vfStack, $value)
+    public function checkExec(Stack $vfStack, bool $value): bool
     {
         $ret = 0;
         foreach ($vfStack as $item) {
@@ -350,7 +352,7 @@ class Interpreter implements InterpreterInterface
             }
         }
 
-        return $ret;
+        return (bool) $ret;
     }
 
     /**
@@ -361,7 +363,7 @@ class Interpreter implements InterpreterInterface
      * @param CheckerBase $checker
      * @return bool
      */
-    public function evaluate(ScriptInterface $script, Stack $mainStack, $sigVersion, $flags, CheckerBase $checker)
+    public function evaluate(ScriptInterface $script, Stack $mainStack, int $sigVersion, int $flags, CheckerBase $checker): bool
     {
         $hashStartPos = 0;
         $opCount = 0;
@@ -781,23 +783,23 @@ class Interpreter implements InterpreterInterface
                             } else if ($opCode === Opcodes::OP_SUB) {
                                 $num = $this->math->sub($num1, $num2);
                             } else if ($opCode === Opcodes::OP_BOOLAND) {
-                                $num = $this->math->cmp($num1, $zero) !== 0 && $this->math->cmp($num2, $zero) !== 0;
+                                $num = (int) ($this->math->cmp($num1, $zero) !== 0 && $this->math->cmp($num2, $zero) !== 0);
                             } else if ($opCode === Opcodes::OP_BOOLOR) {
-                                $num = $this->math->cmp($num1, $zero) !== 0 || $this->math->cmp($num2, $zero) !== 0;
+                                $num = (int) ($this->math->cmp($num1, $zero) !== 0 || $this->math->cmp($num2, $zero) !== 0);
                             } elseif ($opCode === Opcodes::OP_NUMEQUAL) {
-                                $num = $this->math->cmp($num1, $num2) === 0;
+                                $num = (int) ($this->math->cmp($num1, $num2) === 0);
                             } elseif ($opCode === Opcodes::OP_NUMEQUALVERIFY) {
-                                $num = $this->math->cmp($num1, $num2) === 0;
+                                $num = (int) ($this->math->cmp($num1, $num2) === 0);
                             } elseif ($opCode === Opcodes::OP_NUMNOTEQUAL) {
-                                $num = $this->math->cmp($num1, $num2) !== 0;
+                                $num = (int) ($this->math->cmp($num1, $num2) !== 0);
                             } elseif ($opCode === Opcodes::OP_LESSTHAN) {
-                                $num = $this->math->cmp($num1, $num2) < 0;
+                                $num = (int) ($this->math->cmp($num1, $num2) < 0);
                             } elseif ($opCode === Opcodes::OP_GREATERTHAN) {
-                                $num = $this->math->cmp($num1, $num2) > 0;
+                                $num = (int) ($this->math->cmp($num1, $num2) > 0);
                             } elseif ($opCode === Opcodes::OP_LESSTHANOREQUAL) {
-                                $num = $this->math->cmp($num1, $num2) <= 0;
+                                $num = (int) ($this->math->cmp($num1, $num2) <= 0);
                             } elseif ($opCode === Opcodes::OP_GREATERTHANOREQUAL) {
-                                $num = $this->math->cmp($num1, $num2) >= 0;
+                                $num = (int) ($this->math->cmp($num1, $num2) >= 0);
                             } elseif ($opCode === Opcodes::OP_MIN) {
                                 $num = ($this->math->cmp($num1, $num2) <= 0) ? $num1 : $num2;
                             } else {

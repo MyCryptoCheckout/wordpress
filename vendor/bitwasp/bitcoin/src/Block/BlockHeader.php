@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Block;
 
 use BitWasp\Bitcoin\Crypto\Hash;
+use BitWasp\Bitcoin\Exceptions\InvalidHashLengthException;
 use BitWasp\Bitcoin\Serializable;
 use BitWasp\Bitcoin\Serializer\Block\BlockHeaderSerializer;
 use BitWasp\Buffertools\BufferInterface;
@@ -50,14 +53,14 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
      * @param int $bits
      * @param int $nonce
      */
-    public function __construct($version, BufferInterface $prevBlock, BufferInterface $merkleRoot, $timestamp, $bits, $nonce)
+    public function __construct(int $version, BufferInterface $prevBlock, BufferInterface $merkleRoot, int $timestamp, int $bits, int $nonce)
     {
         if ($prevBlock->getSize() !== 32) {
-            throw new \InvalidArgumentException('BlockHeader prevBlock must be a 32-byte Buffer');
+            throw new InvalidHashLengthException('BlockHeader prevBlock must be a 32-byte Buffer');
         }
 
         if ($merkleRoot->getSize() !== 32) {
-            throw new \InvalidArgumentException('BlockHeader merkleRoot must be a 32-byte Buffer');
+            throw new InvalidHashLengthException('BlockHeader merkleRoot must be a 32-byte Buffer');
         }
 
         $this->version = $version;
@@ -71,7 +74,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
     /**
      * @return BufferInterface
      */
-    public function getHash()
+    public function getHash(): BufferInterface
     {
         return Hash::sha256d($this->getBuffer())->flip();
     }
@@ -82,7 +85,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
      * {@inheritdoc}
      * @see \BitWasp\Bitcoin\Block\BlockHeaderInterface::getVersion()
      */
-    public function getVersion()
+    public function getVersion(): int
     {
         return $this->version;
     }
@@ -90,7 +93,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
     /**
      * @return bool
      */
-    public function hasBip9Prefix()
+    public function hasBip9Prefix(): bool
     {
         return ($this->version & self::BIP9_PREFIX) != 0;
     }
@@ -99,7 +102,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
      * {@inheritdoc}
      * @see \BitWasp\Bitcoin\Block\BlockHeaderInterface::getPrevBlock()
      */
-    public function getPrevBlock()
+    public function getPrevBlock(): BufferInterface
     {
         return $this->prevBlock;
     }
@@ -108,7 +111,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
      * {@inheritdoc}
      * @see \BitWasp\Bitcoin\Block\BlockHeaderInterface::getMerkleRoot()
      */
-    public function getMerkleRoot()
+    public function getMerkleRoot(): BufferInterface
     {
         return $this->merkleRoot;
     }
@@ -117,7 +120,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
      * {@inheritdoc}
      * @see \BitWasp\Bitcoin\Block\BlockHeaderInterface::getBits()
      */
-    public function getBits()
+    public function getBits(): int
     {
         return $this->bits;
     }
@@ -126,7 +129,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
      * {@inheritdoc}
      * @see \BitWasp\Bitcoin\Block\BlockHeaderInterface::getNonce()
      */
-    public function getNonce()
+    public function getNonce(): int
     {
         return $this->nonce;
     }
@@ -137,7 +140,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
      * {@inheritdoc}
      * @see \BitWasp\Bitcoin\Block\BlockHeaderInterface::getTimestamp()
      */
-    public function getTimestamp()
+    public function getTimestamp(): int
     {
         return $this->timestamp;
     }
@@ -146,7 +149,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
      * @param BlockHeaderInterface $other
      * @return bool
      */
-    public function equals(BlockHeaderInterface $other)
+    public function equals(BlockHeaderInterface $other): bool
     {
         return $this->version === $other->getVersion()
             && $this->prevBlock->equals($other->getPrevBlock())
@@ -160,7 +163,7 @@ class BlockHeader extends Serializable implements BlockHeaderInterface
      * {@inheritdoc}
      * @see \BitWasp\Buffertools\SerializableInterface::getBuffer()
      */
-    public function getBuffer()
+    public function getBuffer(): BufferInterface
     {
         return (new BlockHeaderSerializer())->serialize($this);
     }

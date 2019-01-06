@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Script\Interpreter;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
@@ -70,7 +72,7 @@ abstract class CheckerBase
      * @param TransactionSignatureSerializer|null $sigSerializer
      * @param PublicKeySerializerInterface|null $pubKeySerializer
      */
-    public function __construct(EcAdapterInterface $ecAdapter, TransactionInterface $transaction, $nInput, $amount, TransactionSignatureSerializer $sigSerializer = null, PublicKeySerializerInterface $pubKeySerializer = null)
+    public function __construct(EcAdapterInterface $ecAdapter, TransactionInterface $transaction, int $nInput, int $amount, TransactionSignatureSerializer $sigSerializer = null, PublicKeySerializerInterface $pubKeySerializer = null)
     {
         $this->sigSerializer = $sigSerializer ?: new TransactionSignatureSerializer(EcSerializer::getSerializer(DerSignatureSerializerInterface::class, true, $ecAdapter));
         $this->pubKeySerializer = $pubKeySerializer ?: EcSerializer::getSerializer(PublicKeySerializerInterface::class, true, $ecAdapter);
@@ -86,13 +88,13 @@ abstract class CheckerBase
      * @param int $sigVersion
      * @return BufferInterface
      */
-    abstract public function getSigHash(ScriptInterface $script, $hashType, $sigVersion);
+    abstract public function getSigHash(ScriptInterface $script, int $hashType, int $sigVersion): BufferInterface;
 
     /**
      * @param BufferInterface $signature
      * @return bool
      */
-    public function isValidSignatureEncoding(BufferInterface $signature)
+    public function isValidSignatureEncoding(BufferInterface $signature): bool
     {
         try {
             TransactionSignature::isDERSignature($signature);
@@ -110,7 +112,7 @@ abstract class CheckerBase
      * @throws ScriptRuntimeException
      * @throws \Exception
      */
-    public function isLowDerSignature(BufferInterface $signature)
+    public function isLowDerSignature(BufferInterface $signature): bool
     {
         if (!$this->isValidSignatureEncoding($signature)) {
             throw new ScriptRuntimeException(Interpreter::VERIFY_DERSIG, 'Signature with incorrect encoding');
@@ -128,7 +130,7 @@ abstract class CheckerBase
      * @param int $hashType
      * @return bool
      */
-    public function isDefinedHashtype($hashType)
+    public function isDefinedHashtype(int $hashType): bool
     {
         $nHashType = $hashType & (~($this->sigHashOptionalBits));
 
@@ -142,7 +144,7 @@ abstract class CheckerBase
      * @param BufferInterface $signature
      * @return bool
      */
-    public function isDefinedHashtypeSignature(BufferInterface $signature)
+    public function isDefinedHashtypeSignature(BufferInterface $signature): bool
     {
         if ($signature->getSize() === 0) {
             return false;
@@ -158,7 +160,7 @@ abstract class CheckerBase
      * @return $this
      * @throws \BitWasp\Bitcoin\Exceptions\ScriptRuntimeException
      */
-    public function checkSignatureEncoding(BufferInterface $signature, $flags)
+    public function checkSignatureEncoding(BufferInterface $signature, int $flags)
     {
         if ($signature->getSize() === 0) {
             return $this;
@@ -181,7 +183,7 @@ abstract class CheckerBase
      * @return $this
      * @throws \Exception
      */
-    public function checkPublicKeyEncoding(BufferInterface $publicKey, $flags)
+    public function checkPublicKeyEncoding(BufferInterface $publicKey, int $flags)
     {
         if (($flags & Interpreter::VERIFY_STRICTENC) !== 0 && !PublicKey::isCompressedOrUncompressed($publicKey)) {
             throw new ScriptRuntimeException(Interpreter::VERIFY_STRICTENC, 'Public key with incorrect encoding');
@@ -199,7 +201,7 @@ abstract class CheckerBase
      * @return bool
      * @throws ScriptRuntimeException
      */
-    public function checkSig(ScriptInterface $script, BufferInterface $sigBuf, BufferInterface $keyBuf, $sigVersion, $flags)
+    public function checkSig(ScriptInterface $script, BufferInterface $sigBuf, BufferInterface $keyBuf, int $sigVersion, int $flags)
     {
         $this
             ->checkSignatureEncoding($sigBuf, $flags)
@@ -227,7 +229,7 @@ abstract class CheckerBase
      * @param \BitWasp\Bitcoin\Script\Interpreter\Number $scriptLockTime
      * @return bool
      */
-    public function checkLockTime(\BitWasp\Bitcoin\Script\Interpreter\Number $scriptLockTime)
+    public function checkLockTime(\BitWasp\Bitcoin\Script\Interpreter\Number $scriptLockTime): bool
     {
         $input = $this->transaction->getInput($this->nInput);
         $nLockTime = $scriptLockTime->getInt();
@@ -254,7 +256,7 @@ abstract class CheckerBase
      * @param \BitWasp\Bitcoin\Script\Interpreter\Number $sequence
      * @return bool
      */
-    public function checkSequence(\BitWasp\Bitcoin\Script\Interpreter\Number $sequence)
+    public function checkSequence(\BitWasp\Bitcoin\Script\Interpreter\Number $sequence): bool
     {
         $txSequence = $this->transaction->getInput($this->nInput)->getSequence();
         if ($this->transaction->getVersion() < 2) {

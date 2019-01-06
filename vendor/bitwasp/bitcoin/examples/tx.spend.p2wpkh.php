@@ -3,7 +3,7 @@
 require __DIR__ . "/../vendor/autoload.php";
 
 use BitWasp\Bitcoin\Address\PayToPubKeyHashAddress;
-use BitWasp\Bitcoin\Key\PrivateKeyFactory;
+use BitWasp\Bitcoin\Key\Factory\PrivateKeyFactory;
 use BitWasp\Bitcoin\Script\Interpreter\InterpreterInterface as I;
 use BitWasp\Bitcoin\Transaction\Factory\Signer;
 use BitWasp\Bitcoin\Transaction\Factory\TxBuilder;
@@ -13,7 +13,8 @@ use BitWasp\Buffertools\Buffer;
 use BitWasp\Bitcoin\Script\ScriptFactory;
 
 // Setup network and private key to segnet
-$key = PrivateKeyFactory::fromHex("4242424242424242424242424242424242424242424242424242424242424242", true);
+$privKeyFactory = new PrivateKeyFactory();
+$key = $privKeyFactory->fromHexCompressed("4242424242424242424242424242424242424242424242424242424242424242");
 
 // scriptPubKey is P2WKH
 $program = ScriptFactory::scriptPubKey()->p2wkh($key->getPubKeyHash());
@@ -22,7 +23,8 @@ $program = ScriptFactory::scriptPubKey()->p2wkh($key->getPubKeyHash());
 $outpoint = new OutPoint(Buffer::hex('3a4242c32cf9dca64df73450c7a6141840538b90ccf5d5206b3482e52f7486fc', 32), 0);
 $txOut = new TransactionOutput(99900000, $program);
 
-$dest = new PayToPubKeyHashAddress($key->getPubKeyHash());
+// move to p2pkh
+$dest = new PayToPubKeyHashAddress($key->getPublicKey()->getPubKeyHash());
 
 // Create unsigned transaction
 $tx = (new TxBuilder())

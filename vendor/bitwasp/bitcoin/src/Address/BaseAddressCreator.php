@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Address;
 
 use BitWasp\Bitcoin\Network\NetworkInterface;
@@ -12,11 +14,11 @@ abstract class BaseAddressCreator
      * @param NetworkInterface|null $network
      * @return Address
      */
-    abstract public function fromString($strAddress, NetworkInterface $network = null);
+    abstract public function fromString(string $strAddress, NetworkInterface $network = null): Address;
 
     /**
      * @param ScriptInterface $script
      * @return Address
      */
-    abstract public function fromOutputScript(ScriptInterface $script);
+    abstract public function fromOutputScript(ScriptInterface $script): Address;
 }

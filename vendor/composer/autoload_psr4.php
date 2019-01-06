@@ -9,6 +9,7 @@ return array(
     'plainview\\sdk_mcc\\' => array($baseDir . '/src/sdk'),
     'mycryptocheckout\\api\\' => array($vendorDir . '/mycryptocheckout/api/src'),
     'mycryptocheckout\\' => array($baseDir . '/src'),
+    'lastguest\\' => array($vendorDir . '/lastguest/murmurhash/src/lastguest'),
     'Mdanter\\Ecc\\' => array($vendorDir . '/mdanter/ecc/src'),
     'FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
@@ -16,4 +17,5 @@ return array(
     'Btccom\\BitcoinCash\\' => array($vendorDir . '/btccom/bitwasp-bitcoin-bch-addon/src'),
     'BitWasp\\Buffertools\\' => array($vendorDir . '/bitwasp/buffertools/src/Buffertools'),
     'BitWasp\\Bitcoin\\' => array($vendorDir . '/bitwasp/bitcoin/src'),
+    'BitWasp\\Bech32\\' => array($vendorDir . '/bitwasp/bech32/src'),
 );

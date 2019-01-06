@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Mnemonic\Bip39;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
@@ -21,6 +23,14 @@ class Bip39Mnemonic implements MnemonicInterface
      */
     private $wordList;
 
+    const MIN_ENTROPY_BYTE_LEN = 16;
+    const MAX_ENTROPY_BYTE_LEN = 32;
+    const DEFAULT_ENTROPY_BYTE_LEN = self::MAX_ENTROPY_BYTE_LEN;
+
+    private $validEntropySizes = [
+        self::MIN_ENTROPY_BYTE_LEN * 8, 160, 192, 224, self::MAX_ENTROPY_BYTE_LEN * 8,
+    ];
+
     /**
      * @param EcAdapterInterface $ecAdapter
      * @param Bip39WordListInterface $wordList
@@ -38,8 +48,16 @@ class Bip39Mnemonic implements MnemonicInterface
      * @return string
      * @throws \BitWasp\Bitcoin\Exceptions\RandomBytesFailure
      */
-    public function create($entropySize = 512)
+    public function create(int $entropySize = null): string
     {
+        if (null === $entropySize) {
+            $entropySize = self::DEFAULT_ENTROPY_BYTE_LEN * 8;
+        }
+
+        if (!in_array($entropySize, $this->validEntropySizes)) {
+            throw new \InvalidArgumentException("Invalid entropy length");
+        }
+
         $random = new Random();
         $entropy = $random->bytes($entropySize / 8);
 
@@ -51,47 +69,36 @@ class Bip39Mnemonic implements MnemonicInterface
      * @param integer $CSlen
      * @return string
      */
-    private function calculateChecksum(BufferInterface $entropy, $CSlen)
+    private function calculateChecksum(BufferInterface $entropy, int $CSlen): string
     {
-        $entHash = Hash::sha256($entropy);
+        // entropy range (128, 256) yields (4, 8) bits of checksum
+        $checksumChar = ord(Hash::sha256($entropy)->getBinary()[0]);
+        $cs = '';
+        for ($i = 0; $i < $CSlen; $i++) {
+            $cs .= $checksumChar >> (7 - $i) & 1;
+        }
 
-        // Convert byte string to padded binary string of 0/1's.
-        $hashBits = str_pad(gmp_strval($entHash->getGmp(), 2), 256, '0', STR_PAD_LEFT);
-
-        // Take $CSlen bits for the checksum
-        $checksumBits = substr($hashBits, 0, $CSlen);
-
-        return $checksumBits;
+        return $cs;
     }
 
     /**
      * @param BufferInterface $entropy
-     * @return array
+     * @return string[] - array of words from the word list
      */
-    public function entropyToWords(BufferInterface $entropy)
+    public function entropyToWords(BufferInterface $entropy): array
     {
-        if ($entropy->getSize() === 0) {
-            throw new \InvalidArgumentException('Invalid entropy, empty');
-        }
-        if ($entropy->getSize() > 1024) {
-            throw new \InvalidArgumentException('Invalid entropy, max 1024 bytes');
-        }
-        if ($entropy->getSize() % 4 !== 0) {
-            throw new \InvalidArgumentException('Invalid entropy, must be multitude of 4 bytes');
-        }
-
-        $math = $this->ecAdapter->getMath();
-
         $ENT = $entropy->getSize() * 8;
-        $CS = $ENT / 32;
+        if (!in_array($entropy->getSize() * 8, $this->validEntropySizes)) {
+            throw new \InvalidArgumentException("Invalid entropy length");
+        }
 
+        $CS = $ENT >> 5; // divide by 32, convinces static analysis result is an integer
         $bits = gmp_strval($entropy->getGmp(), 2) . $this->calculateChecksum($entropy, $CS);
         $bits = str_pad($bits, ($ENT + $CS), '0', STR_PAD_LEFT);
 
         $result = [];
         foreach (str_split($bits, 11) as $bit) {
-            $idx = $math->baseConvert($bit, 2, 10);
-            $result[] = $this->wordList->getWord($idx);
+            $result[] = $this->wordList->getWord(bindec($bit));
         }
 
         return $result;
@@ -101,7 +108,7 @@ class Bip39Mnemonic implements MnemonicInterface
      * @param BufferInterface $entropy
      * @return string
      */
-    public function entropyToMnemonic(BufferInterface $entropy)
+    public function entropyToMnemonic(BufferInterface $entropy): string
     {
         return implode(' ', $this->entropyToWords($entropy));
     }
@@ -110,47 +117,46 @@ class Bip39Mnemonic implements MnemonicInterface
      * @param string $mnemonic
      * @return BufferInterface
      */
-    public function mnemonicToEntropy($mnemonic)
+    public function mnemonicToEntropy(string $mnemonic): BufferInterface
     {
-        $math = $this->ecAdapter->getMath();
         $words = explode(' ', $mnemonic);
 
+        // Mnemonic sizes are multiples of 3 words
         if (count($words) % 3 !== 0) {
             throw new \InvalidArgumentException('Invalid mnemonic');
         }
 
-        $bits = array();
+        // Build up $bits from the list of words
+        $bits = '';
         foreach ($words as $word) {
             $idx = $this->wordList->getIndex($word);
-            $bits[] = str_pad($math->baseConvert($idx, 10, 2), 11, '0', STR_PAD_LEFT);
+            // Mnemonic bit sizes are multiples of 33 bits
+            $bits .= str_pad(decbin($idx), 11, '0', STR_PAD_LEFT);
         }
 
-        $bits = implode('', $bits);
-
-        // max entropy is 1024; (1024×8)+((1024×8)÷32) = 8448
-        if (strlen($bits) > 8448) {
-            throw new \InvalidArgumentException('Invalid mnemonic, too long');
-        }
-
+        // Every 32 bits of ENT adds a 1 CS bit.
         $CS = strlen($bits) / 33;
         $ENT = strlen($bits) - $CS;
-
-        $csBits = substr($bits, -1 * $CS);
-        $entBits = substr($bits, 0, -1 * $CS);
-
-        $binary = '';
-        $bitsInChar = 8;
-        for ($i = 0; $i < $ENT; $i += $bitsInChar) {
-            // Extract 8 bits at a time, convert to hex, pad, and convert to binary.
-            $eBits = substr($entBits, $i, $bitsInChar);
-            $binary .= pack("H*", (str_pad($math->baseConvert($eBits, 2, 16), 2, '0', STR_PAD_LEFT)));
+        if (!in_array($ENT, $this->validEntropySizes)) {
+            throw new \InvalidArgumentException('Invalid mnemonic - entropy size is invalid');
         }
 
-        $entropy = new Buffer($binary, null, $math);
-        if ($csBits !== $this->calculateChecksum($entropy, $CS)) {
+        // Checksum bits
+        $csBits = substr($bits, $ENT, $CS);
+
+        // Split $ENT bits into 8 bit words to be packed
+        $entArray = str_split(substr($bits, 0, $ENT), 8);
+        $chars = [];
+        for ($i = 0; $i < $ENT / 8; $i++) {
+            $chars[] = bindec($entArray[$i]);
+        }
+
+        // Check checksum
+        $entropy = new Buffer(pack("C*", ...$chars));
+        if (hash_equals($csBits, $this->calculateChecksum($entropy, $CS))) {
+            return $entropy;
+        } else {
             throw new \InvalidArgumentException('Checksum does not match');
         }
-
-        return $entropy;
     }
 }

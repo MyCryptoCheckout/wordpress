@@ -7,8 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
 {
     public static $files = array (
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '7f939cf3886f8168713c84dc1019984a' => __DIR__ . '/..' . '/lastguest/murmurhash/murmurhash3.php',
+        'a626201e4406003b96eee958a069f504' => __DIR__ . '/..' . '/bitwasp/bech32/src/bech32.php',
         '7cfce27594bbc1dd0dbf7e3eb5cd4911' => __DIR__ . '/..' . '/bitwasp/bitcoin/src/Script/functions.php',
     );
 
@@ -21,6 +20,10 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         array (
             'mycryptocheckout\\api\\' => 21,
             'mycryptocheckout\\' => 17,
+        ),
+        'l' => 
+        array (
+            'lastguest\\' => 10,
         ),
         'M' => 
         array (
@@ -40,6 +43,7 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
             'Btccom\\BitcoinCash\\' => 19,
             'BitWasp\\Buffertools\\' => 20,
             'BitWasp\\Bitcoin\\' => 16,
+            'BitWasp\\Bech32\\' => 15,
         ),
     );
 
@@ -55,6 +59,10 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         'mycryptocheckout\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'lastguest\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lastguest/murmurhash/src/lastguest',
         ),
         'Mdanter\\Ecc\\' => 
         array (
@@ -83,6 +91,10 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         'BitWasp\\Bitcoin\\' => 
         array (
             0 => __DIR__ . '/..' . '/bitwasp/bitcoin/src',
+        ),
+        'BitWasp\\Bech32\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bitwasp/bech32/src',
         ),
     );
 

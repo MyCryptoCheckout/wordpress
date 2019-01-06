@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Mdanter\Ecc\Serializer\Util;
 
@@ -7,7 +8,9 @@ use Mdanter\Ecc\Curves\NamedCurveFp;
 use Mdanter\Ecc\Curves\CurveFactory;
 use Mdanter\Ecc\Curves\NistCurve;
 use Mdanter\Ecc\Curves\SecgCurve;
+use Mdanter\Ecc\Exception\UnsupportedCurveException;
 use Mdanter\Ecc\Primitives\CurveFpInterface;
+use Mdanter\Ecc\Primitives\GeneratorPoint;
 
 class CurveOidMapper
 {
@@ -67,29 +70,29 @@ class CurveOidMapper
     /**
      * @return array
      */
-    public static function getNames()
+    public static function getNames(): array
     {
         return array_keys(self::$oidMap);
     }
 
     /**
      * @param CurveFpInterface $curve
-     * @return mixed
+     * @return int
      */
-    public static function getByteSize(CurveFpInterface $curve)
+    public static function getByteSize(CurveFpInterface $curve): int
     {
         if ($curve instanceof NamedCurveFp && array_key_exists($curve->getName(), self::$sizeMap)) {
             return self::$sizeMap[$curve->getName()];
         }
 
-        throw new \RuntimeException('Unsupported curve type.');
+        throw new UnsupportedCurveException('Unsupported curve type');
     }
 
     /**
      * @param NamedCurveFp $curve
      * @return ObjectIdentifier
      */
-    public static function getCurveOid(NamedCurveFp $curve)
+    public static function getCurveOid(NamedCurveFp $curve): ObjectIdentifier
     {
         if (array_key_exists($curve->getName(), self::$oidMap)) {
             $oidString = self::$oidMap[$curve->getName()];
@@ -97,14 +100,14 @@ class CurveOidMapper
             return new ObjectIdentifier($oidString);
         }
 
-        throw new \RuntimeException('Unsupported curve type.');
+        throw new UnsupportedCurveException('Unsupported curve type');
     }
 
     /**
      * @param ObjectIdentifier $oid
-     * @return \Mdanter\Ecc\Primitives\GeneratorPoint
+     * @return NamedCurveFp
      */
-    public static function getCurveFromOid(ObjectIdentifier $oid)
+    public static function getCurveFromOid(ObjectIdentifier $oid): NamedCurveFp
     {
         $oidString = $oid->getContent();
         $invertedMap = array_flip(self::$oidMap);
@@ -113,14 +116,16 @@ class CurveOidMapper
             return CurveFactory::getCurveByName($invertedMap[$oidString]);
         }
 
-        throw new \RuntimeException('Invalid data: unsupported curve.');
+        $error = new UnsupportedCurveException('Invalid data: unsupported curve.');
+        $error->setOid($oidString);
+        throw $error;
     }
 
     /**
      * @param ObjectIdentifier $oid
-     * @return \Mdanter\Ecc\Primitives\GeneratorPoint
+     * @return GeneratorPoint
      */
-    public static function getGeneratorFromOid(ObjectIdentifier $oid)
+    public static function getGeneratorFromOid(ObjectIdentifier $oid): GeneratorPoint
     {
         $oidString = $oid->getContent();
         $invertedMap = array_flip(self::$oidMap);
@@ -129,6 +134,8 @@ class CurveOidMapper
             return CurveFactory::getGeneratorByName($invertedMap[$oidString]);
         }
 
-        throw new \RuntimeException('Invalid data: unsupported generator.');
+        $error = new UnsupportedCurveException('Invalid data: unsupported generator.');
+        $error->setOid($oidString);
+        throw $error;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Serializer\Signature;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
@@ -7,12 +9,12 @@ use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Adapter\EcAdapter;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Signature\Signature;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Serializer\Signature\DerSignatureSerializerInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface;
+use BitWasp\Bitcoin\Serializer\Types;
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\BufferInterface;
+use BitWasp\Buffertools\Buffertools;
 use BitWasp\Buffertools\Exceptions\ParserOutOfRange;
 use BitWasp\Buffertools\Parser;
-use BitWasp\Buffertools\Template;
-use BitWasp\Buffertools\TemplateFactory;
 
 class DerSignatureSerializer implements DerSignatureSerializerInterface
 {
@@ -22,112 +24,100 @@ class DerSignatureSerializer implements DerSignatureSerializerInterface
     private $ecAdapter;
 
     /**
+     * @var \BitWasp\Buffertools\Types\VarString
+     */
+    private $varstring;
+
+    /**
      * @param EcAdapter $adapter
      */
     public function __construct(EcAdapter $adapter)
     {
         $this->ecAdapter = $adapter;
+        $this->varstring = Types::varstring();
     }
 
     /**
      * @return EcAdapterInterface
      */
-    public function getEcAdapter()
+    public function getEcAdapter(): EcAdapterInterface
     {
         return $this->ecAdapter;
     }
 
     /**
-     * @return Template
-     */
-    private function getInnerTemplate()
-    {
-        return (new TemplateFactory())
-            ->uint8()
-            ->varstring()
-            ->uint8()
-            ->varstring()
-            ->getTemplate();
-    }
-
-    /**
-     * @return Template
-     */
-    private function getOuterTemplate()
-    {
-        return (new TemplateFactory())
-            ->uint8()
-            ->varstring()
-            ->getTemplate();
-    }
-
-    /**
      * @param SignatureInterface $signature
      * @return BufferInterface
+     * @throws \Exception
      */
-    public function serialize(SignatureInterface $signature)
+    public function serialize(SignatureInterface $signature): BufferInterface
     {
-        $math = $this->ecAdapter->getMath();
-
         // Ensure that the R and S hex's are of even length
-        $rBin = pack('H*', $math->decHex($math->toString($signature->getR())));
-        $sBin = pack('H*', $math->decHex($math->toString($signature->getS())));
+        $rBin = gmp_export($signature->getR(), 1, GMP_MSW_FIRST | GMP_BIG_ENDIAN);
+        $sBin = gmp_export($signature->getS(), 1, GMP_MSW_FIRST | GMP_BIG_ENDIAN);
 
         // Pad R and S if their highest bit is flipped, ie,
         // they are negative.
-        $rt = $rBin[0] & pack('H*', '80');
-        if (ord($rt) === 128) {
-            $rBin = pack('H*', '00') . $rBin;
+        if ((ord($rBin[0]) & 0x80) === 0x80) {
+            $rBin = "\x00$rBin";
         }
 
-        $st = $sBin[0] & pack('H*', '80');
-        if (ord($st) === 128) {
-            $sBin = pack('H*', '00') . $sBin;
+        if ((ord($sBin[0]) & 0x80) === 0x80) {
+            $sBin = "\x00$sBin";
         }
 
-        return $this->getOuterTemplate()->write([
-            0x30,
-            $this->getInnerTemplate()->write([
-                0x02,
-                new Buffer($rBin, null, $math),
-                0x02,
-                new Buffer($sBin, null, $math)
-            ])
-        ]);
+        $inner = sprintf(
+            "\x02%s%s\x02%s%s",
+            Buffertools::numToVarIntBin(strlen($rBin)),
+            $rBin,
+            Buffertools::numToVarIntBin(strlen($sBin)),
+            $sBin
+        );
+
+        return new Buffer(sprintf("\x30%s%s", Buffertools::numToVarIntBin(strlen($inner)), $inner));
     }
 
     /**
      * @param Parser $parser
-     * @return Signature
+     * @return SignatureInterface
      * @throws ParserOutOfRange
      */
-    public function fromParser(Parser $parser)
+    public function fromParser(Parser $parser): SignatureInterface
     {
-        try {
-            list (, $inner) = $this->getOuterTemplate()->parse($parser);
-            list (, $r, , $s) = $this->getInnerTemplate()->parse(new Parser($inner));
-            /** @var Buffer $r */
-            /** @var Buffer $s */
+        $prefix = $parser->readBytes(1);
+        if ($prefix->getBinary() != "\x30") {
+            throw new \RuntimeException("invalid signature");
+        }
+        $inner = $this->varstring->read($parser);
 
-            return new Signature(
-                $this->ecAdapter,
-                $r->getGmp(),
-                $s->getGmp()
-            );
+        try {
+            $pinner = new Parser($inner);
+
+            $rPref = $pinner->readBytes(1);
+            if ($rPref->getBinary() != "\x02") {
+                throw new \RuntimeException("invalid signature");
+            }
+            $r = $this->varstring->read($pinner);
+
+            $sPref = $pinner->readBytes(1);
+            if ($sPref->getBinary() != "\x02") {
+                throw new \RuntimeException("invalid signature");
+            }
+            $s = $this->varstring->read($pinner);
         } catch (ParserOutOfRange $e) {
             throw new ParserOutOfRange('Failed to extract full signature from parser');
         }
+
+        return new Signature($this->ecAdapter, $r->getGmp(), $s->getGmp());
     }
 
     /**
-     * @param BufferInterface|$string
-     * @return Signature
+     * @param BufferInterface $derSignature
+     * @return SignatureInterface
      * @throws ParserOutOfRange
      */
-    public function parse($string)
+    public function parse(BufferInterface $derSignature): SignatureInterface
     {
-        $parser = new Parser($string);
-        $signature = $this->fromParser($parser);
-        return $signature;
+        return $this->fromParser(new Parser($derSignature));
     }
 }

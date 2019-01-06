@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Crypto\EcAdapter;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
@@ -17,22 +19,26 @@ class EcAdapterFactory
     private static $adapter;
 
     /**
-     * @var
+     * @var resource
      */
     private static $context;
 
     /**
-     * @param null $flags
+     * @param int|null $flags
      * @return resource
      */
-    public static function getSecp256k1Context($flags = null)
+    public static function getSecp256k1Context(int $flags = null)
     {
         if (!extension_loaded('secp256k1')) {
             throw new \RuntimeException('Secp256k1 not installed');
         }
 
         if (self::$context === null) {
-            self::$context = secp256k1_context_create($flags ?: SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY);
+            $context = secp256k1_context_create($flags ?: SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY);
+            if (null === $context) {
+                throw new \RuntimeException("Failed to initialize secp256k1 context");
+            }
+            self::$context = $context;
         }
 
         return self::$context;
@@ -43,7 +49,7 @@ class EcAdapterFactory
      * @param GeneratorPoint $generator
      * @return EcAdapterInterface
      */
-    public static function getAdapter(Math $math, GeneratorPoint $generator)
+    public static function getAdapter(Math $math, GeneratorPoint $generator): EcAdapterInterface
     {
         if (self::$adapter !== null) {
             return self::$adapter;
@@ -71,7 +77,7 @@ class EcAdapterFactory
      * @param GeneratorPoint $generator
      * @return PhpEcc
      */
-    public static function getPhpEcc(Math $math, GeneratorPoint $generator)
+    public static function getPhpEcc(Math $math, GeneratorPoint $generator): PhpEcc
     {
         return new PhpEcc($math, $generator);
     }
@@ -81,7 +87,7 @@ class EcAdapterFactory
      * @param GeneratorPoint $generator
      * @return Secp256k1
      */
-    public static function getSecp256k1(Math $math, GeneratorPoint $generator)
+    public static function getSecp256k1(Math $math, GeneratorPoint $generator): Secp256k1
     {
         return new Secp256k1($math, $generator, self::getSecp256k1Context());
     }

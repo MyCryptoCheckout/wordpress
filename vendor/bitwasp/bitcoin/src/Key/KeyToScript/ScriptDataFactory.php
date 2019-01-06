@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Key\KeyToScript;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\KeyInterface;
@@ -7,13 +9,13 @@ use BitWasp\Bitcoin\Crypto\EcAdapter\Key\KeyInterface;
 abstract class ScriptDataFactory
 {
     /**
-     * @param KeyInterface $key
+     * @param KeyInterface ...$keys
      * @return ScriptAndSignData
      */
-    abstract public function convertKey(KeyInterface $key);
+    abstract public function convertKey(KeyInterface ...$keys): ScriptAndSignData;
 
     /**
      * @return string
      */
-    abstract public function getScriptType();
+    abstract public function getScriptType(): string;
 }

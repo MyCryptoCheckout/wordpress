@@ -1,40 +1,85 @@
 [
     {
-        "name": "bitwasp/bitcoin",
-        "version": "v0.0.35.0",
-        "version_normalized": "0.0.35.0",
+        "name": "bitwasp/bech32",
+        "version": "v0.0.1",
+        "version_normalized": "0.0.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/Bit-Wasp/bitcoin-php.git",
-            "reference": "3dba2e678a6111ae81984637f51b23f760196000"
+            "url": "https://github.com/Bit-Wasp/bech32.git",
+            "reference": "e1ea58c848a4ec59d81b697b3dfe9cc99968d0e7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Bit-Wasp/bitcoin-php/zipball/3dba2e678a6111ae81984637f51b23f760196000",
-            "reference": "3dba2e678a6111ae81984637f51b23f760196000",
+            "url": "https://api.github.com/repos/Bit-Wasp/bech32/zipball/e1ea58c848a4ec59d81b697b3dfe9cc99968d0e7",
+            "reference": "e1ea58c848a4ec59d81b697b3dfe9cc99968d0e7",
             "shasum": ""
         },
-        "require": {
-            "bitwasp/buffertools": "^0.4.0",
-            "bitwasp/secp256k1-php": "^0.1.2",
-            "composer/semver": "^1.4.0",
-            "ext-bcmath": "*",
-            "ext-gmp": "*",
-            "ext-openssl": "*",
-            "lastguest/murmurhash": "v1.3.0",
-            "mdanter/ecc": "^0.4.0",
-            "paragonie/random_compat": "^1.4.0|^2.0.0",
-            "php-64bit": ">=5.6",
-            "pleonasm/merkle-tree": "1.0.0"
-        },
         "require-dev": {
-            "bitwasp/testing-php": "^0.1.1",
-            "ext-json": "*",
-            "nbobtc/bitcoind-php": "^2.0.0",
             "phpunit/phpunit": "^5.4.0",
             "squizlabs/php_codesniffer": "^2.0.0"
         },
-        "time": "2018-03-12T20:36:54+00:00",
+        "time": "2018-02-05T22:23:47+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "BitWasp\\Bech32\\": "src/"
+            },
+            "files": [
+                "src/bech32.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Unlicense"
+        ],
+        "authors": [
+            {
+                "name": "Thomas Kerin",
+                "homepage": "https://thomaskerin.io",
+                "role": "Author"
+            }
+        ],
+        "description": "Pure (no dependencies) implementation of bech32",
+        "homepage": "https://github.com/bit-wasp/bech32"
+    },
+    {
+        "name": "bitwasp/bitcoin",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Bit-Wasp/bitcoin-php.git",
+            "reference": "3be9f6d9c83ce9eabe27cba1f81d11d8f1c30e0a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Bit-Wasp/bitcoin-php/zipball/3be9f6d9c83ce9eabe27cba1f81d11d8f1c30e0a",
+            "reference": "3be9f6d9c83ce9eabe27cba1f81d11d8f1c30e0a",
+            "shasum": ""
+        },
+        "require": {
+            "bitwasp/bech32": "^0.0.1",
+            "bitwasp/buffertools": "^0.5.0",
+            "composer/semver": "^1.4.0",
+            "lastguest/murmurhash": "v2.0.0",
+            "mdanter/ecc": "^0.5.0",
+            "php-64bit": ">=7.0",
+            "pleonasm/merkle-tree": "1.0.0"
+        },
+        "require-dev": {
+            "bitwasp/bitcoinconsensus": "v3.0.0",
+            "bitwasp/secp256k1-php": "^v0.2.0",
+            "ext-json": "*",
+            "nbobtc/bitcoind-php": "v2.0.2",
+            "phpunit/phpunit": "^5.4.0",
+            "squizlabs/php_codesniffer": "^2.0.0"
+        },
+        "suggest": {
+            "ext-bitcoinconsensus": "The bitcoinconsensus library for safest possible script verification",
+            "ext-secp256k1": "The secp256k1 library for fast and safe elliptic curve operations"
+        },
+        "time": "2018-12-17T22:52:54+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -61,28 +106,28 @@
     },
     {
         "name": "bitwasp/buffertools",
-        "version": "v0.4.1",
-        "version_normalized": "0.4.1.0",
+        "version": "v0.5.5",
+        "version_normalized": "0.5.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Bit-Wasp/buffertools-php.git",
-            "reference": "5ac7578fc00d093075a493320bd0a01d1ae0128c"
+            "reference": "65abcc63a08dac0df56975c40127ea262edfbfd7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Bit-Wasp/buffertools-php/zipball/5ac7578fc00d093075a493320bd0a01d1ae0128c",
-            "reference": "5ac7578fc00d093075a493320bd0a01d1ae0128c",
+            "url": "https://api.github.com/repos/Bit-Wasp/buffertools-php/zipball/65abcc63a08dac0df56975c40127ea262edfbfd7",
+            "reference": "65abcc63a08dac0df56975c40127ea262edfbfd7",
             "shasum": ""
         },
         "require": {
-            "mdanter/ecc": "~0.4"
+            "php-64bit": ">=7.0.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "~5.0",
-            "satooshi/php-coveralls": "~0.6.1",
+            "phpstan/phpstan": "v0.9.x",
+            "phpunit/phpunit": "^6.0",
             "squizlabs/php_codesniffer": "~2.0"
         },
-        "time": "2017-06-21T18:23:36+00:00",
+        "time": "2018-11-11T16:40:42+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -105,104 +150,6 @@
             }
         ],
         "description": "Toolbox for working with binary and hex data. Similar to NodeJS Buffer."
-    },
-    {
-        "name": "bitwasp/secp256k1-php",
-        "version": "v0.1.3",
-        "version_normalized": "0.1.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Bit-Wasp/secp256k1-php.git",
-            "reference": "0ad10c06f36fa5caea6f7276315c2fae6262708e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Bit-Wasp/secp256k1-php/zipball/0ad10c06f36fa5caea6f7276315c2fae6262708e",
-            "reference": "0ad10c06f36fa5caea6f7276315c2fae6262708e",
-            "shasum": ""
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^6.5",
-            "squizlabs/php_codesniffer": "2.*",
-            "symfony/yaml": "^3.4"
-        },
-        "time": "2018-02-17T14:24:05+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Unlicense"
-        ],
-        "authors": [
-            {
-                "name": "Ruben de Vries",
-                "email": "ruben@rubensayshi.com"
-            },
-            {
-                "name": "Thomas Kerin",
-                "email": "afk11@users.noreply.github.com"
-            }
-        ],
-        "description": "PHP Extension with bindings for bitcoin/secp256k1.",
-        "keywords": [
-            "ECDSA",
-            "bitcoin",
-            "bitwasp",
-            "cryptocurrency",
-            "ecc",
-            "extension",
-            "php",
-            "secp256k1"
-        ]
-    },
-    {
-        "name": "btccom/bitwasp-bitcoin-bch-addon",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/btccom/bitwasp-bitcoin-bch-addon.git",
-            "reference": "1eae2fd528b094e0aa9185ecfe5946401b339101"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/btccom/bitwasp-bitcoin-bch-addon/zipball/1eae2fd528b094e0aa9185ecfe5946401b339101",
-            "reference": "1eae2fd528b094e0aa9185ecfe5946401b339101",
-            "shasum": ""
-        },
-        "require": {
-            "bitwasp/bitcoin": "0.0.35.0",
-            "btccom/cashaddress": "v0.0.3"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^5.7",
-            "squizlabs/php_codesniffer": "v2.0.0"
-        },
-        "time": "2018-03-18T19:04:00+00:00",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Btccom\\BitcoinCash\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "btccom"
-            }
-        ],
-        "description": "Bridge to bitwasp/bitcoin for bch.",
-        "homepage": "https://github.com/btccom/bitwasp-bitcoin-bch-addon",
-        "keywords": [
-            "bcash",
-            "bch",
-            "bitcoin cash",
-            "cashaddr"
-        ]
     },
     {
         "name": "btccom/cashaddress",
@@ -313,35 +260,35 @@
     },
     {
         "name": "fgrosse/phpasn1",
-        "version": "1.5.3",
-        "version_normalized": "1.5.3.0",
+        "version": "v2.1.1",
+        "version_normalized": "2.1.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/fgrosse/PHPASN1.git",
-            "reference": "40244500384f8b96f5952076f3e05fb56a815c55"
+            "reference": "7ebf2a09084a7bbdb7b879c66fdf7ad80461bbe8"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fgrosse/PHPASN1/zipball/40244500384f8b96f5952076f3e05fb56a815c55",
-            "reference": "40244500384f8b96f5952076f3e05fb56a815c55",
+            "url": "https://api.github.com/repos/fgrosse/PHPASN1/zipball/7ebf2a09084a7bbdb7b879c66fdf7ad80461bbe8",
+            "reference": "7ebf2a09084a7bbdb7b879c66fdf7ad80461bbe8",
             "shasum": ""
         },
         "require": {
-            "ext-gmp": "*",
-            "php": ">=5.6.0"
+            "php": ">=7.0.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "~4.5",
-            "satooshi/php-coveralls": "dev-master"
+            "phpunit/phpunit": "~6.3",
+            "satooshi/php-coveralls": "~2.0"
         },
         "suggest": {
+            "ext-gmp": "GMP is the preferred extension for big integer calculations",
             "php-curl": "For loading OID information from the web if they have not bee defined statically"
         },
-        "time": "2017-12-17T10:18:20+00:00",
+        "time": "2018-12-02T01:34:34+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.5.x-dev"
+                "dev-master": "2.0.x-dev"
             }
         },
         "installation-source": "dist",
@@ -384,29 +331,33 @@
     },
     {
         "name": "lastguest/murmurhash",
-        "version": "1.3.0",
-        "version_normalized": "1.3.0.0",
+        "version": "2.0.0",
+        "version_normalized": "2.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/lastguest/murmurhash-php.git",
-            "reference": "8eb06483456bc98f5adb7707d981a8ef6a065fa2"
+            "reference": "4fb7516f67e695e5d7fa129d1bbb925ec0ebe408"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/lastguest/murmurhash-php/zipball/8eb06483456bc98f5adb7707d981a8ef6a065fa2",
-            "reference": "8eb06483456bc98f5adb7707d981a8ef6a065fa2",
+            "url": "https://api.github.com/repos/lastguest/murmurhash-php/zipball/4fb7516f67e695e5d7fa129d1bbb925ec0ebe408",
+            "reference": "4fb7516f67e695e5d7fa129d1bbb925ec0ebe408",
             "shasum": ""
         },
         "require": {
-            "php": ">=4.3"
+            "php": "^7"
         },
-        "time": "2016-05-16T23:22:58+00:00",
+        "require-dev": {
+            "phpstan/phpstan": "^0.6.3",
+            "phpunit/phpunit": "^5"
+        },
+        "time": "2017-10-10T15:16:12+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
-            "files": [
-                "murmurhash3.php"
-            ]
+            "psr-4": {
+                "lastguest\\": "src/lastguest/"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -429,31 +380,30 @@
     },
     {
         "name": "mdanter/ecc",
-        "version": "v0.4.5",
-        "version_normalized": "0.4.5.0",
+        "version": "v0.5.2",
+        "version_normalized": "0.5.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpecc/phpecc.git",
-            "reference": "9ed6017fbae2fd1105e0d81e703007d353b7587b"
+            "reference": "b95f25cc1bacc83a9f0ccd375900b7cfd343029e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpecc/phpecc/zipball/9ed6017fbae2fd1105e0d81e703007d353b7587b",
-            "reference": "9ed6017fbae2fd1105e0d81e703007d353b7587b",
+            "url": "https://api.github.com/repos/phpecc/phpecc/zipball/b95f25cc1bacc83a9f0ccd375900b7cfd343029e",
+            "reference": "b95f25cc1bacc83a9f0ccd375900b7cfd343029e",
             "shasum": ""
         },
         "require": {
             "ext-gmp": "*",
-            "fgrosse/phpasn1": "~1.5",
-            "paragonie/random_compat": "^1|^2",
-            "php": ">=5.6.0, <7.2"
+            "fgrosse/phpasn1": "^2.0",
+            "php": "^7.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "~4.1|~5.0",
-            "squizlabs/php_codesniffer": "~2",
-            "symfony/yaml": "~2.6|~3.0"
+            "phpunit/phpunit": "^6.0",
+            "squizlabs/php_codesniffer": "^2.0",
+            "symfony/yaml": "^2.6|^3.0"
         },
-        "time": "2017-12-12T12:13:30+00:00",
+        "time": "2018-12-03T18:17:01+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -476,6 +426,11 @@
                 "email": "thibaud@aztech.io",
                 "homepage": "http://aztech.io",
                 "role": "Maintainer"
+            },
+            {
+                "name": "Thomas Kerin",
+                "email": "afk11@users.noreply.github.com",
+                "role": "Maintainer"
             }
         ],
         "description": "PHP Elliptic Curve Cryptography library",
@@ -490,27 +445,29 @@
             "nistp192",
             "nistp224",
             "nistp256",
+            "nistp384",
             "nistp521",
             "phpecc",
-            "secp256k1"
+            "secp256k1",
+            "secp256r1"
         ]
     },
     {
         "name": "mycryptocheckout/api",
-        "version": "2.01",
-        "version_normalized": "2.01.0.0",
+        "version": "2.03",
+        "version_normalized": "2.03.0.0",
         "source": {
             "type": "git",
             "url": "https://bitbucket.org/mycryptocheckout/api.git",
-            "reference": "613b2b63c7d562d80b8becf3433944c7e937c687"
+            "reference": "ebe2a1ca6c707334e0f1140464fb558d985bc80f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://bitbucket.org/mycryptocheckout/api/get/613b2b63c7d562d80b8becf3433944c7e937c687.zip",
-            "reference": "613b2b63c7d562d80b8becf3433944c7e937c687",
+            "url": "https://bitbucket.org/mycryptocheckout/api/get/ebe2a1ca6c707334e0f1140464fb558d985bc80f.zip",
+            "reference": "ebe2a1ca6c707334e0f1140464fb558d985bc80f",
             "shasum": ""
         },
-        "time": "2018-10-30T21:46:45+00:00",
+        "time": "2018-12-14T17:56:53+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -526,57 +483,6 @@
         "homepage": "https://mycryptocheckout.com/",
         "keywords": [
             "mycryptocheckout"
-        ]
-    },
-    {
-        "name": "paragonie/random_compat",
-        "version": "v2.0.17",
-        "version_normalized": "2.0.17.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/paragonie/random_compat.git",
-            "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/29af24f25bab834fcbb38ad2a69fa93b867e070d",
-            "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*|5.*"
-        },
-        "suggest": {
-            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
-        },
-        "time": "2018-07-04T16:31:37+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/random.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Paragon Initiative Enterprises",
-                "email": "security@paragonie.com",
-                "homepage": "https://paragonie.com"
-            }
-        ],
-        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
-        "keywords": [
-            "csprng",
-            "polyfill",
-            "pseudorandom",
-            "random"
         ]
     },
     {

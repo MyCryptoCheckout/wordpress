@@ -1,7 +1,6 @@
 ## Pure PHP Elliptic Curve DSA and DH
 
 [![Build Status](https://travis-ci.org/phpecc/phpecc.svg?branch=master)](https://travis-ci.org/phpecc/phpecc)
-[![HHVM Status](http://hhvm.h4cc.de/badge/mdanter/ecc.svg)](http://hhvm.h4cc.de/package/mdanter/ecc)
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/phpecc/phpecc/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/phpecc/phpecc?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/phpecc/phpecc/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/phpecc/phpecc/?branch=master)
@@ -23,12 +22,9 @@ The library supports the following curves:
  - secp256k1
  - nistp192
  - nistp224
- - nistp256 / secg256r1
- - nistp384 / secg384r1
+ - nistp256 / secp256r1
+ - nistp384 / secp384r1
  - nistp521
-
-The library exposes a class for random byte generation, for PHP7+ users is provided by `random_bytes`. 
-PHP5.6 users will use the paragonie/random_bytes polyfill. 
 
 During ECDSA, a random value `k` is required. It is acceptable to use a true RNG to generate this value, but 
 should the same `k` value ever be repeatedly used for a key, an attacker can recover that signing key. 
@@ -37,12 +33,6 @@ this concern.
 
 The library uses a non-branching Montgomery ladder for scalar multiplication, as it's constant time and avoids secret 
 dependant branches. 
-
-### Compatibility notice:
-
-A dependency used by this library in v0.4.x interacts with a newly reserved keyword in PHP 7.2. Therefore the library
-cannot be used on 7.2. For a PHP7.0+ branch, you should upgrade to [v0.5.x](https://github.com/phpecc/phpecc/releases/tag/v0.5.0)
-
  
 ### License
 
@@ -50,9 +40,11 @@ This package is released under the MIT license.
 
 ### Requirements
 
-* PHP 5.6+
+* PHP 7.0+
 * composer
 * ext-gmp
+
+For PHP5.6 compatibility, use the v0.4.x releases.
 
 ### Installation
 

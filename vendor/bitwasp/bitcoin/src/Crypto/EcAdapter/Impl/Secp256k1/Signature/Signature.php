@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Signature;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Adapter\EcAdapter;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Serializer\Signature\DerSignatureSerializer;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface;
 use BitWasp\Bitcoin\Serializable;
+use BitWasp\Buffertools\BufferInterface;
 
 class Signature extends Serializable implements SignatureInterface
 {
@@ -77,30 +80,30 @@ class Signature extends Serializable implements SignatureInterface
      * @param Signature $other
      * @return bool
      */
-    private function doEquals(Signature $other)
+    private function doEquals(Signature $other): bool
     {
         $a = '';
         $b = '';
         secp256k1_ecdsa_signature_serialize_der($this->ecAdapter->getContext(), $a, $this->getResource());
         secp256k1_ecdsa_signature_serialize_der($this->ecAdapter->getContext(), $b, $other->getResource());
 
-        return $a === $b;
+        return hash_equals($a, $b);
     }
 
     /**
      * @param SignatureInterface $signature
      * @return bool
      */
-    public function equals(SignatureInterface $signature)
+    public function equals(SignatureInterface $signature): bool
     {
         /** @var Signature $signature */
         return $this->doEquals($signature);
     }
 
     /**
-     * @return \BitWasp\Buffertools\BufferInterface
+     * @return BufferInterface
      */
-    public function getBuffer()
+    public function getBuffer(): BufferInterface
     {
         return (new DerSignatureSerializer($this->ecAdapter))->serialize($this);
     }

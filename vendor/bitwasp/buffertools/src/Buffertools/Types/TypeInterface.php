@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Buffertools\Types;
 
 use BitWasp\Buffertools\Parser;
@@ -7,34 +9,27 @@ use BitWasp\Buffertools\Parser;
 interface TypeInterface
 {
     /**
-     * Return the math adapter
-     *
-     * @return \Mdanter\Ecc\Math\GmpMathInterface
-     */
-    public function getMath();
-
-    /**
      * Flip whatever bitstring is given to us
      *
      * @param  string $bitString
      * @return string
      */
-    public function flipBits($bitString);
+    public function flipBits(string $bitString): string;
 
     /**
      * @param mixed $integer
-     * @return mixed
+     * @return string
      */
-    public function write($integer);
+    public function write($integer): string;
 
     /**
      * @param Parser $parser
-     * @return string|int
+     * @return mixed
      */
     public function read(Parser $parser);
 
     /**
-     * @return int|string
+     * @return int
      */
-    public function getByteOrder();
+    public function getByteOrder(): int;
 }

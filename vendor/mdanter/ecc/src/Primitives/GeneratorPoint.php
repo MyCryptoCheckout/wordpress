@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Mdanter\Ecc\Primitives;
 
+use Mdanter\Ecc\Crypto\Key\PrivateKeyInterface;
+use Mdanter\Ecc\Crypto\Key\PublicKeyInterface;
 use Mdanter\Ecc\Math\GmpMathInterface;
 use Mdanter\Ecc\Crypto\Key\PrivateKey;
 use Mdanter\Ecc\Crypto\Key\PublicKey;
@@ -14,7 +17,7 @@ use Mdanter\Ecc\Random\RandomNumberGeneratorInterface;
 class GeneratorPoint extends Point
 {
     /**
-     * @var \Mdanter\Ecc\Random\DebugDecorator|RandomNumberGeneratorInterface|null
+     * @var RandomNumberGeneratorInterface
      */
     private $generator;
 
@@ -44,9 +47,9 @@ class GeneratorPoint extends Point
      * @todo   Check if really necessary here (only used for testing in lib)
      * @param  \GMP $x
      * @param  \GMP $y
-     * @return boolean
+     * @return bool
      */
-    public function isValid(\GMP $x, \GMP $y)
+    public function isValid(\GMP $x, \GMP $y): bool
     {
        
         $math = $this->getAdapter();
@@ -73,9 +76,9 @@ class GeneratorPoint extends Point
     }
 
     /**
-     * @return PrivateKey
+     * @return PrivateKeyInterface
      */
-    public function createPrivateKey()
+    public function createPrivateKey(): PrivateKeyInterface
     {
         $secret = $this->generator->generate($this->getOrder());
 
@@ -85,9 +88,9 @@ class GeneratorPoint extends Point
     /**
      * @param \GMP $x
      * @param \GMP $y
-     * @return PublicKey
+     * @return PublicKeyInterface
      */
-    public function getPublicKeyFrom(\GMP $x, \GMP $y)
+    public function getPublicKeyFrom(\GMP $x, \GMP $y): PublicKeyInterface
     {
         $pubPoint = $this->getCurve()->getPoint($x, $y, $this->getOrder());
         return new PublicKey($this->getAdapter(), $this, $pubPoint);
@@ -95,9 +98,9 @@ class GeneratorPoint extends Point
 
     /**
      * @param \GMP $secretMultiplier
-     * @return PrivateKey
+     * @return PrivateKeyInterface
      */
-    public function getPrivateKeyFrom(\GMP $secretMultiplier)
+    public function getPrivateKeyFrom(\GMP $secretMultiplier): PrivateKeyInterface
     {
         return new PrivateKey($this->getAdapter(), $this, $secretMultiplier);
     }

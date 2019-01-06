@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Bitcoin\Key\KeyToScript;
 
+use BitWasp\Bitcoin\Address\Address;
 use BitWasp\Bitcoin\Address\BaseAddressCreator;
 use BitWasp\Bitcoin\Script\ScriptInterface;
 use BitWasp\Bitcoin\Transaction\Factory\SignData;
@@ -32,16 +35,16 @@ class ScriptAndSignData
     /**
      * @return ScriptInterface
      */
-    public function getScriptPubKey()
+    public function getScriptPubKey(): ScriptInterface
     {
         return $this->scriptPubKey;
     }
 
     /**
      * @param BaseAddressCreator $creator
-     * @return \BitWasp\Bitcoin\Address\Address
+     * @return Address
      */
-    public function getAddress(BaseAddressCreator $creator)
+    public function getAddress(BaseAddressCreator $creator): Address
     {
         return $creator->fromOutputScript($this->scriptPubKey);
     }
@@ -49,7 +52,7 @@ class ScriptAndSignData
     /**
      * @return SignData
      */
-    public function getSignData()
+    public function getSignData(): SignData
     {
         return $this->signData;
     }

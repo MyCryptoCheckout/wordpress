@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Mdanter\Ecc\Crypto\Key;
 
@@ -26,6 +27,7 @@ namespace Mdanter\Ecc\Crypto\Key;
  * ***********************************************************************
  */
 
+use Mdanter\Ecc\Exception\PublicKeyException;
 use Mdanter\Ecc\Math\GmpMathInterface;
 use Mdanter\Ecc\Primitives\CurveFpInterface;
 use Mdanter\Ecc\Primitives\GeneratorPoint;
@@ -40,25 +42,25 @@ class PublicKey implements PublicKeyInterface
      *
      * @var CurveFpInterface
      */
-    protected $curve;
+    private $curve;
 
     /**
      *
      * @var GeneratorPoint
      */
-    protected $generator;
+    private $generator;
 
     /**
      *
      * @var PointInterface
      */
-    protected $point;
+    private $point;
 
     /**
      *
      * @var GmpMathInterface
      */
-    protected $adapter;
+    private $adapter;
 
     /**
      * Initialize a new PublicKey instance.
@@ -66,8 +68,6 @@ class PublicKey implements PublicKeyInterface
      * @param  GmpMathInterface  $adapter
      * @param  GeneratorPoint    $generator
      * @param  PointInterface    $point
-     * @throws \LogicException
-     * @throws \RuntimeException
      */
     public function __construct(GmpMathInterface $adapter, GeneratorPoint $generator, PointInterface $point)
     {
@@ -76,19 +76,23 @@ class PublicKey implements PublicKeyInterface
         $this->point = $point;
         $this->adapter = $adapter;
 
-        $n = $generator->getOrder();
+        // step 1: not point at infinity.
+        if ($point->isInfinity()) {
+            throw new PublicKeyException($generator, $point, "Cannot use point at infinity for public key");
+        }
 
-        if ($adapter->cmp($point->getX(), gmp_init(0, 10)) < 0 || $adapter->cmp($n, $point->getX()) <= 0
-            || $adapter->cmp($point->getY(), gmp_init(0, 10)) < 0 || $adapter->cmp($n, $point->getY()) <= 0
+        // step 2 full & partial public key validation routine
+        if ($adapter->cmp($point->getX(), gmp_init(0, 10)) < 0 || $adapter->cmp($this->curve->getPrime(), $point->getX()) < 0
+            || $adapter->cmp($point->getY(), gmp_init(0, 10)) < 0 || $adapter->cmp($this->curve->getPrime(), $point->getY()) < 0
         ) {
-            throw new \RuntimeException("Generator point has x and y out of range.");
+            throw new PublicKeyException($generator, $point, "Point has x and y out of range.");
         }
 
         // Sanity check. Point (x,y) values are qualified against it's
         // generator and curve. Here we ensure the Point and Generator
         // are the same.
         if (!$generator->getCurve()->equals($point->getCurve())) {
-            throw new \RuntimeException("Curve for given point not in common with GeneratorPoint");
+            throw new PublicKeyException($generator, $point, "Curve for given point not in common with GeneratorPoint");
         }
     }
 
@@ -96,7 +100,7 @@ class PublicKey implements PublicKeyInterface
      * {@inheritDoc}
      * @see \Mdanter\Ecc\Crypto\Key\PublicKeyInterface::getCurve()
      */
-    public function getCurve()
+    public function getCurve(): CurveFpInterface
     {
         return $this->curve;
     }
@@ -105,7 +109,7 @@ class PublicKey implements PublicKeyInterface
      * {$inheritDoc}
      * @see \Mdanter\Ecc\Crypto\Key\PublicKeyInterface::getGenerator()
      */
-    public function getGenerator()
+    public function getGenerator(): GeneratorPoint
     {
         return $this->generator;
     }
@@ -114,7 +118,7 @@ class PublicKey implements PublicKeyInterface
      * {@inheritDoc}
      * @see \Mdanter\Ecc\Crypto\Key\PublicKeyInterface::getPoint()
      */
-    public function getPoint()
+    public function getPoint(): PointInterface
     {
         return $this->point;
     }

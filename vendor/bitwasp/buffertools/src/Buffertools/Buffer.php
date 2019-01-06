@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitWasp\Buffertools;
 
-use Mdanter\Ecc\EccFactory;
 use Mdanter\Ecc\Math\GmpMathInterface;
 
 class Buffer implements BufferInterface
@@ -18,19 +19,12 @@ class Buffer implements BufferInterface
     protected $buffer;
 
     /**
-     * @var GmpMathInterface
-     */
-    protected $math;
-
-    /**
      * @param string               $byteString
      * @param null|integer         $byteSize
-     * @param GmpMathInterface     $math
      * @throws \Exception
      */
-    public function __construct($byteString = '', $byteSize = null, GmpMathInterface $math = null)
+    public function __construct(string $byteString = '', int $byteSize = null)
     {
-        $this->math = $math ?: EccFactory::getAdapter();
         if ($byteSize !== null) {
             // Check the integer doesn't overflow its supposed size
             if (strlen($byteString) > $byteSize) {
@@ -59,46 +53,47 @@ class Buffer implements BufferInterface
      * Create a new buffer from a hex string
      *
      * @param string $hexString
-     * @param integer $byteSize
-     * @param GmpMathInterface $math
+     * @param int|null $byteSize
      * @return Buffer
      * @throws \Exception
      */
-    public static function hex($hexString = '', $byteSize = null, GmpMathInterface $math = null)
+    public static function hex(string $hexString = '', int $byteSize = null): BufferInterface
     {
         if (strlen($hexString) > 0 && !ctype_xdigit($hexString)) {
             throw new \InvalidArgumentException('Buffer::hex: non-hex character passed');
         }
 
-        $math = $math ?: EccFactory::getAdapter();
         $binary = pack("H*", $hexString);
-        return new self($binary, $byteSize, $math);
+        return new self($binary, $byteSize);
     }
 
     /**
      * @param int|string $integer
      * @param null|int $byteSize
-     * @param GmpMathInterface|null $math
      * @return Buffer
      */
-    public static function int($integer, $byteSize = null, GmpMathInterface $math = null)
+    public static function int($integer, $byteSize = null): BufferInterface
     {
         if ($integer < 0) {
             throw new \InvalidArgumentException('Negative integers not supported by Buffer::int. This could be an application error, or you should be using templates.');
         }
 
-        $math = $math ?: EccFactory::getAdapter();
-        $binary = pack("H*", $math->decHex($integer));
-        return new self($binary, $byteSize, $math);
+        $hex = gmp_strval(gmp_init($integer, 10), 16);
+        if ((mb_strlen($hex) % 2) !== 0) {
+            $hex = "0{$hex}";
+        }
+
+        $binary = pack("H*", $hex);
+        return new self($binary, $byteSize);
     }
 
     /**
-     * @param integer      $start
+     * @param int      $start
      * @param integer|null $end
-     * @return Buffer
+     * @return BufferInterface
      * @throws \Exception
      */
-    public function slice($start, $end = null)
+    public function slice(int $start, int $end = null): BufferInterface
     {
         if ($start > $this->getSize()) {
             throw new \Exception('Start exceeds buffer length');
@@ -118,7 +113,7 @@ class Buffer implements BufferInterface
         }
 
         $length = strlen($string);
-        return new self($string, $length, $this->math);
+        return new self($string, $length);
     }
 
     /**
@@ -126,7 +121,7 @@ class Buffer implements BufferInterface
      *
      * @return int
      */
-    public function getSize()
+    public function getSize(): int
     {
         return $this->size;
     }
@@ -136,7 +131,7 @@ class Buffer implements BufferInterface
      *
      * @return int
      */
-    public function getInternalSize()
+    public function getInternalSize(): int
     {
         return strlen($this->buffer);
     }
@@ -144,7 +139,7 @@ class Buffer implements BufferInterface
     /**
      * @return string
      */
-    public function getBinary()
+    public function getBinary(): string
     {
         // if a size is specified we'll make sure the value returned is that size
         if ($this->size !== null) {
@@ -161,7 +156,7 @@ class Buffer implements BufferInterface
     /**
      * @return string
      */
-    public function getHex()
+    public function getHex(): string
     {
         return unpack("H*", $this->getBinary())[1];
     }
@@ -169,7 +164,7 @@ class Buffer implements BufferInterface
     /**
      * @return \GMP
      */
-    public function getGmp()
+    public function getGmp(): \GMP
     {
         $gmp = gmp_init($this->getHex(), 16);
         return $gmp;
@@ -184,18 +179,20 @@ class Buffer implements BufferInterface
     }
 
     /**
-     * @return BufferInterface
+     * @return Buffer
      */
-    public function flip()
+    public function flip(): BufferInterface
     {
-        return Buffertools::flipBytes($this);
+        /** @var Buffer $buffer */
+        $buffer = Buffertools::flipBytes($this);
+        return $buffer;
     }
 
     /**
      * @param BufferInterface $other
      * @return bool
      */
-    public function equals(BufferInterface $other)
+    public function equals(BufferInterface $other): bool
     {
         return ($other->getSize() === $this->getSize()
              && $other->getBinary() === $this->getBinary());
