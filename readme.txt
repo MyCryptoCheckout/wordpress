@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.4
-Stable tag: 2.31
+Stable tag: 2.32
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -42,6 +42,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bitcoin BTC (Including SegWit addresses, Electrum HD wallet)
 - Bitcoin Cash BCH (Including Electrum HD wallet)
 - Bitcoin Gold BTG
+- Bitcoin Zero BZX
 - Bitsmdo BSD
 - CatoCoin CATO
 - CloakCoin CLOAK
@@ -72,6 +73,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 = ERC20 tokens supported (Including MetaMask): =
 
 - 0x ZRX
+- Acorn Collective OAK
 - ADULTEUM ADULT
 - Aeternity AE
 - Aragon ANT
@@ -189,6 +191,11 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 11. Donations generator form
 
 == Changelog ==
+
+= 2.32 20190109 =
+
+* New currency: Acorn Collective OAK
+* New currency: Bitcoin Zero BZX
 
 = 2.31 20181228 =
 
