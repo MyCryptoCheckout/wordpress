@@ -246,10 +246,16 @@
   -moz-osx-font-smoothing: grayscale; }
 
 .mcc-GRS:before {
-  content: "\e950"; }
+  content: "\e951"; }
 
 .mcc-BLXS:before {
-  content: "\e951"; }
+  content: "\e950"; }
+
+.mcc-BZX:before {
+  content: "\e952"; }
+
+.mcc-OAK:before {
+  content: "\e953"; }
 
 .mcc-CLOAK:before {
   content: "\e94f"; }
@@ -521,6 +527,9 @@
 .mcc_currency_icons.color i.mcc-BLXS {
   color: #FDDE02; }
 
+.mcc_currency_icons.color i.mcc-BZX {
+  color: #000; }
+
 .mcc_currency_icons.color i.mcc-BNB {
   color: #F5BC00; }
 
@@ -640,6 +649,9 @@
 
 .mcc_currency_icons.color i.mcc-NYC {
   color: #6D6E71; }
+
+.mcc_currency_icons.color i.mcc-OAK {
+  color: #0292B4; }
 
 .mcc_currency_icons.color i.mcc-OMG {
   color: #1A53F0; }
