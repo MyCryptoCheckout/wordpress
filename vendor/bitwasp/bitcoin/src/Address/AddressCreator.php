@@ -1,12 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Address;
 
 use BitWasp\Bitcoin\Base58;
 use BitWasp\Bitcoin\Bitcoin;
 use BitWasp\Bitcoin\Exceptions\UnrecognizedAddressException;
+use BitWasp\Bitcoin\Exceptions\UnrecognizedScriptForAddressException;
 use BitWasp\Bitcoin\Network\NetworkInterface;
 use BitWasp\Bitcoin\Script\Classifier\OutputClassifier;
 use BitWasp\Bitcoin\Script\P2shScript;
@@ -15,7 +14,6 @@ use BitWasp\Bitcoin\Script\ScriptType;
 use BitWasp\Bitcoin\Script\WitnessProgram;
 use BitWasp\Bitcoin\Script\WitnessScript;
 use BitWasp\Bitcoin\SegwitBech32;
-use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\BufferInterface;
 
 class AddressCreator extends BaseAddressCreator
@@ -25,16 +23,16 @@ class AddressCreator extends BaseAddressCreator
      * @param NetworkInterface $network
      * @return Base58Address|null
      */
-    protected function readBase58Address(string $strAddress, NetworkInterface $network)
+    protected function readBase58Address($strAddress, NetworkInterface $network)
     {
         try {
             $data = Base58::decodeCheck($strAddress);
-            $prefixByte = $data->slice(0, $network->getP2shPrefixLength())->getHex();
+            $prefixByte = $data->slice(0, 1)->getHex();
 
             if ($prefixByte === $network->getP2shByte()) {
                 return new ScriptHashAddress($data->slice(1));
             } else if ($prefixByte === $network->getAddressByte()) {
-                return new PayToPubKeyHashAddress($data->slice($network->getAddressPrefixLength()));
+                return new PayToPubKeyHashAddress($data->slice(1));
             }
         } catch (\Exception $e) {
             // Just return null
@@ -48,18 +46,10 @@ class AddressCreator extends BaseAddressCreator
      * @param NetworkInterface $network
      * @return SegwitAddress|null
      */
-    protected function readSegwitAddress(string $strAddress, NetworkInterface $network)
+    protected function readSegwitAddress($strAddress, NetworkInterface $network)
     {
         try {
-            list ($version, $program) = \BitWasp\Bech32\decodeSegwit($network->getSegwitBech32Prefix(), $strAddress);
-
-            if (0 === $version) {
-                $wp = WitnessProgram::v0(new Buffer($program));
-            } else {
-                $wp = new WitnessProgram($version, new Buffer($program));
-            }
-
-            return new SegwitAddress($wp);
+            return new SegwitAddress(SegwitBech32::decode($strAddress, $network));
         } catch (\Exception $e) {
             // Just return null
         }
@@ -69,9 +59,10 @@ class AddressCreator extends BaseAddressCreator
 
     /**
      * @param ScriptInterface $outputScript
-     * @return Address
+     * @return Address|PayToPubKeyHashAddress|ScriptHashAddress|SegwitAddress
+     * @throws UnrecognizedScriptForAddressException
      */
-    public function fromOutputScript(ScriptInterface $outputScript): Address
+    public function fromOutputScript(ScriptInterface $outputScript)
     {
         if ($outputScript instanceof P2shScript || $outputScript instanceof WitnessScript) {
             throw new \RuntimeException("P2shScript & WitnessScript's are not accepted by fromOutputScript");
@@ -92,7 +83,7 @@ class AddressCreator extends BaseAddressCreator
                 /** @var BufferInterface $solution */
                 return new ScriptHashAddress($decode->getSolution());
             default:
-                throw new \RuntimeException('Script type is not associated with an address');
+                throw new UnrecognizedScriptForAddressException('Script type is not associated with an address');
         }
     }
 
@@ -102,7 +93,7 @@ class AddressCreator extends BaseAddressCreator
      * @return Address
      * @throws UnrecognizedAddressException
      */
-    public function fromString(string $strAddress, NetworkInterface $network = null): Address
+    public function fromString($strAddress, NetworkInterface $network = null)
     {
         $network = $network ?: Bitcoin::getNetwork();
 
@@ -114,6 +105,6 @@ class AddressCreator extends BaseAddressCreator
             return $bech32Address;
         }
 
-        throw new UnrecognizedAddressException();
+        throw new UnrecognizedAddressException("Address not understood");
     }
 }

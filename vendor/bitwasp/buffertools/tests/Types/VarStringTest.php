@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools\Tests\Types;
 
 use BitWasp\Buffertools\Tests\BinaryTest;
@@ -9,39 +7,29 @@ use BitWasp\Buffertools\Types\VarInt;
 use BitWasp\Buffertools\Types\VarString;
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\Parser;
+use Mdanter\Ecc\EccFactory;
 
 class VarStringTest extends BinaryTest
 {
-    /**
-     * @return array
-     */
-    public function getSampleVarStrings(): array
+
+    public function testGetVarString()
     {
-        return array_map(function (string $value) {
-            return [$value];
-        }, [
+        $strings = array(
             '',
             '00',
             '00010203040506070809',
             '00010203040506070809000102030405060708090001020304050607080900010203040506070809000102030405060708090001020304050607080900010203040506070809000102030405060708090001020304050607080900010203040506070809000102030405060708090001020304050607080900010203040506070809000102030405060708090001020304050607080900010203040506070809000102030405060708090001020304050607080900010203040506070809000102030405060708090001020304050607080900010203040506070809000102030405060708090001020304050607080900010203040506070809000102',
-        ]);
-    }
+        );
 
-    /**
-     * @param string $input
-     * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
-     * @throws \Exception
-     * @dataProvider getSampleVarStrings
-     */
-    public function testGetVarString(string $input)
-    {
-        $varstring = new VarString(new VarInt());
-        $binary = $varstring->write(Buffer::hex($input));
+        $math = EccFactory::getAdapter();
+        $varstring = new VarString(new VarInt($math));
 
-        $parser = new Parser(new Buffer($binary));
-        $original = $varstring->read($parser);
-
-        $this->assertSame($input, $original->getHex());
+        foreach ($strings as $string) {
+            $binary = $varstring->write(Buffer::hex($string));
+            $parser = new Parser(new Buffer($binary));
+            $original = $varstring->read($parser);
+            $this->assertSame($string, $original->getHex());
+        }
     }
 
     /**
@@ -50,9 +38,10 @@ class VarStringTest extends BinaryTest
      */
     public function testAbortsWithInvalidVarIntLength()
     {
+        $math = EccFactory::getAdapter();
         $buffer = new Buffer("\x05\x00");
 
-        $varstring = new VarString(new VarInt());
+        $varstring = new VarString(new VarInt($math));
         $varstring->read(new Parser($buffer));
     }
     /**
@@ -61,7 +50,8 @@ class VarStringTest extends BinaryTest
      */
     public function testFailsWithoutBuffer()
     {
-        $varstring = new VarString(new VarInt());
+        $math = EccFactory::getAdapter();
+        $varstring = new VarString(new VarInt($math));
         $varstring->write('');
     }
 }

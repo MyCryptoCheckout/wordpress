@@ -19,7 +19,7 @@ class TemplateParser
     /**
      * @param string $data
      * @param array $template
-     * @return \FG\ASN1\ASNObject|Sequence
+     * @return \FG\ASN1\Object|Sequence
      * @throws ParserException if there was an issue parsing
      */
     public function parseBase64($data, array $template)
@@ -31,12 +31,12 @@ class TemplateParser
     /**
      * @param string $binary
      * @param array $template
-     * @return \FG\ASN1\ASNObject|Sequence
+     * @return \FG\ASN1\Object|Sequence
      * @throws ParserException if there was an issue parsing
      */
     public function parseBinary($binary, array $template)
     {
-        $parsedObject = ASNObject::fromBinary($binary);
+        $parsedObject = Object::fromBinary($binary);
 
         foreach ($template as $key => $value) {
             $this->validate($parsedObject, $key, $value);
@@ -45,7 +45,7 @@ class TemplateParser
         return $parsedObject;
     }
 
-    private function validate(ASNObject $object, $key, $value)
+    private function validate(Object $object, $key, $value)
     {
         if (is_array($value)) {
             $this->assertTypeId($key, $object);
@@ -60,7 +60,7 @@ class TemplateParser
         }
     }
 
-    private function assertTypeId($expectedTypeId, ASNObject $object)
+    private function assertTypeId($expectedTypeId, Object $object)
     {
         $actualType = $object->getType();
         if ($expectedTypeId != $actualType) {

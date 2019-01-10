@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Crypto\EcDH;
 
@@ -28,9 +27,10 @@ namespace Mdanter\Ecc\Crypto\EcDH;
  */
 
 use Mdanter\Ecc\Crypto\Key\PrivateKeyInterface;
+use Mdanter\Ecc\Crypto\Key\PublicKey;
 use Mdanter\Ecc\Crypto\Key\PublicKeyInterface;
-use Mdanter\Ecc\Exception\ExchangeException;
 use Mdanter\Ecc\Math\GmpMathInterface;
+use Mdanter\Ecc\Primitives\PointInterface;
 
 /**
  * This class is the implementation of ECDH.
@@ -52,7 +52,7 @@ class EcDH implements EcDHInterface
     /**
      * Secret key between the two parties
      *
-     * @var PublicKeyInterface
+     * @var PointInterface
      */
     private $secretKey = null;
 
@@ -82,22 +82,22 @@ class EcDH implements EcDHInterface
      * {@inheritDoc}
      * @see \Mdanter\Ecc\Crypto\EcDH\EcDHInterface::calculateSharedKey()
      */
-    public function calculateSharedKey(): \GMP
+    public function calculateSharedKey()
     {
         $this->calculateKey();
 
-        return $this->secretKey->getPoint()->getX();
+        return $this->secretKey->getX();
     }
 
     /**
      * {@inheritDoc}
      * @see \Mdanter\Ecc\Crypto\EcDH\EcDHInterface::createMultiPartyKey()
      */
-    public function createMultiPartyKey(): PublicKeyInterface
+    public function createMultiPartyKey()
     {
         $this->calculateKey();
 
-        return $this->secretKey;
+        return new PublicKey($this->adapter, $this->senderKey->getPoint(), $this->secretKey);
     }
 
     /**
@@ -128,16 +128,7 @@ class EcDH implements EcDHInterface
         $this->checkExchangeState();
 
         if ($this->secretKey === null) {
-            try {
-                // Multiply our secret with recipients public key
-                $point = $this->recipientKey->getPoint()->mul($this->senderKey->getSecret());
-
-                // Ensure we completed a valid exchange, ensure we can create a
-                // public key instance for the shared secret using our generator.
-                $this->secretKey = $this->senderKey->getPoint()->getPublicKeyFrom($point->getX(), $point->getY());
-            } catch (\Exception $e) {
-                throw new ExchangeException("Invalid ECDH exchange", 0, $e);
-            }
+            $this->secretKey = $this->recipientKey->getPoint()->mul($this->senderKey->getSecret());
         }
     }
 
@@ -153,17 +144,11 @@ class EcDH implements EcDHInterface
         }
 
         if ($this->senderKey === null) {
-            throw new ExchangeException('Sender key not set.');
+            throw new \RuntimeException('Sender key not set.');
         }
 
         if ($this->recipientKey === null) {
-            throw new ExchangeException('Recipient key not set.');
-        }
-
-        // Check the point exists on our curve.
-        $point = $this->recipientKey->getPoint();
-        if (!$this->senderKey->getPoint()->getCurve()->contains($point->getX(), $point->getY())) {
-            throw new ExchangeException("Invalid ECDH exchange - Point does not exist on our curve");
+            throw new \RuntimeException('Recipient key not set.');
         }
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Script\Parser;
 
 use BitWasp\Bitcoin\Math\Math;
@@ -70,13 +68,13 @@ class Parser implements \Iterator
         $this->data = $buffer->getBinary();
         $this->end = $buffer->getSize();
         $this->script = $script;
-        $this->empty = new Buffer('', 0);
+        $this->empty = new Buffer('', 0, $math);
     }
 
     /**
      * @return int
      */
-    public function getPosition(): int
+    public function getPosition()
     {
         return $this->position;
     }
@@ -86,7 +84,7 @@ class Parser implements \Iterator
      * @param integer $strSize
      * @return array|bool
      */
-    private function unpackSize(string $packFormat, int $strSize)
+    private function unpackSize($packFormat, $strSize)
     {
         if ($this->end - $this->position < $strSize) {
             return false;
@@ -103,7 +101,7 @@ class Parser implements \Iterator
      * @param int $ptr
      * @return Operation
      */
-    private function doNext(int $ptr)
+    private function doNext($ptr)
     {
         if ($this->position >= $this->end) {
             throw new \RuntimeException('Position exceeds end of script!');
@@ -130,7 +128,7 @@ class Parser implements \Iterator
             }
 
             if ($dataSize > 0) {
-                $pushData = new Buffer(substr($this->data, $this->position, $dataSize), $dataSize);
+                $pushData = new Buffer(substr($this->data, $this->position, $dataSize), $dataSize, $this->math);
             }
 
             $this->position += $dataSize;
@@ -143,11 +141,11 @@ class Parser implements \Iterator
     }
 
     /**
-     * @param int $begin
+     * @param $begin
      * @param null|int $length
      * @return Script
      */
-    public function slice(int $begin, int $length = null)
+    public function slice($begin, $length = null)
     {
         if ($begin < 0) {
             throw new \RuntimeException("Invalid start of script - cannot be negative or ");
@@ -198,7 +196,7 @@ class Parser implements \Iterator
     }
 
     /**
-     * @return Operation|null
+     * @return Operation
      */
     public function next()
     {
@@ -222,7 +220,7 @@ class Parser implements \Iterator
     /**
      * @return Operation[]
      */
-    public function decode(): array
+    public function decode()
     {
         $result = [];
         foreach ($this as $operation) {
@@ -235,7 +233,7 @@ class Parser implements \Iterator
     /**
      * @return string
      */
-    public function getHumanReadable(): string
+    public function getHumanReadable()
     {
         return implode(' ', array_map(
             function (Operation $operation) {

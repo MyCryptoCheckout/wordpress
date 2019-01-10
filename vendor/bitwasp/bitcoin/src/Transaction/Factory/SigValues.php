@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction\Factory;
 
 use BitWasp\Bitcoin\Script\ScriptInterface;
@@ -33,7 +31,7 @@ class SigValues
     /**
      * @return ScriptInterface
      */
-    public function getScriptSig(): ScriptInterface
+    public function getScriptSig()
     {
         return $this->scriptSig;
     }
@@ -41,7 +39,7 @@ class SigValues
     /**
      * @return ScriptWitnessInterface
      */
-    public function getScriptWitness(): ScriptWitnessInterface
+    public function getScriptWitness()
     {
         return $this->scriptWitness;
     }

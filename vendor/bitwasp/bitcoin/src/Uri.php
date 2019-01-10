@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin;
 
 use BitWasp\Bitcoin\Address\AddressInterface;
@@ -15,20 +13,15 @@ class Uri
     /**
      * @var AddressInterface
      */
-    private $bip21Address;
+    private $address;
 
     /**
-     * @var AddressInterface|null
-     */
-    private $bip72Address;
-
-    /**
-     * @var null|string
+     * @var null|int
      */
     private $amount;
 
     /**
-     * @var string|null
+     * @var
      */
     private $label;
 
@@ -50,29 +43,25 @@ class Uri
     /**
      * Uri constructor.
      * @param AddressInterface|null $address
-     * @param int $convention
+     * @param int $rule
      */
-    public function __construct(AddressInterface $address = null, int $convention = self::BIP0021)
+    public function __construct(AddressInterface $address = null, $rule = self::BIP0021)
     {
-        if ($convention === self::BIP0021) {
+        if ($rule === self::BIP0021) {
             if ($address === null) {
                 throw new \InvalidArgumentException('Cannot provide a null address with bip0021');
             }
-            $this->bip21Address = $address;
-        } else if ($convention === self::BIP0072) {
-            $this->bip72Address = $address;
-        } else {
-            throw new \InvalidArgumentException("Invalid convention for bitcoin uri");
         }
 
-        $this->rule = $convention;
+        $this->address = $address;
+        $this->rule = $rule;
     }
 
     /**
-     * @param string $value
+     * @param int $value
      * @return $this
      */
-    public function setAmountBtc(string $value)
+    public function setAmountBtc($value)
     {
         $this->amount = $value;
         return $this;
@@ -83,7 +72,7 @@ class Uri
      * @param int $value
      * @return $this
      */
-    public function setAmount(Amount $amount, int $value)
+    public function setAmount(Amount $amount, $value)
     {
         $this->amount = $amount->toBtc($value);
         return $this;
@@ -93,7 +82,7 @@ class Uri
      * @param string $label
      * @return $this
      */
-    public function setLabel(string $label)
+    public function setLabel($label)
     {
         $this->label = $label;
         return $this;
@@ -103,7 +92,7 @@ class Uri
      * @param string $message
      * @return $this
      */
-    public function setMessage(string $message)
+    public function setMessage($message)
     {
         $this->message = $message;
         return $this;
@@ -113,7 +102,7 @@ class Uri
      * @param string $url
      * @return $this
      */
-    public function setRequestUrl(string $url)
+    public function setRequestUrl($url)
     {
         $this->request = $url;
         return $this;
@@ -123,12 +112,12 @@ class Uri
      * @param NetworkInterface|null $network
      * @return string
      */
-    public function uri(NetworkInterface $network = null): string
+    public function uri(NetworkInterface $network = null)
     {
         if ($this->rule === self::BIP0072) {
-            $address = $this->bip72Address === null ? '' : $this->bip72Address->getAddress($network);
+            $address = $this->address === null ? '' : $this->address->getAddress($network);
         } else {
-            $address = $this->bip21Address->getAddress($network);
+            $address = $this->address->getAddress($network);
         }
 
         $url = 'bitcoin:' . $address;

@@ -1,20 +1,16 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Serializer\PublicKey;
 
 use Mdanter\Ecc\Crypto\Key\PublicKeyInterface;
 use Mdanter\Ecc\Math\GmpMathInterface;
 use Mdanter\Ecc\Math\MathAdapterFactory;
-use Mdanter\Ecc\Serializer\Point\PointSerializerInterface;
-use Mdanter\Ecc\Serializer\Point\UncompressedPointSerializer;
 use Mdanter\Ecc\Serializer\PublicKey\Der\Formatter;
 use Mdanter\Ecc\Serializer\PublicKey\Der\Parser;
 
 /**
  *
  * @link https://tools.ietf.org/html/rfc5480#page-3
- * @todo: review for full spec, should we support all prefixes here?
  */
 class DerPublicKeySerializer implements PublicKeySerializerInterface
 {
@@ -40,15 +36,15 @@ class DerPublicKeySerializer implements PublicKeySerializerInterface
     private $parser;
 
     /**
-     * @param GmpMathInterface|null $adapter
-     * @param PointSerializerInterface|null $pointSerializer
+     *
+     * @param GmpMathInterface $adapter
      */
-    public function __construct(GmpMathInterface $adapter = null, PointSerializerInterface $pointSerializer = null)
+    public function __construct(GmpMathInterface $adapter = null)
     {
         $this->adapter = $adapter ?: MathAdapterFactory::getAdapter();
 
-        $this->formatter = new Formatter();
-        $this->parser = new Parser($this->adapter, $pointSerializer ?: new UncompressedPointSerializer());
+        $this->formatter = new Formatter($this->adapter);
+        $this->parser = new Parser($this->adapter);
     }
 
     /**
@@ -56,16 +52,12 @@ class DerPublicKeySerializer implements PublicKeySerializerInterface
      * @param  PublicKeyInterface $key
      * @return string
      */
-    public function serialize(PublicKeyInterface $key): string
+    public function serialize(PublicKeyInterface $key)
     {
         return $this->formatter->format($key);
     }
 
-    /**
-     * @param PublicKeyInterface $key
-     * @return string
-     */
-    public function getUncompressedKey(PublicKeyInterface $key): string
+    public function getUncompressedKey(PublicKeyInterface $key)
     {
         return $this->formatter->encodePoint($key->getPoint());
     }
@@ -74,7 +66,7 @@ class DerPublicKeySerializer implements PublicKeySerializerInterface
      * {@inheritDoc}
      * @see \Mdanter\Ecc\Serializer\PublicKey\PublicKeySerializerInterface::parse()
      */
-    public function parse(string $string): PublicKeyInterface
+    public function parse($string)
     {
         return $this->parser->parse($string);
     }

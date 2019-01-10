@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction\SignatureHash;
 
 use BitWasp\Bitcoin\Script\Opcodes;
@@ -22,19 +20,9 @@ class TxSigHashSerializer
     private $scriptCode;
 
     /**
-     * @var int
+     * @var
      */
     private $nIn;
-
-    /**
-     * @var \BitWasp\Buffertools\Types\VarInt
-     */
-    private $varint;
-
-    /**
-     * @var \BitWasp\Buffertools\Types\ByteString
-     */
-    private $bs32le;
 
     /**
      * @var bool
@@ -57,7 +45,7 @@ class TxSigHashSerializer
      * @param int $nIn
      * @param int $nHashTypeIn
      */
-    public function __construct(TransactionInterface $tx, ScriptInterface $scriptCode, int $nIn, int $nHashTypeIn)
+    public function __construct(TransactionInterface $tx, ScriptInterface $scriptCode, $nIn, $nHashTypeIn)
     {
         $this->tx = $tx;
         $this->scriptCode = $scriptCode;
@@ -75,7 +63,7 @@ class TxSigHashSerializer
     /**
      * @return string
      */
-    private function serializeScript(): string
+    private function serializeScript()
     {
         $script = $this->scriptCode;
         $parser = $script->getScriptParser();
@@ -111,7 +99,7 @@ class TxSigHashSerializer
      * @param int $nInput
      * @return string
      */
-    public function serializeInput(int $nInput): string
+    public function serializeInput($nInput)
     {
         if ($this->anyoneCanPay) {
             $nInput = $this->nIn;
@@ -119,7 +107,8 @@ class TxSigHashSerializer
 
         $txIn = $this->tx->getInput($nInput);
         $outpoint = $txIn->getOutPoint();
-        $out = $this->bs32le->write($outpoint->getTxId()) . pack('V', $outpoint->getVout());
+        $out = $this->bs32le->write($outpoint->getTxId())
+            . pack('V', $outpoint->getVout());
 
         if ($nInput !== $this->nIn) {
             // script length is zero
@@ -141,7 +130,7 @@ class TxSigHashSerializer
      * @param int $nOutput
      * @return string
      */
-    public function serializeOutput(int $nOutput): string
+    public function serializeOutput($nOutput)
     {
         if ($this->hashSingle && $nOutput != $this->nIn) {
             $out = pack('P', -1) . "\x00";
@@ -157,7 +146,7 @@ class TxSigHashSerializer
     /**
      * @return string
      */
-    public function serializeTransaction(): string
+    public function serializeTransaction()
     {
         $data = Types::int32le()->write($this->tx->getVersion());
 

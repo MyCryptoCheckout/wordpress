@@ -16,14 +16,14 @@ use Countable;
 use FG\ASN1\Exception\ParserException;
 use Iterator;
 
-abstract class Construct extends ASNObject implements Countable, ArrayAccess, Iterator, Parsable
+abstract class Construct extends Object implements Countable, ArrayAccess, Iterator, Parsable
 {
-    /** @var \FG\ASN1\ASNObject[] */
+    /** @var \FG\ASN1\Object[] */
     protected $children;
     private $iteratorPosition;
 
     /**
-     * @param \FG\ASN1\ASNObject[] $children the variadic type hint is commented due to https://github.com/facebook/hhvm/issues/4858
+     * @param \FG\ASN1\Object[] $children the variadic type hint is commented due to https://github.com/facebook/hhvm/issues/4858
      */
     public function __construct(/* HH_FIXME[4858]: variadic + strict */ ...$children)
     {
@@ -105,7 +105,7 @@ abstract class Construct extends ASNObject implements Countable, ArrayAccess, It
         return $result;
     }
 
-    public function addChild(ASNObject $child)
+    public function addChild(Object $child)
     {
         $this->children[] = $child;
     }
@@ -131,7 +131,7 @@ abstract class Construct extends ASNObject implements Countable, ArrayAccess, It
     }
 
     /**
-     * @return \FG\ASN1\ASNObject[]
+     * @return \FG\ASN1\Object[]
      */
     public function getChildren()
     {
@@ -139,7 +139,7 @@ abstract class Construct extends ASNObject implements Countable, ArrayAccess, It
     }
 
     /**
-     * @return \FG\ASN1\ASNObject
+     * @return \FG\ASN1\Object
      */
     public function getFirstChild()
     {
@@ -164,7 +164,7 @@ abstract class Construct extends ASNObject implements Countable, ArrayAccess, It
         $children = [];
         $octetsToRead = $contentLength;
         while ($octetsToRead > 0) {
-            $newChild = ASNObject::fromBinary($binaryData, $offsetIndex);
+            $newChild = Object::fromBinary($binaryData, $offsetIndex);
             $octetsToRead -= $newChild->getObjectLength();
             $children[] = $newChild;
         }

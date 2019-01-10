@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction;
 
 use BitWasp\Bitcoin\Script\ScriptInterface;
@@ -14,18 +12,18 @@ interface TransactionOutputInterface extends SerializableInterface
      *
      * @return int
      */
-    public function getValue(): int;
+    public function getValue();
 
     /**
      * Get the script for this output
      *
      * @return ScriptInterface
      */
-    public function getScript(): ScriptInterface;
+    public function getScript();
 
     /**
      * @param TransactionOutputInterface $output
      * @return bool
      */
-    public function equals(TransactionOutputInterface $output): bool;
+    public function equals(TransactionOutputInterface $output);
 }

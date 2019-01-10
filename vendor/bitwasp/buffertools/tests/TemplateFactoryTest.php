@@ -1,20 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools\Tests;
 
 use BitWasp\Buffertools\TemplateFactory;
 use BitWasp\Buffertools\Types\VarInt;
 use BitWasp\Buffertools\Types\VarString;
-use BitWasp\Buffertools\Types\Vector;
+use Mdanter\Ecc\EccFactory;
 
 class TemplateFactoryTest extends BinaryTest
 {
     /**
      * @return array
      */
-    public function getTestVectors(): array
+    public function getTestVectors()
     {
         $vectors = [];
 
@@ -46,12 +44,11 @@ class TemplateFactoryTest extends BinaryTest
 
     /**
      * @dataProvider getTestVectors
-     * @param string $function
-     * @param string $eClass
      */
-    public function testTemplateUint(string $function, string $eClass)
+    public function testTemplateUint($function, $eClass)
     {
-        $factory = new TemplateFactory(null);
+        $math = EccFactory::getAdapter();
+        $factory = new TemplateFactory(null, $math);
         $factory->$function();
         $template = $factory->getTemplate();
         $this->assertEquals(1, count($template));
@@ -61,7 +58,8 @@ class TemplateFactoryTest extends BinaryTest
 
     public function testVector()
     {
-        $factory = new TemplateFactory(null);
+        $math = EccFactory::getAdapter();
+        $factory = new TemplateFactory(null, $math);
         $factory->vector(
             function () {
                 return;
@@ -70,6 +68,6 @@ class TemplateFactoryTest extends BinaryTest
         $template = $factory->getTemplate();
         $this->assertEquals(1, count($template));
         $template = $factory->getTemplate()->getItems();
-        $this->assertInstanceOf(Vector::class, $template[0]);
+        $this->assertInstanceOf('BitWasp\Buffertools\Types\Vector', $template[0]);
     }
 }

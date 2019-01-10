@@ -1,47 +1,40 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Serializer\Signature\Der;
 
-use FG\ASN1\ASNObject;
 use FG\ASN1\Identifier;
-use FG\ASN1\Universal\Integer;
+use FG\ASN1\Object;
 use Mdanter\Ecc\Crypto\Signature\Signature;
-use Mdanter\Ecc\Crypto\Signature\SignatureInterface;
-use Mdanter\Ecc\Exception\SignatureDecodeException;
 
 class Parser
 {
     /**
      * @param string $binary
-     * @return SignatureInterface
+     * @return Signature
      * @throws \FG\ASN1\Exception\ParserException
      */
-    public function parse(string $binary): SignatureInterface
+    public function parse($binary)
     {
-        $offsetIndex = 0;
-        $asnObject = ASNObject::fromBinary($binary, $offsetIndex);
-
-        if ($offsetIndex != strlen($binary)) {
-            throw new SignatureDecodeException('Invalid data.');
+        $object = Object::fromBinary($binary);
+        if ($object->getType() !== Identifier::SEQUENCE) {
+            throw new \RuntimeException('Invalid data');
         }
 
-        // Set inherits from Sequence, so use getType!
-        if ($asnObject->getType() !== Identifier::SEQUENCE) {
-            throw new SignatureDecodeException('Invalid tag for sequence.');
+        $content = $object->getContent();
+        if (count($content) !== 2) {
+            throw new \RuntimeException('Failed to parse signature');
         }
 
-        if ($asnObject->getNumberofChildren() !== 2) {
-            throw new SignatureDecodeException('Invalid data.');
-        }
-
-        if (!($asnObject[0] instanceof Integer && $asnObject[1] instanceof Integer)) {
-            throw new SignatureDecodeException('Invalid data.');
+        /** @var \FG\ASN1\Universal\Integer $r  */
+        /** @var \FG\ASN1\Universal\Integer $s  */
+        list ($r, $s) = $content;
+        if ($r->getType() !== Identifier::INTEGER || $s->getType() !== Identifier::INTEGER) {
+            throw new \RuntimeException('Failed to parse signature');
         }
 
         return new Signature(
-            gmp_init($asnObject[0]->getContent(), 10),
-            gmp_init($asnObject[1]->getContent(), 10)
+            gmp_init($r->getContent(), 10),
+            gmp_init($s->getContent(), 10)
         );
     }
 }

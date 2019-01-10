@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Util;
 
@@ -11,7 +10,7 @@ class BinaryString
      * @param string $str
      * @return int
      */
-    public static function length(string $str): int
+    public static function length($str)
     {
         // Premature optimization: cache the function_exists() result
         static $exists = null;
@@ -34,7 +33,7 @@ class BinaryString
      * @param int $length (optional)
      * @return string
      */
-    public static function substring(string $str, int $start = 0, int $length = null): string
+    public static function substring($str, $start = 0, $length = null)
     {
         // Premature optimization: cache the function_exists() result
         static $exists = null;
@@ -59,7 +58,7 @@ class BinaryString
      *
      * @return bool
      */
-    public static function constantTimeCompare(string $knownString, string $userString): bool
+    public static function constantTimeCompare($knownString, $userString)
     {
         return hash_equals($knownString, $userString);
     }

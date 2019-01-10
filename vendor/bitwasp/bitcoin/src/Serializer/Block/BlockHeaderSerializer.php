@@ -1,14 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Block;
 
 use BitWasp\Bitcoin\Block\BlockHeader;
 use BitWasp\Bitcoin\Block\BlockHeaderInterface;
 use BitWasp\Bitcoin\Serializer\Types;
 use BitWasp\Buffertools\Buffer;
-use BitWasp\Buffertools\BufferInterface;
 use BitWasp\Buffertools\Exceptions\ParserOutOfRange;
 use BitWasp\Buffertools\Parser;
 
@@ -37,25 +34,25 @@ class BlockHeaderSerializer
     }
 
     /**
-     * @param BufferInterface $buffer
-     * @return BlockHeaderInterface
+     * @param \BitWasp\Buffertools\BufferInterface|string $string
+     * @return BlockHeader
      * @throws ParserOutOfRange
      */
-    public function parse(BufferInterface $buffer): BlockHeaderInterface
+    public function parse($string)
     {
-        return $this->fromParser(new Parser($buffer));
+        return $this->fromParser(new Parser($string));
     }
 
     /**
      * @param Parser $parser
-     * @return BlockHeaderInterface
+     * @return BlockHeader
      * @throws ParserOutOfRange
      */
-    public function fromParser(Parser $parser): BlockHeaderInterface
+    public function fromParser(Parser $parser)
     {
         try {
             return new BlockHeader(
-                (int) $this->int32le->read($parser),
+                $this->int32le->read($parser),
                 $this->hash->read($parser),
                 $this->hash->read($parser),
                 (int) $this->uint32le->read($parser),
@@ -69,9 +66,9 @@ class BlockHeaderSerializer
 
     /**
      * @param BlockHeaderInterface $header
-     * @return BufferInterface
+     * @return \BitWasp\Buffertools\BufferInterface
      */
-    public function serialize(BlockHeaderInterface $header): BufferInterface
+    public function serialize(BlockHeaderInterface $header)
     {
         return new Buffer(
             $this->int32le->write($header->getVersion()) .

@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Crypto\Key;
 
@@ -39,15 +38,15 @@ interface PublicKeyInterface
     /**
      * @return CurveFpInterface
      */
-    public function getCurve(): CurveFpInterface;
+    public function getCurve();
 
     /**
      * @return PointInterface
      */
-    public function getPoint(): PointInterface;
+    public function getPoint();
 
     /**
      * @return GeneratorPoint
      */
-    public function getGenerator(): GeneratorPoint;
+    public function getGenerator();
 }

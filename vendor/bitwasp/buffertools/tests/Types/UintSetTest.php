@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools\Tests\Types;
 
 use BitWasp\Buffertools\ByteOrder;
@@ -16,22 +14,23 @@ use BitWasp\Buffertools\Types\Uint256;
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\Buffertools;
 use BitWasp\Buffertools\Parser;
+use Mdanter\Ecc\EccFactory;
 
 class UintSetTest extends BinaryTest
 {
 
     /**
-     * @param int $bitSize
-     * @param int $byteOrder
+     * @param $bitSize
      * @return array
      */
-    private function generateSizeBasedTests(int $bitSize, int $byteOrder)
+    private function generateSizeBasedTests($bitSize, $byteOrder)
     {
-        $halfPos = gmp_strval(gmp_init(str_pad('7', $bitSize / 4, 'f', STR_PAD_RIGHT), 16), 10);
-        $maxPos = gmp_strval(gmp_init(str_pad('', $bitSize / 4, 'f', STR_PAD_RIGHT), 16), 10);
+        $math = EccFactory::getAdapter();
+        $halfPos = $math->baseConvert(str_pad('7', $bitSize / 4, 'f', STR_PAD_RIGHT), 16, 10);
+        $maxPos = $math->baseConvert(str_pad('', $bitSize / 4, 'f', STR_PAD_RIGHT), 16, 10);
 
-        $test = function ($integer) use ($bitSize, $byteOrder) {
-            $hex = str_pad(gmp_strval(gmp_init($integer, 10), 16), $bitSize / 4, '0', STR_PAD_LEFT);
+        $test = function ($integer) use ($bitSize, $math, $byteOrder) {
+            $hex = str_pad($math->baseConvert($integer, 10, 16), $bitSize / 4, '0', STR_PAD_LEFT);
 
             if ($byteOrder == ByteOrder::LE) {
                 $hex = Buffertools::flipBytes(Buffer::hex($hex))->getHex();
@@ -52,33 +51,35 @@ class UintSetTest extends BinaryTest
     }
 
     /**
+     * @param $math
      * @return UintInterface[]
      */
-    public function getUintClasses(): array
+    public function getUintClasses($math)
     {
         return [
-            new Uint8(),
-            new Uint16(),
-            new Uint32(),
-            new Uint64(),
-            new Uint128(),
-            new Uint256(),
-            new Uint8(ByteOrder::LE),
-            new Uint16(ByteOrder::LE),
-            new Uint32(ByteOrder::LE),
-            new Uint64(ByteOrder::LE),
-            new Uint128(ByteOrder::LE),
-            new Uint256(ByteOrder::LE),
+            new Uint8($math),
+            new Uint16($math),
+            new Uint32($math),
+            new Uint64($math),
+            new Uint128($math),
+            new Uint256($math),
+            new Uint8($math, ByteOrder::LE),
+            new Uint16($math, ByteOrder::LE),
+            new Uint32($math, ByteOrder::LE),
+            new Uint64($math, ByteOrder::LE),
+            new Uint128($math, ByteOrder::LE),
+            new Uint256($math, ByteOrder::LE),
         ];
     }
 
     /**
      * @return array
      */
-    public function getAllTests(): array
+    public function AllTests()
     {
+        $math = EccFactory::getAdapter();
         $vectors = [];
-        foreach ($this->getUintClasses() as $val) {
+        foreach ($this->getUintClasses($math) as $val) {
             $order = $val->getByteOrder();
             foreach ($this->generateSizeBasedTests($val->getBitSize(), $order) as $t) {
                 $vectors[] = array_merge([$val], $t);
@@ -88,12 +89,11 @@ class UintSetTest extends BinaryTest
     }
 
     /**
-     * @dataProvider getAllTests
-     * @param UintInterface $comp
-     * @param int|string $int
-     * @param string $eHex
+     * @dataProvider AllTests
+     * @param $int
+     * @param $eHex
      */
-    public function testUint(UintInterface $comp, $int, string $eHex)
+    public function testUint(UintInterface $comp, $int, $eHex)
     {
         $binary = $comp->write($int);
         $this->assertEquals($eHex, str_pad(bin2hex($binary), $comp->getBitSize() / 4, '0', STR_PAD_LEFT));
@@ -109,7 +109,8 @@ class UintSetTest extends BinaryTest
      */
     public function testUintInvalidOrder()
     {
-        new Uint8(2);
+        $math = EccFactory::getAdapter();
+        new Uint8($math, 2);
     }
 
     /**
@@ -118,7 +119,8 @@ class UintSetTest extends BinaryTest
      */
     public function testInvalidFlipLength()
     {
-        $u = new Uint8(1);
+        $math = EccFactory::getAdapter();
+        $u = new Uint8($math, 1);
         $u->flipBits('0');
     }
 }

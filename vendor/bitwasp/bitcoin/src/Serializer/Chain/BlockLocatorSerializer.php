@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Chain;
 
 use BitWasp\Bitcoin\Chain\BlockLocator;
@@ -12,6 +10,7 @@ use BitWasp\Buffertools\Parser;
 
 class BlockLocatorSerializer
 {
+
     /**
      * @var \BitWasp\Buffertools\Types\VarInt
      */
@@ -32,7 +31,7 @@ class BlockLocatorSerializer
      * @param Parser $parser
      * @return BlockLocator
      */
-    public function fromParser(Parser $parser): BlockLocator
+    public function fromParser(Parser $parser)
     {
         $numHashes = $this->varint->read($parser);
         $hashes = [];
@@ -46,20 +45,19 @@ class BlockLocatorSerializer
     }
 
     /**
-     * @param BufferInterface $data
+     * @param BufferInterface|string $data
      * @return BlockLocator
      */
-    public function parse(BufferInterface $data): BlockLocator
+    public function parse($data)
     {
         return $this->fromParser(new Parser($data));
     }
 
     /**
      * @param BlockLocator $blockLocator
-     * @return BufferInterface
-     * @throws \Exception
+     * @return \BitWasp\Buffertools\BufferInterface
      */
-    public function serialize(BlockLocator $blockLocator): BufferInterface
+    public function serialize(BlockLocator $blockLocator)
     {
         $binary = $this->varint->write(count($blockLocator->getHashes()));
         foreach ($blockLocator->getHashes() as $hash) {

@@ -49,6 +49,12 @@ namespace mycryptocheckout
 			$this->init_misc_methods_trait();
 			$this->easy_digital_downloads = new ecommerce\easy_digital_downloads\Easy_Digital_Downloads();
 			$this->woocommerce = new ecommerce\woocommerce\WooCommerce();
+
+			if ( defined( 'WP_CLI' ) && WP_CLI )
+			{
+				$cli = new cli\MyCryptoCheckout();
+				\WP_CLI::add_command( 'mycryptocheckout', $cli );
+			}
 		}
 	}
 }

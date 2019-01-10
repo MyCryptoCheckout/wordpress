@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Serializer\PrivateKey;
 
@@ -27,9 +26,9 @@ class PemPrivateKeySerializer implements PrivateKeySerializerInterface
 
     /**
      * {@inheritDoc}
-     * @see \Mdanter\Ecc\Serializer\PrivateKey\PrivateKeySerializerInterface::serialize()
+     * @see \Mdanter\Ecc\Serializer\PrivateKeySerializerInterface::serialize()
      */
-    public function serialize(PrivateKeyInterface $key): string
+    public function serialize(PrivateKeyInterface $key)
     {
         $privateKeyInfo = $this->derSerializer->serialize($key);
 
@@ -42,9 +41,9 @@ class PemPrivateKeySerializer implements PrivateKeySerializerInterface
 
     /**
      * {@inheritDoc}
-     * @see \Mdanter\Ecc\Serializer\PrivateKey\PrivateKeySerializerInterface::parse()
+     * @see \Mdanter\Ecc\Serializer\PrivateKeySerializerInterface::parse()
      */
-    public function parse(string $formattedKey): PrivateKeyInterface
+    public function parse($formattedKey)
     {
         $formattedKey = str_replace('-----BEGIN EC PRIVATE KEY-----', '', $formattedKey);
         $formattedKey = str_replace('-----END EC PRIVATE KEY-----', '', $formattedKey);

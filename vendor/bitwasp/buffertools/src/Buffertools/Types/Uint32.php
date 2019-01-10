@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools\Types;
 
 use BitWasp\Buffertools\Parser;
@@ -15,16 +13,16 @@ class Uint32 extends AbstractUint
      * {@inheritdoc}
      * @see \BitWasp\Buffertools\Types\TypeInterface::getBitSize()
      */
-    public function getBitSize(): int
+    public function getBitSize()
     {
         return 32;
     }
 
     /**
-     * @param int|string $integer
-     * @return string
+     * {@inheritdoc}
+     * @see \BitWasp\Buffertools\Types\TypeInterface::write()
      */
-    public function write($integer): string
+    public function write($integer)
     {
         if ($this->isBigEndian()) {
             return pack($this->formatBE, $integer);

@@ -1,10 +1,7 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Primitives;
 
-use Mdanter\Ecc\Crypto\Key\PrivateKeyInterface;
-use Mdanter\Ecc\Crypto\Key\PublicKeyInterface;
 use Mdanter\Ecc\Math\GmpMathInterface;
 use Mdanter\Ecc\Crypto\Key\PrivateKey;
 use Mdanter\Ecc\Crypto\Key\PublicKey;
@@ -17,7 +14,7 @@ use Mdanter\Ecc\Random\RandomNumberGeneratorInterface;
 class GeneratorPoint extends Point
 {
     /**
-     * @var RandomNumberGeneratorInterface
+     * @var \Mdanter\Ecc\Random\DebugDecorator|RandomNumberGeneratorInterface|null
      */
     private $generator;
 
@@ -47,9 +44,9 @@ class GeneratorPoint extends Point
      * @todo   Check if really necessary here (only used for testing in lib)
      * @param  \GMP $x
      * @param  \GMP $y
-     * @return bool
+     * @return boolean
      */
-    public function isValid(\GMP $x, \GMP $y): bool
+    public function isValid(\GMP $x, \GMP $y)
     {
        
         $math = $this->getAdapter();
@@ -76,9 +73,9 @@ class GeneratorPoint extends Point
     }
 
     /**
-     * @return PrivateKeyInterface
+     * @return PrivateKey
      */
-    public function createPrivateKey(): PrivateKeyInterface
+    public function createPrivateKey()
     {
         $secret = $this->generator->generate($this->getOrder());
 
@@ -88,19 +85,20 @@ class GeneratorPoint extends Point
     /**
      * @param \GMP $x
      * @param \GMP $y
-     * @return PublicKeyInterface
+     * @param \GMP $order
+     * @return PublicKey
      */
-    public function getPublicKeyFrom(\GMP $x, \GMP $y): PublicKeyInterface
+    public function getPublicKeyFrom(\GMP $x, \GMP $y, \GMP $order = null)
     {
-        $pubPoint = $this->getCurve()->getPoint($x, $y, $this->getOrder());
+        $pubPoint = $this->getCurve()->getPoint($x, $y, $order);
         return new PublicKey($this->getAdapter(), $this, $pubPoint);
     }
 
     /**
      * @param \GMP $secretMultiplier
-     * @return PrivateKeyInterface
+     * @return PrivateKey
      */
-    public function getPrivateKeyFrom(\GMP $secretMultiplier): PrivateKeyInterface
+    public function getPrivateKeyFrom(\GMP $secretMultiplier)
     {
         return new PrivateKey($this->getAdapter(), $this, $secretMultiplier);
     }

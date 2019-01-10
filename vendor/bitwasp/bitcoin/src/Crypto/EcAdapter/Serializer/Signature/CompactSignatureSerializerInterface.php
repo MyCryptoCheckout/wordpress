@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Serializer\Signature;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\CompactSignatureInterface;
@@ -13,11 +11,11 @@ interface CompactSignatureSerializerInterface
      * @param CompactSignatureInterface $signature
      * @return BufferInterface
      */
-    public function serialize(CompactSignatureInterface $signature): BufferInterface;
+    public function serialize(CompactSignatureInterface $signature);
 
     /**
-     * @param BufferInterface $data
+     * @param string|BufferInterface $data
      * @return CompactSignatureInterface
      */
-    public function parse(BufferInterface $data): CompactSignatureInterface;
+    public function parse($data);
 }

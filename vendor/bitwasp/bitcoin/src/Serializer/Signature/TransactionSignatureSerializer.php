@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Signature;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Serializer\Signature\DerSignatureSerializerInterface;
 use BitWasp\Bitcoin\Signature\TransactionSignature;
-use BitWasp\Bitcoin\Signature\TransactionSignatureInterface;
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\BufferInterface;
+use BitWasp\Buffertools\Parser;
 
 class TransactionSignatureSerializer
 {
@@ -26,31 +24,28 @@ class TransactionSignatureSerializer
     }
 
     /**
-     * @param TransactionSignatureInterface $txSig
+     * @param TransactionSignature $txSig
      * @return BufferInterface
      */
-    public function serialize(TransactionSignatureInterface $txSig): BufferInterface
+    public function serialize(TransactionSignature $txSig)
     {
         return new Buffer($this->sigSerializer->serialize($txSig->getSignature())->getBinary() . pack('C', $txSig->getHashType()));
     }
 
     /**
-     * @param BufferInterface $buffer
-     * @return TransactionSignatureInterface
-     * @throws \Exception
+     * @param string|BufferInterface $string
+     * @return TransactionSignature
      */
-    public function parse(BufferInterface $buffer): TransactionSignatureInterface
+    public function parse($string)
     {
         $adapter = $this->sigSerializer->getEcAdapter();
-
-        if ($buffer->getSize() < 1) {
-            throw new \RuntimeException("Empty signature");
-        }
+        $math = $adapter->getMath();
+        $buffer = (new Parser($string, $math))->getBuffer()->getBinary();
 
         return new TransactionSignature(
             $adapter,
-            $this->sigSerializer->parse($buffer->slice(0, -1)),
-            (int) $buffer->slice(-1)->getInt()
+            $this->sigSerializer->parse(new Buffer(substr($buffer, 0, -1), null, $math)),
+            unpack('C', substr($buffer, -1))[1]
         );
     }
 }

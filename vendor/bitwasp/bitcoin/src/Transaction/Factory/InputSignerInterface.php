@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction\Factory;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PrivateKeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PublicKeyInterface;
-use BitWasp\Bitcoin\Script\FullyQualifiedScript;
+use BitWasp\Bitcoin\Script\Classifier\OutputData;
 use BitWasp\Bitcoin\Signature\TransactionSignatureInterface;
 use BitWasp\Bitcoin\Transaction\SignatureHash\SigHash;
 use BitWasp\Buffertools\BufferInterface;
@@ -14,26 +12,31 @@ use BitWasp\Buffertools\BufferInterface;
 interface InputSignerInterface
 {
     /**
+     * @return InputSigner
+     */
+    public function extract();
+
+    /**
      * Calculates the signature hash for the input for the given $sigHashType.
      *
      * @param int $sigHashType
      * @return BufferInterface
      */
-    public function getSigHash(int $sigHashType): BufferInterface;
+    public function getSigHash($sigHashType);
 
     /**
      * Returns whether all required signatures have been provided.
      *
      * @return bool
      */
-    public function isFullySigned(): bool;
+    public function isFullySigned();
 
     /**
      * Returns the required number of signatures for this input.
      *
      * @return int
      */
-    public function getRequiredSigs(): int;
+    public function getRequiredSigs();
 
     /**
      * Returns an array where the values are either null,
@@ -41,7 +44,7 @@ interface InputSignerInterface
      *
      * @return TransactionSignatureInterface[]
      */
-    public function getSignatures(): array;
+    public function getSignatures();
 
     /**
      * Returns an array where the values are either null,
@@ -49,33 +52,51 @@ interface InputSignerInterface
      *
      * @return PublicKeyInterface[]
      */
-    public function getPublicKeys(): array;
+    public function getPublicKeys();
+
+    /**
+     * OutputData for the script to be signed (will be
+     * equal to getScriptPubKey, or getRedeemScript, or
+     * getWitnessScript.
+     *
+     * @return OutputData
+     */
+    public function getSignScript();
 
     /**
      * OutputData for the txOut script.
      *
-     * @return FullyQualifiedScript
+     * @return OutputData
      */
-    public function getInputScripts(): FullyQualifiedScript;
+    public function getScriptPubKey();
 
     /**
-     * @return mixed
+     * Returns OutputData for the P2SH redeemScript.
+     *
+     * @return OutputData
      */
-    public function getSteps();
+    public function getRedeemScript();
 
     /**
-     * @param int $idx
-     * @return Checksig[]|Conditional[]
+     * Returns OutputData for the P2WSH witnessScript.
+     *
+     * @return OutputData
      */
-    public function step(int $idx);
+    public function getWitnessScript();
 
     /**
-     * @param int $idx
-     * @param PrivateKeyInterface $privateKey
-     * @param int $sigHashType
-     * @return mixed
+     * Returns whether the scriptPubKey is P2SH.
+     *
+     * @return bool
      */
-    public function signStep(int $idx, PrivateKeyInterface $privateKey, int $sigHashType = SigHash::ALL);
+    public function isP2SH();
+
+    /**
+     * Returns whether the scriptPubKey or redeemScript is P2WSH.
+     *
+     * @return bool
+     */
+    public function isP2WSH();
 
     /**
      * Sign the input using $key and $sigHashTypes
@@ -84,7 +105,7 @@ interface InputSignerInterface
      * @param int $sigHashType
      * @return $this
      */
-    public function sign(PrivateKeyInterface $privateKey, int $sigHashType = SigHash::ALL);
+    public function sign(PrivateKeyInterface $privateKey, $sigHashType = SigHash::ALL);
 
     /**
      * Verifies the input using $flags for script verification, otherwise
@@ -93,12 +114,12 @@ interface InputSignerInterface
      * @param int $flags
      * @return bool
      */
-    public function verify(int $flags = null): bool;
+    public function verify($flags = null);
 
     /**
      * Produces a SigValues instance containing the scriptSig & script witness
      *
      * @return SigValues
      */
-    public function serializeSignatures(): SigValues;
+    public function serializeSignatures();
 }

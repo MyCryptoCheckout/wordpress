@@ -1,42 +1,40 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools;
 
 interface BufferInterface
 {
     /**
-     * @param int              $start
-     * @param int|null         $end
+     * @param integer $start
+     * @param integer|null $end
      * @return BufferInterface
      * @throws \Exception
      */
-    public function slice(int $start, int $end = null): BufferInterface;
+    public function slice($start, $end = null);
 
     /**
      * Get the size of the buffer to be returned
      *
      * @return int
      */
-    public function getSize(): int;
+    public function getSize();
 
     /**
      * Get the size of the value stored in the buffer
      *
      * @return int
      */
-    public function getInternalSize(): int;
+    public function getInternalSize();
 
     /**
      * @return string
      */
-    public function getBinary(): string;
+    public function getBinary();
 
     /**
      * @return string
      */
-    public function getHex(): string;
+    public function getHex();
 
     /**
      * @return int|string
@@ -46,16 +44,15 @@ interface BufferInterface
     /**
      * @return \GMP
      */
-    public function getGmp(): \GMP;
+    public function getGmp();
 
     /**
      * @return Buffer
      */
-    public function flip(): BufferInterface;
+    public function flip();
 
     /**
-     * @param BufferInterface $other
      * @return bool
      */
-    public function equals(BufferInterface $other): bool;
+    public function equals(BufferInterface $other);
 }

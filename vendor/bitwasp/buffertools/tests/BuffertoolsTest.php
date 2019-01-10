@@ -1,19 +1,15 @@
 <?php
 
-declare(strict_types=1);
+namespace BitWasp\Buffertools;
 
-namespace BitWasp\Buffertools\Tests;
+use Mdanter\Ecc\EccFactory;
 
-use BitWasp\Buffertools\Buffer;
-use BitWasp\Buffertools\Buffertools;
-use PHPUnit\Framework\TestCase;
-
-class BuffertoolsTest extends TestCase
+class BuffertoolsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @return array
      */
-    private function getUnsortedList(): array
+    private function getUnsortedList()
     {
         return [
             '0101',
@@ -28,7 +24,7 @@ class BuffertoolsTest extends TestCase
     /**
      * @return array
      */
-    private function getSortedList(): array
+    private function getSortedList()
     {
         return [
             '0000',
@@ -43,7 +39,7 @@ class BuffertoolsTest extends TestCase
     /**
      * @return array
      */
-    private function getUnsortedBufferList(): array
+    private function getUnsortedBufferList()
     {
         $results = [];
         foreach ($this->getUnsortedList() as $hex) {
@@ -55,7 +51,7 @@ class BuffertoolsTest extends TestCase
     /**
      * @return array
      */
-    private function getSortedBufferList(): array
+    private function getSortedBufferList()
     {
         $results = [];
         foreach ($this->getSortedList() as $hex) {
@@ -151,6 +147,18 @@ class BuffertoolsTest extends TestCase
         $this->assertSame($expected, $val->getBinary());
     }
 
+    /**
+     * @expectedException \Exception
+     */
+    public function testNumToVarIntOutOfRange()
+    {
+        // Check that this is out of range (PHP's fault)
+        $adapter = EccFactory::getAdapter();
+        $two = gmp_init(2, 10);
+        $decimal  = $adapter->toString($adapter->add($adapter->pow($two, 32), gmp_init(1)));
+        Buffertools::numToVarInt($decimal);
+    }
+
     public function testFlipBytes()
     {
         $buffer = Buffer::hex('41');
@@ -173,6 +181,7 @@ class BuffertoolsTest extends TestCase
         $flip   = Buffertools::flipBytes($string);
         $this->assertSame($flip, chr(0x08) . chr(0x07) . chr(0x06) . chr(0x05) . chr(0x04) . chr(0x03) . chr(0x02) . chr(0x01));
     }
+
 
     public function testConcat()
     {

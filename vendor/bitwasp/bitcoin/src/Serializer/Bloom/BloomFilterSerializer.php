@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Bloom;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -38,7 +36,7 @@ class BloomFilterSerializer
      * @param BloomFilter $filter
      * @return BufferInterface
      */
-    public function serialize(BloomFilter $filter): BufferInterface
+    public function serialize(BloomFilter $filter)
     {
         $parser = new Parser();
         $parser->appendBinary($this->varint->write(count($filter->getData())));
@@ -57,7 +55,7 @@ class BloomFilterSerializer
      * @param Parser $parser
      * @return BloomFilter
      */
-    public function fromParser(Parser $parser): BloomFilter
+    public function fromParser(Parser $parser)
     {
         $varint = (int) $this->varint->read($parser);
         $vData = [];
@@ -65,9 +63,9 @@ class BloomFilterSerializer
             $vData[] = (int) $this->uint8le->read($parser);
         }
 
-        $nHashFuncs = (int) $this->uint32le->read($parser);
-        $nTweak = (int) $this->uint32le->read($parser);
-        $flags = (int) $this->uint8le->read($parser);
+        $nHashFuncs = $this->uint32le->read($parser);
+        $nTweak = $this->uint32le->read($parser);
+        $flags = $this->uint8le->read($parser);
 
         return new BloomFilter(
             Bitcoin::getMath(),
@@ -79,10 +77,10 @@ class BloomFilterSerializer
     }
 
     /**
-     * @param BufferInterface $data
+     * @param string|BufferInterface $data
      * @return BloomFilter
      */
-    public function parse(BufferInterface $data): BloomFilter
+    public function parse($data)
     {
         return $this->fromParser(new Parser($data));
     }

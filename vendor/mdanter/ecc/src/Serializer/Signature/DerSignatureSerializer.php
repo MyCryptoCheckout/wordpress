@@ -1,11 +1,11 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Serializer\Signature;
 
+use Mdanter\Ecc\Crypto\Signature\Signature;
 use Mdanter\Ecc\Crypto\Signature\SignatureInterface;
 
-class DerSignatureSerializer implements DerSignatureSerializerInterface
+class DerSignatureSerializer
 {
     /**
      * @var Der\Parser
@@ -17,6 +17,9 @@ class DerSignatureSerializer implements DerSignatureSerializerInterface
      */
     private $formatter;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->parser = new Der\Parser();
@@ -27,17 +30,17 @@ class DerSignatureSerializer implements DerSignatureSerializerInterface
      * @param SignatureInterface $signature
      * @return string
      */
-    public function serialize(SignatureInterface $signature): string
+    public function serialize(SignatureInterface $signature)
     {
         return $this->formatter->serialize($signature);
     }
 
     /**
      * @param string $binary
-     * @return SignatureInterface
+     * @return Signature
      * @throws \FG\ASN1\Exception\ParserException
      */
-    public function parse(string $binary): SignatureInterface
+    public function parse($binary)
     {
         return $this->parser->parse($binary);
     }

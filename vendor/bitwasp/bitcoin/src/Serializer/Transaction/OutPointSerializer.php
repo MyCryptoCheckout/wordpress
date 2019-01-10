@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Transaction;
 
 use BitWasp\Bitcoin\Serializer\Types;
@@ -32,9 +30,8 @@ class OutPointSerializer implements OutPointSerializerInterface
     /**
      * @param OutPointInterface $outpoint
      * @return BufferInterface
-     * @throws \Exception
      */
-    public function serialize(OutPointInterface $outpoint): BufferInterface
+    public function serialize(OutPointInterface $outpoint)
     {
         return new Buffer(
             $this->txid->write($outpoint->getTxId()) .
@@ -45,22 +42,17 @@ class OutPointSerializer implements OutPointSerializerInterface
     /**
      * @param Parser $parser
      * @return OutPointInterface
-     * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
      */
-    public function fromParser(Parser $parser): OutPointInterface
+    public function fromParser(Parser $parser)
     {
-        return new OutPoint(
-            $this->txid->read($parser),
-            (int) $this->vout->read($parser)
-        );
+        return new OutPoint($this->txid->read($parser), $this->vout->read($parser));
     }
 
     /**
-     * @param BufferInterface $data
+     * @param string|\BitWasp\Buffertools\BufferInterface $data
      * @return OutPointInterface
-     * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
      */
-    public function parse(BufferInterface $data): OutPointInterface
+    public function parse($data)
     {
         return $this->fromParser(new Parser($data));
     }

@@ -1,18 +1,21 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\Deterministic;
 
+use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\KeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PrivateKeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PublicKeyInterface;
 use BitWasp\Bitcoin\Crypto\Hash;
 use BitWasp\Buffertools\Buffer;
-use BitWasp\Buffertools\BufferInterface;
 
 class ElectrumKey
 {
+    /**
+     * @var EcAdapterInterface
+     */
+    private $ecAdapter;
+
     /**
      * @var null|PrivateKeyInterface
      */
@@ -24,9 +27,10 @@ class ElectrumKey
     private $masterPublic;
 
     /**
+     * @param EcAdapterInterface $ecAdapter
      * @param KeyInterface $masterKey
      */
-    public function __construct(KeyInterface $masterKey)
+    public function __construct(EcAdapterInterface $ecAdapter, KeyInterface $masterKey)
     {
         if ($masterKey->isCompressed()) {
             throw new \RuntimeException('Electrum keys are not compressed');
@@ -38,12 +42,14 @@ class ElectrumKey
         } elseif ($masterKey instanceof PublicKeyInterface) {
             $this->masterPublic = $masterKey;
         }
+
+        $this->ecAdapter = $ecAdapter;
     }
 
     /**
      * @return PrivateKeyInterface
      */
-    public function getMasterPrivateKey(): PrivateKeyInterface
+    public function getMasterPrivateKey()
     {
         if (null === $this->masterPrivate) {
             throw new \RuntimeException("Cannot produce master private key from master public key");
@@ -55,15 +61,15 @@ class ElectrumKey
     /**
      * @return PublicKeyInterface
      */
-    public function getMasterPublicKey(): PublicKeyInterface
+    public function getMasterPublicKey()
     {
         return $this->masterPublic;
     }
 
     /**
-     * @return BufferInterface
+     * @return Buffer
      */
-    public function getMPK(): BufferInterface
+    public function getMPK()
     {
         return $this->getMasterPublicKey()->getBuffer()->slice(1);
     }
@@ -73,30 +79,20 @@ class ElectrumKey
      * @param bool $change
      * @return \GMP
      */
-    public function getSequenceOffset(int $sequence, bool $change = false): \GMP
+    public function getSequenceOffset($sequence, $change = false)
     {
-        $seed = new Buffer(sprintf("%s:%d:%s", $sequence, $change ? 1 : 0, $this->getMPK()->getBinary()));
+        $seed = new Buffer(sprintf("%s:%s:%s", $sequence, $change ? '1' : '0', $this->getMPK()->getBinary()), null, $this->ecAdapter->getMath());
         return Hash::sha256d($seed)->getGmp();
     }
 
     /**
      * @param int $sequence
      * @param bool $change
-     * @return KeyInterface
+     * @return PrivateKeyInterface|PublicKeyInterface
      */
-    public function deriveChild(int $sequence, bool $change = false): KeyInterface
+    public function deriveChild($sequence, $change = false)
     {
         $key = is_null($this->masterPrivate) ? $this->masterPublic : $this->masterPrivate;
         return $key->tweakAdd($this->getSequenceOffset($sequence, $change));
-    }
-
-    /**
-     * @return ElectrumKey
-     */
-    public function withoutPrivateKey(): ElectrumKey
-    {
-        $clone = clone $this;
-        $clone->masterPrivate = null;
-        return $clone;
     }
 }

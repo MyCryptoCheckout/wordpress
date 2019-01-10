@@ -1,27 +1,25 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin;
 
-use BitWasp\Buffertools\BufferInterface;
+use BitWasp\Buffertools\Buffer;
 
 interface SerializableInterface extends \BitWasp\Buffertools\SerializableInterface
 {
     /**
-     * @return BufferInterface
+     * @return Buffer
      */
-    public function getBuffer(): BufferInterface;
+    public function getBuffer();
 
     /**
      * @return string
      */
-    public function getHex(): string;
+    public function getHex();
 
     /**
      * @return string
      */
-    public function getBinary(): string;
+    public function getBinary();
 
     /**
      * @return string

@@ -2,16 +2,13 @@
 
 use BitWasp\Bitcoin\Address\PayToPubKeyHashAddress;
 use BitWasp\Bitcoin\Bitcoin;
-use BitWasp\Bitcoin\Crypto\Random\Random;
-use BitWasp\Bitcoin\Key\Factory\PrivateKeyFactory;
+use BitWasp\Bitcoin\Key\PrivateKeyFactory;
 
 require __DIR__ . "/../vendor/autoload.php";
 
 $network = Bitcoin::getNetwork();
 
-$random = new Random();
-$privKeyFactory = new PrivateKeyFactory();
-$privateKey = $privKeyFactory->generateCompressed($random);
+$privateKey = PrivateKeyFactory::create(true);
 $publicKey = $privateKey->getPublicKey();
 
 echo "Key Info\n";

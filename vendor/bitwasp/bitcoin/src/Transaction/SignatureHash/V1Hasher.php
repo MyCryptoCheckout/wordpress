@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction\SignatureHash;
 
 use BitWasp\Bitcoin\Crypto\Hash;
@@ -32,7 +30,7 @@ class V1Hasher extends SigHash
     protected $outputSerializer;
 
     /**
-     * @var OutPointSerializerInterface
+     * @var TransactionOutputSerializer
      */
     protected $outpointSerializer;
 
@@ -43,12 +41,8 @@ class V1Hasher extends SigHash
      * @param OutPointSerializerInterface $outpointSerializer
      * @param TransactionOutputSerializer|null $outputSerializer
      */
-    public function __construct(
-        TransactionInterface $transaction,
-        int $amount,
-        OutPointSerializerInterface $outpointSerializer = null,
-        TransactionOutputSerializer $outputSerializer = null
-    ) {
+    public function __construct(TransactionInterface $transaction, $amount, OutPointSerializerInterface $outpointSerializer = null, TransactionOutputSerializer $outputSerializer = null)
+    {
         $this->amount = $amount;
         $this->outputSerializer = $outputSerializer ?: new TransactionOutputSerializer();
         $this->outpointSerializer = $outpointSerializer ?: new OutPointSerializer();
@@ -57,9 +51,9 @@ class V1Hasher extends SigHash
 
     /**
      * @param int $sighashType
-     * @return BufferInterface
+     * @return Buffer|BufferInterface
      */
-    public function hashPrevOuts(int $sighashType): BufferInterface
+    public function hashPrevOuts($sighashType)
     {
         if (!($sighashType & SigHash::ANYONECANPAY)) {
             $binary = '';
@@ -74,9 +68,9 @@ class V1Hasher extends SigHash
 
     /**
      * @param int $sighashType
-     * @return BufferInterface
+     * @return Buffer|BufferInterface
      */
-    public function hashSequences(int $sighashType): BufferInterface
+    public function hashSequences($sighashType)
     {
         if (!($sighashType & SigHash::ANYONECANPAY) && ($sighashType & 0x1f) !== SigHash::SINGLE && ($sighashType & 0x1f) !== SigHash::NONE) {
             $binary = '';
@@ -93,9 +87,9 @@ class V1Hasher extends SigHash
     /**
      * @param int $sighashType
      * @param int $inputToSign
-     * @return BufferInterface
+     * @return Buffer|BufferInterface
      */
-    public function hashOutputs(int $sighashType, int $inputToSign): BufferInterface
+    public function hashOutputs($sighashType, $inputToSign)
     {
         if (($sighashType & 0x1f) !== SigHash::SINGLE && ($sighashType & 0x1f) !== SigHash::NONE) {
             $binary = '';
@@ -121,11 +115,9 @@ class V1Hasher extends SigHash
      * @return BufferInterface
      * @throws \Exception
      */
-    public function calculate(
-        ScriptInterface $txOutScript,
-        int $inputToSign,
-        int $sighashType = SigHash::ALL
-    ): BufferInterface {
+    public function calculate(ScriptInterface $txOutScript, $inputToSign, $sighashType = SigHash::ALL)
+    {
+        $sighashType = (int) $sighashType;
 
         $hashPrevOuts = $this->hashPrevOuts($sighashType);
         $hashSequence = $this->hashSequences($sighashType);

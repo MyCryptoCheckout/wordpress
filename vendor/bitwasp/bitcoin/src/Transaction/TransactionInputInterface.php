@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction;
 
 use BitWasp\Bitcoin\Script\ScriptInterface;
@@ -32,21 +30,21 @@ interface TransactionInputInterface extends SerializableInterface
      *
      * @return OutPointInterface
      */
-    public function getOutPoint(): OutPointInterface;
+    public function getOutPoint();
 
     /**
      * Get the scriptSig for this input
      *
      * @return ScriptInterface
      */
-    public function getScript(): ScriptInterface;
+    public function getScript();
 
     /**
      * Get the sequence number for this input
      *
      * @return int
      */
-    public function getSequence(): int;
+    public function getSequence();
 
     /**
      * Equality check with $this and $other
@@ -54,7 +52,7 @@ interface TransactionInputInterface extends SerializableInterface
      * @param TransactionInputInterface $other
      * @return bool
      */
-    public function equals(TransactionInputInterface $other): bool;
+    public function equals(TransactionInputInterface $other);
 
     /**
      * Check whether the transaction is the Coinbase, ie, it has
@@ -62,41 +60,41 @@ interface TransactionInputInterface extends SerializableInterface
      *
      * @return bool
      */
-    public function isCoinBase(): bool;
+    public function isCoinBase();
 
     /**
      * @return bool
      */
-    public function isFinal(): bool;
+    public function isFinal();
 
     /**
      * Checks whether the SEQUENCE_LOCKTIME_DISABLE_FLAG is set
      * Always returns true if txin is coinbase.
      *
-     * @return bool
+     * @return int
      */
-    public function isSequenceLockDisabled(): bool;
+    public function isSequenceLockDisabled();
 
     /**
      * Indicates whether the input is locked with a time based lock (as opposed to block)
      *
      * @return bool
      */
-    public function isLockedToTime(): bool;
+    public function isLockedToTime();
 
     /**
      * Returns whether the input is locked with a block based lock (as opposed to time)
      *
      * @return bool
      */
-    public function isLockedToBlock(): bool;
+    public function isLockedToBlock();
 
     /**
      * Returns the relative block time for the input.
      * Range limited to 0 - 33553920 (approx 1 yr)
      * @return int
      */
-    public function getRelativeBlockLock(): int;
+    public function getRelativeBlockLock();
 
     /**
      * Returns the relative locktime for the input in seconds.
@@ -104,5 +102,5 @@ interface TransactionInputInterface extends SerializableInterface
      *
      * @return int
      */
-    public function getRelativeTimeLock(): int;
+    public function getRelativeTimeLock();
 }

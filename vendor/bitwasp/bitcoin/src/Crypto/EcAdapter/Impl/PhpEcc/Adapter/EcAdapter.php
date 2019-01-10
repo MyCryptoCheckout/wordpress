@@ -1,18 +1,21 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Adapter;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Key\PrivateKey;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Key\PublicKey;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Signature\CompactSignature;
+use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Signature\Signature;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PrivateKeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PublicKeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\CompactSignatureInterface;
+use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface;
+use BitWasp\Bitcoin\Crypto\Random\RbgInterface;
+use BitWasp\Bitcoin\Crypto\Random\Rfc6979;
 use BitWasp\Bitcoin\Math\Math;
 use BitWasp\Buffertools\BufferInterface;
+use Mdanter\Ecc\Crypto\Signature\Signer;
 use Mdanter\Ecc\Primitives\GeneratorPoint;
 use Mdanter\Ecc\Primitives\PointInterface;
 
@@ -41,7 +44,7 @@ class EcAdapter implements EcAdapterInterface
     /**
      * @return Math
      */
-    public function getMath(): Math
+    public function getMath()
     {
         return $this->math;
     }
@@ -55,44 +58,121 @@ class EcAdapter implements EcAdapterInterface
     }
 
     /**
-     * @return \GMP
-     */
-    public function getOrder(): \GMP
-    {
-        return $this->generator->getOrder();
-    }
-
-    /**
      * @param \GMP $scalar
      * @param bool|false $compressed
-     * @return PrivateKeyInterface
+     * @return PrivateKey
      */
-    public function getPrivateKey(\GMP $scalar, bool $compressed = false): PrivateKeyInterface
+    public function getPrivateKey(\GMP $scalar, $compressed = false)
     {
         return new PrivateKey($this, $scalar, $compressed);
     }
 
     /**
+     * @param PointInterface $point
+     * @param bool|false $compressed
+     * @return PublicKey
+     */
+    public function getPublicKey(PointInterface $point, $compressed = false)
+    {
+        return new PublicKey($this, $point, $compressed);
+    }
+
+    /**
+     * @param \GMP $r
+     * @param \GMP $s
+     * @return Signature
+     */
+    public function getSignature(\GMP $r, \GMP $s)
+    {
+        return new Signature($this, $r, $s);
+    }
+
+    /**
      * @param BufferInterface $messageHash
-     * @param CompactSignature|CompactSignatureInterface $signature
-     * @return PublicKeyInterface
+     * @param PublicKey $publicKey
+     * @param Signature $signature
+     * @return bool
+     */
+    private function doVerify(BufferInterface $messageHash, PublicKey $publicKey, Signature $signature)
+    {
+        $hash = gmp_init($messageHash->getHex(), 16);
+        $signer = new Signer($this->math);
+        return $signer->verify($publicKey, $signature, $hash);
+    }
+
+    /**
+     * @param BufferInterface $messageHash
+     * @param PublicKeyInterface $publicKey
+     * @param SignatureInterface $signature
+     * @return bool
+     */
+    public function verify(BufferInterface $messageHash, PublicKeyInterface $publicKey, SignatureInterface $signature)
+    {
+        /** @var PublicKey $publicKey */
+        /** @var Signature $signature */
+        return $this->doVerify($messageHash, $publicKey, $signature);
+    }
+
+    /**
+     * @param BufferInterface $messageHash
+     * @param PrivateKey $privateKey
+     * @param RbgInterface|null $rbg
+     * @return Signature
+     */
+    private function doSign(BufferInterface $messageHash, PrivateKey $privateKey, RbgInterface $rbg = null)
+    {
+        $rbg = $rbg ?: new Rfc6979($this, $privateKey, $messageHash);
+        $randomK = gmp_init($rbg->bytes(32)->getHex(), 16);
+        $hash = gmp_init($messageHash->getHex(), 16);
+
+        $signer = new Signer($this->math);
+        $signature = $signer->sign($privateKey, $hash, $randomK);
+        $s = $signature->getS();
+
+        // if s is less than half the curve order, invert s
+        if (!$this->validateSignatureElement($s, true)) {
+            $s = $this->math->sub($this->generator->getOrder(), $s);
+        }
+
+        return new Signature($this, $signature->getR(), $s);
+    }
+
+    /**
+     * @param BufferInterface $messageHash
+     * @param PrivateKeyInterface $privateKey
+     * @param RbgInterface $rbg
+     * @return SignatureInterface
+     * @throws \BitWasp\Bitcoin\Exceptions\RandomBytesFailure
+     */
+    public function sign(BufferInterface $messageHash, PrivateKeyInterface $privateKey, RbgInterface $rbg = null)
+    {
+        /** @var PrivateKey $privateKey */
+        return $this->doSign($messageHash, $privateKey, $rbg);
+    }
+
+    /**
+     * @param BufferInterface $messageHash
+     * @param CompactSignatureInterface $signature
+     * @return PublicKey
      * @throws \Exception
      */
-    public function recover(BufferInterface $messageHash, CompactSignatureInterface $signature): PublicKeyInterface
+    public function recover(BufferInterface $messageHash, CompactSignatureInterface $signature)
     {
         $math = $this->getMath();
-        $G = $this->generator;
+        $G = $this->getGenerator();
 
+        $zero = gmp_init(0);
         $one = gmp_init(1);
 
         $r = $signature->getR();
         $s = $signature->getS();
-        $isYEven = ($signature->getRecoveryId() & 1) !== 0;
-        $isSecondKey = ($signature->getRecoveryId() & 2) !== 0;
+        $recGMP = gmp_init($signature->getRecoveryId(), 10);
+        $isYEven = $math->cmp($math->bitwiseAnd($recGMP, $one), $zero) !== 0;
+        $isSecondKey = $math->cmp($math->bitwiseAnd($recGMP, gmp_init(2)), $zero) !== 0;
         $curve = $G->getCurve();
 
         // Precalculate (p + 1) / 4 where p is the field order
-        $pOverFour = $math->div($math->add($curve->getPrime(), $one), gmp_init(4));
+        $p_over_four = $math->div($math->add($curve->getPrime(), $one), gmp_init(4));
 
         // 1.1 Compute x
         if (!$isSecondKey) {
@@ -103,7 +183,7 @@ class EcAdapter implements EcAdapterInterface
 
         // 1.3 Convert x to point
         $alpha = $math->mod($math->add($math->add($math->pow($x, 3), $math->mul($curve->getA(), $x)), $curve->getB()), $curve->getPrime());
-        $beta = $math->powmod($alpha, $pOverFour, $curve->getPrime());
+        $beta = $math->powmod($alpha, $p_over_four, $curve->getPrime());
 
         // If beta is even, but y isn't or vice versa, then convert it,
         // otherwise we're done and y=beta.
@@ -116,18 +196,18 @@ class EcAdapter implements EcAdapterInterface
         // 1.4 Check that nR is at infinity (implicitly done in constructor)
         $R = $G->getCurve()->getPoint($x, $y);
 
-        $pointNegate = function (PointInterface $p) use ($math, $G) {
+        $point_negate = function (PointInterface $p) use ($math, $G) {
             return $G->getCurve()->getPoint($p->getX(), $math->mul($p->getY(), gmp_init('-1', 10)));
         };
 
         // 1.6.1 Compute a candidate public key Q = r^-1 (sR - eG)
         $rInv = $math->inverseMod($r, $G->getOrder());
-        $eGNeg = $pointNegate($G->mul($messageHash->getGmp()));
+        $eGNeg = $point_negate($G->mul($messageHash->getGmp()));
         $Q = $R->mul($s)->add($eGNeg)->mul($rInv);
 
         // 1.6.2 Test Q as a public key
         $Qk = new PublicKey($this, $Q, $signature->isCompressed());
-        if ($Qk->verify($messageHash, $signature->convert())) {
+        if ($this->verify($messageHash, $Qk, $signature->convert())) {
             return $Qk;
         }
 
@@ -144,7 +224,7 @@ class EcAdapter implements EcAdapterInterface
      * @return int
      * @throws \Exception
      */
-    public function calcPubKeyRecoveryParam(\GMP $r, \GMP $s, BufferInterface $messageHash, PublicKey $publicKey): int
+    public function calcPubKeyRecoveryParam(\GMP $r, \GMP $s, BufferInterface $messageHash, PublicKey $publicKey)
     {
         $Q = $publicKey->getPoint();
         for ($i = 0; $i < 4; $i++) {
@@ -162,14 +242,48 @@ class EcAdapter implements EcAdapterInterface
     }
 
     /**
+     * @param BufferInterface $messageHash
+     * @param PrivateKey $privateKey
+     * @param RbgInterface|null $rbg
+     * @return CompactSignature
+     * @throws \Exception
+     */
+    private function doSignCompact(BufferInterface $messageHash, PrivateKey $privateKey, RbgInterface $rbg = null)
+    {
+        $sign = $this->sign($messageHash, $privateKey, $rbg);
+
+        // calculate the recovery param
+        // there should be a way to get this when signing too, but idk how ...
+        return new CompactSignature(
+            $this,
+            $sign->getR(),
+            $sign->getS(),
+            $this->calcPubKeyRecoveryParam($sign->getR(), $sign->getS(), $messageHash, $privateKey->getPublicKey()),
+            $privateKey->isCompressed()
+        );
+    }
+
+    /**
+     * @param PrivateKeyInterface $privateKey
+     * @param BufferInterface $messageHash
+     * @param RbgInterface $rbg
+     * @return CompactSignature
+     */
+    public function signCompact(BufferInterface $messageHash, PrivateKeyInterface $privateKey, RbgInterface $rbg = null)
+    {
+        /** @var PrivateKey $privateKey */
+        return $this->doSignCompact($messageHash, $privateKey, $rbg);
+    }
+
+    /**
      * @param BufferInterface $privateKey
      * @return bool
      */
-    public function validatePrivateKey(BufferInterface $privateKey): bool
+    public function validatePrivateKey(BufferInterface $privateKey)
     {
         $math = $this->math;
         $scalar = $privateKey->getGmp();
-        return $math->cmp($scalar, gmp_init(0)) > 0 && $math->cmp($scalar, $this->getOrder()) < 0;
+        return $math->cmp($scalar, gmp_init(0)) > 0 && $math->cmp($scalar, $this->getGenerator()->getOrder()) < 0;
     }
 
     /**
@@ -177,10 +291,10 @@ class EcAdapter implements EcAdapterInterface
      * @param bool $half
      * @return bool
      */
-    public function validateSignatureElement(\GMP $element, bool $half = false): bool
+    public function validateSignatureElement(\GMP $element, $half = false)
     {
         $math = $this->getMath();
-        $against = $this->getOrder();
+        $against = $this->getGenerator()->getOrder();
         if ($half) {
             $against = $math->rightShift($against, 1);
         }
@@ -193,7 +307,7 @@ class EcAdapter implements EcAdapterInterface
      * @return PublicKeyInterface
      * @throws \Exception
      */
-    public function publicKeyFromBuffer(BufferInterface $publicKey): PublicKeyInterface
+    public function publicKeyFromBuffer(BufferInterface $publicKey)
     {
         $prefix = $publicKey->slice(0, 1)->getBinary();
         $size = $publicKey->getSize();

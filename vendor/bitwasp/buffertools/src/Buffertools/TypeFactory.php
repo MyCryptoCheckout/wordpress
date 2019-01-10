@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools;
 
 use BitWasp\Buffertools\Types\ByteString;
@@ -20,17 +18,32 @@ use BitWasp\Buffertools\Types\Uint256;
 use BitWasp\Buffertools\Types\VarInt;
 use BitWasp\Buffertools\Types\VarString;
 use BitWasp\Buffertools\Types\Vector;
+use Mdanter\Ecc\EccFactory;
+use Mdanter\Ecc\Math\GmpMathInterface;
 
 class TypeFactory implements TypeFactoryInterface
 {
+    /**
+     * @var GmpMathInterface
+     */
+    private $math;
+
+    /**
+     * @param GmpMathInterface $math
+     */
+    public function __construct(GmpMathInterface $math = null)
+    {
+        $this->math = $math ?: EccFactory::getAdapter();
+    }
+
     /**
      * Add a Uint8 serializer to the template
      *
      * @return Uint8
      */
-    public function uint8(): Uint8
+    public function uint8()
     {
-        return new Uint8(ByteOrder::BE);
+        return new Uint8($this->math, ByteOrder::BE);
     }
 
     /**
@@ -38,9 +51,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint8
      */
-    public function uint8le(): Uint8
+    public function uint8le()
     {
-        return new Uint8(ByteOrder::LE);
+        return new Uint8($this->math, ByteOrder::LE);
     }
 
     /**
@@ -48,9 +61,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint16
      */
-    public function uint16(): Uint16
+    public function uint16()
     {
-        return new Uint16(ByteOrder::BE);
+        return new Uint16($this->math, ByteOrder::BE);
     }
 
     /**
@@ -58,9 +71,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint16
      */
-    public function uint16le(): Uint16
+    public function uint16le()
     {
-        return new Uint16(ByteOrder::LE);
+        return new Uint16($this->math, ByteOrder::LE);
     }
 
     /**
@@ -68,9 +81,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint32
      */
-    public function uint32(): Uint32
+    public function uint32()
     {
-        return new Uint32(ByteOrder::BE);
+        return new Uint32($this->math, ByteOrder::BE);
     }
 
     /**
@@ -78,9 +91,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint32
      */
-    public function uint32le(): Uint32
+    public function uint32le()
     {
-        return new Uint32(ByteOrder::LE);
+        return new Uint32($this->math, ByteOrder::LE);
     }
 
     /**
@@ -88,9 +101,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint64
      */
-    public function uint64(): Uint64
+    public function uint64()
     {
-        return new Uint64(ByteOrder::BE);
+        return new Uint64($this->math, ByteOrder::BE);
     }
 
     /**
@@ -98,9 +111,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint64
      */
-    public function uint64le(): Uint64
+    public function uint64le()
     {
-        return new Uint64(ByteOrder::LE);
+        return new Uint64($this->math, ByteOrder::LE);
     }
 
     /**
@@ -108,9 +121,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint128
      */
-    public function uint128(): Uint128
+    public function uint128()
     {
-        return new Uint128(ByteOrder::BE);
+        return new Uint128($this->math, ByteOrder::BE);
     }
 
     /**
@@ -118,9 +131,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint128
      */
-    public function uint128le(): Uint128
+    public function uint128le()
     {
-        return new Uint128(ByteOrder::LE);
+        return new Uint128($this->math, ByteOrder::LE);
     }
 
     /**
@@ -128,9 +141,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint256
      */
-    public function uint256(): Uint256
+    public function uint256()
     {
-        return new Uint256(ByteOrder::BE);
+        return new Uint256($this->math, ByteOrder::BE);
     }
 
     /**
@@ -138,9 +151,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Uint256
      */
-    public function uint256le(): Uint256
+    public function uint256le()
     {
-        return new Uint256(ByteOrder::LE);
+        return new Uint256($this->math, ByteOrder::LE);
     }
 
     /**
@@ -148,9 +161,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int8
      */
-    public function int8(): Int8
+    public function int8()
     {
-        return new Int8(ByteOrder::BE);
+        return new Int8($this->math, ByteOrder::BE);
     }
 
     /**
@@ -158,9 +171,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int8
      */
-    public function int8le(): Int8
+    public function int8le()
     {
-        return new Int8(ByteOrder::LE);
+        return new Int8($this->math, ByteOrder::LE);
     }
 
     /**
@@ -168,9 +181,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int16
      */
-    public function int16(): Int16
+    public function int16()
     {
-        return new Int16(ByteOrder::BE);
+        return new Int16($this->math, ByteOrder::BE);
     }
 
     /**
@@ -178,9 +191,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int16
      */
-    public function int16le(): Int16
+    public function int16le()
     {
-        return new Int16(ByteOrder::LE);
+        return new Int16($this->math, ByteOrder::LE);
     }
 
     /**
@@ -188,9 +201,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int32
      */
-    public function int32(): Int32
+    public function int32()
     {
-        return new Int32(ByteOrder::BE);
+        return new Int32($this->math, ByteOrder::BE);
     }
 
     /**
@@ -198,9 +211,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int32
      */
-    public function int32le(): Int32
+    public function int32le()
     {
-        return new Int32(ByteOrder::LE);
+        return new Int32($this->math, ByteOrder::LE);
     }
 
     /**
@@ -208,9 +221,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int64
      */
-    public function int64(): Int64
+    public function int64()
     {
-        return new Int64(ByteOrder::BE);
+        return new Int64($this->math, ByteOrder::BE);
     }
 
     /**
@@ -218,9 +231,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int64
      */
-    public function int64le(): Int64
+    public function int64le()
     {
-        return new Int64(ByteOrder::LE);
+        return new Int64($this->math, ByteOrder::LE);
     }
 
     /**
@@ -228,9 +241,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int128
      */
-    public function int128(): Int128
+    public function int128()
     {
-        return new Int128(ByteOrder::BE);
+        return new Int128($this->math, ByteOrder::BE);
     }
 
     /**
@@ -238,9 +251,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int128
      */
-    public function int128le(): Int128
+    public function int128le()
     {
-        return new Int128(ByteOrder::LE);
+        return new Int128($this->math, ByteOrder::LE);
     }
 
     /**
@@ -248,9 +261,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int256
      */
-    public function int256(): Int256
+    public function int256()
     {
-        return new Int256(ByteOrder::BE);
+        return new Int256($this->math, ByteOrder::BE);
     }
 
     /**
@@ -258,9 +271,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return Int256
      */
-    public function int256le(): Int256
+    public function int256le()
     {
-        return new Int256(ByteOrder::LE);
+        return new Int256($this->math, ByteOrder::LE);
     }
 
     /**
@@ -268,9 +281,9 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return VarInt
      */
-    public function varint(): VarInt
+    public function varint()
     {
-        return new VarInt();
+        return new VarInt($this->math);
     }
 
     /**
@@ -278,33 +291,33 @@ class TypeFactory implements TypeFactoryInterface
      *
      * @return VarString
      */
-    public function varstring(): VarString
+    public function varstring()
     {
-        return new VarString(new VarInt());
+        return new VarString(new VarInt($this->math), ByteOrder::BE);
     }
 
     /**
      * Add a byte string serializer to the template. This serializer requires a length to
      * pad/truncate to.
      *
-     * @param  int $length
+     * @param  $length
      * @return ByteString
      */
-    public function bytestring(int $length): ByteString
+    public function bytestring($length)
     {
-        return new ByteString($length, ByteOrder::BE);
+        return new ByteString($this->math, $length, ByteOrder::BE);
     }
 
     /**
      * Add a little-endian byte string serializer to the template. This serializer requires
      * a length to pad/truncate to.
      *
-     * @param  int $length
+     * @param  $length
      * @return ByteString
      */
-    public function bytestringle(int $length): ByteString
+    public function bytestringle($length)
     {
-        return new ByteString($length, ByteOrder::LE);
+        return new ByteString($this->math, $length, ByteOrder::LE);
     }
 
     /**
@@ -317,7 +330,7 @@ class TypeFactory implements TypeFactoryInterface
      * @param  callable $readHandler
      * @return Vector
      */
-    public function vector(callable $readHandler): Vector
+    public function vector(callable $readHandler)
     {
         return new Vector($this->varint(), $readHandler);
     }

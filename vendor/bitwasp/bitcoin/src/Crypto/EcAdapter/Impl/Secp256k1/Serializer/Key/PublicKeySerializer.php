@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Serializer\Key;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Adapter\EcAdapter;
@@ -39,14 +37,15 @@ class PublicKeySerializer implements PublicKeySerializerInterface
             $this->ecAdapter->getContext(),
             $serialized,
             $publicKey->getResource(),
-            $isCompressed ? SECP256K1_EC_COMPRESSED : SECP256K1_EC_UNCOMPRESSED
+            $isCompressed
         )) {
             throw new \RuntimeException('Secp256k1: Failed to serialize public key');
         }
 
         return new Buffer(
             $serialized,
-            $isCompressed ? PublicKey::LENGTH_COMPRESSED : PublicKey::LENGTH_UNCOMPRESSED
+            $isCompressed ? PublicKey::LENGTH_COMPRESSED : PublicKey::LENGTH_UNCOMPRESSED,
+            $this->ecAdapter->getMath()
         );
     }
 
@@ -54,24 +53,26 @@ class PublicKeySerializer implements PublicKeySerializerInterface
      * @param PublicKeyInterface $publicKey
      * @return BufferInterface
      */
-    public function serialize(PublicKeyInterface $publicKey): BufferInterface
+    public function serialize(PublicKeyInterface $publicKey)
     {
         /** @var PublicKey $publicKey */
         return $this->doSerialize($publicKey);
     }
 
     /**
-     * @param BufferInterface $buffer
-     * @return PublicKeyInterface
+     * @param \BitWasp\Buffertools\BufferInterface|string $data
+     * @return PublicKey
      */
-    public function parse(BufferInterface $buffer): PublicKeyInterface
+    public function parse($data)
     {
+        $buffer = (new Parser($data))->getBuffer();
         $binary = $buffer->getBinary();
-        $pubkey_t = null;
+        $pubkey_t = '';
+        /** @var resource $pubkey_t */
         if (!secp256k1_ec_pubkey_parse($this->ecAdapter->getContext(), $pubkey_t, $binary)) {
             throw new \RuntimeException('Secp256k1 failed to parse public key');
         }
-        /** @var resource $pubkey_t */
+
         return new PublicKey(
             $this->ecAdapter,
             $pubkey_t,

@@ -1,152 +1,185 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\Deterministic;
 
-use BitWasp\Bitcoin\Address\Address;
-use BitWasp\Bitcoin\Address\BaseAddressCreator;
-use BitWasp\Bitcoin\Exceptions\InvalidDerivationException;
-use BitWasp\Bitcoin\Key\KeyToScript\ScriptAndSignData;
-use BitWasp\Bitcoin\Key\KeyToScript\ScriptDataFactory;
-use BitWasp\Bitcoin\Script\ScriptType;
+use BitWasp\Bitcoin\Script\P2shScript;
+use BitWasp\Bitcoin\Script\ScriptFactory;
+use BitWasp\Buffertools\Buffertools;
 
-/**
- * Implements a multisignature HD node, which like HierarchicalKey
- * adapts the type of script (p2sh? p2wsh? nested?) with the ScriptDataFactory.
- * Older versions used to contain the absolute BIP32 path, which has been removed.
-
- * Older versions also used to sort the keys returned by getKeys, but now they are
- * returned in signer first order.
- *
- * The ScriptDataFactory must be configured for the desired m-on-n, and sorting parameters
- * as this is purely a concern for script creation.
- */
 class MultisigHD
 {
+    /**
+     * @var int|string
+     */
+    private $m;
+
+    /**
+     * @var string
+     */
+    private $path;
+
     /**
      * @var HierarchicalKey[]
      */
     private $keys;
 
     /**
-     * @var ScriptDataFactory
+     * @var HierarchicalKeySequence
      */
-    private $scriptFactory;
+    private $sequences;
 
     /**
-     * @var ScriptAndSignData
+     * @var P2shScript
      */
-    private $scriptAndSignData;
+    private $redeemScript;
 
     /**
-     * MultisigHD constructor.
-     * @param ScriptDataFactory $scriptDataFactory
-     * @param HierarchicalKey ...$keys
+     * @var bool
      */
-    public function __construct(ScriptDataFactory $scriptDataFactory, HierarchicalKey... $keys)
+    private $sort;
+
+    /**
+     * @param int|string $m
+     * @param string $path
+     * @param array $keys
+     * @param HierarchicalKeySequence $sequences
+     * @param bool $sort
+     */
+    public function __construct($m, $path, array $keys, HierarchicalKeySequence $sequences, $sort = false)
     {
         if (count($keys) < 1) {
             throw new \RuntimeException('Must have at least one HierarchicalKey for Multisig HD Script');
         }
 
-        if (substr($scriptDataFactory->getScriptType(), 0 - strlen(ScriptType::MULTISIG)) !== ScriptType::MULTISIG) {
-            throw new \RuntimeException("multi-signature script factory required: {$scriptDataFactory->getScriptType()} given");
+        // Sort here to guarantee calls to getKeys() returns keys in the same order as the redeemScript.
+        if ($sort) {
+            $keys = $this->sortHierarchicalKeys($keys);
         }
 
-        $this->keys = $keys;
-        $this->scriptFactory = $scriptDataFactory;
-
-        // Immediately produce the script to check our inputs are correct
-        $publicKeys = [];
-        foreach ($this->keys as $key) {
-            $publicKeys[] = $key->getPublicKey();
+        foreach ($keys as $key) {
+            $this->keys[] = $key;
         }
-        $this->scriptAndSignData = $this->scriptFactory->convertKey(...$publicKeys);
+
+        $this->m = $m;
+        $this->path = $path;
+        $this->sort = $sort;
+        $this->sequences = $sequences;
+        $this->redeemScript = new P2shScript(ScriptFactory::scriptPubKey()->multisig($m, array_map(
+            function (HierarchicalKey $key) {
+                return $key->getPublicKey();
+            },
+            $this->keys
+        ), false));
+    }
+
+    /**
+     * @param HierarchicalKey[] $keys
+     * @return HierarchicalKey[]
+     */
+    private function sortHierarchicalKeys(array $keys)
+    {
+        return Buffertools::sort($keys, function (HierarchicalKey $key) {
+            return $key->getPublicKey()->getBuffer();
+        });
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 
     /**
      * Return the composite keys of this MultisigHD wallet entry.
-     * Note: unlike previous versions, the cosigner indexes are preserved here.
-     * To obtain the sorted keys, extract them from the script.
+     * This will strictly adhere to the choice on whether keys should be sorted, since this is done in the constructor.
      *
      * @return HierarchicalKey[]
      */
-    public function getKeys(): array
+    public function getKeys()
     {
         return $this->keys;
     }
 
     /**
-     * @return ScriptDataFactory
+     * Returns the redeemScript. Note - keys are already sorted in the constructor, so this is not required in ScriptFactory.
+     *
+     * @return P2shScript
      */
-    public function getScriptDataFactory(): ScriptDataFactory
+    public function getRedeemScript()
     {
-        return $this->scriptFactory;
+        return $this->redeemScript;
     }
 
     /**
-     * @return ScriptAndSignData
+     * @return \BitWasp\Bitcoin\Script\ScriptInterface
      */
-    public function getScriptAndSignData(): ScriptAndSignData
+    public function getScriptPubKey()
     {
-        return $this->scriptAndSignData;
+        return $this->redeemScript->getOutputScript();
     }
 
     /**
-     * @param BaseAddressCreator $addressCreator
-     * @return Address
+     * @return \BitWasp\Bitcoin\Address\ScriptHashAddress
      */
-    public function getAddress(BaseAddressCreator $addressCreator): Address
+    public function getAddress()
     {
-        return $this->getScriptAndSignData()->getAddress($addressCreator);
+        return $this->redeemScript->getAddress();
     }
 
     /**
-     * @param int $sequence
+     * Derive each HK child and produce a new MultisigHD object
+     *
+     * @param int|string $sequence
      * @return MultisigHD
-     * @throws InvalidDerivationException
      */
-    public function deriveChild(int $sequence): MultisigHD
+    public function deriveChild($sequence)
     {
-        $keys = [];
-        foreach ($this->keys as $cosignerIdx => $key) {
-            try {
-                $keys[] = $key->deriveChild($sequence);
-            } catch (InvalidDerivationException $e) {
-                throw new InvalidDerivationException("Cosigner {$cosignerIdx} key derivation failed", 0, $e);
-            }
+        $keys = array_map(
+            function (HierarchicalKey $hk) use ($sequence) {
+                return $hk->deriveChild($sequence);
+            },
+            $this->keys
+        );
+
+        if ($this->sort) {
+            $keys = $this->sortHierarchicalKeys($keys);
         }
 
-        return new self($this->scriptFactory, ...$keys);
+        return new self(
+            $this->m,
+            $this->path . '/' . $this->sequences->getNode($sequence),
+            $keys,
+            $this->sequences,
+            $this->sort
+        );
     }
 
     /**
-     * Decodes a BIP32 path into actual 32bit sequence numbers and derives the child key
+     * @param array|\stdClass|\Traversable $list
+     * @return MultisigHD
+     */
+    public function deriveFromList($list)
+    {
+        HierarchicalKeySequence::validateListType($list);
+
+        $account = $this;
+        foreach ($list as $sequence) {
+            $account = $account->deriveChild($sequence);
+        }
+
+        return $account;
+    }
+
+    /**
+     * Derive a path in the tree of available addresses.
      *
      * @param string $path
      * @return MultisigHD
-     * @throws \Exception
      */
-    public function derivePath(string $path): MultisigHD
+    public function derivePath($path)
     {
-        $sequences = new HierarchicalKeySequence();
-        $parts = $sequences->decodeRelative($path);
-        $numParts = count($parts);
-
-        $key = $this;
-        for ($i = 0; $i < $numParts; $i++) {
-            try {
-                $key = $key->deriveChild((int) $parts[$i]);
-            } catch (InvalidDerivationException $e) {
-                if ($i === $numParts - 1) {
-                    throw new InvalidDerivationException($e->getMessage());
-                } else {
-                    throw new InvalidDerivationException("Invalid derivation for non-terminal index: cannot use this path!");
-                }
-            }
-        }
-
-        return $key;
+        return $this->deriveFromList($this->sequences->decodePath($path));
     }
 }

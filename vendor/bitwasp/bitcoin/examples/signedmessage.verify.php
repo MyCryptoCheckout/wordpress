@@ -12,7 +12,6 @@ use BitWasp\Bitcoin\Network\NetworkFactory;
 use BitWasp\Bitcoin\Serializer\MessageSigner\SignedMessageSerializer;
 
 Bitcoin::setNetwork(NetworkFactory::bitcoinTestnet());
-$addrCreator = new AddressCreator();
 
 $address = 'n2Z2DFCxG6vktyX1MFkKAQPQFsrmniGKj5';
 
@@ -22,8 +21,9 @@ hi
 IBpGR29vEbbl4kmpK0fcDsT75GPeH2dg5O199D3iIkS3VcDoQahJMGJEDozXot8JGULWjN9Llq79aF+FogOoz/M=
 -----END BITCOIN SIGNED MESSAGE-----';
 
+$addressCreator = new AddressCreator();
 /** @var PayToPubKeyHashAddress $address */
-$address = $addrCreator->fromString($address);
+$address = $addressCreator->fromString($address);
 
 /** @var CompactSignatureSerializerInterface $compactSigSerializer */
 $compactSigSerializer = EcSerializer::getSerializer(CompactSignatureSerializerInterface::class);

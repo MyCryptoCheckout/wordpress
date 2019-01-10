@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Address;
 
 use BitWasp\Buffertools\BufferInterface;
 
 /**
  * Abstract Class Address
- * Used to store a hash
+ * Used to store a hash, and a base58 encoded address
  */
 abstract class Address implements AddressInterface
 {
@@ -28,7 +26,7 @@ abstract class Address implements AddressInterface
     /**
      * @return BufferInterface
      */
-    public function getHash(): BufferInterface
+    public function getHash()
     {
         return $this->hash;
     }

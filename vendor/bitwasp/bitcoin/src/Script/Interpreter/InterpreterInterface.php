@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Script\Interpreter;
 
 use BitWasp\Bitcoin\Script\ScriptInterface;
@@ -91,19 +89,19 @@ interface InterpreterInterface
      * @param ScriptInterface $scriptSig
      * @param ScriptInterface $scriptPubKey
      * @param int $flags
-     * @param CheckerBase $checker
+     * @param Checker $checker
      * @param ScriptWitnessInterface|null $witness
      * @return bool
      */
-    public function verify(ScriptInterface $scriptSig, ScriptInterface $scriptPubKey, int $flags, CheckerBase $checker, ScriptWitnessInterface $witness = null);
+    public function verify(ScriptInterface $scriptSig, ScriptInterface $scriptPubKey, $flags, CheckerBase $checker, ScriptWitnessInterface $witness = null);
 
     /**
      * @param ScriptInterface $script
      * @param Stack $stack
      * @param int $sigVersion
      * @param int $flags
-     * @param CheckerBase $checker
+     * @param Checker $checker
      * @return bool
      */
-    public function evaluate(ScriptInterface $script, Stack $stack, int $sigVersion, int $flags, CheckerBase $checker);
+    public function evaluate(ScriptInterface $script, Stack $stack, $sigVersion, $flags, CheckerBase $checker);
 }

@@ -1,19 +1,13 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Key;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Adapter\EcAdapter;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Serializer\Key\PublicKeySerializer;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\Key;
-use BitWasp\Bitcoin\Crypto\EcAdapter\Key\KeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PublicKeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface;
 use BitWasp\Buffertools\BufferInterface;
-use Mdanter\Ecc\Crypto\Signature\Signer;
-use Mdanter\Ecc\Primitives\CurveFpInterface;
-use Mdanter\Ecc\Primitives\GeneratorPoint;
 use Mdanter\Ecc\Primitives\PointInterface;
 
 class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\Key\PublicKeyInterface
@@ -48,9 +42,12 @@ class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\K
     public function __construct(
         EcAdapter $ecAdapter,
         PointInterface $point,
-        bool $compressed = false,
-        string $prefix = null
+        $compressed = false,
+        $prefix = null
     ) {
+        if (false === is_bool($compressed)) {
+            throw new \InvalidArgumentException('PublicKey: Compressed must be a boolean');
+        }
         $this->ecAdapter = $ecAdapter;
         $this->point = $point;
         $this->prefix = $prefix;
@@ -58,9 +55,9 @@ class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\K
     }
 
     /**
-     * @return GeneratorPoint
+     * @return \Mdanter\Ecc\Primitives\GeneratorPoint
      */
-    public function getGenerator(): GeneratorPoint
+    public function getGenerator()
     {
         return $this->ecAdapter->getGenerator();
     }
@@ -68,7 +65,7 @@ class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\K
     /**
      * @return \Mdanter\Ecc\Primitives\CurveFpInterface
      */
-    public function getCurve(): CurveFpInterface
+    public function getCurve()
     {
         return $this->ecAdapter->getGenerator()->getCurve();
     }
@@ -84,7 +81,7 @@ class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\K
     /**
      * @return PointInterface
      */
-    public function getPoint(): PointInterface
+    public function getPoint()
     {
         return $this->point;
     }
@@ -94,39 +91,37 @@ class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\K
      * @param SignatureInterface $signature
      * @return bool
      */
-    public function verify(BufferInterface $msg32, SignatureInterface $signature): bool
+    public function verify(BufferInterface $msg32, SignatureInterface $signature)
     {
-        $hash = gmp_init($msg32->getHex(), 16);
-        $signer = new Signer($this->ecAdapter->getMath());
-        return $signer->verify($this, $signature, $hash);
+        return $this->ecAdapter->verify($msg32, $this, $signature);
     }
 
     /**
      * @param \GMP $tweak
-     * @return KeyInterface
+     * @return PublicKeyInterface
      */
-    public function tweakAdd(\GMP $tweak): KeyInterface
+    public function tweakAdd(\GMP $tweak)
     {
         $offset = $this->ecAdapter->getGenerator()->mul($tweak);
         $newPoint = $this->point->add($offset);
-        return new PublicKey($this->ecAdapter, $newPoint, $this->compressed);
+        return $this->ecAdapter->getPublicKey($newPoint, $this->compressed);
     }
 
     /**
      * @param \GMP $tweak
-     * @return KeyInterface
+     * @return PublicKeyInterface
      */
-    public function tweakMul(\GMP $tweak): KeyInterface
+    public function tweakMul(\GMP $tweak)
     {
         $point = $this->point->mul($tweak);
-        return new PublicKey($this->ecAdapter, $point, $this->compressed);
+        return $this->ecAdapter->getPublicKey($point, $this->compressed);
     }
 
     /**
      * @param BufferInterface $publicKey
      * @return bool
      */
-    public static function isCompressedOrUncompressed(BufferInterface $publicKey): bool
+    public static function isCompressedOrUncompressed(BufferInterface $publicKey)
     {
         $vchPubKey = $publicKey->getBinary();
         if ($publicKey->getSize() < self::LENGTH_COMPRESSED) {
@@ -155,7 +150,7 @@ class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\K
     /**
      * @return bool
      */
-    public function isCompressed(): bool
+    public function isCompressed()
     {
         return $this->compressed;
     }
@@ -164,7 +159,7 @@ class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\K
      * @param PublicKey $other
      * @return bool
      */
-    private function doEquals(PublicKey $other): bool
+    private function doEquals(PublicKey $other)
     {
         return $this->compressed === $other->compressed
             && $this->point->equals($other->point)
@@ -175,7 +170,7 @@ class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\K
      * @param PublicKeyInterface $other
      * @return bool
      */
-    public function equals(PublicKeyInterface $other): bool
+    public function equals(PublicKeyInterface $other)
     {
         /** @var self $other */
         return $this->doEquals($other);
@@ -184,7 +179,7 @@ class PublicKey extends Key implements PublicKeyInterface, \Mdanter\Ecc\Crypto\K
     /**
      * @return BufferInterface
      */
-    public function getBuffer(): BufferInterface
+    public function getBuffer()
     {
         return (new PublicKeySerializer($this->ecAdapter))->serialize($this);
     }

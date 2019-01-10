@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\Deterministic\Slip132;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -16,6 +14,11 @@ class Slip132
      */
     private $helper;
 
+    /**
+     * Slip132PrefixRegistry constructor.
+
+     * @param KeyToScriptHelper $helper
+     */
     public function __construct(KeyToScriptHelper $helper = null)
     {
         $this->helper = $helper ?: new KeyToScriptHelper(Bitcoin::getEcAdapter());
@@ -27,7 +30,7 @@ class Slip132
      * @return ScriptPrefix
      * @throws \BitWasp\Bitcoin\Exceptions\InvalidNetworkParameter
      */
-    private function loadPrefix(PrefixRegistry $registry, ScriptDataFactory $factory): ScriptPrefix
+    private function loadPrefix(PrefixRegistry $registry, ScriptDataFactory $factory)
     {
         list ($private, $public) = $registry->getPrefixes($factory->getScriptType());
         return new ScriptPrefix($factory, $private, $public);
@@ -39,9 +42,22 @@ class Slip132
      * @return ScriptPrefix
      * @throws \BitWasp\Bitcoin\Exceptions\InvalidNetworkParameter
      */
-    public function p2pkh(PrefixRegistry $registry): ScriptPrefix
+    public function p2pkh(PrefixRegistry $registry)
     {
         return $this->loadPrefix($registry, $this->helper->getP2pkhFactory());
+    }
+
+    /**
+     * xpub on bitcoin
+     * @param PrefixRegistry $registry
+     * @return ScriptPrefix
+     * @throws \BitWasp\Bitcoin\Exceptions\DisallowedScriptDataFactoryException
+     * @throws \BitWasp\Bitcoin\Exceptions\InvalidNetworkParameter
+     * @deprecated
+     */
+    public function p2shP2pkh(PrefixRegistry $registry)
+    {
+        return $this->loadPrefix($registry, $this->helper->getP2shFactory($this->helper->getP2pkhFactory()));
     }
 
     /**
@@ -51,24 +67,22 @@ class Slip132
      * @throws \BitWasp\Bitcoin\Exceptions\DisallowedScriptDataFactoryException
      * @throws \BitWasp\Bitcoin\Exceptions\InvalidNetworkParameter
      */
-    public function p2shP2wpkh(PrefixRegistry $registry): ScriptPrefix
+    public function p2shP2wpkh(PrefixRegistry $registry)
     {
         return $this->loadPrefix($registry, $this->helper->getP2shFactory($this->helper->getP2wpkhFactory()));
     }
 
     /**
      * Ypub on bitcoin
-     * @param int $m
-     * @param int $n
-     * @param bool $sortKeys
      * @param PrefixRegistry $registry
      * @return ScriptPrefix
      * @throws \BitWasp\Bitcoin\Exceptions\DisallowedScriptDataFactoryException
      * @throws \BitWasp\Bitcoin\Exceptions\InvalidNetworkParameter
+     * @deprecated
      */
-    public function p2shP2wshMultisig(int $m, int $n, bool $sortKeys, PrefixRegistry $registry): ScriptPrefix
+    public function p2shP2wshP2pkh(PrefixRegistry $registry)
     {
-        return $this->loadPrefix($registry, $this->helper->getP2shP2wshFactory($this->helper->getMultisigFactory($m, $n, $sortKeys)));
+        return $this->loadPrefix($registry, $this->helper->getP2shP2wshFactory($this->helper->getP2pkhFactory()));
     }
 
     /**
@@ -77,23 +91,21 @@ class Slip132
      * @return ScriptPrefix
      * @throws \BitWasp\Bitcoin\Exceptions\InvalidNetworkParameter
      */
-    public function p2wpkh(PrefixRegistry $registry): ScriptPrefix
+    public function p2wpkh(PrefixRegistry $registry)
     {
         return $this->loadPrefix($registry, $this->helper->getP2wpkhFactory());
     }
 
     /**
      * Zpub on bitcoin
-     * @param int $m
-     * @param int $n
-     * @param bool $sortKeys
      * @param PrefixRegistry $registry
      * @return ScriptPrefix
      * @throws \BitWasp\Bitcoin\Exceptions\DisallowedScriptDataFactoryException
      * @throws \BitWasp\Bitcoin\Exceptions\InvalidNetworkParameter
+     * @deprecated
      */
-    public function p2wshMultisig(int $m, int $n, bool $sortKeys, PrefixRegistry $registry): ScriptPrefix
+    public function p2wshP2pkh(PrefixRegistry $registry)
     {
-        return $this->loadPrefix($registry, $this->helper->getP2wshFactory($this->helper->getMultisigFactory($m, $n, $sortKeys)));
+        return $this->loadPrefix($registry, $this->helper->getP2wshFactory($this->helper->getP2pkhFactory()));
     }
 }

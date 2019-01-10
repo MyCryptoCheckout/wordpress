@@ -4,7 +4,7 @@ require __DIR__ . "/../vendor/autoload.php";
 
 use BitWasp\Bitcoin\Address\PayToPubKeyHashAddress;
 use BitWasp\Bitcoin\Bitcoin;
-use BitWasp\Bitcoin\Key\Factory\PrivateKeyFactory;
+use BitWasp\Bitcoin\Key\PrivateKeyFactory;
 use BitWasp\Bitcoin\Script\ScriptFactory;
 use BitWasp\Bitcoin\Transaction\Factory\Signer;
 use BitWasp\Bitcoin\Transaction\OutPoint;
@@ -26,20 +26,20 @@ $amount = '161662670';
 $fee = '12345';
 $amountAfterFee = $amount - $fee;
 
-$privKeyFactory = new PrivateKeyFactory();
 // Two users independently create private keys.
-$pk1 = $privKeyFactory->fromHexUncompressed($privHex1);
-$addr1 = new PayToPubKeyHashAddress($pk1->getPublicKey()->getPubKeyHash());
-$pk2 = $privKeyFactory->fromHexUncompressed($privHex2);
+$pk1 = PrivateKeyFactory::fromHex($privHex1);
+$pk2 = PrivateKeyFactory::fromHex($privHex2);
 
 $outpoint = new OutPoint(Buffer::hex($txid), $vout);
 $redeemScript = new P2shScript(ScriptFactory::fromHex($redeemScriptHex));
 $txOut = new TransactionOutput($amount, $redeemScript->getOutputScript());
 
+$dest = new PayToPubKeyHashAddress($pk1->getPubKeyHash());
+
 // One party (pk1) wants to spend funds. He creates a transaction spending the funding tx to his address.
 $spendTx = TransactionFactory::build()
     ->spendOutPoint($outpoint)
-    ->payToAddress($amountAfterFee, $addr1)
+    ->payToAddress($amountAfterFee, $dest)
     ->get();
 
 echo "Unsigned transaction: " . $spendTx->getHex() . PHP_EOL;

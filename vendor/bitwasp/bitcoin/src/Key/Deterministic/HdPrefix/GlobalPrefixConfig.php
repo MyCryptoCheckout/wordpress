@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\Deterministic\HdPrefix;
 
 use BitWasp\Bitcoin\Network\NetworkInterface;
@@ -37,7 +35,7 @@ class GlobalPrefixConfig
      * @param NetworkInterface $network
      * @return NetworkConfig
      */
-    public function getNetworkConfig(NetworkInterface $network): NetworkConfig
+    public function getNetworkConfig(NetworkInterface $network)
     {
         $class = get_class($network);
         if (!array_key_exists($class, $this->networkConfigs)) {

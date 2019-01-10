@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\KeyToScript\Decorator;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\KeyInterface;
@@ -16,7 +14,6 @@ class P2shScriptDecorator extends ScriptHashDecorator
      * @var array
      */
     protected $allowedScriptTypes = [
-        ScriptType::MULTISIG,
         ScriptType::P2PKH,
         ScriptType::P2PK,
         ScriptType::P2WKH,
@@ -28,13 +25,13 @@ class P2shScriptDecorator extends ScriptHashDecorator
     protected $decorateType = ScriptType::P2SH;
 
     /**
-     * @param KeyInterface ...$keys
+     * @param KeyInterface $key
      * @return ScriptAndSignData
      * @throws \BitWasp\Bitcoin\Exceptions\P2shScriptException
      */
-    public function convertKey(KeyInterface ...$keys): ScriptAndSignData
+    public function convertKey(KeyInterface $key)
     {
-        $redeemScript = new P2shScript($this->scriptDataFactory->convertKey(...$keys)->getScriptPubKey());
+        $redeemScript = new P2shScript($this->scriptDataFactory->convertKey($key)->getScriptPubKey());
         return new ScriptAndSignData(
             $redeemScript->getOutputScript(),
             (new SignData())

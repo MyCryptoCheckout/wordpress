@@ -1,16 +1,13 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Signature;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Adapter\EcAdapter;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Serializer\Signature\DerSignatureSerializer;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface;
 use BitWasp\Bitcoin\Serializable;
-use BitWasp\Buffertools\BufferInterface;
 
-class Signature extends Serializable implements SignatureInterface, \Mdanter\Ecc\Crypto\Signature\SignatureInterface
+class Signature extends Serializable implements SignatureInterface
 {
     /**
      * @var \GMP
@@ -41,18 +38,16 @@ class Signature extends Serializable implements SignatureInterface, \Mdanter\Ecc
 
     /**
      * @inheritdoc
-     * @see SignatureInterface::getR()
      */
-    public function getR(): \GMP
+    public function getR()
     {
         return $this->r;
     }
 
     /**
      * @inheritdoc
-     * @see SignatureInterface::getS()
      */
-    public function getS(): \GMP
+    public function getS()
     {
         return $this->s;
     }
@@ -61,7 +56,7 @@ class Signature extends Serializable implements SignatureInterface, \Mdanter\Ecc
      * @param Signature $signature
      * @return bool
      */
-    public function doEquals(Signature $signature): bool
+    public function doEquals(Signature $signature)
     {
         $math = $this->ecAdapter->getMath();
         return $math->equals($this->getR(), $signature->getR())
@@ -72,7 +67,7 @@ class Signature extends Serializable implements SignatureInterface, \Mdanter\Ecc
      * @param SignatureInterface $signature
      * @return bool
      */
-    public function equals(SignatureInterface $signature): bool
+    public function equals(SignatureInterface $signature)
     {
         /** @var Signature $signature */
         return $this->doEquals($signature);
@@ -81,7 +76,7 @@ class Signature extends Serializable implements SignatureInterface, \Mdanter\Ecc
     /**
      * @return \BitWasp\Buffertools\BufferInterface
      */
-    public function getBuffer(): BufferInterface
+    public function getBuffer()
     {
         return (new DerSignatureSerializer($this->ecAdapter))->serialize($this);
     }

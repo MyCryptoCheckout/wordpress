@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools;
 
 class Buffertools
@@ -11,7 +9,7 @@ class Buffertools
      * @return string
      * @throws \Exception
      */
-    public static function numToVarIntBin(int $decimal): string
+    public static function numToVarIntBin($decimal)
     {
         if ($decimal < 0xfd) {
             $bin = chr($decimal);
@@ -33,10 +31,10 @@ class Buffertools
      * Convert a decimal number into a VarInt Buffer
      *
      * @param  integer $decimal
-     * @return BufferInterface
+     * @return Buffer
      * @throws \Exception
      */
-    public static function numToVarInt(int $decimal): BufferInterface
+    public static function numToVarInt($decimal)
     {
         return new Buffer(static::numToVarIntBin($decimal));
     }
@@ -66,10 +64,10 @@ class Buffertools
     /**
      * @param BufferInterface $buffer1
      * @param BufferInterface $buffer2
-     * @param int|null        $size
+     * @param int    $size
      * @return BufferInterface
      */
-    public static function concat(BufferInterface $buffer1, BufferInterface $buffer2, int $size = null)
+    public static function concat(BufferInterface $buffer1, BufferInterface $buffer2, $size = null)
     {
         return new Buffer($buffer1->getBinary() . $buffer2->getBinary(), $size);
     }
@@ -88,10 +86,10 @@ class Buffertools
      * and which optionally type-hint the items in the array.
      *
      * @param array $items
-     * @param callable|null $convertToBuffer
+     * @param callable $convertToBuffer
      * @return array
      */
-    public static function sort(array $items, callable $convertToBuffer = null): array
+    public static function sort(array $items, callable $convertToBuffer = null)
     {
         if (null == $convertToBuffer) {
             $convertToBuffer = function ($value) {

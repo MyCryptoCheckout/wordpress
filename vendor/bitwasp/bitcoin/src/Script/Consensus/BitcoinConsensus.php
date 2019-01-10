@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Script\Consensus;
 
 use BitWasp\Bitcoin\Script\Consensus\Exception\BitcoinConsensusException;
@@ -14,15 +12,14 @@ class BitcoinConsensus implements ConsensusInterface
     /**
      * @param TransactionInterface $tx
      * @param ScriptInterface $scriptPubKey
-     * @param int $flags
      * @param int $nInputToSign
+     * @param int $flags
      * @param int $amount
      * @return bool
-     * @throws BitcoinConsensusException
      */
-    public function verify(TransactionInterface $tx, ScriptInterface $scriptPubKey, int $flags, int $nInputToSign, int $amount): bool
+    public function verify(TransactionInterface $tx, ScriptInterface $scriptPubKey, $flags, $nInputToSign, $amount)
     {
-        if ($flags !== ($flags & BITCOINCONSENSUS_SCRIPT_FLAGS_VERIFY_ALL)) {
+        if ($flags !== ($flags & BITCOINCONSENSUS_VERIFY_ALL)) {
             throw new BitcoinConsensusException("Invalid flags for bitcoinconsensus");
         }
 

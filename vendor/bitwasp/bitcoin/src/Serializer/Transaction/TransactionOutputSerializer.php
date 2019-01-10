@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Transaction;
 
 use BitWasp\Bitcoin\Script\Opcodes;
@@ -45,7 +43,7 @@ class TransactionOutputSerializer
      * @param TransactionOutputInterface $output
      * @return BufferInterface
      */
-    public function serialize(TransactionOutputInterface $output): BufferInterface
+    public function serialize(TransactionOutputInterface $output)
     {
         return new Buffer(
             $this->uint64le->write($output->getValue()) .
@@ -55,23 +53,23 @@ class TransactionOutputSerializer
 
     /**
      * @param Parser $parser
-     * @return TransactionOutputInterface
+     * @return TransactionOutput
      * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
      */
-    public function fromParser(Parser $parser): TransactionOutputInterface
+    public function fromParser(Parser $parser)
     {
         return new TransactionOutput(
-            (int) $this->uint64le->read($parser),
+            $this->uint64le->read($parser),
             new Script($this->varstring->read($parser), $this->opcodes)
         );
     }
 
     /**
-     * @param BufferInterface $string
-     * @return TransactionOutputInterface
+     * @param string $string
+     * @return TransactionOutput
      * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
      */
-    public function parse(BufferInterface $string): TransactionOutputInterface
+    public function parse($string)
     {
         return $this->fromParser(new Parser($string));
     }

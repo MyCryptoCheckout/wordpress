@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Serializer\PrivateKey;
 
@@ -12,12 +11,12 @@ interface PrivateKeySerializerInterface
      * @param  PrivateKeyInterface $key
      * @return string
      */
-    public function serialize(PrivateKeyInterface $key): string;
+    public function serialize(PrivateKeyInterface $key);
 
     /**
      *
      * @param  string $formattedKey
      * @return PrivateKeyInterface
      */
-    public function parse(string $formattedKey): PrivateKeyInterface;
+    public function parse($formattedKey);
 }

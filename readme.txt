@@ -135,6 +135,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 
 = WAVES Tokens supported: =
 
+- BLXS Blockscart
 - CoffeeCoin COF
 - Tokes TKS
 - Waves World WAVESWORLD
@@ -192,10 +193,13 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 
 == Changelog ==
 
+* New currency: BLXS Blockscart
+
 = 2.32 20190109 =
 
 * New currency: Acorn Collective OAK
 * New currency: Bitcoin Zero BZX
+* Bitwasp library, that handles HD wallets, updated to v1.0. This requires PHP7.
 
 = 2.31 20181228 =
 

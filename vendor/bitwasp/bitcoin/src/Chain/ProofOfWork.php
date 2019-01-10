@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Chain;
 
 use BitWasp\Bitcoin\Block\BlockHeaderInterface;
@@ -38,7 +36,7 @@ class ProofOfWork
      * @param int $bits
      * @return \GMP
      */
-    public function getTarget(int $bits): \GMP
+    public function getTarget($bits)
     {
         $negative = false;
         $overflow = false;
@@ -48,7 +46,7 @@ class ProofOfWork
     /**
      * @return \GMP
      */
-    public function getMaxTarget(): \GMP
+    public function getMaxTarget()
     {
         return $this->getTarget($this->params->powBitsLimit());
     }
@@ -57,16 +55,20 @@ class ProofOfWork
      * @param int $bits
      * @return BufferInterface
      */
-    public function getTargetHash(int $bits): BufferInterface
+    public function getTargetHash($bits)
     {
-        return Buffer::int(gmp_strval($this->getTarget($bits), 10), 32);
+        return Buffer::int(
+            gmp_strval($this->getTarget($bits), 10),
+            32,
+            $this->math
+        );
     }
 
     /**
      * @param int $bits
      * @return string
      */
-    public function getDifficulty(int $bits): string
+    public function getDifficulty($bits)
     {
         $target = $this->getTarget($bits);
         $lowest = $this->getMaxTarget();
@@ -85,7 +87,7 @@ class ProofOfWork
      * @param int $nBits
      * @return bool
      */
-    public function checkPow(BufferInterface $hash, int $nBits): bool
+    public function check(BufferInterface $hash, $nBits)
     {
         $negative = false;
         $overflow = false;
@@ -96,7 +98,7 @@ class ProofOfWork
         }
 
         if ($this->math->cmp($hash->getGmp(), $target) > 0) {
-            return false;
+            throw new \RuntimeException("Hash doesn't match nBits");
         }
 
         return true;
@@ -107,16 +109,16 @@ class ProofOfWork
      * @return bool
      * @throws \Exception
      */
-    public function checkHeader(BlockHeaderInterface $header): bool
+    public function checkHeader(BlockHeaderInterface $header)
     {
-        return $this->checkPow($header->getHash(), $header->getBits());
+        return $this->check($header->getHash(), $header->getBits());
     }
 
     /**
      * @param int $bits
      * @return \GMP
      */
-    public function getWork(int $bits): \GMP
+    public function getWork($bits)
     {
         $target = gmp_strval($this->getTarget($bits), 10);
         return gmp_init(bcdiv(self::POW_2_256, $target), 10);

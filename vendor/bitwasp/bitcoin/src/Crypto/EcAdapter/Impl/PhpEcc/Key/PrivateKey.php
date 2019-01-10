@@ -1,30 +1,21 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Key;
 
 use BitWasp\Bitcoin\Bitcoin;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Adapter\EcAdapter;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Serializer\Key\PrivateKeySerializer;
-use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Signature\CompactSignature;
-use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\CompactSignatureInterface;
-use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Signature\Signature;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\Key;
-use BitWasp\Bitcoin\Crypto\EcAdapter\Key\KeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PrivateKeyInterface;
-use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PublicKeyInterface;
-use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface;
 use BitWasp\Bitcoin\Crypto\Random\RbgInterface;
-use BitWasp\Bitcoin\Crypto\Random\Rfc6979;
 use BitWasp\Bitcoin\Exceptions\InvalidPrivateKey;
 use BitWasp\Bitcoin\Network\NetworkInterface;
 use BitWasp\Bitcoin\Serializer\Key\PrivateKey\WifPrivateKeySerializer;
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\BufferInterface;
-use Mdanter\Ecc\Crypto\Signature\Signer;
+use Mdanter\Ecc\Crypto\EcDH\EcDH;
 
-class PrivateKey extends Key implements PrivateKeyInterface
+class PrivateKey extends Key implements PrivateKeyInterface, \Mdanter\Ecc\Crypto\Key\PrivateKeyInterface
 {
     /**
      * @var \GMP
@@ -52,75 +43,64 @@ class PrivateKey extends Key implements PrivateKeyInterface
      * @param bool $compressed
      * @throws InvalidPrivateKey
      */
-    public function __construct(EcAdapter $ecAdapter, \GMP $int, bool $compressed = false)
+    public function __construct(EcAdapter $ecAdapter, \GMP $int, $compressed = false)
     {
-        if (false === $ecAdapter->validatePrivateKey(Buffer::int(gmp_strval($int, 10), 32))) {
+        if (false === $ecAdapter->validatePrivateKey(Buffer::int(gmp_strval($int, 10), 32, $ecAdapter->getMath()))) {
             throw new InvalidPrivateKey('Invalid private key - must be less than curve order.');
         }
 
+        if (false === is_bool($compressed)) {
+            throw new \InvalidArgumentException('PrivateKey: Compressed argument must be a boolean');
+        }
+        
         $this->ecAdapter = $ecAdapter;
         $this->secretMultiplier = $int;
         $this->compressed = $compressed;
     }
 
     /**
+     * @return \Mdanter\Ecc\Primitives\GeneratorPoint
+     */
+    public function getPoint()
+    {
+        return $this->ecAdapter->getGenerator();
+    }
+
+    /**
      * @return \GMP
      */
-    public function getSecret(): \GMP
+    public function getSecret()
     {
         return $this->secretMultiplier;
     }
 
     /**
-     * @param BufferInterface $msg32
-     * @param RbgInterface|null $rbg
-     * @return Signature
+     * @param \Mdanter\Ecc\Crypto\Key\PublicKeyInterface $recipient
+     * @return EcDH
      */
-    public function sign(BufferInterface $msg32, RbgInterface $rbg = null): SignatureInterface
+    public function createExchange(\Mdanter\Ecc\Crypto\Key\PublicKeyInterface $recipient)
     {
-        $rbg = $rbg ?: new Rfc6979($this->ecAdapter, $this, $msg32);
-        $randomK = gmp_init($rbg->bytes(32)->getHex(), 16);
-        $hash = gmp_init($msg32->getHex(), 16);
-
-        $math = $this->ecAdapter->getMath();
-        $signer = new Signer($math);
-        $signature = $signer->sign($this->ecAdapter->getGenerator()->getPrivateKeyFrom($this->secretMultiplier), $hash, $randomK);
-        $s = $signature->getS();
-
-        // if s is less than half the curve order, invert s
-        if (!$this->ecAdapter->validateSignatureElement($s, true)) {
-            $s = $math->sub($this->ecAdapter->getOrder(), $s);
-        }
-
-        return new Signature($this->ecAdapter, $signature->getR(), $s);
+        $ecdh = new EcDH($this->ecAdapter->getMath());
+        $ecdh->setSenderKey($this);
+        $ecdh->setRecipientKey($recipient);
+        return $ecdh;
     }
 
     /**
      * @param BufferInterface $msg32
      * @param RbgInterface|null $rbg
-     * @return CompactSignatureInterface
-     * @throws \Exception
+     * @return \BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface
      */
-    public function signCompact(BufferInterface $msg32, RbgInterface $rbg = null): CompactSignatureInterface
+    public function sign(BufferInterface $msg32, RbgInterface $rbg = null)
     {
-        $sign = $this->sign($msg32, $rbg);
-
-        // calculate the recovery param
-        // there should be a way to get this when signing too, but idk how ...
-        return new CompactSignature(
-            $this->ecAdapter,
-            $sign->getR(),
-            $sign->getS(),
-            $this->ecAdapter->calcPubKeyRecoveryParam($sign->getR(), $sign->getS(), $msg32, $this->getPublicKey()),
-            $this->isCompressed()
-        );
+        return $this->ecAdapter->sign($msg32, $this, $rbg);
     }
 
     /**
      * @param \GMP $tweak
-     * @return KeyInterface
+     * @return PrivateKeyInterface
      */
-    public function tweakAdd(\GMP $tweak): KeyInterface
+    public function tweakAdd(\GMP $tweak)
     {
         $adapter = $this->ecAdapter;
         $modMath = $adapter->getMath()->getModularArithmetic($adapter->getGenerator()->getOrder());
@@ -129,9 +109,9 @@ class PrivateKey extends Key implements PrivateKeyInterface
 
     /**
      * @param \GMP $tweak
-     * @return KeyInterface
+     * @return PrivateKeyInterface
      */
-    public function tweakMul(\GMP $tweak): KeyInterface
+    public function tweakMul(\GMP $tweak)
     {
         $adapter = $this->ecAdapter;
         $modMath = $adapter->getMath()->getModularArithmetic($adapter->getGenerator()->getOrder());
@@ -141,7 +121,7 @@ class PrivateKey extends Key implements PrivateKeyInterface
     /**
      * {@inheritDoc}
      */
-    public function isCompressed(): bool
+    public function isCompressed()
     {
         return $this->compressed;
     }
@@ -151,11 +131,11 @@ class PrivateKey extends Key implements PrivateKeyInterface
      *
      * @return PublicKey
      */
-    public function getPublicKey(): PublicKeyInterface
+    public function getPublicKey()
     {
         if (null === $this->publicKey) {
-            $point = $this->ecAdapter->getGenerator()->mul($this->secretMultiplier);
-            $this->publicKey = new PublicKey($this->ecAdapter, $point, $this->compressed);
+            $adapter = $this->ecAdapter;
+            $this->publicKey = $adapter->getPublicKey($adapter->getGenerator()->mul($this->secretMultiplier), $this->compressed);
         }
 
         return $this->publicKey;
@@ -165,10 +145,11 @@ class PrivateKey extends Key implements PrivateKeyInterface
      * @param NetworkInterface $network
      * @return string
      */
-    public function toWif(NetworkInterface $network = null): string
+    public function toWif(NetworkInterface $network = null)
     {
         $network = $network ?: Bitcoin::getNetwork();
         $serializer = new WifPrivateKeySerializer(
+            $this->ecAdapter,
             new PrivateKeySerializer($this->ecAdapter)
         );
 
@@ -176,9 +157,9 @@ class PrivateKey extends Key implements PrivateKeyInterface
     }
 
     /**
-     * @return BufferInterface
+     * @return \BitWasp\Buffertools\BufferInterface
      */
-    public function getBuffer(): BufferInterface
+    public function getBuffer()
     {
         return (new PrivateKeySerializer($this->ecAdapter))->serialize($this);
     }

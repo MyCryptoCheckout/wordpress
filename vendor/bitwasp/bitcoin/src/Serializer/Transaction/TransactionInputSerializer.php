@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Transaction;
 
 use BitWasp\Bitcoin\Script\Opcodes;
@@ -16,7 +14,7 @@ use BitWasp\Buffertools\Parser;
 class TransactionInputSerializer
 {
     /**
-     * @var OutPointSerializerInterface
+     * @var OutPointSerializer
      */
     private $outpointSerializer;
 
@@ -52,7 +50,7 @@ class TransactionInputSerializer
      * @param TransactionInputInterface $input
      * @return BufferInterface
      */
-    public function serialize(TransactionInputInterface $input): BufferInterface
+    public function serialize(TransactionInputInterface $input)
     {
         return new Buffer(
             $this->outpointSerializer->serialize($input->getOutPoint())->getBinary() .
@@ -63,26 +61,24 @@ class TransactionInputSerializer
 
     /**
      * @param Parser $parser
-     * @return TransactionInputInterface
+     * @return TransactionInput
      * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
-     * @throws \Exception
      */
-    public function fromParser(Parser $parser): TransactionInputInterface
+    public function fromParser(Parser $parser)
     {
         return new TransactionInput(
             $this->outpointSerializer->fromParser($parser),
             new Script($this->varstring->read($parser), $this->opcodes),
-            (int) $this->uint32le->read($parser)
+            $this->uint32le->read($parser)
         );
     }
 
     /**
-     * @param BufferInterface $string
-     * @return TransactionInputInterface
+     * @param BufferInterface|string $string
+     * @return TransactionInput
      * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
-     * @throws \Exception
      */
-    public function parse(BufferInterface $string): TransactionInputInterface
+    public function parse($string)
     {
         return $this->fromParser(new Parser($string));
     }

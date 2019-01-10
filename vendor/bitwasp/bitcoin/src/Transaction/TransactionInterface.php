@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction;
 
 use BitWasp\Bitcoin\Script\ScriptWitnessInterface;
@@ -21,119 +19,119 @@ interface TransactionInterface extends SerializableInterface
     /**
      * @return bool
      */
-    public function isCoinbase(): bool;
+    public function isCoinbase();
 
     /**
      * Get the transactions sha256d hash.
      *
      * @return BufferInterface
      */
-    public function getTxHash(): BufferInterface;
+    public function getTxHash();
 
     /**
      * Get the little-endian sha256d hash.
      * @return BufferInterface
      */
-    public function getTxId(): BufferInterface;
+    public function getTxId();
 
     /**
      * Get the little endian sha256d hash including witness data
      * @return BufferInterface
      */
-    public function getWitnessTxId(): BufferInterface;
+    public function getWitnessTxId();
 
     /**
      * Get the version of this transaction
      *
      * @return int
      */
-    public function getVersion(): int;
+    public function getVersion();
 
     /**
      * Return an array of all inputs
      *
      * @return TransactionInputInterface[]
      */
-    public function getInputs(): array;
+    public function getInputs();
 
     /**
      * @param int $index
      * @return TransactionInputInterface
      */
-    public function getInput(int $index): TransactionInputInterface;
+    public function getInput($index);
 
     /**
      * Return an array of all outputs
      *
      * @return TransactionOutputInterface[]
      */
-    public function getOutputs(): array;
+    public function getOutputs();
 
     /**
      * @param int $vout
      * @return TransactionOutputInterface
      */
-    public function getOutput(int $vout): TransactionOutputInterface;
+    public function getOutput($vout);
 
     /**
      * @param int $index
      * @return ScriptWitnessInterface
      */
-    public function getWitness(int $index): ScriptWitnessInterface;
+    public function getWitness($index);
 
     /**
      * @return ScriptWitnessInterface[]
      */
-    public function getWitnesses(): array;
+    public function getWitnesses();
 
     /**
      * @param int $vout
      * @return OutPointInterface
      */
-    public function makeOutPoint(int $vout): OutPointInterface;
+    public function makeOutPoint($vout);
 
     /**
      * @param int $vout
      * @return Utxo
      */
-    public function makeUtxo(int $vout): Utxo;
+    public function makeUtxo($vout);
 
     /**
      * Return the locktime for this transaction
      *
      * @return int
      */
-    public function getLockTime(): int;
+    public function getLockTime();
 
     /**
-     * @return int
+     * @return int|string
      */
     public function getValueOut();
 
     /**
      * @return bool
      */
-    public function hasWitness(): bool;
+    public function hasWitness();
 
     /**
      * @param TransactionInterface $tx
      * @return bool
      */
-    public function equals(TransactionInterface $tx): bool;
+    public function equals(TransactionInterface $tx);
 
     /**
      * @return BufferInterface
      */
-    public function getBaseSerialization(): BufferInterface;
+    public function getBaseSerialization();
 
     /**
      * @return BufferInterface
      */
-    public function getWitnessSerialization(): BufferInterface;
+    public function getWitnessSerialization();
 
     /**
      * @deprecated
      * @return BufferInterface
      */
-    public function getWitnessBuffer(): BufferInterface;
+    public function getWitnessBuffer();
 }

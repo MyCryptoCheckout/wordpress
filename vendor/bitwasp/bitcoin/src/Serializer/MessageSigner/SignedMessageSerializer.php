@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\MessageSigner;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Serializer\Signature\CompactSignatureSerializerInterface;
@@ -34,7 +32,7 @@ class SignedMessageSerializer
      * @param SignedMessage $signedMessage
      * @return BufferInterface
      */
-    public function serialize(SignedMessage $signedMessage): BufferInterface
+    public function serialize(SignedMessage $signedMessage)
     {
         $content = self::HEADER . PHP_EOL
             . $signedMessage->getMessage() . PHP_EOL
@@ -49,7 +47,7 @@ class SignedMessageSerializer
      * @param string $content
      * @return SignedMessage
      */
-    public function parse(string $content): SignedMessage
+    public function parse($content)
     {
         if (0 !== strpos($content, self::HEADER)) {
             throw new \RuntimeException('Message must begin with ' . self::HEADER);
@@ -72,12 +70,8 @@ class SignedMessageSerializer
         $sigStart = $sigHeaderPos + strlen(self::SIG_START);
 
         $sig = trim(substr($content, $sigStart, $sigEnd - $sigStart));
-        $decoded = base64_decode($sig);
-        if (false === $decoded) {
-            throw new \RuntimeException('Invalid base64');
-        }
-
-        $compactSig = $this->csSerializer->parse(new Buffer($decoded));
+        $sig = new Buffer(base64_decode($sig));
+        $compactSig = $this->csSerializer->parse($sig);
 
         return new SignedMessage($message, $compactSig);
     }

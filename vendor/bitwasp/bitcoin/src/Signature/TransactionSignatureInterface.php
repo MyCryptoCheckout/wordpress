@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Signature;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface;
@@ -12,16 +10,16 @@ interface TransactionSignatureInterface extends SerializableInterface
     /**
      * @return SignatureInterface
      */
-    public function getSignature(): SignatureInterface;
+    public function getSignature();
 
     /**
-     * @return int
+     * @return int|string
      */
-    public function getHashType(): int;
+    public function getHashType();
 
     /**
      * @param TransactionSignatureInterface $other
      * @return bool
      */
-    public function equals(TransactionSignatureInterface $other): bool;
+    public function equals(TransactionSignatureInterface $other);
 }

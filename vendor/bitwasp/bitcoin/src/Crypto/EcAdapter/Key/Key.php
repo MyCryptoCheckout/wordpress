@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Key;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Serializer\Key\PublicKeySerializerInterface;
@@ -19,7 +17,7 @@ abstract class Key extends Serializable implements KeyInterface
     /**
      * @return bool
      */
-    public function isPrivate(): bool
+    public function isPrivate()
     {
         return $this instanceof PrivateKeyInterface;
     }
@@ -28,7 +26,7 @@ abstract class Key extends Serializable implements KeyInterface
      * @param PublicKeySerializerInterface|null $serializer
      * @return \BitWasp\Buffertools\BufferInterface
      */
-    public function getPubKeyHash(PublicKeySerializerInterface $serializer = null): BufferInterface
+    public function getPubKeyHash(PublicKeySerializerInterface $serializer = null)
     {
         if ($this instanceof PrivateKeyInterface) {
             $publicKey = $this->getPublicKey();

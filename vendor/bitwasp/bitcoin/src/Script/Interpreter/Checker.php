@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Script\Interpreter;
 
 use BitWasp\Bitcoin\Script\ScriptInterface;
@@ -24,7 +22,7 @@ class Checker extends CheckerBase
      * @param int $sigVersion
      * @return BufferInterface
      */
-    public function getSigHash(ScriptInterface $script, int $sigHashType, int $sigVersion): BufferInterface
+    public function getSigHash(ScriptInterface $script, $sigHashType, $sigVersion)
     {
         $cacheCheck = $sigVersion . $sigHashType . $script->getBuffer()->getBinary();
         if (!isset($this->sigHashCache[$cacheCheck])) {

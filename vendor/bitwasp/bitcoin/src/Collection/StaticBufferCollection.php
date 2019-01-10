@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Collection;
 
 use BitWasp\Buffertools\BufferInterface;
@@ -20,17 +18,19 @@ class StaticBufferCollection extends StaticCollection
 
     /**
      * StaticBufferCollection constructor.
-     * @param BufferInterface ...$values
+     * @param BufferInterface[] $sigValues
      */
-    public function __construct(BufferInterface... $values)
+    public function __construct(array $sigValues)
     {
-        $this->set = $values;
+        array_map(function (BufferInterface $data) {
+            $this->set[] = $data;
+        }, $sigValues);
     }
 
     /**
      * @return BufferInterface
      */
-    public function bottom(): BufferInterface
+    public function bottom()
     {
         return parent::bottom();
     }
@@ -38,7 +38,7 @@ class StaticBufferCollection extends StaticCollection
     /**
      * @return BufferInterface
      */
-    public function top(): BufferInterface
+    public function top()
     {
         return parent::top();
     }
@@ -46,7 +46,7 @@ class StaticBufferCollection extends StaticCollection
     /**
      * @return BufferInterface
      */
-    public function current(): BufferInterface
+    public function current()
     {
         return $this->set[$this->position];
     }

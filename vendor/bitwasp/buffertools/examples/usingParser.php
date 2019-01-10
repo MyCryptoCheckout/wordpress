@@ -1,12 +1,12 @@
 <?php
 
-require __DIR__ . "/../vendor/autoload.php";
+require "../vendor/autoload.php";
 
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\Parser;
 
 // Parsers read Buffers
-$buffer = new Buffer('abcd01020304');
+$buffer = new Buffer('abc');
 $parser = new Parser($buffer);
 
 // Call readBytes to unpack the data
@@ -15,8 +15,7 @@ $parser = new Parser($buffer);
 $set = [
     $parser->readBytes(1),
     $parser->readBytes(1),
-    $parser->readBytes(1),
-    $parser->readBytes(4)
+    $parser->readBytes(1)
 ];
 
 foreach ($set as $item) {

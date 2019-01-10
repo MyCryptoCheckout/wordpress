@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools\Tests\Types;
 
 use BitWasp\Buffertools\Buffer;
@@ -9,6 +7,7 @@ use BitWasp\Buffertools\Parser;
 use BitWasp\Buffertools\Tests\BinaryTest;
 use BitWasp\Buffertools\Types\VarInt;
 use Mdanter\Ecc\EccFactory;
+use Mdanter\Ecc\Math\GmpMath;
 
 class VarIntTest extends BinaryTest
 {
@@ -18,8 +17,9 @@ class VarIntTest extends BinaryTest
      */
     public function testSolveWriteTooLong()
     {
-        $varint = new VarInt();
-        $disallowed = gmp_add(gmp_pow(gmp_init(2, 10), 64), gmp_init(1, 10));
+        $math = EccFactory::getAdapter();
+        $varint = new VarInt($math);
+        $disallowed = $math->add($math->pow(gmp_init(2, 10), 64), gmp_init(1, 10));
         $varint->solveWriteSize($disallowed);
     }
 
@@ -29,12 +29,13 @@ class VarIntTest extends BinaryTest
      */
     public function testSolveReadTooLong()
     {
-        $varint = new VarInt();
-        $disallowed = gmp_add(gmp_pow(gmp_init(2, 10), 64), gmp_init(1, 10));
+        $math = EccFactory::getAdapter();
+        $varint = new VarInt($math);
+        $disallowed = $math->add($math->pow(gmp_init(2, 10), 64), gmp_init(1, 10));
         $varint->solveReadSize($disallowed);
     }
 
-    public function getVarIntFixtures(): array
+    public function getVarIntFixtures()
     {
         return [
             ["\x00", 0,],
@@ -54,7 +55,7 @@ class VarIntTest extends BinaryTest
      */
     public function testVarIntRead($bin, $int)
     {
-        $vi = new VarInt();
+        $vi = new VarInt(new GmpMath());
         $this->assertEquals($int, $vi->read(new Parser(new Buffer($bin))));
     }
 
@@ -65,7 +66,7 @@ class VarIntTest extends BinaryTest
      */
     public function testVarIntWrite($bin, $int)
     {
-        $vi = new VarInt();
+        $vi = new VarInt(new GmpMath());
         $this->assertEquals($bin, $vi->write($int));
     }
 }

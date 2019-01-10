@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
-namespace BitWasp\Buffertools\Tests;
+namespace BitWasp\Buffertools\Tests\Util;
 
 use \BitWasp\Buffertools\Buffer;
-use PHPUnit\Framework\TestCase;
+use Mdanter\Ecc\EccFactory;
 
-class BufferTest extends TestCase
+class BufferTest extends \PHPUnit_Framework_TestCase
 {
     public function testBufferDebug()
     {
@@ -73,7 +71,7 @@ class BufferTest extends TestCase
     public function testSerialize()
     {
         $hex = '41414141';
-        $dec = gmp_strval(gmp_init($hex, 16), 10);
+        $dec = EccFactory::getAdapter()->hexDec($hex);
         $bin = pack("H*", $hex);
         $buffer = Buffer::hex($hex);
 
@@ -96,27 +94,23 @@ class BufferTest extends TestCase
         $this->assertEquals(4, Buffer::hex('41', 4)->getSize());
     }
 
-    /**
-     * @return array
-     */
-    public function getIntVectors(): array
+    public function IntVectors()
     {
-        return [
-            ['1',  '01', 1,   ],
-            ['1',  '01', null,],
-            ['20', '14', 1,   ]
-        ];
+        $math = EccFactory::getAdapter();
+
+        return array(
+            array('1',  1,      '01', $math),
+            array('1',  null,   '01', $math),
+            array('20', 1,      '14', $math)
+        );
     }
 
     /**
-     * @dataProvider getIntVectors
-     * @param int|string $int
-     * @param int|null $size
-     * @param string $expectedHex
+     * @dataProvider IntVectors
      */
-    public function testIntConstruct($int, string $expectedHex, int $size = null)
+    public function testIntConstruct($int, $size, $expectedHex, $math)
     {
-        $buffer = Buffer::int($int, $size);
+        $buffer = Buffer::int($int, $size, $math);
         $this->assertEquals($expectedHex, $buffer->getHex());
     }
 

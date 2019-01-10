@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools;
 
 use BitWasp\Buffertools\Types\ByteString;
@@ -30,7 +28,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint8
      */
-    public function uint8(): Uint8
+    public function uint8()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -43,7 +41,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint8
      */
-    public function uint8le(): Uint8
+    public function uint8le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -56,7 +54,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint16
      */
-    public function uint16(): Uint16
+    public function uint16()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -69,7 +67,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint16
      */
-    public function uint16le(): Uint16
+    public function uint16le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -82,7 +80,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint32
      */
-    public function uint32(): Uint32
+    public function uint32()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -95,7 +93,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint32
      */
-    public function uint32le(): Uint32
+    public function uint32le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -108,7 +106,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint64
      */
-    public function uint64(): Uint64
+    public function uint64()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -121,7 +119,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint64
      */
-    public function uint64le(): Uint64
+    public function uint64le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -134,7 +132,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint128
      */
-    public function uint128(): Uint128
+    public function uint128()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -147,7 +145,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint128
      */
-    public function uint128le(): Uint128
+    public function uint128le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -160,7 +158,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint256
      */
-    public function uint256(): Uint256
+    public function uint256()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -173,7 +171,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Uint256
      */
-    public function uint256le(): Uint256
+    public function uint256le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -186,7 +184,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int8
      */
-    public function int8(): Int8
+    public function int8()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -199,7 +197,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int8
      */
-    public function int8le(): Int8
+    public function int8le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -212,7 +210,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int16
      */
-    public function int16(): Int16
+    public function int16()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -225,7 +223,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int16
      */
-    public function int16le(): Int16
+    public function int16le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -238,7 +236,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int32
      */
-    public function int32(): Int32
+    public function int32()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -251,7 +249,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int32
      */
-    public function int32le(): Int32
+    public function int32le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -264,7 +262,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int64
      */
-    public function int64(): Int64
+    public function int64()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -277,7 +275,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int64
      */
-    public function int64le(): Int64
+    public function int64le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -290,7 +288,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int128
      */
-    public function int128(): Int128
+    public function int128()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -303,7 +301,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int128
      */
-    public function int128le(): Int128
+    public function int128le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -316,7 +314,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int256
      */
-    public function int256(): Int256
+    public function int256()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -329,7 +327,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return Int256
      */
-    public function int256le(): Int256
+    public function int256le()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -342,7 +340,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return VarInt
      */
-    public function varint(): VarInt
+    public function varint()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -355,7 +353,7 @@ class CachingTypeFactory extends TypeFactory
      *
      * @return VarString
      */
-    public function varstring(): VarString
+    public function varstring()
     {
         if (!isset($this->cache[__FUNCTION__])) {
             $this->cache[__FUNCTION__] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -367,10 +365,10 @@ class CachingTypeFactory extends TypeFactory
      * Add a byte string serializer to the template. This serializer requires a length to
      * pad/truncate to.
      *
-     * @param  int $length
+     * @param  $length
      * @return ByteString
      */
-    public function bytestring(int $length): ByteString
+    public function bytestring($length)
     {
         if (!isset($this->cache[__FUNCTION__ . $length])) {
             $this->cache[__FUNCTION__ . $length] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -382,10 +380,10 @@ class CachingTypeFactory extends TypeFactory
      * Add a little-endian byte string serializer to the template. This serializer requires
      * a length to pad/truncate to.
      *
-     * @param  int $length
+     * @param  $length
      * @return ByteString
      */
-    public function bytestringle(int $length): ByteString
+    public function bytestringle($length)
     {
         if (!isset($this->cache[__FUNCTION__ . $length])) {
             $this->cache[__FUNCTION__ . $length] = call_user_func_array(['parent', __FUNCTION__], func_get_args());
@@ -403,7 +401,7 @@ class CachingTypeFactory extends TypeFactory
      * @param  callable $readHandler
      * @return Vector
      */
-    public function vector(callable $readHandler): Vector
+    public function vector(callable $readHandler)
     {
         return parent::vector($readHandler);
     }

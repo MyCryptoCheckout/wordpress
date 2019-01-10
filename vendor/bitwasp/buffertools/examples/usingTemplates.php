@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . "/../vendor/autoload.php";
+require "../vendor/autoload.php";
 
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\Parser;
@@ -28,11 +28,11 @@ print_r($set);
 // a structure-specific parser reads the internal structure (not needed for writing)
 
 $vector = (new TemplateFactory())
-    ->vector(function () {
-    }) // can be null, since we're writing
+    ->vector(function () {}) // can be null, since we're writing
     ->getTemplate()
     ->write([$set]);
 
 echo $vector->getHex() . PHP_EOL;
 
 echo $vector->getBinary() . PHP_EOL;
+

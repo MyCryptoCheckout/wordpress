@@ -29,15 +29,15 @@ use FG\ASN1\Exception\ParserException;
  *
  * @see http://luca.ntop.org/Teaching/Appunti/asn1.html
  */
-class ExplicitlyTaggedObject extends ASNObject
+class ExplicitlyTaggedObject extends Object
 {
-    /** @var \FG\ASN1\ASNObject[] */
+    /** @var \FG\ASN1\Object[] */
     private $decoratedObjects;
     private $tag;
 
     /**
      * @param int $tag
-     * @param \FG\ASN1\ASNObject $objects,...
+     * @param \FG\ASN1\Object $objects,...
      */
     public function __construct($tag, /* HH_FIXME[4858]: variadic + strict */ ...$objects)
     {
@@ -115,7 +115,7 @@ class ExplicitlyTaggedObject extends ASNObject
         $decoratedObjects = [];
 
         while ($remainingContentLength > 0) {
-            $nextObject = ASNObject::fromBinary($binaryData, $offsetIndex);
+            $nextObject = Object::fromBinary($binaryData, $offsetIndex);
             $remainingContentLength -= $nextObject->getObjectLength();
             $decoratedObjects[] = $nextObject;
         }

@@ -1,31 +1,33 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools\Types;
 
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\ByteOrder;
 use BitWasp\Buffertools\Parser;
+use Mdanter\Ecc\Math\GmpMathInterface;
 
 abstract class AbstractSignedInt extends AbstractType implements SignedIntInterface
 {
     /**
-     * @param int $byteOrder
+     * @param GmpMathInterface     $math
+     * @param int                  $byteOrder
      */
-    public function __construct(int $byteOrder = ByteOrder::BE)
+    public function __construct(GmpMathInterface $math, $byteOrder = ByteOrder::BE)
     {
-        parent::__construct($byteOrder);
+        parent::__construct($math, $byteOrder);
     }
 
     /**
-     * @param int|string $integer
+     * @param $integer
      * @return string
      */
-    public function writeBits($integer): string
+    public function writeBits($integer)
     {
+        $math = $this->getMath();
+
         return str_pad(
-            gmp_strval(gmp_init($integer, 10), 2),
+            $math->baseConvert($integer, 10, 2),
             $this->getBitSize(),
             '0',
             STR_PAD_LEFT
@@ -66,7 +68,7 @@ abstract class AbstractSignedInt extends AbstractType implements SignedIntInterf
      * {@inheritdoc}
      * @see \BitWasp\Buffertools\Types\TypeInterface::write()
      */
-    public function write($integer): string
+    public function write($integer)
     {
         $bitSize = $this->getBitSize();
         if (gmp_sign($integer) < 0) {
@@ -87,8 +89,8 @@ abstract class AbstractSignedInt extends AbstractType implements SignedIntInterf
      * {@inheritdoc}
      * @see \BitWasp\Buffertools\Types\TypeInterface::read()
      */
-    public function read(Parser $parser)
+    public function read(Parser $binary)
     {
-        return $this->readBits($parser);
+        return $this->readBits($binary);
     }
 }

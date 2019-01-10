@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Util;
 
@@ -13,9 +12,13 @@ class NumberSize
      * @param \GMP             $x
      * @return float
      */
-    public static function getCeiledByteSize(GmpMathInterface $adapter, \GMP $x): float
+    public static function getCeiledByteSize(GmpMathInterface $adapter, \GMP $x)
     {
-        $log2 = self::bnNumBits($adapter, $x);
+        $log2 = 0;
+        while ($x = $adapter->rightShift($x, 1)) {
+            $log2++;
+        }
+
         return ceil($log2 / 8);
     }
 
@@ -24,37 +27,41 @@ class NumberSize
      * @param \GMP             $x
      * @return float
      */
-    public static function getFlooredByteSize(GmpMathInterface $adapter, \GMP $x): float
+    public static function getFlooredByteSize(GmpMathInterface $adapter, \GMP $x)
     {
-        $log2 = self::bnNumBits($adapter, $x);
+        $log2 = 0;
+        while ($x = $adapter->rightShift($x, 1)) {
+            $log2++;
+        }
+
         return floor($log2 / 8) + 1;
     }
 
     /**
-     * Returns the number of minimum required bytes to store a given number. Non-significant upper bits are not counted.
+     * Returns the number of mininum required bytes to store a given number. Non-significant upper bits are not counted.
      *
      * @param  GmpMathInterface $adapter
      * @param  \GMP             $x
-     * @return int
+     * @return integer
      *
      * @link https://www.openssl.org/docs/crypto/BN_num_bytes.html
      */
-    public static function bnNumBytes(GmpMathInterface $adapter, \GMP $x): int
+    public static function bnNumBytes(GmpMathInterface $adapter, \GMP $x)
     {
         // https://github.com/luvit/openssl/blob/master/openssl/crypto/bn/bn.h#L402
-        return (int) floor((self::bnNumBits($adapter, $x) + 7) / 8);
+        return floor((self::bnNumBits($adapter, $x) + 7) / 8);
     }
 
     /**
-     * Returns the number of bits used to store this number. Non-significant upper bits are not counted.
+     * Returns the number of bits used to store this number. Non-singicant upper bits are not counted.
      *
      * @param  GmpMathInterface $adapter
      * @param  \GMP             $x
-     * @return int
+     * @return number
      *
      * @link https://www.openssl.org/docs/crypto/BN_num_bytes.html
      */
-    public static function bnNumBits(GmpMathInterface $adapter, \GMP $x): int
+    public static function bnNumBits(GmpMathInterface $adapter, \GMP $x)
     {
         $zero = gmp_init(0, 10);
         if ($adapter->equals($x, $zero)) {

@@ -15,7 +15,7 @@ class EnglishWordList extends WordList implements ElectrumWordListInterface
     /**
      * @return int
      */
-    public function count(): int
+    public function count()
     {
         return count($this->getWords());
     }
@@ -23,7 +23,7 @@ class EnglishWordList extends WordList implements ElectrumWordListInterface
     /**
      * @return array
      */
-    public function getWords(): array
+    public function getWords()
     {
         return array('like', 'just', 'love', 'know', 'never', 'want', 'time',
             'out', 'there', 'make', 'look', 'eye', 'down', 'only', 'think',
@@ -265,10 +265,10 @@ class EnglishWordList extends WordList implements ElectrumWordListInterface
     }
 
     /**
-     * @param string $word
-     * @return int
+     * @param $word
+     * @return mixed
      */
-    public function getIndex(string $word): int
+    public function getIndex($word)
     {
         // create a flipped word list to speed up the searching of words
         if (null === $this->wordsFlipped) {

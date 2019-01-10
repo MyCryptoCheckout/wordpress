@@ -17,14 +17,6 @@ class Viacoin extends Network
     ];
 
     /**
-     * {@inheritdoc}
-     * @see Network::$bech32PrefixMap
-     */
-    protected $bech32PrefixMap = [
-        self::BECH32_PREFIX_SEGWIT => "via",
-    ];
-
-    /**
      * @var array map of bip32 type to bytes
      */
     protected $bip32PrefixMap = [

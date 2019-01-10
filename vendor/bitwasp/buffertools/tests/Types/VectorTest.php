@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools\Tests\Types;
 
 use BitWasp\Buffertools\Tests\BinaryTest;
@@ -9,12 +7,14 @@ use BitWasp\Buffertools\Types\VarInt;
 use BitWasp\Buffertools\Types\Vector;
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\Parser;
+use Mdanter\Ecc\EccFactory;
 
 class VectorTest extends BinaryTest
 {
     public function testVector()
     {
-        $varint = new VarInt();
+        $math = EccFactory::getAdapter();
+        $varint = new VarInt($math);
         $vector = new Vector(
             $varint,
             function () {
@@ -33,7 +33,8 @@ class VectorTest extends BinaryTest
      */
     public function testWriteInvalid()
     {
-        $varint = new VarInt();
+        $math = EccFactory::getAdapter();
+        $varint = new VarInt($math);
         $vector = new Vector(
             $varint,
             function () {
@@ -46,7 +47,8 @@ class VectorTest extends BinaryTest
 
     public function testReadVector()
     {
-        $varint = new VarInt();
+        $math = EccFactory::getAdapter();
+        $varint = new VarInt($math);
         $vector = new Vector(
             $varint,
             function (Parser $parser) {

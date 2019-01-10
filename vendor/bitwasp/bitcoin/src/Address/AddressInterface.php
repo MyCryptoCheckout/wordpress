@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Address;
 
 use BitWasp\Bitcoin\Network\NetworkInterface;
@@ -14,15 +12,15 @@ interface AddressInterface
      * @param NetworkInterface $network
      * @return string
      */
-    public function getAddress(NetworkInterface $network = null): string;
+    public function getAddress(NetworkInterface $network = null);
 
     /**
      * @return BufferInterface
      */
-    public function getHash(): BufferInterface;
+    public function getHash();
 
     /**
      * @return ScriptInterface
      */
-    public function getScriptPubKey(): ScriptInterface;
+    public function getScriptPubKey();
 }

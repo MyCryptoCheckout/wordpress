@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Network;
 
 use BitWasp\Bitcoin\Exceptions\InvalidNetworkParameter;
@@ -52,23 +50,13 @@ class Network implements NetworkInterface
 
     /**
      * @param string $field - name of field being validated
-     * @param string $value - we check this value
-     * @throws InvalidNetworkParameter
+     * @param mixed $value - we check this value
+     * @param int $length - length we require
      */
-    private function validateHexStringRepresentsBytes(string $field, string $value)
+    private function validateHexString($field, $value, $length)
     {
-        if (!is_string($value)) {
-            throw new InvalidNetworkParameter("{$field} must be a string");
-        }
-
-        $length = strlen($value);
-
-        if ($length == 0) {
-            throw new InvalidNetworkParameter("{$field} must be non-empty string");
-        }
-
-        if ($length % 2 !== 0) {
-            throw new InvalidNetworkParameter("{$field} must have even number of characters (hex representing bytes)");
+        if (!is_string($value) || strlen($value) !== 2 * $length) {
+            throw new InvalidNetworkParameter("{$field} must be a {$length} byte hex string");
         }
 
         if (!ctype_xdigit($value)) {
@@ -78,24 +66,23 @@ class Network implements NetworkInterface
 
     /**
      * Network constructor.
-     * @throws InvalidNetworkParameter
      */
     public function __construct()
     {
         if (null !== $this->p2pMagic) {
-            $this->validateHexStringRepresentsBytes("P2P magic", $this->p2pMagic);
+            $this->validateHexString("P2P magic", $this->p2pMagic, 4);
         }
 
         foreach ($this->base58PrefixMap as $type => $byte) {
-            $this->validateHexStringRepresentsBytes("{$type} base58 prefix", $byte);
+            $this->validateHexString("{$type} base58 prefix", $byte, 1);
         }
 
         foreach ($this->bip32PrefixMap as $type => $bytes) {
-            $this->validateHexStringRepresentsBytes("{$type} bip32 prefix", $bytes);
+            $this->validateHexString("{$type} bip32 prefix", $bytes, 4);
         }
 
         if (count($this->bip32ScriptTypeMap) !== count($this->bip32PrefixMap)) {
-            throw new InvalidNetworkParameter("BIP32 prefixes not configured correctly. Number of items does not match.");
+            throw new InvalidNetworkParameter("BIP32 prefixes not configured correctly");
         }
     }
 
@@ -103,7 +90,7 @@ class Network implements NetworkInterface
      * @param string $prefixType
      * @return bool
      */
-    protected function hasBase58Prefix(string $prefixType): bool
+    protected function hasBase58Prefix($prefixType)
     {
         return array_key_exists($prefixType, $this->base58PrefixMap);
     }
@@ -113,7 +100,7 @@ class Network implements NetworkInterface
      * @return string
      * @throws MissingBase58Prefix
      */
-    protected function getBase58Prefix(string $prefixType): string
+    protected function getBase58Prefix($prefixType)
     {
         if (!$this->hasBase58Prefix($prefixType)) {
             throw new MissingBase58Prefix();
@@ -125,7 +112,7 @@ class Network implements NetworkInterface
      * @param string $prefixType
      * @return bool
      */
-    protected function hasBech32Prefix(string $prefixType): bool
+    protected function hasBech32Prefix($prefixType)
     {
         return array_key_exists($prefixType, $this->bech32PrefixMap);
     }
@@ -135,7 +122,7 @@ class Network implements NetworkInterface
      * @return string
      * @throws MissingBech32Prefix
      */
-    protected function getBech32Prefix(string $prefixType): string
+    protected function getBech32Prefix($prefixType)
     {
         if (!$this->hasBech32Prefix($prefixType)) {
             throw new MissingBech32Prefix();
@@ -147,17 +134,17 @@ class Network implements NetworkInterface
      * @param string $prefixType
      * @return bool
      */
-    protected function hasBip32Prefix(string $prefixType): bool
+    protected function hasBip32Prefix($prefixType)
     {
         return array_key_exists($prefixType, $this->bip32PrefixMap);
     }
 
     /**
-     * @param string $prefixType
-     * @return string
+     * @param $prefixType
+     * @return mixed
      * @throws MissingBip32Prefix
      */
-    protected function getBip32Prefix(string $prefixType): string
+    protected function getBip32Prefix($prefixType)
     {
         if (!$this->hasBip32Prefix($prefixType)) {
             throw new MissingBip32Prefix();
@@ -170,7 +157,7 @@ class Network implements NetworkInterface
      * @throws MissingNetworkParameter
      * @see NetworkInterface::getSignedMessageMagic
      */
-    public function getSignedMessageMagic(): string
+    public function getSignedMessageMagic()
     {
         if (null === $this->signedMessagePrefix) {
             throw new MissingNetworkParameter("Missing magic string for signed message");
@@ -183,7 +170,7 @@ class Network implements NetworkInterface
      * @throws MissingNetworkParameter
      * @see NetworkInterface::getNetMagicBytes()
      */
-    public function getNetMagicBytes(): string
+    public function getNetMagicBytes()
     {
         if (null === $this->p2pMagic) {
             throw new MissingNetworkParameter("Missing network magic bytes");
@@ -195,7 +182,7 @@ class Network implements NetworkInterface
      * @return string
      * @throws MissingBase58Prefix
      */
-    public function getPrivByte(): string
+    public function getPrivByte()
     {
         return $this->getBase58Prefix(self::BASE58_WIF);
     }
@@ -205,18 +192,9 @@ class Network implements NetworkInterface
      * @throws MissingBase58Prefix
      * @see NetworkInterface::getAddressByte()
      */
-    public function getAddressByte(): string
+    public function getAddressByte()
     {
         return $this->getBase58Prefix(self::BASE58_ADDRESS_P2PKH);
-    }
-    /**
-     * @return int
-     * @throws MissingBase58Prefix
-     * @see NetworkInterface::getAddressPrefixLength()
-     */
-    public function getAddressPrefixLength(): int
-    {
-        return strlen($this->getAddressByte()) / 2;
     }
 
     /**
@@ -224,37 +202,27 @@ class Network implements NetworkInterface
      * @throws MissingBase58Prefix
      * @see NetworkInterface::getP2shByte()
      */
-    public function getP2shByte(): string
+    public function getP2shByte()
     {
         return $this->getBase58Prefix(self::BASE58_ADDRESS_P2SH);
     }
 
     /**
-     * @return int
-     * @throws MissingBase58Prefix
-     * @see NetworkInterface::getP2shPrefixLength()
-     */
-    public function getP2shPrefixLength(): int
-    {
-        return strlen($this->getP2shByte()) / 2;
-    }
-
-    /**
-     * @return string
+     * @return mixed|string
      * @throws MissingBip32Prefix
      * @see NetworkInterface::getHDPubByte()
      */
-    public function getHDPubByte(): string
+    public function getHDPubByte()
     {
         return $this->getBip32Prefix(self::BIP32_PREFIX_XPUB);
     }
 
     /**
-     * @return string
+     * @return mixed|string
      * @throws MissingBip32Prefix
      * @see NetworkInterface::getHDPrivByte()
      */
-    public function getHDPrivByte(): string
+    public function getHDPrivByte()
     {
         return $this->getBip32Prefix(self::BIP32_PREFIX_XPRV);
     }
@@ -264,7 +232,7 @@ class Network implements NetworkInterface
      * @throws MissingBech32Prefix
      * @see NetworkInterface::getSegwitBech32Prefix()
      */
-    public function getSegwitBech32Prefix(): string
+    public function getSegwitBech32Prefix()
     {
         return $this->getBech32Prefix(self::BECH32_PREFIX_SEGWIT);
     }

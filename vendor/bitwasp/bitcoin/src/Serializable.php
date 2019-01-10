@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin;
 
 abstract class Serializable implements SerializableInterface
@@ -9,7 +7,7 @@ abstract class Serializable implements SerializableInterface
     /**
      * @return string
      */
-    public function getHex(): string
+    public function getHex()
     {
         return $this->getBuffer()->getHex();
     }
@@ -17,13 +15,13 @@ abstract class Serializable implements SerializableInterface
     /**
      * @return string
      */
-    public function getBinary(): string
+    public function getBinary()
     {
         return $this->getBuffer()->getBinary();
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getInt()
     {

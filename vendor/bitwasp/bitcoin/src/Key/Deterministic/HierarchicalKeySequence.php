@@ -1,104 +1,130 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\Deterministic;
 
+/**
+ * NB: Paths returned by this library omit m/M. This is because
+ * some knowledge is lost during derivations, so the full path
+ * is already considered 'meta-data'. It also allows the library
+ * to assume derivations are relative to the current instance.
+ */
 class HierarchicalKeySequence
 {
-    private static $filterBip32Index = [
-        'min_range' => 0,
-        'max_range' => (1 << 31) - 1,
-    ];
+
+    const START_HARDENED = 2147483648;
 
     /**
-     * decodeAbsolute accepts an absolute BIP32 path, one beginning
-     * with m or M. It returns an array, containing two elements.
-     * The first is whether the prefix was public or private.
-     * The second is the array of indices contained in the path.
-     *
-     * @param string $path
-     * @return array - <isPrivate bool, path <int[]>>
+     * @param int $sequence
+     * @return bool
      */
-    public function decodeAbsolute(string $path)
+    public function isHardened($sequence)
     {
-        $parts = explode("/", $path);
-        if (count($parts) < 1) {
-            throw new \InvalidArgumentException("Invalid BIP32 path - must have at least one component");
-        }
-
-        if (!($parts[0] === "m" || $parts[0] === "M")) {
-            throw new \InvalidArgumentException("Invalid start of absolute BIP32 path - should be m or M");
-        }
-
-        return [
-            $parts[0] === "m",
-            $this->decodeDerivation(...array_slice($parts, 1)),
-        ];
+        return ($sequence >> 31) === 1;
     }
 
     /**
-     * decodeRelative accepts a relative BIP32 path, that is,
-     * one without the prefix of m or M. These are usually provided
-     * when requesting some child derivation of a key.
-     *
-     * @param string $path
-     * @return int[]
+     * @param int $sequence
+     * @return int
      */
-    public function decodeRelative(string $path): array
+    public function getHardened($sequence)
     {
-        $parts = explode("/", $path);
-        if (count($parts) < 1) {
-            throw new \InvalidArgumentException("Invalid BIP32 path - must have at least one component");
+        if ($this->isHardened($sequence)) {
+            throw new \LogicException('Sequence is already for a hardened key');
         }
 
-        if ($parts[0] === "m" || $parts[0] === "M") {
-            throw new \InvalidArgumentException("Only relative paths accepted");
-        }
+        $flag = 1 << 31;
+        $hardened = $sequence | $flag;
 
-        return $this->decodeDerivation(...$parts);
+        return $hardened;
     }
 
     /**
-     * Inner routine for decoding the numeric section of a path
-     * @param string ...$parts
-     * @return int[]
+     * Convert a human readable path node (eg, "0", "0'", or "0h") into the correct sequence (0, 0x80000000, 0x80000000)
+     *
+     * @param $node
+     * @return int|string
      */
-    private function decodeDerivation(string... $parts): array
+    public function fromNode($node)
     {
-        $indices = [];
-        foreach ($parts as $i => $part) {
-            if ($part === "") {
-                throw new \InvalidArgumentException("Invalid BIP32 path - Empty path section");
-            }
-
-            // test the last character for hardened
-            $last = substr($part, -1);
-            $hardened = $last == "h" || $last == "'";
-            if ($hardened) {
-                if (strlen($part) === 1) {
-                    throw new \InvalidArgumentException("Invalid BIP32 path - section contains only hardened flag");
-                }
-                $part = substr($part, 0, -1);
-            }
-
-            // any other hardened chars are invalid
-            if (false !== strpos($part, "h") || false !== strpos($part, "'")) {
-                throw new \InvalidArgumentException("Invalid BIP32 path - section contains extra hardened characters");
-            }
-
-            // validate part is a valid integer
-            if (false === filter_var($part, FILTER_VALIDATE_INT, self::$filterBip32Index)) {
-                throw new \InvalidArgumentException("Index is invalid or outside valid range: $part");
-            }
-
-            // make index from int $part + $hardened
-            $index = (int) $part;
-            if ($hardened) {
-                $index |= 1 << 31;
-            }
-            $indices[] = $index;
+        $hardened = false;
+        if (in_array(substr(strtolower($node), -1), array('h', "'"), true) === true) {
+            $intEnd = strlen($node) - 1;
+            $node = substr($node, 0, $intEnd);
+            $hardened = true;
         }
-        return $indices;
+
+        if ($hardened) {
+            $node = $this->getHardened($node);
+        }
+
+        return $node;
+    }
+
+    /**
+     * Given a sequence, get the human readable node. Ie, 0 -> 0, 0x80000000 -> 0h
+     *
+     * @param int $sequence
+     * @return string
+     */
+    public function getNode($sequence)
+    {
+        if ($this->isHardened($sequence)) {
+            $sequence = $sequence - self::START_HARDENED;
+            $sequence = (string) $sequence . 'h';
+        }
+
+        return $sequence;
+    }
+
+    /**
+     * Decodes a human-readable path, into an array of integers (sequences)
+     *
+     * @param string $path
+     * @return array
+     */
+    public function decodePath($path)
+    {
+        if ($path === '') {
+            throw new \InvalidArgumentException('Invalid path passed to decodePath()');
+        }
+
+        $list = [];
+        foreach (explode('/', $path) as $segment) {
+            if ($segment !== 'm' && $segment !== 'M') {
+                $list[] = $this->fromNode($segment);
+            }
+        }
+
+        return $list;
+    }
+
+    /**
+     * Encodes a list of sequences to the human-readable path.
+     *
+     * @param array|\stdClass|\Traversable $list
+     * @return string
+     */
+    public function encodePath($list)
+    {
+        self::validateListType($list);
+
+        $path = [];
+        foreach ($list as $sequence) {
+            $path[] = $this->getNode($sequence);
+        }
+
+        return implode('/', $path);
+    }
+
+    /**
+     * Check the list, mainly that it works for foreach()
+     *
+     * @param \stdClass|array|\Traversable $list
+     */
+    public static function validateListType($list)
+    {
+        if (!is_array($list) && !$list instanceof \Traversable && !$list instanceof \stdClass) {
+            throw new \InvalidArgumentException('Sequence list must be an array or \Traversable');
+        }
     }
 }

@@ -1,11 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction\SignatureHash;
 
 use BitWasp\Bitcoin\Script\ScriptInterface;
-use BitWasp\Buffertools\BufferInterface;
 
 interface SigHashInterface
 {
@@ -41,9 +38,5 @@ interface SigHashInterface
      * @param int $sighashType
      * @return \BitWasp\Buffertools\BufferInterface
      */
-    public function calculate(
-        ScriptInterface $txOutScript,
-        int $inputToSign,
-        int $sighashType = SigHash::ALL
-    ): BufferInterface;
+    public function calculate(ScriptInterface $txOutScript, $inputToSign, $sighashType = SigHash::ALL);
 }

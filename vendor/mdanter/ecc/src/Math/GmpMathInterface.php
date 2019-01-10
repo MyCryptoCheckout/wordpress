@@ -11,14 +11,14 @@ interface GmpMathInterface
      * @param  \GMP $other
      * @return int        less than 0 if first is less than second, 0 if equal, greater than 0 if greater than.
      */
-    public function cmp(\GMP $first, \GMP $other): int;
+    public function cmp(\GMP $first, \GMP $other);
 
     /**
      * @param \GMP $first
      * @param \GMP $other
      * @return bool
      */
-    public function equals(\GMP $first, \GMP $other): bool;
+    public function equals(\GMP $first, \GMP $other);
     
     /**
      * Returns the remainder of a division
@@ -27,7 +27,7 @@ interface GmpMathInterface
      * @param  \GMP $modulus
      * @return \GMP
      */
-    public function mod(\GMP $number, \GMP $modulus): \GMP;
+    public function mod(\GMP $number, \GMP $modulus);
 
     /**
      * Adds two numbers
@@ -36,7 +36,7 @@ interface GmpMathInterface
      * @param  \GMP $addend
      * @return \GMP
      */
-    public function add(\GMP $augend, \GMP $addend): \GMP;
+    public function add(\GMP $augend, \GMP $addend);
 
     /**
      * Substract one number from another
@@ -45,7 +45,7 @@ interface GmpMathInterface
      * @param  \GMP $subtrahend
      * @return \GMP
      */
-    public function sub(\GMP $minuend, \GMP $subtrahend): \GMP;
+    public function sub(\GMP $minuend, \GMP $subtrahend);
 
     /**
      * Multiplies a number by another.
@@ -54,7 +54,7 @@ interface GmpMathInterface
      * @param  \GMP $multiplicand
      * @return \GMP
      */
-    public function mul(\GMP $multiplier, \GMP $multiplicand): \GMP;
+    public function mul(\GMP $multiplier, \GMP $multiplicand);
 
     /**
      * Divides a number by another.
@@ -63,7 +63,7 @@ interface GmpMathInterface
      * @param  \GMP $divisor
      * @return \GMP
      */
-    public function div(\GMP $dividend, \GMP $divisor): \GMP;
+    public function div(\GMP $dividend, \GMP $divisor);
 
     /**
      * Raises a number to a power.
@@ -72,7 +72,7 @@ interface GmpMathInterface
      * @param  int $exponent The power to raise the number to.
      * @return \GMP
      */
-    public function pow(\GMP $base, int $exponent): \GMP;
+    public function pow(\GMP $base, $exponent);
 
     /**
      * Performs a logical AND between two values.
@@ -81,7 +81,7 @@ interface GmpMathInterface
      * @param  \GMP $other
      * @return \GMP
      */
-    public function bitwiseAnd(\GMP $first, \GMP $other): \GMP;
+    public function bitwiseAnd(\GMP $first, \GMP $other);
 
     /**
      * Performs a logical XOR between two values.
@@ -90,7 +90,7 @@ interface GmpMathInterface
      * @param  \GMP $other
      * @return \GMP
      */
-    public function bitwiseXor(\GMP $first, \GMP $other): \GMP;
+    public function bitwiseXor(\GMP $first, \GMP $other);
 
     /**
      * Shifts bits to the right
@@ -98,7 +98,7 @@ interface GmpMathInterface
      * @param int  $positions Number of positions to shift
      * @return \GMP
      */
-    public function rightShift(\GMP $number, int $positions): \GMP;
+    public function rightShift(\GMP $number, $positions);
 
     /**
      * Shifts bits to the left
@@ -106,15 +106,15 @@ interface GmpMathInterface
      * @param int $positions Number of positions to shift
      * @return \GMP
      */
-    public function leftShift(\GMP $number, int $positions): \GMP;
+    public function leftShift(\GMP $number, $positions);
 
     /**
      * Returns the string representation of a returned value.
      *
      * @param \GMP $value
-     * @return string
+     * @return int|string
      */
-    public function toString(\GMP $value): string;
+    public function toString(\GMP $value);
 
     /**
      * Converts an hexadecimal string to decimal.
@@ -122,15 +122,15 @@ interface GmpMathInterface
      * @param  string $hexString
      * @return int|string
      */
-    public function hexDec(string $hexString): string;
+    public function hexDec($hexString);
 
     /**
      * Converts a decimal string to hexadecimal.
      *
      * @param  int|string $decString
-     * @return string
+     * @return int|string
      */
-    public function decHex(string $decString): string;
+    public function decHex($decString);
 
     /**
      * Calculates the modular exponent of a number.
@@ -138,9 +138,8 @@ interface GmpMathInterface
      * @param \GMP $base
      * @param \GMP $exponent
      * @param \GMP $modulus
-     * @return \GMP
      */
-    public function powmod(\GMP $base, \GMP $exponent, \GMP $modulus): \GMP;
+    public function powmod(\GMP $base, \GMP $exponent, \GMP $modulus);
 
     /**
      * Checks whether a number is a prime.
@@ -148,7 +147,7 @@ interface GmpMathInterface
      * @param  \GMP $n
      * @return boolean
      */
-    public function isPrime(\GMP $n): bool;
+    public function isPrime(\GMP $n);
 
     /**
      * Gets the next known prime that is greater than a given prime.
@@ -156,72 +155,65 @@ interface GmpMathInterface
      * @param  \GMP $currentPrime
      * @return \GMP
      */
-    public function nextPrime(\GMP $currentPrime): \GMP;
+    public function nextPrime(\GMP $currentPrime);
 
     /**
      * @param \GMP $a
      * @param \GMP $m
      * @return \GMP
      */
-    public function inverseMod(\GMP $a, \GMP $m): \GMP;
+    public function inverseMod(\GMP $a, \GMP $m);
 
     /**
      * @param \GMP $a
      * @param \GMP $p
      * @return int
      */
-    public function jacobi(\GMP $a, \GMP $p): int;
+    public function jacobi(\GMP $a, \GMP $p);
 
     /**
      * @param  \GMP $x
-     * @return string
+     * @return string|null
      */
-    public function intToString(\GMP $x): string;
-
-    /**
-     * @param \GMP $x
-     * @param int $byteSize
-     * @return string
-     */
-    public function intToFixedSizeString(\GMP $x, int $byteSize): string;
+    public function intToString(\GMP $x);
 
     /**
      *
      * @param  int|string $s
      * @return \GMP
      */
-    public function stringToInt(string $s): \GMP;
+    public function stringToInt($s);
 
     /**
      *
      * @param  \GMP $m
      * @return \GMP
      */
-    public function digestInteger(\GMP $m): \GMP;
+    public function digestInteger(\GMP $m);
 
     /**
      * @param  \GMP $a
      * @param  \GMP $m
      * @return \GMP
      */
-    public function gcd2(\GMP $a, \GMP $m): \GMP;
+    public function gcd2(\GMP $a, \GMP $m);
 
     /**
-     * @param string $value
-     * @param int $fromBase
-     * @param int $toBase
-     * @return string
+     * @param $value
+     * @param $fromBase
+     * @param $toBase
+     * @return int|string
      */
-    public function baseConvert(string $value, int $fromBase, int $toBase): string;
+    public function baseConvert($value, $fromBase, $toBase);
 
     /**
      * @return NumberTheory
      */
-    public function getNumberTheory(): NumberTheory;
+    public function getNumberTheory();
 
     /**
      * @param \GMP $modulus
      * @return ModularArithmetic
      */
-    public function getModularArithmetic(\GMP $modulus): ModularArithmetic;
+    public function getModularArithmetic(\GMP $modulus);
 }

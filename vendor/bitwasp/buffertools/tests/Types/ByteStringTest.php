@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools\Tests\Types;
 
 use BitWasp\Buffertools\Buffer;
@@ -10,31 +8,28 @@ use BitWasp\Buffertools\ByteOrder;
 use BitWasp\Buffertools\Parser;
 use BitWasp\Buffertools\Tests\BinaryTest;
 use BitWasp\Buffertools\Types\ByteString;
+use Mdanter\Ecc\Math\MathAdapterFactory;
 
 class ByteStringTest extends BinaryTest
 {
-    /**
-     * @return array
-     */
-    public function getVectors(): array
+    public function getVectors()
     {
+        $math = MathAdapterFactory::getAdapter();
         return [
-            [1, '04'],
-            [1, '41'],
-            [4, '0488b21e'],
+            [$math, 1, '04'],
+            [$math, 1, '41'],
+            [$math, 4, '0488b21e'],
         ];
     }
 
     /**
      * @dataProvider getVectors
-     * @param int $size
-     * @param string $string
      */
-    public function testByteString(int $size, string $string)
+    public function testByteString($math, $size, $string)
     {
         $buffer = Buffer::hex($string, $size);
 
-        $t = new ByteString($size);
+        $t = new ByteString($math, $size);
         $out = $t->write($buffer);
 
         $this->assertEquals(pack("H*", $string), $out);
@@ -45,14 +40,12 @@ class ByteStringTest extends BinaryTest
 
     /**
      * @dataProvider getVectors
-     * @param int $size
-     * @param string $string
      */
-    public function testByteStringLe(int $size, string $string)
+    public function testByteStringLe($math, $size, $string)
     {
         $buffer = Buffer::hex($string, $size);
 
-        $t = new ByteString($size, ByteOrder::LE);
+        $t = new ByteString($math, $size, ByteOrder::LE);
         $out = $t->write($buffer);
 
         $eFlipped = Buffertools::flipBytes(pack("H*", $string));

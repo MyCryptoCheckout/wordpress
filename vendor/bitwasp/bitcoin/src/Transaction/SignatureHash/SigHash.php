@@ -1,12 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction\SignatureHash;
 
 use BitWasp\Bitcoin\Script\ScriptInterface;
 use BitWasp\Bitcoin\Transaction\TransactionInterface;
-use BitWasp\Buffertools\BufferInterface;
 
 abstract class SigHash implements SigHashInterface
 {
@@ -27,15 +24,5 @@ abstract class SigHash implements SigHashInterface
         $this->tx = $transaction;
     }
 
-    /**
-     * @param ScriptInterface $txOutScript
-     * @param int $inputToSign
-     * @param int $sighashType
-     * @return BufferInterface
-     */
-    abstract public function calculate(
-        ScriptInterface $txOutScript,
-        int $inputToSign,
-        int $sighashType = self::ALL
-    ): BufferInterface;
+    abstract public function calculate(ScriptInterface $txOutScript, $inputToSign, $sighashType = SigHash::ALL);
 }

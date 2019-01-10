@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Script\Factory;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Key\PublicKey;
@@ -19,7 +17,7 @@ class OutputScriptFactory
      * @param PublicKeyInterface $publicKey
      * @return ScriptInterface
      */
-    public function p2pk(PublicKeyInterface $publicKey): ScriptInterface
+    public function p2pk(PublicKeyInterface $publicKey)
     {
         return $this->payToPubKey($publicKey);
     }
@@ -28,7 +26,7 @@ class OutputScriptFactory
      * @param BufferInterface $pubKeyHash
      * @return ScriptInterface
      */
-    public function p2pkh(BufferInterface $pubKeyHash): ScriptInterface
+    public function p2pkh(BufferInterface $pubKeyHash)
     {
         return $this->payToPubKeyHash($pubKeyHash);
     }
@@ -37,7 +35,7 @@ class OutputScriptFactory
      * @param BufferInterface $scriptHash
      * @return ScriptInterface
      */
-    public function p2sh(BufferInterface $scriptHash): ScriptInterface
+    public function p2sh(BufferInterface $scriptHash)
     {
         return $this->payToScriptHash($scriptHash);
     }
@@ -46,7 +44,7 @@ class OutputScriptFactory
      * @param BufferInterface $witnessScriptHash
      * @return ScriptInterface
      */
-    public function p2wsh(BufferInterface $witnessScriptHash): ScriptInterface
+    public function p2wsh(BufferInterface $witnessScriptHash)
     {
         return $this->witnessScriptHash($witnessScriptHash);
     }
@@ -55,7 +53,7 @@ class OutputScriptFactory
      * @param BufferInterface $witnessKeyHash
      * @return ScriptInterface
      */
-    public function p2wkh(BufferInterface $witnessKeyHash): ScriptInterface
+    public function p2wkh(BufferInterface $witnessKeyHash)
     {
         return $this->witnessKeyHash($witnessKeyHash);
     }
@@ -65,7 +63,7 @@ class OutputScriptFactory
      * @param PublicKeyInterface  $publicKey
      * @return ScriptInterface
      */
-    public function payToPubKey(PublicKeyInterface $publicKey): ScriptInterface
+    public function payToPubKey(PublicKeyInterface $publicKey)
     {
         return ScriptFactory::sequence([$publicKey->getBuffer(), Opcodes::OP_CHECKSIG]);
     }
@@ -76,7 +74,7 @@ class OutputScriptFactory
      * @param BufferInterface $pubKeyHash
      * @return ScriptInterface
      */
-    public function payToPubKeyHash(BufferInterface $pubKeyHash): ScriptInterface
+    public function payToPubKeyHash(BufferInterface $pubKeyHash)
     {
         if ($pubKeyHash->getSize() !== 20) {
             throw new \RuntimeException('Public key hash must be exactly 20 bytes');
@@ -92,7 +90,7 @@ class OutputScriptFactory
      * @param BufferInterface $scriptHash
      * @return ScriptInterface
      */
-    public function payToScriptHash(BufferInterface $scriptHash): ScriptInterface
+    public function payToScriptHash(BufferInterface $scriptHash)
     {
         if ($scriptHash->getSize() !== 20) {
             throw new \RuntimeException('P2SH scriptHash must be exactly 20 bytes');
@@ -107,9 +105,9 @@ class OutputScriptFactory
      * @param bool|true $sort
      * @return ScriptInterface
      */
-    public function multisig(int $m, array $keys = [], bool $sort = true): ScriptInterface
+    public function multisig($m, array $keys = [], $sort = true)
     {
-        return self::multisigKeyBuffers($m, array_map(function (PublicKeyInterface $key): BufferInterface {
+        return self::multisigKeyBuffers($m, array_map(function (PublicKeyInterface $key) {
             return $key->getBuffer();
         }, $keys), $sort);
     }
@@ -117,10 +115,10 @@ class OutputScriptFactory
     /**
      * @param int $m
      * @param BufferInterface[] $keys
-     * @param bool $sort
+     * @param bool|true $sort
      * @return ScriptInterface
      */
-    public function multisigKeyBuffers(int $m, array $keys = [], bool $sort = true): ScriptInterface
+    public function multisigKeyBuffers($m, array $keys = [], $sort = true)
     {
         $n = count($keys);
         if ($m < 0) {
@@ -142,21 +140,21 @@ class OutputScriptFactory
         $new = ScriptFactory::create();
         $new->int($m);
         foreach ($keys as $key) {
-            if ($key->getSize() !== PublicKey::LENGTH_COMPRESSED && $key->getSize() !== PublicKey::LENGTH_UNCOMPRESSED) {
+            if ($key->getSize() != PublicKey::LENGTH_COMPRESSED && $key->getSize() != PublicKey::LENGTH_UNCOMPRESSED) {
                 throw new \RuntimeException("Invalid length for public key buffer");
             }
 
             $new->push($key);
         }
 
-        return $new->int($n)->opcode(Opcodes::OP_CHECKMULTISIG)->getScript();
+        return $new->int($n)->op('OP_CHECKMULTISIG')->getScript();
     }
 
     /**
      * @param BufferInterface $keyHash
      * @return ScriptInterface
      */
-    public function witnessKeyHash(BufferInterface $keyHash): ScriptInterface
+    public function witnessKeyHash(BufferInterface $keyHash)
     {
         if ($keyHash->getSize() !== 20) {
             throw new \RuntimeException('witness key-hash should be 20 bytes');
@@ -169,7 +167,7 @@ class OutputScriptFactory
      * @param BufferInterface $scriptHash
      * @return ScriptInterface
      */
-    public function witnessScriptHash(BufferInterface $scriptHash): ScriptInterface
+    public function witnessScriptHash(BufferInterface $scriptHash)
     {
         if ($scriptHash->getSize() !== 32) {
             throw new \RuntimeException('witness script-hash should be 32 bytes');
@@ -182,7 +180,7 @@ class OutputScriptFactory
      * @param BufferInterface $commitment
      * @return ScriptInterface
      */
-    public function witnessCoinbaseCommitment(BufferInterface $commitment): ScriptInterface
+    public function witnessCoinbaseCommitment(BufferInterface $commitment)
     {
         if ($commitment->getSize() !== 32) {
             throw new \RuntimeException('Witness commitment hash must be exactly 32-bytes');

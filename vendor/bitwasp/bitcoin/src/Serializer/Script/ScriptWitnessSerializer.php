@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Script;
 
 use BitWasp\Bitcoin\Script\ScriptWitness;
@@ -33,7 +31,7 @@ class ScriptWitnessSerializer
      * @param Parser $parser
      * @return ScriptWitnessInterface
      */
-    public function fromParser(Parser $parser): ScriptWitnessInterface
+    public function fromParser(Parser $parser)
     {
         $size = $this->varint->read($parser);
         $entries = [];
@@ -41,14 +39,14 @@ class ScriptWitnessSerializer
             $entries[] = $this->varstring->read($parser);
         }
 
-        return new ScriptWitness(...$entries);
+        return new ScriptWitness($entries);
     }
 
     /**
      * @param ScriptWitnessInterface $witness
      * @return BufferInterface
      */
-    public function serialize(ScriptWitnessInterface $witness): BufferInterface
+    public function serialize(ScriptWitnessInterface $witness)
     {
         $binary = $this->varint->write($witness->count());
         foreach ($witness as $value) {

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Key;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Signature\SignatureInterface;
@@ -38,12 +36,12 @@ interface PublicKeyInterface extends KeyInterface
      * @param PublicKeyInterface $other
      * @return bool
      */
-    public function equals(PublicKeyInterface $other): bool;
+    public function equals(PublicKeyInterface $other);
 
     /**
      * @param BufferInterface $msg32
      * @param SignatureInterface $signature
      * @return bool
      */
-    public function verify(BufferInterface $msg32, SignatureInterface $signature): bool;
+    public function verify(BufferInterface $msg32, SignatureInterface $signature);
 }

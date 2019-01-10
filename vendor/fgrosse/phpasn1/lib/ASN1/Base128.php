@@ -2,7 +2,6 @@
 
 namespace FG\ASN1;
 
-use FG\Utility\BigInteger;
 use InvalidArgumentException;
 
 /**
@@ -17,13 +16,17 @@ class Base128
      */
     public static function encode($value)
     {
-        $value = BigInteger::create($value);
-        $octets = chr($value->modulus(0x80)->toInteger());
+        $value = gmp_init($value, 10);
+        $octets = chr(gmp_strval(gmp_and($value, 0x7f), 10));
 
-        $value = $value->shiftRight(7);
-        while ($value->compare(0) > 0) {
-            $octets .= chr(0x80 | $value->modulus(0x80)->toInteger());
-            $value = $value->shiftRight(7);
+        $rightShift = function ($number, $positions) {
+            return gmp_div($number, gmp_pow(2, $positions));
+        };
+
+        $value = $rightShift($value, 7);
+        while (gmp_cmp($value, 0) > 0) {
+            $octets .= chr(gmp_strval(gmp_or(0x80, gmp_and($value, 0x7f)), 10));
+            $value = $rightShift($value, 7);
         }
 
         return strrev($octets);
@@ -39,25 +42,29 @@ class Base128
     public static function decode($octets)
     {
         $bitsPerOctet = 7;
-        $value = BigInteger::create(0);
+        $value = gmp_init(0, 10);
         $i = 0;
+
+        $leftShift = function ($number, $positions) {
+            return gmp_mul($number, gmp_pow(2, $positions));
+        };
 
         while (true) {
             if (!isset($octets[$i])) {
                 throw new InvalidArgumentException(sprintf('Malformed base-128 encoded value (0x%s).', strtoupper(bin2hex($octets)) ?: '0'));
             }
 
-            $octet = ord($octets[$i++]);
+            $octet = gmp_init(ord($octets[$i++]), 10);
 
-            $l1 = $value->shiftLeft($bitsPerOctet);
-            $r1 = $octet & 0x7f;
-            $value = $l1->add($r1);
+            $l1 = $leftShift($value, $bitsPerOctet);
+            $r1 = gmp_and($octet, 0x7f);
+            $value = gmp_add($l1, $r1);
 
-            if (0 === ($octet & 0x80)) {
+            if (0 === gmp_cmp(gmp_and($octet, 0x80), 0)) {
                 break;
             }
         }
 
-        return (string)$value;
+        return gmp_strval($value);
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Script\Parser;
 
 use BitWasp\Bitcoin\Script\Opcodes;
@@ -9,13 +7,6 @@ use BitWasp\Buffertools\BufferInterface;
 
 class Operation
 {
-    /**
-     * @var int[]
-     */
-    protected static $logical = [
-        Opcodes::OP_IF, Opcodes::OP_NOTIF, Opcodes::OP_ELSE, Opcodes::OP_ENDIF,
-    ];
-
     /**
      * @var bool
      */
@@ -42,7 +33,7 @@ class Operation
      * @param BufferInterface $pushData
      * @param int $pushDataSize
      */
-    public function __construct(int $opCode, BufferInterface $pushData, int $pushDataSize = 0)
+    public function __construct($opCode, BufferInterface $pushData, $pushDataSize = 0)
     {
         $this->push = $opCode >= 0 && $opCode <= Opcodes::OP_PUSHDATA4;
         $this->opCode = $opCode;
@@ -51,38 +42,17 @@ class Operation
     }
 
     /**
-     * @return BufferInterface|int
-     */
-    public function encode()
-    {
-        if ($this->push) {
-            return $this->pushData;
-        } else {
-            return $this->opCode;
-        }
-    }
-
-    /**
      * @return bool
      */
-    public function isPush(): bool
+    public function isPush()
     {
         return $this->push;
     }
 
     /**
-     * @return bool
-     */
-    public function isLogical(): bool
-    {
-        return !$this->isPush() && in_array($this->opCode, self::$logical);
-    }
-
-
-    /**
      * @return int
      */
-    public function getOp(): int
+    public function getOp()
     {
         return $this->opCode;
     }
@@ -90,7 +60,7 @@ class Operation
     /**
      * @return BufferInterface
      */
-    public function getData(): BufferInterface
+    public function getData()
     {
         return $this->pushData;
     }
@@ -98,7 +68,7 @@ class Operation
     /**
      * @return int
      */
-    public function getDataSize(): int
+    public function getDataSize()
     {
         if (!$this->push) {
             throw new \RuntimeException("Op wasn't a push operation");

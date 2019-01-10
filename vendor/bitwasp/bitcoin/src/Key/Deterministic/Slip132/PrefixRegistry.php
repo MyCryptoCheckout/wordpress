@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\Deterministic\Slip132;
 
 class PrefixRegistry
@@ -39,7 +37,7 @@ class PrefixRegistry
      * @param string $scriptType
      * @return array
      */
-    public function getPrefixes($scriptType): array
+    public function getPrefixes($scriptType)
     {
         if (!array_key_exists($scriptType, $this->registry)) {
             throw new \InvalidArgumentException("Unknown script type");

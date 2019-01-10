@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\KeyToScript\Factory;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PublicKeyInterface;
@@ -15,22 +13,19 @@ class P2pkScriptDataFactory extends KeyToScriptDataFactory
     /**
      * @return string
      */
-    public function getScriptType(): string
+    public function getScriptType()
     {
         return ScriptType::P2PK;
     }
 
     /**
-     * @param PublicKeyInterface ...$keys
+     * @param PublicKeyInterface $publicKey
      * @return ScriptAndSignData
      */
-    protected function convertKeyToScriptData(PublicKeyInterface ...$keys): ScriptAndSignData
+    protected function convertKeyToScriptData(PublicKeyInterface $publicKey)
     {
-        if (count($keys) !== 1) {
-            throw new \InvalidArgumentException("Invalid number of keys");
-        }
         return new ScriptAndSignData(
-            ScriptFactory::scriptPubKey()->p2pk($keys[0]),
+            ScriptFactory::scriptPubKey()->p2pk($publicKey),
             new SignData()
         );
     }

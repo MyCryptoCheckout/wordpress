@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Primitives;
 
@@ -44,7 +43,7 @@ interface PointInterface
     /**
      * Returns true if instance is an non-finite point.
      */
-    public function isInfinity(): bool;
+    public function isInfinity();
 
     /**
      * Adds another point to the current one and returns the resulting point.
@@ -52,15 +51,15 @@ interface PointInterface
      * @param  PointInterface $addend
      * @return PointInterface
      */
-    public function add(PointInterface $addend): PointInterface;
+    public function add(PointInterface $addend);
 
     /**
      * Compares the current instance to another point.
      *
      * @param  PointInterface $other
-     * @return int            A number different than 0 when current instance is less than the given point, 0 when they are equal.
+     * @return int|string              A number different than 0 when current instance is less than the given point, 0 when they are equal.
      */
-    public function cmp(PointInterface $other): int;
+    public function cmp(PointInterface $other);
 
     /**
      * Checks whether the current instance is equal to the given point.
@@ -68,7 +67,7 @@ interface PointInterface
      * @param  PointInterface $other
      * @return bool                    true when points are equal, false otherwise.
      */
-    public function equals(PointInterface $other): bool;
+    public function equals(PointInterface $other);
 
     /**
      * Multiplies the point by a scalar value and returns the resulting point.
@@ -76,47 +75,47 @@ interface PointInterface
      * @param  \GMP $multiplier
      * @return PointInterface
      */
-    public function mul(\GMP $multiplier): PointInterface;
+    public function mul(\GMP $multiplier);
 
     /**
      * Returns the curve to which the point belongs.
      *
      * @return CurveFpInterface
      */
-    public function getCurve(): CurveFpInterface;
+    public function getCurve();
 
     /**
      * Doubles the current point and returns the resulting point.
      *
      * @return PointInterface
      */
-    public function getDouble(): PointInterface;
+    public function getDouble();
 
     /**
      * Returns the order of the point.
      *
      * @return \GMP
      */
-    public function getOrder(): \GMP;
+    public function getOrder();
 
     /**
      * Returns the X coordinate of the point.
      *
      * @return \GMP
      */
-    public function getX(): \GMP;
+    public function getX();
 
     /**
      * Returns the Y coordinate of the point.
      *
      * @return \GMP
      */
-    public function getY(): \GMP;
+    public function getY();
 
     /**
      * Returns the string representation of the point.
      *
      * @return string
      */
-    public function __toString(): string;
+    public function __toString();
 }

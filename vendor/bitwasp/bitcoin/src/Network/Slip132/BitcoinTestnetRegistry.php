@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Network\Slip132;
 
 use BitWasp\Bitcoin\Key\Deterministic\Slip132\PrefixRegistry;

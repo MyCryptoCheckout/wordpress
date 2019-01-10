@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Primitives;
 
@@ -41,7 +40,7 @@ interface CurveFpInterface
      *
      * @return ModularArithmetic
      */
-    public function getModAdapter(): ModularArithmetic;
+    public function getModAdapter();
 
     /**
      * Returns the point identified by given coordinates.
@@ -51,21 +50,21 @@ interface CurveFpInterface
      * @param  \GMP $order
      * @return PointInterface
      */
-    public function getPoint(\GMP $x, \GMP $y, \GMP $order = null): PointInterface;
+    public function getPoint(\GMP $x, \GMP $y, \GMP $order = null);
 
     /**
      * @param bool $wasOdd
      * @param \GMP $x
      * @return \GMP
      */
-    public function recoverYfromX(bool $wasOdd, \GMP $x): \GMP;
+    public function recoverYfromX($wasOdd, \GMP $x);
 
     /**
      * Returns a point representing infinity on the curve.
      *
      * @return PointInterface
      */
-    public function getInfinity(): PointInterface;
+    public function getInfinity();
 
     /**
      *
@@ -75,7 +74,7 @@ interface CurveFpInterface
      * @param  RandomNumberGeneratorInterface $randomGenerator
      * @return GeneratorPoint
      */
-    public function getGenerator(\GMP $x, \GMP $y, \GMP $order, RandomNumberGeneratorInterface $randomGenerator = null): GeneratorPoint;
+    public function getGenerator(\GMP $x, \GMP $y, \GMP $order, RandomNumberGeneratorInterface $randomGenerator = null);
 
     /**
      * Checks whether the curve contains the given coordinates.
@@ -84,33 +83,33 @@ interface CurveFpInterface
      * @param  \GMP $y
      * @return bool
      */
-    public function contains(\GMP $x, \GMP $y): bool;
+    public function contains(\GMP $x, \GMP $y);
 
     /**
      * Returns the a parameter of the curve.
      *
      * @return \GMP
      */
-    public function getA(): \GMP;
+    public function getA();
 
     /**
      * Returns the b parameter of the curve.
      *
      * @return \GMP
      */
-    public function getB(): \GMP;
+    public function getB();
 
     /**
      * Returns the prime associated with the curve.
      *
      * @return \GMP
      */
-    public function getPrime(): \GMP;
+    public function getPrime();
 
     /**
      * @return int
      */
-    public function getSize(): int;
+    public function getSize();
 
     /**
      * Compares the curve to another.
@@ -118,7 +117,7 @@ interface CurveFpInterface
      * @param  CurveFpInterface $other
      * @return int              < 0 if $this < $other, 0 if $other == $this, > 0 if $this > $other
      */
-    public function cmp(CurveFpInterface $other): int;
+    public function cmp(CurveFpInterface $other);
 
     /**
      * Checks whether the curve is equal to another.
@@ -126,12 +125,12 @@ interface CurveFpInterface
      * @param  CurveFpInterface $other
      * @return bool
      */
-    public function equals(CurveFpInterface $other): bool;
+    public function equals(CurveFpInterface $other);
 
     /**
      * Return string representation of curve for debugging
      *
      * @return string
      */
-    public function __toString(): string;
+    public function __toString();
 }

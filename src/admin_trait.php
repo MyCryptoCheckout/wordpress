@@ -251,8 +251,6 @@ trait admin_trait
 
 		$r .= $table;
 
-
-
 		return $r;
 	}
 

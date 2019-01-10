@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\KeyToScript\Decorator;
 
 use BitWasp\Bitcoin\Exceptions\DisallowedScriptDataFactoryException;
@@ -25,6 +23,11 @@ abstract class ScriptHashDecorator extends ScriptDataFactory
      */
     protected $decorateType;
 
+    /**
+     * ScriptHashDecorator constructor.
+     * @param KeyToScriptDataFactory $scriptDataFactory
+     * @throws DisallowedScriptDataFactoryException
+     */
     public function __construct(KeyToScriptDataFactory $scriptDataFactory)
     {
         if (!in_array($scriptDataFactory->getScriptType(), $this->allowedScriptTypes, true)) {
@@ -36,7 +39,7 @@ abstract class ScriptHashDecorator extends ScriptDataFactory
     /**
      * @return string
      */
-    public function getScriptType(): string
+    public function getScriptType()
     {
         return sprintf("%s|%s", $this->decorateType, $this->scriptDataFactory->getScriptType());
     }

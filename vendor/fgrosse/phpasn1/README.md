@@ -2,6 +2,7 @@ PHPASN1
 =======
 
 [![Build Status](https://secure.travis-ci.org/fgrosse/PHPASN1.png?branch=master)](http://travis-ci.org/fgrosse/PHPASN1)
+[![HHVM Status](http://hhvm.h4cc.de/badge/fgrosse/phpasn1.png)](http://hhvm.h4cc.de/package/fgrosse/phpasn1)
 [![PHP 7 ready](http://php7ready.timesplinter.ch/fgrosse/PHPASN1/badge.svg)](https://travis-ci.org/fgrosse/PHPASN1)
 [![Coverage Status](https://coveralls.io/repos/fgrosse/PHPASN1/badge.svg?branch=master&service=github)](https://coveralls.io/github/fgrosse/PHPASN1?branch=master)
 
@@ -22,10 +23,8 @@ The **changelog** can now be found at [CHANGELOG.md](CHANGELOG.md).
 
 ## Dependencies
 
-PHPASN1 requires at least `PHP 7.0` and either the `gmp` or `bcmath` extension.
-Support for older PHP versions (i.e. PHP 5.6) was dropped starting with `v2.0`.
-If you must use an outdated PHP version consider using [PHPASN v1.5][13].
-
+PHPASN1 requires at least `PHP 5.6` and the `gmp` extension.
+It has also been successfully tested using `PHP 7` and `HHVM`
 For the loading of object identifier names directly from the web [curl][7] is used.
 
 ## Installation
@@ -81,13 +80,11 @@ echo base64_encode($myBinary);
 Decoding BER encoded binary data is just as easy as encoding it:
 
 ```php
-use FG\ASN1\ASNObject;
+use FG\ASN1\Object;
 
 $base64String = ...
 $binaryData = base64_decode($base64String);        
-$asnObject = ASNObject::fromBinary($binaryData);
-
-
+$asnObject = Object::fromBinary($binaryData);
 // do stuff
 ```
 
@@ -164,4 +161,3 @@ This library is distributed under the [MIT License](LICENSE).
 [10]: https://coveralls.io/github/fgrosse/PHPASN1
 [11]: https://github.com/fgrosse/PHPASN1/blob/master/tests/ASN1/TemplateParserTest.php#L16
 [12]: https://groups.google.com/d/forum/phpasn1
-[13]: https://packagist.org/packages/fgrosse/phpasn1#1.5.2

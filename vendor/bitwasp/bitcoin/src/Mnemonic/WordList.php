@@ -1,16 +1,14 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Mnemonic;
 
 abstract class WordList implements WordListInterface
 {
     /**
-     * @param int $index
-     * @return string
+     * @param $index
+     * @return mixed
      */
-    public function getWord(int $index): string
+    public function getWord($index)
     {
         $words = $this->getWords();
         if (!isset($words[$index])) {

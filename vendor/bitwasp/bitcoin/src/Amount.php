@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin;
 
 class Amount
@@ -9,20 +7,20 @@ class Amount
     const COIN = 100000000;
 
     /**
-     * @param int $satoshis
-     * @return string
+     * @param int|string $satoshis
+     * @return double
      */
-    public function toBtc(int $satoshis): string
+    public function toBtc($satoshis)
     {
-        return bcdiv((string)$satoshis, (string) self::COIN, 8);
+        return bcdiv((string)$satoshis, self::COIN, 8);
     }
 
     /**
-     * @param string $btcAmount
-     * @return int
+     * @param double $double
+     * @return int|string
      */
-    public function toSatoshis(string $btcAmount): int
+    public function toSatoshis($double)
     {
-        return (int) bcmul($btcAmount, (string) self::COIN, 0);
+        return bcmul((float)$double, self::COIN, 0);
     }
 }

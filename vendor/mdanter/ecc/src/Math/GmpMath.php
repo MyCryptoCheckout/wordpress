@@ -3,7 +3,6 @@
 namespace Mdanter\Ecc\Math;
 
 use Mdanter\Ecc\Util\BinaryString;
-use Mdanter\Ecc\Util\NumberSize;
 
 class GmpMath implements GmpMathInterface
 {
@@ -11,7 +10,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::cmp()
      */
-    public function cmp(\GMP $first, \GMP $other): int
+    public function cmp(\GMP $first, \GMP $other)
     {
         return gmp_cmp($first, $other);
     }
@@ -21,7 +20,7 @@ class GmpMath implements GmpMathInterface
      * @param \GMP $other
      * @return bool
      */
-    public function equals(\GMP $first, \GMP $other): bool
+    public function equals(\GMP $first, \GMP $other)
     {
         return gmp_cmp($first, $other) === 0;
     }
@@ -30,7 +29,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::mod()
      */
-    public function mod(\GMP $number, \GMP $modulus): \GMP
+    public function mod(\GMP $number, \GMP $modulus)
     {
         return gmp_mod($number, $modulus);
     }
@@ -39,7 +38,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::add()
      */
-    public function add(\GMP $augend, \GMP $addend): \GMP
+    public function add(\GMP $augend, \GMP $addend)
     {
         return gmp_add($augend, $addend);
     }
@@ -48,7 +47,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::sub()
      */
-    public function sub(\GMP $minuend, \GMP $subtrahend): \GMP
+    public function sub(\GMP $minuend, \GMP $subtrahend)
     {
         return gmp_sub($minuend, $subtrahend);
     }
@@ -57,7 +56,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::mul()
      */
-    public function mul(\GMP $multiplier, \GMP $multiplicand): \GMP
+    public function mul(\GMP $multiplier, \GMP $multiplicand)
     {
         return gmp_mul($multiplier, $multiplicand);
     }
@@ -66,7 +65,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::div()
      */
-    public function div(\GMP $dividend, \GMP $divisor): \GMP
+    public function div(\GMP $dividend, \GMP $divisor)
     {
         return gmp_div($dividend, $divisor);
     }
@@ -75,7 +74,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::pow()
      */
-    public function pow(\GMP $base, int $exponent): \GMP
+    public function pow(\GMP $base, $exponent)
     {
         return gmp_pow($base, $exponent);
     }
@@ -84,7 +83,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::bitwiseAnd()
      */
-    public function bitwiseAnd(\GMP $first, \GMP $other): \GMP
+    public function bitwiseAnd(\GMP $first, \GMP $other)
     {
         return gmp_and($first, $other);
     }
@@ -93,7 +92,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::rightShift()
      */
-    public function rightShift(\GMP $number, int $positions): \GMP
+    public function rightShift(\GMP $number, $positions)
     {
         // Shift 1 right = div / 2
         return gmp_div($number, gmp_pow(gmp_init(2, 10), $positions));
@@ -103,7 +102,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::bitwiseXor()
      */
-    public function bitwiseXor(\GMP $first, \GMP $other): \GMP
+    public function bitwiseXor(\GMP $first, \GMP $other)
     {
         return gmp_xor($first, $other);
     }
@@ -112,7 +111,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::leftShift()
      */
-    public function leftShift(\GMP $number, int $positions): \GMP
+    public function leftShift(\GMP $number, $positions)
     {
         // Shift 1 left = mul by 2
         return gmp_mul($number, gmp_pow(2, $positions));
@@ -122,7 +121,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::toString()
      */
-    public function toString(\GMP $value): string
+    public function toString(\GMP $value)
     {
         return gmp_strval($value);
     }
@@ -131,7 +130,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::hexDec()
      */
-    public function hexDec(string $hex): string
+    public function hexDec($hex)
     {
         return gmp_strval(gmp_init($hex, 16), 10);
     }
@@ -140,7 +139,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::decHex()
      */
-    public function decHex(string $dec): string
+    public function decHex($dec)
     {
         $dec = gmp_init($dec, 10);
 
@@ -161,7 +160,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::powmod()
      */
-    public function powmod(\GMP $base, \GMP $exponent, \GMP $modulus): \GMP
+    public function powmod(\GMP $base, \GMP $exponent, \GMP $modulus)
     {
         if ($this->cmp($exponent, gmp_init(0, 10)) < 0) {
             throw new \InvalidArgumentException("Negative exponents (" . $this->toString($exponent) . ") not allowed.");
@@ -174,7 +173,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::isPrime()
      */
-    public function isPrime(\GMP $n): bool
+    public function isPrime(\GMP $n)
     {
         $prob = gmp_prob_prime($n);
 
@@ -189,7 +188,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::nextPrime()
      */
-    public function nextPrime(\GMP $starting_value): \GMP
+    public function nextPrime(\GMP $starting_value)
     {
         return gmp_nextprime($starting_value);
     }
@@ -198,7 +197,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::inverseMod()
      */
-    public function inverseMod(\GMP $a, \GMP $m): \GMP
+    public function inverseMod(\GMP $a, \GMP $m)
     {
         return gmp_invert($a, $m);
     }
@@ -207,49 +206,16 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::jacobi()
      */
-    public function jacobi(\GMP $a, \GMP $n): int
+    public function jacobi(\GMP $a, \GMP $n)
     {
         return gmp_jacobi($a, $n);
-    }
-
-    /**
-     * @param \GMP $x
-     * @param int $byteSize
-     * @return string
-     */
-    public function intToFixedSizeString(\GMP $x, int $byteSize): string
-    {
-        if ($byteSize < 0) {
-            throw new \RuntimeException("Byte size cannot be negative");
-        }
-
-        if (gmp_cmp($x, 0) < 0) {
-            throw new \RuntimeException("x was negative - not yet supported");
-        }
-
-        $two = gmp_init(2);
-        $range = gmp_pow($two, $byteSize * 8);
-        if (NumberSize::bnNumBits($this, $x) >= NumberSize::bnNumBits($this, $range)) {
-            throw new \RuntimeException("Number overflows byte size");
-        }
-
-        $maskShift = gmp_pow($two, 8);
-        $mask = gmp_mul(gmp_init(255), $range);
-
-        $binary = '';
-        for ($i = $byteSize - 1; $i >= 0; $i--) {
-            $mask = gmp_div($mask, $maskShift);
-            $binary .= pack('C', gmp_strval(gmp_div(gmp_and($x, $mask), gmp_pow($two, $i * 8)), 10));
-        }
-
-        return $binary;
     }
 
     /**
      * {@inheritDoc}
      * @see GmpMathInterface::intToString()
      */
-    public function intToString(\GMP $x): string
+    public function intToString(\GMP $x)
     {
         if (gmp_cmp($x, 0) < 0) {
             throw new \InvalidArgumentException('Unable to convert negative integer to string');
@@ -268,7 +234,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::stringToInt()
      */
-    public function stringToInt(string $s): \GMP
+    public function stringToInt($s)
     {
         $result = gmp_init(0, 10);
         $sLen = BinaryString::length($s);
@@ -284,7 +250,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::digestInteger()
      */
-    public function digestInteger(\GMP $m): \GMP
+    public function digestInteger(\GMP $m)
     {
         return $this->stringToInt(hash('sha1', $this->intToString($m), true));
     }
@@ -293,7 +259,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::gcd2()
      */
-    public function gcd2(\GMP $a, \GMP $b): \GMP
+    public function gcd2(\GMP $a, \GMP $b)
     {
         while ($this->cmp($a, gmp_init(0)) > 0) {
             $temp = $a;
@@ -308,7 +274,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::baseConvert()
      */
-    public function baseConvert(string $number, int $from, int $to): string
+    public function baseConvert($number, $from, $to)
     {
         return gmp_strval(gmp_init($number, $from), $to);
     }
@@ -317,7 +283,7 @@ class GmpMath implements GmpMathInterface
      * {@inheritDoc}
      * @see GmpMathInterface::getNumberTheory()
      */
-    public function getNumberTheory(): NumberTheory
+    public function getNumberTheory()
     {
         return new NumberTheory($this);
     }
@@ -326,7 +292,7 @@ class GmpMath implements GmpMathInterface
      * @param \GMP $modulus
      * @return ModularArithmetic
      */
-    public function getModularArithmetic(\GMP $modulus): ModularArithmetic
+    public function getModularArithmetic(\GMP $modulus)
     {
         return new ModularArithmetic($this, $modulus);
     }

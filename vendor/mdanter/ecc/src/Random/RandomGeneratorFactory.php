@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 namespace Mdanter\Ecc\Random;
 
 use Mdanter\Ecc\Crypto\Key\PrivateKeyInterface;
@@ -10,9 +10,9 @@ class RandomGeneratorFactory
 {
     /**
      * @param bool $debug
-     * @return DebugDecorator|RandomNumberGeneratorInterface
+     * @return DebugDecorator|RandomNumberGeneratorInterface|null
      */
-    public static function getRandomGenerator(bool $debug = false): RandomNumberGeneratorInterface
+    public static function getRandomGenerator($debug = false)
     {
         return self::wrapAdapter(
             new RandomNumberGenerator(
@@ -26,18 +26,18 @@ class RandomGeneratorFactory
     /**
      * @param PrivateKeyInterface $privateKey
      * @param \GMP                $messageHash
-     * @param string              $algorithm
+     * @param string              $algo
      * @param bool                $debug
      * @return DebugDecorator|RandomNumberGeneratorInterface
      */
-    public static function getHmacRandomGenerator(PrivateKeyInterface $privateKey, \GMP $messageHash, string $algorithm, bool $debug = false): RandomNumberGeneratorInterface
+    public static function getHmacRandomGenerator(PrivateKeyInterface $privateKey, \GMP $messageHash, $algo, $debug = false)
     {
         return self::wrapAdapter(
             new HmacRandomNumberGenerator(
                 MathAdapterFactory::getAdapter($debug),
                 $privateKey,
                 $messageHash,
-                $algorithm
+                $algo
             ),
             'rfc6979',
             $debug
@@ -46,11 +46,11 @@ class RandomGeneratorFactory
 
     /**
      * @param RandomNumberGeneratorInterface $generator
-     * @param string                         $name
+     * @param $name
      * @param bool                           $debug
      * @return DebugDecorator|RandomNumberGeneratorInterface
      */
-    private static function wrapAdapter(RandomNumberGeneratorInterface $generator, string $name, bool $debug = false): RandomNumberGeneratorInterface
+    private static function wrapAdapter(RandomNumberGeneratorInterface $generator, $name, $debug = false)
     {
         if ($debug === true) {
             return new DebugDecorator($generator, $name);

@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Serializer\Signature\Der;
 
@@ -13,7 +12,7 @@ class Formatter
      * @param SignatureInterface $signature
      * @return Sequence
      */
-    public function toAsn(SignatureInterface $signature): Sequence
+    public function toAsn(SignatureInterface $signature)
     {
         return new Sequence(
             new Integer(gmp_strval($signature->getR(), 10)),
@@ -25,7 +24,7 @@ class Formatter
      * @param SignatureInterface $signature
      * @return string
      */
-    public function serialize(SignatureInterface $signature): string
+    public function serialize(SignatureInterface $signature)
     {
         return $this->toAsn($signature)->getBinary();
     }

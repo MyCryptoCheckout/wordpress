@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Primitives;
 
@@ -37,7 +36,7 @@ class CurveParameters
      * @param \GMP $a
      * @param \GMP $b
      */
-    public function __construct(int $size, \GMP $prime, \GMP $a, \GMP $b)
+    public function __construct($size, \GMP $prime, \GMP $a, \GMP $b)
     {
         $this->size = $size;
         $this->prime = $prime;
@@ -48,7 +47,7 @@ class CurveParameters
     /**
      * @return \GMP
      */
-    public function getA(): \GMP
+    public function getA()
     {
         return $this->a;
     }
@@ -56,7 +55,7 @@ class CurveParameters
     /**
      * @return \GMP
      */
-    public function getB(): \GMP
+    public function getB()
     {
         return $this->b;
     }
@@ -64,7 +63,7 @@ class CurveParameters
     /**
      * @return \GMP
      */
-    public function getPrime(): \GMP
+    public function getPrime()
     {
         return $this->prime;
     }
@@ -72,7 +71,7 @@ class CurveParameters
     /**
      * @return int
      */
-    public function getSize(): int
+    public function getSize()
     {
         return $this->size;
     }

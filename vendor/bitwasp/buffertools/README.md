@@ -1,18 +1,17 @@
 # Buffertools
-
+=============
 This library provides a `Buffer` and `Parser` class to make dealing with binary data in PHP easier.
 `Templates` extend this by offering a read/write interface for larger serialized structures. 
 
-[![Build Status](https://travis-ci.org/Bit-Wasp/buffertools-php.svg?branch=master)](https://travis-ci.org/Bit-Wasp/buffertools-php)
+[![Build Status](https://travis-ci.org/Bit-Wasp/buffertools-php.svg)](https://travis-ci.org/Bit-Wasp/buffertools-php)
 [![Code Coverage](https://scrutinizer-ci.com/g/bit-wasp/buffertools-php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bit-wasp/buffertools-php/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Bit-Wasp/buffertools-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Bit-Wasp/buffertools-php/?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/bitwasp/buffertools/v/stable)](https://packagist.org/packages/bitwasp/buffertools)
-[![Total Downloads](https://poser.pugx.org/bitwasp/buffertools/downloads)](https://packagist.org/packages/bitwasp/buffertools)
-[![License](https://poser.pugx.org/bitwasp/buffertools/license)](https://packagist.org/packages/bitwasp/buffertools)
+[![Latest Stable Version](https://poser.pugx.org/bitwasp/buffertools/v/stable.png)](https://packagist.org/packages/bitwasp/buffertools)
+[![Join the chat at https://gitter.im/Bit-Wasp/bitcoin-php](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Bit-Wasp/bitcoin-php?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Requirements:
 
- * PHP 7.0+
+ * PHP 5.6+
  * Composer
  * ext-gmp
 
@@ -23,26 +22,82 @@ This library provides a `Buffer` and `Parser` class to make dealing with binary 
 ## Examples 
  
  Buffer's are immutable classes to store binary data. 
- Buffer::hex can be used to initialize from hex
- Buffer::int can be used to initialize from a positive decimal integer (int|string)
-   
+ BufferHex will convert the provided data to binary, as will BufferInt. 
  Buffer's main methods are:
   - getBinary()
   - getHex()
   - getInt()
-
+  
  Parser will read Buffers. 
  Parser's main methods are: 
   - readBytes()
+  - getArray()
+  - getVarInt()
+  - getString()
   - writeBytes()
-  - readArray()
-  - writeArray()
   
  In most cases, the interface offered by Parser should not be used directly. 
  Instead, Templates expose read/write access to larger serialized structures.
  
- - [Example 1: Using buffer to wrap binary data](./examples/usingBuffer.php) 
- - [Example 2: Using parser to extract binary data](./examples/usingParser.php) 
- - [Example 3: Using templates to read multiple elements from a parser](./examples/usingTemplates.php) 
- - [Example 4: Using templates to read/write structured messages](./examples/usingTemplates2.php) 
-  
+ ### Using Parser to read binary data
+```php
+    use BitWasp\Buffertools\Buffer;
+    use BitWasp\Buffertools\Parser;
+    
+    // Parsers read Buffers
+    $buffer = new Buffer('abc');
+    $parser = new Parser($buffer);
+    
+    // Call readBytes to unpack the data
+    /** @var Buffer[] $set */
+    $set = [
+        $parser->readBytes(1),
+        $parser->readBytes(1),
+        $parser->readBytes(1)
+    ];
+    
+    foreach ($set as $item) {
+        echo $item->getBinary() . PHP_EOL;
+    }
+```
+
+### Using Templates
+```php
+    
+use BitWasp\Buffertools\Buffer;
+use BitWasp\Buffertools\Parser;
+use BitWasp\Buffertools\TemplateFactory;
+
+$structure = (object) [
+    'hash' => hash('sha256', 'abc'),
+    'message_id' => 9123,
+    'message' => "Hi there! What's up?"
+];
+
+// Templates are read/write
+$template = (new TemplateFactory)
+    ->bytestring(32)
+    ->uint32()
+    ->varstring()
+    ->getTemplate();
+
+// Write the structure
+$binary = $template->write([
+    Buffer::hex($structure->hash),
+    $structure->message_id,
+    new Buffer($structure->message)
+]);
+
+echo $binary->getHex() . "\n";
+
+// Use the template to read resulting Buffer
+$parsed = $template->parse(new Parser($binary));
+
+$p = (object) [
+    'hash' => $parsed[0]->getHex(),
+    'message_id' => $parsed[1],
+    'message' => $parsed[2]->getBinary()
+];
+
+print_r($p);
+```

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Signature;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Adapter\EcAdapter;
@@ -37,8 +35,13 @@ class CompactSignature extends Signature implements CompactSignatureInterface
      * @param int $recid
      * @param bool $compressed
      */
-    public function __construct(EcAdapter $ecAdapter, $secp256k1_ecdsa_signature_t, int $recid, bool $compressed)
+    public function __construct(EcAdapter $ecAdapter, $secp256k1_ecdsa_signature_t, $recid, $compressed)
     {
+        $math = $ecAdapter->getMath();
+        if (!is_bool($compressed)) {
+            throw new \InvalidArgumentException('CompactSignature: compressed must be a boolean');
+        }
+
         if (!is_resource($secp256k1_ecdsa_signature_t)
             || SECP256K1_TYPE_RECOVERABLE_SIG !== get_resource_type($secp256k1_ecdsa_signature_t)
         ) {
@@ -46,10 +49,10 @@ class CompactSignature extends Signature implements CompactSignatureInterface
         }
 
         $ser = '';
-        $recidout = 0;
-        secp256k1_ecdsa_recoverable_signature_serialize_compact($ecAdapter->getContext(), $ser, $recidout, $secp256k1_ecdsa_signature_t);
+        $recidout = '';
+        secp256k1_ecdsa_recoverable_signature_serialize_compact($ecAdapter->getContext(), $secp256k1_ecdsa_signature_t, $ser, $recidout);
         list ($r, $s) = array_map(
-            function ($val) {
+            function ($val) use ($math) {
                 return (new Buffer($val))->getGmp();
             },
             str_split($ser, 32)
@@ -65,7 +68,7 @@ class CompactSignature extends Signature implements CompactSignatureInterface
     /**
      * @return Signature
      */
-    public function convert(): Signature
+    public function convert()
     {
         $sig_t = '';
         /** @var resource $sig_t */
@@ -84,15 +87,15 @@ class CompactSignature extends Signature implements CompactSignatureInterface
     /**
      * @return int
      */
-    public function getRecoveryId(): int
+    public function getRecoveryId()
     {
         return $this->recid;
     }
 
     /**
-     * @return int
+     * @return int|string
      */
-    public function getFlags(): int
+    public function getFlags()
     {
         return $this->getRecoveryId() + 27 + ($this->isCompressed() ? 4 : 0);
     }
@@ -100,7 +103,7 @@ class CompactSignature extends Signature implements CompactSignatureInterface
     /**
      * @return bool
      */
-    public function isCompressed(): bool
+    public function isCompressed()
     {
         return $this->compressed;
     }
@@ -108,7 +111,7 @@ class CompactSignature extends Signature implements CompactSignatureInterface
     /**
      * @return BufferInterface
      */
-    public function getBuffer(): BufferInterface
+    public function getBuffer()
     {
         return (new CompactSignatureSerializer($this->ecAdapter))->serialize($this);
     }

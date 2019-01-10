@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Script;
 
 class Opcodes implements \ArrayAccess
@@ -86,8 +84,8 @@ class Opcodes implements \ArrayAccess
     const OP_MUL = 149;
     const OP_DIV = 150;
     const OP_MOD = 151;
-    const OP_LSHIFT = 152; /* Disabled */
-    const OP_RSHIFT = 153; /* Disabled */
+    const OP_LSHIFT = 152;
+    const OP_RSHIFT = 153;
     const OP_BOOLAND = 154;
     const OP_BOOLOR = 155;
     const OP_NUMEQUAL = 156;
@@ -220,8 +218,8 @@ class Opcodes implements \ArrayAccess
         self::OP_MUL => 'OP_MUL',
         self::OP_DIV => 'OP_DIV',
         self::OP_MOD => 'OP_MOD',
-        self::OP_LSHIFT => 'OP_LSHIFT', /* Disabled */
-        self::OP_RSHIFT => 'OP_RSHIFT', /* Disabled */
+        self::OP_LSHIFT => 'OP_LSHIFT',
+        self::OP_RSHIFT => 'OP_RSHIFT',
         self::OP_BOOLAND => 'OP_BOOLAND',
         self::OP_BOOLOR => 'OP_BOOLOR',
         self::OP_NUMEQUAL => 'OP_NUMEQUAL',
@@ -283,9 +281,9 @@ class Opcodes implements \ArrayAccess
     }
 
     /**
-     * @param int $op
+     * @param integer $op
      */
-    private function opExists(int $op)
+    private function opExists($op)
     {
         if (!array_key_exists($op, self::$names)) {
             throw new \RuntimeException("Opcode not found");
@@ -295,7 +293,7 @@ class Opcodes implements \ArrayAccess
     /**
      * @param string $name
      */
-    private function opNameExists(string $name)
+    private function opNameExists($name)
     {
         if (!array_key_exists($name, $this->known)) {
             throw new \RuntimeException("Opcode by that name not found");
@@ -306,7 +304,7 @@ class Opcodes implements \ArrayAccess
      * @param int $op
      * @return string
      */
-    public function getOp(int $op): string
+    public function getOp($op)
     {
         $this->opExists($op);
         return self::$names[$op];
@@ -316,7 +314,7 @@ class Opcodes implements \ArrayAccess
      * @param string $name
      * @return int
      */
-    public function getOpByName(string $name): int
+    public function getOpByName($name)
     {
         $this->opNameExists($name);
         return $this->known[$name];
@@ -326,7 +324,7 @@ class Opcodes implements \ArrayAccess
      * @param int $opcode
      * @return string
      */
-    public function offsetGet($opcode): string
+    public function offsetGet($opcode)
     {
         return $this->getOp($opcode);
     }
@@ -335,32 +333,29 @@ class Opcodes implements \ArrayAccess
      * @param int $opcode
      * @return bool
      */
-    public function offsetExists($opcode): bool
+    public function offsetExists($opcode)
     {
         return array_key_exists($opcode, self::$names);
     }
 
-    /**
-     * @throws \RuntimeException
-     */
     private function errorNoWrite()
     {
         throw new \RuntimeException('Cannot write to Opcodes');
     }
 
     /**
-     * @param int $pos
+     * @param int $opcode
      */
-    public function offsetUnset($pos)
+    public function offsetUnset($opcode)
     {
         $this->errorNoWrite();
     }
 
     /**
-     * @param int $pos
+     * @param int $opcode
      * @param mixed $value
      */
-    public function offsetSet($pos, $value)
+    public function offsetSet($opcode, $value)
     {
         $this->errorNoWrite();
     }

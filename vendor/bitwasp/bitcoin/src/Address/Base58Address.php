@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Address;
 
 use BitWasp\Bitcoin\Base58;
@@ -15,7 +13,7 @@ abstract class Base58Address extends Address implements Base58AddressInterface
      * @param NetworkInterface|null $network
      * @return string
      */
-    public function getAddress(NetworkInterface $network = null): string
+    public function getAddress(NetworkInterface $network = null)
     {
         $network = $network ?: Bitcoin::getNetwork();
         $payload = new Buffer($this->getPrefixByte($network) . $this->getHash()->getBinary());

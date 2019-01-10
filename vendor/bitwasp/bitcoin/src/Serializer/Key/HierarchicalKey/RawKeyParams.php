@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Key\HierarchicalKey;
 
 use BitWasp\Buffertools\BufferInterface;
@@ -47,7 +45,7 @@ class RawKeyParams
      * @param BufferInterface $chainCode
      * @param BufferInterface $keyData
      */
-    public function __construct(string $prefix, int $depth, int $parentFingerprint, int $sequence, BufferInterface $chainCode, BufferInterface $keyData)
+    public function __construct($prefix, $depth, $parentFingerprint, $sequence, BufferInterface $chainCode, BufferInterface $keyData)
     {
         $this->prefix = $prefix;
         $this->depth = $depth;
@@ -60,7 +58,7 @@ class RawKeyParams
     /**
      * @return string
      */
-    public function getPrefix(): string
+    public function getPrefix()
     {
         return $this->prefix;
     }
@@ -68,7 +66,7 @@ class RawKeyParams
     /**
      * @return int
      */
-    public function getDepth(): int
+    public function getDepth()
     {
         return $this->depth;
     }
@@ -76,7 +74,7 @@ class RawKeyParams
     /**
      * @return int
      */
-    public function getParentFingerprint(): int
+    public function getParentFingerprint()
     {
         return $this->parentFpr;
     }
@@ -84,7 +82,7 @@ class RawKeyParams
     /**
      * @return int
      */
-    public function getSequence(): int
+    public function getSequence()
     {
         return $this->sequence;
     }
@@ -92,7 +90,7 @@ class RawKeyParams
     /**
      * @return BufferInterface
      */
-    public function getChainCode(): BufferInterface
+    public function getChainCode()
     {
         return $this->chainCode;
     }
@@ -100,7 +98,7 @@ class RawKeyParams
     /**
      * @return BufferInterface
      */
-    public function getKeyData(): BufferInterface
+    public function getKeyData()
     {
         return $this->keyData;
     }

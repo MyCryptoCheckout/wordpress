@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Script;
 
 use BitWasp\Bitcoin\Address\SegwitAddress;
@@ -53,7 +51,7 @@ class WitnessScript extends Script
     /**
      * @return WitnessProgram
      */
-    public function getWitnessProgram(): WitnessProgram
+    public function getWitnessProgram()
     {
         if (null === $this->witnessProgram) {
             $this->witnessProgram = WitnessProgram::v0($this->witnessScriptHash);
@@ -65,7 +63,7 @@ class WitnessScript extends Script
     /**
      * @return SegwitAddress
      */
-    public function getAddress(): SegwitAddress
+    public function getAddress()
     {
         if (null === $this->address) {
             $this->address = new SegwitAddress($this->getWitnessProgram());
@@ -77,7 +75,7 @@ class WitnessScript extends Script
     /**
      * @return ScriptInterface
      */
-    public function getOutputScript(): ScriptInterface
+    public function getOutputScript()
     {
         return $this->getWitnessProgram()->getScript();
     }

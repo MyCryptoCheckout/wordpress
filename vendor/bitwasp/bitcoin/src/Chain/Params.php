@@ -1,15 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Chain;
 
 use BitWasp\Bitcoin\Block\Block;
 use BitWasp\Bitcoin\Block\BlockHeader;
-use BitWasp\Bitcoin\Block\BlockHeaderInterface;
-use BitWasp\Bitcoin\Block\BlockInterface;
 use BitWasp\Bitcoin\Math\Math;
-use BitWasp\Bitcoin\Script\Opcodes;
 use BitWasp\Bitcoin\Script\ScriptFactory;
 use BitWasp\Bitcoin\Transaction\Factory\TxBuilder;
 use BitWasp\Buffertools\Buffer;
@@ -65,7 +60,7 @@ class Params implements ParamsInterface
 
     /**
      * Hex: 1d00ffff
-     * @var int
+     * @var string
      */
     protected static $powBitsLimit = 486604799;
 
@@ -94,50 +89,57 @@ class Params implements ParamsInterface
     }
 
     /**
-     * @return BlockHeaderInterface
+     * @return \BitWasp\Bitcoin\Block\BlockHeaderInterface
      */
-    public function getGenesisBlockHeader(): BlockHeaderInterface
+    public function getGenesisBlockHeader()
     {
         return new BlockHeader(
-            1,
+            '1',
             Buffer::hex('00', 32),
             Buffer::hex('4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b', 32),
-            1231006505,
+            '1231006505',
             0x1d00ffff,
-            2083236893
+            '2083236893'
         );
     }
 
     /**
-     * @return BlockInterface
+     * @return \BitWasp\Bitcoin\Block\BlockInterface
      */
-    public function getGenesisBlock(): BlockInterface
+    public function getGenesisBlock()
     {
-        $timestamp = new Buffer('The Times 03/Jan/2009 Chancellor on brink of second bailout for banks');
-        $publicKey = Buffer::hex('04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f');
+        $timestamp = new Buffer('The Times 03/Jan/2009 Chancellor on brink of second bailout for banks', null, $this->math);
+        $publicKey = Buffer::hex('04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f', null, $this->math);
 
         $inputScript = ScriptFactory::create()
-            ->push(Buffer::int('486604799', 4)->flip())
-            ->push(Buffer::int('4', 1))
+            ->push(Buffer::int('486604799', 4, $this->math)->flip())
+            ->push(Buffer::int('4', 1, $this->math))
             ->push($timestamp)
+            ->getScript();
+
+        $outputScript = ScriptFactory::create()
+            ->push($publicKey)
+            ->op('OP_CHECKSIG')
             ->getScript();
 
         return new Block(
             $this->math,
             $this->getGenesisBlockHeader(),
-            (new TxBuilder)
-                ->version(1)
-                ->input(new Buffer('', 32), 0xffffffff, $inputScript)
-                ->output(5000000000, ScriptFactory::sequence([$publicKey, Opcodes::OP_CHECKSIG]))
-                ->locktime(0)
-                ->get()
+            [
+                (new TxBuilder)
+                    ->version('1')
+                    ->input(new Buffer('', 32), 0xffffffff, $inputScript)
+                    ->output(5000000000, $outputScript)
+                    ->locktime(0)
+                    ->get()
+            ]
         );
     }
 
     /**
      * @return int
      */
-    public function maxBlockSizeBytes(): int
+    public function maxBlockSizeBytes()
     {
         return static::$maxBlockSizeBytes;
     }
@@ -145,7 +147,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function subsidyHalvingInterval(): int
+    public function subsidyHalvingInterval()
     {
         return static::$subsidyHalvingInterval;
     }
@@ -153,7 +155,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function coinbaseMaturityAge(): int
+    public function coinbaseMaturityAge()
     {
         return static::$coinbaseMaturityAge;
     }
@@ -161,7 +163,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function maxMoney(): int
+    public function maxMoney()
     {
         return static::$maxMoney;
     }
@@ -169,7 +171,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function powTargetTimespan(): int
+    public function powTargetTimespan()
     {
         return static::$powTargetTimespan ;
     }
@@ -177,7 +179,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function powTargetSpacing(): int
+    public function powTargetSpacing()
     {
         return static::$powTargetSpacing;
     }
@@ -185,15 +187,15 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function powRetargetInterval(): int
+    public function powRetargetInterval()
     {
         return static::$powRetargetInterval;
     }
 
     /**
-     * @return string
+     * @return int|string
      */
-    public function powTargetLimit(): string
+    public function powTargetLimit()
     {
         return static::$powTargetLimit;
     }
@@ -201,7 +203,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function powBitsLimit(): int
+    public function powBitsLimit()
     {
         return static::$powBitsLimit;
     }
@@ -209,7 +211,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function majorityEnforceBlockUpgrade(): int
+    public function majorityEnforceBlockUpgrade()
     {
         return static::$majorityEnforceBlockUpgrade;
     }
@@ -217,7 +219,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function majorityWindow(): int
+    public function majorityWindow()
     {
         return static::$majorityWindow;
     }
@@ -225,7 +227,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function p2shActivateTime(): int
+    public function p2shActivateTime()
     {
         return static::$p2shActivateTime;
     }
@@ -233,7 +235,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function getMaxBlockSigOps(): int
+    public function getMaxBlockSigOps()
     {
         return $this->maxBlockSizeBytes() / 50;
     }
@@ -241,7 +243,7 @@ class Params implements ParamsInterface
     /**
      * @return int
      */
-    public function getMaxTxSigOps(): int
+    public function getMaxTxSigOps()
     {
         return $this->getMaxBlockSigOps() / 5;
     }

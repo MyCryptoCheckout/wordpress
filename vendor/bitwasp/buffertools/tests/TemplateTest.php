@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools\Tests;
 
 use BitWasp\Buffertools\ByteOrder;
@@ -13,6 +11,7 @@ use BitWasp\Buffertools\Types\VarInt;
 use BitWasp\Buffertools\Types\VarString;
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\Parser;
+use Mdanter\Ecc\EccFactory;
 
 class TemplateTest extends BinaryTest
 {
@@ -35,7 +34,8 @@ class TemplateTest extends BinaryTest
 
     public function testAddItemToTemplate()
     {
-        $item = new Uint64();
+        $math = \Mdanter\Ecc\EccFactory::getAdapter();
+        $item = new Uint64($math);
         $template = new Template();
 
         $this->assertEmpty($template->getItems());
@@ -50,7 +50,8 @@ class TemplateTest extends BinaryTest
 
     public function testAddThroughConstructor()
     {
-        $item = new Uint64();
+        $math = \Mdanter\Ecc\EccFactory::getAdapter();
+        $item = new Uint64($math);
         $template = new Template([$item]);
 
         $items = $template->getItems();
@@ -67,8 +68,9 @@ class TemplateTest extends BinaryTest
         $buffer = Buffer::hex($value . $varint . $script);
         $parser = new Parser($buffer);
 
-        $uint64le = new Uint64(ByteOrder::LE);
-        $varstring = new VarString(new VarInt());
+        $math = \Mdanter\Ecc\EccFactory::getAdapter();
+        $uint64le = new Uint64($math, ByteOrder::LE);
+        $varstring = new VarString(new VarInt($math));
         $template = new Template([$uint64le, $varstring]);
 
         list ($foundValue, $foundScript) = $template->parse($parser);
@@ -85,8 +87,9 @@ class TemplateTest extends BinaryTest
         $script = '76a914d04b020dab70a7dd7055db3bbc70d27c1b25a99c88ac';
         $hex = $value . $varint . $script;
 
-        $uint64le = new Uint64(ByteOrder::LE);
-        $varstring = new VarString(new VarInt());
+        $math = \Mdanter\Ecc\EccFactory::getAdapter();
+        $uint64le = new Uint64($math, ByteOrder::LE);
+        $varstring = new VarString(new VarInt($math));
         $template = new Template([$uint64le, $varstring]);
 
         $binary = $template->write([50000, Buffer::hex($script)]);
@@ -99,8 +102,9 @@ class TemplateTest extends BinaryTest
      */
     public function testWriteIncomplete()
     {
-        $uint64le = new Uint64(ByteOrder::LE);
-        $varstring = new VarString(new VarInt());
+        $math = \Mdanter\Ecc\EccFactory::getAdapter();
+        $uint64le = new Uint64($math, ByteOrder::LE);
+        $varstring = new VarString(new VarInt($math));
         $template = new Template([$uint64le, $varstring]);
 
         $template->write([50000]);
@@ -112,11 +116,12 @@ class TemplateTest extends BinaryTest
         $txinBuf = Buffer::hex($txin);
         $txinParser = new Parser($txinBuf);
 
+        $math = EccFactory::getAdapter();
         $template = new Template(
             [
-            new ByteString(32, ByteOrder::LE),
-            new Uint32(ByteOrder::LE),
-            new VarString(new VarInt())
+            new ByteString($math, 32, ByteOrder::LE),
+            new Uint32($math, ByteOrder::LE),
+            new VarString(new VarInt($math))
             ]
         );
 

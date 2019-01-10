@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction\Factory;
 
 use BitWasp\Bitcoin\Address\AddressInterface;
@@ -70,7 +68,7 @@ class TxBuilder
     /**
      * @return TransactionInterface
      */
-    private function makeTransaction(): TransactionInterface
+    private function makeTransaction()
     {
         return new Transaction($this->nVersion, $this->inputs, $this->outputs, $this->witness, $this->nLockTime);
     }
@@ -78,7 +76,7 @@ class TxBuilder
     /**
      * @return TransactionInterface
      */
-    public function get(): TransactionInterface
+    public function get()
     {
         return $this->makeTransaction();
     }
@@ -86,7 +84,7 @@ class TxBuilder
     /**
      * @return TransactionInterface
      */
-    public function getAndReset(): TransactionInterface
+    public function getAndReset()
     {
         $transaction = $this->makeTransaction();
         $this->reset();
@@ -97,7 +95,7 @@ class TxBuilder
      * @param int $nVersion
      * @return $this
      */
-    public function version(int $nVersion)
+    public function version($nVersion)
     {
         $this->nVersion = $nVersion;
         return $this;
@@ -106,24 +104,17 @@ class TxBuilder
     /**
      * @param BufferInterface|string $hashPrevOut - hex or BufferInterface
      * @param int $nPrevOut
-     * @param ScriptInterface $script
+     * @param Script|null $script
      * @param int $nSequence
      * @return $this
      */
-    public function input($hashPrevOut, int $nPrevOut, ScriptInterface $script = null, int $nSequence = TransactionInputInterface::SEQUENCE_FINAL)
+    public function input($hashPrevOut, $nPrevOut, Script $script = null, $nSequence = TransactionInputInterface::SEQUENCE_FINAL)
     {
-        if ($hashPrevOut instanceof BufferInterface) {
-            if ($hashPrevOut->getSize() !== 32) {
-                throw new \InvalidArgumentException("Invalid size for txid buffer");
-            }
-        } else if (is_string($hashPrevOut)) {
-            $hashPrevOut = Buffer::hex($hashPrevOut, 32);
-        } else {
-            throw new \InvalidArgumentException("Invalid value for hashPrevOut in TxBuilder::input");
-        }
-
         $this->inputs[] = new TransactionInput(
-            new OutPoint($hashPrevOut, $nPrevOut),
+            new OutPoint(
+                $hashPrevOut instanceof BufferInterface ? $hashPrevOut : Buffer::hex($hashPrevOut, 32),
+                $nPrevOut
+            ),
             $script ?: new Script(),
             $nSequence
         );
@@ -149,7 +140,7 @@ class TxBuilder
      * @param ScriptInterface $script
      * @return $this
      */
-    public function output(int $value, ScriptInterface $script)
+    public function output($value, ScriptInterface $script)
     {
         $this->outputs[] = new TransactionOutput($value, $script);
         return $this;
@@ -185,7 +176,7 @@ class TxBuilder
      * @param int $locktime
      * @return $this
      */
-    public function locktime(int $locktime)
+    public function locktime($locktime)
     {
         $this->nLockTime = $locktime;
         return $this;
@@ -197,7 +188,7 @@ class TxBuilder
      * @return $this
      * @throws \Exception
      */
-    public function lockToTimestamp(Locktime $lockTime, int $nTimestamp)
+    public function lockToTimestamp(Locktime $lockTime, $nTimestamp)
     {
         $this->locktime($lockTime->fromTimestamp($nTimestamp));
         return $this;
@@ -209,7 +200,7 @@ class TxBuilder
      * @return $this
      * @throws \Exception
      */
-    public function lockToBlockHeight(Locktime $lockTime, int $blockHeight)
+    public function lockToBlockHeight(Locktime $lockTime, $blockHeight)
     {
         $this->locktime($lockTime->fromBlockHeight($blockHeight));
         return $this;
@@ -221,7 +212,7 @@ class TxBuilder
      * @param int $nSequence
      * @return $this
      */
-    public function spendOutPoint(OutPointInterface $outpoint, ScriptInterface $script = null, int $nSequence = TransactionInputInterface::SEQUENCE_FINAL)
+    public function spendOutPoint(OutPointInterface $outpoint, ScriptInterface $script = null, $nSequence = TransactionInputInterface::SEQUENCE_FINAL)
     {
         $this->inputs[] = new TransactionInput(
             $outpoint,
@@ -239,7 +230,7 @@ class TxBuilder
      * @param int $nSequence
      * @return $this
      */
-    public function spendOutputFrom(TransactionInterface $transaction, int $outputToSpend, ScriptInterface $script = null, int $nSequence = TransactionInputInterface::SEQUENCE_FINAL)
+    public function spendOutputFrom(TransactionInterface $transaction, $outputToSpend, ScriptInterface $script = null, $nSequence = TransactionInputInterface::SEQUENCE_FINAL)
     {
         // Check TransactionOutput exists in $tx
         $transaction->getOutput($outputToSpend);
@@ -260,7 +251,7 @@ class TxBuilder
      * @param AddressInterface $address
      * @return $this
      */
-    public function payToAddress(int $value, AddressInterface $address)
+    public function payToAddress($value, AddressInterface $address)
     {
         // Create Script from address, then create an output.
         $this->output(

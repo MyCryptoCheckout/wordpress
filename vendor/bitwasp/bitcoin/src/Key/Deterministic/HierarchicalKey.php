@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\Deterministic;
 
 use BitWasp\Bitcoin\Address\BaseAddressCreator;
@@ -11,7 +9,6 @@ use BitWasp\Bitcoin\Crypto\EcAdapter\Key\KeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PrivateKeyInterface;
 use BitWasp\Bitcoin\Crypto\EcAdapter\Key\PublicKeyInterface;
 use BitWasp\Bitcoin\Crypto\Hash;
-use BitWasp\Bitcoin\Exceptions\InvalidDerivationException;
 use BitWasp\Bitcoin\Key\KeyToScript\ScriptAndSignData;
 use BitWasp\Bitcoin\Key\KeyToScript\ScriptDataFactory;
 use BitWasp\Bitcoin\Network\NetworkInterface;
@@ -20,6 +17,8 @@ use BitWasp\Bitcoin\Serializer\Key\HierarchicalKey\ExtendedKeySerializer;
 use BitWasp\Bitcoin\Util\IntRange;
 use BitWasp\Buffertools\Buffer;
 use BitWasp\Buffertools\BufferInterface;
+use BitWasp\Buffertools\Buffertools;
+use BitWasp\Buffertools\Parser;
 
 class HierarchicalKey
 {
@@ -72,7 +71,7 @@ class HierarchicalKey
      * @param BufferInterface $chainCode
      * @param KeyInterface $key
      */
-    public function __construct(EcAdapterInterface $ecAdapter, ScriptDataFactory $scriptDataFactory, int $depth, int $parentFingerprint, int $sequence, BufferInterface $chainCode, KeyInterface $key)
+    public function __construct(EcAdapterInterface $ecAdapter, ScriptDataFactory $scriptDataFactory, $depth, $parentFingerprint, $sequence, BufferInterface $chainCode, KeyInterface $key)
     {
         if ($depth < 0 || $depth > IntRange::U8_MAX) {
             throw new \InvalidArgumentException('Invalid depth for BIP32 key, must be in range [0 - 255] inclusive');
@@ -108,7 +107,7 @@ class HierarchicalKey
      *
      * @return int
      */
-    public function getDepth(): int
+    public function getDepth()
     {
         return $this->depth;
     }
@@ -120,7 +119,7 @@ class HierarchicalKey
      *
      * @return int
      */
-    public function getSequence(): int
+    public function getSequence()
     {
         return $this->sequence;
     }
@@ -128,9 +127,9 @@ class HierarchicalKey
     /**
      * Get the fingerprint of the parent key. For master keys, this is 00000000.
      *
-     * @return int
+     * @return string
      */
-    public function getFingerprint(): int
+    public function getFingerprint()
     {
         if ($this->getDepth() === 0) {
             return 0;
@@ -143,10 +142,9 @@ class HierarchicalKey
      * Return the fingerprint to be used for child keys.
      * @return int
      */
-    public function getChildFingerprint(): int
+    public function getChildFingerprint()
     {
-        $pubKeyHash = $this->getPublicKey()->getPubKeyHash();
-        return (int) $pubKeyHash->slice(0, 4)->getInt();
+        return $this->getPublicKey()->getPubKeyHash()->slice(0, 4)->getInt();
     }
 
     /**
@@ -155,7 +153,7 @@ class HierarchicalKey
      *
      * @return BufferInterface
      */
-    public function getChainCode(): BufferInterface
+    public function getChainCode()
     {
         return $this->chainCode;
     }
@@ -163,7 +161,7 @@ class HierarchicalKey
     /**
      * @return PrivateKeyInterface
      */
-    public function getPrivateKey(): PrivateKeyInterface
+    public function getPrivateKey()
     {
         if ($this->key->isPrivate()) {
             /** @var PrivateKeyInterface $key */
@@ -179,7 +177,7 @@ class HierarchicalKey
      *
      * @return PublicKeyInterface
      */
-    public function getPublicKey(): PublicKeyInterface
+    public function getPublicKey()
     {
         if ($this->isPrivate()) {
             return $this->getPrivateKey()->getPublicKey();
@@ -193,7 +191,7 @@ class HierarchicalKey
     /**
      * @return HierarchicalKey
      */
-    public function withoutPrivateKey(): HierarchicalKey
+    public function withoutPrivateKey()
     {
         $clone = clone $this;
         $clone->key = $clone->getPublicKey();
@@ -234,7 +232,7 @@ class HierarchicalKey
      *
      * @return bool
      */
-    public function isPrivate(): bool
+    public function isPrivate()
     {
         return $this->key->isPrivate();
     }
@@ -244,7 +242,7 @@ class HierarchicalKey
      *
      * @return bool
      */
-    public function isHardened(): bool
+    public function isHardened()
     {
         return ($this->sequence >> 31) === 1;
     }
@@ -256,7 +254,7 @@ class HierarchicalKey
      * @return BufferInterface
      * @throws \Exception
      */
-    public function getHmacSeed(int $sequence): BufferInterface
+    public function getHmacSeed($sequence)
     {
         if ($sequence < 0 || $sequence > IntRange::U32_MAX) {
             throw new \InvalidArgumentException("Sequence is outside valid range, must be >= 0 && <= (2^31)-1");
@@ -267,12 +265,14 @@ class HierarchicalKey
                 throw new \Exception("Can't derive a hardened key without the private key");
             }
 
-            $data = "\x00{$this->getPrivateKey()->getBinary()}";
+            $buffer = Buffertools::concat(new Buffer("\x00"), $this->getPrivateKey()->getBuffer());
         } else {
-            $data = $this->getPublicKey()->getBinary();
+            $buffer = $this->getPublicKey()->getBuffer();
         }
 
-        return new Buffer($data . pack("N", $sequence));
+        return (new Parser($buffer))
+            ->writeBytes(4, Buffer::int($sequence, 4))
+            ->getBuffer();
     }
 
     /**
@@ -280,9 +280,9 @@ class HierarchicalKey
      *
      * @param int $sequence
      * @return HierarchicalKey
-     * @throws \BitWasp\Bitcoin\Exceptions\InvalidDerivationException
+     * @throws \Exception
      */
-    public function deriveChild(int $sequence): HierarchicalKey
+    public function deriveChild($sequence)
     {
         $nextDepth = $this->depth + 1;
         if ($nextDepth > 255) {
@@ -293,8 +293,8 @@ class HierarchicalKey
         $offset = $hash->slice(0, 32);
         $chain = $hash->slice(32);
 
-        if (!$this->ecAdapter->validatePrivateKey($offset)) {
-            throw new InvalidDerivationException("Derived invalid key for index {$sequence}, use next index");
+        if (false === $this->ecAdapter->validatePrivateKey($offset)) {
+            return $this->deriveChild($sequence + 1);
         }
 
         $key = $this->isPrivate() ? $this->getPrivateKey() : $this->getPublicKey();
@@ -312,32 +312,35 @@ class HierarchicalKey
     }
 
     /**
+     * @param array|\stdClass|\Traversable $list
+     * @return HierarchicalKey
+     * @throws \Exception
+     */
+    public function deriveFromList($list)
+    {
+        if (!is_array($list) && !$list instanceof \Traversable && !$list instanceof \stdClass) {
+            throw new \InvalidArgumentException('List must be an array or \Traversable');
+        }
+
+        $key = $this;
+        foreach ($list as $sequence) {
+            $key = $key->deriveChild($sequence);
+        }
+
+        return $key;
+    }
+
+    /**
      * Decodes a BIP32 path into actual 32bit sequence numbers and derives the child key
      *
      * @param string $path
      * @return HierarchicalKey
      * @throws \Exception
      */
-    public function derivePath(string $path): HierarchicalKey
+    public function derivePath($path)
     {
         $sequences = new HierarchicalKeySequence();
-        $parts = $sequences->decodeRelative($path);
-        $numParts = count($parts);
-
-        $key = $this;
-        for ($i = 0; $i < $numParts; $i++) {
-            try {
-                $key = $key->deriveChild($parts[$i]);
-            } catch (InvalidDerivationException $e) {
-                if ($i === $numParts - 1) {
-                    throw new InvalidDerivationException($e->getMessage());
-                } else {
-                    throw new InvalidDerivationException("Invalid derivation for non-terminal index: cannot use this path!");
-                }
-            }
-        }
-
-        return $key;
+        return $this->deriveFromList($sequences->decodePath($path));
     }
 
     /**
@@ -345,7 +348,7 @@ class HierarchicalKey
      * @param NetworkInterface $network
      * @return string
      */
-    public function toExtendedKey(NetworkInterface $network = null): string
+    public function toExtendedKey(NetworkInterface $network = null)
     {
         $network = $network ?: Bitcoin::getNetwork();
 
@@ -361,7 +364,7 @@ class HierarchicalKey
      * @param NetworkInterface $network
      * @return string
      */
-    public function toExtendedPrivateKey(NetworkInterface $network = null): string
+    public function toExtendedPrivateKey(NetworkInterface $network = null)
     {
         if (!$this->isPrivate()) {
             throw new \LogicException('Cannot create extended private key from public');
@@ -376,7 +379,7 @@ class HierarchicalKey
      * @param NetworkInterface $network
      * @return string
      */
-    public function toExtendedPublicKey(NetworkInterface $network = null): string
+    public function toExtendedPublicKey(NetworkInterface $network = null)
     {
         return $this->withoutPrivateKey()->toExtendedKey($network);
     }

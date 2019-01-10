@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Mnemonic;
 
 interface WordListInterface extends \Countable
@@ -9,17 +7,17 @@ interface WordListInterface extends \Countable
     /**
      * @return string[]
      */
-    public function getWords(): array;
+    public function getWords();
 
     /**
-     * @param int $index
+     * @param $index
      * @return string
      */
-    public function getWord(int $index): string;
+    public function getWord($index);
 
     /**
-     * @param string $word
+     * @param $word
      * @return integer
      */
-    public function getIndex(string $word): int;
+    public function getIndex($word);
 }

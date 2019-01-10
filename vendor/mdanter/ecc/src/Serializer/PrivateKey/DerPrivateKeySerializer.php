@@ -1,9 +1,8 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Serializer\PrivateKey;
 
-use FG\ASN1\ASNObject;
+use FG\ASN1\Object;
 use FG\ASN1\Universal\Sequence;
 use FG\ASN1\Universal\Integer;
 use FG\ASN1\Universal\BitString;
@@ -12,6 +11,7 @@ use Mdanter\Ecc\Crypto\Key\PrivateKeyInterface;
 use Mdanter\Ecc\Math\GmpMathInterface;
 use Mdanter\Ecc\Math\MathAdapterFactory;
 use Mdanter\Ecc\Serializer\Util\CurveOidMapper;
+use Mdanter\Ecc\Serializer\PublicKey\PemPublicKeySerializer;
 use Mdanter\Ecc\Serializer\PublicKey\DerPublicKeySerializer;
 use FG\ASN1\ExplicitlyTaggedObject;
 
@@ -37,9 +37,9 @@ class DerPrivateKeySerializer implements PrivateKeySerializerInterface
 
     /**
      * @param GmpMathInterface       $adapter
-     * @param DerPublicKeySerializer $pubKeySerializer
+     * @param PemPublicKeySerializer $pubKeySerializer
      */
-    public function __construct(GmpMathInterface $adapter = null, DerPublicKeySerializer $pubKeySerializer = null)
+    public function __construct(GmpMathInterface $adapter = null, PemPublicKeySerializer $pubKeySerializer = null)
     {
         $this->adapter = $adapter ?: MathAdapterFactory::getAdapter();
         $this->pubKeySerializer = $pubKeySerializer ?: new DerPublicKeySerializer($this->adapter);
@@ -47,9 +47,9 @@ class DerPrivateKeySerializer implements PrivateKeySerializerInterface
 
     /**
      * {@inheritDoc}
-     * @see \Mdanter\Ecc\Serializer\PrivateKey\PrivateKeySerializerInterface::serialize()
+     * @see \Mdanter\Ecc\Serializer\PrivateKeySerializerInterface::serialize()
      */
-    public function serialize(PrivateKeyInterface $key): string
+    public function serialize(PrivateKeyInterface $key)
     {
         $privateKeyInfo = new Sequence(
             new Integer(self::VERSION),
@@ -65,7 +65,7 @@ class DerPrivateKeySerializer implements PrivateKeySerializerInterface
      * @param PrivateKeyInterface $key
      * @return BitString
      */
-    private function encodePubKey(PrivateKeyInterface $key): BitString
+    private function encodePubKey(PrivateKeyInterface $key)
     {
         return new BitString(
             $this->pubKeySerializer->getUncompressedKey($key->getPublicKey())
@@ -76,19 +76,20 @@ class DerPrivateKeySerializer implements PrivateKeySerializerInterface
      * @param PrivateKeyInterface $key
      * @return string
      */
-    private function formatKey(PrivateKeyInterface $key): string
+    private function formatKey(PrivateKeyInterface $key)
     {
         return gmp_strval($key->getSecret(), 16);
     }
 
     /**
+     * @param string $data
      * {@inheritDoc}
-     * @see \Mdanter\Ecc\Serializer\PrivateKey\PrivateKeySerializerInterface::parse()
+     * @see \Mdanter\Ecc\Serializer\PrivateKeySerializerInterface::parse()
      * @throws \FG\ASN1\Exception\ParserException
      */
-    public function parse(string $data): PrivateKeyInterface
+    public function parse($data)
     {
-        $asnObject = ASNObject::fromBinary($data);
+        $asnObject = Object::fromBinary($data);
 
         if (! ($asnObject instanceof Sequence) || $asnObject->getNumberofChildren() !== 4) {
             throw new \RuntimeException('Invalid data.');

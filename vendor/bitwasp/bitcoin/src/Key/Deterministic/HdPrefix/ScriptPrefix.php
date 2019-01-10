@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Key\Deterministic\HdPrefix;
 
 use BitWasp\Bitcoin\Exceptions\InvalidNetworkParameter;
@@ -30,7 +28,7 @@ class ScriptPrefix
      * @param string $privatePrefix
      * @param string $publicPrefix
      */
-    public function __construct(ScriptDataFactory $scriptDataFactory, string $privatePrefix, string $publicPrefix)
+    public function __construct(ScriptDataFactory $scriptDataFactory, $privatePrefix, $publicPrefix)
     {
         if (strlen($privatePrefix) !== 8) {
             throw new InvalidNetworkParameter("Invalid HD private prefix: wrong length");
@@ -56,7 +54,7 @@ class ScriptPrefix
     /**
      * @return string
      */
-    public function getPrivatePrefix(): string
+    public function getPrivatePrefix()
     {
         return $this->privatePrefix;
     }
@@ -64,7 +62,7 @@ class ScriptPrefix
     /**
      * @return string
      */
-    public function getPublicPrefix(): string
+    public function getPublicPrefix()
     {
         return $this->publicPrefix;
     }
@@ -72,7 +70,7 @@ class ScriptPrefix
     /**
      * @return ScriptDataFactory
      */
-    public function getScriptDataFactory(): ScriptDataFactory
+    public function getScriptDataFactory()
     {
         return $this->scriptDataFactory;
     }

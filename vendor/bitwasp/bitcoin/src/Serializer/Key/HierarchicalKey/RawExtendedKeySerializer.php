@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Key\HierarchicalKey;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Adapter\EcAdapterInterface;
@@ -62,7 +60,7 @@ class RawExtendedKeySerializer
      * @return BufferInterface
      * @throws \Exception
      */
-    public function serialize(RawKeyParams $keyParams): BufferInterface
+    public function serialize(RawKeyParams $keyParams)
     {
         return new Buffer(
             pack("H*", $keyParams->getPrefix()) .
@@ -79,14 +77,14 @@ class RawExtendedKeySerializer
      * @return RawKeyParams
      * @throws ParserOutOfRange
      */
-    public function fromParser(Parser $parser): RawKeyParams
+    public function fromParser(Parser $parser)
     {
         try {
             return new RawKeyParams(
                 $this->bytestring4->read($parser)->getHex(),
-                (int) $this->uint8->read($parser),
-                (int) $this->uint32->read($parser),
-                (int) $this->uint32->read($parser),
+                $this->uint8->read($parser),
+                $this->uint32->read($parser),
+                $this->uint32->read($parser),
                 $this->bytestring32->read($parser),
                 $this->bytestring33->read($parser)
             );

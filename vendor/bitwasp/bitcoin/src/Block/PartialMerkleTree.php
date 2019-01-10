@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Block;
 
 use BitWasp\Bitcoin\Crypto\Hash;
@@ -40,7 +38,7 @@ class PartialMerkleTree extends Serializable
      * @param array $vHashes
      * @param array $vBits
      */
-    public function __construct(int $txCount = 0, array $vHashes = [], array $vBits = [])
+    public function __construct($txCount = 0, array $vHashes = [], array $vBits = [])
     {
         $this->elementCount = $txCount;
         $this->vHashes = $vHashes;
@@ -55,7 +53,7 @@ class PartialMerkleTree extends Serializable
      * @param array $vMatch
      * @return PartialMerkleTree
      */
-    public static function create(int $txCount, array $vTxHashes, array $vMatch)
+    public static function create($txCount, array $vTxHashes, array $vMatch)
     {
         $tree = new self($txCount);
         $tree->traverseAndBuild($tree->calcTreeHeight(), 0, $vTxHashes, $vMatch);
@@ -68,7 +66,7 @@ class PartialMerkleTree extends Serializable
      * @param int $height
      * @return int
      */
-    public function calcTreeWidth(int $height)
+    public function calcTreeWidth($height)
     {
         return ($this->elementCount + (1 << $height) - 1) >> $height;
     }
@@ -78,7 +76,7 @@ class PartialMerkleTree extends Serializable
      *
      * @return int
      */
-    public function calcTreeHeight(): int
+    public function calcTreeHeight()
     {
         $height = 0;
         while ($this->calcTreeWidth($height) > 1) {
@@ -91,7 +89,7 @@ class PartialMerkleTree extends Serializable
     /**
      * @return int
      */
-    public function getTxCount(): int
+    public function getTxCount()
     {
         return $this->elementCount;
     }
@@ -99,7 +97,7 @@ class PartialMerkleTree extends Serializable
     /**
      * @return BufferInterface[]
      */
-    public function getHashes(): array
+    public function getHashes()
     {
         return $this->vHashes;
     }
@@ -107,7 +105,7 @@ class PartialMerkleTree extends Serializable
     /**
      * @return array
      */
-    public function getFlagBits(): array
+    public function getFlagBits()
     {
         return $this->vFlagBits;
     }
@@ -120,8 +118,9 @@ class PartialMerkleTree extends Serializable
      * @param \BitWasp\Buffertools\BufferInterface[] $vTxid
      * @return \BitWasp\Buffertools\BufferInterface
      */
-    public function calculateHash(int $height, $position, array $vTxid): BufferInterface
+    public function calculateHash($height, $position, array $vTxid)
     {
+
         if ($height === 0) {
             return $vTxid[$position];
         } else {
@@ -144,7 +143,7 @@ class PartialMerkleTree extends Serializable
      * @param array $vTxid - array of Txid's in the block
      * @param array $vMatch - reference to array to populate
      */
-    public function traverseAndBuild(int $height, int $position, array $vTxid, array &$vMatch)
+    public function traverseAndBuild($height, $position, array $vTxid, array &$vMatch)
     {
         $parent = false;
         for ($p = $position << $height; $p < ($position + 1) << $height && $p < $this->elementCount; $p++) {
@@ -173,7 +172,7 @@ class PartialMerkleTree extends Serializable
      * @param BufferInterface[] $vMatch
      * @return BufferInterface
      */
-    public function traverseAndExtract(int $height, int $position, &$nBitsUsed, &$nHashUsed, &$vMatch): BufferInterface
+    public function traverseAndExtract($height, $position, &$nBitsUsed, &$nHashUsed, &$vMatch)
     {
         if ($nBitsUsed >= count($this->vFlagBits)) {
             $this->fBad = true;
@@ -213,7 +212,7 @@ class PartialMerkleTree extends Serializable
      * @return BufferInterface - this will be the merkle root
      * @throws \Exception
      */
-    public function extractMatches(array &$vMatch): BufferInterface
+    public function extractMatches(array &$vMatch)
     {
         $nTx = $this->getTxCount();
         if (0 === $nTx) {
@@ -255,7 +254,7 @@ class PartialMerkleTree extends Serializable
     /**
      * @return BufferInterface
      */
-    public function getBuffer(): BufferInterface
+    public function getBuffer()
     {
         return (new PartialMerkleTreeSerializer())->serialize($this);
     }

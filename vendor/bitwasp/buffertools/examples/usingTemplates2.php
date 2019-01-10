@@ -1,8 +1,9 @@
 <?php
 
-require __DIR__ . "/../vendor/autoload.php";
+require "../vendor/autoload.php";
 
 use BitWasp\Buffertools\Buffer;
+use BitWasp\Buffertools\BufferHex;
 use BitWasp\Buffertools\Parser;
 use BitWasp\Buffertools\TemplateFactory;
 
@@ -21,7 +22,7 @@ $template = (new TemplateFactory)
 
 // Write the structure
 $binary = $template->write([
-    Buffer::hex($structure->hash),
+    new BufferHex($structure->hash),
     $structure->message_id,
     new Buffer($structure->message)
 ]);

@@ -12,7 +12,7 @@
 	},
 	"require": {
 		"mycryptocheckout/api": "^2.01",
-		"bitwasp/bitcoin": "^1.0",
-		"btccom/cashaddress": "^0.0.3"
+		"btccom/cashaddress": "^0.0.3",
+		"bitwasp/bitcoin": "v0.0.35.1"
 	}
 }

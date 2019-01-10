@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Serializer\Point;
 
@@ -34,7 +33,7 @@ class CompressedPointSerializer implements PointSerializerInterface
      * @param PointInterface $point
      * @return string
      */
-    public function getPrefix(PointInterface $point): string
+    public function getPrefix(PointInterface $point)
     {
         if ($this->adapter->equals($this->adapter->mod($point->getY(), gmp_init(2, 10)), gmp_init(0))) {
             return '02';
@@ -47,7 +46,7 @@ class CompressedPointSerializer implements PointSerializerInterface
      * @param PointInterface $point
      * @return string
      */
-    public function serialize(PointInterface $point): string
+    public function serialize(PointInterface $point)
     {
         $length = CurveOidMapper::getByteSize($point->getCurve()) * 2;
 
@@ -62,7 +61,7 @@ class CompressedPointSerializer implements PointSerializerInterface
      * @param string $data - hex serialized compressed point
      * @return PointInterface
      */
-    public function unserialize(CurveFpInterface $curve, string $data): PointInterface
+    public function unserialize(CurveFpInterface $curve, $data)
     {
         $prefix = substr($data, 0, 2);
         if ($prefix !== '03' && $prefix !== '02') {

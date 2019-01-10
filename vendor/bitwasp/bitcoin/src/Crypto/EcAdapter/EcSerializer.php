@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -55,7 +53,7 @@ class EcSerializer
      * @param string $interface
      * @return string
      */
-    public static function getImplRelPath(string $interface): string
+    public static function getImplRelPath($interface)
     {
         if (0 === count(self::$map)) {
             if (!in_array($interface, self::$serializerInterface, true)) {
@@ -81,7 +79,7 @@ class EcSerializer
     /**
      * @return array
      */
-    public static function getImplPaths(): array
+    public static function getImplPaths()
     {
         return [
             'BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\Adapter\EcAdapter' => 'BitWasp\Bitcoin\Crypto\EcAdapter\Impl\PhpEcc\\',
@@ -91,9 +89,9 @@ class EcSerializer
 
     /**
      * @param EcAdapterInterface $adapter
-     * @return string
+     * @return mixed
      */
-    public static function getAdapterImplPath(EcAdapterInterface $adapter): string
+    public static function getAdapterImplPath(EcAdapterInterface $adapter)
     {
         $paths = static::getImplPaths();
         $class = get_class($adapter);
@@ -105,12 +103,12 @@ class EcSerializer
     }
 
     /**
-     * @param string $interface
-     * @param bool $useCache
+     * @param $interface
+     * @param bool|true $useCache
      * @param EcAdapterInterface $adapter
      * @return mixed
      */
-    public static function getSerializer(string $interface, $useCache = true, EcAdapterInterface $adapter = null)
+    public static function getSerializer($interface, $useCache = true, EcAdapterInterface $adapter = null)
     {
         if (null === $adapter) {
             $adapter = Bitcoin::getEcAdapter();

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Serializer\Key;
 
 use BitWasp\Bitcoin\Crypto\EcAdapter\Impl\Secp256k1\Adapter\EcAdapter;
@@ -34,16 +32,16 @@ class PrivateKeySerializer implements PrivateKeySerializerInterface
      * @param PrivateKey $privateKey
      * @return BufferInterface
      */
-    private function doSerialize(PrivateKey $privateKey): BufferInterface
+    private function doSerialize(PrivateKey $privateKey)
     {
-        return new Buffer($privateKey->getSecretBinary(), 32);
+        return new Buffer($privateKey->getSecretBinary(), 32, $this->ecAdapter->getMath());
     }
 
     /**
      * @param PrivateKeyInterface $privateKey
      * @return BufferInterface
      */
-    public function serialize(PrivateKeyInterface $privateKey): BufferInterface
+    public function serialize(PrivateKeyInterface $privateKey)
     {
         /** @var PrivateKey $privateKey */
         return $this->doSerialize($privateKey);
@@ -51,23 +49,20 @@ class PrivateKeySerializer implements PrivateKeySerializerInterface
 
     /**
      * @param Parser $parser
-     * @param bool $compressed
-     * @return PrivateKeyInterface
-     * @throws \Exception
+     * @return PrivateKey
+     * @throws \BitWasp\Buffertools\Exceptions\ParserOutOfRange
      */
-    public function fromParser(Parser $parser, bool $compressed): PrivateKeyInterface
+    public function fromParser(Parser $parser)
     {
-        return $this->ecAdapter->getPrivateKey($parser->readBytes(32)->getGmp(), $compressed);
+        return $this->ecAdapter->getPrivateKey($parser->readBytes(32)->getGmp());
     }
 
     /**
-     * @param BufferInterface $data
-     * @param bool $compressed
-     * @return PrivateKeyInterface
-     * @throws \Exception
+     * @param \BitWasp\Buffertools\BufferInterface|string $data
+     * @return PrivateKey
      */
-    public function parse(BufferInterface $data, bool $compressed): PrivateKeyInterface
+    public function parse($data)
     {
-        return $this->fromParser(new Parser($data), $compressed);
+        return $this->fromParser(new Parser($data, $this->ecAdapter->getMath()));
     }
 }

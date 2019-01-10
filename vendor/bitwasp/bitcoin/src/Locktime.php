@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin;
 
 class Locktime
@@ -21,15 +19,6 @@ class Locktime
     const TIME_MAX = self::INT_MAX - self::BLOCK_MAX;
 
     /**
-     * @param int $nLockTime
-     * @return bool
-     */
-    public function isLockedToBlock(int $nLockTime): bool
-    {
-        return $nLockTime > 0 && $nLockTime <= self::BLOCK_MAX;
-    }
-
-    /**
      * Convert a $timestamp to a locktime.
      * Max timestamp is 3794967296 - 04/04/2090 @ 5:34am (UTC)
      *
@@ -37,7 +26,7 @@ class Locktime
      * @return int
      * @throws \Exception
      */
-    public function fromTimestamp(int $timestamp): int
+    public function fromTimestamp($timestamp)
     {
         if ($timestamp > self::TIME_MAX) {
             throw new \Exception('Timestamp out of range');
@@ -57,7 +46,7 @@ class Locktime
      * @return int
      * @throws \Exception
      */
-    public function toTimestamp(int $lockTime): int
+    public function toTimestamp($lockTime)
     {
         if ($lockTime <= self::BLOCK_MAX) {
             throw new \Exception('Lock time out of range for timestamp');
@@ -79,7 +68,7 @@ class Locktime
      * @return int
      * @throws \Exception
      */
-    public function fromBlockHeight(int $blockHeight): int
+    public function fromBlockHeight($blockHeight)
     {
         if ($blockHeight > self::BLOCK_MAX) {
             throw new \Exception('This block height is too high');
@@ -96,7 +85,7 @@ class Locktime
      * @return int
      * @throws \Exception
      */
-    public function toBlockHeight(int $lockTime): int
+    public function toBlockHeight($lockTime)
     {
         if ($lockTime >= self::BLOCK_MAX) {
             throw new \Exception('This locktime is out of range for a block height');

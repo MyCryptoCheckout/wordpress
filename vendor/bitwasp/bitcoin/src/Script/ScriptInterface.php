@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Script;
 
 use BitWasp\Bitcoin\Script\Parser\Parser;
@@ -13,55 +11,45 @@ interface ScriptInterface extends SerializableInterface
     /**
      * @return BufferInterface
      */
-    public function getScriptHash(): BufferInterface;
+    public function getScriptHash();
 
     /**
      * @return BufferInterface
      */
-    public function getWitnessScriptHash(): BufferInterface;
+    public function getWitnessScriptHash();
 
     /**
      * @return Parser
      */
-    public function getScriptParser(): Parser;
+    public function getScriptParser();
 
     /**
      * @return Opcodes
      */
-    public function getOpcodes(): Opcodes;
+    public function getOpcodes();
 
     /**
-     * Returns boolean indicating whether script
-     * was push only. If true, $ops is populated
-     * with the contained buffers
-     * @param array $ops
      * @return bool
      */
-    public function isPushOnly(array &$ops = null): bool;
+    public function isPushOnly();
 
     /**
      * @param WitnessProgram|null $witness
      * @return bool
      */
-    public function isWitness(& $witness): bool;
-
-    /**
-     * @param BufferInterface $scriptHash
-     * @return bool
-     */
-    public function isP2SH(& $scriptHash): bool;
+    public function isWitness(& $witness);
 
     /**
      * @param bool $accurate
      * @return int
      */
-    public function countSigOps(bool $accurate = true): int;
+    public function countSigOps($accurate = true);
 
     /**
      * @param ScriptInterface $scriptSig
      * @return int
      */
-    public function countP2shSigOps(ScriptInterface $scriptSig): int;
+    public function countP2shSigOps(ScriptInterface $scriptSig);
 
     /**
      * @param ScriptInterface $scriptSig
@@ -69,11 +57,11 @@ interface ScriptInterface extends SerializableInterface
      * @param int $flags
      * @return int
      */
-    public function countWitnessSigOps(ScriptInterface $scriptSig, ScriptWitnessInterface $witness, int $flags): int;
+    public function countWitnessSigOps(ScriptInterface $scriptSig, ScriptWitnessInterface $witness, $flags);
 
     /**
      * @param ScriptInterface $script
      * @return bool
      */
-    public function equals(ScriptInterface $script): bool;
+    public function equals(ScriptInterface $script);
 }

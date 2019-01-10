@@ -4,9 +4,6 @@ namespace Mdanter\Ecc\Math;
 
 class MathAdapterFactory
 {
-    /**
-     * @var GmpMathInterface
-     */
     private static $forcedAdapter = null;
 
     /**
@@ -21,7 +18,7 @@ class MathAdapterFactory
      * @param bool $debug
      * @return DebugDecorator|GmpMathInterface|null
      */
-    public static function getAdapter(bool $debug = false): GmpMathInterface
+    public static function getAdapter($debug = false)
     {
         if (self::$forcedAdapter !== null) {
             return self::$forcedAdapter;
@@ -29,7 +26,7 @@ class MathAdapterFactory
 
         $adapter = new GmpMath();
 
-        return self::wrapAdapter($adapter, $debug);
+        return self::wrapAdapter($adapter, (bool) $debug);
     }
 
     /**
@@ -37,7 +34,7 @@ class MathAdapterFactory
      * @param bool $debug
      * @return DebugDecorator|GmpMathInterface
      */
-    private static function wrapAdapter(GmpMathInterface $adapter, bool $debug): GmpMathInterface
+    private static function wrapAdapter(GmpMathInterface $adapter, $debug)
     {
         if ($debug === true) {
             return new DebugDecorator($adapter);

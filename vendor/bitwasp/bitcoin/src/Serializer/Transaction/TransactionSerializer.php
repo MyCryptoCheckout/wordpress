@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Transaction;
 
 use BitWasp\Bitcoin\Script\Opcodes;
@@ -19,32 +17,32 @@ class TransactionSerializer implements TransactionSerializerInterface
     /**
      * @var \BitWasp\Buffertools\Types\Int32
      */
-    protected $int32le;
+    private $int32le;
 
     /**
      * @var \BitWasp\Buffertools\Types\Uint32
      */
-    protected $uint32le;
+    private $uint32le;
 
     /**
      * @var \BitWasp\Buffertools\Types\VarInt
      */
-    protected $varint;
+    private $varint;
 
     /**
      * @var TransactionInputSerializer
      */
-    protected $inputSerializer;
+    private $inputSerializer;
 
     /**
      * @var TransactionOutputSerializer
      */
-    protected $outputSerializer;
+    private $outputSerializer;
 
     /**
      * @var ScriptWitnessSerializer
      */
-    protected $witnessSerializer;
+    private $witnessSerializer;
 
     public function __construct(TransactionInputSerializer $inputSerializer = null, TransactionOutputSerializer $outputSerializer = null, ScriptWitnessSerializer $witnessSerializer = null)
     {
@@ -75,9 +73,9 @@ class TransactionSerializer implements TransactionSerializerInterface
      * @param Parser $parser
      * @return TransactionInterface
      */
-    public function fromParser(Parser $parser): TransactionInterface
+    public function fromParser(Parser $parser)
     {
-        $version = (int) $this->int32le->read($parser);
+        $version = $this->int32le->read($parser);
 
         $vin = [];
         $vinCount = $this->varint->read($parser);
@@ -120,16 +118,16 @@ class TransactionSerializer implements TransactionSerializerInterface
             throw new \RuntimeException('Flags byte was 0');
         }
 
-        $lockTime = (int) $this->uint32le->read($parser);
+        $lockTime = $this->uint32le->read($parser);
 
         return new Transaction($version, $vin, $vout, $vwit, $lockTime);
     }
 
     /**
-     * @param BufferInterface $data
+     * @param string|BufferInterface $data
      * @return TransactionInterface
      */
-    public function parse(BufferInterface $data): TransactionInterface
+    public function parse($data)
     {
         return $this->fromParser(new Parser($data));
     }
@@ -139,7 +137,7 @@ class TransactionSerializer implements TransactionSerializerInterface
      * @param int $opt
      * @return BufferInterface
      */
-    public function serialize(TransactionInterface $transaction, int $opt = 0): BufferInterface
+    public function serialize(TransactionInterface $transaction, $opt = 0)
     {
         $parser = new Parser();
         $parser->appendBinary($this->int32le->write($transaction->getVersion()));

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Mnemonic\Bip39;
 
 use BitWasp\Bitcoin\Crypto\Hash;
@@ -15,7 +13,7 @@ class Bip39SeedGenerator
      * @return BufferInterface
      * @throws \Exception
      */
-    private function normalize(string $string): BufferInterface
+    private function normalize($string)
     {
         if (!class_exists('Normalizer')) {
             if (mb_detect_encoding($string) === 'UTF-8') {
@@ -34,12 +32,12 @@ class Bip39SeedGenerator
      * @return \BitWasp\Buffertools\BufferInterface
      * @throws \Exception
      */
-    public function getSeed(string $mnemonic, string $passphrase = ''): BufferInterface
+    public function getSeed($mnemonic, $passphrase = '')
     {
         return Hash::pbkdf2(
             'sha512',
             $this->normalize($mnemonic),
-            $this->normalize("mnemonic{$passphrase}"),
+            $this->normalize("mnemonic" . $passphrase),
             2048,
             64
         );

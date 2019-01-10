@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Crypto\Key;
 
@@ -39,21 +38,21 @@ interface PrivateKeyInterface
     /**
      * @return PublicKeyInterface
      */
-    public function getPublicKey(): PublicKeyInterface;
+    public function getPublicKey();
 
     /**
      * @return GeneratorPoint
      */
-    public function getPoint(): GeneratorPoint;
+    public function getPoint();
 
     /**
      * @return \GMP
      */
-    public function getSecret(): \GMP;
+    public function getSecret();
 
     /**
      * @param  PublicKeyInterface $recipient
      * @return EcDHInterface
      */
-    public function createExchange(PublicKeyInterface $recipient): EcDHInterface;
+    public function createExchange(PublicKeyInterface $recipient);
 }

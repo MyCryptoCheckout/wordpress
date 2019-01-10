@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction\Mutator;
 
+use BitWasp\Bitcoin\Script\Script;
 use BitWasp\Bitcoin\Script\ScriptInterface;
 use BitWasp\Bitcoin\Transaction\TransactionOutput;
 use BitWasp\Bitcoin\Transaction\TransactionOutputInterface;
@@ -26,7 +25,7 @@ class OutputMutator
     /**
      * @return TransactionOutputInterface
      */
-    public function done(): TransactionOutputInterface
+    public function done()
     {
         return $this->output;
     }
@@ -46,10 +45,18 @@ class OutputMutator
     }
 
     /**
+     * @return $this
+     */
+    public function null()
+    {
+        return $this->replace(array('value' => '18446744073709551615', 'script' => new Script()));
+    }
+
+    /**
      * @param int $value
      * @return $this
      */
-    public function value(int $value)
+    public function value($value)
     {
         return $this->replace(array('value' => $value));
     }

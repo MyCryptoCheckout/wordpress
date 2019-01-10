@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Buffertools;
 
 use BitWasp\Buffertools\Types\TypeInterface;
@@ -28,7 +26,7 @@ class Template implements \Countable
      * @see \Countable::count()
      * @return int
      */
-    public function count(): int
+    public function count()
     {
         return count($this->template);
     }
@@ -38,7 +36,7 @@ class Template implements \Countable
      *
      * @return Types\TypeInterface[]
      */
-    public function getItems(): array
+    public function getItems()
     {
         return $this->template;
     }
@@ -47,9 +45,9 @@ class Template implements \Countable
      * Add a new TypeInterface to the Template
      *
      * @param  TypeInterface $item
-     * @return Template
+     * @return $this
      */
-    public function addItem(TypeInterface $item): Template
+    public function addItem(TypeInterface $item)
     {
         $this->template[] = $item;
         return $this;
@@ -61,7 +59,7 @@ class Template implements \Countable
      * @param  Parser $parser
      * @return mixed[]|Buffer[]|int[]|string[]
      */
-    public function parse(Parser $parser): array
+    public function parse(Parser $parser)
     {
         if (0 == count($this->template)) {
             throw new \RuntimeException('No items in template');
@@ -80,9 +78,9 @@ class Template implements \Countable
      * each be an instance of Buffer or implement SerializableInterface.
      *
      * @param  array $items
-     * @return BufferInterface
+     * @return Buffer
      */
-    public function write(array $items): BufferInterface
+    public function write(array $items)
     {
         if (count($items) != count($this->template)) {
             throw new \RuntimeException('Number of items must match template');

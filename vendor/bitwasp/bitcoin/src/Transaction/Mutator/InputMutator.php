@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction\Mutator;
 
 use BitWasp\Bitcoin\Script\ScriptInterface;
@@ -30,7 +28,7 @@ class InputMutator
     /**
      * @return TransactionInputInterface
      */
-    public function done(): TransactionInputInterface
+    public function done()
     {
         return $this->input;
     }
@@ -81,7 +79,7 @@ class InputMutator
      * @param int $vout
      * @return InputMutator
      */
-    public function vout(int $vout)
+    public function vout($vout)
     {
         return $this->replace(array('vout' => $vout));
     }
@@ -99,7 +97,7 @@ class InputMutator
      * @param int $nSequence
      * @return $this
      */
-    public function sequence(int $nSequence)
+    public function sequence($nSequence)
     {
         return $this->replace(array('nSequence' => $nSequence));
     }

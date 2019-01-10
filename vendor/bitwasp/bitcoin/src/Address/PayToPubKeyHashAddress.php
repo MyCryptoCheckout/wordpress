@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Address;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -14,22 +12,22 @@ class PayToPubKeyHashAddress extends Base58Address
 {
     /**
      * PayToPubKeyHashAddress constructor.
-     * @param BufferInterface $data
+     * @param BufferInterface $hash
      */
-    public function __construct(BufferInterface $data)
+    public function __construct(BufferInterface $hash)
     {
-        if ($data->getSize() !== 20) {
+        if ($hash->getSize() !== 20) {
             throw new \RuntimeException("P2PKH address hash should be 20 bytes");
         }
 
-        parent::__construct($data);
+        parent::__construct($hash);
     }
 
     /**
      * @param NetworkInterface $network
      * @return string
      */
-    public function getPrefixByte(NetworkInterface $network = null): string
+    public function getPrefixByte(NetworkInterface $network = null)
     {
         $network = $network ?: Bitcoin::getNetwork();
         return pack("H*", $network->getAddressByte());
@@ -38,7 +36,7 @@ class PayToPubKeyHashAddress extends Base58Address
     /**
      * @return ScriptInterface
      */
-    public function getScriptPubKey(): ScriptInterface
+    public function getScriptPubKey()
     {
         return ScriptFactory::scriptPubKey()->payToPubKeyHash($this->getHash());
     }

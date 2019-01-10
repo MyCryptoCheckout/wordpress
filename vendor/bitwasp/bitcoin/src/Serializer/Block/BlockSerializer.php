@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Serializer\Block;
 
 use BitWasp\Bitcoin\Block\Block;
@@ -9,7 +7,6 @@ use BitWasp\Bitcoin\Block\BlockInterface;
 use BitWasp\Bitcoin\Math\Math;
 use BitWasp\Bitcoin\Serializer\Transaction\TransactionSerializerInterface;
 use BitWasp\Bitcoin\Serializer\Types;
-use BitWasp\Buffertools\BufferInterface;
 use BitWasp\Buffertools\Exceptions\ParserOutOfRange;
 use BitWasp\Buffertools\Parser;
 
@@ -53,7 +50,7 @@ class BlockSerializer implements BlockSerializerInterface
      * @return BlockInterface
      * @throws ParserOutOfRange
      */
-    public function fromParser(Parser $parser): BlockInterface
+    public function fromParser(Parser $parser)
     {
         try {
             $header = $this->headerSerializer->fromParser($parser);
@@ -62,27 +59,27 @@ class BlockSerializer implements BlockSerializerInterface
             for ($i = 0; $i < $nTx; $i++) {
                 $vTx[] = $this->txSerializer->fromParser($parser);
             }
-            return new Block($this->math, $header, ...$vTx);
+            return new Block($this->math, $header, $vTx);
         } catch (ParserOutOfRange $e) {
             throw new ParserOutOfRange('Failed to extract full block header from parser');
         }
     }
 
     /**
-     * @param BufferInterface $buffer
+     * @param \BitWasp\Buffertools\BufferInterface|string $string
      * @return BlockInterface
      * @throws ParserOutOfRange
      */
-    public function parse(BufferInterface $buffer): BlockInterface
+    public function parse($string)
     {
-        return $this->fromParser(new Parser($buffer));
+        return $this->fromParser(new Parser($string));
     }
 
     /**
      * @param BlockInterface $block
-     * @return BufferInterface
+     * @return \BitWasp\Buffertools\BufferInterface
      */
-    public function serialize(BlockInterface $block): BufferInterface
+    public function serialize(BlockInterface $block)
     {
         $parser = new Parser($this->headerSerializer->serialize($block->getHeader()));
         $parser->appendBinary($this->varint->write(count($block->getTransactions())));

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Transaction;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -13,6 +11,7 @@ use BitWasp\Buffertools\BufferInterface;
 
 class TransactionInput extends Serializable implements TransactionInputInterface
 {
+
     /**
      * @var OutPointInterface
      */
@@ -24,7 +23,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     private $script;
 
     /**
-     * @var int
+     * @var string|int
      */
     private $sequence;
 
@@ -33,7 +32,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
      * @param ScriptInterface $script
      * @param int $sequence
      */
-    public function __construct(OutPointInterface $outPoint, ScriptInterface $script, int $sequence = self::SEQUENCE_FINAL)
+    public function __construct(OutPointInterface $outPoint, ScriptInterface $script, $sequence = self::SEQUENCE_FINAL)
     {
         $this->outPoint = $outPoint;
         $this->script = $script;
@@ -43,7 +42,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * @return OutPointInterface
      */
-    public function getOutPoint(): OutPointInterface
+    public function getOutPoint()
     {
         return $this->outPoint;
     }
@@ -51,7 +50,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * @return ScriptInterface
      */
-    public function getScript(): ScriptInterface
+    public function getScript()
     {
         return $this->script;
     }
@@ -59,7 +58,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * @return int
      */
-    public function getSequence(): int
+    public function getSequence()
     {
         return $this->sequence;
     }
@@ -68,7 +67,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
      * @param TransactionInputInterface $other
      * @return bool
      */
-    public function equals(TransactionInputInterface $other): bool
+    public function equals(TransactionInputInterface $other)
     {
         if (!$this->outPoint->equals($other->getOutPoint())) {
             return false;
@@ -84,9 +83,9 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * Check whether this transaction is a Coinbase transaction
      *
-     * @return bool
+     * @return boolean
      */
-    public function isCoinbase(): bool
+    public function isCoinbase()
     {
         $outpoint = $this->outPoint;
         return $outpoint->getTxId()->getBinary() === str_pad('', 32, "\x00")
@@ -96,16 +95,16 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * @return bool
      */
-    public function isFinal(): bool
+    public function isFinal()
     {
         $math = Bitcoin::getMath();
-        return $math->cmp(gmp_init($this->getSequence(), 10), gmp_init(self::SEQUENCE_FINAL, 10)) === 0;
+        return $math->cmp(gmp_init($this->getSequence()), gmp_init(self::SEQUENCE_FINAL)) === 0;
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isSequenceLockDisabled(): bool
+    public function isSequenceLockDisabled()
     {
         if ($this->isCoinbase()) {
             return true;
@@ -117,7 +116,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * @return bool
      */
-    public function isLockedToTime(): bool
+    public function isLockedToTime()
     {
         return !$this->isSequenceLockDisabled() && (($this->sequence & self::SEQUENCE_LOCKTIME_TYPE_FLAG) === self::SEQUENCE_LOCKTIME_TYPE_FLAG);
     }
@@ -125,7 +124,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * @return bool
      */
-    public function isLockedToBlock(): bool
+    public function isLockedToBlock()
     {
         return !$this->isSequenceLockDisabled() && (($this->sequence & self::SEQUENCE_LOCKTIME_TYPE_FLAG) === 0);
     }
@@ -133,7 +132,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * @return int
      */
-    public function getRelativeTimeLock(): int
+    public function getRelativeTimeLock()
     {
         if (!$this->isLockedToTime()) {
             throw new \RuntimeException('Cannot decode time based locktime when disable flag set/timelock flag unset/tx is coinbase');
@@ -146,7 +145,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * @return int
      */
-    public function getRelativeBlockLock(): int
+    public function getRelativeBlockLock()
     {
         if (!$this->isLockedToBlock()) {
             throw new \RuntimeException('Cannot decode block locktime when disable flag set/timelock flag set/tx is coinbase');
@@ -158,7 +157,7 @@ class TransactionInput extends Serializable implements TransactionInputInterface
     /**
      * @return BufferInterface
      */
-    public function getBuffer(): BufferInterface
+    public function getBuffer()
     {
         return (new TransactionInputSerializer(new OutPointSerializer()))->serialize($this);
     }

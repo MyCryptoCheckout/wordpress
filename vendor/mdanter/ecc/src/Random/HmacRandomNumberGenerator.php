@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace Mdanter\Ecc\Random;
 
@@ -37,7 +36,7 @@ class HmacRandomNumberGenerator implements RandomNumberGeneratorInterface
         'sha1' => 160,
         'sha224' => 224,
         'sha256' => 256,
-        'sha384' => 384,
+        'sha384' => 385,
         'sha512' => 512
     );
 
@@ -48,7 +47,7 @@ class HmacRandomNumberGenerator implements RandomNumberGeneratorInterface
      * @param \GMP $messageHash - decimal hash of the message (*may* be truncated)
      * @param string $algorithm - hashing algorithm
      */
-    public function __construct(GmpMathInterface $math, PrivateKeyInterface $privateKey, \GMP $messageHash, string $algorithm)
+    public function __construct(GmpMathInterface $math, PrivateKeyInterface $privateKey, \GMP $messageHash, $algorithm)
     {
         if (!isset($this->algSize[$algorithm])) {
             throw new \InvalidArgumentException('Unsupported hashing algorithm');
@@ -65,14 +64,14 @@ class HmacRandomNumberGenerator implements RandomNumberGeneratorInterface
      * @param \GMP $qlen - length of q in bits
      * @return \GMP
      */
-    public function bits2int(string $bits, \GMP $qlen): \GMP
+    public function bits2int($bits, $qlen)
     {
         $vlen = gmp_init(BinaryString::length($bits) * 8, 10);
         $hex = bin2hex($bits);
         $v = gmp_init($hex, 16);
 
         if ($this->math->cmp($vlen, $qlen) > 0) {
-            $v = $this->math->rightShift($v, (int) $this->math->toString($this->math->sub($vlen, $qlen)));
+            $v = $this->math->rightShift($v, $this->math->toString($this->math->sub($vlen, $qlen)));
         }
 
         return $v;
@@ -83,16 +82,16 @@ class HmacRandomNumberGenerator implements RandomNumberGeneratorInterface
      * @param \GMP $rlen - rounded octet length
      * @return string
      */
-    public function int2octets(\GMP $int, \GMP $rlen): string
+    public function int2octets(\GMP $int, \GMP $rlen)
     {
         $out = pack("H*", $this->math->decHex(gmp_strval($int, 10)));
         $length = gmp_init(BinaryString::length($out), 10);
         if ($this->math->cmp($length, $rlen) < 0) {
-            return str_pad('', (int) $this->math->toString($this->math->sub($rlen, $length)), "\x00") . $out;
+            return str_pad('', $this->math->toString($this->math->sub($rlen, $length)), "\x00") . $out;
         }
 
         if ($this->math->cmp($length, $rlen) > 0) {
-            return BinaryString::substring($out, 0, (int) $this->math->toString($rlen));
+            return BinaryString::substring($out, 0, $this->math->toString($rlen));
         }
 
         return $out;
@@ -102,7 +101,7 @@ class HmacRandomNumberGenerator implements RandomNumberGeneratorInterface
      * @param string $algorithm
      * @return int
      */
-    private function getHashLength(string $algorithm): int
+    private function getHashLength($algorithm)
     {
         return $this->algSize[$algorithm];
     }
@@ -111,15 +110,15 @@ class HmacRandomNumberGenerator implements RandomNumberGeneratorInterface
      * @param \GMP $q
      * @return \GMP
      */
-    public function generate(\GMP $q): \GMP
+    public function generate(\GMP $q)
     {
         $qlen = gmp_init(NumberSize::bnNumBits($this->math, $q), 10);
         $rlen = $this->math->rightShift($this->math->add($qlen, gmp_init(7, 10)), 3);
         $hlen = $this->getHashLength($this->algorithm);
         $bx = $this->int2octets($this->privateKey->getSecret(), $rlen) . $this->int2octets($this->messageHash, $rlen);
 
-        $v = str_pad('', $hlen >> 3, "\x01", STR_PAD_LEFT);
-        $k = str_pad('', $hlen >> 3, "\x00", STR_PAD_LEFT);
+        $v = str_pad('', $hlen / 8, "\x01", STR_PAD_LEFT);
+        $k = str_pad('', $hlen / 8, "\x00", STR_PAD_LEFT);
 
         $k = hash_hmac($this->algorithm, $v . "\x00" . $bx, $k, true);
         $v = hash_hmac($this->algorithm, $v, $k, true);
@@ -133,7 +132,7 @@ class HmacRandomNumberGenerator implements RandomNumberGeneratorInterface
             while ($this->math->cmp($toff, $rlen) < 0) {
                 $v = hash_hmac($this->algorithm, $v, $k, true);
 
-                $cc = min(BinaryString::length($v), (int) gmp_strval(gmp_sub($rlen, $toff), 10));
+                $cc = min(BinaryString::length($v), gmp_strval(gmp_sub($rlen, $toff), 10));
                 $t .= BinaryString::substring($v, 0, $cc);
                 $toff = gmp_add($toff, $cc);
             }

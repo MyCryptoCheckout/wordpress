@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace BitWasp\Bitcoin\Mnemonic;
 
 use BitWasp\Bitcoin\Bitcoin;
@@ -19,7 +17,7 @@ class MnemonicFactory
      * @param EcAdapterInterface $ecAdapter
      * @return ElectrumMnemonic
      */
-    public static function electrum(ElectrumWordListInterface $wordList = null, EcAdapterInterface $ecAdapter = null): ElectrumMnemonic
+    public static function electrum(ElectrumWordListInterface $wordList = null, EcAdapterInterface $ecAdapter = null)
     {
         return new ElectrumMnemonic(
             $ecAdapter ?: Bitcoin::getEcAdapter(),
@@ -32,7 +30,7 @@ class MnemonicFactory
      * @param EcAdapterInterface $ecAdapter
      * @return Bip39Mnemonic
      */
-    public static function bip39(Bip39WordListInterface $wordList = null, EcAdapterInterface $ecAdapter = null): Bip39Mnemonic
+    public static function bip39(Bip39WordListInterface $wordList = null, EcAdapterInterface $ecAdapter = null)
     {
         return new Bip39Mnemonic(
             $ecAdapter ?: Bitcoin::getEcAdapter(),

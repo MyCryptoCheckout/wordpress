@@ -22,14 +22,14 @@ endif
 
 ifeq "$(STRICT)" "1"
 phpcs: pretest
-		vendor/bin/phpcs --standard=PSR1,PSR2 src/ tests/ tests-rpc/ examples/
+		vendor/bin/phpcs --standard=PSR1,PSR2 src tests/
 else
 phpcs: pretest
-		vendor/bin/phpcs --standard=PSR1,PSR2 -n src/ tests/ tests-rpc/ examples/
+		vendor/bin/phpcs --standard=PSR1,PSR2 -n src tests/
 endif
 
 phpcbf: pretest
-		vendor/bin/phpcbf --standard=PSR1,PSR2 -n src/ tests/ tests-rpc/ examples/
+		vendor/bin/phpcbf --standard=PSR1,PSR2 -n src tests/ examples/
 
 ocular:
 		wget https://scrutinizer-ci.com/ocular.phar

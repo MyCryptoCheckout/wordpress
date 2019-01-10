@@ -11,13 +11,12 @@
 namespace FG\ASN1\Universal;
 
 use Exception;
-use FG\Utility\BigInteger;
+use FG\ASN1\Object;
 use FG\ASN1\Exception\ParserException;
-use FG\ASN1\ASNObject;
 use FG\ASN1\Parsable;
 use FG\ASN1\Identifier;
 
-class Integer extends ASNObject implements Parsable
+class Integer extends Object implements Parsable
 {
     /** @var int */
     private $value;
@@ -50,12 +49,24 @@ class Integer extends ASNObject implements Parsable
         return strlen($this->getEncodedValue());
     }
 
+    /**
+     * @param resource|\GMP $number
+     * @param int $positions
+     *
+     * @return resource|\GMP
+     */
+    private function rightShift($number, $positions)
+    {
+        // Shift 1 right = div / 2
+        return gmp_div($number, gmp_pow(2, (int) $positions));
+    }
+
     protected function getEncodedValue()
     {
-        $value = BigInteger::create($this->value, 10);
-        $negative = $value->compare(0) < 0;
+        $value = gmp_init($this->value, 10);
+        $negative = gmp_cmp($value, 0) < 0;
         if ($negative) {
-             $value = $value->absoluteValue();
+             $value = gmp_abs($value);
              $limit = 0x80;
         } else {
              $limit = 0x7f;
@@ -63,12 +74,12 @@ class Integer extends ASNObject implements Parsable
 
         $mod = 0xff+1;
         $values = [];
-        while($value->compare($limit) > 0) {
-            $values[] = $value->modulus($mod)->toInteger();
-            $value = $value->shiftRight(8);
+        while(gmp_cmp($value, $limit) > 0) {
+            $values[] = (int) gmp_strval(gmp_mod($value, $mod), 10);
+            $value = $this->rightShift($value, 8);
         }
 
-        $values[] = $value->modulus($mod)->toInteger();
+        $values[] = (int) gmp_strval(gmp_mod($value, $mod), 10);
         $numValues = count($values);
 
         if ($negative) {
@@ -112,17 +123,17 @@ class Integer extends ASNObject implements Parsable
             self::ensureMinimalEncoding($binaryData, $offsetIndex);
         }
         $isNegative = (ord($binaryData[$offsetIndex]) & 0x80) != 0x00;
-        $number = BigInteger::create(ord($binaryData[$offsetIndex++]) & 0x7F);
-
+        $number = gmp_init(ord($binaryData[$offsetIndex++]) & 0x7F, 10);
+        
         for ($i = 0; $i < $contentLength - 1; $i++) {
-            $number = $number->multiply(0x100)->add(ord($binaryData[$offsetIndex++]));
+            $number = gmp_or(gmp_mul($number, 0x100), ord($binaryData[$offsetIndex++]));
         }
 
         if ($isNegative) {
-            $number = $number->subtract(BigInteger::create(2)->toPower(8 * $contentLength - 1));
+            $number = gmp_sub($number, gmp_pow(2, 8 * $contentLength - 1));
         }
 
-        $parsedObject = new static((string)$number);
+        $parsedObject = new static(gmp_strval($number, 10));
         $parsedObject->setContentLength($contentLength);
 
         return $parsedObject;
