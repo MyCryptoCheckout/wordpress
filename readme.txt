@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 7.0
-Stable tag: 2.32
+Stable tag: 2.33
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -193,13 +193,17 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 
 == Changelog ==
 
+= 2.33 20190110 =
+
 * New currency: BLXS Blockscart
+* Downgrade Bitwasp library to support PHP 5.6 again.
+* Add beginning of CLI. Used for automatic testing.
 
 = 2.32 20190109 =
 
 * New currency: Acorn Collective OAK
 * New currency: Bitcoin Zero BZX
-* Bitwasp library, that handles HD wallets, updated to v1.0. This requires PHP7.
+* Upgrade Bitwasp library, that handles HD wallets, updated to v1.0. This requires PHP7.
 
 = 2.31 20181228 =
 
