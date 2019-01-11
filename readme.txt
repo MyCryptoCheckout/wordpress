@@ -23,7 +23,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Peer-to-peer transactions
 - Use any wallet(s) you want: desktop, mobile, or online
 - Automagically detect unique payments from customers using one wallet address
-- Optional hierarchically deterministic (HD) wallet support
+- Optional hierarchically deterministic (HD) wallet support 
 - No redirection to 3rd parties, no iframes, no modal windows
 - Optional donations widget shortcode generator
 - Built in support for shops with .onion addresses on Tor
@@ -120,18 +120,18 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - USD Coin USDC
 - Veritaseum VERI
 - Worldcoin1 WRD1
-- We can now add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
+- Add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
 = NEM Mosaic tokens supported: =
 
 - shelterDAO SHEL
-- We can now add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
+- Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
-= TRON TRC-20 Tokens supported: =
+= TRON TRC-10 / TRC-20 Tokens supported: =
 
 - ActivEightCoin ACTIV
 - TRONBITCOIN TBTC
-- We can now add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON TRC-20 tokens</a>!
+- Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
 
 = WAVES Tokens supported (Including Waves Client): =
 
@@ -139,13 +139,12 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - CoffeeCoin COF
 - Tokes TKS
 - Waves World WAVESWORLD
-- We can now add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
+- Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
 = Cryptocurrency Donations Widget =
 
 Receive donations in any of the cryptocurrencies supported by MyCryptoCheckout. Generate a widget using our simple shortcode generator and add it into any text widget or text editor. Shortcode generation options:
 
-- receive donations in any or all the cryptocurrencies supported by MyCryptoCheckout
 - select currencies to show
 - select primary currency
 - show currencies with icons or a dropdown box
