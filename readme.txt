@@ -39,8 +39,8 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 
 = Cryptocurrencies supported: =
 
-- Bitcoin BTC (Including SegWit addresses, Electrum HD wallet)
-- Bitcoin Cash BCH (Including Electrum HD wallet)
+- Bitcoin BTC (Including SegWit, HD wallets)
+- Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
 - Bitcoin Zero BZX
 - Bitsmdo BSD
@@ -48,13 +48,13 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - CloakCoin CLOAK
 - ColossusXT COLX
 - CrypticCoin CRYP
-- Dash DASH
+- Dash DASH (Including HD wallets)
 - Decred DCR
-- Digibyte DGB (Including SegWit addresses)
+- Digibyte DGB (Including SegWit)
 - Elite 1337
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
-- Litecoin LTC (Including SegWit addresses, Electrum HD wallet)
+- Litecoin LTC (Including SegWit, HD wallets)
 - MarsCoin MARS
 - Monero XMR
 - NEM XEM
@@ -65,8 +65,8 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - TRON TRX
 - TurtleNetwork TN
 - Verge XVG
-- Viacoin VIA
-- Waves WAVES
+- Viacoin VIA (Including SegWit, HD wallets)
+- Waves WAVES (Including Waves Client)
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
@@ -133,7 +133,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - TRONBITCOIN TBTC
 - We can now add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON TRC-20 tokens</a>!
 
-= WAVES Tokens supported: =
+= WAVES Tokens supported (Including Waves Client): =
 
 - BLXS Blockscart
 - CoffeeCoin COF
@@ -192,6 +192,12 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 11. Donations generator form
 
 == Changelog ==
+
+= 2.34 20190111 =
+
+* New: HD wallet support for Dash
+* New: HD wallet support for Viacoin VIA
+* New: SegWit support for Viacoin VIA
 
 = 2.33 20190110 =
 
