@@ -566,10 +566,10 @@ trait admin_trait
 
 		if ( $currency->supports( 'confirmations' ) )
 			$confirmations = $fs->number( 'confirmations' )
-				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer.', 'mycryptocheckout' ) )
+				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. More confirmations take longer. Only some blockchains support 0 confirmations (mempool).', 'mycryptocheckout' ) )
 				// Input label
 				->label( __( 'Confirmations', 'mycryptocheckout' ) )
-				->min( 1, 100 )
+				->min( 0, 100 )
 				->value( $wallet->confirmations );
 
 		if ( $currency->supports( 'btc_hd_public_key' ) )
