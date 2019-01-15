@@ -245,6 +245,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-HERB:before {
+  content: "\e954"; }
+
 .mcc-GRS:before {
   content: "\e951"; }
 
@@ -601,6 +604,9 @@
 
 .mcc_currency_icons.color i.mcc-GUSD {
   color: #07c4e1; }
+
+.mcc_currency_icons.color i.mcc-HERB {
+  color: #60AC04; }
 
 .mcc_currency_icons.color i.mcc-HT {
   color: #1C2143; }
