@@ -91,6 +91,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Gemini Dollar GUSD
 - Gifto GTO
 - Golem GNT
+- Herbalist Token HERB
 - Huobi Token HT
 - Icon ICX
 - intimate ITM
