@@ -115,6 +115,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - shelterDAO SHEL
 - Spendcoin SPND
 - Status SNT
+- Storiqa STQ
 - Storm STORM
 - TenXPay PAY
 - TrueUSD TUSD
@@ -193,6 +194,9 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 11. Donations generator form
 
 == Changelog ==
+
+* New currency: Herbalist Token HERB
+* New currency: Storiqa STQ
 
 = 2.34 20190113 =
 
