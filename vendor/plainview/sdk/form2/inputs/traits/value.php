@@ -87,7 +87,6 @@ trait value
 
 	/**
 		@brief		Returns the input's value from the _POST variable.
-		@details	Will strip off slashes before returning the value.
 		@return		string		The value of the _POST variable. If no value was in the post, null is returned.
 		@see		get_filtered_post_value()
 		@see		use_post_value()
@@ -96,8 +95,6 @@ trait value
 	public function get_post_value()
 	{
 		$value = $this->form()->get_post_value( $this->make_name() );
-		if ( $value !== null )
-			$value = stripslashes( $value );
 		$value = $this->apply_value_filters( $value );
 		return $value;
 	}

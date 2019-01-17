@@ -229,6 +229,15 @@ implements
 	}
 
 	/**
+		@brief		Check whether there is an item with this value.
+		@since		2018-11-07 21:31:19
+	**/
+	public function has_value( $value )
+	{
+		return in_array( $value, $this->items );
+	}
+
+	/**
 	 * Concatenate values of a given key as a string.
 	 *
 	 * @param  string  $value
@@ -240,6 +249,15 @@ implements
 		if ( is_null( $glue ) ) return implode( $this->lists( $value ) );
 
 		return implode( $glue, $this->lists( $value ) );
+	}
+
+	/**
+		@brief		Import this array.
+		@since		2018-07-08 09:49:39
+	**/
+	public function import_array( $array )
+	{
+		$this->items = $array;
 	}
 
 	public function insert_after( $key, $item )
@@ -606,7 +624,15 @@ implements
 	 */
 	public function toArray()
 	{
-		return $this->items;
+		$items = $this->items;
+		foreach( $items as $index => $item )
+		{
+			if ( ! is_object( $item ) )
+				continue;
+			if ( get_class( $item ) == get_class( $this ) )
+				$items[ $index ] = $item->to_array();
+		}
+		return $items;
 	}
 
 	/**

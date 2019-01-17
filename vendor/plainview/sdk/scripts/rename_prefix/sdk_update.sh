@@ -14,7 +14,7 @@ if [ "$NAMESPACE" == "" ]; then
 	exit 1
 fi
 
-if [ ! -f "../base.php" ]; then
+if [ ! -f "../../base.php" ]; then
 	echo "Please run this file from the scripts directory."
 	exit 1
 fi

@@ -21,12 +21,13 @@ fi
 echo "NAMESPACE=$NAMESPACE" > sdk_namespace
 
 cd ..
+cd ..
 if [ ! -f "base.php" ]; then
 	echo "Please run this file from the scripts directory."
 	exit 1
 fi
 
 # Single backslash
-perl -pi -e "s/plainview\\\\sdk/plainview\\\\sdk$NAMESPACE/" `find ./ -type f`
+perl -pi -e "s/plainview\\\\sdk/plainview\\\\$NAMESPACEsdk/" `find ./ -type f`
 # Double backslash
-perl -pi -e "s/plainview\\\\\\\\sdk/plainview\\\\\\\\sdk$NAMESPACE/" `find ./ -type f`
+perl -pi -e "s/plainview\\\\\\\\sdk/plainview\\\\\\\\$NAMESPACEsdk/" `find ./ -type f`

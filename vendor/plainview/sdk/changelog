@@ -1,3 +1,12 @@
+20190117		Fix prefix renamer script.
+20181115		form2: Add the pattern() method to text inputs.
+20181114		form2: do not stripslashes from values.
+20181107		Added collection->has_value, which is the same as in_array, but nicer to use.
+20181103		Added rename_prefix and rename_suffix, depending on how one wishes to rename the namespaces.
+20180911		Wordpress: New EDD updater
+20180708		Collection add import_array()
+20180707		Collection: Deep convert during to_array().
+20180703		Fix Wordpress EDD workaround warning.
 20180611		Make static delete() function on object_store traits into normal function.
 20180504		Wordpress: Fix _() command that doesn't exist. But does...
 20180425		Wordpress debug trait now has filter to allow the text to be modified.

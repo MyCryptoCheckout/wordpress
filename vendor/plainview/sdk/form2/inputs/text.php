@@ -47,6 +47,16 @@ class text
 	}
 
 	/**
+		@brief		Set the pattern attribute.
+		@since		2018-11-15 15:36:55
+	**/
+	public function pattern( $pattern )
+	{
+		$this->set_attribute( 'pattern', $pattern );
+		return $this;
+	}
+
+	/**
 		@brief		Require that this textfield's value be trimmed when set.
 		@param		bool		$value		True to trim the value when getting it from the POST.
 		@since		20130712
