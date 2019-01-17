@@ -6,7 +6,7 @@
 	{
 		"psr-4": {
 			"mycryptocheckout\\" : "src/",
-			"plainview\\sdk_mcc\\" : "src/sdk/",
+			"plainview\\sdk_mcc\\" : "vendor/plainview/sdk/",
 			"Btccom\\BitcoinCash\\": "vendor/btccom/bitwasp-bitcoin-bch-addon/src/"
 		}
 	},

@@ -46,7 +46,7 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
     public static $prefixDirsPsr4 = array (
         'plainview\\sdk_mcc\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/sdk',
+            0 => __DIR__ . '/..' . '/plainview/sdk',
         ),
         'mycryptocheckout\\api\\' => 
         array (

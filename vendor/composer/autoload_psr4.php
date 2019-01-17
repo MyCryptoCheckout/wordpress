@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'plainview\\sdk_mcc\\' => array($baseDir . '/src/sdk'),
+    'plainview\\sdk_mcc\\' => array($vendorDir . '/plainview/sdk'),
     'mycryptocheckout\\api\\' => array($vendorDir . '/mycryptocheckout/api/src'),
     'mycryptocheckout\\' => array($baseDir . '/src'),
     'Mdanter\\Ecc\\' => array($vendorDir . '/mdanter/ecc/src'),
