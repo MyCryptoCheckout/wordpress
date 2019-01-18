@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-STQ:before {
+  content: "\e955";
+}
 .mcc-HERB:before {
   content: "\e954";
 }
