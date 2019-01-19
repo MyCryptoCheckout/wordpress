@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.35
+Stable tag: 2.34
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -154,6 +154,12 @@ Receive donations in any of the cryptocurrencies supported by MyCryptoCheckout. 
 - show QR code
 - show wallet address text
 
+= Incompatible Plugins =
+
+The following plugins prevent MyCryptoCheckout from working correctly:
+
+- Plugin Organizer by Jeff Sterup. Deactivate plugin.
+
 = Security =
 
 Disable the MCC currencies tab: after you have wallets setup you can prevent them from being edited in the WordPress admin. Add the following code to your wp-config file-
@@ -194,8 +200,6 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 11. Donations generator form
 
 == Changelog ==
-
-= 2.35 20190118 =
 
 * New currency: Herbalist Token HERB
 * New currency: Storiqa STQ
