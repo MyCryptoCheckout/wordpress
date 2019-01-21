@@ -190,15 +190,18 @@ trait donations_trait
 			$dustiest = $wallets->get_dustiest_wallet( $currency_id );
 			if ( ! $dustiest )
 				continue;
+			$currency = $currencies->get( $currency_id );
 			$currencies_to_show[ $currency_id ] = [
 				'address' => $dustiest->get_address(),
 				'currency_id' => $currency_id,
-				'currency_name' => $currencies->get( $currency_id )->get_name(),
+				'currency_name' => $currency->get_name(),
 				'icon' => sprintf( '%s/src/static/images/currencies/%s.svg',
 					$this->paths( 'url' ),
 					$currency_id
 				),
 			];
+			if ( isset( $currency->qr_code ) )
+				$currencies_to_show[ $currency_id ][ 'qr_code_text' ] = $currency->qr_code;
 		}
 
 		// Handle the primary currency.

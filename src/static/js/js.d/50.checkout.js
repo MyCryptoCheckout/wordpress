@@ -71,7 +71,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			return;
 		$$.$div.addClass( 'mycryptocheckout' );
 		$$.mycryptocheckout_checkout_data = $$.extract_data( $( '#mycryptocheckout_checkout_data' ) );
-		console.log( 'MCC checkout data', $$.mycryptocheckout_checkout_data );
+		console.log( 'MyCryptoCheckout: Checkout data', $$.mycryptocheckout_checkout_data );
 		$$.clipboard_inputs();
 		$$.maybe_hide_woocommerce_order_overview();
 		$$.maybe_upgrade_divs();
@@ -152,8 +152,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 					;
 			}
 		}
-
-		console.log( 'MCC QR code text is: ', qr_code_text );
 
 		// Generate a QR code?
 		var qr_code = new QRCode( $qr_code[ 0 ],
@@ -320,7 +318,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( typeof ( $$.mycryptocheckout_checkout_data.waves ) !== 'undefined' )
 		{
 			add_waves = true;
-			console.log( $$.mycryptocheckout_checkout_data );
+			console.log( 'MyCryptoCheckout: Waves link', $$.mycryptocheckout_checkout_data );
 			currency = $$.mycryptocheckout_checkout_data.token_id;
 		}
 		if ( $$.data.currency_id == 'WAVES' )

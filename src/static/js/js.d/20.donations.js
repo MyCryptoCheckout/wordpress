@@ -31,6 +31,7 @@
 					data = atob( data );
 					// And parse into an object.
 					$$.div_data = jQuery.parseJSON( data );
+					console.log( 'MyCryptoCheckout: Donations div data', $$.div_data );
                 }
 
                 /**
@@ -108,7 +109,7 @@
                 	@brief		Show a qr code with this address.
                 	@since		2018-05-12 22:11:28
                 **/
-                $$.qr_code = function( address )
+                $$.qr_code = function( currency_id )
                 {
                 	if ( $$.div_data[ 'qr_code_enabled' ] != '1' )
             			return;
@@ -120,6 +121,17 @@
             			'max-width' : width,
             		} );
             		$qr_code.html( '' );
+
+            		var address = $$.div_data[ 'currencies' ][ currency_id ][ 'address' ];
+            		if ( $$.div_data[ 'currencies' ][ currency_id ][ 'qr_code_text' ] !== undefined )
+            		{
+            			var qr_code_text = $$.div_data[ 'currencies' ][ currency_id ][ 'qr_code_text' ];
+						qr_code_text = qr_code_text
+							.replace( '[MCC_TO]', address )
+							.replace( '[MCC_AMOUNT]', 0 )
+							;
+						address = qr_code_text;
+            		}
 					var qr_code = new QRCode( $qr_code[ 0 ],
 					{
 						text: address,
@@ -142,7 +154,7 @@
                 	$$.currency_selector.val( currency_id );
 					$$.show_address( address );
                 	$$.show_currency_name( $$.div_data[ 'currencies' ][ currency_id ][ 'currency_name' ] );
-					$$.qr_code( address );
+					$$.qr_code( currency_id );
                 }
 
                 /**

@@ -264,6 +264,7 @@
 					data = atob( data );
 					// And parse into an object.
 					$$.div_data = jQuery.parseJSON( data );
+					console.log( 'MyCryptoCheckout: Donations div data', $$.div_data );
                 }
 
                 /**
@@ -341,7 +342,7 @@
                 	@brief		Show a qr code with this address.
                 	@since		2018-05-12 22:11:28
                 **/
-                $$.qr_code = function( address )
+                $$.qr_code = function( currency_id )
                 {
                 	if ( $$.div_data[ 'qr_code_enabled' ] != '1' )
             			return;
@@ -353,6 +354,17 @@
             			'max-width' : width,
             		} );
             		$qr_code.html( '' );
+
+            		var address = $$.div_data[ 'currencies' ][ currency_id ][ 'address' ];
+            		if ( $$.div_data[ 'currencies' ][ currency_id ][ 'qr_code_text' ] !== undefined )
+            		{
+            			var qr_code_text = $$.div_data[ 'currencies' ][ currency_id ][ 'qr_code_text' ];
+						qr_code_text = qr_code_text
+							.replace( '[MCC_TO]', address )
+							.replace( '[MCC_AMOUNT]', 0 )
+							;
+						address = qr_code_text;
+            		}
 					var qr_code = new QRCode( $qr_code[ 0 ],
 					{
 						text: address,
@@ -375,7 +387,7 @@
                 	$$.currency_selector.val( currency_id );
 					$$.show_address( address );
                 	$$.show_currency_name( $$.div_data[ 'currencies' ][ currency_id ][ 'currency_name' ] );
-					$$.qr_code( address );
+					$$.qr_code( currency_id );
                 }
 
                 /**
@@ -484,7 +496,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			return;
 		$$.$div.addClass( 'mycryptocheckout' );
 		$$.mycryptocheckout_checkout_data = $$.extract_data( $( '#mycryptocheckout_checkout_data' ) );
-		console.log( 'MCC checkout data', $$.mycryptocheckout_checkout_data );
+		console.log( 'MyCryptoCheckout: Checkout data', $$.mycryptocheckout_checkout_data );
 		$$.clipboard_inputs();
 		$$.maybe_hide_woocommerce_order_overview();
 		$$.maybe_upgrade_divs();
@@ -565,8 +577,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 					;
 			}
 		}
-
-		console.log( 'MCC QR code text is: ', qr_code_text );
 
 		// Generate a QR code?
 		var qr_code = new QRCode( $qr_code[ 0 ],
@@ -733,7 +743,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( typeof ( $$.mycryptocheckout_checkout_data.waves ) !== 'undefined' )
 		{
 			add_waves = true;
-			console.log( $$.mycryptocheckout_checkout_data );
+			console.log( 'MyCryptoCheckout: Waves link', $$.mycryptocheckout_checkout_data );
 			currency = $$.mycryptocheckout_checkout_data.token_id;
 		}
 		if ( $$.data.currency_id == 'WAVES' )
