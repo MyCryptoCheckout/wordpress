@@ -19,7 +19,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 = Key Features & Highlights =
 
 - 0% transaction fees
-- No product restrictions
+- No KYC or product restrictions
 - Peer-to-peer transactions
 - Use any wallet(s) you want: desktop, mobile, or online
 - Automagically detect unique payments from customers using one wallet address

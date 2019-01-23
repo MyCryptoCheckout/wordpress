@@ -47,7 +47,8 @@
     vertical-align: top; }
     .mycryptocheckout.online_payment_instructions .mcc_qr_code img {
       height: 10em;
-      width: auto; }
+      width: auto;
+      border: 3px solid #FFF; }
   .mycryptocheckout.online_payment_instructions .wf-wrap .wf-container-main #content .woocommerce .wc-complete-wrap .wc-side-column .mycryptocheckout .to .to_input.clipboardable {
     font-size: 12px; }
 
@@ -96,6 +97,8 @@
   line-height: 24px; }
 .mycryptocheckout.mcc_donations .qr_code {
   margin-bottom: 10px; }
+  .mycryptocheckout.mcc_donations .qr_code img {
+    border: 3px solid #FFF; }
 .mycryptocheckout.mcc_donations .currency_selector select {
   max-width: 100%;
   margin: 4px 0; }

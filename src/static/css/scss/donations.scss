@@ -16,6 +16,9 @@
 	}
 	.qr_code {
 		margin-bottom: 10px;
+		img {
+			border: 3px solid #FFF;
+		}
 	}
 	.currency_selector select {
 		max-width: 100%;
