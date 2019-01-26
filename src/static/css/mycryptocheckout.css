@@ -221,6 +221,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-USDT:before {
+  content: "\e956"; }
+
 .mcc-STQ:before {
   content: "\e955"; }
 
@@ -633,6 +636,8 @@
   color: #000000; }
 .mcc_currency_icons.color i.mcc-USDC {
   color: #2775c9; }
+.mcc_currency_icons.color i.mcc-USDT {
+  color: #229A77; }
 .mcc_currency_icons.color i.mcc-VERI {
   color: #FF9933; }
 .mcc_currency_icons.color i.mcc-VIA {
