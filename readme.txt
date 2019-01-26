@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 80+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 85+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
@@ -8,7 +8,7 @@ Stable tag: 2.35
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 80+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 85+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -19,7 +19,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 = Key Features & Highlights =
 
 - 0% transaction fees
-- No product restrictions
+- No KYC or product restrictions
 - Peer-to-peer transactions
 - Use any wallet(s) you want: desktop, mobile, or online
 - Automagically detect unique payments from customers using one wallet address
@@ -28,7 +28,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Optional donations widget shortcode generator
 - Built in support for .onion addresses on Tor
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
-- Take MCC for a test ride by visiting our <a href ="https://wpdemo.mycryptocheckout.com/">demo store</a>
+- Take MCC for a test ride by visiting our <a href="https://wpdemo.mycryptocheckout.com/">demo store</a>
 - How to auto convert received <a href="https://mycryptocheckout.com/doc/auto-convert-crypto-to-fiat/">Bitcoin/Altcoin to USD/EUR/etc</a>
 
 The free license can process three sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account that includes unlimited transactions if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
