@@ -48,6 +48,10 @@ trait btc_hd_public_key_trait
 				$network = NetworkFactory::dash();
 				$prefixes = new BitcoinRegistry();
 			break;
+			case 'GRS':
+				$network = new GroestlNetwork();
+				$prefixes = new BitcoinRegistry();
+			break;
 			case 'LTC':
 				$network = NetworkFactory::litecoin();
 				$prefixes = new BitcoinRegistry();
@@ -102,7 +106,7 @@ trait btc_hd_public_key_trait
 			case 'BCH':
 				$address = $child_key->getAddress( new AddressCreator() )->getAddress();
 				$dir = dirname( MyCryptoCheckout()->paths( '__FILE__' ) );
-				$dir = $dir . '/src/3rdparty/CashAddress.php';
+				$dir = $dir . '/src/thirdparty/CashAddress.php';
 				require_once( $dir );
 				$ca = new \CashAddress\CashAddress();
 				$address = $ca->old2new( $address );
@@ -112,6 +116,7 @@ trait btc_hd_public_key_trait
 				$address = $child_key->getAddress( new AddressCreator() )->getAddress();
 			break;
 			case 'DASH':
+			case 'GRS':
 			case 'LTC':
 			case 'VIA':
 				$address = $child_key->getAddress( new AddressCreator() )->getAddress( $network );

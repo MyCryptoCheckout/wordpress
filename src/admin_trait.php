@@ -603,7 +603,14 @@ trait admin_trait
 					->min( 0 )
 					->value( $path );
 
-				$new_address = $currency->btc_hd_public_key_generate_address( $wallet );
+				try
+				{
+					$new_address = $currency->btc_hd_public_key_generate_address( $wallet );
+				}
+				catch ( Exception $e )
+				{
+					$new_address = $e->getMessage();
+				}
 				$fs->markup( 'm_btc_hd_public_key_generate_address_path' )
 					->p( __( 'The address at index %d is %s.', 'mycryptocheckout' ), $path, $new_address );
 			}
