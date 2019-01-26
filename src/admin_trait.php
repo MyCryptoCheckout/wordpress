@@ -583,7 +583,7 @@ trait admin_trait
 				// Fieldset legend
 				$fs->legend->label( __( 'HD wallet settings', 'mycryptocheckout' ) );
 
-				$pubs = 'XPUB/YPUB/ZPUB';
+				$pubs = 'xpub/ypub/zpub';
 				if ( $currency->supports( 'btc_hd_public_key_pubs' ) )
 					$pubs = implode( '/', $currency->supports->btc_hd_public_key_pubs );
 
@@ -682,7 +682,19 @@ trait admin_trait
 					if ( $currency->supports( 'btc_hd_public_key' ) )
 						if ( function_exists( 'gmp_abs' ) )
 						{
-							$wallet->set( 'btc_hd_public_key', $btc_hd_public_key->get_filtered_post_value() );
+							$public_key = $btc_hd_public_key->get_filtered_post_value();
+							$wallet->set( 'btc_hd_public_key', $public_key );
+
+							// Check that the currency accepts this pub type.
+							if ( $currency->supports( 'btc_hd_public_key_pubs' ) )
+							{
+								$pubs = implode( '/', $currency->supports->btc_hd_public_key_pubs );
+								$pub_type = substr( $public_key, 0, 4 );
+								if ( ! in_array( $pub_type, $currency->supports->btc_hd_public_key_pubs ) )
+									throw new Exception( sprintf( 'This public key type is not supported. Please use only: %s', implode( ' or ', $currency->supports->btc_hd_public_key_pubs ) ) );
+							}
+
+
 							$wallet->set( 'btc_hd_public_key_generate_address_path', $btc_hd_public_key_generate_address_path->get_filtered_post_value() );
 						}
 

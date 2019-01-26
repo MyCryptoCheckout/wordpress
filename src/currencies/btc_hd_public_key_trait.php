@@ -94,9 +94,20 @@ trait btc_hd_public_key_trait
 		  ] )
 		] );
 
-		$serializer = new Base58ExtendedKeySerializer(
-		  new ExtendedKeySerializer($adapter, $config)
-		);
+		switch( $wallet->get_currency_id() )
+		{
+			case 'GRS':
+				// They're sorta using a base58. Almost.
+				$serializer = new groestl\GroestlExtendedKeySerializer(
+				  new ExtendedKeySerializer( $adapter, $config )
+				);
+			break;
+			default:
+				$serializer = new Base58ExtendedKeySerializer(
+				  new ExtendedKeySerializer( $adapter, $config )
+				);
+				break;
+		}
 
 		$key = $serializer->parse( $network, $public_key );
 		$child_key = $key->derivePath( $path );

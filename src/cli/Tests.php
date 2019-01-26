@@ -72,6 +72,15 @@ class Tests
 					3 => 'XeaAJvVbiDdrxu6GbHq37T5jnxYaReNGeh',
 				],
 			],
+			'GRS' => [
+				'zpub6rtbDzTM985owxDb5A3z6U8Q2bSD4ZyfkEx81h1Rx9a4dSNxmiAXm32RvpRsHThZJdUfezAJGaKFHJR7VdaBzKUaHwwUVvc4DTJehjZevYa' =>
+				[
+					0 => 'grs1q36yl8tu236lqlqqc3hz34etzz7gwhlvz8s6cl6',
+					1 => 'grs1qy2mjjyrznw2cm9hqujzmdvlqneczpdzxrtl0m3',
+					2 => 'grs1qm23z0w88mqvluj9y2g2rnwkjtwd4gvq0wg03z3',
+				],
+
+			],
 			'LTC' => [
 				'xpub661MyMwAqRbcEtLWbRkdoi4iyDKyCZDaXAi5KjUq6qGUmrTMSkhSGmGSsTjXxAqPUoK7bH9Btj4NP6QdX7zKTzGixhBZu3iUXsEtQD3SbKq' => [
 					0 => 'LNYKNpmGQp2hRxiSHdpxACBunZkP21HsTX',
