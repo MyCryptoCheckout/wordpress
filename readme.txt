@@ -119,6 +119,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Storiqa STQ
 - Storm STORM
 - TenXPay PAY
+- Tether USD USDT
 - TrueUSD TUSD
 - TuneTrade TXT
 - USD Coin USDC
@@ -203,6 +204,7 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 == Changelog ==
 
 * New currency: Groestlcoin GRS
+* New currency: Tether USD USDT
 * Fix: QRcode and Timer HTML was being escaped unnecessarily.
 
 = 2.35 20190118 =
