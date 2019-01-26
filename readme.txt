@@ -55,6 +55,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Elite 1337
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
+- Groestlcoin GRS
 - Litecoin LTC (Including SegWit, HD wallets)
 - MarsCoin MARS
 - Monero XMR
@@ -200,6 +201,9 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 11. Donations generator form
 
 == Changelog ==
+
+* New currency: Groestlcoin GRS
+* Fix: QRcode and Timer HTML was being escaped unnecessarily.
 
 = 2.35 20190118 =
 
