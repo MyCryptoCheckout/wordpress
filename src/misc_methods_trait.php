@@ -584,6 +584,7 @@ trait misc_methods_trait
 	public function update_global_disk_option( $form, $key )
 	{
 		$form_value = $form->input( $key )->get_post_value();
+		$form_value = stripslashes( $form_value );
 		// Remove the DOS newlines.
 		$form_value = str_replace( "\r", '' , $form_value );
 		$form_value = trim( $form_value );
@@ -600,6 +601,7 @@ trait misc_methods_trait
 	public function update_local_global_disk_option( $form, $key )
 	{
 		$form_value = $form->input( $key )->get_post_value();
+		$form_value = stripslashes( $form_value );
 		// Remove the DOS newlines.
 		$form_value = str_replace( "\r", '' , $form_value );
 		$form_value = trim( $form_value );
