@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.35
+Stable tag: 2.36
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -202,6 +202,8 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 11. Donations generator form
 
 == Changelog ==
+
+= 2.36 20190127 =
 
 * New currency: Groestlcoin GRS
 * New currency: Tether USD USDT
