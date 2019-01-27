@@ -206,6 +206,7 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 * New currency: Groestlcoin GRS
 * New currency: Tether USD USDT
 * Fix: QRcode and Timer HTML was being escaped unnecessarily.
+* Fix: add white border around QR codes for dark themes.
 
 = 2.35 20190118 =
 
