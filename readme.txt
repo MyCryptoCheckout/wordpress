@@ -55,7 +55,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Elite 1337
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
-- Groestlcoin GRS
+- Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
 - MarsCoin MARS
 - Monero XMR
