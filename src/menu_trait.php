@@ -75,6 +75,13 @@ trait menu_trait
 			// Name of tab
 			->name( __( 'Account', 'mycryptocheckout' ) );
 
+		$tabs->tab( 'autosettle' )
+			->callback_this( 'autosettle_admin' )
+			// Tab heading
+			->heading( __( 'MyCryptoCheckout Autosettlement Accounts', 'mycryptocheckout' ) )
+			// Name of tab
+			->name( __( 'Autosettlement', 'mycryptocheckout' ) );
+
 		$tabs->tab( 'donations' )
 			->callback_this( 'admin_donations' )
 			// Tab heading
