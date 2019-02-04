@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-XLM:before {
+  content: "\e957";
+}
 .mcc-USDT:before {
   content: "\e956";
 }
