@@ -62,6 +62,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - NEM XEM
 - New York Coin NYC
 - Solaris XLR
+- Stellar XLM
 - Straks STAK
 - TokenPay TPAY
 - TRON TRX
@@ -202,6 +203,8 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 11. Donations generator form
 
 == Changelog ==
+
+* New currency: Stellar XLM
 
 = 2.36 20190127 =
 
