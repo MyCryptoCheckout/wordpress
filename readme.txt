@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.36
+Stable tag: 2.37
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -146,6 +146,10 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Waves World WAVESWORLD
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
+= Stellar Tokens supported: =
+
+- Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
+
 = Cryptocurrency Donations Widget =
 
 Receive donations in any of the cryptocurrencies supported by MyCryptoCheckout. Generate a widget using our simple shortcode generator and add it into any text widget or text editor. Shortcode generation options:
@@ -203,7 +207,10 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 
 == Changelog ==
 
+= 2.37 20190205 =
+
 * New currency: Stellar XLM
+* Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
 
 = 2.36 20190127 =
 
