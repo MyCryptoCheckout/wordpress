@@ -132,6 +132,10 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - shelterDAO SHEL
 - Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
+= TN TurtleNetwork tokens supported: =
+
+- Add your <a href="https://mycryptocheckout.com/turtlenetwork-token/">custom TurtleNetwork tokens</a>!
+
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
 - ActivEightCoin ACTIV
