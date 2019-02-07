@@ -30,7 +30,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
 - Take MCC for a test ride by visiting our <a href="https://wpdemo.mycryptocheckout.com/">demo store</a>
 
-The free license will monitor and detect 3 transactions per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account that includes unlimited transaction detection if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
+The free license can process 3 sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account that includes unlimited transactions if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
 
 = Webshops supported =
 
