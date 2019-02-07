@@ -87,6 +87,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - DigixDAO DGD
 - Dragonchain DRGN
 - eBitcoin EBTC
+- Enjin Token ENJ
 - Flix FLIX
 - FunFair FUN
 - Gemini Dollar GUSD
@@ -210,6 +211,8 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 11. Donations generator form
 
 == Changelog ==
+
+* New currency: Enjin Token ENJ
 
 = 2.37 20190205 =
 
