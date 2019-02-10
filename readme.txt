@@ -213,6 +213,7 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 == Changelog ==
 
 * New currency: Enjin Token ENJ
+* Fix: QR code for ERC20 tokens now includes address + amount in a more standardized format.
 
 = 2.37 20190205 =
 
