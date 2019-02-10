@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.37
+Stable tag: 2.38
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -211,6 +211,8 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 11. Donations generator form
 
 == Changelog ==
+
+= 2.38 20190210 =
 
 * New currency: Enjin Token ENJ
 * Fix: QR code for ERC20 tokens now includes address + amount in a more standardized format used by popular mobile wallets.
