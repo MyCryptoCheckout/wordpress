@@ -101,6 +101,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 	{
 		if ( ! $$.show_browser_link )
 			return;
+		// Don't show browser link for erc20.
+		if ( $$.mycryptocheckout_checkout_data.currency.erc20 !== undefined )
+			return;
 		// Extract the currency name from the qr code, if possible.
 		var currency_name = $$.mycryptocheckout_checkout_data.currency_id;
 		if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
