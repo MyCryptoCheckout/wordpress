@@ -32,7 +32,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 
 The free license can process 3 sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account that includes unlimited transactions if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
 
-= Webshops supported =
+= eCommerce platforms supported =
 
 - Easy Digital Downloads
 - WooCommerce
