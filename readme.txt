@@ -87,7 +87,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - DigixDAO DGD
 - Dragonchain DRGN
 - eBitcoin EBTC
-- Enjin Token ENJ
+- Enjin Coin ENJ
 - Flix FLIX
 - FunFair FUN
 - Gemini Dollar GUSD
@@ -214,7 +214,7 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 
 = 2.38 20190210 =
 
-* New currency: Enjin Token ENJ
+* New currency: Enjin Coin ENJ
 * Fix: QR code for ERC20 tokens now includes address + amount in a more standardized format used by popular mobile wallets.
 
 = 2.37 20190205 =
