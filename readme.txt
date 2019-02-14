@@ -210,6 +210,18 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 10. Donations widget
 11. Donations generator form
 
+== Frequently Asked Questions ==
+
+= Unable to retrieve your account data =
+
+If MyCryptoCheckout is unable to retrieve the account data for your domain, it's usually due to the MCC API server being blocked from connecting to your install. Check for:
+
+- Maintenance plugins
+- Password protection plugins
+- Firewalls
+
+If after disabling the above plugins you still can't get it working, then contact us and we'll try to find the cause of the problem.
+
 == Changelog ==
 
 = 2.38 20190210 =
