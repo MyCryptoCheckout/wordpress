@@ -27,6 +27,7 @@ namespace mycryptocheckout
 
 		use admin_trait;
 		use api_trait;
+		use autosettlement_trait;
 		use currencies_trait;
 		use donations_trait;
 		use wallets_trait;
