@@ -2,7 +2,7 @@
 
 namespace mycryptocheckout;
 
-use \Exception;
+use Exception;
 
 /**
 	@brief		Handles admin things such as settings and currencies.
