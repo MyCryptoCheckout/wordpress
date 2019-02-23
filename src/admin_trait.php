@@ -120,7 +120,7 @@ trait admin_trait
 
 		try
 		{
-			$this->api()->account()->is_available_for_payment();
+			//$this->api()->account()->is_available_for_payment();
 		}
 		catch ( Exception $e )
 		{
@@ -629,29 +629,7 @@ trait admin_trait
 		}
 
 		if ( $this->is_network && is_super_admin() )
-		{
-			$fs = $form->fieldset( 'fs_network' );
-			// Fieldset legend
-			$fs->legend->label( __( 'Network settings', 'mycryptocheckout' ) );
-
-			$wallet_on_network = $fs->checkbox( 'wallet_on_network' )
-				->checked( $wallet->network )
-				->description( __( 'Do you want the wallet to be available on the whole network?', 'mycryptocheckout' ) )
-				// Input label
-				->label( __( 'Network wallet', 'mycryptocheckout' ) );
-
-			$sites = $fs->select( 'site_ids' )
-				->description( __( 'If not network enabled, on which sites this wallet should be available.', 'mycryptocheckout' ) )
-				// Input label
-				->label( __( 'Sites', 'mycryptocheckout' ) )
-				->multiple()
-				->value( $wallet->sites );
-
-			foreach( $this->get_sorted_sites() as $site_id => $site_name )
-				$sites->option( $site_name, $site_id );
-
-			$sites->autosize();
-		}
+			$wallet->add_network_fields( $form );
 
 		$save = $form->primary_button( 'save' )
 			->value( __( 'Save settings', 'mycryptocheckout' ) );
@@ -668,9 +646,6 @@ trait admin_trait
 				try
 				{
 					$wallet->address = $wallet_address->get_filtered_post_value();
-
-					if ( $this->is_network )
-						$wallet->network = $wallet_on_network->is_checked();
 
 					$currency = $this->currencies()->get( $wallet->get_currency_id() );
 					$currency->validate_address( $wallet->address );
@@ -694,15 +669,10 @@ trait admin_trait
 									throw new Exception( sprintf( 'This public key type is not supported. Please use only: %s', implode( ' or ', $currency->supports->btc_hd_public_key_pubs ) ) );
 							}
 
-
 							$wallet->set( 'btc_hd_public_key_generate_address_path', $btc_hd_public_key_generate_address_path->get_filtered_post_value() );
 						}
 
-					if ( $this->is_network && is_super_admin() )
-					{
-						$wallet->network = $wallet_on_network->is_checked();
-						$wallet->sites = $sites->get_post_value();
-					}
+					$wallet->maybe_parse_network_form_post( $form );
 
 					if ( $currency->supports( 'monero_private_view_key' ) )
 					{

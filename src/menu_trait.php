@@ -82,6 +82,20 @@ trait menu_trait
 			// Name of tab
 			->name( __( 'Autosettlements', 'mycryptocheckout' ) );
 
+		if ( $tabs->get_is( 'autosettlement_edit' ) )
+		{
+			$autosettlement_id = $_GET[ 'autosettlement_id' ];
+			$autosettlements = $this->autosettlements();
+			$autosettlement = $autosettlements->get( $autosettlement_id );
+			$tabs->tab( 'autosettlement_edit' )
+				->callback_this( 'autosettlement_edit' )
+				// Editing autosettlement TYPE
+				->heading( sprintf( __( 'Editing autosettlement %s', 'mycryptocheckout' ), $autosettlement->get_type() ) )
+				// Name of tab
+				->name( __( 'Edit autosettlement', 'mycryptocheckout' ) )
+				->parameters( $autosettlement_id );
+		}
+
 		$tabs->tab( 'donations' )
 			->callback_this( 'admin_donations' )
 			// Tab heading

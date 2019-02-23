@@ -62,13 +62,13 @@ trait autosettlement_trait
 
 			// Address
 			$url = add_query_arg( [
-				'tab' => 'edit_autosettlement',
+				'tab' => 'autosettlement_edit',
 				'autosettlement_id' => $index,
 			] );
 			$url = sprintf( '<a href="%s" title="%s">%s</a>',
 				$url,
 				__( 'Edit this autosettlement', 'mycryptocheckout' ),
-				$autosettlement->get_type()
+				$autosettlements->get_types_as_options()[ $autosettlement->get_type() ]
 			);
 			$row->td( 'type' )->text( $url );
 
@@ -182,6 +182,109 @@ trait autosettlement_trait
 		$r .= $form->open_tag();
 		$r .= $table;
 		$r .= $form->close_tag();
+		$r .= $form->open_tag();
+		$r .= $form->display_form_table();
+		$r .= $form->close_tag();
+
+		echo $r;
+	}
+
+	/**
+		@brief		Edit this autosettlement setting.
+		@since		2019-02-21 22:47:10
+	**/
+	public function autosettlement_edit( $id )
+	{
+		$autosettlements = $this->autosettlements();
+		if ( ! $autosettlements->has( $id ) )
+		{
+			echo 'Invalid ID!';
+			return;
+		}
+		$autosettlement = $autosettlements->get( $id );
+
+		$form = $this->form();
+		$form->id( 'autosettlement_edit' );
+		$r = '';
+
+		switch( $autosettlement->get_type() )
+		{
+			case 'bittrex':
+				$bittrex_api_key = $form->text( 'bittrex_api_key' )
+					->description( __( 'The limited API key of your Bittrex account.', 'mycryptocheckout' ) )
+					// Input label
+					->label( __( 'Bittrex API key', 'mycryptocheckout' ) )
+					->size( 32 )
+					->maxlength( 32 )
+					->trim()
+					->value( $autosettlement->get( 'bittrex_api_key' ) );
+			break;
+		}
+
+		// Which currencies to apply this autosettlement on.
+		$fs = $form->fieldset( 'fs_currencies' );
+		// Fieldset legend
+		$fs->legend->label( __( 'Currencies', 'mycryptocheckout' ) );
+
+		$currencies_input = $fs->select( 'currencies' )
+			->description( __( 'Which currencies should be autosettled using these settings? If no currencies are select, this will be applied to all of them.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Currencies to autosettle', 'mycryptocheckout' ) )
+			->multiple()
+			->size( 20 )
+			->value( $autosettlement->get_currencies() );
+		$this->currencies()->add_to_select_options( $currencies_input );
+
+		if ( $this->is_network && is_super_admin() )
+			$autosettlement->add_network_fields( $form );
+
+		$save = $form->primary_button( 'save' )
+			->value( __( 'Save settings', 'mycryptocheckout' ) );
+
+		if ( $form->is_posting() )
+		{
+			$form->post();
+			$form->use_post_values();
+
+			$reshow = false;
+
+			if ( $save->pressed() )
+			{
+				try
+				{
+					switch( $autosettlement->get_type() )
+					{
+						case 'bittrex':
+							$value = $bittrex_api_key->get_filtered_post_value();
+							$autosettlement->set( 'bittrex_api_key', $value );
+						break;
+					}
+
+					$autosettlement->set_currencies( $currencies_input->get_post_value() );
+
+					$autosettlement->maybe_parse_network_form_post( $form );
+
+					$autosettlements->save();
+
+					$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
+					$reshow = true;
+				}
+				catch ( Exception $e )
+				{
+					$r .= $this->error_message_box()->_( $e->getMessage() );
+				}
+			}
+
+			if ( $reshow )
+			{
+				echo $r;
+				$_POST = [];
+				$function = __FUNCTION__;
+				echo $this->$function( $id );
+				return;
+			}
+		}
+
 		$r .= $form->open_tag();
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();

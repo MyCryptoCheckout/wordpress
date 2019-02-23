@@ -192,6 +192,7 @@ class Easy_Digital_Downloads
 		edd_update_payment_meta( $payment_id, '_mcc_payment_id', $mcc_payment_id );
 
 		$wallet->apply_to_payment( $payment );
+		MyCryptoCheckout()->autosettlements()->apply_to_payment( $payment );
 
 		$mcc->api()->payments()->save( $payment_id, $payment );
 

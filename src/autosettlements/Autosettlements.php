@@ -23,6 +23,31 @@ class Autosettlements
 	}
 
 	/**
+		@brief		Convenience method to apply any applicable autosettlements to this payment.
+		@since		2019-02-23 11:04:22
+	**/
+	public function apply_to_payment( $payment )
+	{
+		foreach( $this as $autosettlement )
+			if ( $autosettlement->is_enabled_on_this_site() )
+				if ( $autosettlement->applies_to_payment( $payment ) )
+					$autosettlement->apply_to_payment( $payment );
+	}
+
+	/**
+		@brief		Return all wallets that are enabled on this site.
+		@since		2017-12-10 19:13:02
+	**/
+	public function enabled_on_this_site()
+	{
+		$r = [];
+		foreach( $this as $item )
+			if ( $item->is_enabled_on_this_site() )
+				$r []= $wallet;
+		return $r;
+	}
+
+	/**
 		@brief		Return the types of autosettlements we offer, as a select input array.
 		@since		2019-02-21 19:43:03
 	**/
