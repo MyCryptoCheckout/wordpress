@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-ACAD:before {
+  content: "\e959";
+}
 .mcc-ENJ:before {
   content: "\e958";
 }
