@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.38
+Stable tag: 2.39
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.0
 
@@ -75,6 +75,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 = ERC20 tokens supported (Including MetaMask): =
 
 - 0x ZRX
+- Academy Token ACAD
 - Acorn Collective OAK
 - ADULTEUM ADULT
 - Aeternity AE
@@ -96,6 +97,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Herbalist Token HERB
 - Huobi Token HT
 - Icon ICX
+- IMSmart Token IMT
 - intimate ITM
 - Invacio INV
 - Kyber Network KNC
@@ -223,6 +225,11 @@ If MyCryptoCheckout is unable to retrieve the account data for your domain, it's
 If after disabling the above plugins you still can't get it working, then contact us and we'll try to find the cause of the problem.
 
 == Changelog ==
+
+= 2.39 20190307 =
+
+* New currency: Academy Token ACAD
+* New currency: IMSmart Token IMT
 
 = 2.38 20190210 =
 
