@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-IMT:before {
+  content: "\e95a";
+}
 .mcc-ACAD:before {
   content: "\e959";
 }
