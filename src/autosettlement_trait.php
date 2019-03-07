@@ -92,6 +92,17 @@ trait autosettlement_trait
 		$save = $form->primary_button( 'save' )
 			->value( __( 'Save settings', 'mycryptocheckout' ) );
 
+		foreach( $autosettlements as $autosettlement )
+		try
+		{
+			$r .= $this->info_message_box()->_( $autosettlement->test() );
+		}
+		catch( Exception $e )
+		{
+			$message = sprintf( 'Fail for %s: %s', $autosettlement->get_type(), $e->getMessage() );
+			$r .= $this->error_message_box()->_( $message );
+		}
+
 		if ( $form->is_posting() )
 		{
 			$form->post();
@@ -219,6 +230,14 @@ trait autosettlement_trait
 					->trim()
 					->value( $autosettlement->get( 'bittrex_api_key' ) );
 			break;
+				$bittrex_api_secret = $form->text( 'bittrex_api_secret' )
+					->description( __( 'The secret text associated to this API key.', 'mycryptocheckout' ) )
+					// Input label
+					->label( __( 'Bittrex secret', 'mycryptocheckout' ) )
+					->size( 32 )
+					->trim()
+					->value( $autosettlement->get( 'bittrex_api_secret' ) );
+			break;
 		}
 
 		// Which currencies to apply this autosettlement on.
@@ -257,6 +276,8 @@ trait autosettlement_trait
 						case 'bittrex':
 							$value = $bittrex_api_key->get_filtered_post_value();
 							$autosettlement->set( 'bittrex_api_key', $value );
+							$value = $bittrex_api_secret->get_filtered_post_value();
+							$autosettlement->set( 'bittrex_api_secret', $value );
 						break;
 					}
 

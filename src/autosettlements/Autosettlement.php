@@ -153,6 +153,10 @@ class Autosettlement
 	**/
 	public function test()
 	{
-		throw new Exception( 'Unable to connect to api' );
+		$autosettlement = new \mycryptocheckout\api\v2\Autosettlement();
+		$autosettlement->set_type( $this->get_type() );
+		foreach( $this as $key => $value )
+			$autosettlement->$key = $value;
+		return MyCryptoCheckout()->api()->autosettlements()->test( $autosettlement );
 	}
 }
