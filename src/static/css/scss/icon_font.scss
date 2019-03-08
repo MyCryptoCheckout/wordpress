@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-XRP:before {
+  content: "\e95b";
+}
 .mcc-IMT:before {
   content: "\e95a";
 }
