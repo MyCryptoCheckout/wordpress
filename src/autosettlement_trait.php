@@ -229,7 +229,6 @@ trait autosettlement_trait
 					->maxlength( 32 )
 					->trim()
 					->value( $autosettlement->get( 'bittrex_api_key' ) );
-			break;
 				$bittrex_api_secret = $form->text( 'bittrex_api_secret' )
 					->description( __( 'The secret text associated to this API key.', 'mycryptocheckout' ) )
 					// Input label
