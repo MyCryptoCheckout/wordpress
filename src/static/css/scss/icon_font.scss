@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-ORGT:before {
+  content: "\e95c";
+}
 .mcc-XRP:before {
   content: "\e95b";
 }

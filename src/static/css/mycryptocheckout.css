@@ -221,6 +221,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-ORGT:before {
+  content: "\e95c"; }
+
 .mcc-XRP:before {
   content: "\e95b"; }
 
@@ -615,6 +618,8 @@
   color: #1A53F0; }
 .mcc_currency_icons.color i.mcc-ONG {
   color: #000000; }
+.mcc_currency_icons.color i.mcc-ORGT {
+  color: #c717b0; }
 .mcc_currency_icons.color i.mcc-PAY {
   color: #302C2C; }
 .mcc_currency_icons.color i.mcc-PPT {
