@@ -28,6 +28,19 @@ abstract class API
 	}
 
 	/**
+		@brief		Return the autosettlements component.
+		@since		2019-03-06 23:34:51
+	**/
+	public function autosettlements()
+	{
+		if ( isset( $this->__autosettlements ) )
+			return $this->__autosettlements;
+
+		$this->__autosettlements = $this->new_autosettlements();
+		return $this->__autosettlements;
+	}
+
+	/**
 		@brief		Output this string to any debug log you might have.
 		@details	Optimally, run the arguments through an sprintf.
 		@since		2018-10-13 11:48:29
@@ -131,6 +144,15 @@ abstract class API
 	public function new_account()
 	{
 		return new Account( $this );
+	}
+
+	/**
+		@brief		Create the autosettlements component.
+		@since		2019-03-06 23:35:37
+	**/
+	public function new_autosettlements()
+	{
+		return new Autosettlements( $this );
 	}
 
 	/**
