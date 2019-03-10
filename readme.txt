@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.39
+Stable tag: 2.40
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.1
 
@@ -149,6 +149,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 - BLXS Blockscart
 - CoffeeCoin COF
+- Organic Token ORGT
 - Tokes TKS
 - Waves World WAVESWORLD
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
@@ -225,6 +226,10 @@ If MyCryptoCheckout is unable to retrieve the account data for your domain, it's
 If after disabling the above plugins you still can't get it working, then contact us and we'll try to find the cause of the problem.
 
 == Changelog ==
+
+= 2.40 20190310 =
+
+* New currency: Organic Token ORGT
 
 = 2.39 20190307 =
 
