@@ -92,17 +92,6 @@ trait autosettlement_trait
 		$save = $form->primary_button( 'save' )
 			->value( __( 'Save settings', 'mycryptocheckout' ) );
 
-		foreach( $autosettlements as $autosettlement )
-		try
-		{
-			$r .= $this->info_message_box()->_( $autosettlement->test() );
-		}
-		catch( Exception $e )
-		{
-			$message = sprintf( 'Fail for %s: %s', $autosettlement->get_type(), $e->getMessage() );
-			$r .= $this->error_message_box()->_( $message );
-		}
-
 		if ( $form->is_posting() )
 		{
 			$form->post();
@@ -145,11 +134,13 @@ trait autosettlement_trait
 							$autosettlement = $autosettlements->get( $id );
 							try
 							{
-								$r .= $this->info_message_box()->_( $autosettlement->test() );
+								$message = sprintf( 'Success for %s: %s', $autosettlement->get_type(), $autosettlement->test() );
+								$r .= $this->info_message_box()->_( $message );
 							}
 							catch( Exception $e )
 							{
-								$r .= $this->error_message_box()->_( $e->getMessage() );
+								$message = sprintf( 'Fail for %s: %s', $autosettlement->get_type(), $e->getMessage() );
+								$r .= $this->error_message_box()->_( $message );
 							}
 						}
 					break;
