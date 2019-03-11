@@ -18,7 +18,7 @@ class Autosettlements
 		$json = $this->api()->send_post_with_account( 'autosettlement/test', [ 'autosettlement' => $autosettlement ] );
 		if ( ! isset( $json->result ) )
 			throw new Exception( 'Invalid JSON from API.' );
-		if ( $json->result !== 'success' )
+		if ( $json->result !== 'ok' )
 			throw new Exception( $json->message );
 		return $json->message;
 	}
