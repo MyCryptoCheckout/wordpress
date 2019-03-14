@@ -524,6 +524,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 	**/
 	$$.maybe_browser_link = function()
 	{
+		if( typeof $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet != 'undefined' )
+			$$.show_browser_link = $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet;
 		if ( ! $$.show_browser_link )
 			return;
 		// Don't show browser link for erc20.
@@ -533,7 +535,10 @@ var mycryptocheckout_checkout_javascript = function( data )
 		var currency_name = $$.mycryptocheckout_checkout_data.currency_id;
 		if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
 			currency_name = $$.data.qr_codes[ $$.data.currency_id ].replace( /:.*/, '' );
-		var html = '<a href="MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT"><div class="open_wallet_payment"></div></a>';
+		if( typeof $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url != 'undefined' )
+			var html = $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url;
+		else
+			var html = '<a href="MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT"><div class="open_wallet_payment"></div></a>';
 		html = $$.replace_keywords( html );
 		html = html.replace( 'MCC_CURRENCY', currency_name );
 		var $div = $( '<div>' );
@@ -650,8 +655,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if( typeof $$.mycryptocheckout_checkout_data.supports === 'undefined' )
 			return;
 
-		$$.show_browser_link = false;
-
 		var contractInstance = false;
 		if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined' )
 		{
@@ -662,6 +665,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( contractInstance === false )
 			if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined' )
 				return;
+
+		$$.show_browser_link = false;
 
 		$$.$metamask = $( '<div class="metamask_payment"></div>' );
 		$$.$metamask.appendTo( $$.$payment_buttons );
