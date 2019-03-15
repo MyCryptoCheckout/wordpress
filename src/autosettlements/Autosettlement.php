@@ -54,12 +54,13 @@ class Autosettlement
 		{
 			case 'bittrex':
 				$autosettlement[ 'bittrex_api_key' ] = $this->get( 'bittrex_api_key' );
+				$autosettlement[ 'bittrex_api_secret' ] = $this->get( 'bittrex_api_secret' );
 			break;
 		}
 
 		$data->autosettlements []= $autosettlement;
 
-		MyCryptoCheckout()->debug( 'Adding autosettlements %s to payment %s', $data, $payment );
+		MyCryptoCheckout()->debug( 'Adding autosettlements %s to payment %s', $data->autosettlements, $payment );
 
 		$payment->data()->set( 'autosettlements', $data->autosettlements );
 	}
