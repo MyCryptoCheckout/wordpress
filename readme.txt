@@ -60,7 +60,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Monero XMR
 - NEM XEM
 - New York Coin NYC
-- Ripple XRP
 - Solaris XLR
 - Stellar XLM
 - Straks STAK
@@ -70,6 +69,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Verge XVG
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
+- XRP
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
