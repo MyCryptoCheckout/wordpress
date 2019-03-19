@@ -175,6 +175,29 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
+= Code snippets =
+
+We have various code snippets that allow you to customize MyCryptoCheckout together with your e-commerce solution:
+
+Easy Digital Downloads
+
+<a href="https://mycryptocheckout.com/doc/snippets/modify-the-decimal-precision-of-a-currency/">Modify the decimal precision of a currency</a>
+<a href="https://mycryptocheckout.com/doc/snippets/refresh-page-after-payment-complete/">Refresh page after payment complete</a>
+
+Woocommerce
+
+<a href="https://mycryptocheckout.com/doc/customize-cryptocurrency-icons/">Customize cryptocurrency icons on the checkout</a>
+<a href="https://mycryptocheckout.com/doc/snippets/display-the-woocommerce-products-prices-in-fiat-cryptocurrency/">Display the WooCommerce products prices in fiat + cryptocurrency</a>
+<a href="https://mycryptocheckout.com/doc/snippets/display-the-woocommerce-cart-total-in-fiat-and-or-cryptocurrency/">Display the WooCommerce cart total in fiat and / or cryptocurrency</a>
+<a href="https://mycryptocheckout.com/doc/snippets/display-the-woocommerce-order-received-total-in-fiat-and-or-crypto/">Display the WooCommerce order received total in fiat and/or crypto</a>
+<a href="https://mycryptocheckout.com/doc/snippets/modify-the-decimal-precision-of-a-currency/">Modify the decimal precision of a currency</a>
+<a href="https://mycryptocheckout.com/doc/snippets/refresh-page-after-payment-complete/">Refresh page after payment complete</a>
+<a href="https://mycryptocheckout.com/doc/snippets/display-woocommerce-product-prices-in-other-currencies/">Selectively display WooCommerce product prices in any cryptocurrency</a>
+
+Woocommerce themes
+
+<a href="https://mycryptocheckout.com/doc/snippets/the7-theme-checkout-fix/">The7</a> &#8211; move the payment instructions higher up on the order confirmation page
+
 = Security =
 
 Disable the MCC currencies tab: after you have wallets setup you can prevent them from being edited in the WordPress admin. Add the following code to your wp-config file-
