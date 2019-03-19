@@ -85,6 +85,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bancor BNT
 - Basic Attention Token BAT
 - Binance Coin BNB
+- Cointorox OROX
 - Dai DAI
 - DigixDAO DGD
 - Dragonchain DRGN
@@ -250,6 +251,8 @@ If MyCryptoCheckout is unable to retrieve the account data for your domain, it's
 If after disabling the above plugins you still can't get it working, then contact us and we'll try to find the cause of the problem.
 
 == Changelog ==
+
+* New currency: Cointorox OROX
 
 = 2.40 20190310 =
 
