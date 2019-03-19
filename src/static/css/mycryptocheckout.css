@@ -221,6 +221,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-USDT_ERC20:before {
+  content: "\e95d"; }
+
+.mcc-OROX:before {
+  content: "\e95e"; }
+
 .mcc-ORGT:before {
   content: "\e95c"; }
 
@@ -620,6 +626,8 @@
   color: #000000; }
 .mcc_currency_icons.color i.mcc-ORGT {
   color: #c717b0; }
+.mcc_currency_icons.color i.mcc-OROX {
+  color: #5832bf; }
 .mcc_currency_icons.color i.mcc-PAY {
   color: #302C2C; }
 .mcc_currency_icons.color i.mcc-PPT {
@@ -663,6 +671,8 @@
 .mcc_currency_icons.color i.mcc-USDC {
   color: #2775c9; }
 .mcc_currency_icons.color i.mcc-USDT {
+  color: #229A77; }
+.mcc_currency_icons.color i.mcc-USDT_ERC20 {
   color: #229A77; }
 .mcc_currency_icons.color i.mcc-VERI {
   color: #FF9933; }
