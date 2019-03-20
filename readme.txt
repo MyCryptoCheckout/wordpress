@@ -106,6 +106,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Latino Token LATINO
 - L'île LILE
 - Loom LOOM
+- Luxcess Group Token LXC
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
@@ -253,6 +254,7 @@ If after disabling the above plugins you still can't get it working, then contac
 == Changelog ==
 
 * New currency: Cointorox OROX
+* New currency: Luxcess Group Token LXC
 
 = 2.40 20190310 =
 
