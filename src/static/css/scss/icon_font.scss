@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-LXC:before {
+  content: "\e95f";
+}
 .mcc-USDT_ERC20:before {
   content: "\e95d";
 }

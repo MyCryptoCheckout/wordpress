@@ -221,6 +221,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-LXC:before {
+  content: "\e95f"; }
+
 .mcc-USDT_ERC20:before {
   content: "\e95d"; }
 
@@ -604,6 +607,8 @@
   color: #08839D; }
 .mcc_currency_icons.color i.mcc-LTC {
   color: #838383; }
+.mcc_currency_icons.color i.mcc-LXC {
+  color: #c8962c; }
 .mcc_currency_icons.color i.mcc-MARS {
   color: #D13914; }
 .mcc_currency_icons.color i.mcc-MCO {
