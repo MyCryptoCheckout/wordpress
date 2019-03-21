@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.40
+Stable tag: 2.41
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.1
 
@@ -252,6 +252,8 @@ If MyCryptoCheckout is unable to retrieve the account data for your domain, it's
 If after disabling the above plugins you still can't get it working, then contact us and we'll try to find the cause of the problem.
 
 == Changelog ==
+
+= 2.41 20190321 =
 
 * New currency: Cointorox OROX
 * New currency: Luxcess Group Token LXC
