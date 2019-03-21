@@ -376,6 +376,14 @@ trait misc_methods_trait
 		$markup_percent = MyCryptoCheckout()->get_site_option( 'markup_percent' );
 		$marked_up_amount = $marked_up_amount * ( 1 + ( $markup_percent / 100 ) );
 
+		if ( strpos( $marked_up_amount, 'E' ) !== false )
+		{
+			// Convert from exponent to float string.
+			$marked_up_amount = sprintf( '%.18f', $marked_up_amount );
+			// And trim off the zeros.
+			$marked_up_amount = rtrim( $marked_up_amount, '0' );
+		}
+
 		$action = MyCryptoCheckout()->new_action( 'markup_amount' );
 		$action->currency_id = $options[ 'currency_id' ];
 		$action->markup_amount = $markup_amount;

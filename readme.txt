@@ -1,14 +1,14 @@
-=== MyCryptoCheckout - Accept 85+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 90+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.36
+Stable tag: 2.41
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 5.0
+Tested up to: 5.1
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 85+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 90+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -29,11 +29,10 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Built in support for .onion addresses on Tor
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
 - Take MCC for a test ride by visiting our <a href="https://wpdemo.mycryptocheckout.com/">demo store</a>
-- How to auto convert received <a href="https://mycryptocheckout.com/doc/auto-convert-crypto-to-fiat/">Bitcoin/Altcoin to USD/EUR/etc</a>
 
-The free license can process three sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account that includes unlimited transactions if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
+The free license can process 3 sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account that includes unlimited transactions if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
 
-= Webshops supported =
+= eCommerce platforms supported =
 
 - Easy Digital Downloads
 - WooCommerce
@@ -62,6 +61,7 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - NEM XEM
 - New York Coin NYC
 - Solaris XLR
+- Stellar XLM
 - Straks STAK
 - TokenPay TPAY
 - TRON TRX
@@ -69,12 +69,14 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Verge XVG
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
+- XRP
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
 = ERC20 tokens supported (Including MetaMask): =
 
 - 0x ZRX
+- Academy Token ACAD
 - Acorn Collective OAK
 - ADULTEUM ADULT
 - Aeternity AE
@@ -83,10 +85,12 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Bancor BNT
 - Basic Attention Token BAT
 - Binance Coin BNB
+- Cointorox OROX
 - Dai DAI
 - DigixDAO DGD
 - Dragonchain DRGN
 - eBitcoin EBTC
+- Enjin Coin ENJ
 - Flix FLIX
 - FunFair FUN
 - Gemini Dollar GUSD
@@ -95,12 +99,14 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - Herbalist Token HERB
 - Huobi Token HT
 - Icon ICX
+- IMSmart Token IMT
 - intimate ITM
 - Invacio INV
 - Kyber Network KNC
 - Latino Token LATINO
 - L'île LILE
 - Loom LOOM
+- Luxcess Group Token LXC
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
@@ -132,6 +138,10 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 - shelterDAO SHEL
 - Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
+= TN TurtleNetwork tokens supported: =
+
+- Add your <a href="https://mycryptocheckout.com/turtlenetwork-token/">custom TurtleNetwork tokens</a>!
+
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
 - ActivEightCoin ACTIV
@@ -142,9 +152,14 @@ The free license can process three sales per month. A <a href="https://mycryptoc
 
 - BLXS Blockscart
 - CoffeeCoin COF
+- Organic Token ORGT
 - Tokes TKS
 - Waves World WAVESWORLD
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
+
+= Stellar Tokens supported: =
+
+- Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
 
 = Cryptocurrency Donations Widget =
 
@@ -161,6 +176,29 @@ Receive donations in any of the cryptocurrencies supported by MyCryptoCheckout. 
 The following plugins prevent MyCryptoCheckout from working correctly:
 
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
+
+= Code snippets =
+
+We have various code snippets that allow you to customize MyCryptoCheckout together with your e-commerce solution:
+
+Easy Digital Downloads
+
+<a href="https://mycryptocheckout.com/doc/snippets/modify-the-decimal-precision-of-a-currency/">Modify the decimal precision of a currency</a>
+<a href="https://mycryptocheckout.com/doc/snippets/refresh-page-after-payment-complete/">Refresh page after payment complete</a>
+
+Woocommerce
+
+<a href="https://mycryptocheckout.com/doc/customize-cryptocurrency-icons/">Customize cryptocurrency icons on the checkout</a>
+<a href="https://mycryptocheckout.com/doc/snippets/display-the-woocommerce-products-prices-in-fiat-cryptocurrency/">Display the WooCommerce products prices in fiat + cryptocurrency</a>
+<a href="https://mycryptocheckout.com/doc/snippets/display-the-woocommerce-cart-total-in-fiat-and-or-cryptocurrency/">Display the WooCommerce cart total in fiat and / or cryptocurrency</a>
+<a href="https://mycryptocheckout.com/doc/snippets/display-the-woocommerce-order-received-total-in-fiat-and-or-crypto/">Display the WooCommerce order received total in fiat and/or crypto</a>
+<a href="https://mycryptocheckout.com/doc/snippets/modify-the-decimal-precision-of-a-currency/">Modify the decimal precision of a currency</a>
+<a href="https://mycryptocheckout.com/doc/snippets/refresh-page-after-payment-complete/">Refresh page after payment complete</a>
+<a href="https://mycryptocheckout.com/doc/snippets/display-woocommerce-product-prices-in-other-currencies/">Selectively display WooCommerce product prices in any cryptocurrency</a>
+
+Woocommerce themes
+
+<a href="https://mycryptocheckout.com/doc/snippets/the7-theme-checkout-fix/">The7</a> &#8211; move the payment instructions higher up on the order confirmation page
 
 = Security =
 
@@ -201,7 +239,43 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 10. Donations widget
 11. Donations generator form
 
+== Frequently Asked Questions ==
+
+= Unable to retrieve your account data =
+
+If MyCryptoCheckout is unable to retrieve the account data for your domain, it's usually due to the MCC API server being blocked from connecting to your install. Check for:
+
+- Maintenance plugins
+- Password protection plugins
+- Firewalls
+
+If after disabling the above plugins you still can't get it working, then contact us and we'll try to find the cause of the problem.
+
 == Changelog ==
+
+= 2.41 20190321 =
+
+* New currency: Cointorox OROX
+* New currency: Luxcess Group Token LXC
+
+= 2.40 20190310 =
+
+* New currency: Organic Token ORGT
+
+= 2.39 20190307 =
+
+* New currency: Academy Token ACAD
+* New currency: IMSmart Token IMT
+
+= 2.38 20190210 =
+
+* New currency: Enjin Coin ENJ
+* Fix: QR code for ERC20 tokens now includes address + amount in a more standardized format used by popular mobile wallets.
+
+= 2.37 20190205 =
+
+* New currency: Stellar XLM
+* Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
 
 = 2.36 20190127 =
 

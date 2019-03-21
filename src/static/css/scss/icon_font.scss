@@ -37,6 +37,30 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-LXC:before {
+  content: "\e95f";
+}
+.mcc-USDT_ERC20:before {
+  content: "\e95d";
+}
+.mcc-OROX:before {
+  content: "\e95e";
+}
+.mcc-ORGT:before {
+  content: "\e95c";
+}
+.mcc-XRP:before {
+  content: "\e95b";
+}
+.mcc-IMT:before {
+  content: "\e95a";
+}
+.mcc-ACAD:before {
+  content: "\e959";
+}
+.mcc-ENJ:before {
+  content: "\e958";
+}
 .mcc-XLM:before {
   content: "\e957";
 }

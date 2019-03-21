@@ -221,6 +221,30 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-LXC:before {
+  content: "\e95f"; }
+
+.mcc-USDT_ERC20:before {
+  content: "\e95d"; }
+
+.mcc-OROX:before {
+  content: "\e95e"; }
+
+.mcc-ORGT:before {
+  content: "\e95c"; }
+
+.mcc-XRP:before {
+  content: "\e95b"; }
+
+.mcc-IMT:before {
+  content: "\e95a"; }
+
+.mcc-ACAD:before {
+  content: "\e959"; }
+
+.mcc-ENJ:before {
+  content: "\e958"; }
+
 .mcc-XLM:before {
   content: "\e957"; }
 
@@ -493,6 +517,8 @@
 
 .mcc_currency_icons.color i.mcc-1337 {
   color: #4C1515; }
+.mcc_currency_icons.color i.mcc-ACAD {
+  color: #024574; }
 .mcc_currency_icons.color i.mcc-ACTIV {
   color: #ccaf3c; }
 .mcc_currency_icons.color i.mcc-ADULT {
@@ -543,6 +569,8 @@
   color: #C91111; }
 .mcc_currency_icons.color i.mcc-EBTC {
   color: #F37721; }
+.mcc_currency_icons.color i.mcc-ENJ {
+  color: #9368fe; }
 .mcc_currency_icons.color i.mcc-ETH {
   color: #282828; }
 .mcc_currency_icons.color i.mcc-FLIX {
@@ -563,6 +591,8 @@
   color: #1C2143; }
 .mcc_currency_icons.color i.mcc-ICX {
   color: #1FC5C9; }
+.mcc_currency_icons.color i.mcc-IMT {
+  color: #fcee21; }
 .mcc_currency_icons.color i.mcc-INV {
   color: #35C1C7; }
 .mcc_currency_icons.color i.mcc-ITM {
@@ -577,6 +607,8 @@
   color: #08839D; }
 .mcc_currency_icons.color i.mcc-LTC {
   color: #838383; }
+.mcc_currency_icons.color i.mcc-LXC {
+  color: #c8962c; }
 .mcc_currency_icons.color i.mcc-MARS {
   color: #D13914; }
 .mcc_currency_icons.color i.mcc-MCO {
@@ -597,6 +629,10 @@
   color: #1A53F0; }
 .mcc_currency_icons.color i.mcc-ONG {
   color: #000000; }
+.mcc_currency_icons.color i.mcc-ORGT {
+  color: #c717b0; }
+.mcc_currency_icons.color i.mcc-OROX {
+  color: #5832bf; }
 .mcc_currency_icons.color i.mcc-PAY {
   color: #302C2C; }
 .mcc_currency_icons.color i.mcc-PPT {
@@ -641,6 +677,8 @@
   color: #2775c9; }
 .mcc_currency_icons.color i.mcc-USDT {
   color: #229A77; }
+.mcc_currency_icons.color i.mcc-USDT_ERC20 {
+  color: #229A77; }
 .mcc_currency_icons.color i.mcc-VERI {
   color: #FF9933; }
 .mcc_currency_icons.color i.mcc-VIA {
@@ -659,6 +697,8 @@
   color: #000; }
 .mcc_currency_icons.color i.mcc-XMR {
   color: #FF6600; }
+.mcc_currency_icons.color i.mcc-XRP {
+  color: #000; }
 .mcc_currency_icons.color i.mcc-XVG {
   color: #00bbeb; }
 .mcc_currency_icons.color i.mcc-ZEC {
