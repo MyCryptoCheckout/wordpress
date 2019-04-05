@@ -236,7 +236,7 @@ trait autosettlement_trait
 		$fs->legend->label( __( 'Currencies', 'mycryptocheckout' ) );
 
 		$currencies_input = $fs->select( 'currencies' )
-			->description( __( 'The currencies to be autosettled. If no currencies are select, these settings will be applied to all of them. Hold the ctrl or shift key to select multiple currecies.', 'mycryptocheckout' ) )
+			->description( __( 'Select the currencies to be autosettled. If no currencies are selected, these settings will be applied to all of them. Hold the ctrl or shift key to select multiple currencies.', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Currencies to autosettle', 'mycryptocheckout' ) )
 			->multiple()
