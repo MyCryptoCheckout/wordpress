@@ -212,6 +212,9 @@ trait autosettlement_trait
 		switch( $autosettlement->get_type() )
 		{
 			case 'bittrex':
+				$m_bittrex = $form->markup( 'm_bittrex' )
+					->value( 'Your Bittrex balance will be checked every few minutes for an hour. If you have more than the minimum trade size ($2.00), they will be market sold for USD.' );
+
 				$bittrex_api_key = $form->text( 'bittrex_api_key' )
 					->description( __( 'The limited API key of your Bittrex account.', 'mycryptocheckout' ) )
 					// Input label
