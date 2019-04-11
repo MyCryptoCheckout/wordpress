@@ -17,7 +17,7 @@ class base
 		@since		20130416
 		@var		$is_network
 	**/
-	protected $is_network;
+	public $is_network;
 
 	/**
 		@brief		Text domain of .PO translation.
@@ -25,7 +25,7 @@ class base
 		@var		$language_domain
 		@since		20130416
 	**/
-	protected $language_domain = '';
+	public $language_domain = '';
 
 	/**
 		@brief		Contains the paths to the plugin and other places of interest.

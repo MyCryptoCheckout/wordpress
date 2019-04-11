@@ -292,6 +292,7 @@ class WooCommerce
 		$payment->timeout_hours = intval( $gateway->get_option( 'payment_timeout_hours' ) );
 
 		$wallet->apply_to_payment( $payment );
+		MyCryptoCheckout()->autosettlements()->apply_to_payment( $payment );
 
 		// This stuff should be handled by the Payment object, but the order doesn't exist yet...
 		$order->update_meta_data( '_mcc_amount', $payment->amount );

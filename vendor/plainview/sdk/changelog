@@ -1,3 +1,5 @@
+20190222		Wordpress: No more protected properties.
+20190119		Mail: Allow attachment encoding and mime type.
 20190117		Fix prefix renamer script.
 20181115		form2: Add the pattern() method to text inputs.
 20181114		form2: do not stripslashes from values.

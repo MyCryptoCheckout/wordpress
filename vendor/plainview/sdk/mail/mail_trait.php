@@ -62,10 +62,11 @@ trait mail_trait
 		@return		mail					This object.
 		@since		20130423
 	**/
-	public function attachment( $path, $name = '' )
+	public function attachment( $path, $name = '', $encoding = 'base64', $mime_type = null )
 	{
-		$mime_type = static::mime_content_type( $path );
-		$this->AddAttachment( $path, $name, 'base64', $mime_type );
+		if ( ! $mime_type )
+			$mime_type = static::mime_content_type( $path );
+		$this->AddAttachment( $path, $name, $encoding, $mime_type );
 		return $this;
 	}
 
