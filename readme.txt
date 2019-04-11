@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 90+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 95+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
@@ -8,7 +8,7 @@ Stable tag: 2.42
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.1
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 90+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 95+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -23,14 +23,15 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Peer-to-peer transactions
 - Use any wallet(s) you want: desktop, mobile, or online
 - Automagically detect unique payments from customers using one wallet address
+- No redirection to 3rd parties or iframes
 - Optional hierarchically deterministic (HD) wallet support
-- No redirection to 3rd parties, no iframes, no modal windows
-- Optional donations widget shortcode generator
+- Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
+- Donations widget shortcode generator
 - Built in support for .onion addresses on Tor
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
 - Take MCC for a test ride by visiting our <a href="https://wpdemo.mycryptocheckout.com/">demo store</a>
 
-The free license can process 3 sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account that includes unlimited transactions if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing options</a> are available if you need to use MyCryptoCheckout on several domains.
+The free license can process 3 sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account that includes unlimited transactions if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing</a> is available if you need to use MyCryptoCheckout on several domains.
 
 = eCommerce platforms supported =
 
@@ -162,6 +163,16 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 - Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
 
+= Fiat Autosettlements =
+
+Autosettlement is a feature that enables you to connect MyCryptoCheckout to exchange(s) to automatically sell any received cryptocurrencies into fiat or stablecoins (USD, USDC, USDT). The sell will credit funds to your exchanges wallet. This is a great tool for merchants who want to accept bitcoin/altcoins but prefer to cash out immediately to avoid market volatility.
+
+Supported exchanges:
+
+- Binance
+- Bittrex
+- More coming soon
+
 = Cryptocurrency Donations Widget =
 
 Receive donations in any of the cryptocurrencies supported by MyCryptoCheckout. Generate a widget using our simple shortcode generator and add it into any text widget or text editor. Shortcode generation options:
@@ -172,34 +183,11 @@ Receive donations in any of the cryptocurrencies supported by MyCryptoCheckout. 
 - show QR code
 - show wallet address text
 
-= Incompatible Plugins =
-
-The following plugins prevent MyCryptoCheckout from working correctly:
-
-- Plugin Organizer by Jeff Sterup. Deactivate plugin.
-
 = Code snippets =
 
 We have various code snippets that allow you to customize MyCryptoCheckout together with your e-commerce solution:
 
-Easy Digital Downloads
-
-<a href="https://mycryptocheckout.com/doc/snippets/modify-the-decimal-precision-of-a-currency/">Modify the decimal precision of a currency</a>
-<a href="https://mycryptocheckout.com/doc/snippets/refresh-page-after-payment-complete/">Refresh page after payment complete</a>
-
-Woocommerce
-
-<a href="https://mycryptocheckout.com/doc/customize-cryptocurrency-icons/">Customize cryptocurrency icons on the checkout</a>
-<a href="https://mycryptocheckout.com/doc/snippets/display-the-woocommerce-products-prices-in-fiat-cryptocurrency/">Display the WooCommerce products prices in fiat + cryptocurrency</a>
-<a href="https://mycryptocheckout.com/doc/snippets/display-the-woocommerce-cart-total-in-fiat-and-or-cryptocurrency/">Display the WooCommerce cart total in fiat and / or cryptocurrency</a>
-<a href="https://mycryptocheckout.com/doc/snippets/display-the-woocommerce-order-received-total-in-fiat-and-or-crypto/">Display the WooCommerce order received total in fiat and/or crypto</a>
-<a href="https://mycryptocheckout.com/doc/snippets/modify-the-decimal-precision-of-a-currency/">Modify the decimal precision of a currency</a>
-<a href="https://mycryptocheckout.com/doc/snippets/refresh-page-after-payment-complete/">Refresh page after payment complete</a>
-<a href="https://mycryptocheckout.com/doc/snippets/display-woocommerce-product-prices-in-other-currencies/">Selectively display WooCommerce product prices in any cryptocurrency</a>
-
-Woocommerce themes
-
-<a href="https://mycryptocheckout.com/doc/snippets/the7-theme-checkout-fix/">The7</a> &#8211; move the payment instructions higher up on the order confirmation page
+<a href="https://mycryptocheckout.com/doc/snippets/">See all available code snippets</a>
 
 = Security =
 
@@ -212,6 +200,12 @@ Disable the MCC currencies tab: after you have wallets setup you can prevent the
 Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version. The URL is used by the API server to know where to send updated account info (license status, payment statistics), exchange rates, and completed purchase notifications. The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently).
 
 If your server cannot be reached by the API server this plugin will not function.
+
+= Incompatible Plugins =
+
+The following plugins prevent MyCryptoCheckout from working correctly:
+
+- Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Installation ==
 
