@@ -50,13 +50,9 @@ class Autosettlement
 		$autosettlement = [];
 		$autosettlement[ 'type' ] = $this->get_type();
 
-		switch( $this->get_type() )
-		{
-			case 'bittrex':
-				$autosettlement[ 'bittrex_api_key' ] = $this->get( 'bittrex_api_key' );
-				$autosettlement[ 'bittrex_api_secret' ] = $this->get( 'bittrex_api_secret' );
-			break;
-		}
+		$keys_to_copy = MyCryptoCheckout()->autosettlement_keys_to_payment( $this->get_type() );
+		foreach( $keys_to_copy as $key_to_copy )
+			$autosettlement[ $key_to_copy ] = $this->get( $key_to_copy );
 
 		$data->autosettlements []= $autosettlement;
 
@@ -94,6 +90,19 @@ class Autosettlement
 				__( 'Currencies: %s.', 'mycryptocheckout' ),
 				implode( ', ', $this->get_currencies() )
 			);
+
+		foreach( [
+			'binance_settlement_currency',
+			'bittrex_settlement_currency',
+			] as $key )
+		{
+			$currency = $this->get( $key );
+			if ( $currency != '' )
+				$r []= sprintf(
+					__( 'Settling to %s', 'mycryptocheckout' ),
+					$currency
+				);
+		}
 
 		return $r;
 	}

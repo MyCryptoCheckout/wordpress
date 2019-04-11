@@ -55,6 +55,7 @@ class Autosettlements
 	{
 		return [
 			'bittrex' => 'Bittrex',
+			'binance' => 'Binance',
 		];
 	}
 

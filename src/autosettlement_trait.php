@@ -132,6 +132,7 @@ trait autosettlement_trait
 						foreach( $ids as $id )
 						{
 							$autosettlement = $autosettlements->get( $id );
+							ddd( $id );
 							try
 							{
 								$message = sprintf( 'Success for %s: %s', $autosettlement->get_type(), $autosettlement->test() );
@@ -211,6 +212,34 @@ trait autosettlement_trait
 
 		switch( $autosettlement->get_type() )
 		{
+			case 'binance':
+				$m_binance = $form->markup( 'm_binance' )
+					->value( 'Your Binance balance will be checked every few minutes for an hour. If you have more than the minimum trade size ($2.00), they will be market sold for USD.' );
+
+				$binance_api_key = $form->text( 'binance_api_key' )
+					->description( __( 'The API key of your Binance account.', 'mycryptocheckout' ) )
+					// Input label
+					->label( __( 'Binance API key', 'mycryptocheckout' ) )
+					->size( 32 )
+					->maxlength( 64 )
+					->trim()
+					->value( $autosettlement->get( 'binance_api_key' ) );
+				$binance_api_secret = $form->text( 'binance_api_secret' )
+					->description( __( 'The secret text associated to this API key.', 'mycryptocheckout' ) )
+					// Input label
+					->label( __( 'Binance secret', 'mycryptocheckout' ) )
+					->size( 32 )
+					->maxlength( 64 )
+					->trim()
+					->value( $autosettlement->get( 'binance_api_secret' ) );
+				$binance_settlement_currency = $form->select( 'binance_settlement_currency' )
+					->description( __( 'The currency you wish to settle to.', 'mycryptocheckout' ) )
+					->label( __( 'Autosettlement currency', 'mycryptocheckout' ) )
+					->opt( 'USDC', 'USDC - USD Coin' )
+					->opt( 'USDT', 'USDT - Tether' )
+					->opt( 'TUSD', 'TUSD - TrueUSD' )
+					->value( $autosettlement->get( 'binance_settlement_currency', 'USDT' ) );
+				break;
 			case 'bittrex':
 				$m_bittrex = $form->markup( 'm_bittrex' )
 					->value( 'Your Bittrex balance will be checked every few minutes for an hour. If you have more than the minimum trade size ($2.00), they will be market sold for USD.' );
@@ -230,6 +259,12 @@ trait autosettlement_trait
 					->size( 32 )
 					->trim()
 					->value( $autosettlement->get( 'bittrex_api_secret' ) );
+				$bittrex_settlement_currency = $form->select( 'bittrex_settlement_currency' )
+					->description( __( 'The currency you wish to settle to.', 'mycryptocheckout' ) )
+					->label( __( 'Autosettlement currency', 'mycryptocheckout' ) )
+					->opt( 'USD', 'USD - US Dollars' )
+					->opt( 'USDT', 'USDT - USD Tether' )
+					->value( $autosettlement->get( 'bittrex_settlement_currency', 'USD' ) );
 			break;
 		}
 
@@ -266,12 +301,22 @@ trait autosettlement_trait
 				{
 					switch( $autosettlement->get_type() )
 					{
+						case 'binance':
+							$value = $binance_api_key->get_filtered_post_value();
+							$autosettlement->set( 'binance_api_key', $value );
+							$value = $binance_api_secret->get_filtered_post_value();
+							$autosettlement->set( 'binance_api_secret', $value );
+							$value = $binance_settlement_currency->get_filtered_post_value();
+							$autosettlement->set( 'binance_settlement_currency', $value );
+							break;
 						case 'bittrex':
 							$value = $bittrex_api_key->get_filtered_post_value();
 							$autosettlement->set( 'bittrex_api_key', $value );
 							$value = $bittrex_api_secret->get_filtered_post_value();
 							$autosettlement->set( 'bittrex_api_secret', $value );
-						break;
+							$value = $bittrex_settlement_currency->get_filtered_post_value();
+							$autosettlement->set( 'bittrex_settlement_currency', $value );
+							break;
 					}
 
 					$autosettlement->set_currencies( $currencies_input->get_post_value() );
@@ -304,5 +349,25 @@ trait autosettlement_trait
 		$r .= $form->close_tag();
 
 		echo $r;
+	}
+
+	/**
+		@brief		Return an array of the keys to copy to the payment.
+		@since		2019-04-11 20:57:56
+	**/
+	public static function autosettlement_keys_to_payment( $type )
+	{
+		switch( $type )
+		{
+			case 'binance':
+				$r = [ 'binance_api_key', 'binance_api_secret', 'binance_settlement_currency' ];
+			break;
+			case 'bittrex':
+				$r = [ 'bittrex_api_key', 'bittrex_api_secret', 'bittrex_settlement_currency' ];
+			break;
+			default:
+				$r = [];
+		}
+		return $r;
 	}
 }
