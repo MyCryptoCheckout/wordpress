@@ -179,6 +179,15 @@ trait autosettlement_trait
 
 		$r .= wpautop( __( 'The table below shows the autosettlements that have been set up. To edit an autosettlement, click the type.', 'mycryptocheckout' ) );
 
+		$autosettlement_text = sprintf(
+			// perhaps <a>we can ...you</a>
+			__( "Read the full %sfiat autosettlement documentation%s to learn more about this feature.", 'mycryptocheckout' ),
+			'<a href="https://mycryptocheckout.com/doc/autosettlements/" target="_blank">',
+			'</a>'
+		);
+		
+		$r .= wpautop( $autosettlement_text );
+
 		$r .= $this->h2( __( 'Autosettlements', 'mycryptocheckout' ) );
 
 		$r .= $form->open_tag();
