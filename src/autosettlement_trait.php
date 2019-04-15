@@ -132,7 +132,6 @@ trait autosettlement_trait
 						foreach( $ids as $id )
 						{
 							$autosettlement = $autosettlements->get( $id );
-							ddd( $id );
 							try
 							{
 								$message = sprintf( 'Success for %s: %s', $autosettlement->get_type(), $autosettlement->test() );
