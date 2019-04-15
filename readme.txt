@@ -21,13 +21,14 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - 0% transaction fees
 - No KYC or product restrictions
 - Peer-to-peer transactions
-- Use any wallet(s) you want: desktop, mobile, or online
-- Automagically detect unique payments from customers using one wallet address
 - No redirection to 3rd parties or iframes
-- Optional hierarchically deterministic (HD) wallet support
+- Use any crypto wallet you want
+- Automagically detect unique payments using one wallet address
+- Hierarchically deterministic (HD) wallet support
+- 1-Click payment buttons, MetaMask, Waves Client, etc.
 - Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
-- Built in support for .onion addresses on Tor
+- Tor support
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
 - Take MCC for a test ride by visiting our <a href="https://wpdemo.mycryptocheckout.com/">demo store</a>
 
@@ -165,13 +166,13 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = Fiat Autosettlements =
 
-Autosettlement is a feature that enables you to connect MyCryptoCheckout to exchange(s) to automatically sell any received cryptocurrencies into fiat or stablecoins (USD, USDC, USDT). The sell will credit funds to your exchanges wallet. This is a great tool for merchants who want to accept bitcoin/altcoins but prefer to cash out immediately to avoid market volatility.
+Autosettlement is a feature that enables you to connect MyCryptoCheckout to exchange(s) and automatically sell any received cryptocurrencies into fiat or stablecoins (USD, USDC, USDT). This is a great tool for merchants who want to accept bitcoin/altcoins but prefer to cash out immediately to avoid market volatility.
 
 Supported exchanges:
 
 - Binance
 - Bittrex
-- More coming soon
+- More coming soon!
 
 = Cryptocurrency Donations Widget =
 
@@ -200,12 +201,6 @@ Disable the MCC currencies tab: after you have wallets setup you can prevent the
 Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version. The URL is used by the API server to know where to send updated account info (license status, payment statistics), exchange rates, and completed purchase notifications. The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently).
 
 If your server cannot be reached by the API server this plugin will not function.
-
-= Incompatible Plugins =
-
-The following plugins prevent MyCryptoCheckout from working correctly:
-
-- Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Installation ==
 
@@ -245,6 +240,16 @@ If MyCryptoCheckout is unable to retrieve the account data for your domain, it's
 - Firewalls
 
 If after disabling the above plugins you still can't get it working, then contact us and we'll try to find the cause of the problem.
+
+= Where can I find full documentation? =
+
+Full searchable docs can be found at <a href="https://mycryptocheckout.com/doc/installation/">https://mycryptocheckout.com/doc/installation/</a>
+
+= Incompatible plugin list =
+
+The following plugins prevent MyCryptoCheckout from working correctly:
+
+- Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
 

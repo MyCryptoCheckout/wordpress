@@ -179,6 +179,15 @@ trait autosettlement_trait
 
 		$r .= wpautop( __( 'The table below shows the autosettlements that have been set up. To edit an autosettlement, click the type.', 'mycryptocheckout' ) );
 
+		$autosettlement_text = sprintf(
+			// perhaps <a>we can ...you</a>
+			__( "Read the full %sfiat autosettlement documentation%s to learn more about this feature.", 'mycryptocheckout' ),
+			'<a href="https://mycryptocheckout.com/doc/autosettlements/" target="_blank">',
+			'</a>'
+		);
+		
+		$r .= wpautop( $autosettlement_text );
+
 		$r .= $this->h2( __( 'Autosettlements', 'mycryptocheckout' ) );
 
 		$r .= $form->open_tag();
@@ -241,7 +250,7 @@ trait autosettlement_trait
 				break;
 			case 'bittrex':
 				$m_bittrex = $form->markup( 'm_bittrex' )
-					->value( 'Your Bittrex balance will be checked every few minutes for an hour. If you have more than the minimum trade size ($2.00), they will be market sold for USD.' );
+					->value( 'Your Bittrex balance will be checked every few minutes for an hour after a payment is detected for selected coins. If you have more than the minimum trade size, it will be market sold into the autosettlement currency of your choice.' );
 
 				$bittrex_api_key = $form->text( 'bittrex_api_key' )
 					->description( __( 'The limited API key of your Bittrex account.', 'mycryptocheckout' ) )
