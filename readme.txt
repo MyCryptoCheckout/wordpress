@@ -22,13 +22,13 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - No KYC or product restrictions
 - Peer-to-peer transactions
 - No redirection to 3rd parties or iframes
-- Use any wallet(s) you want: desktop, mobile, or online
-- Automagically detect unique payments from customers using one wallet address
-- Optional hierarchically deterministic (HD) wallet support
+- Use any crypto wallet you want
+- Automagically detect unique payments using one wallet address
+- Hierarchically deterministic (HD) wallet support
 - 1-Click payment buttons, MetaMask, Waves Client, etc.
 - Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
-- Built in support for .onion addresses on Tor
+- Tor support
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
 - Take MCC for a test ride by visiting our <a href="https://wpdemo.mycryptocheckout.com/">demo store</a>
 
@@ -202,12 +202,6 @@ Upon plugin activation an account is created on the MyCryptoCheckout API server:
 
 If your server cannot be reached by the API server this plugin will not function.
 
-= Incompatible Plugins =
-
-The following plugins prevent MyCryptoCheckout from working correctly:
-
-- Plugin Organizer by Jeff Sterup. Deactivate plugin.
-
 == Installation ==
 
 1. Activate the plugin
@@ -250,6 +244,12 @@ If after disabling the above plugins you still can't get it working, then contac
 = Where can I find full documentation? =
 
 Full searchable docs can be found at <a href="https://mycryptocheckout.com/doc/installation/">https://mycryptocheckout.com/doc/installation/</a>
+
+= Incompatible plugin list =
+
+The following plugins prevent MyCryptoCheckout from working correctly:
+
+- Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
 
