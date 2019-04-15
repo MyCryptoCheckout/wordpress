@@ -222,7 +222,7 @@ trait autosettlement_trait
 		{
 			case 'binance':
 				$m_binance = $form->markup( 'm_binance' )
-					->value( 'Your Binance balance will be checked every few minutes for an hour. If you have more than the minimum trade size ($2.00), they will be market sold for USD.' );
+					->value( 'Your Binance balance will be checked every few minutes for an hour after a payment is detected for selected coins. If you have more than the minimum trade size, it will be market sold into the autosettlement currency of your choice.' );
 
 				$binance_api_key = $form->text( 'binance_api_key' )
 					->description( __( 'The API key of your Binance account.', 'mycryptocheckout' ) )
