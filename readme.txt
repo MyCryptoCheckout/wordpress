@@ -26,7 +26,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Automagically detect unique payments from customers using one wallet address
 - Optional hierarchically deterministic (HD) wallet support
 - 1-Click payment buttons, MetaMask, Waves Client, etc.
-- Fiat autosettlement enables you to connect to numerous exchange(s) and instantly convert selected coins to fiat or stablecoins
+- Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
 - Built in support for .onion addresses on Tor
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
