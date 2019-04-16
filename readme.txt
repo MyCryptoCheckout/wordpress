@@ -166,7 +166,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = Fiat Autosettlements =
 
-Autosettlement is a feature that enables you to connect MyCryptoCheckout to exchange(s) and automatically sell any received cryptocurrencies into fiat or stablecoins (USD, USDC, USDT). This is a great tool for merchants who want to accept bitcoin/altcoins but prefer to cash out immediately to avoid market volatility.
+Autosettlement is a feature that enables you to connect MyCryptoCheckout to exchange(s) and automatically sell any received cryptocurrencies into fiat or stablecoins (USD, USDC, USDT, TUSD). This is a great tool for merchants who want to accept bitcoin/altcoins but prefer to cash out immediately to avoid market volatility.
 
 Supported exchanges:
 
