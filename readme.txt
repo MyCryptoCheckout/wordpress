@@ -44,7 +44,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
-- Bitcoin Zero BZX
 - Bitsmdo BSD
 - CatoCoin CATO
 - CloakCoin CLOAK
