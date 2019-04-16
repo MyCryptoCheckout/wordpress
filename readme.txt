@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.42
+Stable tag: 2.50
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.1
 
@@ -251,6 +251,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+= 2.50 20190416 =
+
+* New: Fiat Autosettlement enables you to connect to exchanges and instantly convert received coins into fiat or stablecoins ( $USD, $USDC, $USDT, $TUSD ). Supported exchanges: Binance, and Bittrex.
 
 = 2.42 20190403 =
 
