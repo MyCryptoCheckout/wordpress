@@ -671,21 +671,38 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.$metamask = $( '<div class="metamask_payment"></div>' );
 		$$.$metamask.appendTo( $$.$payment_buttons );
 
-		$$.$metamask.click( function()
+		$$.$metamask.click( async function()
 		{
+			var window_web3 = false;
+			// Privacy mode enabled?
+			if ( window.ethereum )
+			{
+				if ( typeof window.ethereum.selectedAddress === 'undefined')
+				{
+					window_web3 = new Web3(window.ethereum);
+					await window.ethereum.enable();
+
+				}
+				else
+				{
+					window_web3 = new Web3(window.ethereum);
+				}
+			}
+
 			if ( contractInstance === false )
 			{
-				web3.eth.sendTransaction(
+				window_web3.eth.sendTransaction(
 				{
 					// From is not necessary.
 					to: $$.mycryptocheckout_checkout_data.to,
-					value: web3.toWei(
+					value: window_web3.toWei(
 						$$.mycryptocheckout_checkout_data.amount,
 						$$.mycryptocheckout_checkout_data.supports.metamask_currency
 					),
 				}, function (err, transactionHash )
 				{
 					// No error logging for now.
+					console.log( 'Error sending Eth via Metamask', err );
 				}
 				);
 			}
@@ -702,13 +719,14 @@ var mycryptocheckout_checkout_javascript = function( data )
 					$$.mycryptocheckout_checkout_data.to,
 					amount,
 					{
-						'from' : web3.eth.accounts[0],		// First available.
+						'from' : window_web3.eth.accounts[0],		// First available.
 					},
 					( function(err,result)
 					{
 						if( ! err )
 						{
-							console.log( result )
+							// No error logging for now.
+							console.log( 'Error sending Eth via Metamask', result );
 						}
 					}
 					)
