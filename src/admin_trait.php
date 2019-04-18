@@ -120,7 +120,7 @@ trait admin_trait
 
 		try
 		{
-			//$this->api()->account()->is_available_for_payment();
+			$this->api()->account()->is_available_for_payment();
 		}
 		catch ( Exception $e )
 		{
