@@ -20,20 +20,10 @@ class text
 
 	public $plaintext = false;
 	public $lowercase = false;
+	public $stripslashes = false;
 	public $trim = false;
 	public $type = 'text';
 	public $uppercase = false;
-
-	/**
-		@brief		Add a value filter that removes all tags from the string.
-		@param		bool		$value		True to strip the string of tags.
-		@since		20130807
-	**/
-	public function plaintext( $value = true )
-	{
-		$this->plaintext = $value;
-		return $this->add_value_filter( 'plaintext' );
-	}
 
 	/**
 		@brief		Require that this textfield's value be lowercased.
@@ -54,6 +44,28 @@ class text
 	{
 		$this->set_attribute( 'pattern', $pattern );
 		return $this;
+	}
+
+	/**
+		@brief		Add a value filter that removes all tags from the string.
+		@param		bool		$value		True to strip the string of tags.
+		@since		20130807
+	**/
+	public function plaintext( $value = true )
+	{
+		$this->plaintext = $value;
+		return $this->add_value_filter( 'plaintext' );
+	}
+
+	/**
+		@brief		Run a stripslashes on the value.
+		@param		bool		$value		True to stripslash the value.
+		@since		2019-04-04 19:49:06
+	**/
+	public function stripslashes( $value = true )
+	{
+		$this->stripslashes = $value;
+		return $this->add_value_filter( 'stripslashes' );
 	}
 
 	/**
@@ -81,7 +93,7 @@ class text
 
 	/**
 		@brief		Filter the value to lowercase.
-		@param		bool		$value		True to uppercase the value.
+		@param		bool		$value		The value to lowercase.
 		@since		20130814
 	**/
 	public function value_filter_lowercase( $value )
@@ -93,7 +105,7 @@ class text
 
 	/**
 		@brief		Filter the value to a plain text value.
-		@param		bool		$value		True to uppercase the value.
+		@param		bool		$value		The value to plaintext.
 		@since		20130814
 	**/
 	public function value_filter_plaintext( $value )
@@ -104,8 +116,20 @@ class text
 	}
 
 	/**
+		@brief		Filter the value by stripslashing it.
+		@param		bool		$value		The value to stripslash.
+		@since		2019-04-04 19:49:28
+	**/
+	public function value_filter_stripslashes( $value )
+	{
+		if ( $this->stripslashes )
+			$value = stripslashes( $value );
+		return $value;
+	}
+
+	/**
 		@brief		Filter the value by trimming it.
-		@param		bool		$value		True to uppercase the value.
+		@param		bool		$value		The value to uppercase.
 		@since		20130814
 	**/
 	public function value_filter_trim( $value )

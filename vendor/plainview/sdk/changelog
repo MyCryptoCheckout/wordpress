@@ -1,3 +1,8 @@
+20190414		Use clone for loading object stores.
+20190411		Wordpress: Update EDD updater
+20190404		form2: Add stripslashes() filter to text and textarea.
+20190331		collection: to_array will handle ALL collections.
+20190314		Wordpress: Workaround for serialized options not being saved due to caching.
 20190222		Wordpress: No more protected properties.
 20190119		Mail: Allow attachment encoding and mime type.
 20190117		Fix prefix renamer script.

@@ -28,6 +28,6 @@ if [ ! -f "base.php" ]; then
 fi
 
 # Single backslash
-perl -pi -e "s/plainview\\\\sdk/plainview\\\\$NAMESPACEsdk/" `find ./ -type f`
+perl -pi -e "s/plainview\\\\sdk/plainview\\\\${NAMESPACE}sdk/" `find ./ -type f`
 # Double backslash
-perl -pi -e "s/plainview\\\\\\\\sdk/plainview\\\\\\\\$NAMESPACEsdk/" `find ./ -type f`
+perl -pi -e "s/plainview\\\\\\\\sdk/plainview\\\\\\\\${NAMESPACE}sdk/" `find ./ -type f`

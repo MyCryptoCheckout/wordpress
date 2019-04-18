@@ -62,8 +62,7 @@ trait Store
 		}
 
 		// This is a workaround for the "wonderful" Wordpress object cache that can't keep two instances of an object in memory.
-		$r = serialize( $r );
-		$r = unserialize( $r );
+		$r = clone( $r );
 
 		// Save to the cache.
 		$container->$__key = $r;

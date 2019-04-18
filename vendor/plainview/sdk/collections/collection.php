@@ -629,7 +629,7 @@ implements
 		{
 			if ( ! is_object( $item ) )
 				continue;
-			if ( get_class( $item ) == get_class( $this ) )
+			if ( is_a( $item, __CLASS__ ) )
 				$items[ $index ] = $item->to_array();
 		}
 		return $items;

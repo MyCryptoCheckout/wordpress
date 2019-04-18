@@ -57,4 +57,3 @@ class textarea
 		return $this->set_attribute( 'rows', $rows );
 	}
 }
-

@@ -810,6 +810,9 @@ class base
 	{
 		$fixed_option = $this->fix_local_option_name( $option );
 		$value = get_option( $fixed_option, 'no_default_value' );
+		if ( is_object( $value ) )
+			// This is a workaround to prevent Wordpress from caching the value and then refusing to update it.
+			$value = unserialize( serialize( $value ) );
 		if ( $value === 'no_default_value' )
 		{
 			$options = $this->local_options();
@@ -835,6 +838,9 @@ class base
 	{
 		$fixed_option = $this->fix_site_option_name( $option );
 		$value = get_site_option( $fixed_option, 'no_default_value' );
+		if ( is_object( $value ) )
+			// This is a workaround to prevent Wordpress from caching the value and then refusing to update it.
+			$value = unserialize( serialize( $value ) );
 		// No value returned?
 		if ( $value === 'no_default_value' )
 		{
