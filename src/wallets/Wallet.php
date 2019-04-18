@@ -10,6 +10,7 @@ class Wallet
 	extends \mycryptocheckout\Collection
 {
 	use \mycryptocheckout\traits\network_available;
+	use \mycryptocheckout\traits\label_for_item;
 
 	/**
 		@brief		The wallet's address.
@@ -35,12 +36,6 @@ class Wallet
 		@since		2017-12-09 09:06:47
 	**/
 	public $enabled = true;
-
-	/**
-		@brief		The label / description of the wallet.
-		@since		2019-04-18 22:45:32
-	**/
-	public $label = '';
 
 	/**
 		@brief		When the wallet was last used for payment.
@@ -151,17 +146,6 @@ class Wallet
 	}
 
 	/**
-		@brief		Return the label of the wallet.
-		@since		2019-04-18 22:45:19
-	**/
-	public function get_label()
-	{
-		if ( ! isset( $this->label ) )
-			$this->label = '';
-		return $this->label;
-	}
-
-	/**
 		@brief		Return the order of this wallet.
 		@since		2018-10-17 19:12:57
 	**/
@@ -179,16 +163,6 @@ class Wallet
 	public function set_enabled( $status = true )
 	{
 		$this->enabled = $status;
-		return $this;
-	}
-
-	/**
-		@brief		Save the label / description for this wallet.
-		@since		2019-04-18 22:46:03
-	**/
-	public function set_label( $label )
-	{
-		$this->label = $label;
 		return $this;
 	}
 

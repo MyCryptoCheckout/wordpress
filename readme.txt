@@ -252,6 +252,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* New: Add labels for wallets and autosettlements, if you wish to give the items descriptions to help you remember them.
+
 = 2.51 20190418 =
 
 * Fix: Metamask privacy mode now supported.

@@ -12,6 +12,7 @@ class Autosettlement
 	extends \mycryptocheckout\Collection
 {
 	use \mycryptocheckout\traits\network_available;
+	use \mycryptocheckout\traits\label_for_item;
 
 	/**
 		@brief		Is this autosettlement enabled?
@@ -80,6 +81,9 @@ class Autosettlement
 
 		if ( ! $this->get_enabled() )
 			$r []= __( 'This autosettlement is disabled.', 'mycryptocheckout' );
+
+		if ( $this->label != '' )
+			$r []= $this->label;
 
 		$r = $this->get_network_details( $r );
 

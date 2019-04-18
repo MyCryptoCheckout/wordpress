@@ -282,6 +282,15 @@ trait autosettlement_trait
 			break;
 		}
 
+		$autosettlement_label = $form->text( 'wallet_label' )
+			->description( __( 'Describe this autosettlement to yourself.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Label', 'mycryptocheckout' ) )
+			->size( 32 )
+			->stripslashes()
+			->trim()
+			->value( $autosettlement->get_label() );
+
 		// Which currencies to apply this autosettlement on.
 		$fs = $form->fieldset( 'fs_currencies' );
 		// Fieldset legend
@@ -332,6 +341,8 @@ trait autosettlement_trait
 							$autosettlement->set( 'bittrex_settlement_currency', $value );
 							break;
 					}
+
+					$autosettlement->set_label( $autosettlement_label->get_filtered_post_value() );
 
 					$autosettlement->set_currencies( $currencies_input->get_post_value() );
 
