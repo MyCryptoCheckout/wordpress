@@ -549,6 +549,15 @@ trait admin_trait
 		// Fieldset legend
 		$fs->legend->label( __( 'Basic settings', 'mycryptocheckout' ) );
 
+		$wallet_label = $fs->text( 'wallet_label' )
+			->description( __( 'Describe the wallet to yourself.', 'mycryptocheckout' ) )
+			// Input label
+			->label( __( 'Label', 'mycryptocheckout' ) )
+			->size( 32 )
+			->stripslashes()
+			->trim()
+			->value( $wallet->get_label() );
+
 		$wallet_address = $fs->text( 'wallet_address' )
 			->description( __( 'The address of your wallet to which you want to receive funds.', 'mycryptocheckout' ) )
 			// Input label
@@ -673,6 +682,8 @@ trait admin_trait
 						}
 
 					$wallet->maybe_parse_network_form_post( $form );
+
+					$wallet->set_label( $wallet_label->get_filtered_post_value() );
 
 					if ( $currency->supports( 'monero_private_view_key' ) )
 					{
