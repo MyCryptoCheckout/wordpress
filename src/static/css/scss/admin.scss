@@ -4,7 +4,7 @@
 		width: 100%;
 		max-width: 1000px;
 	}
-	form#currencies {
+	.plainview_sdk_table.widefat.currencies {
 		td#currency {
 			cursor: move;
 		}
@@ -14,6 +14,10 @@
 		}
 		.wallet_placeholder {
 			background: #d8d8d8;
+		}
+		td#wallet {
+			overflow-wrap: break-word;
+			word-break: break-all;
 		}
 	}
 }
