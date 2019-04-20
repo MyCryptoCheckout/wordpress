@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.51
+Stable tag: 2.52
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.1
 
@@ -252,7 +252,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.52 20190420 =
+
 * New: Add labels for wallets and autosettlements, if you wish to give the items descriptions to help you remember them.
+* Fix: Admin currency table more responsive on smaller screens.
 
 = 2.51 20190418 =
 
