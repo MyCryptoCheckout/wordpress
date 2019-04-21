@@ -256,7 +256,7 @@ trait autosettlement_trait
 					->value( 'Your Bittrex balance will be checked every few minutes for an hour after a payment is detected for selected coins. If you have more than the minimum trade size, it will be market sold into the autosettlement currency of your choice.' );
 
 				$form->markup( 'm_bittrex_api' )
-					->value( 'See how to <a href="https://mycryptocheckout.com/doc/autosettlements/bittrex/">get Biittrex API keys</a> and set permissions.' );
+					->value( 'See how to <a href="https://mycryptocheckout.com/doc/autosettlements/bittrex/">get Bittrex API keys</a> and set permissions.' );
 
 				$bittrex_api_key = $form->text( 'bittrex_api_key' )
 					->description( __( 'The limited API key of your Bittrex account.', 'mycryptocheckout' ) )
