@@ -41,6 +41,20 @@ abstract class Payments
 	public abstract function cancel_local( Payment $payment );
 
 	/**
+		@brief		Complete a payment on the API.
+		@since		2018-03-25 22:30:37
+	**/
+	/**
+		@brief		Complete a payment on the API.
+		@since		2019-04-22 11:50:49
+	**/
+	public function complete( $payment_id )
+	{
+		$json = $this->api()->send_post_with_account( 'payment/complete/' . $payment_id, [] );
+		return true;
+	}
+
+	/**
 		@brief		Complete a local payment.
 		@since		2018-10-13 11:53:39
 	**/

@@ -28,6 +28,7 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_complete_payment' );
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
 		$this->add_action( 'woocommerce_order_status_cancelled' );
+		$this->add_action( 'woocommerce_order_status_completed' );
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
 		$this->add_filter( 'woocommerce_get_checkout_payment_url', 10, 2 );
@@ -232,6 +233,20 @@ class WooCommerce
 			return;
 		MyCryptoCheckout()->debug( 'Cancelling payment %d for order %s', $payment_id, $order_id );
 		MyCryptoCheckout()->api()->payments()->cancel( $payment_id );
+	}
+
+	/**
+		@brief		Complete an order on the server.
+		@since		2019-04-22 11:50:06
+	**/
+	public function woocommerce_order_status_completed( $order_id )
+	{
+		$order = wc_get_order( $order_id );
+		$payment_id = $order->get_meta( '_mcc_payment_id' );
+		if ( $payment_id < 2 )		// 1 is for test mode.
+			return;
+		MyCryptoCheckout()->debug( 'Completing payment %d for order %s', $payment_id, $order_id );
+		MyCryptoCheckout()->api()->payments()->complete( $payment_id );
 	}
 
 	/**
