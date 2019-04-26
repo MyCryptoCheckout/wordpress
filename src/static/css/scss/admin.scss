@@ -4,6 +4,10 @@
 		width: 100%;
 		max-width: 1000px;
 	}
+	#plainview_sdk_mcc_form2_inputs_text_wallet_address {
+		width: 100%;
+		max-width: 820px;
+	}
 	.plainview_sdk_table.widefat.currencies {
 		td#currency {
 			cursor: move;
@@ -18,6 +22,27 @@
 		td#wallet {
 			overflow-wrap: break-word;
 			word-break: break-all;
+		}
+	}
+	form#edit_wallet {
+		#plainview_sdk_mcc_form2_inputs_text_wallet_address, 
+		#plainview_sdk_mcc_form2_inputs_text_btc_hd_public_key,
+		#plainview_sdk_mcc_form2_inputs_text_monero_private_view_key
+		{
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+	}
+	form#autosettlement_edit {
+		#plainview_sdk_mcc_form2_inputs_text_bittrex_api_key,
+		#plainview_sdk_mcc_form2_inputs_text_bittrex_api_secret,
+		#plainview_sdk_mcc_form2_inputs_text_binance_api_key,
+		#plainview_sdk_mcc_form2_inputs_text_binance_api_secret
+		{
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
 		}
 	}
 }
