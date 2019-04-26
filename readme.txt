@@ -216,17 +216,17 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 
 == Screenshots ==
 
-1. WooCommerce checkout
-2. WooCommerce checkout icon colors
-3. Payment page w/ payment data
-4. Account overview tab
-5. Currencies tab
-6. Adding a Monero wallet
-7. WooCommerce gateway settings
-8. Easy Digital Downloads checkout
-9. Easy Digital Downloads gateway settings
+1. Checkout
+2. Payment page
+3. Account overview tab
+4. Currencies tab
+5. Edit wallet
+6. Autosettlement tab
+7. Edit Autosettlement
+8. WooCommerce settings
+9. Easy Digital Downloads settings
 10. Donations widget
-11. Donations generator form
+11. Donations shortcode generator
 
 == Frequently Asked Questions ==
 
