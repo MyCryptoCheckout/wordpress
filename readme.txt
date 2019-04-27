@@ -117,7 +117,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Pundi X NPXS
 - QASH
 - Raiden RDN
-- Request Network REQ
+- Request REQ
 - SALT
 - shelterDAO SHEL
 - Spendcoin SPND
