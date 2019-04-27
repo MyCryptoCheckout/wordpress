@@ -154,7 +154,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - CoffeeCoin COF
 - Organic Token ORGT
 - Tokes TKS
-- Waves World WAVESWORLD
+- Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
 = Stellar Tokens supported: =
