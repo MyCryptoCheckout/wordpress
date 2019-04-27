@@ -79,7 +79,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 - 0x ZRX
 - Academy Token ACAD
-- Acorn Collective OAK
 - ADULTEUM ADULT
 - Aeternity AE
 - Aragon ANT
@@ -112,7 +111,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
-- Nebulas NAS
 - Omisego OMG
 - onG.social ONG
 - Populous PPT
