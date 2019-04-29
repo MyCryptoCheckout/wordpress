@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.52
+Stable tag: 2.53
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.1
 
@@ -252,8 +252,11 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.53 20190429 =
+
 * New currency: Pi Edutainment Global PIEG
 * New currency: Presearch PRE
+* Fix: MCC will attempt an autosettlement in cases where customer sends wrong amount for order.
 
 = 2.52 20190420 =
 
