@@ -113,8 +113,10 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Monaco MCO
 - Omisego OMG
 - onG.social ONG
+- Pi Edutainment Global PIEG
 - Populous PPT
 - Pundi X NPXS
+- Presearch PRE
 - QASH
 - Raiden RDN
 - Request REQ
@@ -249,6 +251,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: Pi Edutainment Global PIEG
+* New currency: Presearch PRE
 
 = 2.52 20190420 =
 
