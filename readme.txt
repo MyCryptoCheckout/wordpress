@@ -79,7 +79,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 - 0x ZRX
 - Academy Token ACAD
-- Acorn Collective OAK
 - ADULTEUM ADULT
 - Aeternity AE
 - Aragon ANT
@@ -112,14 +111,13 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
-- Nebulas NAS
 - Omisego OMG
 - onG.social ONG
 - Populous PPT
 - Pundi X NPXS
 - QASH
 - Raiden RDN
-- Request Network REQ
+- Request REQ
 - SALT
 - shelterDAO SHEL
 - Spendcoin SPND
@@ -156,7 +154,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - CoffeeCoin COF
 - Organic Token ORGT
 - Tokes TKS
-- Waves World WAVESWORLD
+- Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
 = Stellar Tokens supported: =

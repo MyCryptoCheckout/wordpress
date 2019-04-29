@@ -181,6 +181,9 @@
 .settings_page_mycryptocheckout #plainview_sdk_mcc_form2_inputs_text_btc_hd_public_key {
   width: 100%;
   max-width: 1000px; }
+.settings_page_mycryptocheckout #plainview_sdk_mcc_form2_inputs_text_wallet_address {
+  width: 100%;
+  max-width: 820px; }
 .settings_page_mycryptocheckout .plainview_sdk_table.widefat.currencies td#currency {
   cursor: move; }
 .settings_page_mycryptocheckout .plainview_sdk_table.widefat.currencies .ui-sortable-helper {
@@ -191,6 +194,19 @@
 .settings_page_mycryptocheckout .plainview_sdk_table.widefat.currencies td#wallet {
   overflow-wrap: break-word;
   word-break: break-all; }
+.settings_page_mycryptocheckout form#edit_wallet #plainview_sdk_mcc_form2_inputs_text_wallet_address,
+.settings_page_mycryptocheckout form#edit_wallet #plainview_sdk_mcc_form2_inputs_text_btc_hd_public_key,
+.settings_page_mycryptocheckout form#edit_wallet #plainview_sdk_mcc_form2_inputs_text_monero_private_view_key {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+.settings_page_mycryptocheckout form#autosettlement_edit #plainview_sdk_mcc_form2_inputs_text_bittrex_api_key,
+.settings_page_mycryptocheckout form#autosettlement_edit #plainview_sdk_mcc_form2_inputs_text_bittrex_api_secret,
+.settings_page_mycryptocheckout form#autosettlement_edit #plainview_sdk_mcc_form2_inputs_text_binance_api_key,
+.settings_page_mycryptocheckout form#autosettlement_edit #plainview_sdk_mcc_form2_inputs_text_binance_api_secret {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
 
 #payment .wc_payment_methods .payment_method_mycryptocheckout img {
   max-height: 1.618em;
@@ -223,6 +239,9 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
+
+.mcc-PRE:before {
+  content: "\e962"; }
 
 .mcc-PIEG:before {
   content: "\e961"; }
@@ -650,6 +669,8 @@
   color: #bc181e; }
 .mcc_currency_icons.color i.mcc-PPT {
   color: #152743; }
+.mcc_currency_icons.color i.mcc-PRE {
+  color: #2d8eff; }
 .mcc_currency_icons.color i.mcc-QASH {
   color: #1347E8; }
 .mcc_currency_icons.color i.mcc-RDN {
