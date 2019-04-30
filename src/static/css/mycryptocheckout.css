@@ -315,7 +315,7 @@
 .mcc-TXT:before {
   content: "\e94a"; }
 
-.mcc-WAVESWORLD:before {
+.mcc-WW:before {
   content: "\e949"; }
 
 .mcc-TUSD:before {
@@ -719,7 +719,7 @@
   color: #000000; }
 .mcc_currency_icons.color i.mcc-WAVES {
   color: #0155FF; }
-.mcc_currency_icons.color i.mcc-WAVESWORLD {
+.mcc_currency_icons.color i.mcc-WW {
   color: #3609F9; }
 .mcc_currency_icons.color i.mcc-WRD1 {
   color: #221F1F; }
