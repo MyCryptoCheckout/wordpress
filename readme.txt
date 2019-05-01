@@ -99,7 +99,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Golem GNT
 - Herbalist Token HERB
 - Huobi Token HT
-- Icon ICX
 - IMSmart Token IMT
 - intimate ITM
 - Invacio INV
