@@ -105,8 +105,8 @@ trait admin_trait
 	public function admin_account_invalid()
 	{
 		$r = '';
-		$r .= wpautop( __( 'It appears as if MyCrytpoCheckout was unable to retrieve your account data from the MyCryptoCheckout server.', 'mycryptocheckout' ) );
-		$r .= wpautop( __( 'Use the button below to try and retrieve your account data again.', 'mycryptocheckout' ) );
+		$r .= wpautop( __( 'It appears as if MyCryptoCheckout was unable to retrieve your account data from the API server.', 'mycryptocheckout' ) );
+		$r .= wpautop( __( 'Click the Refresh your account data button below to try and retrieve your account data again.', 'mycryptocheckout' ) );
 		return $r;
 	}
 
