@@ -92,6 +92,15 @@ class Tests
 					2 => 'ltc1qza0zyp2ephz82wpc34lmzsqm0ydldd9suts74q',
 				],
 			],
+			'SMART' => [
+				'xpub661MyMwAqRbcGej6Edrjf67WGrZhqEuwjFRrnGRPitSqaBDhBbYxAZ2zMDC67NSKGLEKNS4aPoxpFBXHd1f6dqpaV3UPoWPL2yAgapTgDRo' =>
+				[
+					0 => 'SXLWPFb9pUscK21MiwAZk3bfebyWW6biaa',
+					1 => 'SkE18TTVLJHvGEegfoXDE8kvUxjqWPnp6Q',
+					2 => 'SVhDvyYt4FXtGonuCDVVUc4BRvmqqrQFEx',
+					3 => 'SPXwwHzyex7BdzAN7u2uKjmJqG9KfNxwZG',
+				],
+			],
 			'VIA' => [
 				'xpub661MyMwAqRbcFW2c4WQq7PstswwEjzErA6c4gc4Naet6P8QpAs9PrjKNTiuiwJcRDPPUmavG1b49GggUa4KhXQDpT5KtoMQrAHzdZycfEr7' =>
 				[

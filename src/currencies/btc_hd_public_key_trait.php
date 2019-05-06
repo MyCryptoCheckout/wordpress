@@ -56,6 +56,10 @@ trait btc_hd_public_key_trait
 				$network = NetworkFactory::litecoin();
 				$prefixes = new BitcoinRegistry();
 			break;
+			case 'SMART':
+				$network = new smartcash\SmartCash();
+				$prefixes = new BitcoinRegistry();
+			break;
 			case 'VIA':
 				$network = new ViacoinNetwork();
 				$prefixes = new BitcoinRegistry();
@@ -129,6 +133,7 @@ trait btc_hd_public_key_trait
 			case 'DASH':
 			case 'GRS':
 			case 'LTC':
+			case 'SMART':
 			case 'VIA':
 				$address = $child_key->getAddress( new AddressCreator() )->getAddress( $network );
 			break;
