@@ -4,9 +4,9 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.53
+Stable tag: 2.54
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 5.1
+Tested up to: 5.2
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 90+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -251,6 +251,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.54 20190507 =
+
+* New currency: SmartCash SMART
+
 = 2.53 20190429 =
 
 * New currency: Pi Edutainment Global PIEG
@@ -269,73 +273,3 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 = 2.50 20190416 =
 
 * New: Fiat Autosettlement enables you to connect to exchanges and instantly convert received coins into fiat or stablecoins ( $USD, $USDC, $USDT, $TUSD ). Supported exchanges: Binance, and Bittrex.
-
-= 2.42 20190403 =
-
-* New currency: Electra ECA
-
-= 2.41 20190321 =
-
-* New currency: Cointorox OROX
-* New currency: Luxcess Group Token LXC
-
-= 2.40 20190310 =
-
-* New currency: Organic Token ORGT
-
-= 2.39 20190307 =
-
-* New currency: Academy Token ACAD
-* New currency: IMSmart Token IMT
-
-= 2.38 20190210 =
-
-* New currency: Enjin Coin ENJ
-* Fix: QR code for ERC20 tokens now includes address + amount in a more standardized format used by popular mobile wallets.
-
-= 2.37 20190205 =
-
-* New currency: Stellar XLM
-* Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
-
-= 2.36 20190127 =
-
-* New currency: Groestlcoin GRS
-* New currency: Tether USD USDT
-* Fix: QRcode and Timer HTML was being escaped unnecessarily.
-* Fix: add white border around QR codes for dark themes.
-
-= 2.35 20190118 =
-
-* New currency: Herbalist Token HERB
-* New currency: Storiqa STQ
-
-= 2.34 20190113 =
-
-* New: Some wallets (BCH, BTC, BTG, BZX, DASH, DCR, DGB, LTC, TPAY, XVG, ZEC) now optionally support 0-conf payments.
-* New: HD wallet support for Dash
-* New: HD wallet support for Viacoin VIA
-* New: SegWit support for Viacoin VIA
-
-= 2.33 20190110 =
-
-* New currency: BLXS Blockscart
-* Downgrade Bitwasp library to support PHP 5.6 again.
-* Add beginning of CLI. Used for automatic testing.
-
-= 2.32 20190109 =
-
-* New currency: Acorn Collective OAK
-* New currency: Bitcoin Zero BZX
-* Upgrade Bitwasp library, that handles HD wallets, updated to v1.0. This requires PHP7.
-
-= 2.31 20181228 =
-
-* New currency: CloakCoin CLOAK
-
-= 2.30 20181221 =
-
-* New currency: USD Coin USDC
-* New currency: Tokes TKS
-* New currency: ActivEightCoin ACTIV
-* New: "open in waves" button. The button uses the Waves payments API and opens the Waves client either desktop or online version.
