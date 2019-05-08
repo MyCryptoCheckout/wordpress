@@ -575,7 +575,7 @@ trait admin_trait
 
 		if ( $currency->supports( 'confirmations' ) )
 			$confirmations = $fs->number( 'confirmations' )
-				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. Only some blockchains support 0-conf (mempool) such as BCH, BTC, BTG, DASH, DCR, DGB, ECA, LTC, XVG, ZEC.', 'mycryptocheckout' ) )
+				->description( __( 'How many confirmations needed to regard orders as paid. 1 is the default. Only some blockchains support 0-conf (mempool) such as BCH, BTC, BTG, DASH, DCR, DGB, ECA, GRS, LTC, SMART, VIA, XVG, ZEC.', 'mycryptocheckout' ) )
 				// Input label
 				->label( __( 'Confirmations', 'mycryptocheckout' ) )
 				->min( 0, 100 )
