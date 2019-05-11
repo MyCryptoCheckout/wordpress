@@ -110,7 +110,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
-- Omisego OMG
+- OmiseGo OMG
 - onG.social ONG
 - Pi Edutainment Global PIEG
 - Populous PPT
