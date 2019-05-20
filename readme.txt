@@ -62,6 +62,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Monero XMR
 - NEM XEM
 - New York Coin NYC
+- SmartCash SMART
 - Solaris XLR
 - Stellar XLM
 - Straks STAK
