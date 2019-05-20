@@ -34,7 +34,6 @@ class Easy_Digital_Downloads
 		$this->add_action( 'edd_view_order_details_billing_after' );
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
-		$this->add_action( 'mycryptocheckout_generate_checkout_javascript_data' );
 		$this->add_action( 'mycryptocheckout_hourly' );
 	}
 
@@ -80,12 +79,10 @@ class Easy_Digital_Downloads
 		if ( $edd_payment->status == 'publish' )
 			$payment->paid = true;
 
-		$this->__current_payment = $payment;		// For the javascript later.
-
 		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment, $instructions );
 
 		$output = wpautop( $instructions ) . $output;
-		$output .= MyCryptoCheckout()->generate_checkout_js();
+		$output .= MyCryptoCheckout()->generate_checkout_js( $payment );
 		return $output;
 	}
 
@@ -548,19 +545,6 @@ class Easy_Digital_Downloads
 		if ( $r == '' )
 			$r = static::get_gateway_string( $key );
 		return $r;
-	}
-
-	/**
-		@brief		mycryptocheckout_generate_checkout_javascript_data
-		@since		2018-09-04 09:45:31
-	**/
-	public function mycryptocheckout_generate_checkout_javascript_data( $action )
-	{
-		if ( ! isset( $this->__current_payment ) )
-			return;
-		$payment = $this->__current_payment;
-		MyCryptoCheckout()->api()->payments()->add_to_checkout_javascript_data( $action, $payment );
-		return $action;
 	}
 
 	/**

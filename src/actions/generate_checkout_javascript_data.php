@@ -16,6 +16,12 @@ class generate_checkout_javascript_data
 	public $data;
 
 	/**
+		@brief		IN: The payment from which to generate the javascript.
+		@since		2019-05-20 13:09:08
+	**/
+	public $payment;
+
+	/**
 		@brief		Render the data as a string.
 		@since		2018-04-25 16:02:59
 	**/

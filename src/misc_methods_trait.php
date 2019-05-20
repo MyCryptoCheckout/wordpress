@@ -85,10 +85,14 @@ trait misc_methods_trait
 		@brief		Generate a javascript object containing information for the checkout JS to build the QR code and all that.
 		@since		2018-04-25 15:47:05
 	**/
-	public function generate_checkout_js()
+	public function generate_checkout_js( $payment )
 	{
 		$action = $this->new_action( 'generate_checkout_javascript_data' );
 		$action->data = $this->collection();
+		$action->payment = $payment;
+
+		MyCryptoCheckout()->api()->payments()->add_to_checkout_javascript_data( $action, $payment );
+
 		$action->execute();
 
 		return $action->render();

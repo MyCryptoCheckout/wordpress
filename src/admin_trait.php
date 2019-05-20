@@ -637,6 +637,19 @@ trait admin_trait
 				->value( $wallet->get( 'monero_private_view_key' ) );
 		}
 
+		if ( $currency->supports( 'payment_id' ) )
+		{
+			$size = $currency->supports->payment_id;
+			$payment_id = $fs->text( 'payment_id' )
+				->description( __( 'xxxxx', 'mycryptocheckout' ) )
+				// Input label
+				->label( __( 'Payment ID', 'mycryptocheckout' ) )
+				->required()
+				->size( $size, $size )
+				->trim()
+				->value( $wallet->get( 'payment_id' ) );
+		}
+
 		if ( $this->is_network && is_super_admin() )
 			$wallet->add_network_fields( $form );
 
@@ -689,6 +702,12 @@ trait admin_trait
 					{
 						foreach( [ 'monero_private_view_key' ] as $key )
 							$wallet->set( $key, $$key->get_filtered_post_value() );
+					}
+
+					if ( $currency->supports( 'payment_id' ) )
+					{
+						$key = 'payment_id';
+						$wallet->set( $key, $$key->get_filtered_post_value() );
 					}
 
 					$wallets->save();

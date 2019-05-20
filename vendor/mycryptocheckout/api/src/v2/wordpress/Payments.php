@@ -38,6 +38,12 @@ class Payments
 			$action->data->set( 'token_id', $currency->token_id );
 			$action->data->set( 'waves', true );
 		}
+
+		// Add the payment ID for this specific wallet.
+		if ( isset( $currency->supports->payment_id ) )
+			foreach( MyCryptoCheckout()->wallets() as $wallet )
+				if ( $wallet->address == $payment->to )
+					$action->data->set( 'payment_id', $wallet->get( 'payment_id' ) );
 	}
 
 	/**

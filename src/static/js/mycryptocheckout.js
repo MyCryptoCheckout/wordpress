@@ -506,6 +506,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_metamask();
 		$$.maybe_waves_link();
 		$$.maybe_browser_link();
+		$$.maybe_payment_id();
 	}
 
 	/**
@@ -733,6 +734,22 @@ var mycryptocheckout_checkout_javascript = function( data )
 				);
 			}
 		} );
+	}
+
+	/**
+		@brief		Add payment ID field.
+		@since		2019-05-20 12:28:29
+	**/
+	$$.maybe_payment_id = function()
+	{
+		// The data must support metamask.
+		if( typeof $$.mycryptocheckout_checkout_data.payment_id === 'undefined' )
+			return;
+
+		var $text = '<p class="payment_id"><span class="text">Payment ID</span><span class="to_input">' + $$.mycryptocheckout_checkout_data.payment_id + '</span></p>';
+		$( 'span.to', $$.$online_pay_box ).append( $text );
+//		$$.$online_pay_box.append( '<p class="payment_id"><span class="text">Payment ID</span><span class="to_input">' + $$.mycryptocheckout_checkout_data.payment_id + '</span></p>' );
+		$( '.payment_id .to_input', $$.$div ).mcc_make_clipboard();
 	}
 
 	/**
