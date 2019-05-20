@@ -38,31 +38,30 @@ trait btc_hd_public_key_trait
 		$adapter = Bitcoin::getEcAdapter();
 		$slip132 = new Slip132(new KeyToScriptHelper($adapter));
 
+		$prefixes = new BitcoinRegistry();
 		switch( $wallet->get_currency_id() )
 		{
 			case 'BCH':
 				$network = \Btccom\BitcoinCash\Network\NetworkFactory::bitcoinCash();
-				$prefixes = new BitcoinRegistry();
 			break;
 			case 'DASH':
 				$network = NetworkFactory::dash();
-				$prefixes = new BitcoinRegistry();
 			break;
 			case 'GRS':
 				$network = new GroestlNetwork();
-				$prefixes = new BitcoinRegistry();
 			break;
 			case 'LTC':
 				$network = NetworkFactory::litecoin();
-				$prefixes = new BitcoinRegistry();
 			break;
 			case 'VIA':
 				$network = new ViacoinNetwork();
-				$prefixes = new BitcoinRegistry();
+			break;
+			case 'ZEC':
+				require_once( __DIR__ . '/Zcash.php' );
+				$network = new \BitWasp\Bitcoin\Network\Networks\Zcash();
 			break;
 			default:
 				$network = NetworkFactory::bitcoin();
-				$prefixes = new BitcoinRegistry();
 			break;
 		}
 
@@ -130,6 +129,7 @@ trait btc_hd_public_key_trait
 			case 'GRS':
 			case 'LTC':
 			case 'VIA':
+			case 'ZEC':
 				$address = $child_key->getAddress( new AddressCreator() )->getAddress( $network );
 			break;
 		}
