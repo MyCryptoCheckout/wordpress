@@ -593,7 +593,6 @@ class Easy_Digital_Downloads
 				return MyCryptoCheckout()->debug( 'Unable to mark EDD payment %s on blog %d as abandoned.', $order_id, get_current_blog_id() );
 
 			MyCryptoCheckout()->debug( 'Marking EDD payment %s on blog %d as abandoned.', $order_id, get_current_blog_id() );
-			update_post_meta( $order_id, '_mcc_payment_id', -1 );
 			edd_update_payment_status( $order_id, 'abandoned' );
 		} );
 	}

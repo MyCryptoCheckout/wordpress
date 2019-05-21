@@ -252,6 +252,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: When cancelling an order, keep the MCC order ID for future use.
+
 = 2.54 20190507 =
 
 * New currency: SmartCash SMART
