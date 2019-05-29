@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.55
+Stable tag: 2.56
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.2
 
@@ -41,6 +41,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = Cryptocurrencies supported: =
 
+- 99 Masternodes NMN
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
@@ -250,6 +251,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+= 2.56 20190529 =
+
+* New currency: 99 Masternodes NMN
 
 = 2.55 20190521 =
 
