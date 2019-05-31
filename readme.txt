@@ -41,7 +41,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = Cryptocurrencies supported: =
 
-- 99 Masternodes NMN
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
@@ -65,6 +64,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - New York Coin NYC
 - SmartCash SMART
 - Solaris XLR
+- Spider VPS SPDR
 - Stellar XLM
 - Straks STAK
 - TokenPay TPAY
@@ -75,6 +75,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Waves WAVES (Including Waves Client)
 - Ripple XRP
 - Zcash ZEC (T-address recipients only)
+- 99 Masternodes NMN
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
 = ERC20 tokens supported (Including MetaMask): =
@@ -251,6 +252,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: Spider VPS SPDR
 
 = 2.56 20190529 =
 
