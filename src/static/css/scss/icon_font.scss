@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-SPDR:before {
+  content: "\e965";
+}
 .mcc-NMN:before {
   content: "\e95e";
 }
