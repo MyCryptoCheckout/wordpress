@@ -109,6 +109,8 @@ trait misc_methods_trait
 		$wallet_options = [];
 		$wallets = $this->wallets()->enabled_on_this_site();
 
+		$selected = true;
+
 		foreach( $wallets as $wallet )
 		{
 			$currency_id = $wallet->get_currency_id();
@@ -125,13 +127,18 @@ trait misc_methods_trait
 			$cryptocurrency_amount = $currency->find_next_available_amount( $cryptocurrency_amount );
 
 			if ( $options->as_html )
+			{
 				$value = sprintf( '<option value="%s"%s>%s (%s %s)</option>',
 					$currency_id,
-					( count( $wallet_options[ $currency_id ] ) == 0 ? ' selected="selected"' : '' ),		// Select the first.
+					( $selected ? ' selected="selected"' : '' ),
 					$currency->get_name(),
 					$cryptocurrency_amount,
 					$currency_id
 				);
+				// Select the first.
+				if ( $selected )
+					$selected = false;
+			}
 			else
 				$value = sprintf( '%s (%s %s)',
 					$currency->get_name(),
