@@ -253,6 +253,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Handle manually created orders.
+
 = 2.57 20190607 =
 
 * New currency: Spider VPS SPDR
