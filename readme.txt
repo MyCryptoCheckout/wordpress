@@ -70,6 +70,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - TokenPay TPAY
 - TRON TRX
 - TurtleNetwork TN
+- Ultragate ULG
 - Verge XVG
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
@@ -252,6 +253,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: Ultragate ULG
 
 = 2.57 20190607 =
 
