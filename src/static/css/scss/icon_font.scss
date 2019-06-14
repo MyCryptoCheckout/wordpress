@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-ULG:before {
+  content: "\e966";
+}
 .mcc-SPDR:before {
   content: "\e965";
 }
