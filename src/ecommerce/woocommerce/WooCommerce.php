@@ -244,6 +244,9 @@ class WooCommerce
 		$payment_id = $order->get_meta( '_mcc_payment_id' );
 		if ( $payment_id < 2 )		// 1 is for test mode.
 			return;
+		$transaction_id = $order->get_transaction_id();
+		if ( $transaction_id != '' )
+			return;	// The order was already marked as completed via the API.
 		MyCryptoCheckout()->debug( 'Completing payment %d for order %s', $payment_id, $order_id );
 		MyCryptoCheckout()->api()->payments()->complete( $payment_id );
 	}

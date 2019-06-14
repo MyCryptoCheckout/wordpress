@@ -23,6 +23,11 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$this->title = $this->get_option( 'title' );
 		$this->description = $this->get_option( 'description' );
 
+		$this->supports = [
+			'products',
+//			'subscriptions',
+		];
+
 		add_action( 'mycryptocheckout_generate_checkout_javascript_data', [ $this, 'mycryptocheckout_generate_checkout_javascript_data' ] );
 		add_action( 'woocommerce_email_before_order_table', [ $this, 'woocommerce_email_before_order_table' ], 10, 3 );
 		add_filter( 'woocommerce_gateway_icon', [ $this, 'woocommerce_gateway_icon' ], 10, 2 );
@@ -202,13 +207,26 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		if ( is_object( $cart ) )
 			if ( ! $cart->is_empty() )
-			{
 				$total = $cart->get_total();
-				// BTC is an html entity that needs to go.
-				$total = html_entity_decode( $total );
-				// Extract only numbers.
-				$total = preg_replace( '/[^0-9\.\,]+/', '', $total );
+
+		// Manually created order?
+		if ( $total == 0 )
+		{
+			global $wp;
+			if ( ! empty( $wp->query_vars['order-pay'] ) )
+			{
+				$order_id = $wp->query_vars['order-pay'];
+				$order = wc_get_order( $order_id );
+				$total = $order->get_order_item_totals();
+				$total = $total[ 'order_total' ][ 'value' ];
+				ddd( $total );
 			}
+		}
+
+		// BTC is an html entity that needs to go.
+		$total = html_entity_decode( $total );
+		// Extract only numbers.
+		$total = preg_replace( '/[^0-9\.\,]+/', '', $total );
 
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
 			'amount' => $total,
