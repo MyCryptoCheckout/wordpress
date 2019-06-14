@@ -23,11 +23,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$this->title = $this->get_option( 'title' );
 		$this->description = $this->get_option( 'description' );
 
-		$this->supports = [
-			'products',
-//			'subscriptions',
-		];
-
 		add_action( 'mycryptocheckout_generate_checkout_javascript_data', [ $this, 'mycryptocheckout_generate_checkout_javascript_data' ] );
 		add_action( 'woocommerce_email_before_order_table', [ $this, 'woocommerce_email_before_order_table' ], 10, 3 );
 		add_filter( 'woocommerce_gateway_icon', [ $this, 'woocommerce_gateway_icon' ], 10, 2 );
@@ -219,7 +214,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				$order = wc_get_order( $order_id );
 				$total = $order->get_order_item_totals();
 				$total = $total[ 'order_total' ][ 'value' ];
-				ddd( $total );
 			}
 		}
 
