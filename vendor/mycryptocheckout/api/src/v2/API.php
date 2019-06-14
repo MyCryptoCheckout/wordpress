@@ -182,7 +182,7 @@ abstract class API
 		$data = wp_remote_retrieve_body( $r );
 		$json = json_decode( $data );
 		if ( ! is_object( $json ) )
-			throw new Exception( 'Did not receive a JSON reply from the API server.' );
+			throw new Exception( sprintf( 'Did not receive a JSON reply from the API server: %s', htmlspecialchars( $data ) ) );
 
 		return $json;
 	}
