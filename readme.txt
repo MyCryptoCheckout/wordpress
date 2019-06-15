@@ -61,9 +61,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - MarsCoin MARS
 - Monero XMR
 - NEM XEM
-- New York Coin NYC
 - SmartCash SMART
-- Solaris XLR
 - Spider VPS SPDR
 - Stellar XLM
 - Straks STAK
@@ -96,7 +94,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Dragonchain DRGN
 - eBitcoin EBTC
 - Enjin Coin ENJ
-- Flix FLIX
 - FunFair FUN
 - Gemini Dollar GUSD
 - Gifto GTO
@@ -135,7 +132,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - TuneTrade TXT
 - USD Coin USDC
 - Veritaseum VERI
-- Worldcoin1 WRD1
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
 = NEM Mosaic tokens supported: =
