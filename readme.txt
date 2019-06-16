@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.58
+Stable tag: 2.59
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.2
 
@@ -91,6 +91,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Cointorox OROX
 - Dai DAI
 - DigixDAO DGD
+- Dogecoin DOGE
 - Dragonchain DRGN
 - eBitcoin EBTC
 - Enjin Coin ENJ
@@ -249,6 +250,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+= 2.59 20190616 =
+
+* New currency: Dogecoin DOGE
 
 = 2.58 20190615 =
 
