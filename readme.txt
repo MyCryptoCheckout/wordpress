@@ -153,6 +153,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 = WAVES Tokens supported (Including Waves Client): =
 
 - CoffeeCoin COF
+- CopyrightCoins CCIM
 - Organic Token ORGT
 - Tokes TKS
 - Waves World WW
@@ -250,6 +251,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: CopyrightCoins CCIM
 
 = 2.59 20190616 =
 
