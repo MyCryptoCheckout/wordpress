@@ -23,7 +23,7 @@ There is already a complete Wordpress implementation included. To see the API in
 
 The **API** component is the main class. It handles communication with the API server and provides basic services to the other components such as data storage and retrieval.
 
-The **Account** component provides functions relating to the account data that is stored. Currency information, exchange rates, payment information, etc.
+The **Account** component provides functions relating to the account data that is stored. Currency information, exchange rates, payment information, reserved amounts, etc.
 
 The **Payments** component handles adding and canceling of payment data into the API server. It receives messages from the API component regarding canceling or completion of payments.
 
@@ -138,13 +138,15 @@ Then fill it with data:
 
 And then send it to the API.
 
+Before setting the amount, check that the amount is not already reserved by another transcation. The account data stores an array of reserved amounts for each currency. If the amount you desire is reserved, increase it by a decimal point until you find an unreserved amount.
+
 `$payment_id = $api->payments()->add( $payment );`
 
 Store the `$payment_id` somewhere related to whatever is being sold. In Wordpress WooCommerce, this would be the order meta.
 
 Do you need to cancel the payment on the server?
 
-`$api->payments()->add( $payment_id );`
+`$api->payments()->cancel( $payment_id );`
 
 The server can cancel a payment due to it becoming to old. The server will send a `cancel_payment` message, together with the payment ID. Your implementation of the `cancel_local` method will receive a Payment object with the `payment_id` property set.
 

@@ -9,6 +9,7 @@ return array(
     'plainview\\sdk_mcc\\' => array($vendorDir . '/plainview/sdk'),
     'mycryptocheckout\\api\\' => array($vendorDir . '/mycryptocheckout/api/src'),
     'mycryptocheckout\\' => array($baseDir . '/src'),
+    'Shift196\\AKashLib\\' => array($vendorDir . '/shift196/lib-akash/src'),
     'Mdanter\\Ecc\\' => array($vendorDir . '/mdanter/ecc/src'),
     'FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),

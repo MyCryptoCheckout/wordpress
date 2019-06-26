@@ -71,6 +71,11 @@ abstract class Payments
 		$payment = new Payment();
 		$payment->created_at = time();
 
+		// Ensure that every payment is unique.
+		$microtime = microtime( true );
+		$microtime = preg_replace( '/.*\./', '', $microtime );		// We want only the microseconds.
+		$payment->data()->set( 'microtime', $microtime );
+
 		// Shoudl we extract old data?
 		if ( $data !== null )
 			foreach( (array) $data as $key => $value )

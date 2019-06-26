@@ -448,20 +448,20 @@
     },
     {
         "name": "mycryptocheckout/api",
-        "version": "2.03",
-        "version_normalized": "2.03.0.0",
+        "version": "2.06",
+        "version_normalized": "2.06.0.0",
         "source": {
             "type": "git",
             "url": "https://bitbucket.org/mycryptocheckout/api.git",
-            "reference": "ebe2a1ca6c707334e0f1140464fb558d985bc80f"
+            "reference": "b0855ce05d41ce233233b5704bddee404c145128"
         },
         "dist": {
             "type": "zip",
-            "url": "https://bitbucket.org/mycryptocheckout/api/get/ebe2a1ca6c707334e0f1140464fb558d985bc80f.zip",
-            "reference": "ebe2a1ca6c707334e0f1140464fb558d985bc80f",
+            "url": "https://bitbucket.org/mycryptocheckout/api/get/b0855ce05d41ce233233b5704bddee404c145128.zip",
+            "reference": "b0855ce05d41ce233233b5704bddee404c145128",
             "shasum": ""
         },
-        "time": "2018-12-14T17:56:53+00:00",
+        "time": "2019-06-24T21:05:37+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -574,5 +574,34 @@
             }
         ],
         "description": "An implementation of a Merkle Tree in PHP"
+    },
+    {
+        "name": "shift196/lib-akash",
+        "version": "1.0.4",
+        "version_normalized": "1.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/shift-reality/php-crypto.git",
+            "reference": "f05b86cfa2f32fd6aad509861ae563112a8f12dc"
+        },
+        "time": "2018-07-09T09:10:32+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "files": [],
+            "psr-4": {
+                "Shift196\\AKashLib\\": "src"
+            }
+        },
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "bogdan",
+                "email": "shift196@yandex.ru"
+            }
+        ],
+        "description": "AKash it's easy hashing library for PHP."
     }
 ]
