@@ -58,7 +58,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Ethereum Classic ETC
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
-- MarsCoin MARS
 - Monero XMR
 - NEM XEM
 - SmartCash SMART
@@ -102,7 +101,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Herbalist Token HERB
 - Huobi Token HT
 - IMSmart Token IMT
-- intimate ITM
 - Invacio INV
 - Kyber Network KNC
 - Latino Token LATINO
