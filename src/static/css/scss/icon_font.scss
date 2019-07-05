@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-MERO:before {
+  content: "\e969";
+}
 .mcc-CCIM:before {
   content: "\e968";
 }
