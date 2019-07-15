@@ -89,6 +89,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Binance Coin BNB
 - Cointorox OROX
 - Dai DAI
+- Decentraland MANA
 - DigixDAO DGD
 - Dogecoin DOGE
 - Dragonchain DRGN
@@ -113,6 +114,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - OmiseGo OMG
 - onG.social ONG
 - Pi Edutainment Global PIEG
+- Polymath Network POLY
 - Populous PPT
 - Pundi X NPXS
 - Presearch PRE
@@ -145,6 +147,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
 - ActivEightCoin ACTIV
+- BitTorrent BTT
 - TRONBITCOIN TBTC
 - Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
 
