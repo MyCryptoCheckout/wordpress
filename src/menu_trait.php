@@ -103,7 +103,7 @@ trait menu_trait
 			// Name of tab
 			->name( __( 'Donations', 'mycryptocheckout' ) );
 
-		if ( $this->is_network )
+		if ( $this->is_network() )
 			$tabs->tab( 'local_settings' )
 				->callback_this( 'admin_local_settings' )
 				// Tab heading

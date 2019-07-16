@@ -39,7 +39,7 @@ trait payment_timer_trait
 			$payment_timer_enabled->value( $this->get_local_option( 'payment_timer_enabled' ) );
 			$payment_timer_html->value( $this->get_local_global_file_option( 'payment_timer_html' ) );
 
-			if ( $this->is_network )
+			if ( $this->is_network() )
 				$payment_timer_enabled->opt( 'auto', __( 'Use network admin default', 'mycryptocheckout' ) );
 		}
 		else
@@ -50,7 +50,7 @@ trait payment_timer_trait
 			$payment_timer_enabled->opt( 'default_enabled', __( 'Default enabled on all sites', 'mycryptocheckout' ) );
 			$payment_timer_enabled->opt( 'default_disabled', __( 'Default disabled on all sites', 'mycryptocheckout' ) );
 
-			$payment_timer_enabled->value( $this->get_site_option( 'payment_timer_enabled' ) );
+			$payment_timer_enabled->value( $this->get_site_or_local_option( 'payment_timer_enabled' ) );
 			$payment_timer_html->value( $this->get_global_file_option( 'payment_timer_html' ) );
 		}
 	}

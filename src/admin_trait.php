@@ -19,7 +19,7 @@ trait admin_trait
 		global $wpdb;
 
 		// Rename the wallets key.
-		if ( $this->is_network )
+		if ( $this->is_network() )
 			$wpdb->update( $wpdb->sitemeta, [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_wallets' ], [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_' ] );
 		else
 			$wpdb->update( $wpdb->options, [ 'option_name' => 'MyCryptoCheckout_wallets' ], [ 'option_name' => 'MyCryptoCheckout_' ] );
@@ -43,7 +43,7 @@ trait admin_trait
 		$r = '';
 
 		$public_listing = $form->checkbox( 'public_listing' )
-			->checked( $this->get_site_option( 'public_listing' ) )
+			->checked( $this->get_site_or_local_option( 'public_listing' ) )
 			->description( __( 'Check the box and refresh your account if you want your webshop listed in the upcoming store directory on mycryptocheckout.com. Your store name and URL will be listed.', 'mycryptocheckout' ) )
 			->label( __( 'Be featured in the MCC store directory?', 'mycryptocheckout' ) );
 
@@ -68,9 +68,9 @@ trait admin_trait
 			if ( $retrieve_account->pressed() )
 			{
 				if ( $public_listing->is_checked() )
-					MyCryptoCheckout()->update_site_option( 'public_listing', true );
+					MyCryptoCheckout()->update_site_or_local_option( 'public_listing', true );
 				else
-					MyCryptoCheckout()->delete_site_option( 'public_listing' );
+					MyCryptoCheckout()->delete_site_or_local_option( 'public_listing' );
 
 				$result = $this->mycryptocheckout_retrieve_account();
 				if ( $result )
@@ -637,7 +637,7 @@ trait admin_trait
 				->value( $wallet->get( 'monero_private_view_key' ) );
 		}
 
-		if ( $this->is_network && is_super_admin() )
+		if ( $this->is_network() && is_super_admin() )
 			$wallet->add_network_fields( $form );
 
 		$save = $form->primary_button( 'save' )
@@ -795,7 +795,7 @@ trait admin_trait
 			->min( -1000 )
 			->step( 0.01 )
 			->size( 6, 6 )
-			->value( $this->get_site_option( 'markup_amount' ) );
+			->value( $this->get_site_or_local_option( 'markup_amount' ) );
 
 		$markup_percent = $fs->number( 'markup_percent' )
 			// Input description.
@@ -806,13 +806,13 @@ trait admin_trait
 			->min( -100 )
 			->step( 0.01 )
 			->size( 6, 6 )
-			->value( $this->get_site_option( 'markup_percent' ) );
+			->value( $this->get_site_or_local_option( 'markup_percent' ) );
 
 		$fs = $form->fieldset( 'fs_qr_code' );
 		// Label for fieldset
 		$fs->legend->label( __( 'QR code', 'mycryptocheckout' ) );
 
-		if ( $this->is_network )
+		if ( $this->is_network() )
 			$form->global_settings = true;
 		else
 			$form->local_settings = true;
@@ -823,7 +823,7 @@ trait admin_trait
 		// Label for fieldset
 		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
 
-		if ( $this->is_network )
+		if ( $this->is_network() )
 			$form->global_settings = true;
 		else
 			$form->local_settings = true;
@@ -840,8 +840,8 @@ trait admin_trait
 			$form->post();
 			$form->use_post_values();
 
-			$this->update_site_option( 'markup_amount', $markup_amount->get_filtered_post_value() );
-			$this->update_site_option( 'markup_percent', $markup_percent->get_filtered_post_value() );
+			$this->update_site_or_local_option( 'markup_amount', $markup_amount->get_filtered_post_value() );
+			$this->update_site_or_local_option( 'markup_percent', $markup_percent->get_filtered_post_value() );
 
 			$this->save_payment_timer_inputs( $form );
 			$this->save_qr_code_inputs( $form );

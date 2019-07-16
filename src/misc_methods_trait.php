@@ -48,6 +48,18 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Delete a site or local option, depending on network mode.
+		@since		2019-07-16 20:58:59
+	**/
+	public function delete_site_or_local_option( $key )
+	{
+		if ( $this->is_network() )
+			delete_site_option( $key );
+		else
+			delete_option( $key );
+	}
+
+	/**
 		@brief		Enqueue the MCC CSS.
 		@since		2018-01-29 09:40:03
 	**/
@@ -172,7 +184,7 @@ trait misc_methods_trait
 	**/
 	public function get_global_file_option( $key )
 	{
-		if ( $this->is_network )
+		if ( $this->is_network() )
 			$value = $this->get_site_option( $key );
 		else
 			$value = '';
@@ -187,13 +199,24 @@ trait misc_methods_trait
 	**/
 	public function get_client_url()
 	{
-		if ( ! $this->is_network )
+		if ( ! $this->is_network() )
 			$server_name = get_bloginfo( 'url' );
 		else
 			// The server name is the name of the first blog.
 			$server_name = get_blog_option( 1, 'siteurl' );
 
 		return $server_name;
+	}
+
+	/**
+		@brief		Return a site or local option depending on whether this is a network install or not.
+		@since		2019-07-16 20:40:55
+	**/
+	public function get_site_or_local_option( $key )
+	{
+		if ( $this->is_network() )
+			return $this->get_site_option( $key );
+		return $this->get_local_option( $key );
 	}
 
 	/**
@@ -316,6 +339,17 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Is this a network install?
+		@since		2019-07-16 20:24:25
+	**/
+	public function is_network()
+	{
+		if ( defined( 'MYCRYPTOCHECKOUT_NETWORK_SINGLE_INSTALLS' ) )
+			return false;
+		return MULTISITE;
+	}
+
+	/**
 		@brief		Return this timestamp in the blog's date time format.
 		@since		2017-12-27 16:07:00
 	**/
@@ -341,7 +375,7 @@ trait misc_methods_trait
 	**/
 	public function local_options()
 	{
-		return array_merge( [
+		$local_options = array_merge( [
 			/**
 				@brief		Is the QR code enabled? true, false, auto = use global setting.
 				@since		2018-04-26 16:15:56
@@ -354,6 +388,7 @@ trait misc_methods_trait
 			**/
 			'qr_code_html' => '',
 		], parent::local_options() );
+		return array_merge( $local_options, $this->site_options() );
 	}
 
 	/**
@@ -377,10 +412,10 @@ trait misc_methods_trait
 
 		$marked_up_amount = $amount;
 
-		$markup_amount = MyCryptoCheckout()->get_site_option( 'markup_amount' );
+		$markup_amount = MyCryptoCheckout()->get_site_or_local_option( 'markup_amount' );
 		$marked_up_amount += $markup_amount;
 
-		$markup_percent = MyCryptoCheckout()->get_site_option( 'markup_percent' );
+		$markup_percent = MyCryptoCheckout()->get_site_or_local_option( 'markup_percent' );
 		$marked_up_amount = $marked_up_amount * ( 1 + ( $markup_percent / 100 ) );
 
 		if ( strpos( $marked_up_amount, 'E' ) !== false )
@@ -420,7 +455,7 @@ trait misc_methods_trait
 			break;
 		}
 
-		if ( $this->is_network )
+		if ( $this->is_network() )
 		{
 			$enabled = $this->get_site_option( $key );
 			switch( $enabled )
@@ -624,6 +659,17 @@ trait misc_methods_trait
 		if ( $form_value == $this->get_global_file_option( $key ) )
 			$form_value = '';
 		$this->update_local_option( $key, $form_value );
+	}
+
+	/**
+		@brief		Update a key locally or globally.
+		@since		2019-07-16 20:54:29
+	**/
+	public function update_site_or_local_option( $key, $value )
+	{
+		if ( $this->is_network() )
+			return $this->update_site_option( $key, $value );
+		return $this->update_local_option( $key, $value );
 	}
 
 	/**

@@ -305,7 +305,7 @@ trait autosettlement_trait
 			->value( $autosettlement->get_currencies() );
 		$this->currencies()->add_to_select_options( $currencies_input );
 
-		if ( $this->is_network && is_super_admin() )
+		if ( $this->is_network() && is_super_admin() )
 			$autosettlement->add_network_fields( $form );
 
 		$save = $form->primary_button( 'save' )

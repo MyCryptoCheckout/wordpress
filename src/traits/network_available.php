@@ -113,7 +113,7 @@ trait network_available
 	**/
 	public function maybe_parse_network_form_post( $form )
 	{
-		if ( ! MyCryptoCheckout()->is_network )
+		if ( ! MyCryptoCheckout()->is_network() )
 			return;
 		if( ! is_super_admin() )
 			return;

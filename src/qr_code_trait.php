@@ -37,7 +37,7 @@ trait qr_code_trait
 			$qr_code_enabled->value( $this->get_local_option( 'qr_code_enabled' ) );
 			$qr_code_html->value( $this->get_local_global_file_option( 'qr_code_html' ) );
 
-			if ( $this->is_network )
+			if ( $this->is_network() )
 				$qr_code_enabled->opt( 'auto', __( 'Use network admin default', 'mycryptocheckout' ) );
 		}
 		else
@@ -48,7 +48,7 @@ trait qr_code_trait
 			$qr_code_enabled->opt( 'default_enabled', __( 'Default enabled on all sites', 'mycryptocheckout' ) );
 			$qr_code_enabled->opt( 'default_disabled', __( 'Default disabled on all sites', 'mycryptocheckout' ) );
 
-			$qr_code_enabled->value( $this->get_site_option( 'qr_code_enabled' ) );
+			$qr_code_enabled->value( $this->get_site_or_local_option( 'qr_code_enabled' ) );
 			$qr_code_html->value( $this->get_global_file_option( 'qr_code_html' ) );
 		}
 	}
