@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.59
+Stable tag: 2.60
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.2
 
@@ -254,7 +254,13 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.60 20190716 =
+
+* New currency: BitTorrent BTT
 * New currency: CopyrightCoins CCIM
+* New currency: Decentraland MANA
+* New currency: MeroCoin MERO
+* New currency: Polymath Network POLY
 
 = 2.59 20190616 =
 
