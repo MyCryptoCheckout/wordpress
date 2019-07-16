@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 90+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 95+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
@@ -8,7 +8,7 @@ Stable tag: 2.59
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.2
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 90+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 95+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -29,6 +29,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
 - Tor support
+- 0-conf (mempool) support for some coins
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
 - Take MCC for a test ride by visiting our <a href="https://wpdemo.mycryptocheckout.com/">demo store</a>
 
@@ -58,7 +59,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Ethereum Classic ETC
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
-- MarsCoin MARS
 - Monero XMR
 - NEM XEM
 - SmartCash SMART
@@ -72,7 +72,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Verge XVG
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
-- Ripple XRP
+- XRP
 - Zcash ZEC (T-address recipients only)
 - 99 Masternodes NMN
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
@@ -90,6 +90,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Binance Coin BNB
 - Cointorox OROX
 - Dai DAI
+- Decentraland MANA
 - DigixDAO DGD
 - Dogecoin DOGE
 - Dragonchain DRGN
@@ -102,7 +103,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Herbalist Token HERB
 - Huobi Token HT
 - IMSmart Token IMT
-- intimate ITM
 - Invacio INV
 - Kyber Network KNC
 - Latino Token LATINO
@@ -115,6 +115,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - OmiseGo OMG
 - onG.social ONG
 - Pi Edutainment Global PIEG
+- Polymath Network POLY
 - Populous PPT
 - Pundi X NPXS
 - Presearch PRE
@@ -147,6 +148,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
 - ActivEightCoin ACTIV
+- BitTorrent BTT
 - TRONBITCOIN TBTC
 - Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
 

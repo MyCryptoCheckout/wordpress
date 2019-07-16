@@ -37,6 +37,18 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-POLY:before {
+  content: "\e96a";
+}
+.mcc-MANA:before {
+  content: "\e96b";
+}
+.mcc-BTT:before {
+  content: "\e96c";
+}
+.mcc-MERO:before {
+  content: "\e969";
+}
 .mcc-CCIM:before {
   content: "\e968";
 }
