@@ -88,6 +88,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bancor BNT
 - Basic Attention Token BAT
 - Binance Coin BNB
+- Chainlink LINK
 - Cointorox OROX
 - Dai DAI
 - Decentraland MANA
