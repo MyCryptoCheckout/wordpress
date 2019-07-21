@@ -17,7 +17,10 @@ trait wallets_trait
 		if ( isset( $this->__wallets ) )
 			return $this->__wallets;
 
-		$this->__wallets = wallets\Wallets::load();
+		if ( $this->is_network() )
+			$this->__wallets = wallets\Site_Wallets::load();
+		else
+			$this->__wallets = wallets\Local_Wallets::load();
 		return $this->__wallets;
 	}
 }
