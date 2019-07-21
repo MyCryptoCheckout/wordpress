@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-LINK:before {
+  content: "\e96d";
+}
 .mcc-POLY:before {
   content: "\e96a";
 }
