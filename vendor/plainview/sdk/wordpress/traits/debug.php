@@ -218,7 +218,11 @@ trait debug
 	{
 		$hash = md5( $this->paths( '__FILE__' ) . AUTH_KEY );
 		$hash = substr( $hash, 0, 8 );
-		return $this->paths( '__FILE__' ) . ".$hash.debug.html";
+		$filename = $this->paths( '__FILE__' ) . ".$hash.debug.html";
+		$filter = __NAMESPACE__ . '_debug_file';
+		// The filter is something like "plainview\sdk_mcc_broadcast\wordpress\traits_debug_file"
+		$filename = apply_filters( $filter, $filename );
+		return $filename;
 	}
 
 	/**
