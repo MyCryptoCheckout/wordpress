@@ -779,7 +779,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		$$.show_browser_link = false;
 
-		var url = 'https://client.wavesplatform.com/#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&referrer=' + encodeURIComponent( document.location ) + '&strict';
+		var url = 'https://dex.wavesplatform.com/#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&referrer=' + encodeURIComponent( document.location ) + '&strict';
 		url = $$.replace_keywords( url );
 		var html = '<a href="' + url + '"><div class="waves_payment"></div></a>';
 		var $div = $( '<div>' );
