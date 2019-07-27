@@ -26,6 +26,7 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
+		$this->add_action( 'template_redirect' );
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
 		$this->add_action( 'woocommerce_order_status_cancelled' );
 		$this->add_action( 'woocommerce_order_status_completed' );
@@ -154,6 +155,35 @@ class WooCommerce
 					$order->save();
 				}
 		} );
+	}
+
+	/**
+		@brief		Maybe redirect to the order recieved page for Waves transactions.
+		@since		2019-07-27 19:43:13
+	**/
+	public function template_redirect()
+	{
+		if ( ! isset( $_GET[ 'txId' ] ) )	// This is what waves adds.
+			return;
+		if ( count( $_GET ) !== 1 )			// The waves payment API strips out every parameter.
+			return;
+		if ( ! is_order_received_page() )	// It at least returns the buyer to the order received page.
+			return;
+
+		// Extract the order ID.
+		global $wp;
+		$order_id = intval( $wp->query_vars['order-received'] );
+
+		// Order must be valid.
+		$order = new \WC_Order( $order_id );
+		if ( ! $order )
+			return;
+
+		// And now redirec the buyer to the correct page.
+		$url = $order->get_checkout_order_received_url();
+
+		wp_redirect( $url );
+		exit;
 	}
 
 	/**
