@@ -1,3 +1,5 @@
+20190716		Wordpress: Added code for Option (local) storage.
+20190607		Wordpress: Add filter for debugging file path.
 20190414		Use clone for loading object stores.
 20190411		Wordpress: Update EDD updater
 20190404		form2: Add stripslashes() filter to text and textarea.
