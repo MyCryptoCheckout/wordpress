@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.60
+Stable tag: 2.61
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.2
 
@@ -33,7 +33,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
 - Take MCC for a test ride by visiting our <a href="https://wpdemo.mycryptocheckout.com/">demo store</a>
 
-The free license can process 3 sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased that includes unlimited transactions if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing</a> is available if you need to use MyCryptoCheckout on several domains.
+The free license can process 3 sales per month. A <a href="https://mycryptocheckout.com/pricing/">flat rate license</a> can be purchased for your account that includes unlimited transactions if you require more. <a href="https://mycryptocheckout.com/bulk-pricing/">Bulk pricing</a> is available if you need to use MyCryptoCheckout on several domains.
 
 = eCommerce platforms supported =
 
@@ -88,7 +88,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bancor BNT
 - Basic Attention Token BAT
 - Binance Coin BNB
-- Chainlink LINK
 - Cointorox OROX
 - Dai DAI
 - Decentraland MANA
@@ -254,6 +253,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+= 2.61 20190728 =
+
+* Fix: Handle the WAVES payments redirects, bringing the buyer back to the order received page.
 
 = 2.60 20190716 =
 

@@ -179,7 +179,12 @@ class WooCommerce
 		if ( ! $order )
 			return;
 
-		// And now redirec the buyer to the correct page.
+		// Is this an mcc transaction?
+		$mcc_currency_id = $order->get_meta( '_mcc_currency_id' );
+		if ( ! $mcc_currency_id )
+			return;
+
+		// And now redirect the buyer to the correct page.
 		$url = $order->get_checkout_order_received_url();
 
 		wp_redirect( $url );
