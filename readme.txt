@@ -88,7 +88,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bancor BNT
 - Basic Attention Token BAT
 - Binance Coin BNB
-- Cointorox OROX
 - Dai DAI
 - Decentraland MANA
 - DigixDAO DGD
@@ -102,6 +101,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Golem GNT
 - Herbalist Token HERB
 - Huobi Token HT
+- Hype Token HYPE
 - IMSmart Token IMT
 - Invacio INV
 - Kyber Network KNC
@@ -154,6 +154,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = WAVES Tokens supported (Including Waves Client): =
 
+- Best Token BEST
 - CoffeeCoin COF
 - CopyrightCoins CCIM
 - Organic Token ORGT
@@ -253,6 +254,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: Best Token BEST
+* New currency: Hype Token HYPE
 
 = 2.61 20190728 =
 
