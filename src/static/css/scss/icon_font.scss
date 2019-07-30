@@ -37,6 +37,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-HYPE:before {
+  content: "\e96e";
+}
+.mcc-BEST:before {
+  content: "\e96f";
+}
 .mcc-LINK:before {
   content: "\e96d";
 }
