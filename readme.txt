@@ -256,6 +256,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 * New currency: Best Token BEST
+* New currency: ChainLink Token LINK
 * New currency: Hype Token HYPE
 
 = 2.61 20190728 =
