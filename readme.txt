@@ -74,7 +74,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Waves WAVES (Including Waves Client)
 - XRP
 - Zcash ZEC (T-address recipients only)
-- 99 Masternodes NMN
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
 = ERC20 tokens supported (Including MetaMask): =
@@ -88,6 +87,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bancor BNT
 - Basic Attention Token BAT
 - Binance Coin BNB
+- Chainlink LINK
 - Dai DAI
 - Decentraland MANA
 - DigixDAO DGD
