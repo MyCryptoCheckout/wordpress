@@ -104,6 +104,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Hype Token HYPE
 - IMSmart Token IMT
 - Invacio INV
+- Kubo Coin KUBO
 - Kyber Network KNC
 - Latino Token LATINO
 - L'île LILE
@@ -254,6 +255,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: Kubo Coin KUBO
 
 = 2.62 20190731 =
 
