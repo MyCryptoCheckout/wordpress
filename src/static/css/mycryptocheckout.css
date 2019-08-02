@@ -240,6 +240,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-KUBO:before {
+  content: "\e970"; }
+
 .mcc-HYPE:before {
   content: "\e96e"; }
 
@@ -678,6 +681,8 @@
   color: #4AAAE0; }
 .mcc_currency_icons.color i.mcc-KNC {
   color: #188C92; }
+.mcc_currency_icons.color i.mcc-KUBO {
+  color: #000000; }
 .mcc_currency_icons.color i.mcc-LATINO {
   color: #1eb7eb; }
 .mcc_currency_icons.color i.mcc-LILE {
