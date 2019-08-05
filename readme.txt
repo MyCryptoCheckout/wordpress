@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.62
+Stable tag: 2.63
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.2
 
@@ -256,7 +256,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.63 20190805 =
+
 * New currency: Kubo Coin KUBO
+* New licensing: All subdomains, subdirectory installs and the main domain will all share the same license.
 
 = 2.62 20190731 =
 
