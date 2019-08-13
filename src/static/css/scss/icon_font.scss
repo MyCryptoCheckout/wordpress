@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-EOS:before {
+  content: "\e971";
+}
 .mcc-KUBO:before {
   content: "\e970";
 }

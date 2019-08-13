@@ -253,6 +253,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-EOS:before {
+  content: "\e971"; }
+
 .mcc-KUBO:before {
   content: "\e970"; }
 
@@ -664,6 +667,8 @@
   color: #bd01fe; }
 .mcc_currency_icons.color i.mcc-ENJ {
   color: #9368fe; }
+.mcc_currency_icons.color i.mcc-EOS {
+  color: #000000; }
 .mcc_currency_icons.color i.mcc-ETH {
   color: #282828; }
 .mcc_currency_icons.color i.mcc-FLIX {
