@@ -352,6 +352,11 @@ class WooCommerce
 		$order->update_meta_data( '_mcc_to', $payment->to );
 		$order->update_meta_data( '_mcc_payment_data', $payment->data );
 
+		$action = MyCryptoCheckout()->new_action( 'woocommerce_create_order' );
+		$action->order = $order;
+		$action->payment = $payment;
+		$action->execute();
+
 		// We want to keep the account locked, but still enable the is_available gateway check to work for the rest of this session.
 		$this->__just_used = true;
 	}
