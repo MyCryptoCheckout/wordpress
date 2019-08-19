@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.63
+Stable tag: 2.64
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.2
 
@@ -88,6 +88,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Basic Attention Token BAT
 - Binance Coin BNB
 - Chainlink LINK
+- Connect Coin XCON
 - Dai DAI
 - Decentraland MANA
 - DigixDAO DGD
@@ -255,6 +256,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+= 2.63 20190819 =
+
+* New currency: Connect Coin XCON
 
 = 2.63 20190805 =
 
