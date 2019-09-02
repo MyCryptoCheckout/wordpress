@@ -64,7 +64,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - SmartCash SMART
 - Spider VPS SPDR
 - Stellar XLM
-- Straks STAK
 - TokenPay TPAY
 - TRON TRX
 - TurtleNetwork TN
@@ -94,7 +93,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - DigixDAO DGD
 - Dogecoin DOGE
 - Dragonchain DRGN
-- eBitcoin EBTC
 - Enjin Coin ENJ
 - FunFair FUN
 - Gemini Dollar GUSD
@@ -140,7 +138,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = NEM Mosaic tokens supported: =
 
-- shelterDAO SHEL
 - Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
 = TN TurtleNetwork tokens supported: =
