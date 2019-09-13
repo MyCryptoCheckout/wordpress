@@ -257,6 +257,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Clarify that no payments will be processed in test mode.
+
 = 2.63 20190819 =
 
 * New currency: Connect Coin XCON

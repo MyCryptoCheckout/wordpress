@@ -308,7 +308,7 @@ class Easy_Digital_Downloads
 				'id'	=> 'mcc_test_mode',
 				'name'	=> __( 'Test mode', 'woocommerce' ),
 				'type'	=> 'checkbox',
-				'desc'	=> __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server.', 'mycryptocheckout' ),
+				'desc'	=> __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server. No payments will be processed in this mode.', 'mycryptocheckout' ),
 			],
 			'mcc_gateway_name' =>
 			[

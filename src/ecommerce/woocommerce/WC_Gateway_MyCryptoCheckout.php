@@ -48,7 +48,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		];
 		$r[ 'test_mode' ] = [
 			'title'       => __( 'Test mode', 'mycryptocheckout' ),
-			'label'       => __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server.', 'mycryptocheckout' ),
+			'label'       => __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server. No payments will be processed in this mode.', 'mycryptocheckout' ),
 			'type'        => 'checkbox',
 			'description' => '',
 			'default'     => 'no',
@@ -288,6 +288,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		MyCryptoCheckout()->enqueue_css();
 
 		$options = $this->get_wallet_options();
+
+		$action = MyCryptoCheckout()->new_action( 'woocommerce_payment_fields_wallet_options' );
+		$action->options = $options;
+		$action->execute();
+		$options = $action->options;
+
 		$currencies = array_keys( $options );
 
 		woocommerce_form_field( 'mcc_currency_id',
