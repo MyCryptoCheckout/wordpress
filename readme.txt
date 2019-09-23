@@ -4,9 +4,9 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.64
+Stable tag: 2.65
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 5.2
+Tested up to: 5.2.3
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 95+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -124,6 +124,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - SALT
 - shelterDAO SHEL
+- Space Crowns SMC
 - Spendcoin SPND
 - Status SNT
 - Storiqa STQ
@@ -254,9 +255,12 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.65 20190923 =
+
+* New currency: Space Crowns SMC
 * Fix: Clarify that no payments will be processed in test mode.
 
-= 2.63 20190819 =
+= 2.64 20190819 =
 
 * New currency: Connect Coin XCON
 

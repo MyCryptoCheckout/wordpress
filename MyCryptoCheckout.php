@@ -7,7 +7,7 @@ Description:	Cryptocurrency payment gateway using the MyCryptoCheckout.com servi
 Plugin Name:	MyCryptoCheckout
 Plugin URI:		https://mycryptocheckout.com
 Text Domain:	mycryptocheckout
-Version:		2.64
+Version:		2.65
 */
 
 namespace mycryptocheckout
@@ -62,7 +62,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.64 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.65 );
 	/**
 		@brief		Return the instance of ThreeWP Broadcast.
 		@since		2014-10-18 14:48:37
