@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-SMC:before {
+  content: "\e973";
+}
 .mcc-XCON:before {
   content: "\e972";
 }
