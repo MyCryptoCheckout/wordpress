@@ -175,9 +175,10 @@ trait admin_trait
 			$text =  __( 'Purchase a license for unlimited payments', 'mycryptocheckout' );
 		$row->th( 'key' )->text( $text );
 		$url = $this->api()->get_purchase_url();
+		$text = $account->has_license() ? __( 'Extend my license', 'mycryptocheckout' ) : __( 'Add an unlimited license to my cart', 'mycryptocheckout' );
 		$url = sprintf( '<a href="%s">%s</a> &rArr;',
 			$url,
-			__( 'Add an unlimited license to my cart', 'mycryptocheckout' )
+			$text
 		);
 		$row->td( 'details' )->text( $url );
 
