@@ -55,6 +55,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Digibyte DGB (Including SegWit)
 - Electra ECA
 - Elite 1337
+- Enix ENIX
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
@@ -256,6 +257,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* New currency: Enix ENIX
 * New currency: Peony PNY
 
 = 2.65 20190923 =
