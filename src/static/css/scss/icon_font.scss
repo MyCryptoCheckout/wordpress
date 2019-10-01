@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-ENIX:before {
+  content: "\e974";
+}
 .mcc-SMC:before {
   content: "\e973";
 }

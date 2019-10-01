@@ -253,6 +253,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-ENIX:before {
+  content: "\e974"; }
+
 .mcc-SMC:before {
   content: "\e973"; }
 
@@ -671,6 +674,8 @@
   color: #F37721; }
 .mcc_currency_icons.color i.mcc-ECA {
   color: #bd01fe; }
+.mcc_currency_icons.color i.mcc-ENIX {
+  color: #18CCEA; }
 .mcc_currency_icons.color i.mcc-ENJ {
   color: #9368fe; }
 .mcc_currency_icons.color i.mcc-EOS {
