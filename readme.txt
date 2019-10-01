@@ -61,6 +61,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
 - NEM XEM
+- Peony PNY
 - SmartCash SMART
 - Spider VPS SPDR
 - Stellar XLM
@@ -254,6 +255,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: Peony PNY
 
 = 2.65 20190923 =
 
