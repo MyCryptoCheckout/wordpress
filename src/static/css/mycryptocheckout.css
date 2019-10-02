@@ -253,6 +253,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-HEAT:before {
+  content: "\e976"; }
+
 .mcc-PNY:before {
   content: "\e975"; }
 
@@ -697,6 +700,8 @@
   color: #7F27FF; }
 .mcc_currency_icons.color i.mcc-GUSD {
   color: #07c4e1; }
+.mcc_currency_icons.color i.mcc-HEAT {
+  color: #FF0701; }
 .mcc_currency_icons.color i.mcc-HERB {
   color: #60AC04; }
 .mcc_currency_icons.color i.mcc-HT {
