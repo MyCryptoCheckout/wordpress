@@ -37,6 +37,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-PNY:before {
+  content: "\e975";
+}
 .mcc-ENIX:before {
   content: "\e974";
 }
