@@ -45,8 +45,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
-- Bitsmdo BSD
-- CatoCoin CATO
 - CloakCoin CLOAK
 - ColossusXT COLX
 - CrypticCoin CRYP
@@ -107,8 +105,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Invacio INV
 - Kubo Coin KUBO
 - Kyber Network KNC
-- Latino Token LATINO
-- L'île LILE
 - Loom LOOM
 - Luxcess Group Token LXC
 - Maker MKR
@@ -125,7 +121,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Raiden RDN
 - Request REQ
 - SALT
-- shelterDAO SHEL
 - Space Crowns SMC
 - Spendcoin SPND
 - Status SNT
@@ -151,7 +146,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 - ActivEightCoin ACTIV
 - BitTorrent BTT
-- TRONBITCOIN TBTC
 - Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
 
 = WAVES Tokens supported (Including Waves Client): =
