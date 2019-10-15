@@ -98,6 +98,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Gemini Dollar GUSD
 - Gifto GTO
 - Golem GNT
+- Golfcoin GOLF
 - Herbalist Token HERB
 - Huobi Token HT
 - Hype Token HYPE
