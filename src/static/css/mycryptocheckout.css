@@ -227,9 +227,15 @@
   width: auto; }
 
 .woocommerce-checkout #payment ul.wc_payment_methods li.payment_method_mycryptocheckout label .mcc_currency_icons {
-  display: inline;
-  margin-left: 5px;
-  word-break: break-all; }
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  word-break: break-all;
+  word-wrap: break-word; }
 
 @font-face {
   font-family: 'mcc';
@@ -247,7 +253,7 @@
   line-height: 1;
   color: #000;
   font-size: 22px;
-  margin: 0 1px;
+  margin: 5px 2px;
   vertical-align: middle;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
