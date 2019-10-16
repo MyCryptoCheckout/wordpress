@@ -4,9 +4,9 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.65
+Stable tag: 2.66
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 5.2.3
+Tested up to: 5.3
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 95+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -251,6 +251,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+= 2.66 20191016 =
 
 * New currency: Golfcoin GOLF
 * New currency: Enix ENIX
