@@ -252,6 +252,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* New currency: Golfcoin GOLF
 * New currency: Enix ENIX
 * New currency: Peony PNY
 
