@@ -250,18 +250,10 @@ var mycryptocheckout_checkout_javascript = function( data )
 		{
 			var window_web3 = false;
 			// Privacy mode enabled?
-			if ( window.ethereum )
+			if ( typeof window.ethereum !== 'undefined' )
 			{
-				if ( typeof window.ethereum.selectedAddress === 'undefined')
-				{
-					window_web3 = new Web3(window.ethereum);
-					await window.ethereum.enable();
-
-				}
-				else
-				{
-					window_web3 = new Web3(window.ethereum);
-				}
+				window_web3 = new Web3(window.ethereum);
+				await window.ethereum.enable();
 			}
 
 			if ( contractInstance === false )
