@@ -57,6 +57,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
+- Heat HEAT
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
 - NEM XEM
@@ -255,6 +256,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 = 2.66 20191016 =
 
 * New currency: Golfcoin GOLF
+* New currency: Heat HEAT
 * New currency: Enix ENIX
 * New currency: Peony PNY
 
