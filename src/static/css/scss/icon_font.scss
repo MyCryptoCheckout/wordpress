@@ -38,6 +38,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-USDT_TRC20:before {
+  content: "\e978";
+}
+.mcc-PLA:before {
+  content: "\e97a";
+}
 .mcc-GOLF:before {
   content: "\e977";
 }

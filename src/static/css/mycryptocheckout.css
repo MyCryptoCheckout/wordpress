@@ -259,6 +259,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-USDT_TRC20:before {
+  content: "\e978"; }
+
+.mcc-PLA:before {
+  content: "\e97a"; }
+
 .mcc-GOLF:before {
   content: "\e977"; }
 
@@ -777,6 +783,8 @@
   color: #302C2C; }
 .mcc_currency_icons.color i.mcc-PIEG {
   color: #bc181e; }
+.mcc_currency_icons.color i.mcc-PLA {
+  color: #FECB00; }
 .mcc_currency_icons.color i.mcc-PNY {
   color: #a29667; }
 .mcc_currency_icons.color i.mcc-POLY {
@@ -834,7 +842,9 @@
 .mcc_currency_icons.color i.mcc-USDT {
   color: #229A77; }
 .mcc_currency_icons.color i.mcc-USDT_ERC20 {
-  color: #229A77; }
+  color: #282828; }
+.mcc_currency_icons.color i.mcc-USDT_TRC20 {
+  color: #000000; }
 .mcc_currency_icons.color i.mcc-VERI {
   color: #FF9933; }
 .mcc_currency_icons.color i.mcc-VIA {

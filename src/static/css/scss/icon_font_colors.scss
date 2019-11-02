@@ -242,6 +242,9 @@
 		&.mcc-PIEG {
 			color: #bc181e;
 		}
+		&.mcc-PLA {
+  			color: #FECB00;
+		}
 		&.mcc-PNY {
  			color: #a29667;
 		}
@@ -327,7 +330,10 @@
 			color: #229A77;
 		}
 		&.mcc-USDT_ERC20 {
-  			color: #229A77;
+  			color: #282828;
+		}
+		&.mcc-USDT_TRC20 {
+  			color: #000000;
 		}
 		&.mcc-VERI {
 			color: #FF9933;
