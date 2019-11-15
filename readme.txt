@@ -56,6 +56,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Enix ENIX
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
+- FREE Coin
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Heat HEAT
 - Litecoin LTC (Including SegWit, HD wallets)
@@ -63,6 +64,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - NEM XEM
 - Peony PNY
 - SmartCash SMART
+- SPAZ Swapcoinz
 - Spider VPS SPDR
 - Stellar XLM
 - TRON TRX
@@ -252,6 +254,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: ABYCoin ABYCOIN
+* New currency: FREE Coin
+* New currency: SPAZ Swapcoinz
 
 = 2.67 20191016 =
 

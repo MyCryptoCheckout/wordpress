@@ -83,6 +83,7 @@ class Account
 	**/
 	public function send_client_account_data( \mycryptocheckout\api\v2\Client_Account_Data $client_account_data )
 	{
+		remove_filter( 'http_request_args', 'trp_strip_trpst_from_requests', 10, 2 );
 		$result = parent::send_client_account_data( $client_account_data );
 		wp_cache_flush();
 		return $result;
