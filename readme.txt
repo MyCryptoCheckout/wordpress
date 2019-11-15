@@ -65,7 +65,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - SmartCash SMART
 - Spider VPS SPDR
 - Stellar XLM
-- TokenPay TPAY
 - TRON TRX
 - TurtleNetwork TN
 - Ultragate ULG
@@ -80,13 +79,11 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 - 0x ZRX
 - Academy Token ACAD
-- ADULTEUM ADULT
 - Aeternity AE
 - Aragon ANT
 - Augur REP
 - Bancor BNT
 - Basic Attention Token BAT
-- Binance Coin BNB
 - Chainlink LINK
 - Connect Coin XCON
 - Dai DAI
