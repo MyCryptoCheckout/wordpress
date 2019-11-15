@@ -38,6 +38,15 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-FREE:before {
+  content: "\e979";
+}
+.mcc-ABYCOIN:before {
+  content: "\e97b";
+}
+.mcc-SPAZ:before {
+  content: "\e97c";
+}
 .mcc-USDT_TRC20:before {
   content: "\e978";
 }
