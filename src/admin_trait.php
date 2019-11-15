@@ -167,6 +167,9 @@ trait admin_trait
 			);
 			$row->td( 'details' )->text( $text );
 		}
+		else
+		{
+		}
 
 		$row = $table->head()->row();
 		if ( $account->has_license() )
@@ -880,6 +883,12 @@ trait admin_trait
 		$hourly_cron = $form->secondary_button( 'hourly_cron' )
 			->value( __( 'Run hourly cron job', 'mycryptocheckout' ) );
 
+		$form->markup( 'm_show_expired_license_notifications' )
+			->p(  __( 'Make all expired license notifications appear again.', 'mycryptocheckout' ) );
+
+		$show_expired_license_notifications = $form->secondary_button( 'show_expired_license_notifications' )
+			->value( __( 'Reset expired license notifications', 'mycryptocheckout' ) );
+
 		if ( $form->is_posting() )
 		{
 			$form->post();
@@ -889,6 +898,12 @@ trait admin_trait
 			{
 				do_action( 'mycryptocheckout_hourly' );
 				$r .= $this->info_message_box()->_( __( 'MyCryptoCheckout hourly cron job run.', 'mycryptocheckout' ) );
+			}
+
+			if ( $show_expired_license_notifications->pressed() )
+			{
+				$this->update_site_option( 'expired_license_nag_dismissals', [] );
+				$r .= $this->info_message_box()->_( __( 'Notifications reset! The next time your account is refreshed, you might see an expired license notification. ', 'mycryptocheckout' ) );
 			}
 
 			echo $r;
@@ -928,6 +943,9 @@ trait admin_trait
 
 		// Sort the wallets.
 		$this->add_action( 'wp_ajax_mycryptocheckout_sort_wallets' );
+
+		// Display the expired warning?
+		$this->expired_license()->show();
 	}
 
 	/**
