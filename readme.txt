@@ -115,6 +115,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - OmiseGo OMG
 - onG.social ONG
 - Pi Edutainment Global PIEG
+- PLA Planet
 - Polymath Network POLY
 - Populous PPT
 - Pundi X NPXS
@@ -259,6 +260,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 * New currency: ABYCoin ABYCOIN
 * New currency: FREE Coin
+* New currency: PLA Planet
 * New currency: SPAZ Swapcoinz
 
 = 2.67 20191016 =
