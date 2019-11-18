@@ -167,6 +167,9 @@ trait admin_trait
 			);
 			$row->td( 'details' )->text( $text );
 		}
+		else
+		{
+		}
 
 		$row = $table->head()->row();
 		if ( $account->has_license() )
@@ -886,6 +889,12 @@ trait admin_trait
 		$test_communication = $form->secondary_button( 'test_communication' )
 			->value( __( 'Test communication', 'mycryptocheckout' ) );
 
+		$form->markup( 'm_show_expired_license_notifications' )
+			->p(  __( 'Make all expired license notifications appear again.', 'mycryptocheckout' ) );
+
+		$show_expired_license_notifications = $form->secondary_button( 'show_expired_license_notifications' )
+			->value( __( 'Reset expired license notifications', 'mycryptocheckout' ) );
+
 		if ( $form->is_posting() )
 		{
 			$form->post();
@@ -906,6 +915,12 @@ trait admin_trait
 					$r .= $this->error_message_box()->_( __( 'Communications failure: %s', 'mycryptocheckout' ),
 						$result->message
 					);
+			}
+
+			if ( $show_expired_license_notifications->pressed() )
+			{
+				$this->update_site_option( 'expired_license_nag_dismissals', [] );
+				$r .= $this->info_message_box()->_( __( 'Notifications reset! The next time your account is refreshed, you might see an expired license notification. ', 'mycryptocheckout' ) );
 			}
 
 			echo $r;
@@ -945,6 +960,9 @@ trait admin_trait
 
 		// Sort the wallets.
 		$this->add_action( 'wp_ajax_mycryptocheckout_sort_wallets' );
+
+		// Display the expired warning?
+		$this->expired_license()->show();
 	}
 
 	/**

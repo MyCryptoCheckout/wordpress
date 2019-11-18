@@ -49,7 +49,14 @@ trait api_trait
 	public function mycryptocheckout_retrieve_account()
 	{
 		$this->debug( 'Action mycryptocheckout_retrieve_account called!' );
-		return $this->api()->account()->retrieve();
+		$result = $this->api()->account()->retrieve();
+		if ( $result )
+		{
+			$account = $this->api()->account();
+			if ( isset( $account->data->license_expired ) )
+				$this->expired_license()->add( $account->data->license_expired );
+		}
+		return $result;
 	}
 
 	/**

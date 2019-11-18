@@ -66,6 +66,19 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Return an instance of the license expired handler.
+		@since		2019-11-15 21:07:57
+	**/
+	public function expired_license()
+	{
+		if ( isset( $this->__expired_license ) )
+			return $this->__expired_license;
+
+		$this->__expired_license = new Expired_License();
+		return $this->__expired_license;
+	}
+
+	/**
 		@brief		Return some default gateway strings that are useful here and there.
 		@since		2018-01-02 18:28:52
 	**/
@@ -545,6 +558,12 @@ trait misc_methods_trait
 				@since		2018-10-15 11:01:19
 			**/
 			'account_retrieve_key' => '',
+
+			/**
+				@brief		Dismissals for the expired licenses nag.
+				@since		2019-11-15 21:06:15
+			**/
+			'expired_license_nag_dismissals' => [],
 
 			/**
 				@brief		Fixed amount markup of products for using MyCryptoCheckout as the payment.
