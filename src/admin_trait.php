@@ -875,10 +875,16 @@ trait admin_trait
 		$r = '';
 
 		$form->markup( 'm_hourly_cron' )
-			->p(  __( 'The hourly run cron job will do things like update the account information, exchange rates, send unsent data to the API server, etc.', 'mycryptocheckout' ) );
+			->p( __( 'The hourly run cron job will do things like update the account information, exchange rates, send unsent data to the API server, etc.', 'mycryptocheckout' ) );
 
 		$hourly_cron = $form->secondary_button( 'hourly_cron' )
 			->value( __( 'Run hourly cron job', 'mycryptocheckout' ) );
+
+		$form->markup( 'm_test_communication' )
+			->p( __( "Test the communication with the API server. If it doesn't work, then there is a conflict with another plugin or the theme.", 'mycryptocheckout' ) );
+
+		$test_communication = $form->secondary_button( 'test_communication' )
+			->value( __( 'Test communication', 'mycryptocheckout' ) );
 
 		if ( $form->is_posting() )
 		{
@@ -889,6 +895,17 @@ trait admin_trait
 			{
 				do_action( 'mycryptocheckout_hourly' );
 				$r .= $this->info_message_box()->_( __( 'MyCryptoCheckout hourly cron job run.', 'mycryptocheckout' ) );
+			}
+
+			if ( $test_communication->pressed() )
+			{
+				$result = $this->api()->test_communication();
+				if ( $result->result == 'ok' )
+					$r .= $this->info_message_box()->_( __( 'Success! %s', 'mycryptocheckout' ), $result->message );
+				else
+					$r .= $this->error_message_box()->_( __( 'Communications failure: %s', 'mycryptocheckout' ),
+						$result->message
+					);
 			}
 
 			echo $r;
