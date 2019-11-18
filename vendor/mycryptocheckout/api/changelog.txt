@@ -1,3 +1,7 @@
+2.06		20191119
+
+Add test communication function.
+
 2.05		20190613
 
 Return JSON error info.

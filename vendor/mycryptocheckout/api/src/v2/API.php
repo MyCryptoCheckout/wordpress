@@ -263,6 +263,9 @@ abstract class API
 					// Mark the local payment as complete.
 					$this->payments()->complete_local( $payment );
 				break;
+				case 'test_communication':
+					$this->json_reply( [ 'result' => 'ok', 'message' => date( 'Y-m-d H:i:s' ) ] );
+				break;
 				case 'update_account':
 					// Save our new account data.
 					$new_account_data = (object) (array) $message->account;
@@ -304,5 +307,14 @@ abstract class API
 		$data[ 'domain' ] = $this->get_client_url();
 		$data[ 'domain_key' ] = $account->get_domain_key();
 		return $this->send_post( $url, $data );
+	}
+
+	/**
+		@brief		Test basic communication with the client in realtime.
+		@since		2019-11-15 23:04:31
+	**/
+	public function test_communication()
+	{
+		return $this->send_post_with_account( 'test_communication', [] );
 	}
 }
