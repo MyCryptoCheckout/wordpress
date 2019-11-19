@@ -256,7 +256,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-* New: Add communication test function under tools. Used to check for plugin conflicts preventing the MCC API from correctly communicating with your install.
+* New: Added communication test function under tools. Used to check for plugin conflicts preventing the MCC API from correctly communicating with your install.
+* New: Added license expiration notice.
 
 = 2.68 20191115 =
 
