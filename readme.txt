@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.68
+Stable tag: 2.69
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.3
 
@@ -63,6 +63,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Monero XMR
 - NEM XEM
 - Peony PNY
+- Sinovate SIN
 - SmartCash SMART
 - SPAZ Swapcoinz
 - Spider VPS SPDR
@@ -256,6 +257,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.69 20191121 =
+
+* New currency: Sinovate SIN
 * New: Added communication test function under tools. Used to check for plugin conflicts preventing the MCC API from correctly communicating with your install.
 * New: Added license expiration notice.
 
