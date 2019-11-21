@@ -38,6 +38,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-SIN:before {
+  content: "\e97d";
+}
 .mcc-FREE:before {
   content: "\e979";
 }
