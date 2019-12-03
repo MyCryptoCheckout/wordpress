@@ -18,7 +18,7 @@
   "homepage": "https://github.com/MyCryptoCheckout/wordpress",
   "devDependencies": {
     "@lodder/grunt-postcss": "^1.0.10",
-    "autoprefixer": "^9.7.2",
+    "autoprefixer": "^9.7.3",
     "grunt": "^1.0.4",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0"

@@ -89,7 +89,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Basic Attention Token BAT
 - Chainlink LINK
 - Connect Coin XCON
-- Dai DAI
 - Decentraland MANA
 - DigixDAO DGD
 - Dogecoin DOGE
@@ -113,6 +112,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
+- Multi-collateral DAI
 - OmiseGo OMG
 - onG.social ONG
 - Pi Edutainment Global PIEG
@@ -133,6 +133,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Swapcoinz SPAZ
 - TenXPay PAY
 - Tether USD USDT
+- TBC Mart Token TMT
 - TrueUSD TUSD
 - TuneTrade TXT
 - USD Coin USDC

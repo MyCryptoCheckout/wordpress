@@ -38,6 +38,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-DAI:before {
+  content: "\e90f";
+}
+.mcc-TMT:before {
+  content: "\e97f";
+}
 .mcc-RMESH:before {
   content: "\e97e";
 }
@@ -250,9 +256,6 @@
 }
 .mcc-CRYP:before {
   content: "\e90e";
-}
-.mcc-DAI:before {
-  content: "\e90f";
 }
 .mcc-DASH:before {
   content: "\e910";
