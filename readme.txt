@@ -89,6 +89,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Basic Attention Token BAT
 - Chainlink LINK
 - Connect Coin XCON
+- Multi-collateral DAI DAI
 - Decentraland MANA
 - DigixDAO DGD
 - Dogecoin DOGE
@@ -112,7 +113,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
-- Multi-collateral DAI
 - OmiseGo OMG
 - onG.social ONG
 - Pi Edutainment Global PIEG
@@ -124,6 +124,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - QASH
 - Raiden RDN
 - Request REQ
+- RightMesh RMESH
 - SALT
 - Space Crowns SMC
 - Spendcoin SPND
@@ -257,6 +258,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: ARightMesh RMESH
+* New currency: ATBC Mart Token TMT
+* Switched DAI to "Multi-collateral DAI" version
 
 = 2.70 20191125 =
 
