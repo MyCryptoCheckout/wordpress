@@ -261,7 +261,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 = 2.72 20191209 =
 
-* Fix: New URL for Waves checkout.
+* Fix: New URL for Waves checkout, pointing to the waves.exchange.
 
 = 2.71 20191203 =
 
