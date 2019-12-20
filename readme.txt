@@ -42,6 +42,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = Cryptocurrencies supported: =
 
+- Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
@@ -258,6 +259,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: Binance Coin BNB
+* Fix: WooCommerce: Redirect online "pay now" links directly to "order received" page, since the payment method is already chosen.
 
 = 2.72 20191209 =
 

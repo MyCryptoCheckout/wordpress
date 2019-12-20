@@ -255,6 +255,8 @@ class Currency
 	**/
 	public function validate_address_length( $address, $length )
 	{
+		if ( $length < 1 )
+			return true;
 		if ( ! is_array( $length ) )
 			$length = [ $length ];
 		if ( ! in_array( strlen( $address ), $length ) )

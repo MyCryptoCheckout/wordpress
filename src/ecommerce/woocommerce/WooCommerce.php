@@ -27,6 +27,7 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
 		$this->add_action( 'template_redirect' );
+		$this->add_action( 'before_woocommerce_pay' );
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
 		$this->add_action( 'woocommerce_order_status_cancelled' );
 		$this->add_action( 'woocommerce_order_status_completed' );
@@ -36,6 +37,33 @@ class WooCommerce
 		$this->add_filter( 'woocommerce_payment_gateways' );
 		$this->add_action( 'woocommerce_review_order_before_payment' );
 		$this->add_action( 'woocommerce_sections_general' );
+	}
+
+	/**
+		@brief		If this is an MCC order, redirect to order received immediately.
+		@since		2019-12-11 22:56:26
+	**/
+	public function before_woocommerce_pay()
+	{
+		// Extract the order ID.
+		global $wp;
+		$order_id = intval( $wp->query_vars['order-pay'] );
+
+		// Order must be valid.
+		$order = new \WC_Order( $order_id );
+		if ( ! $order )
+			return;
+
+		// Is this an mcc transaction?
+		$mcc_currency_id = $order->get_meta( '_mcc_currency_id' );
+		if ( ! $mcc_currency_id )
+			return;
+
+		// And now redirect the buyer to the correct page.
+		$url = $order->get_checkout_order_received_url();
+
+		wp_redirect( $url );
+		exit;
 	}
 
 	/**
@@ -207,6 +235,30 @@ class WooCommerce
 			__( 'MyCryptoCheckout details', 'woocommerce' )
 		);
 
+		$attempts = $order->get_meta( '_mcc_attempts' );
+		$payment_id = $order->get_meta( '_mcc_payment_id' );
+
+		if ( $payment_id > 0 )
+		{
+			if ( $payment_id == 1 )
+				$payment_id = __( 'Test', 'mycryptocheckout' );
+			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+				// Expecting 123 BTC to xyzabc
+				sprintf( __( 'MyCryptoCheckout payment ID: %s', 'mycryptocheckout'),
+					$payment_id
+				)
+			);
+		}
+		else
+		{
+			if ( $attempts > 0 )
+				$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
+					sprintf( __( '%d attempts made to contact the API server.', 'mycryptocheckout'),
+						$attempts
+					)
+				);
+		}
+
 		if ( $order->is_paid() )
 			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
 				// Received 123 BTC to xyzabc
@@ -226,30 +278,6 @@ class WooCommerce
 					$order->get_meta( '_mcc_to' )
 				)
 			);
-
-			$attempts = $order->get_meta( '_mcc_attempts' );
-			$payment_id = $order->get_meta( '_mcc_payment_id' );
-
-			if ( $payment_id > 0 )
-			{
-				if ( $payment_id == 1 )
-					$payment_id = __( 'Test', 'mycryptocheckout' );
-				$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-					// Expecting 123 BTC to xyzabc
-					sprintf( __( 'MyCryptoCheckout payment ID: %s', 'mycryptocheckout'),
-						$payment_id
-					)
-				);
-			}
-			else
-			{
-				if ( $attempts > 0 )
-					$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
-						sprintf( __( '%d attempts made to contact the API server.', 'mycryptocheckout'),
-							$attempts
-						)
-					);
-			}
 		}
 
 		echo $r;
