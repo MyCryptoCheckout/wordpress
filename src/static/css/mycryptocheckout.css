@@ -259,6 +259,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-JOB:before {
+  content: "\e980"; }
+
+.mcc-TRDS:before {
+  content: "\e981"; }
+
 .mcc-DAI:before {
   content: "\e90f"; }
 
@@ -755,6 +761,8 @@
   color: #35C1C7; }
 .mcc_currency_icons.color i.mcc-ITM {
   color: #4AAAE0; }
+.mcc_currency_icons.color i.mcc-JOB {
+  color: #211566; }
 .mcc_currency_icons.color i.mcc-KNC {
   color: #188C92; }
 .mcc_currency_icons.color i.mcc-KUBO {
@@ -859,6 +867,8 @@
   color: #000; }
 .mcc_currency_icons.color i.mcc-TPAY {
   color: #3058A6; }
+.mcc_currency_icons.color i.mcc-TRDS {
+  color: #1C05DB; }
 .mcc_currency_icons.color i.mcc-TRX {
   color: #000; }
 .mcc_currency_icons.color i.mcc-TUSD {

@@ -38,6 +38,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-JOB:before {
+  content: "\e980";
+}
+.mcc-TRDS:before {
+  content: "\e981";
+}
 .mcc-DAI:before {
   content: "\e90f";
 }
