@@ -107,6 +107,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Hype Token HYPE
 - IMSmart Token IMT
 - Invacio INV
+- Jobchain JOB
 - Kubo Coin KUBO
 - Kyber Network KNC
 - Loom LOOM
@@ -136,6 +137,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - TenXPay PAY
 - Tether USD USDT
 - TBC Mart Token TMT
+- Traders Token TRDS
 - TrueUSD TUSD
 - TuneTrade TXT
 - USD Coin USDC
@@ -261,6 +263,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 * New currency: Binance Coin BNB
+* New currency: Jobchain JOB
+* New currency: Traders Token TRDS
 * Fix: WooCommerce: Redirect online "pay now" links directly to "order received" page, since the payment method is already chosen.
 
 = 2.72 20191209 =
