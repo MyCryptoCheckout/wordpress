@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.72
+Stable tag: 2.73
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.3
 
@@ -55,6 +55,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Electra ECA
 - Elite 1337
 - Enix ENIX
+- EOS
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
 - FREE Coin
@@ -262,6 +263,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.73 20200102 =
+
+* New currency: EOS
 * New currency: Binance Coin BNB
 * New currency: Jobchain JOB
 * New currency: Traders Token TRDS
