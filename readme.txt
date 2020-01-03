@@ -47,8 +47,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
 - CloakCoin CLOAK
-- ColossusXT COLX
-- CrypticCoin CRYP
 - Dash DASH (Including HD wallets)
 - Decred DCR
 - Digibyte DGB (Including SegWit)
@@ -71,7 +69,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Spider VPS SPDR
 - Stellar XLM
 - TRON TRX
-- TurtleNetwork TN
 - Ultragate ULG
 - Verge XVG
 - Viacoin VIA (Including SegWit, HD wallets)
