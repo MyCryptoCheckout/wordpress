@@ -325,7 +325,7 @@ trait misc_methods_trait
 	public function init_misc_methods_trait()
 	{
 		$this->add_action( 'mycryptocheckout_check_for_valid_payment_id' );
-		$this->add_action( 'mycryptocheckout_generate_checkout_javascript_data' );
+		$this->add_action( 'mycryptocheckout_generate_checkout_javascript_data', 100 );
 	}
 
 	/**
@@ -523,6 +523,18 @@ trait misc_methods_trait
 	{
 		$this->payment_timer_generate_checkout_javascript_data( $action );
 		$this->qr_code_generate_checkout_javascript_data( $action );
+
+		// ENS address. This requires finding the wallet that has this address and extracting the ENS address from it.
+		$to = $action->data->get( 'to' );
+		$wallets = $this->wallets();
+		foreach( $wallets as $wallet )
+		{
+			if ( $wallet->get_address() != $to )
+				continue;
+			$ens_address = $wallet->get( 'ens_address' );
+			if ( $ens_address != '' )
+				$action->data->set( 'ens_address', $ens_address );
+		}
 	}
 
 	/**

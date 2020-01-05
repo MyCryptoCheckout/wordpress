@@ -571,6 +571,18 @@ trait admin_trait
 			->trim()
 			->value( $wallet->get_address() );
 
+		$ens_address =( $currency->id == 'ETH' || isset( $currency->erc20 ) );
+		if ( $ens_address )
+		{
+			$ens_address_input = $fs->text( 'ens_address' )
+				->description( __( 'The ENS address of your wallet to which you want to receive funds. The resolving address must match your normal address.', 'mycryptocheckout' ) )
+				// Input label
+				->label( __( 'ENS Address', 'mycryptocheckout' ) )
+				->size( 32 )
+				->trim()
+				->value( $wallet->get( 'ens_address' ) );
+		}
+
 		$wallet_enabled = $fs->checkbox( 'wallet_enabled' )
 			->checked( $wallet->enabled )
 			->description( __( 'Is this wallet enabled and ready to receive funds?', 'mycryptocheckout' ) )
@@ -666,6 +678,9 @@ trait admin_trait
 					$wallet->enabled = $wallet_enabled->is_checked();
 					if ( $currency->supports( 'confirmations' ) )
 						$wallet->confirmations = $confirmations->get_filtered_post_value();
+
+					if ( $ens_address )
+						$wallet->set( 'ens_address', $ens_address_input->get_filtered_post_value() );
 
 					if ( $currency->supports( 'btc_hd_public_key' ) )
 						if ( function_exists( 'gmp_abs' ) )

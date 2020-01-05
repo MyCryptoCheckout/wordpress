@@ -506,6 +506,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_metamask();
 		$$.maybe_waves_link();
 		$$.maybe_browser_link();
+		$$.maybe_ens_address();
 	}
 
 	/**
@@ -544,6 +545,19 @@ var mycryptocheckout_checkout_javascript = function( data )
 		var $div = $( '<div>' );
 		$div.html( html );
 		$div.appendTo( $$.$payment_buttons );
+	}
+
+	/**
+		@brief		Add the alternate ENS address if it exists.
+		@since		2020-01-05 22:52:27
+	**/
+	$$.maybe_ens_address = function()
+	{
+		if ( $$.data.ens_address === undefined )
+			return;
+		$ens_address = $( '<br/><span class="ens_address">ENS address<span class="to_input">' + $$.data.ens_address + '</span></span>' );
+		$ens_address.appendTo( $( 'p', $$.$div ).first() );
+		$$.clipboard_inputs();
 	}
 
 	/**
