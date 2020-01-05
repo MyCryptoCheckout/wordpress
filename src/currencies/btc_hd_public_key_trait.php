@@ -153,7 +153,7 @@ trait btc_hd_public_key_trait
 		}
 		$action->wallet->address = $new_address;
 
-		// Increse the path value.
+		// Increase the path value.
 		$path_key = 'btc_hd_public_key_generate_address_path';
 		$path_value = $action->wallet->get( $path_key, 0 );
 		$path_value++;
