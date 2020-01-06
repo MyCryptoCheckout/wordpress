@@ -274,21 +274,24 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		$$.$metamask.click( async function()
 		{
-			var window_web3 = false;
-			// Privacy mode enabled?
-			if ( typeof window.ethereum !== 'undefined' )
-			{
-				window_web3 = new Web3(window.ethereum);
-				await window.ethereum.enable();
-			}
+			// Override web3 with our included version.
+			const web3 = new Web3(window.web3.currentProvider);
+
+			console.log( 'Using web3 version', web3.version );
+
+			let accounts = await web3.eth.getAccounts();
+			web3.eth.defaultAccount = accounts[0]
+
+			await window.ethereum.enable();
 
 			if ( contractInstance === false )
 			{
-				window_web3.eth.sendTransaction(
+				web3.eth.sendTransaction(
 				{
 					// From is not necessary.
+					'from' : web3.eth.defaultAccount,
 					to: $$.mycryptocheckout_checkout_data.to,
-					value: window_web3.toWei(
+					value: web3.utils.toWei(
 						$$.mycryptocheckout_checkout_data.amount,
 						$$.mycryptocheckout_checkout_data.supports.metamask_currency
 					),
@@ -312,7 +315,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					$$.mycryptocheckout_checkout_data.to,
 					amount,
 					{
-						'from' : window_web3.eth.accounts[0],		// First available.
+						'from' : web3.eth.defaultAccount,
 					},
 					( function(err,result)
 					{
