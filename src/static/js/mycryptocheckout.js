@@ -497,6 +497,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.$div.addClass( 'mycryptocheckout' );
 		$$.mycryptocheckout_checkout_data = $$.extract_data( $( '#mycryptocheckout_checkout_data' ) );
 		console.log( 'MyCryptoCheckout: Checkout data', $$.mycryptocheckout_checkout_data );
+		$$.maybe_ens_address();
 		$$.clipboard_inputs();
 		$$.maybe_hide_woocommerce_order_overview();
 		$$.maybe_upgrade_divs();
@@ -506,7 +507,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_metamask();
 		$$.maybe_waves_link();
 		$$.maybe_browser_link();
-		$$.maybe_ens_address();
 	}
 
 	/**
@@ -555,9 +555,17 @@ var mycryptocheckout_checkout_javascript = function( data )
 	{
 		if ( $$.data.ens_address === undefined )
 			return;
-		$ens_address = $( '<br/><span class="ens_address">ENS address<span class="to_input">' + $$.data.ens_address + '</span></span>' );
-		$ens_address.appendTo( $( 'p', $$.$div ).first() );
-		$$.clipboard_inputs();
+//		$ens_address = $( '<br/><span class="ens_address">ENS <span class="to_input">' + $$.data.ens_address + '</span></span>' );
+
+		// Create a new to
+		var $p = $( 'p', $$.$div ).first();
+		var $to = $( '.to', $p );
+		$p.append( '<br>' );
+		$p.append( 'To ' );
+		$to.clone().appendTo( $p );
+
+		// Change the first to ens.
+		$( '.to .to_input', $p ).first().html( $$.data.ens_address );
 	}
 
 	/**
