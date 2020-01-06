@@ -1,6 +1,10 @@
 // payment buttons wrapper
 .payment_buttons {
 	display: block;
+	a {
+		display: inline-block;
+		outline: none;
+	}
 }
 
 // Metamask button

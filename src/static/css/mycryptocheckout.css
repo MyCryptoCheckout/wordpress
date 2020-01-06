@@ -119,6 +119,9 @@
 
 .payment_buttons {
   display: block; }
+  .payment_buttons a {
+    display: inline-block;
+    outline: none; }
 
 .metamask_payment {
   display: inline-block;
