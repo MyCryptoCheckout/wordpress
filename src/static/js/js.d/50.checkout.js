@@ -130,9 +130,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 	{
 		if ( $$.data.ens_address === undefined )
 			return;
-//		$ens_address = $( '<br/><span class="ens_address">ENS <span class="to_input">' + $$.data.ens_address + '</span></span>' );
 
-		// Create a new to
+		// Create a new To, which is the same as the old.
 		var $p = $( 'p', $$.$div ).first();
 		var $to = $( '.to', $p );
 		$p.append( '<br>' );
@@ -140,7 +139,12 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$to.clone().appendTo( $p );
 
 		// Change the first to ens.
-		$( '.to .to_input', $p ).first().html( $$.data.ens_address );
+		$( '.to', $p ).first()
+			.removeClass( 'to' )
+			.addClass( 'ens_address' );
+
+		// And put the ENS address in the span.
+		$( '.ens_address .to_input' ).html( $$.data.ens_address );
 	}
 
 	/**
