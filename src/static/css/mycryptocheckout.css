@@ -52,7 +52,7 @@
   .mycryptocheckout.online_payment_instructions .wf-wrap .wf-container-main #content .woocommerce .wc-complete-wrap .wc-side-column .mycryptocheckout .to .to_input.clipboardable {
     font-size: 12px; }
 
-.mycryptocheckout .to .to_input input {
+.mycryptocheckout .to .to_input input, .mycryptocheckout .ens_address .to_input input {
   max-width: 510px;
   margin-bottom: 5px; }
 .mycryptocheckout .amount .to_input input {
