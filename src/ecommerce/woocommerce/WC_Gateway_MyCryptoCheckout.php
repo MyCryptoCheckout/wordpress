@@ -210,6 +210,20 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				$total = preg_replace( '/[^0-9\.\,]+/', '', $total );
 			}
 
+		// No total? Perhaps we are on the pay-for-order page.
+		if ( $total == 0 )
+		{
+			if ( isset( $_REQUEST[ 'pay_for_order' ] ) )
+			{
+				$order = wc_get_order_id_by_order_key( $_REQUEST[ 'key' ] );
+				if ( $order )
+				{
+					$order = new \WC_Order( $order );
+					$total = $order->get_total();
+				}
+			}
+		}
+
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
 			'amount' => $total,
 			'original_currency' => get_woocommerce_currency(),
@@ -321,6 +335,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		// Reduce stock levels
 		wc_reduce_stock_levels( $order_id );
+
+		if ( isset( $_POST[ 'mcc_currency_id' ] ) )
+		{
+			MyCryptoCheckout()->woocommerce->woocommerce_checkout_create_order( $order, [] );
+			$order->save();
+		}
 
 		MyCryptoCheckout()->check_for_valid_payment_id( [
 			'post_id' => $order_id,
