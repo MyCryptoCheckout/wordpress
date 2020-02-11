@@ -265,6 +265,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-FRTS:before {
+  content: "\e982"; }
+
 .mcc-JOB:before {
   content: "\e980"; }
 
@@ -739,6 +742,8 @@
   color: #7D0A7F; }
 .mcc_currency_icons.color i.mcc-FREE {
   color: #F7B930; }
+.mcc_currency_icons.color i.mcc-FRTS {
+  color: #ED6D00; }
 .mcc_currency_icons.color i.mcc-FUN {
   color: #ED1968; }
 .mcc_currency_icons.color i.mcc-GOLF {

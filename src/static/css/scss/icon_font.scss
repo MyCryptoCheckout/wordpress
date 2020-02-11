@@ -38,6 +38,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-FRTS:before {
+  content: "\e982";
+}
 .mcc-JOB:before {
   content: "\e980";
 }
