@@ -52,9 +52,12 @@
   .mycryptocheckout.online_payment_instructions .wf-wrap .wf-container-main #content .woocommerce .wc-complete-wrap .wc-side-column .mycryptocheckout .to .to_input.clipboardable {
     font-size: 12px; }
 
-.mycryptocheckout .to .to_input input, .mycryptocheckout .ens_address .to_input input {
+.mycryptocheckout .to .to_input input {
   max-width: 510px;
   margin-bottom: 5px; }
+.mycryptocheckout .ens_address .to_input input {
+  max-width: 510px;
+  margin-bottom: 10px; }
 .mycryptocheckout .amount .to_input input {
   max-width: 275px;
   margin-bottom: 10px; }
@@ -261,6 +264,9 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
+
+.mcc-FRTS:before {
+  content: "\e982"; }
 
 .mcc-JOB:before {
   content: "\e980"; }
@@ -736,6 +742,8 @@
   color: #7D0A7F; }
 .mcc_currency_icons.color i.mcc-FREE {
   color: #F7B930; }
+.mcc_currency_icons.color i.mcc-FRTS {
+  color: #ED6D00; }
 .mcc_currency_icons.color i.mcc-FUN {
   color: #ED1968; }
 .mcc_currency_icons.color i.mcc-GOLF {

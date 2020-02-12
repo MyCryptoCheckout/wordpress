@@ -79,9 +79,13 @@
 
 // Payment page address and amount inputs
 .mycryptocheckout {
-	.to .to_input input, .ens_address .to_input input {
+	.to .to_input input {
 		max-width: 510px;
 		margin-bottom: 5px;
+	}
+	.ens_address .to_input input {
+		max-width: 510px;
+		margin-bottom: 10px;
 	}
 	.amount .to_input input {
 		max-width: 275px;
