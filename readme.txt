@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.73
+Stable tag: 2.74
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.3
 
@@ -46,7 +46,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
-- CloakCoin CLOAK
 - Dash DASH (Including HD wallets)
 - Decred DCR
 - Digibyte DGB (Including SegWit)
@@ -65,7 +64,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Peony PNY
 - Sinovate SIN
 - SmartCash SMART
-- SPAZ Swapcoinz
 - Spider VPS SPDR
 - Stellar XLM
 - TRON TRX
@@ -95,12 +93,12 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Dragonchain DRGN
 - Enjin Coin ENJ
 - FREE Coin FREE
+- FRTS Coin FRTS
 - FunFair FUN
 - Gemini Dollar GUSD
 - Gifto GTO
 - Golem GNT
 - Golfcoin GOLF
-- Herbalist Token HERB
 - Huobi Token HT
 - Hype Token HYPE
 - IMSmart Token IMT
@@ -127,9 +125,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - RightMesh RMESH
 - SALT
 - Space Crowns SMC
-- Spendcoin SPND
 - Status SNT
-- Storiqa STQ
 - Storm STORM
 - Swapcoinz SPAZ
 - TenXPay PAY
@@ -137,7 +133,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - TBC Mart Token TMT
 - Traders Token TRDS
 - TrueUSD TUSD
-- TuneTrade TXT
 - USD Coin USDC
 - Veritaseum VERI
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
@@ -148,7 +143,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
-- ActivEightCoin ACTIV
 - BitTorrent BTT
 - Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
 
@@ -159,7 +153,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - CoffeeCoin COF
 - CopyrightCoins CCIM
 - Organic Token ORGT
-- Tokes TKS
 - Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
@@ -255,6 +248,12 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 
 == Changelog ==
+
+= 2.74 20200212 =
+
+* New currency: FRTS Coin FRTS
+* New: Added ENS Ethereum wallet address support.
+* Added experimental payment spread function to the WooCommerce gateway, which helps webshops with 100s of sales per minute.
 
 = 2.73 20200102 =
 

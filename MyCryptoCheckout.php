@@ -7,7 +7,7 @@ Description:	Cryptocurrency payment gateway using the MyCryptoCheckout.com servi
 Plugin Name:	MyCryptoCheckout
 Plugin URI:		https://mycryptocheckout.com
 Text Domain:	mycryptocheckout
-Version:		2.73
+Version:		2.74
 */
 
 namespace mycryptocheckout

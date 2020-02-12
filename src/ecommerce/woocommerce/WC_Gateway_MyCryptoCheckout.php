@@ -134,6 +134,18 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'step' => 1,
 			],
 		];
+		$r[ 'payment_amount_spread' ] = [
+			'title' => __( 'Payment amount spread', 'mycryptocheckout' ),
+			'type' => 'number',
+			'description' => __( 'If you are anticipating several purchases a second with the same currency, increase this amount to 100 or more to help prevent duplicate amount payments by slightly increasing the payment at random.', 'mycryptocheckout' ),
+			'default' => 0,
+			'custom_attributes' =>
+			[
+				'max' => 1000,
+				'min' => 0,
+				'step' => 1,
+			],
+		];
 		$r[ 'reset_to_defaults' ] = [
 			'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
 			'type'			=> 'checkbox',

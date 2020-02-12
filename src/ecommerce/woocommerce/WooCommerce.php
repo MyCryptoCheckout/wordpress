@@ -27,7 +27,7 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
 		$this->add_action( 'template_redirect' );
-		$this->add_action( 'before_woocommerce_pay' );
+		//$this->add_action( 'before_woocommerce_pay' );
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
 		$this->add_action( 'woocommerce_order_status_cancelled' );
 		$this->add_action( 'woocommerce_order_status_completed' );
@@ -322,6 +322,9 @@ class WooCommerce
 
 		$currency_id = sanitize_text_field( $_POST[ 'mcc_currency_id' ] );
 
+		// Get the gateway instance.
+		$gateway = \WC_Gateway_MyCryptoCheckout::instance();
+
 		// All of the below is just to calculate the amount.
 		$mcc = MyCryptoCheckout();
 
@@ -339,7 +342,22 @@ class WooCommerce
 			'currency_id' => $currency_id,
 		] );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
-		$amount = $currency->find_next_available_amount( $amount );
+		$next_amount = $amount;
+		$next_amounts = [ $amount ];
+		// Increase the next amount by 20.
+		$spread = intval( $gateway->get_option( 'payment_amount_spread' ) );
+		for( $counter = 0; $counter < $spread ; $counter++ )
+		{
+			// Help find_next_available_amount by increasing the value by 1.
+			$precision = $currency->get_decimal_precision();
+			$next_amount = MyCryptoCheckout()->increase_floating_point_number( $next_amount, $precision );
+			// And now find the next amount.
+			$next_amount = $currency->find_next_available_amount( $next_amount );
+			$next_amounts []= $next_amount;
+		}
+
+		// Select a next amount at random.
+		$amount = $next_amounts[ array_rand( $next_amounts ) ];
 
 		// Are we paying in the same currency as the native currency?
 		if ( $currency_id == get_woocommerce_currency() )
@@ -353,8 +371,6 @@ class WooCommerce
 		$payment->amount = $amount;
 		$payment->currency_id = $currency_id;
 
-		// Get the gateway instance.
-		$gateway = \WC_Gateway_MyCryptoCheckout::instance();
 		$test_mode = $gateway->get_option( 'test_mode' );
 		if ( $test_mode == 'yes' )
 		{
