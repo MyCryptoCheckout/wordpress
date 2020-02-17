@@ -343,6 +343,7 @@ class WooCommerce
 		] );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
 		$next_amount = $amount;
+		$next_amount = MyCryptoCheckout()->increase_floating_point_number( $next_amount, $precision );
 		$next_amounts = [ $amount ];
 		// Increase the next amount by 20.
 		$spread = intval( $gateway->get_option( 'payment_amount_spread' ) );

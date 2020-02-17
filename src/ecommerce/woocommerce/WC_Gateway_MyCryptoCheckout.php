@@ -349,10 +349,11 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		wc_reduce_stock_levels( $order_id );
 
 		if ( isset( $_POST[ 'mcc_currency_id' ] ) )
-		{
-			MyCryptoCheckout()->woocommerce->woocommerce_checkout_create_order( $order, [] );
-			$order->save();
-		}
+			if ( $order->get_meta( '_mcc_payment_id' ) < 1 )
+			{
+				MyCryptoCheckout()->woocommerce->woocommerce_checkout_create_order( $order, [] );
+				$order->save();
+			}
 
 		MyCryptoCheckout()->check_for_valid_payment_id( [
 			'post_id' => $order_id,
