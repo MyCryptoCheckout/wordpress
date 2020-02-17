@@ -249,7 +249,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			return;
 
 		// web3 must be supported.
-		if (typeof window.ethereum === 'undefined' && typeof web3 === 'undefined')
+		if (typeof window.ethereum === 'undefined')
 			return;
 
 		if ( !ethereum.isMetaMask)
@@ -278,12 +278,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.$metamask.click( async function()
 		{
 			 // Modern dapp browsers...
-			if ( window.ethereum )
+			if (window.ethereum)
 			{
-				window.web3 = new Web3(web3.currentProvider);
-				console.log( 'Using new web3 version', web3.version );
 				window.web3 = new Web3(ethereum);
-				console.log( 'Using new web3 version', web3.version );
 				try {
 					// Request account access if needed
 					await ethereum.enable();
@@ -337,56 +334,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					console.log( 'User denied account access', error );
 				}
 			}
-			// Legacy dapp browsers...
-			else if (window.web3)
-			{
-				console.log( 'Using old web3.' );
-				window.web3 = new Web3(web3.currentProvider);
-				// Acccounts always exposed
-				if ( contractInstance === false )
-				{
-					web3.eth.sendTransaction(
-					{
-						// From is not necessary.
-						to: $$.mycryptocheckout_checkout_data.to,
-						value: web3.toWei(
-							$$.mycryptocheckout_checkout_data.amount,
-							$$.mycryptocheckout_checkout_data.supports.metamask_currency
-						),
-					}, function (err, transactionHash )
-					{
-						// No error logging for now.
-						console.log( 'Error sending Eth via Metamask', err );
-					}
-					);
-				}
-				else
-				{
-					var amount = $$.mycryptocheckout_checkout_data.amount;
-					// If there is a divider, use it.
-					if ( typeof $$.mycryptocheckout_checkout_data.currency.divider !== 'undefined' )
-						amount *= $$.mycryptocheckout_checkout_data.currency.divider;
-					else
-						amount *= 1000000000000000000;		// This is ETH's decimal system.
 
-						contractInstance.transfer(
-							$$.mycryptocheckout_checkout_data.to,
-							amount,
-							{
-								'from' : web3.eth.accounts[0],		// First available.
-							},
-							( function(err,result)
-							{
-								if( ! err )
-								{
-									// No error logging for now.
-									console.log( 'Error sending Eth via Metamask', result );
-								}
-							}
-							)
-						);
-				}
-			}
 		} );
 	}
 
