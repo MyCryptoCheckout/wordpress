@@ -16,7 +16,9 @@ module.exports = function(grunt) {
     	postcss: {
   			options: {
     			processors: [
-      				require('autoprefixer')({overrideBrowserslist: ['last 10 version']})
+      				require('autoprefixer')({
+						overrideBrowserslist: ['> 0.5%, last 2 versions, Firefox ESR, not dead']
+					})
     			]
   			},
   			dist: {
