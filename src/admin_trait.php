@@ -487,9 +487,9 @@ trait admin_trait
 			}
 		}
 
-		$r .= wpautop( __( 'The table below shows the currencies and wallets you have set up in the plugin. To edit a wallet, click the address.', 'mycryptocheckout' ) );
+		$r .= wpautop( __( 'This table shows the currencies you have setup. To edit a currency, click the address. To sort them, drag the currency name up or down.', 'mycryptocheckout' ) );
 
-		$r .= wpautop( __( 'You can have several wallets in the same currency. The wallets will be used in sequential order.', 'mycryptocheckout' ) );
+		$r .= wpautop( __( 'If you have several wallets of the same currency, they will be used in sequential order.', 'mycryptocheckout' ) );
 
 		$wallets_text = sprintf(
 			// perhaps <a>we can ...you</a>
@@ -502,7 +502,31 @@ trait admin_trait
 			$wallets_text = '<strong>' . $wallets_text . '</strong>';
 		$r .= wpautop( $wallets_text );
 
-		$r .= wpautop( __( 'The wallets can be sorted by dragging their currency name up and down.', 'mycryptocheckout' ) );
+		// WooCommerce message
+		if ( class_exists( 'woocommerce' ) )
+		{
+			$home_url = home_url();
+			$woo_text = sprintf(
+				// perhaps <a>WooCommerce Settings</a>
+				__( "After adding currencies, visit the %sWooCommerce Settings%s to enable the gateway and more.", 'mycryptocheckout' ),
+				'<a href="' . esc_url( $home_url ) . '/wp-admin/admin.php?page=wc-settings&tab=checkout&section=mycryptocheckout">',
+				'</a>'
+			);
+			$r .= wpautop( $woo_text );
+		}
+
+		// EDD message
+		if ( class_exists( 'Easy_Digital_Downloads' ) )
+		{
+			$home_url = home_url();
+			$edd_text = sprintf(
+				// perhaps <a>Easy Digital Downloads Settings</a>
+				__( "After adding currencies, visit the %sEasy Digital Downloads Settings%s to enable the gateway and more.", 'mycryptocheckout' ),
+				'<a href="' . esc_url( $home_url ) . '/wp-admin/edit.php?post_type=download&page=edd-settings&tab=gateways">',
+				'</a>'
+			);
+			$r .= wpautop( $edd_text );
+		}
 
 		$r .= $this->h2( __( 'Current currencies / wallets', 'mycryptocheckout' ) );
 
