@@ -666,8 +666,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 	}
 
 	/**
-		@brief		Maybe generate a metamask payment link.
-		@since		2018-08-27 20:42:19
+			@brief          Maybe generate a metamask payment link.
+			@since          2018-08-27 20:42:19
 	**/
 	$$.maybe_metamask = function()
 	{
@@ -677,6 +677,11 @@ var mycryptocheckout_checkout_javascript = function( data )
 		// web3 must be supported.
 		if (typeof window.ethereum === 'undefined')
 			return;
+
+		// Then backup the good old injected Web3, sometimes it's usefull:
+		window.web3old = window.web3;
+		// And replace the old injected version by the latest build of Web3.js version 1.0.0
+		window.web3 = new Web3(window.web3.currentProvider);
 
 		if ( !ethereum.isMetaMask)
 			return;
@@ -707,9 +712,13 @@ var mycryptocheckout_checkout_javascript = function( data )
 			if (window.ethereum)
 			{
 				window.web3 = new Web3(ethereum);
+
 				try {
 					// Request account access if needed
 					await ethereum.enable();
+					let accounts = await web3.eth.getAccounts();
+					web3.eth.defaultAccount = accounts[ 0 ];
+					var default_account = accounts[ 0 ];
 
 					if ( contractInstance === false )
 					{
@@ -717,7 +726,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 						{
 							// From is not necessary.
 							to: $$.mycryptocheckout_checkout_data.to,
-							value: web3.toWei(
+							value: web3.utils.toWei(
 								$$.mycryptocheckout_checkout_data.amount,
 								$$.mycryptocheckout_checkout_data.supports.metamask_currency
 							),
@@ -737,22 +746,22 @@ var mycryptocheckout_checkout_javascript = function( data )
 						else
 							amount *= 1000000000000000000;		// This is ETH's decimal system.
 
-							contractInstance.transfer(
-								$$.mycryptocheckout_checkout_data.to,
-								amount,
+						contractInstance.transfer(
+							$$.mycryptocheckout_checkout_data.to,
+							amount,
+							{
+								'from' : default_account,		// First available.
+							},
+							( function(err,result)
+							{
+								if( ! err )
 								{
-									'from' : web3.eth.accounts[0],		// First available.
-								},
-								( function(err,result)
-								{
-									if( ! err )
-									{
-										// No error logging for now.
-										console.log( 'Error sending Eth via Metamask', result );
-									}
+									// No error logging for now.
+									console.log( 'Error sending Eth via Metamask', result );
 								}
-								)
-							);
+							}
+							)
+						);
 					}
 
 				} catch (error) {
