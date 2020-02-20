@@ -25,7 +25,8 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Use any crypto wallet you want
 - Automagically detect unique payments using one wallet address
 - Hierarchically deterministic (HD) wallet support
-- 1-Click payment buttons, MetaMask, Waves Client, etc.
+- 1-Click payment buttons, MetaMask, Waves Client.
+- ENS addresses supported.
 - Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
 - Tor support
@@ -48,12 +49,12 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bitcoin Gold BTG
 - Dash DASH (Including HD wallets)
 - Decred DCR
-- Digibyte DGB (Including SegWit)
+- Digibyte DGB (Including SegWit, HD wallets)
 - Electra ECA
 - Elite 1337
 - Enix ENIX
 - EOS
-- Ethereum ETH (Including MetaMask)
+- Ethereum ETH (Including MetaMask, ENS addresses)
 - Ethereum Classic ETC
 - FREE Coin
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
@@ -75,7 +76,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
-= ERC20 tokens supported (Including MetaMask): =
+= ERC20 tokens supported (Including MetaMask, ENS addresses): =
 
 - 0x ZRX
 - Academy Token ACAD
