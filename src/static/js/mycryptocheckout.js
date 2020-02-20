@@ -745,7 +745,10 @@ var mycryptocheckout_checkout_javascript = function( data )
 						if ( typeof $$.mycryptocheckout_checkout_data.currency.divider !== 'undefined' )
 							amount *= $$.mycryptocheckout_checkout_data.currency.divider;
 						else
-							amount *= 1000000000000000000;		// This is ETH's decimal system.
+							amount = web3.utils.toWei( amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency );
+
+						// .transfer loves plain strings.
+						amount = amount + "";
 
 						contractInstance.methods
 							.transfer( $$.mycryptocheckout_checkout_data.to, amount )
