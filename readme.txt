@@ -251,6 +251,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 * Fix: Allow for erc20 transfers with new Metamask.
+* Update: Optimize CSS prefixes.
+* New: Add gateway settings link on currencies page.
+* New: xpub HD wallet support for Digibyte.
 
 = 2.75 20200219 =
 
