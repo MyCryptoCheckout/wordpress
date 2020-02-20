@@ -249,6 +249,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Allow for erc20 transfers with new Metamask.
+
 = 2.75 20200219 =
 
 * Fix: Updated Web3.js version for Metamask (Ethereum) to 1.2.5.

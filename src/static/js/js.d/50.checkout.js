@@ -267,8 +267,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 		var contractInstance = false;
 		if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined' )
 		{
-			var Contract = web3.eth.contract( JSON.parse( $$.mycryptocheckout_checkout_data.supports.metamask_abi ) );
-			contractInstance = Contract.at( $$.mycryptocheckout_checkout_data.currency.contract )
+			var contractInstance = new web3.eth.Contract( JSON.parse( $$.mycryptocheckout_checkout_data.supports.metamask_abi ), $$.mycryptocheckout_checkout_data.currency.contract );
+//			var Contract = web3.eth.contract( JSON.parse( $$.mycryptocheckout_checkout_data.supports.metamask_abi ) );
+//			contractInstance = Contract.at( $$.mycryptocheckout_checkout_data.currency.contract )
 		}
 
 		if ( contractInstance === false )
@@ -320,22 +321,11 @@ var mycryptocheckout_checkout_javascript = function( data )
 						else
 							amount *= 1000000000000000000;		// This is ETH's decimal system.
 
-						contractInstance.transfer(
-							$$.mycryptocheckout_checkout_data.to,
-							amount,
-							{
+						contractInstance.methods
+							.transfer( $$.mycryptocheckout_checkout_data.to, amount )
+							.send( {
 								'from' : default_account,		// First available.
-							},
-							( function(err,result)
-							{
-								if( ! err )
-								{
-									// No error logging for now.
-									console.log( 'Error sending Eth via Metamask', result );
-								}
-							}
-							)
-						);
+							} );
 					}
 
 				} catch (error) {
