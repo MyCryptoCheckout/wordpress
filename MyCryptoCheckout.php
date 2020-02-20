@@ -3,7 +3,7 @@
 Author:			edward_plainview
 Author Email:	edward@plainviewplugins.com
 Author URI:		https://plainviewplugins.com
-Description:	Cryptocurrency payment gateway using the MyCryptoCheckout.com service.
+Description:	Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads.
 Plugin Name:	MyCryptoCheckout
 Plugin URI:		https://mycryptocheckout.com
 Text Domain:	mycryptocheckout
