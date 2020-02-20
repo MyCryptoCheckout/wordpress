@@ -48,6 +48,10 @@ trait btc_hd_public_key_trait
 				$network = NetworkFactory::dash();
 				$prefixes = new BitcoinRegistry();
 			break;
+			case 'DGB':
+				$network = new DigibyteNetwork();
+				$prefixes = new BitcoinRegistry();
+			break;
 			case 'GRS':
 				$network = new GroestlNetwork();
 				$prefixes = new BitcoinRegistry();
@@ -127,6 +131,7 @@ trait btc_hd_public_key_trait
 				$address = $child_key->getAddress( new AddressCreator() )->getAddress();
 			break;
 			case 'DASH':
+			case 'DGB':
 			case 'GRS':
 			case 'LTC':
 			case 'VIA':
