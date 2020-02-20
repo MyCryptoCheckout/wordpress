@@ -32,11 +32,18 @@ class Tests
 	**/
 	public function run()
 	{
-		// Test account.
-		$this->cli->update_account();
+		try
+		{
+			// Test account.
+			$this->cli->update_account();
 
-		$this->test_wallets();
-		$this->test_hd_wallets();
+			$this->test_wallets();
+			$this->test_hd_wallets();
+		}
+		catch( Exception $e )
+		{
+			WP_CLI::line( sprintf( 'FAIL: %s', $e ) );
+		}
 	}
 
 	/**
@@ -50,7 +57,8 @@ class Tests
 
 		foreach( [
 			'BTC' => [
-				'xpub661MyMwAqRbcGkCtDgveovuTzXX4Jnf3ja6kS5iN1ha3mNKaspHRJYzrGkbz6HLsPRJVd7iq9utnE7zBPbYtBRuQN79MLVJumLUwZaToKWX' => [
+				'xpub661MyMwAqRbcGkCtDgveovuTzXX4Jnf3ja6kS5iN1ha3mNKaspHRJYzrGkbz6HLsPRJVd7iq9utnE7zBPbYtBRuQN79MLVJumLUwZaToKWX' =>
+				[
 					0 => '1F9c7oEazFLx5xyA38zhad1jgw7PHcYcJQ',
 					1 => '1PnyjDv7hSZWXLsZA8K7J7VyEf5XQK5Lj8',
 					2 => '1D3bnYGXdN5oV46Rdayshxq8ortJ6P38nX',
@@ -70,6 +78,23 @@ class Tests
 					1 => 'XwuMrYjnEJvxyGDzSP2nK54E3XzqD57THL',
 					2 => 'XhoyJ46B8YYEL8zpm4oNR9XoUNeZr2Ymns',
 					3 => 'XeaAJvVbiDdrxu6GbHq37T5jnxYaReNGeh',
+				],
+			],
+			'DGB' => [
+				'xpub6C8nAML9rZuv9Aa6YEU7dNcFvU4vJwCxe53cCFwvVdxHzHDKz6aVVEMKHQQB19DeL83Z4LMo18bn6ifjbFLcE2DnDAV2yZhiKGtzNHk71fS' =>
+				[
+					0 => 'DPmHeodd9pBsG15cLAxkFAG8kJ2Sft2cr5',
+					1 => 'DSFULbY33sMCp5prDfcAJyZpJtjC6KdEmo',
+				],
+				'ypub6Zfvumx3CmRzsLHpsWrL6o4EQrvTs7bfRn94HeibAGQ4APWcFzq8XYdQLhUokRHobPY2zrAn86UpXj57o3x7x7iu6h4FFyfC3TiHdraThA2' =>
+				[
+					0 => 'SaEuW5pgQH7bfjNd2Yhpwx7otekLKCu7YV',
+					1 => 'SaFcHKzNoirHdemv1qteYB7FmhuDvguRvJ',
+				],
+				'zpub6rhAxgrS7zsTtRj67GdsX5fEcJugo6bcWNyQjHjY8sdq3DX7LxcyoX5kLDKaksSrtwJv5JrNBxaQskVM9vJB56ojLqR7w7pVeutMrHusM54' =>
+				[
+					0 => 'dgb1qwz94lncd2vzzdanxkqc4gm38gs3hc48c2jm7md',
+					1 => 'dgb1qx8zmgwerfsnkdgajhf9mn0xt5j679qy9lm59ag',
 				],
 			],
 			'GRS' => [
@@ -113,6 +138,7 @@ class Tests
 			$currency = $currencies->get( $currency_id );
 			foreach( $pubs as $pub => $addresses )
 			{
+				$small_pub = substr( $pub, 0, 4 );
 				$wallet = $wallets->new_wallet();
 				$wallet->address = 'x';
 				$wallet->currency_id = $currency_id;
@@ -122,8 +148,9 @@ class Tests
 					$wallet->set( 'btc_hd_public_key_generate_address_path', $index );
 					$new_address = $currency->btc_hd_public_key_generate_address( $wallet );
 					if ( $new_address != $address )
-						throw new Exception( sprintf( 'FAIL: %s HD wallet %s is bad: %s not %s', $currency_id, $index, $new_address, $address ) );
-					WP_CLI::line( sprintf( 'PASS: %s HD wallet %s is %s', $currency_id, $index, $new_address ) );
+	//					throw new Exception( sprintf( 'FAIL: %s %s HD wallet %s is bad: %s not %s', $currency_id, $small_pub, $index, $new_address, $address ) );
+						WP_CLI::line( sprintf( 'FAIL: %s %s HD wallet %s is bad: %s not %s', $currency_id, $small_pub, $index, $new_address, $address ) );
+					WP_CLI::line( sprintf( 'PASS: %s %s HD wallet %s is %s', $currency_id, $small_pub, $index, $new_address ) );
 				}
 			}
 		}
