@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.75
+Stable tag: 2.76
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.3
 
@@ -25,8 +25,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Use any crypto wallet you want
 - Automagically detect unique payments using one wallet address
 - Hierarchically deterministic (HD) wallet support
-- 1-Click payment buttons, MetaMask, Waves Client.
-- ENS addresses supported.
+- 1-Click payment buttons, MetaMask, Waves Client, etc.
 - Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
 - Tor support
@@ -49,12 +48,12 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Bitcoin Gold BTG
 - Dash DASH (Including HD wallets)
 - Decred DCR
-- Digibyte DGB (Including SegWit, HD wallets)
+- Digibyte DGB (Including SegWit)
 - Electra ECA
 - Elite 1337
 - Enix ENIX
 - EOS
-- Ethereum ETH (Including MetaMask, ENS addresses)
+- Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
 - FREE Coin
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
@@ -76,7 +75,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
-= ERC20 tokens supported (Including MetaMask, ENS addresses): =
+= ERC20 tokens supported (Including MetaMask): =
 
 - 0x ZRX
 - Academy Token ACAD
@@ -250,10 +249,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.76 20200223 =
+
 * Fix: Allow for erc20 transfers with new Metamask.
-* Update: Optimize CSS prefixes.
-* New: Add gateway settings link on currencies page.
-* New: xpub HD wallet support for Digibyte.
 
 = 2.75 20200219 =
 
