@@ -42,6 +42,9 @@ trait admin_trait
 		$form->id( 'account' );
 		$r = '';
 
+		if ( ! function_exists('curl_version') )
+			$r .= $this->error_message_box()->_( __( 'Your PHP CURL module is missing. MyCryptoCheckout may not work 100% well.', 'mycryptocheckout' ) );
+
 		$public_listing = $form->checkbox( 'public_listing' )
 			->checked( $this->get_site_option( 'public_listing' ) )
 			->description( __( 'Check the box and refresh your account if you want your webshop listed in the upcoming store directory on mycryptocheckout.com. Your store name and URL will be listed.', 'mycryptocheckout' ) )
