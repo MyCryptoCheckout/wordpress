@@ -343,19 +343,22 @@ class WooCommerce
 		] );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
 		$next_amount = $amount;
-		$next_amount = MyCryptoCheckout()->increase_floating_point_number( $next_amount, $precision );
-		$next_amounts = [ $amount ];
+		$precision = $currency->get_decimal_precision();
+
+		$next_amount = $currency->find_next_available_amount( $next_amount );
+		$next_amounts = [ $next_amount ];
+
 		// Increase the next amount by 20.
 		$spread = intval( $gateway->get_option( 'payment_amount_spread' ) );
 		for( $counter = 0; $counter < $spread ; $counter++ )
 		{
 			// Help find_next_available_amount by increasing the value by 1.
-			$precision = $currency->get_decimal_precision();
 			$next_amount = MyCryptoCheckout()->increase_floating_point_number( $next_amount, $precision );
 			// And now find the next amount.
-			$next_amount = $currency->find_next_available_amount( $next_amount );
 			$next_amounts []= $next_amount;
 		}
+
+		MyCryptoCheckout()->debug( 'Next amounts: %s', $next_amounts );
 
 		// Select a next amount at random.
 		$amount = $next_amounts[ array_rand( $next_amounts ) ];
