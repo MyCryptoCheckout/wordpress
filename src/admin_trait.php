@@ -665,6 +665,13 @@ trait admin_trait
 				}
 				$fs->markup( 'm_btc_hd_public_key_generate_address_path' )
 					->p( __( 'The address at index %d is %s.', 'mycryptocheckout' ), $path, $new_address );
+
+				$circa_amount = $fs->number( 'circa_amount' )
+					->description( __( "When using an HD wallet, you can accept amounts that are +- a percent from the requested amount.", 'mycryptocheckout' ) )
+					->label( __( 'Circa amount %', 'mycryptocheckout' ) )
+					->min( 0 )
+					->max( 100 )
+					->value( $wallet->get( 'circa_amount' ) );
 			}
 		}
 
@@ -724,6 +731,7 @@ trait admin_trait
 									throw new Exception( sprintf( 'This public key type is not supported. Please use only: %s', implode( ' or ', $currency->supports->btc_hd_public_key_pubs ) ) );
 							}
 
+							$wallet->set( 'circa_amount', $circa_amount->get_filtered_post_value() );
 							$wallet->set( 'btc_hd_public_key_generate_address_path', $btc_hd_public_key_generate_address_path->get_filtered_post_value() );
 						}
 
