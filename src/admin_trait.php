@@ -667,8 +667,8 @@ trait admin_trait
 					->p( __( 'The address at index %d is %s.', 'mycryptocheckout' ), $path, $new_address );
 
 				$circa_amount = $fs->number( 'circa_amount' )
-					->description( __( "When using an HD wallet, you can accept amounts that are +- a percent from the requested amount.", 'mycryptocheckout' ) )
-					->label( __( 'Circa amount %', 'mycryptocheckout' ) )
+					->description( __( "When using an HD wallet, you can accept amounts that are lower than requested.", 'mycryptocheckout' ) )
+					->label( __( 'Underpayment %', 'mycryptocheckout' ) )
 					->min( 0 )
 					->max( 100 )
 					->value( $wallet->get( 'circa_amount' ) );

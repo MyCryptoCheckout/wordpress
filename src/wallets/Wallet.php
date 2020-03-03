@@ -82,9 +82,16 @@ class Wallet
 					$payment->data()->set( 'monero_private_view_key', $this->get( 'monero_private_view_key' ) );
 				}
 			}
-			$circa_amount = $this->get( 'circa_amount' );
-			if ( $circa_amount > 0 )
-				$payment->data()->set( 'circa_amount', $circa_amount );
+
+			// Only set the circa amount if there is a pub key.
+			$key = $wallet->get( 'btc_hd_public_key' );
+			$key = trim( $key );
+			if ( strlen( $key ) > 16 )		// At least 10 chars of key
+			{
+				$circa_amount = $this->get( 'circa_amount' );
+				if ( $circa_amount > 0 )
+					$payment->data()->set( 'circa_amount', $circa_amount );
+			}
 		}
 	}
 

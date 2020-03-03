@@ -249,6 +249,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* New: Allow underpayment % for HD wallets.
+
 = 2.76 20200223 =
 
 * Fix: Allow for erc20 transfers with new Metamask.
