@@ -83,7 +83,6 @@ class Wallet
 				}
 			}
 			$circa_amount = $this->get( 'circa_amount' );
-			MyCryptoCheckout()->debug( 'Circa: %s', $circa_amount );
 			if ( $circa_amount > 0 )
 				$payment->data()->set( 'circa_amount', $circa_amount );
 		}
