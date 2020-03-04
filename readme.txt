@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.76
+Stable tag: 2.77
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.3
 
@@ -249,7 +249,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-* New: Allow underpayment % for HD wallets.
+= 2.77 20200304 =
+
+* New: Allow underpayment % for HD wallets. See: <a href="https://mycryptocheckout.com/doc/usage/hd-wallet-settings/">https://mycryptocheckout.com/doc/usage/hd-wallet-settings/</a>
 
 = 2.76 20200223 =
 
