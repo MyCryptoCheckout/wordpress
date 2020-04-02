@@ -28,12 +28,14 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_complete_payment' );
 		$this->add_action( 'template_redirect' );
 		//$this->add_action( 'before_woocommerce_pay' );
+		$this->add_action( 'wcs_new_order_created' );
+		$this->add_filter( 'wcs_renewal_order_meta' );
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
-		$this->add_action( 'woocommerce_order_status_cancelled' );
-		$this->add_action( 'woocommerce_order_status_completed' );
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
 		$this->add_filter( 'woocommerce_get_checkout_payment_url', 10, 2 );
+		$this->add_action( 'woocommerce_order_status_cancelled' );
+		$this->add_action( 'woocommerce_order_status_completed' );
 		$this->add_filter( 'woocommerce_payment_gateways' );
 		$this->add_action( 'woocommerce_review_order_before_payment' );
 		$this->add_action( 'woocommerce_sections_general' );
@@ -220,6 +222,35 @@ class WooCommerce
 	}
 
 	/**
+		@brief		Since sub orders are cloned, we need to remove the payment info.
+		@since		2020-03-18 20:21:01
+	**/
+	public function wcs_new_order_created( $order )
+	{
+		MyCryptoCheckout()->debug( 'Deleting payment ID for subscription order %s', $order->get_id() );
+		$order->delete_meta_data( '_mcc_payment_id' );
+		$order->save();
+		return $order;
+	}
+
+	/**
+		@brief		Remove our MCC meta since WCS is nice enough to copy ALL meta from old, expired orders.
+		@since		2020-03-20 15:40:02
+	**/
+	public function wcs_renewal_order_meta( $order_meta )
+	{
+		MyCryptoCheckout()->debug( 'Order meta %s', $order_meta );
+		foreach( $order_meta as $index => $meta )
+		{
+			// Remove all MCC meta.
+			if ( strpos( $meta[ 'meta_key' ], '_mcc_' ) === 0 )
+				unset( $order_meta[ $index ] );
+		}
+		MyCryptoCheckout()->debug( 'Order meta %s', $order_meta );
+		return $order_meta;
+	}
+
+	/**
 		@brief		woocommerce_admin_order_data_after_order_details
 		@since		2017-12-14 20:35:48
 	**/
@@ -348,7 +379,7 @@ class WooCommerce
 		$next_amount = $currency->find_next_available_amount( $next_amount );
 		$next_amounts = [ $next_amount ];
 
-		// Increase the next amount by 20.
+		// Increase the next amount.
 		$spread = intval( $gateway->get_option( 'payment_amount_spread' ) );
 		for( $counter = 0; $counter < $spread ; $counter++ )
 		{
