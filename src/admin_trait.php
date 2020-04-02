@@ -149,10 +149,11 @@ trait admin_trait
 			$row->th( 'key' )->text( __( 'API key', 'mycryptocheckout' ) );
 			$row->td( 'details' )->text( $account->get_domain_key() );
 
-			$row = $table->head()->row();
-			$row->th( 'key' )->text( __( 'Server name', 'mycryptocheckout' ) );
-			$row->td( 'details' )->text( $this->get_client_url() );
 		}
+
+		$row = $table->head()->row();
+		$row->th( 'key' )->text( __( 'Server name', 'mycryptocheckout' ) );
+		$row->td( 'details' )->text( $this->get_client_url() );
 
 		$row = $table->head()->row();
 		$row->th( 'key' )->text( __( 'Account data refreshed', 'mycryptocheckout' ) );
