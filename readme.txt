@@ -251,6 +251,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 = 2.78 20200404 =
 
+* Fix: Increase compatibility with WC Subscriptions plugin.
 * Tweak: Updated WC compatibility tag for v4.0. No other changes needed.
 
 = 2.77 20200304 =
