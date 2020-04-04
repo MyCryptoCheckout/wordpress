@@ -1,13 +1,14 @@
 <?php
 /*
-Author:			edward_plainview
-Author Email:	edward@plainviewplugins.com
-Author URI:		https://plainviewplugins.com
-Description:	Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads.
-Plugin Name:	MyCryptoCheckout
-Plugin URI:		https://mycryptocheckout.com
-Text Domain:	mycryptocheckout
-Version:		2.77
+Author:				edward_plainview
+Author Email:		edward@plainviewplugins.com
+Author URI:			https://plainviewplugins.com
+Description:		Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads.
+Plugin Name:		MyCryptoCheckout
+Plugin URI:			https://mycryptocheckout.com
+Text Domain:		mycryptocheckout
+Version:			2.78
+WC tested up to:	4.0
 */
 
 namespace mycryptocheckout
@@ -62,7 +63,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.77 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.78 );
 	/**
 		@brief		Return the instance of MCC.
 		@since		2014-10-18 14:48:37
