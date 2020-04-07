@@ -249,6 +249,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: QR code warning in checkout javascript when QR codes are disabled.
+
 = 2.78 20200404 =
 
 * Fix: Increase compatibility with WC Subscriptions plugin.

@@ -109,8 +109,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 			return;
 		// Extract the currency name from the qr code, if possible.
 		var currency_name = $$.mycryptocheckout_checkout_data.currency_id;
-		if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
-			currency_name = $$.data.qr_codes[ $$.data.currency_id ].replace( /:.*/, '' );
+		if ( $$.data.qr_codes !== undefined )
+			if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
+				currency_name = $$.data.qr_codes[ $$.data.currency_id ].replace( /:.*/, '' );
 		if( typeof $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url != 'undefined' )
 			var html = $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url;
 		else
