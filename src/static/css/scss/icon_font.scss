@@ -38,6 +38,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-WWTK:before {
+  content: "\e983";
+}
+.mcc-SNG:before {
+  content: "\e984";
+}
 .mcc-FRTS:before {
   content: "\e982";
 }
