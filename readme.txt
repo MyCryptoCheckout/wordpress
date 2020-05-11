@@ -246,6 +246,7 @@ Full searchable docs can be found at <a href="https://mycryptocheckout.com/doc/i
 The following plugins prevent MyCryptoCheckout from working correctly:
 
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
+- <a href="dpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 
 == Changelog ==
 
