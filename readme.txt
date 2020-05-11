@@ -78,7 +78,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 = ERC20 tokens supported (Including MetaMask): =
 
 - 0x ZRX
-- Academy Token ACAD
 - Aeternity AE
 - Aragon ANT
 - Augur REP
@@ -107,7 +106,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Kubo Coin KUBO
 - Kyber Network KNC
 - Loom LOOM
-- Luxcess Group Token LXC
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
@@ -152,7 +150,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - BESTCOIN BEST
 - CoffeeCoin COF
 - CopyrightCoins CCIM
-- Organic Token ORGT
 - Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
