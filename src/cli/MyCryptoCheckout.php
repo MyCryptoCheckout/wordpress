@@ -13,6 +13,16 @@ Generic commands for MCC.
 class MyCryptoCheckout
 {
 	/**
+		@brief		Dump public keys
+		@since		2020-04-24 21:49:01
+	**/
+	public function dump_pub( $args )
+	{
+		$dump_pub = new Dump_Pub( $this );
+		$dump_pub->run( $args );
+	}
+
+	/**
 		Run internal tests.
 
 		* @since		2019-01-09 14:16:42
