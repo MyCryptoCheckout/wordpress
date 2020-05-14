@@ -63,6 +63,13 @@ class Tests
 					1 => '1PnyjDv7hSZWXLsZA8K7J7VyEf5XQK5Lj8',
 					2 => '1D3bnYGXdN5oV46Rdayshxq8ortJ6P38nX',
 				],
+				'zpub6o6r17JTry4VkoxeAFgi8i7QqvzW5GBoStWXNKj2WdhTCEBuL8Aq5JCHW6etRuDwsyJWsNSXjZtUgDhygJFTuZZpxGiYwdVYr33cFXgxk8g' =>
+				[
+					0 => 'bc1qtc4geels0j9dfs5te0huf63nf3r2we0z4u4f3n',
+					1 => 'bc1qpzqgfr64zdt0hupn4aalszeaa2kssm8hk6ngpf',
+					2 => 'bc1qyem9l9vq8e46vn2732tu98vlp7usctzzhv8ea0',
+					3 => 'bc1qfuyjsgpnkfajnm8dapgkhaznwxyc352j8vwqpe',
+				],
 			],
 			'BCH' => [
 				'xpub661MyMwAqRbcF9oUAF1k4RFVbUFWud32pX1rf1QsyHRdcYTnZdoZLand63MMtajoKKMUVRJXDCn7Yj61GCFnuqEexxYzhjwpE4PvWHSwVqK' =>
