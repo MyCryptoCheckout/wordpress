@@ -115,7 +115,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Polymath Network POLY
 - Populous PPT
 - Pundi X NPXS
-- Presearch PRE
 - QASH
 - Raiden RDN
 - Request REQ
