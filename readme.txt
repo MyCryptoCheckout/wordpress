@@ -111,7 +111,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Monaco MCO
 - OmiseGo OMG
 - onG.social ONG
-- Pi Edutainment Global PIEG
 - PLA Planet
 - Polymath Network POLY
 - Populous PPT
