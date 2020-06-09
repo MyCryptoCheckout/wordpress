@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.78
+Stable tag: 2.79
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.3
 
@@ -55,7 +55,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - EOS
 - Ethereum ETH (Including MetaMask)
 - Ethereum Classic ETC
-- FREE Coin
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Heat HEAT
 - Litecoin LTC (Including SegWit, HD wallets)
@@ -245,6 +244,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="dpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 
 == Changelog ==
+
+= 2.79 20200609 =
 
 * New currency: CuraDAI CURA
 * Fix: QR code warning in checkout javascript when QR codes are disabled.
