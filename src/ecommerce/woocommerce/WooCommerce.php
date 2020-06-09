@@ -351,6 +351,11 @@ class WooCommerce
 		if ( $order->get_payment_method() != static::$gateway_id )
 			return;
 
+		$account = MyCryptoCheckout()->api()->account();
+		$available_for_payment = $account->is_available_for_payment();
+
+		MyCryptoCheckout()->debug( 'Creating order! Available: %d', $available_for_payment );
+
 		$currency_id = sanitize_text_field( $_POST[ 'mcc_currency_id' ] );
 
 		// Get the gateway instance.
@@ -372,7 +377,16 @@ class WooCommerce
 			'amount' => $order_total,
 			'currency_id' => $currency_id,
 		] );
+		MyCryptoCheckout()->debug( 'Marking up total: %s %s -> %s', $order_total, $woocommerce_currency, $amount );
 		$amount = $currency->convert( $woocommerce_currency, $amount );
+		if ( $amount == 0 )
+		{
+
+			$account = MyCryptoCheckout()->api()->account();
+			MyCryptoCheckout()->debug( 'Error with conversion! %s', $account );
+		}
+		else
+			MyCryptoCheckout()->debug( 'Conversion: %s', $amount );
 		$next_amount = $amount;
 		$precision = $currency->get_decimal_precision();
 
@@ -393,6 +407,8 @@ class WooCommerce
 
 		// Select a next amount at random.
 		$amount = $next_amounts[ array_rand( $next_amounts ) ];
+
+		MyCryptoCheckout()->debug( 'Amount selected: %s', $amount );
 
 		// Are we paying in the same currency as the native currency?
 		if ( $currency_id == get_woocommerce_currency() )
@@ -421,6 +437,8 @@ class WooCommerce
 
 		$wallet->apply_to_payment( $payment );
 		MyCryptoCheckout()->autosettlements()->apply_to_payment( $payment );
+
+		MyCryptoCheckout()->debug( 'Payment as created: %s', $payment );
 
 		// This stuff should be handled by the Payment object, but the order doesn't exist yet...
 		$order->update_meta_data( '_mcc_amount', $payment->amount );
