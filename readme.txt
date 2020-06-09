@@ -85,6 +85,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Basic Attention Token BAT
 - Chainlink LINK
 - Connect Coin XCON
+- CuraDAI CURA
 - Multi-collateral DAI DAI
 - Decentraland MANA
 - DigixDAO DGD
@@ -245,7 +246,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* New currency: CuraDAI CURA
 * Fix: QR code warning in checkout javascript when QR codes are disabled.
+* Tweak: A lot more debugging info when using WooCommerce.
 
 = 2.78 20200404 =
 
