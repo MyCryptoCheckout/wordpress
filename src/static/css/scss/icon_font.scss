@@ -38,6 +38,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-CURA:before {
+  content: "\e985";
+}
 .mcc-WWTK:before {
   content: "\e983";
 }
