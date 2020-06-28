@@ -85,6 +85,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Chainlink LINK
 - Connect Coin XCON
 - CuraDAI CURA
+- Devil's Dragon DDGN
 - Multi-collateral DAI DAI
 - Decentraland MANA
 - DigixDAO DGD
@@ -109,6 +110,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
+- Media Play Cash MPC
 - OmiseGo OMG
 - onG.social ONG
 - PLA Planet
@@ -244,6 +246,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="dpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: Devil's Dragon DDGN
+* New currency: Media Play Cash MPC
 
 = 2.79 20200609 =
 
