@@ -88,6 +88,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Devil's Dragon DDGN
 - Multi-collateral DAI DAI
 - Decentraland MANA
+- DigitexFutures DGTX
 - DigixDAO DGD
 - Dogecoin DOGE
 - Dragonchain DRGN
@@ -248,6 +249,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 * New currency: Devil's Dragon DDGN
+* New currency: DigitexFutures DGTX
 * New currency: Media Play Cash MPC
 
 = 2.79 20200609 =
