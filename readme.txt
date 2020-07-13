@@ -62,8 +62,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - NEM XEM
 - Peony PNY
 - Sinovate SIN
-- SmartCash SMART
-- Spider VPS SPDR
 - Stellar XLM
 - TRON TRX
 - Ultragate ULG
