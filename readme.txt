@@ -147,7 +147,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 = WAVES Tokens supported (Including Waves Client): =
 
 - ABYCoin ABYCOIN
-- BESTCOIN BEST
 - CoffeeCoin COF
 - CopyrightCoins CCIM
 - Waves World WW
