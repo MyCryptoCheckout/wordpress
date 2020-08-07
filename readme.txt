@@ -128,6 +128,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - TenXPay PAY
 - Tether USD USDT
 - TBC Mart Token TMT
+- TheCash TCH
 - Traders Token TRDS
 - TrueUSD TUSD
 - USD Coin USDC
@@ -245,6 +246,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="dpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: TheCash TCH
 
 = 2.80 20200713 =
 
