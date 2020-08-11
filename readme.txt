@@ -6,7 +6,7 @@ Requires at least: 4.9
 Requires PHP: 5.6
 Stable tag: 2.80
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 5.4.2
+Tested up to: 5.5
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 95+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -50,11 +50,9 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Decred DCR
 - Digibyte DGB (Including SegWit)
 - Electra ECA
-- Elite 1337
 - Enix ENIX
 - EOS
 - Ethereum ETH (Including MetaMask)
-- Ethereum Classic ETC
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Heat HEAT
 - Litecoin LTC (Including SegWit, HD wallets)
@@ -64,7 +62,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Sinovate SIN
 - Stellar XLM
 - TRON TRX
-- Ultragate ULG
 - Verge XVG
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
@@ -77,7 +74,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - 0x ZRX
 - Aeternity AE
 - Aragon ANT
-- Augur REP
 - Bancor BNT
 - Basic Attention Token BAT
 - Chainlink LINK
@@ -99,7 +95,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Golem GNT
 - Golfcoin GOLF
 - Huobi Token HT
-- Hype Token HYPE
 - IMSmart Token IMT
 - Invacio INV
 - Jobchain JOB
@@ -111,7 +106,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Monaco MCO
 - Media Play Cash MPC
 - OmiseGo OMG
-- onG.social ONG
 - PLA Planet
 - Polymath Network POLY
 - Populous PPT
