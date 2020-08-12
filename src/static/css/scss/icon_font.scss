@@ -38,6 +38,15 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-TST:before {
+  content: "\e989";
+}
+.mcc-TCH:before {
+  content: "\e98a";
+}
+.mcc-ROK:before {
+  content: "\e98b";
+}
 .mcc-DDGN:before {
   content: "\e986";
 }
