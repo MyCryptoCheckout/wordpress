@@ -114,6 +114,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Raiden RDN
 - Request REQ
 - RightMesh RMESH
+- Roks ROK
 - SALT
 - Space Crowns SMC
 - Status SNT
@@ -122,6 +123,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - TenXPay PAY
 - Tether USD USDT
 - TBC Mart Token TMT
+- TBC Shopping Token TST
 - TheCash TCH
 - Traders Token TRDS
 - TrueUSD TUSD
