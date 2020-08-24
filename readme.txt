@@ -62,6 +62,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Sinovate SIN
 - Stellar XLM
 - TRON TRX
+- Ultragate ULG
 - Verge XVG
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
