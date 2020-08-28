@@ -153,7 +153,25 @@ class Easy_Digital_Downloads
 			'currency_id' => $currency_id,
 		] );
 		$amount = $currency->convert( $edd_currency, $amount );
-		$amount = $currency->find_next_available_amount( $amount );
+		$next_amount = $currency->find_next_available_amount( $amount );
+		$precision = $currency->get_decimal_precision();
+
+		$next_amounts = [ $next_amount ];
+		$spread = intval( edd_get_option( 'mcc_payment_amount_spread' ) );
+		for( $counter = 0; $counter < $spread ; $counter++ )
+		{
+			// Help find_next_available_amount by increasing the value by 1.
+			$next_amount = MyCryptoCheckout()->increase_floating_point_number( $next_amount, $precision );
+			// And now find the next amount.
+			$next_amounts []= $next_amount;
+		}
+
+		MyCryptoCheckout()->debug( 'Next amounts: %s', $next_amounts );
+
+		// Select a next amount at random.
+		$amount = $next_amounts[ array_rand( $next_amounts ) ];
+
+		MyCryptoCheckout()->debug( 'Amount selected: %s', $amount );
 
 		// Good to go.
 
@@ -355,6 +373,18 @@ class Easy_Digital_Downloads
 				'type' => 'number',
 				'max' => 72,
 				'min' => 1,
+				'step' => 1,
+			],
+			'mcc_payment_amount_spread' =>
+			[
+				'id'   => 'mcc_payment_amount_spread',
+				'default' => 0,
+				'desc' => __( 'If you are anticipating several purchases a second with the same currency, increase this amount to 100 or more to help prevent duplicate amount payments by slightly increasing the payment at random.', 'mycryptocheckout' ),
+				'name' => __( 'Payment amount spread', 'mycryptocheckout' ),
+				'size' => 'regular',
+				'type' => 'number',
+				'max' => 100,
+				'min' => 0,
 				'step' => 1,
 			],
 			'mcc_reset_to_defaults' => [

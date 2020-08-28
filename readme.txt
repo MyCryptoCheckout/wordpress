@@ -243,6 +243,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Added payment spread option to EDD.
+
 = 2.81 20200816 =
 
 * New currency: TheCash TCH
