@@ -56,6 +56,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Heat HEAT
 - Litecoin LTC (Including SegWit, HD wallets)
+- MktCoin MLM
 - Monero XMR
 - NEM XEM
 - Peony PNY
@@ -129,6 +130,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Traders Token TRDS
 - TrueUSD TUSD
 - USD Coin USDC
+- VcashPay VCP
 - Veritaseum VERI
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
