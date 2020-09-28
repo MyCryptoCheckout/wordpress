@@ -38,6 +38,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-VCP:before {
+  content: "\e98c";
+}
+.mcc-MLM:before {
+  content: "\e98d";
+}
 .mcc-TST:before {
   content: "\e989";
 }
