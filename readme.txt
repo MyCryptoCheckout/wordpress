@@ -80,6 +80,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Basic Attention Token BAT
 - Chainlink LINK
 - Connect Coin XCON
+- Crypto.com Coin CRO
 - CuraDAI CURA
 - Devil's Dragon DDGN
 - Multi-collateral DAI DAI
@@ -139,6 +140,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
 = TRON TRC-10 / TRC-20 Tokens supported: =
+- CryptoHours CHS
 
 - BitTorrent BTT
 - Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
@@ -148,6 +150,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - ABYCoin ABYCOIN
 - CoffeeCoin COF
 - CopyrightCoins CCIM
+- Neutrino USD USDN
 - Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
