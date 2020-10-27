@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.82
+Stable tag: 2.83
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.5
 
@@ -247,6 +247,15 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="dpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 
 == Changelog ==
+
+= 2.83 20201027 =
+
+* New currency: Crypto.com Coin CRO
+* New currency: CryptoHours CHS
+* New currency: MktCoin MLM
+* New currency: Neutrino USD USDN
+* New currency: VcashPay VCP
+* Fix: Waves checkout link changed to new Waves exchange URL.
 
 = 2.82 20200828 =
 

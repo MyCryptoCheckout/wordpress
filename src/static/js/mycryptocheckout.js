@@ -811,9 +811,10 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		$$.show_browser_link = false;
 
-		var url = 'https://waves.exchange/#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&referrer=' + encodeURIComponent( window.location ) + '&strict';
+		//var url = 'https://waves.exchange/#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&referrer=' + encodeURIComponent( window.location ) + '&strict';
+		var url = 'https://waves.exchange/sign-in#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&strict';
 		url = $$.replace_keywords( url );
-		var html = '<a class="waves_payment" href="' + url + '"><div class="waves_payment"></div></a>';
+		var html = '<a class="waves_payment" target="_blank" href="' + url + '"><div class="waves_payment"></div></a>';
 		var $div = $( '<div>' );
 		$div.html( html );
 		$div.appendTo( $$.$payment_buttons );
