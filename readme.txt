@@ -44,7 +44,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
-- Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
 - Dash DASH (Including HD wallets)
 - Decred DCR
@@ -54,18 +53,15 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - EOS
 - Ethereum ETH (Including MetaMask)
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
-- Heat HEAT
 - Litecoin LTC (Including SegWit, HD wallets)
 - MktCoin MLM
 - Monero XMR
 - NEM XEM
-- Peony PNY
 - Sinovate SIN
 - Stellar XLM
 - TRON TRX
 - Ultragate ULG
 - Verge XVG
-- Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
 - XRP
 - Zcash ZEC (T-address recipients only)
@@ -109,7 +105,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Monaco MCO
 - Media Play Cash MPC
 - OmiseGo OMG
-- PLA Planet
 - Polymath Network POLY
 - Populous PPT
 - Pundi X NPXS
@@ -119,7 +114,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - RightMesh RMESH
 - Roks ROK
 - SALT
-- Space Crowns SMC
 - Status SNT
 - Storm STORM
 - Swapcoinz SPAZ
