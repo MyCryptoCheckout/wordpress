@@ -52,6 +52,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Enix ENIX
 - EOS
 - Ethereum ETH (Including MetaMask)
+- Footballcoin XFC
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
 - MktCoin MLM
@@ -95,6 +96,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Golfcoin GOLF
 - Huobi Token HT
 - IMSmart Token IMT
+- InnovaMinex MINX
 - Invacio INV
 - Jobchain JOB
 - Kubo Coin KUBO
