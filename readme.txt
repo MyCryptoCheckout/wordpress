@@ -49,7 +49,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Decred DCR
 - Digibyte DGB (Including SegWit)
 - Electra ECA
-- Enix ENIX
 - EOS
 - Ethereum ETH (Including MetaMask)
 - Footballcoin XFC
@@ -58,7 +57,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - MktCoin MLM
 - Monero XMR
 - NEM XEM
-- Sinovate SIN
 - Stellar XLM
 - TRON TRX
 - Ultragate ULG
@@ -87,7 +85,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Dogecoin DOGE
 - Dragonchain DRGN
 - Enjin Coin ENJ
-- FREE Coin FREE
 - FRTS Coin FRTS
 - FunFair FUN
 - Gemini Dollar GUSD
@@ -113,12 +110,10 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - QASH
 - Raiden RDN
 - Request REQ
-- RightMesh RMESH
 - Roks ROK
 - SALT
 - Status SNT
 - Storm STORM
-- Swapcoinz SPAZ
 - TenXPay PAY
 - Tether USD USDT
 - TBC Mart Token TMT
@@ -143,7 +138,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = WAVES Tokens supported (Including Waves Client): =
 
-- ABYCoin ABYCOIN
 - CoffeeCoin COF
 - CopyrightCoins CCIM
 - Neutrino USD USDN
