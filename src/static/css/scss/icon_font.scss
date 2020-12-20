@@ -38,6 +38,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-MINX:before {
+  content: "\e991";
+}
+.mcc-XFC:before {
+  content: "\e992";
+}
 .mcc-CHS:before {
   content: "\e98e";
 }
