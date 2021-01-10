@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.84
+Stable tag: 2.85
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.6
 
@@ -237,6 +237,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="dpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 
 == Changelog ==
+
+= 2.85 20210110 =
+
+* New currency: Micro Tuber MCT
 
 = 2.84 20201220 =
 
