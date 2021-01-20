@@ -72,6 +72,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Aragon ANT
 - Bancor BNT
 - Basic Attention Token BAT
+- CGBBank CGB
 - Chainlink LINK
 - Connect Coin XCON
 - Crypto.com Coin CRO
@@ -103,7 +104,8 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Monaco MCO
 - Media Play Cash MPC
 - Micro Tuber MCT
-- OmiseGo OMG
+- Nexo Token NEXO
+- OMG Network OMG
 - Polymath Network POLY
 - Populous PPT
 - Pundi X NPXS
@@ -237,6 +239,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="dpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 
 == Changelog ==
+
+* New currency: CGBBank CGB
+* New currency: Nexo Token NEXO
 
 = 2.85 20210110 =
 
