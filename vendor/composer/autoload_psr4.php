@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'plainview\\sdk_mcc\\' => array($vendorDir . '/plainview/sdk'),
+    'phpEther\\' => array($vendorDir . '/arizn/phpether'),
     'mycryptocheckout\\api\\' => array($vendorDir . '/mycryptocheckout/api/src'),
     'mycryptocheckout\\' => array($baseDir . '/src'),
     'Shift196\\AKashLib\\' => array($vendorDir . '/shift196/lib-akash/src'),
