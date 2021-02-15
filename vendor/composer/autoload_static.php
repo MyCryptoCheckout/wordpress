@@ -23,10 +23,6 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
             'mycryptocheckout\\api\\' => 21,
             'mycryptocheckout\\' => 17,
         ),
-        'S' => 
-        array (
-            'Shift196\\AKashLib\\' => 18,
-        ),
         'M' => 
         array (
             'Mdanter\\Ecc\\' => 12,
@@ -64,10 +60,6 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         'mycryptocheckout\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
-        ),
-        'Shift196\\AKashLib\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/shift196/lib-akash/src',
         ),
         'Mdanter\\Ecc\\' => 
         array (

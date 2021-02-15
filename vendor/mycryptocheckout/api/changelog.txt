@@ -1,3 +1,7 @@
+2.08		20210215
+
+Use MCC API Exception instead of basic Exception.
+
 2.06		20191119
 
 Add test communication function.
