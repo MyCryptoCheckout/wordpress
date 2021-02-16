@@ -38,6 +38,18 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-INCH:before {
+  content: "\e996";
+}
+.mcc-AAVE:before {
+  content: "\e997";
+}
+.mcc-SNX:before {
+  content: "\e998";
+}
+.mcc-UNI:before {
+  content: "\e999";
+}
 .mcc-CGB:before {
   content: "\e994";
 }
