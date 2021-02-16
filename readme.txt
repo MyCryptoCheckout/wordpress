@@ -50,7 +50,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Digibyte DGB (Including SegWit)
 - Electra ECA
 - EOS
-- Ethereum ETH (Including MetaMask)
+- Ethereum ETH (Including MetaMask, HD wallets)
 - Footballcoin XFC
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
@@ -68,6 +68,8 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 = ERC20 tokens supported (Including MetaMask): =
 
 - 0x ZRX
+- 1inch 1INCH
+- Aave AAVE
 - Aeternity AE
 - Aragon ANT
 - Bancor BNT
@@ -114,6 +116,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - Roks ROK
 - SALT
+- Synthetix SNX
 - Status SNT
 - Storm STORM
 - TenXPay PAY
@@ -123,6 +126,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - TheCash TCH
 - Traders Token TRDS
 - TrueUSD TUSD
+- Uniswap UNI
 - USD Coin USDC
 - VcashPay VCP
 - Veritaseum VERI
