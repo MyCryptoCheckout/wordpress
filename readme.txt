@@ -97,8 +97,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Huobi Token HT
 - IMSmart Token IMT
 - InnovaMinex MINX
-- Invacio INV
-- Kubo Coin KUBO
 - Kyber Network KNC
 - Loom LOOM
 - Maker MKR
