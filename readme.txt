@@ -61,6 +61,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - TRON TRX
 - Ultragate ULG
 - Verge XVG
+- Viacoin VIA
 - Waves WAVES (Including Waves Client)
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
