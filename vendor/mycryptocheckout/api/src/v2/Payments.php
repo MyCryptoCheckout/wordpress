@@ -2,6 +2,8 @@
 
 namespace mycryptocheckout\api\v2;
 
+use mycryptocheckout\api\v2\Exception;
+
 /**
 	@brief		Handles payments to the server.
 	@since		2018-10-08 20:38:27

@@ -7,12 +7,13 @@
 		"psr-4": {
 			"mycryptocheckout\\" : "src/",
 			"plainview\\sdk_mcc\\" : "vendor/plainview/sdk/",
-			"Btccom\\BitcoinCash\\": "vendor/btccom/bitwasp-bitcoin-bch-addon/src/"
+			"Btccom\\BitcoinCash\\": "vendor/btccom/bitwasp-bitcoin-bch-addon/src/",
+			"phpEther\\" : "vendor/arizn/phpether/"
 		}
 	},
 	"require": {
 		"btccom/cashaddress": "^0.0.3",
 		"bitwasp/bitcoin": "v0.0.35.1",
-		"mycryptocheckout/api": "^2.07"
+		"mycryptocheckout/api": "^2.08"
 	}
 }

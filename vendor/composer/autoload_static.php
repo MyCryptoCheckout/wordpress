@@ -16,15 +16,12 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         'p' => 
         array (
             'plainview\\sdk_mcc\\' => 18,
+            'phpEther\\' => 9,
         ),
         'm' => 
         array (
             'mycryptocheckout\\api\\' => 21,
             'mycryptocheckout\\' => 17,
-        ),
-        'S' => 
-        array (
-            'Shift196\\AKashLib\\' => 18,
         ),
         'M' => 
         array (
@@ -52,6 +49,10 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         array (
             0 => __DIR__ . '/..' . '/plainview/sdk',
         ),
+        'phpEther\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/arizn/phpether',
+        ),
         'mycryptocheckout\\api\\' => 
         array (
             0 => __DIR__ . '/..' . '/mycryptocheckout/api/src',
@@ -59,10 +60,6 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         'mycryptocheckout\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
-        ),
-        'Shift196\\AKashLib\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/shift196/lib-akash/src',
         ),
         'Mdanter\\Ecc\\' => 
         array (
@@ -104,12 +101,17 @@ class ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3
         ),
     );
 
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit9c0e5548c3c9846633d13faa7dcf3fe3::$classMap;
 
         }, null, ClassLoader::class);
     }
