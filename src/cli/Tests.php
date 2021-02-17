@@ -78,13 +78,6 @@ class Tests
 					3 => 'bc1qfuyjsgpnkfajnm8dapgkhaznwxyc352j8vwqpe',
 				],
 			],
-			'BCH' => [
-				'xpub661MyMwAqRbcF9oUAF1k4RFVbUFWud32pX1rf1QsyHRdcYTnZdoZLand63MMtajoKKMUVRJXDCn7Yj61GCFnuqEexxYzhjwpE4PvWHSwVqK' =>
-				[
-					0 => 'qpvs6t7cghxpvrgf27043awnvs907rl255sg3ewnv8',
-					3 => 'qzmjxrsz42k6jau007gayvskk2trqwy26y06ayfa7k',
-				],
-			],
 			'DASH' => [
 				'xpub661MyMwAqRbcFuWVYexT8CkVbUwnthA433dqozqLNcvHDSPLvXA3hEsbwL8g51BfCisME1KFGaRXtptmtCxrEWAif8UCvKJxKjF9zZsDsJ7' =>
 				[
@@ -109,6 +102,14 @@ class Tests
 				[
 					0 => 'dgb1qwz94lncd2vzzdanxkqc4gm38gs3hc48c2jm7md',
 					1 => 'dgb1qx8zmgwerfsnkdgajhf9mn0xt5j679qy9lm59ag',
+				],
+			],
+			'ETH' => [
+				'xpub6EoaP1G4yqxsDmHKiiRjbs51NxTRcfqhuGNLrR9HgqR25YCbwNJogBjoqHJzKZMCY4hHfv81VLX3t8q9NpCUinQkz37AfWdSKNYdzjaK8cG' =>
+				[
+					0 => '0x128b25a4E357A5a8af033b5993510F0468846065',
+					1 => '0xc47882594082c3038835972bC41984Bb4918332e',
+					2 => '0x13D665B330916D1B56497202724C59C5cA7522F0',
 				],
 			],
 			'GRS' => [

@@ -20,6 +20,29 @@ use Exception;
 **/
 trait btc_hd_public_key_trait
 {
+
+	/**
+		@brief		Generate an ETH HD address.
+		@since		2021-02-09 17:13:02
+	**/
+	public function eth_hd_public_key_generate_address( $wallet )
+	{
+		$address = $wallet->address;
+		$public_key = $wallet->get( 'btc_hd_public_key' );
+
+		$path_key = 'btc_hd_public_key_generate_address_path';
+		$path_value = $wallet->get( $path_key, 0 );
+
+		// xpub6EoaP1G4yqxsDmHKiiRjbs51NxTRcfqhuGNLrR9HgqR25YCbwNJogBjoqHJzKZMCY4hHfv81VLX3t8q9NpCUinQkz37AfWdSKNYdzjaK8cG
+		// 0 0x128b25a4E357A5a8af033b5993510F0468846065
+		// 1 0xc47882594082c3038835972bC41984Bb4918332e
+		// 2 0x13D665B330916D1B56497202724C59C5cA7522F0
+
+		$hd = new \phpEther\HD();
+		$hd->publicSeed( $public_key );
+		return $hd->getAddress( $path_value );
+	}
+
 	/**
 		@brief		Generate a new HD address.
 		@details	This code is adapted from Mario Dian's page on how to generate HD wallet addresses.
@@ -34,6 +57,13 @@ trait btc_hd_public_key_trait
 		$public_key = $wallet->get( 'btc_hd_public_key' );
 		if ( ! $public_key )
 			return $address;
+
+		// Handle ETH differently.
+		$currencies = MyCryptoCheckout()->currencies();
+		$currency = $currencies->get( $wallet->get_currency_id() );
+		if ( $currency->id == 'ETH' )
+		// if ( isset( $currency->erc20 ) || $currency->id == 'ETH' )
+			return $this->eth_hd_public_key_generate_address( $wallet );
 
 		$adapter = Bitcoin::getEcAdapter();
 		$slip132 = new Slip132(new KeyToScriptHelper($adapter));
