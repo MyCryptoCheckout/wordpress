@@ -94,11 +94,13 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Gifto GTO
 - Golem GNT
 - Golfcoin GOLF
+- Genesis Vision GVT
 - Huobi Token HT
 - IMSmart Token IMT
 - InnovaMinex MINX
 - Kyber Network KNC
 - Loom LOOM
+- Lunyr LUN
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
@@ -114,9 +116,11 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - Roks ROK
 - SALT
-- Synthetix SNX
+- Snovian.Space SNOV
 - Status SNT
 - Storm STORM
+- Synthetix SNX
+- Telcoin TEL
 - TenXPay PAY
 - Tether USD USDT
 - TBC Shopping Token TST
