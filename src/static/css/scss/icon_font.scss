@@ -38,6 +38,18 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-GVT:before {
+  content: "\e99a";
+}
+.mcc-LUN:before {
+  content: "\e99b";
+}
+.mcc-SNOV:before {
+  content: "\e99c";
+}
+.mcc-TEL:before {
+  content: "\e99d";
+}
 .mcc-INCH:before {
   content: "\e996";
 }
