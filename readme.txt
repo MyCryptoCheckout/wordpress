@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.86
+Stable tag: 2.87
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.6
 
@@ -243,6 +243,14 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="dpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 
 == Changelog ==
+
+= 2.87 20210221 =
+
+* New currency: Genesis Vision GVT
+* New currency: Lunyr LUN
+* New currency: Snovian.Space SNOV
+* New currency: Telcoin TEL
+* Fix: Account not being unlocked when the API is blocked from communicating.
 
 = 2.86 20210120 =
 
