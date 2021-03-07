@@ -50,7 +50,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Digibyte DGB (Including SegWit)
 - Electra ECA
 - EOS
-- Ethereum ETH (Including MetaMask, HD wallets)
+- Ethereum ETH (Including MetaMask, ENS addresses)
 - Footballcoin XFC
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
@@ -66,7 +66,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
-= ERC20 tokens supported (Including MetaMask): =
+= ERC20 tokens supported (Including MetaMask, ENS addresses): =
 
 - 0x ZRX
 - 1inch 1INCH
@@ -137,8 +137,8 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
 = TRON TRC-10 / TRC-20 Tokens supported: =
-- CryptoHours CHS
 
+- CryptoHours CHS
 - BitTorrent BTT
 - Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
 
