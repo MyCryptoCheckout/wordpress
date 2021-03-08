@@ -249,28 +249,22 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( $$.$online_pay_box.length < 1 )
 			return;
 
-		// web3 must be supported.
-		if (typeof window.ethereum === 'undefined')
+		// web3 must be supported and metamask enabled.
+		if ( typeof window.ethereum === 'undefined' || !ethereum.isMetaMask )
 			return;
 
-		// Then backup the good old injected Web3, sometimes it's usefull:
-		window.web3old = window.web3;
-		// And replace the old injected version by the latest build of Web3.js version 1.0.0
-		window.web3 = new Web3(window.web3.currentProvider);
-
-		if ( !ethereum.isMetaMask)
-			return;
+		window.web3 = new Web3(ethereum);
 
 		// The data must support metamask.
-		if( typeof $$.mycryptocheckout_checkout_data.supports === 'undefined' )
+		if ( typeof $$.mycryptocheckout_checkout_data.supports === 'undefined' )
 			return;
 
 		var contractInstance = false;
-		if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined' )
+		if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined' )
 		{
 			var contractInstance = new web3.eth.Contract( JSON.parse( $$.mycryptocheckout_checkout_data.supports.metamask_abi ), $$.mycryptocheckout_checkout_data.currency.contract );
-//			var Contract = web3.eth.contract( JSON.parse( $$.mycryptocheckout_checkout_data.supports.metamask_abi ) );
-//			contractInstance = Contract.at( $$.mycryptocheckout_checkout_data.currency.contract )
+            // var Contract = web3.eth.contract( JSON.parse( $$.mycryptocheckout_checkout_data.supports.metamask_abi ) );
+            // contractInstance = Contract.at( $$.mycryptocheckout_checkout_data.currency.contract )
 		}
 
 		if ( contractInstance === false )
@@ -284,58 +278,54 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		$$.$metamask.click( async function()
 		{
-			 // Modern dapp browsers...
-			if (window.ethereum)
-			{
-				window.web3 = new Web3(ethereum);
+			try {
+				// Request account access if needed
+				const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-				try {
-					// Request account access if needed
-					await ethereum.enable();
-					let accounts = await web3.eth.getAccounts();
-					web3.eth.defaultAccount = accounts[ 0 ];
-					var default_account = accounts[ 0 ];
-
-					if ( contractInstance === false )
+				if ( contractInstance === false )
+				{
+					await window.ethereum.request(
 					{
-						web3.eth.sendTransaction(
+						method: 'eth_sendTransaction',
+						params: [
 						{
-							// From is not necessary.
+							from: accounts[0],
 							to: $$.mycryptocheckout_checkout_data.to,
-							value: web3.utils.toWei(
+							value: web3.utils.toHex(web3.utils.toWei(
 								$$.mycryptocheckout_checkout_data.amount,
 								$$.mycryptocheckout_checkout_data.supports.metamask_currency
-							),
-						}, function (err, transactionHash )
-						{
-							// No error logging for now.
-							console.log( 'Error sending Eth via Metamask', err );
-						}
-						);
-					}
-					else
+							)),
+		  				},
+						],
+					}, function (err, transactionHash )
 					{
-						var amount = $$.mycryptocheckout_checkout_data.amount;
-						// If there is a divider, use it.
-						if ( typeof $$.mycryptocheckout_checkout_data.currency.divider !== 'undefined' )
-							amount *= $$.mycryptocheckout_checkout_data.currency.divider;
-						else
-							amount = web3.utils.toWei( amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency );
-
-						// .transfer loves plain strings.
-						amount = amount + "";
-
-						contractInstance.methods
-							.transfer( $$.mycryptocheckout_checkout_data.to, amount )
-							.send( {
-								'from' : default_account,		// First available.
-							} );
+						// No error logging for now.
+						console.log( 'Error sending Eth via Metamask', err );
 					}
-
-				} catch (error) {
-					// User denied account access...
-					console.log( 'User denied account access', error );
+					);
 				}
+				else
+				{
+					var amount = $$.mycryptocheckout_checkout_data.amount;
+					// If there is a divider, use it.
+					if ( typeof $$.mycryptocheckout_checkout_data.currency.divider !== 'undefined' )
+						amount *= $$.mycryptocheckout_checkout_data.currency.divider;
+						else
+						amount = web3.utils.toWei( amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency );
+
+					// .transfer loves plain strings.
+					amount = amount + "";
+
+					contractInstance.methods
+						.transfer( $$.mycryptocheckout_checkout_data.to, amount )
+						.send( {
+							'from' : accounts[0],		// First available.
+						} );
+				}
+
+			} catch (error) {
+				// User denied account access...
+				console.log( 'User denied account access', error );
 			}
 
 		} );
