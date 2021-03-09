@@ -6,7 +6,7 @@ Requires at least: 4.9
 Requires PHP: 5.6
 Stable tag: 2.87
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 5.6
+Tested up to: 5.7
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 95+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -66,7 +66,16 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
-= ERC20 tokens supported (Including MetaMask, ENS addresses): =
+= BEP-20 tokens supported (Including MetaMask): =
+
+- Binance-Peg BUSD-T
+- Binance-Peg USD Coin
+- BUSD Token BUSD
+- PancakeSwap Token CAKE
+- VAI Stablecoin VAI
+- Venus XVS
+
+= ERC-20 tokens supported (Including MetaMask, ENS addresses): =
 
 - 0x ZRX
 - 1inch 1INCH
@@ -132,10 +141,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Veritaseum VERI
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
 
-= NEM Mosaic tokens supported: =
-
-- Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
-
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
 - CryptoHours CHS
@@ -149,6 +154,10 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Neutrino USD USDN
 - Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
+
+= NEM Mosaic tokens supported: =
+
+- Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
 = Stellar Tokens supported: =
 
