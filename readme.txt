@@ -253,6 +253,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Metamask code updated to v1.3.4
+
 = 2.87 20210221 =
 
 * New currency: Genesis Vision GVT
