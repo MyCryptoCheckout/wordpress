@@ -74,6 +74,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - PancakeSwap Token CAKE
 - VAI Stablecoin VAI
 - Venus XVS
+- Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP20 tokens</a>!
 
 = ERC-20 tokens supported (Including MetaMask, ENS addresses): =
 
@@ -139,7 +140,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - USD Coin USDC
 - VcashPay VCP
 - Veritaseum VERI
-- Add your <a href="https://mycryptocheckout.com/custom-token/">custom ERC20 tokens</a>!
+- Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
 
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
@@ -253,7 +254,16 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-* Metamask code updated to v1.3.4
+* New currency: Binance-Peg BUSD-T
+* New currency: Binance-Peg USD Coin
+* New currency: BUSD Token BUSD
+* New currency: PancakeSwap Token CAKE
+* New currency: VAI Stablecoin VAI
+* New currency: Venus XVS
+* Metamask code updated.
+* Web3.js updated to v1.3.4
+* XVG logo updated.
+* MLM logo updated.
 
 = 2.87 20210221 =
 
