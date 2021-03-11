@@ -68,9 +68,9 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 
 = BEP-20 tokens supported (Including MetaMask): =
 
+- Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
-- BUSD Token BUSD
 - PancakeSwap Token CAKE
 - VAI Stablecoin VAI
 - Venus XVS
