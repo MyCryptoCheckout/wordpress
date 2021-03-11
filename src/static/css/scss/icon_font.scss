@@ -38,6 +38,21 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-BEP20USDC:before {
+  content: "\e99e";
+}
+.mcc-BEP20USDT:before {
+  content: "\e99f";
+}
+.mcc-CAKE:before {
+  content: "\e9a0";
+}
+.mcc-VAI:before {
+  content: "\e9a1";
+}
+.mcc-XVS:before {
+  content: "\e9a2";
+}
 .mcc-GVT:before {
   content: "\e99a";
 }
