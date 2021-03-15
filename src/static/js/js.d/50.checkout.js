@@ -282,21 +282,21 @@ var mycryptocheckout_checkout_javascript = function( data )
 				// Request account access if needed
 				const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
+				var send_parameters = {
+					'from' : accounts[0],		// First available.
+				};
+
 				if ( contractInstance === false )
 				{
+					send_parameters[ 'to' ] = $$.mycryptocheckout_checkout_data.to;
+					send_parameters[ 'value' ] = web3.utils.toHex(
+						web3.utils.toWei( $$.mycryptocheckout_checkout_data.amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency )
+					);
+					console.log( 'ETH send parameters', send_parameters );
 					await window.ethereum.request(
 					{
 						method: 'eth_sendTransaction',
-						params: [
-						{
-							from: accounts[0],
-							to: $$.mycryptocheckout_checkout_data.to,
-							value: web3.utils.toHex(web3.utils.toWei(
-								$$.mycryptocheckout_checkout_data.amount,
-								$$.mycryptocheckout_checkout_data.supports.metamask_currency
-							)),
-		  				},
-						],
+						params: [ send_parameters ],
 					}, function (err, transactionHash )
 					{
 						// No error logging for now.
@@ -316,11 +316,18 @@ var mycryptocheckout_checkout_javascript = function( data )
 					// .transfer loves plain strings.
 					amount = amount + "";
 
+					if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas !== 'undefined' )
+					{
+						var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
+						send_parameters[ 'gasPrice' ] = web3.utils.toWei( metamask_gas.price + '', 'gwei' );
+						send_parameters[ 'gas' ] = metamask_gas.limit + '';
+					}
+
+					console.log( "ERC20 parameters", send_parameters );
+
 					contractInstance.methods
 						.transfer( $$.mycryptocheckout_checkout_data.to, amount )
-						.send( {
-							'from' : accounts[0],		// First available.
-						} );
+						.send( send_parameters );
 				}
 
 			} catch (error) {

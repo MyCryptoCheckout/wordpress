@@ -254,6 +254,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Metamask ERC20 gas price is now part of the account data.
+
 = 2.88 20210311 =
 
 * New currency: Binance-Peg BUSD-T
