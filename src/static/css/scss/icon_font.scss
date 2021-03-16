@@ -38,6 +38,9 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-SPI:before {
+  content: "\e9a3";
+}
 .mcc-BEP20USDC:before {
   content: "\e99e";
 }

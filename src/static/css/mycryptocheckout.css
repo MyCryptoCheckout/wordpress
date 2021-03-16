@@ -247,6 +247,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-SPI:before {
+  content: "\e9a3"; }
+
 .mcc-BEP20USDC:before {
   content: "\e99e"; }
 
@@ -982,6 +985,8 @@
   color: #00D1FF; }
 .mcc_currency_icons.color i.mcc-SPAZ {
   color: #D0C344; }
+.mcc_currency_icons.color i.mcc-SPI {
+  color: #14ACAA; }
 .mcc_currency_icons.color i.mcc-SPND {
   color: #000; }
 .mcc_currency_icons.color i.mcc-STAK {
