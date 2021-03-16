@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.88
+Stable tag: 2.89
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.7
 
@@ -126,6 +126,7 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - Roks ROK
 - SALT
+- Shopping SPI
 - Snovian.Space SNOV
 - Status SNT
 - Storm STORM
@@ -254,6 +255,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.89 20210316 =
+
+* New currency: Shopping SPI
 * Fix: Metamask ERC20 gas price is now part of the account data.
 
 = 2.88 20210311 =
