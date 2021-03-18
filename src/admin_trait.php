@@ -721,19 +721,22 @@ trait admin_trait
 						if ( function_exists( 'gmp_abs' ) )
 						{
 							$public_key = $btc_hd_public_key->get_filtered_post_value();
+							$public_key = trim( $public_key );
 							$wallet->set( 'btc_hd_public_key', $public_key );
-
-							// Check that the currency accepts this pub type.
-							if ( $currency->supports( 'btc_hd_public_key_pubs' ) )
+							if ( $public_key != '' )
 							{
-								$pubs = implode( '/', $currency->supports->btc_hd_public_key_pubs );
-								$pub_type = substr( $public_key, 0, 4 );
-								if ( ! in_array( $pub_type, $currency->supports->btc_hd_public_key_pubs ) )
-									throw new Exception( sprintf( 'This public key type is not supported. Please use only: %s', implode( ' or ', $currency->supports->btc_hd_public_key_pubs ) ) );
+								// Check that the currency accepts this pub type.
+								if ( $currency->supports( 'btc_hd_public_key_pubs' ) )
+								{
+									$pubs = implode( '/', $currency->supports->btc_hd_public_key_pubs );
+									$pub_type = substr( $public_key, 0, 4 );
+									if ( ! in_array( $pub_type, $currency->supports->btc_hd_public_key_pubs ) )
+										throw new Exception( sprintf( 'This public key type is not supported. Please use only: %s', implode( ' or ', $currency->supports->btc_hd_public_key_pubs ) ) );
+								}
+								$wallet->set( 'circa_amount', $circa_amount->get_filtered_post_value() );
+								$wallet->set( 'btc_hd_public_key_generate_address_path', $btc_hd_public_key_generate_address_path->get_filtered_post_value() );
 							}
 
-							$wallet->set( 'circa_amount', $circa_amount->get_filtered_post_value() );
-							$wallet->set( 'btc_hd_public_key_generate_address_path', $btc_hd_public_key_generate_address_path->get_filtered_post_value() );
 						}
 
 					$wallet->maybe_parse_network_form_post( $form );
