@@ -129,7 +129,6 @@ The free license can process 3 sales per month. A <a href="https://mycryptocheck
 - Shopping SPI
 - Snovian.Space SNOV
 - Status SNT
-- Storm STORM
 - Synthetix SNX
 - Telcoin TEL
 - TenXPay PAY
