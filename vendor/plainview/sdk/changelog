@@ -1,3 +1,16 @@
+20210216		Form2: Fix checkbox value incorrectly reported using get_post_value().
+20210205		Wordpress: Add action name overrides.
+20210122		Form2: Fix description css_class error.
+20210120		Wordpress: New mail class with phpmailer location.
+20210119		Wordpress: Show the custom debug URL.
+20210110		Form2: More Bootstrap4 work.
+20210105		Form2: Add more bootstrap4 customizing.
+20210104		Form2: Add bootstrap4 class to output Bootstrap 4 friendly html.
+20200617		Wordpress: Use wp_salt().
+20200608		Wordpress: Allow form display_form_table() function to accept inputs.
+20200402		Wordpress: Update EDD updater.
+20200223		Wordpress: Assume empty group slug for plugin pack.
+20190812		Base: Fix extra :80 for https/http current_url when using internal proxies.
 20190716		Wordpress: Added code for Option (local) storage.
 20190607		Wordpress: Add filter for debugging file path.
 20190414		Use clone for loading object stores.

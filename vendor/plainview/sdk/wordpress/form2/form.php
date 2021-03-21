@@ -59,12 +59,11 @@ class form
 			'base' => $this->base,
 			'header' => '',
 			'header_level' => 'h3',
+			'inputs' => $this->inputs,
 			'r' => '',					// Return value.
 		), $o );
 
 		$r = '';
-
-		$o->inputs = $this->inputs;
 
 		$this->display_form_table_inputs( $o );
 

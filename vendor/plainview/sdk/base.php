@@ -26,7 +26,7 @@ class base
 		@since		20130630
 		@var		$sdk_version
 	**/
-	protected $sdk_version = 20190716;
+	protected $sdk_version = 20210216;
 
 	/**
 		@brief		Constructor.
@@ -151,6 +151,9 @@ class base
 			$port = '';
 		if ( $ssl && isset($SERVER[ 'HTTP_X_FORWARDED_PORT' ])
                 && $SERVER[ 'HTTP_X_FORWARDED_PORT' ] == '443' )
+            $port = '';
+		if ( $ssl && isset($SERVER[ 'HTTP_X_FORWARDED_PROTO' ])
+                && $SERVER[ 'HTTP_X_FORWARDED_PROTO' ] == 'https' )
             $port = '';
 		if ( $port != '' )
 			$port = ':' . $port;

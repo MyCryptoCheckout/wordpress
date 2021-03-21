@@ -22,6 +22,8 @@ class select
 	public $self_closing = false;
 	public $tag = 'select';
 
+	public $type = 'select';
+
 	public $_value = array();
 
 	/**
@@ -64,6 +66,9 @@ class select
 			$input->css_class( 'required' );
 
 		$input->set_attribute( 'name', $input->make_name() );
+
+		// Allow the form to modify the input.
+		$this->form->prepare_input_display( $input );
 
 		$r = $input->indent() . $input->open_tag() . "\n";
 		foreach( $input->options as $option )

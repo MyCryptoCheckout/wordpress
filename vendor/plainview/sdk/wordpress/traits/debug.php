@@ -64,13 +64,21 @@ trait debug
 			->checked( $instance->get_site_option( 'debug_to_file', false ) );
 
 		// We need to set the description unescaped due to the link.
+		$original_filename = $this->get_debug_original_filename();
 		$filename = $this->get_debug_filename();
-		$basename = basename( $filename );
-		$filename = sprintf( '<a href="%s">%s</a>',
-			$this->paths( 'url' ) . '/' . $basename,
-			$basename
-		);
-		$description = $this->_( 'The debug data will be saved to the file %s. This link is distributable.', $filename );
+		if ( $original_filename == $filename )
+		{
+			$basename = basename( $filename );
+			$filename = sprintf( '<a href="%s">%s</a>',
+				$this->paths( 'url' ) . '/' . $basename,
+				$basename
+			);
+			$description = $this->_( 'The debug data will be saved to the file %s. This link is distributable.', $filename );
+		}
+		else
+		{
+			$description = $this->_( 'The debug data will be saved to the file %s', $filename );
+		}
 		$debug_to_file->description
 			->get_label()
 			->content = $description;
@@ -216,11 +224,9 @@ trait debug
 	**/
 	public function get_debug_filename()
 	{
-		$hash = md5( $this->paths( '__FILE__' ) . AUTH_KEY );
-		$hash = substr( $hash, 0, 8 );
-		$filename = $this->paths( '__FILE__' ) . ".$hash.debug.html";
+		$filename = $this->get_debug_original_filename();
 		$filter = __NAMESPACE__ . '_debug_file';
-		// The filter is something like "plainview\sdk_mcc_broadcast\wordpress\traits_debug_file"
+		// The filter is something like "plainview\sdk_mcc_broadcast_broadcast\wordpress\traits_debug_file"
 		$filename = apply_filters( $filter, $filename );
 		return $filename;
 	}
@@ -232,6 +238,18 @@ trait debug
 	public function get_debug_class_name( $class_name )
 	{
 		return $class_name;
+	}
+
+	/**
+		@brief		Return the original debug filename.
+		@since		2021-01-18 13:42:16
+	**/
+	public function get_debug_original_filename()
+	{
+		$hash = md5( $this->paths( '__FILE__' ) . wp_salt( 'auth' ) );
+		$hash = substr( $hash, 0, 8 );
+		$filename = $this->paths( '__FILE__' ) . ".$hash.debug.html";
+		return $filename;
 	}
 
 	/**

@@ -448,6 +448,38 @@ class form
 	}
 
 	/**
+		@brief		Allow subclasses to modify the input display.
+		@since		2021-01-04 16:11:18
+	**/
+	public function prepare_input_display( $input )
+	{
+	}
+
+	/**
+		@brief		Allow subclasses to modify the whole input display div that contains the label, input and description.
+		@since		2021-01-04 16:27:09
+	**/
+	public function prepare_input_div( $input, $div )
+	{
+	}
+
+	/**
+		@brief		Allow subclasses to modify the input description display.
+		@since		2021-01-04 16:15:12
+	**/
+	public function prepare_input_description_display( $input )
+	{
+	}
+
+	/**
+		@brief		Allow subclasses to modify the input label display.
+		@since		2021-01-04 16:15:10
+	**/
+	public function prepare_input_label_display( $input )
+	{
+	}
+
+	/**
 		@brief		Register an input type.
 		@details	The $o object must contain:
 

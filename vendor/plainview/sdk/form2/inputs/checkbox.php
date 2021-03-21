@@ -47,6 +47,7 @@ class checkbox
 		// It is checked if the name exists in the post AND the value there is the same as this one.
 		$value = $this->get_post_value();
 		$this->check( $value == $this->get_value() );
+		$this->set_post_value( $this->is_checked() );
 		return $this;
 	}
 }

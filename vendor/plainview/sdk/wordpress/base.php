@@ -1174,9 +1174,13 @@ class base
 	public static function mail()
 	{
 		// This ensures that the PHPmailer class is loaded and ready.
-		if ( ! class_exists( '\\PHPMailer' ) )
-			require_once( ABSPATH . WPINC . '/class-phpmailer.php' );
-		return parent::mail();
+		if ( ! class_exists( '\\PHPMailer\\PHPMailer' ) )
+			require_once( ABSPATH . WPINC . '/PHPMailer/PHPMailer.php' );
+
+		$phpmailer = new mail\mail();
+		$phpmailer->CharSet = 'UTF-8';
+		do_action_ref_array( 'phpmailer_init', [ & $phpmailer ] );
+		return $phpmailer;
 	}
 
 	/**

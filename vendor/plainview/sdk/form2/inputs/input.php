@@ -189,6 +189,9 @@ class input
 	**/
 	public function display_description()
 	{
+		if ( ! $this->has_description )
+			return '';
+		$this->form->prepare_input_description_display( $this );
 		return $this->description;
 	}
 
@@ -240,6 +243,8 @@ class input
 
 		// Allow subclasses the chance to modify themselves in case displaying isn't straightforward.
 		$input->prepare_to_display();
+		// Allow the form to modify the input.
+		$this->form->prepare_input_display( $input );
 
 		return $input->open_tag() . $input->display_value() . $input->close_tag();
 	}
@@ -251,6 +256,7 @@ class input
 	**/
 	public function display_label()
 	{
+		$this->form->prepare_input_label_display( $this );
 		return $this->get_label()->toString();
 	}
 
@@ -292,6 +298,8 @@ class input
 		// Hidden?
 		if ( $this->is_hidden() )
 			$r->hidden();
+
+		$this->form->prepare_input_div( $this, $r );
 
 		return $r;
 	}
