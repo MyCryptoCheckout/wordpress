@@ -601,7 +601,14 @@ class Easy_Digital_Downloads
 	{
 		if ( ! function_exists( 'EDD' ) )
 			return;
-		MyCryptoCheckout()->api()->payments()->send_unsent_payments();
+		try
+		{
+			MyCryptoCheckout()->api()->payments()->send_unsent_payments();
+		}
+		catch( Exception $e )
+		{
+			$this->debug( $e->getMessage() );
+		}
 	}
 
 	/**

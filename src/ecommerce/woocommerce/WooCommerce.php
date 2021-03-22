@@ -115,7 +115,14 @@ class WooCommerce
 	{
 		if ( ! function_exists( 'WC' ) )
 			return;
-		MyCryptoCheckout()->api()->payments()->send_unsent_payments();
+		try
+		{
+			MyCryptoCheckout()->api()->payments()->send_unsent_payments();
+		}
+		catch( Exception $e )
+		{
+			$this->debug( $e->getMessage() );
+		}
 	}
 
 	/**
