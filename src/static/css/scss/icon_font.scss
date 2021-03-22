@@ -38,6 +38,12 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+.mcc-DDS:before {
+  content: "\e9a4";
+}
+.mcc-STMX:before {
+  content: "\e9a5";
+}
 .mcc-SPI:before {
   content: "\e9a3";
 }
