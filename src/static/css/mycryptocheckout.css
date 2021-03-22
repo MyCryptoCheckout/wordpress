@@ -247,6 +247,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-DDS:before {
+  content: "\e9a4"; }
+
+.mcc-STMX:before {
+  content: "\e9a5"; }
+
 .mcc-SPI:before {
   content: "\e9a3"; }
 
@@ -817,6 +823,8 @@
   color: #3b7cfb; }
 .mcc_currency_icons.color i.mcc-DDGN {
   color: #000000; }
+.mcc_currency_icons.color i.mcc-DDS {
+  color: #673AB7; }
 .mcc_currency_icons.color i.mcc-DGB {
   color: #0066cc; }
 .mcc_currency_icons.color i.mcc-DGD {
@@ -991,6 +999,8 @@
   color: #000; }
 .mcc_currency_icons.color i.mcc-STAK {
   color: #F29514; }
+.mcc_currency_icons.color i .mcc-STMX {
+  color: #FC2E53; }
 .mcc_currency_icons.color i.mcc-STORM {
   color: #080D98; }
 .mcc_currency_icons.color i.mcc-STQ {
