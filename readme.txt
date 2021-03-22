@@ -90,6 +90,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Connect Coin XCON
 - Crypto.com Coin CRO
 - CuraDAI CURA
+- DDS.Store DDS
 - Devil's Dragon DDGN
 - Multi-collateral DAI DAI
 - Decentraland MANA
