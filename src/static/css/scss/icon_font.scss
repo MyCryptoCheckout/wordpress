@@ -38,501 +38,186 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-.mcc-DDS:before {
-  content: "\e9a4";
-}
-.mcc-STMX:before {
-  content: "\e9a5";
-}
-.mcc-SPI:before {
-  content: "\e9a3";
-}
-.mcc-BEP20USDC:before {
-  content: "\e99e";
-}
-.mcc-BEP20USDT:before {
-  content: "\e99f";
-}
-.mcc-CAKE:before {
-  content: "\e9a0";
-}
-.mcc-VAI:before {
-  content: "\e9a1";
-}
-.mcc-XVS:before {
-  content: "\e9a2";
-}
-.mcc-GVT:before {
-  content: "\e99a";
-}
-.mcc-LUN:before {
-  content: "\e99b";
-}
-.mcc-SNOV:before {
-  content: "\e99c";
-}
-.mcc-TEL:before {
-  content: "\e99d";
-}
-.mcc-INCH:before {
-  content: "\e996";
-}
-.mcc-AAVE:before {
-  content: "\e997";
-}
-.mcc-SNX:before {
-  content: "\e998";
-}
-.mcc-UNI:before {
-  content: "\e999";
-}
-.mcc-CGB:before {
-  content: "\e994";
-}
-.mcc-NEXO:before {
-  content: "\e995";
-}
-.mcc-MCT:before {
-  content: "\e993";
-}
-.mcc-MINX:before {
-  content: "\e991";
-}
-.mcc-XFC:before {
-  content: "\e992";
-}
-.mcc-CHS:before {
-  content: "\e98e";
-}
-.mcc-CRO:before {
-  content: "\e98f";
-}
-.mcc-USDN:before {
-  content: "\e990";
-}
-.mcc-VCP:before {
-  content: "\e98c";
-}
-.mcc-MLM:before {
-  content: "\e98d";
-}
-.mcc-TST:before {
-  content: "\e989";
-}
-.mcc-TCH:before {
-  content: "\e98a";
-}
-.mcc-ROK:before {
-  content: "\e98b";
-}
-.mcc-DDGN:before {
-  content: "\e986";
-}
-.mcc-MPC:before {
-  content: "\e987";
-}
-.mcc-DGTX:before {
-  content: "\e988";
-}
-.mcc-CURA:before {
-  content: "\e985";
-}
-.mcc-WWTK:before {
-  content: "\e983";
-}
-.mcc-SNG:before {
-  content: "\e984";
-}
-.mcc-FRTS:before {
-  content: "\e982";
-}
-.mcc-JOB:before {
-  content: "\e980";
-}
-.mcc-TRDS:before {
-  content: "\e981";
-}
-.mcc-DAI:before {
-  content: "\e90f";
-}
-.mcc-TMT:before {
-  content: "\e97f";
-}
-.mcc-RMESH:before {
-  content: "\e97e";
-}
-.mcc-SIN:before {
-  content: "\e97d";
-}
-.mcc-FREE:before {
-  content: "\e979";
-}
-.mcc-ABYCOIN:before {
-  content: "\e97b";
-}
-.mcc-SPAZ:before {
-  content: "\e97c";
-}
-.mcc-USDT_TRC20:before {
-  content: "\e978";
-}
-.mcc-PLA:before {
-  content: "\e97a";
-}
-.mcc-GOLF:before {
-  content: "\e977";
-}
-.mcc-HEAT:before {
-  content: "\e976";
-}
-.mcc-PNY:before {
-  content: "\e975";
-}
-.mcc-ENIX:before {
-  content: "\e974";
-}
-.mcc-SMC:before {
-  content: "\e973";
-}
-.mcc-XCON:before {
-  content: "\e972";
-}
-.mcc-EOS:before {
-  content: "\e971";
-}
-.mcc-KUBO:before {
-  content: "\e970";
-}
-.mcc-HYPE:before {
-  content: "\e96e";
-}
-.mcc-BEST:before {
-  content: "\e96f";
-}
-.mcc-LINK:before {
-  content: "\e96d";
-}
-.mcc-POLY:before {
-  content: "\e96a";
-}
-.mcc-MANA:before {
-  content: "\e96b";
-}
-.mcc-BTT:before {
-  content: "\e96c";
-}
-.mcc-MERO:before {
-  content: "\e969";
-}
-.mcc-CCIM:before {
-  content: "\e968";
-}
-.mcc-DOGE:before {
-  content: "\e967";
-}
-.mcc-ULG:before {
-  content: "\e966";
-}
-.mcc-SPDR:before {
-  content: "\e965";
-}
-.mcc-NMN:before {
-  content: "\e95e";
-}
-.mcc-OROX:before {
-  content: "\e964";
-}
-.mcc-SMART:before {
-  content: "\e963";
-}
-.mcc-PRE:before {
-  content: "\e962";
-}
-.mcc-PIEG:before {
-  content: "\e961";
-}
-.mcc-ECA:before {
-  content: "\e960";
-}
-.mcc-LXC:before {
-  content: "\e95f";
-}
-.mcc-USDT_ERC20:before {
-  content: "\e95d";
-}
-.mcc-ORGT:before {
-  content: "\e95c";
-}
-.mcc-XRP:before {
-  content: "\e95b";
-}
-.mcc-IMT:before {
-  content: "\e95a";
-}
-.mcc-ACAD:before {
-  content: "\e959";
-}
-.mcc-ENJ:before {
-  content: "\e958";
-}
-.mcc-XLM:before {
-  content: "\e957";
-}
-.mcc-USDT:before {
-  content: "\e956";
-}
-.mcc-STQ:before {
-  content: "\e955";
-}
-.mcc-HERB:before {
-  content: "\e954";
-}
-.mcc-GRS:before {
-  content: "\e951";
-}
-.mcc-BLXS:before {
-  content: "\e950";
-}
-.mcc-BZX:before {
-  content: "\e952";
-}
-.mcc-OAK:before {
-  content: "\e953";
-}
-.mcc-CLOAK:before {
-  content: "\e94f";
-}
-.mcc-ACTIV:before {
-  content: "\e94e";
-}
-.mcc-USDC:before {
-  content: "\e94c";
-}
-.mcc-TKS:before {
-  content: "\e94d";
-}
-.mcc-SPND:before {
-  content: "\e94b";
-}
-.mcc-TXT:before {
-  content: "\e94a";
-}
-.mcc-WW:before {
-  content: "\e949";
-}
-.mcc-TUSD:before {
-  content: "\e947";
-}
-.mcc-GUSD:before {
-  content: "\e948";
-}
-.mcc-1337:before {
-  content: "\e900";
-}
-.mcc-ADULT:before {
-  content: "\e901";
-}
-.mcc-AE:before {
-  content: "\e902";
-}
-.mcc-ANT:before {
-  content: "\e903";
-}
-.mcc-BAT:before {
-  content: "\e904";
-}
-.mcc-BCH:before {
-  content: "\e905";
-}
-.mcc-BNB:before {
-  content: "\e906";
-}
-.mcc-BNT:before {
-  content: "\e907";
-}
-.mcc-BSD:before {
-  content: "\e908";
-}
-.mcc-BTC:before {
-  content: "\e909";
-}
-.mcc-BTG:before {
-  content: "\e90a";
-}
-.mcc-CATO:before {
-  content: "\e90b";
-}
-.mcc-COF:before {
-  content: "\e90c";
-}
-.mcc-COLX:before {
-  content: "\e90d";
-}
-.mcc-CRYP:before {
-  content: "\e90e";
-}
-.mcc-DASH:before {
-  content: "\e910";
-}
-.mcc-DCR:before {
-  content: "\e911";
-}
-.mcc-DGB:before {
-  content: "\e912";
-}
-.mcc-DGD:before {
-  content: "\e913";
-}
-.mcc-DRGN:before {
-  content: "\e914";
-}
-.mcc-EBTC:before {
-  content: "\e915";
-}
-.mcc-ETC:before {
-  content: "\e916";
-}
-.mcc-ETH:before {
-  content: "\e917";
-}
-.mcc-FLIX:before {
-  content: "\e918";
-}
-.mcc-FUN:before {
-  content: "\e919";
-}
-.mcc-GNT:before {
-  content: "\e91a";
-}
-.mcc-GTO:before {
-  content: "\e91b";
-}
-.mcc-HT:before {
-  content: "\e91c";
-}
-.mcc-ICX:before {
-  content: "\e91d";
-}
-.mcc-INV:before {
-  content: "\e91e";
-}
-.mcc-ITM:before {
-  content: "\e91f";
-}
-.mcc-KNC:before {
-  content: "\e920";
-}
-.mcc-LATINO:before {
-  content: "\e921";
-}
-.mcc-LILE:before {
-  content: "\e922";
-}
-.mcc-LOOM:before {
-  content: "\e923";
-}
-.mcc-LTC:before {
-  content: "\e924";
-}
-.mcc-MARS:before {
-  content: "\e925";
-}
-.mcc-MCO:before {
-  content: "\e926";
-}
-.mcc-MKR:before {
-  content: "\e927";
-}
-.mcc-MTL:before {
-  content: "\e928";
-}
-.mcc-NAS:before {
-  content: "\e929";
-}
-.mcc-NPXS:before {
-  content: "\e92a";
-}
-.mcc-NYC:before {
-  content: "\e92b";
-}
-.mcc-OMG:before {
-  content: "\e92c";
-}
-.mcc-ONG:before {
-  content: "\e92d";
-}
-.mcc-PAY:before {
-  content: "\e92e";
-}
-.mcc-PPT:before {
-  content: "\e92f";
-}
-.mcc-QASH:before {
-  content: "\e930";
-}
-.mcc-RDN:before {
-  content: "\e931";
-}
-.mcc-REP:before {
-  content: "\e932";
-}
-.mcc-REQ:before {
-  content: "\e933";
-}
-.mcc-SALT:before {
-  content: "\e934";
-}
-.mcc-SHEL:before {
-  content: "\e935";
-}
-.mcc-SNT:before {
-  content: "\e936";
-}
-.mcc-STAK:before {
-  content: "\e937";
-}
-.mcc-STORM:before {
-  content: "\e938";
-}
-.mcc-TBTC:before {
-  content: "\e939";
-}
-.mcc-TN:before {
-  content: "\e93a";
-}
-.mcc-TPAY:before {
-  content: "\e93b";
-}
-.mcc-TRX:before {
-  content: "\e93c";
-}
-.mcc-VERI:before {
-  content: "\e93d";
-}
-.mcc-VIA:before {
-  content: "\e93e";
-}
-.mcc-WAVES:before {
-  content: "\e93f";
-}
-.mcc-WRD1:before {
-  content: "\e940";
-}
-.mcc-XEM:before {
-  content: "\e941";
-}
-.mcc-XLR:before {
-  content: "\e942";
-}
-.mcc-XMR:before {
-  content: "\e943";
-}
-.mcc-XVG:before {
-  content: "\e944";
-}
-.mcc-ZEC:before {
-  content: "\e945";
-}
-.mcc-ZRX:before {
-  content: "\e946";
+
+// Icon symbol and glyph array
+$icons: (
+"DDS": "e9a4",
+"STMX": "e9a5",
+"SPI": "e9a3",
+"BEP20USDC": "e99e",
+"BEP20USDT": "e99f",
+"CAKE": "e9a0",
+"VAI": "e9a1",
+"XVS": "e9a2",
+"GVT": "e99a",
+"LUN": "e99b",
+"SNOV": "e99c",
+"TEL": "e99d",
+"INCH": "e996",
+"AAVE": "e997",
+"SNX": "e998",
+"UNI": "e999",
+"CGB": "e994",
+"NEXO": "e995",
+"MCT": "e993",
+"MINX": "e991",
+"XFC": "e992",
+"CHS": "e98e",
+"CRO": "e98f",
+"USDN": "e990",
+"VCP": "e98c",
+"MLM": "e98d",
+"TST": "e989",
+"TCH": "e98a",
+"ROK": "e98b",
+"DDGN": "e986",
+"MPC": "e987",
+"DGTX": "e988",
+"CURA": "e985",
+"WWTK": "e983",
+"SNG": "e984",
+"FRTS": "e982",
+"JOB": "e980",
+"TRDS": "e981",
+"DAI": "e90f",
+"TMT": "e97f",
+"RMESH": "e97e",
+"SIN": "e97d",
+"FREE": "e979",
+"ABYCOIN": "e97b",
+"SPAZ": "e97c",
+"USDT_TRC20": "e978",
+"PLA": "e97a",
+"GOLF": "e977",
+"HEAT": "e976",
+"PNY": "e975",
+"ENIX": "e974",
+"SMC": "e973",
+"XCON": "e972",
+"EOS": "e971",
+"KUBO": "e970",
+"HYPE": "e96e",
+"BEST": "e96f",
+"LINK": "e96d",
+"POLY": "e96a",
+"MANA": "e96b",
+"BTT": "e96c",
+"MERO": "e969",
+"CCIM": "e968",
+"DOGE": "e967",
+"ULG": "e966",
+"SPDR": "e965",
+"NMN": "e95e",
+"OROX": "e964",
+"SMART": "e963",
+"PRE": "e962",
+"PIEG": "e961",
+"ECA": "e960",
+"LXC": "e95f",
+"USDT_ERC20": "e95d",
+"ORGT": "e95c",
+"XRP": "e95b",
+"IMT": "e95a",
+"ACAD": "e959",
+"ENJ": "e958",
+"XLM": "e957",
+"USDT": "e956",
+"STQ": "e955",
+"HERB": "e954",
+"GRS": "e951",
+"BLXS": "e950",
+"BZX": "e952",
+"OAK": "e953",
+"CLOAK": "e94f",
+"ACTIV": "e94e",
+"USDC": "e94c",
+"TKS": "e94d",
+"SPND": "e94b",
+"TXT": "e94a",
+"WW": "e949",
+"TUSD": "e947",
+"GUSD": "e948",
+"1337": "e900",
+"ADULT": "e901",
+"AE": "e902",
+"ANT": "e903",
+"BAT": "e904",
+"BCH": "e905",
+"BNB": "e906",
+"BNT": "e907",
+"BSD": "e908",
+"BTC": "e909",
+"BTG": "e90a",
+"CATO": "e90b",
+"COF": "e90c",
+"COLX": "e90d",
+"CRYP": "e90e",
+"DASH": "e910",
+"DCR": "e911",
+"DGB": "e912",
+"DGD": "e913",
+"DRGN": "e914",
+"EBTC": "e915",
+"ETC": "e916",
+"ETH": "e917",
+"FLIX": "e918",
+"FUN": "e919",
+"GNT": "e91a",
+"GTO": "e91b",
+"HT": "e91c",
+"ICX": "e91d",
+"INV": "e91e",
+"ITM": "e91f",
+"KNC": "e920",
+"LATINO": "e921",
+"LILE": "e922",
+"LOOM": "e923",
+"LTC": "e924",
+"MARS": "e925",
+"MCO": "e926",
+"MKR": "e927",
+"MTL": "e928",
+"NAS": "e929",
+"NPXS": "e92a",
+"NYC": "e92b",
+"OMG": "e92c",
+"ONG": "e92d",
+"PAY": "e92e",
+"PPT": "e92f",
+"QASH": "e930",
+"RDN": "e931",
+"REP": "e932",
+"REQ": "e933",
+"SALT": "e934",
+"SHEL": "e935",
+"SNT": "e936",
+"STAK": "e937",
+"STORM": "e938",
+"TBTC": "e939",
+"TN": "e93a",
+"TPAY": "e93b",
+"TRX": "e93c",
+"VERI": "e93d",
+"VIA": "e93e",
+"WAVES": "e93f",
+"WRD1": "e940",
+"XEM": "e941",
+"XLR": "e942",
+"XMR": "e943",
+"XVG": "e944",
+"ZEC": "e945",
+"ZRX": "e946",
+);
+
+// We need a function to add the backslash
+// Sass thinks its an escaping character
+@function icon($character){
+    @return unquote('\"') + unquote(str-insert($character,'\\', 1)) + unquote('\"');
+}
+
+// Loop icon array
+@each $name, $symbol in $icons {
+	.mcc-#{$name}:before {
+	  content: icon($symbol);
+	}
 }
