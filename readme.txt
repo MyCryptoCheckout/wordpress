@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.89
+Stable tag: 2.91
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.7
 
@@ -255,6 +255,12 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.91 20210322 =
+
+* New currency: DDS.Store DDS
+* Fix DGB wallet complaining of a missing xpub when not using an xpub.
+* Monthly free licenses upped to 5 instead of 3.
 
 = 2.89 20210316 =
 
