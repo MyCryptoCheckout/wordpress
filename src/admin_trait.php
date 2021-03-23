@@ -636,7 +636,7 @@ trait admin_trait
 		{
 			if ( ! function_exists( 'gmp_abs' ) )
 				$form->markup( 'm_btc_hd_public_key' )
-					->markup( __( 'This wallet supports HD public keys, but your system is missing the required PHP GMP libary.', 'mycryptocheckout' ) );
+					->markup( __( 'This wallet supports HD public keys, but your system is missing the required PHP GMP library.', 'mycryptocheckout' ) );
 			else
 			{
 				$fs = $form->fieldset( 'fs_btc_hd_public_key' );
