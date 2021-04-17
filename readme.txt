@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 95+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 105+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
@@ -8,7 +8,7 @@ Stable tag: 2.91
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.7
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 95+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 105+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -59,6 +59,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Monero XMR
 - NEM XEM
 - Stellar XLM
+- Terra LUNA
 - TRON TRX
 - Ultragate ULG
 - Verge XVG
@@ -72,7 +73,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
-- Moeda SEEDS
+- Moeda SEEDS SEEDS
 - PancakeSwap Token CAKE
 - VAI Stablecoin VAI
 - Venus XVS
@@ -89,12 +90,15 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Basic Attention Token BAT
 - CGBBank CGB
 - Chainlink LINK
+- Clash Token SCT
 - Connect Coin XCON
 - Crypto.com Coin CRO
 - CuraDAI CURA
 - DDS.Store DDS
 - Devil's Dragon DDGN
+- Moeda Loyalty Points MDA
 - Multi-collateral DAI DAI
+- MX Token MX
 - Decentraland MANA
 - DigitexFutures DGTX
 - DigixDAO DGD
@@ -144,6 +148,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VcashPay VCP
 - Veritaseum VERI
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
+
+= Terra Tokens supported =
+
+- TerraUSD UST
 
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
