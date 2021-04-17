@@ -45,6 +45,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Gold BTG
+- Counterparty XCP
 - Dash DASH (Including HD wallets)
 - Decred DCR
 - Digibyte DGB (Including SegWit)
@@ -71,6 +72,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
+- Moeda SEEDS
 - PancakeSwap Token CAKE
 - VAI Stablecoin VAI
 - Venus XVS
@@ -165,6 +167,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
 
+= Counterparty Tokens supported: =
+
+- XTROPTIONS.GOLD
+
 = Fiat Autosettlements =
 
 Autosettlement is a feature that enables you to connect MyCryptoCheckout to exchange(s) and automatically sell any received cryptocurrencies into fiat or stablecoins (USD, USDC, USDT, TUSD). This is a great tool for merchants who want to accept bitcoin/altcoins but prefer to cash out immediately to avoid market volatility.
@@ -255,6 +261,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* New currency: Moeda SEEDS
+* New currency: Counterparty XCP
+* New currency: XTROPTIONS.GOLD
 
 = 2.91 20210322 =
 
