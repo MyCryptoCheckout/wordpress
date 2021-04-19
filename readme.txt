@@ -265,7 +265,7 @@ Full searchable docs can be found at <a href="https://mycryptocheckout.com/doc/i
 The following plugins prevent MyCryptoCheckout from working correctly:
 
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
-- <a href="dpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
+- <a href="https://wordpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
