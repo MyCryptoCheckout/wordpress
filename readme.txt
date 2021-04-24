@@ -133,7 +133,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - Roks ROK
 - SALT
-- Shopping SPI
+- Shopping.io SPI
 - Snovian.Space SNOV
 - Status SNT
 - Synthetix SNX
@@ -155,8 +155,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
-- CryptoHours CHS
 - BitTorrent BTT
+- CryptoHours CHS
+- EtherM ETM
+
 - Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
 
 = WAVES Tokens supported (Including Waves Client): =
