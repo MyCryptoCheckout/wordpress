@@ -44,6 +44,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
+- Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
 - Counterparty XCP
 - Dash DASH (Including HD wallets)
