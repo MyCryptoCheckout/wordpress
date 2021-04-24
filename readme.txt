@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 105+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 110+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
@@ -8,7 +8,7 @@ Stable tag: 2.91
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.7
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 105+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 110+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -44,12 +44,14 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
+- Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
 - Counterparty XCP
 - Dash DASH (Including HD wallets)
 - Decred DCR
 - Digibyte DGB (Including SegWit)
 - Electra ECA
+- Elrond EGLD
 - EOS
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Footballcoin XFC
@@ -73,6 +75,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
+- JulSwap JULD
 - Moeda SEEDS SEEDS
 - PancakeSwap Token CAKE
 - VAI Stablecoin VAI
@@ -94,6 +97,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Connect Coin XCON
 - Crypto.com Coin CRO
 - CuraDAI CURA
+- Curate XCUR
 - DDS.Store DDS
 - Devil's Dragon DDGN
 - Moeda Loyalty Points MDA
@@ -133,7 +137,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - Roks ROK
 - SALT
-- Shopping SPI
+- Shopping.io SPI
 - Snovian.Space SNOV
 - Status SNT
 - Synthetix SNX
@@ -147,6 +151,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - USD Coin USDC
 - VcashPay VCP
 - Veritaseum VERI
+- World Token WORLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
 
 = Terra Tokens supported =
@@ -155,8 +160,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = TRON TRC-10 / TRC-20 Tokens supported: =
 
-- CryptoHours CHS
 - BitTorrent BTT
+- CryptoHours CHS
+- EtherM ETM
+
 - Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
 
 = WAVES Tokens supported (Including Waves Client): =
