@@ -51,6 +51,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Decred DCR
 - Digibyte DGB (Including SegWit)
 - Electra ECA
+- Elrond EGLD
 - EOS
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Footballcoin XFC
@@ -74,6 +75,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
+- JulSwap JULD
 - Moeda SEEDS SEEDS
 - PancakeSwap Token CAKE
 - VAI Stablecoin VAI
@@ -95,6 +97,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Connect Coin XCON
 - Crypto.com Coin CRO
 - CuraDAI CURA
+- Curate XCUR
 - DDS.Store DDS
 - Devil's Dragon DDGN
 - Moeda Loyalty Points MDA
@@ -148,6 +151,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - USD Coin USDC
 - VcashPay VCP
 - Veritaseum VERI
+- World Token WORLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
 
 = Terra Tokens supported =
