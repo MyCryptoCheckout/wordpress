@@ -33,6 +33,8 @@ class WooCommerce
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
+		$this->add_filter( 'woocommerce_currencies' );
+		$this->add_filter( 'woocommerce_currency_symbol', 10, 2 );
 		$this->add_filter( 'woocommerce_get_checkout_payment_url', 10, 2 );
 		$this->add_action( 'woocommerce_order_status_cancelled' );
 		$this->add_action( 'woocommerce_order_status_completed' );
@@ -483,6 +485,35 @@ class WooCommerce
 		$send_new_order_invoice = $gateway->get_option( 'send_new_order_invoice' );
 		if ( $send_new_order_invoice != 'no' )
 			WC()->mailer()->customer_invoice( $order );
+	}
+
+	/**
+		@brief		woocommerce_currencies
+		@since		2021-05-02 10:54:15
+	**/
+	public function woocommerce_currencies( $currencies )
+	{
+		$wallets = mycryptocheckout()->wallets();
+		$mcc_currencies = mycryptocheckout()->currencies();
+		foreach( $wallets as $wallet )
+		{
+			$currency_id = $wallet->get_currency_id();
+			$name = $mcc_currencies->get( $currency_id )->get_name();
+			$currencies[ $currency_id ] = $name;
+		}
+		return $currencies;
+	}
+
+	/**
+		@brief		woocommerce_currency_symbol
+		@since		2021-05-02 11:00:05
+	**/
+	public function woocommerce_currency_symbol( $currency_symbol, $currency )
+	{
+		$mcc_currencies = mycryptocheckout()->currencies();
+		if ( ! $mcc_currencies->has( $currency ) )
+			return $currency_symbol;
+		return $currency;
 	}
 
 	/**
