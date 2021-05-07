@@ -799,6 +799,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 					{
 						var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
 						send_parameters[ 'gasPrice' ] = web3.utils.toWei( metamask_gas.price + '', 'gwei' );
+						// Does the currency have its own custom gas limit?
+						if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit !== 'undefined' )
+							metamask_gas.limit = $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit;
 						send_parameters[ 'gas' ] = metamask_gas.limit + '';
 					}
 
