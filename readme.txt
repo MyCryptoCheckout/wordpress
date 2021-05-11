@@ -8,7 +8,7 @@ Stable tag: 2.92
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.7
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 110+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 120+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -75,9 +75,14 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
+- Fox Finance FOX
+- FREE Coin FREE
+- Goku Bank Coin GBC
+- GameToken GME
 - JulSwap JULD
 - Moeda SEEDS SEEDS
 - PancakeSwap Token CAKE
+- Shopaneum SPN
 - VAI Stablecoin VAI
 - Venus XVS
 - Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP20 tokens</a>!
@@ -140,6 +145,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Shopping.io SPI
 - Snovian.Space SNOV
 - Status SNT
+- StormX STMX
 - Synthetix SNX
 - Telcoin TEL
 - TenXPay PAY
@@ -147,6 +153,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - TBC Shopping Token TST
 - TheCash TCH
 - TrueUSD TUSD
+- Ultra Token UOS
 - Uniswap UNI
 - USD Coin USDC
 - VcashPay VCP
@@ -163,6 +170,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - BitTorrent BTT
 - CryptoHours CHS
 - EtherM ETM
+- Special Harmony SHC
 
 - Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
 
