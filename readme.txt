@@ -289,6 +289,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 * New currency: Fox Finance FOX
 * New currency: HyperChain HYPER
+* New: WooCommerce stores can set their store currency to any currency in the MCC wallet list.
 
 = 2.92 20210424 =
 
