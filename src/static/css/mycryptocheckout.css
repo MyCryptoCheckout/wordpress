@@ -247,6 +247,27 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-FOX:before {
+  content: "\e9b4"; }
+
+.mcc-GBC:before {
+  content: "\e9b5"; }
+
+.mcc-GME:before {
+  content: "\e9b6"; }
+
+.mcc-HYPER:before {
+  content: "\e9b7"; }
+
+.mcc-SHC:before {
+  content: "\e9b8"; }
+
+.mcc-SPN:before {
+  content: "\e9b9"; }
+
+.mcc-UOS:before {
+  content: "\e9ba"; }
+
 .mcc-EGLD:before {
   content: "\e9af"; }
 
@@ -899,12 +920,18 @@
   color: #F25057; }
 .mcc_currency_icons.color i.mcc-FLIX {
   color: #7D0A7F; }
+.mcc_currency_icons.color i.mcc-FOX {
+  color: #E09622; }
 .mcc_currency_icons.color i.mcc-FREE {
   color: #F7B930; }
 .mcc_currency_icons.color i.mcc-FRTS {
   color: #ED6D00; }
 .mcc_currency_icons.color i.mcc-FUN {
   color: #ED1968; }
+.mcc_currency_icons.color i.mcc-GBC {
+  color: #F1B31E; }
+.mcc_currency_icons.color i.mcc-GME {
+  color: #9484C6; }
 .mcc_currency_icons.color i.mcc-GOLF {
   color: #000000; }
 .mcc_currency_icons.color i.mcc-GNT {
@@ -925,6 +952,8 @@
   color: #1C2143; }
 .mcc_currency_icons.color i.mcc-HYPE {
   color: #E60606; }
+.mcc_currency_icons.color i.mcc-HYPER {
+  color: #6B2EFD; }
 .mcc_currency_icons.color i.mcc-ICX {
   color: #1FC5C9; }
 .mcc_currency_icons.color i.mcc-IMT {
@@ -1041,6 +1070,8 @@
   color: #971EE6; }
 .mcc_currency_icons.color i.mcc-SPDR {
   color: #ad1ca6; }
+.mcc_currency_icons.color i.mcc-SHC {
+  color: #000000; }
 .mcc_currency_icons.color i.mcc-SHEL {
   color: #000000; }
 .mcc_currency_icons.color i.mcc-SIN {
@@ -1057,6 +1088,8 @@
   color: #D0C344; }
 .mcc_currency_icons.color i.mcc-SPI {
   color: #14ACAA; }
+.mcc_currency_icons.color i.mcc-SPN {
+  color: #12496D; }
 .mcc_currency_icons.color i.mcc-SPND {
   color: #000; }
 .mcc_currency_icons.color i.mcc-STAK {
@@ -1095,6 +1128,8 @@
   color: #f4ba3e; }
 .mcc_currency_icons.color i.mcc-UNI {
   color: #FF007A; }
+.mcc_currency_icons.color i.mcc-UOS {
+  color: #7A51D0; }
 .mcc_currency_icons.color i.mcc-USDC {
   color: #2775c9; }
 .mcc_currency_icons.color i.mcc-USDN {
