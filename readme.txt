@@ -79,6 +79,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - FREE Coin FREE
 - Goku Bank Coin GBC
 - GameToken GME
+- HyperChain HYPER
 - JulSwap JULD
 - Moeda SEEDS SEEDS
 - PancakeSwap Token CAKE
@@ -285,6 +286,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* New currency: Fox Finance FOX
+* New currency: HyperChain HYPER
 
 = 2.92 20210424 =
 
