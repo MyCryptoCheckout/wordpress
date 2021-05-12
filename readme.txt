@@ -290,7 +290,12 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 = 2.93 20210512 =
 
 * New currency: Fox Finance FOX
+* New currency: GameToken GME
 * New currency: HyperChain HYPER
+* New currency: Goku Bank Coin GBC
+* New currency: Shopaneum SPN
+* New currency: Ultra Token UOS
+* New currency: Special Harmony SHC
 * New: WooCommerce stores can set their store currency to any currency in the MCC wallet list.
 
 = 2.92 20210424 =
