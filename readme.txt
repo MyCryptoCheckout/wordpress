@@ -296,6 +296,17 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.94 20210527 =
+
+* New currency: Crypto Shopping & Travelling Coin CSTC
+* New currency: EarnX
+* New currency: GameTokenV3 GMEV3
+* New currency: SPI Governance GSPI
+* New currency: Michi $ander MICHI
+* New currency: Moonpirate
+* New currency: SafeBTC
+* New currency: Velorex VEX
+
 = 2.93 20210512 =
 
 * New currency: Fox Finance FOX
