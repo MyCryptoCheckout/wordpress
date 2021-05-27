@@ -8,7 +8,7 @@ Stable tag: 2.93
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.7
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 120+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 130+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
