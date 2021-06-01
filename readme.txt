@@ -73,6 +73,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = BEP-20 tokens supported (Including MetaMask): =
 
+- BakeryToken BAKE
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
@@ -89,11 +90,15 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Moonpirate MOONPIRATE
 - PancakeSwap Token CAKE
 - SafeBTC SAFEBTC
+- SafeMoon SAFEMOON
+- SafeMoonCash SAFEMOONCASH
 - Shopaneum SPN
 - SPI Governance GSPI
+- Swipe SXP
 - VAI Stablecoin VAI
 - VELOREX VEX
 - Venus XVS
+- YUMMY
 - Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP20 tokens</a>!
 
 = ERC-20 tokens supported (Including MetaMask, ENS addresses): =
@@ -126,10 +131,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - FRTS Coin FRTS
 - FunFair FUN
 - Gemini Dollar GUSD
+- Genesis Vision GVT
 - Gifto GTO
 - Golem GNT
 - Golfcoin GOLF
-- Genesis Vision GVT
+- GoodDollar G
 - Huobi Token HT
 - IMSmart Token IMT
 - InnovaMinex MINX
@@ -151,6 +157,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - Roks ROK
 - SALT
+- SHIBA INU SHIB
 - Shopping.io SPI
 - Snovian.Space SNOV
 - Status SNT
