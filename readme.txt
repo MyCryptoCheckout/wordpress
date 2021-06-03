@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.94
+Stable tag: 2.95
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.7
 
@@ -302,6 +302,15 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.95 20210603 =
+
+* New currency: BakeryToken BAKE
+* New currency: SafeMoon SAFEMOON
+* New currency: SafeMoonCash SAFEMOONCASH
+* New currency: SHIBA INU SHIB
+* New currency: Swipe SXP
+* New currency: YUMMY
 
 = 2.94 20210527 =
 
