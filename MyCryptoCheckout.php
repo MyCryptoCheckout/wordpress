@@ -73,5 +73,5 @@ namespace
 		return mycryptocheckout\MyCryptoCheckout::instance();
 	}
 
-	$mycryptocheckout = new mycryptocheckout\MyCryptoCheckout();
+	$mycryptocheckout = new mycryptocheckout\MyCryptoCheckout( __FILE__ );
 }

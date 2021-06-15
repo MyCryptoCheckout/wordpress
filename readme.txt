@@ -303,6 +303,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Plugin URL on non-standard hosts.
+
 = 2.95 20210603 =
 
 * New currency: BakeryToken BAKE

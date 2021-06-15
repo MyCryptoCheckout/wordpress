@@ -128,7 +128,7 @@ class base
 				'filename_from_plugin_directory' => str_replace( WP_PLUGIN_DIR, '', $__FILE__ ),
 				'path_from_plugin_directory' => str_replace( WP_PLUGIN_DIR, '', dirname( $__FILE__ ) ),
 				'path_from_base_directory' => dirname( str_replace( ABSPATH, '', $__FILE__ ) ),
-				'url' => plugins_url() . str_replace( WP_PLUGIN_DIR, '', dirname( $__FILE__ ) ),
+				'url' => plugin_dir_url( $__FILE__ ),
 			];
 		}
 

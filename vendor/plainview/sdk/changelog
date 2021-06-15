@@ -1,3 +1,4 @@
+20210615		Wordpress: fix base URL.
 20210216		Form2: Fix checkbox value incorrectly reported using get_post_value().
 20210205		Wordpress: Add action name overrides.
 20210122		Form2: Fix description css_class error.
