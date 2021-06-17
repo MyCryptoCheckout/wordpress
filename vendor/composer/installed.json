@@ -63,17 +63,17 @@
         },
         {
             "name": "bitwasp/buffertools",
-            "version": "v0.4.6",
-            "version_normalized": "0.4.6.0",
+            "version": "v0.4.7",
+            "version_normalized": "0.4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bit-Wasp/buffertools-php.git",
-                "reference": "c377f5e751e3f1999f6a389b692faa06b9217358"
+                "reference": "9683014f59b401f6858ce069ebddc35140463fe1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bit-Wasp/buffertools-php/zipball/c377f5e751e3f1999f6a389b692faa06b9217358",
-                "reference": "c377f5e751e3f1999f6a389b692faa06b9217358",
+                "url": "https://api.github.com/repos/Bit-Wasp/buffertools-php/zipball/9683014f59b401f6858ce069ebddc35140463fe1",
+                "reference": "9683014f59b401f6858ce069ebddc35140463fe1",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "satooshi/php-coveralls": "~0.6.1",
                 "squizlabs/php_codesniffer": "~2.0"
             },
-            "time": "2018-11-11T16:40:32+00:00",
+            "time": "2020-01-17T21:31:39+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -107,21 +107,25 @@
                 }
             ],
             "description": "Toolbox for working with binary and hex data. Similar to NodeJS Buffer.",
+            "support": {
+                "issues": "https://github.com/Bit-Wasp/buffertools-php/issues",
+                "source": "https://github.com/Bit-Wasp/buffertools-php/tree/v0.5.7"
+            },
             "install-path": "../bitwasp/buffertools"
         },
         {
             "name": "bitwasp/secp256k1-php",
-            "version": "v0.1.3",
-            "version_normalized": "0.1.3.0",
+            "version": "v0.1.4",
+            "version_normalized": "0.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bit-Wasp/secp256k1-php.git",
-                "reference": "0ad10c06f36fa5caea6f7276315c2fae6262708e"
+                "reference": "dba022a223a5b6d3480ac30f119008ef036a7e34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bit-Wasp/secp256k1-php/zipball/0ad10c06f36fa5caea6f7276315c2fae6262708e",
-                "reference": "0ad10c06f36fa5caea6f7276315c2fae6262708e",
+                "url": "https://api.github.com/repos/Bit-Wasp/secp256k1-php/zipball/dba022a223a5b6d3480ac30f119008ef036a7e34",
+                "reference": "dba022a223a5b6d3480ac30f119008ef036a7e34",
                 "shasum": ""
             },
             "require-dev": {
@@ -129,7 +133,7 @@
                 "squizlabs/php_codesniffer": "2.*",
                 "symfony/yaml": "^3.4"
             },
-            "time": "2018-02-17T14:24:05+00:00",
+            "time": "2019-02-26T18:29:00+00:00",
             "type": "library",
             "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
@@ -157,6 +161,10 @@
                 "php",
                 "secp256k1"
             ],
+            "support": {
+                "issues": "https://github.com/Bit-Wasp/secp256k1-php/issues",
+                "source": "https://github.com/Bit-Wasp/secp256k1-php/tree/v0.1"
+            },
             "install-path": "../bitwasp/secp256k1-php"
         },
         {
@@ -205,27 +213,26 @@
         },
         {
             "name": "composer/semver",
-            "version": "1.4.2",
-            "version_normalized": "1.4.2.0",
+            "version": "1.7.2",
+            "version_normalized": "1.7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "c7cb9a2095a074d131b65a8a0cd294479d785573"
+                "reference": "647490bbcaf7fc4891c58f47b825eb99d19c377a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/c7cb9a2095a074d131b65a8a0cd294479d785573",
-                "reference": "c7cb9a2095a074d131b65a8a0cd294479d785573",
+                "url": "https://api.github.com/repos/composer/semver/zipball/647490bbcaf7fc4891c58f47b825eb99d19c377a",
+                "reference": "647490bbcaf7fc4891c58f47b825eb99d19c377a",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.2 || ^7.0"
+                "php": "^5.3.2 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.5 || ^5.0.5",
-                "phpunit/phpunit-mock-objects": "2.3.0 || ^3.0"
+                "phpunit/phpunit": "^4.5 || ^5.0.5"
             },
-            "time": "2016-08-30T16:08:34+00:00",
+            "time": "2020-12-03T15:47:16+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -265,6 +272,25 @@
                 "semver",
                 "validation",
                 "versioning"
+            ],
+            "support": {
+                "irc": "irc://irc.freenode.org/composer",
+                "issues": "https://github.com/composer/semver/issues",
+                "source": "https://github.com/composer/semver/tree/1.7.2"
+            },
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
             ],
             "install-path": "./semver"
         },
@@ -495,17 +521,17 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.18",
-            "version_normalized": "2.0.18.0",
+            "version": "v2.0.20",
+            "version_normalized": "2.0.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "0a58ef6e3146256cc3dc7cc393927bcc7d1b72db"
+                "reference": "0f1f60250fccffeaf5dda91eea1c018aed1adc2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/0a58ef6e3146256cc3dc7cc393927bcc7d1b72db",
-                "reference": "0a58ef6e3146256cc3dc7cc393927bcc7d1b72db",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/0f1f60250fccffeaf5dda91eea1c018aed1adc2a",
+                "reference": "0f1f60250fccffeaf5dda91eea1c018aed1adc2a",
                 "shasum": ""
             },
             "require": {
@@ -517,7 +543,7 @@
             "suggest": {
                 "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
             },
-            "time": "2019-01-03T20:59:08+00:00",
+            "time": "2021-04-17T09:33:01+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -543,6 +569,11 @@
                 "pseudorandom",
                 "random"
             ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
             "install-path": "../paragonie/random_compat"
         },
         {

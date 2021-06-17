@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '245d88f619252aacd7ef7ffd43abde58df7d0708',
+    'reference' => 'a6f7d8484f33183cf20870098c4f5f8eadae1b3f',
     'name' => '__root__',
   ),
   'versions' => 
@@ -41,7 +41,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '245d88f619252aacd7ef7ffd43abde58df7d0708',
+      'reference' => 'a6f7d8484f33183cf20870098c4f5f8eadae1b3f',
     ),
     'bitwasp/bitcoin' => 
     array (
@@ -54,21 +54,21 @@ private static $installed = array (
     ),
     'bitwasp/buffertools' => 
     array (
-      'pretty_version' => 'v0.4.6',
-      'version' => '0.4.6.0',
+      'pretty_version' => 'v0.4.7',
+      'version' => '0.4.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c377f5e751e3f1999f6a389b692faa06b9217358',
+      'reference' => '9683014f59b401f6858ce069ebddc35140463fe1',
     ),
     'bitwasp/secp256k1-php' => 
     array (
-      'pretty_version' => 'v0.1.3',
-      'version' => '0.1.3.0',
+      'pretty_version' => 'v0.1.4',
+      'version' => '0.1.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0ad10c06f36fa5caea6f7276315c2fae6262708e',
+      'reference' => 'dba022a223a5b6d3480ac30f119008ef036a7e34',
     ),
     'btccom/cashaddress' => 
     array (
@@ -81,12 +81,12 @@ private static $installed = array (
     ),
     'composer/semver' => 
     array (
-      'pretty_version' => '1.4.2',
-      'version' => '1.4.2.0',
+      'pretty_version' => '1.7.2',
+      'version' => '1.7.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c7cb9a2095a074d131b65a8a0cd294479d785573',
+      'reference' => '647490bbcaf7fc4891c58f47b825eb99d19c377a',
     ),
     'fgrosse/phpasn1' => 
     array (
@@ -126,12 +126,12 @@ private static $installed = array (
     ),
     'paragonie/random_compat' => 
     array (
-      'pretty_version' => 'v2.0.18',
-      'version' => '2.0.18.0',
+      'pretty_version' => 'v2.0.20',
+      'version' => '2.0.20.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0a58ef6e3146256cc3dc7cc393927bcc7d1b72db',
+      'reference' => '0f1f60250fccffeaf5dda91eea1c018aed1adc2a',
     ),
     'pleonasm/merkle-tree' => 
     array (
