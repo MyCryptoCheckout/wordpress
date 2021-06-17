@@ -304,6 +304,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 * Fix: Plugin URL on non-standard hosts.
+* Fix: Add support for editing HD wallet currencies on PHP 8.
 
 = 2.95 20210603 =
 

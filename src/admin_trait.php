@@ -676,7 +676,7 @@ trait admin_trait
 
 				$circa_amount = $fs->number( 'circa_amount' )
 					->description( __( "When using an HD wallet, you can accept amounts that are lower than requested.", 'mycryptocheckout' ) )
-					->label( __( 'Payment tolerance %', 'mycryptocheckout' ) )
+					->label( __( 'Payment tolerance percent', 'mycryptocheckout' ) )
 					->min( 0 )
 					->max( 100 )
 					->value( $wallet->get( 'circa_amount' ) );
