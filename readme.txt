@@ -66,17 +66,21 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - TRON TRX
 - Ultragate ULG
 - Verge XVG
+- VeriBlock VBK
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
 - Zcash ZEC (T-address recipients only)
+- Zilliqa ZIL
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
 = BEP-20 tokens supported (Including MetaMask): =
 
+- AirdropScout SCOUT
 - BakeryToken BAKE
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
+- Bitcoin 100 B100
 - EarnX EARNX
 - Fox Finance FOX
 - FREE Coin FREE
@@ -88,13 +92,17 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Michi $ander MICHI
 - Moeda SEEDS SEEDS
 - Moonpirate MOONPIRATE
+- xxxNifty NSFW
 - PancakeSwap Token CAKE
+- Papel Token PAPEL
 - SafeBTC SAFEBTC
 - SafeMoon SAFEMOON
 - SafeMoonCash SAFEMOONCASH
 - Shopaneum SPN
+- SkyBorn SKYBORN
 - SPI Governance GSPI
 - Swipe SXP
+- TasteNFT TASTE
 - VAI Stablecoin VAI
 - VELOREX VEX
 - Venus XVS
@@ -136,9 +144,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Golem GNT
 - Golfcoin GOLF
 - GoodDollar G
+- Hoge Finance HOGE
 - Huobi Token HT
 - IMSmart Token IMT
 - InnovaMinex MINX
+- Kishu Inu KISHU
 - Kyber Network KNC
 - Loom LOOM
 - Lunyr LUN
@@ -175,6 +185,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VcashPay VCP
 - Veritaseum VERI
 - World Token WORLD
+- YIELD App YLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
 
 = Terra Tokens supported =
