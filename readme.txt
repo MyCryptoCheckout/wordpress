@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.95
+Stable tag: 2.96
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.7
 
@@ -314,6 +314,19 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.96 20210625 =
+
+* New currency: AirdropScout SCOUT
+* New currency: Bitcoin 100 B100
+* New currency: Hoge Finance HOGE
+* New currency: Kishu Inu KISHU
+* New currency: Papel Token PAPEL
+* New currency: SkyBorn SKYBORN
+* New currency: TasteNFT TASTE
+* New currency: VeriBlock VBK
+* New currency: xxxNifty NSFW
+* New currency: YIELD App YLD
+* New currency: Zilliqa ZIL
 * Fix: Plugin URL on non-standard hosts.
 * Fix: Add support for editing HD wallet currencies on PHP 8.
 
