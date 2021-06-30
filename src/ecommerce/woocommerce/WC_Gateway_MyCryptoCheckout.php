@@ -23,6 +23,9 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$this->title = $this->get_option( 'title' );
 		$this->description = $this->get_option( 'description' );
 
+		if ( $this->get_option( 'send_new_order_email' ) == 'yes' )
+			add_action( 'woocommerce_checkout_order_processed', [ $this, 'woocommerce_checkout_order_processed' ], 20, 1 );
+
 		add_action( 'mycryptocheckout_generate_checkout_javascript_data', [ $this, 'mycryptocheckout_generate_checkout_javascript_data' ] );
 		add_action( 'woocommerce_email_before_order_table', [ $this, 'woocommerce_email_before_order_table' ], 10, 3 );
 		add_filter( 'woocommerce_gateway_icon', [ $this, 'woocommerce_gateway_icon' ], 10, 2 );
@@ -49,6 +52,13 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$r[ 'test_mode' ] = [
 			'title'       => __( 'Test mode', 'mycryptocheckout' ),
 			'label'       => __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server. No payments will be processed in this mode.', 'mycryptocheckout' ),
+			'type'        => 'checkbox',
+			'description' => '',
+			'default'     => 'no',
+		];
+		$r[ 'send_new_order_email' ] = [
+			'title'       => __( 'Send new order e-mail', 'mycryptocheckout' ),
+			'label'       => __( 'Send the new order e-mail before the order is paid. Normally, the new order e-mail is only sent when then order has been paid.', 'mycryptocheckout' ),
 			'type'        => 'checkbox',
 			'description' => '',
 			'default'     => 'no',
@@ -482,5 +492,25 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			return;
 
 		echo wpautop( wptexturize( $instructions ) );
+	}
+
+	/**
+		@brief		Send the new order e-mail when the order is placed.
+		@see		https://stackoverflow.com/questions/45375143/send-an-email-notification-to-the-admin-for-pending-order-status-in-woocommerce
+		@since		2021-06-30 23:06:57
+	**/
+	public function woocommerce_checkout_order_processed( $order_id )
+	{
+		// Get an instance of the WC_Order object
+		$order = wc_get_order( $order_id );
+
+		// Only for "pending" order status
+		if( ! $order->has_status( 'pending' ) )
+			return;
+
+		// Send "New Email" notification
+		WC()->mailer()
+			->get_emails()['WC_Email_New_Order']
+			->trigger( $order_id );
 	}
 }
