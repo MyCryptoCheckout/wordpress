@@ -293,8 +293,10 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 
 If MyCryptoCheckout is unable to retrieve the account data for your domain, it's usually due to the MCC API server being blocked from connecting to your install. Check for:
 
-- Maintenance plugins
-- Password protection plugins
+- Coming soon mode / plugins
+- Maintenance mode / plugins
+- Password protection mode / plugins
+- Private site mode / plugins
 - Firewalls
 
 If after disabling the above plugins you still can't get it working, then contact us and we'll try to find the cause of the problem.
