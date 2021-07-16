@@ -192,15 +192,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - TerraUSD UST
 
-= TRON TRC-10 / TRC-20 Tokens supported: =
-
-- BitTorrent BTT
-- CryptoHours CHS
-- EtherM ETM
-- Special Harmony SHC
-
-- Add your <a href="https://mycryptocheckout.com/trc-20-token/">custom TRON tokens</a>!
-
 = WAVES Tokens supported (Including Waves Client): =
 
 - CoffeeCoin COF
