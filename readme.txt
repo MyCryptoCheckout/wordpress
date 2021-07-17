@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.96
+Stable tag: 2.97
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.7
 
@@ -314,6 +314,17 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.97 20210717 =
+
+* New currency: Carmacoin CARMA
+* New currency: EverRise RISE
+* New currency: Military Finance MIL
+* New currency: neokyne.com NEOK
+* New currency: VeChain VET
+* New currency: VccMix.com VMIX
+* New currency: XinFin Network XDC
+* New: Add WooCommerce setting for sending an order e-mail directly after placing the order.
 
 = 2.96 20210625 =
 
