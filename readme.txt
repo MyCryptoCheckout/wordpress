@@ -67,8 +67,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Ultragate ULG
 - Verge XVG
 - VeriBlock VBK
+- VeChain VET
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
+- XinFin Network XDC
 - Zcash ZEC (T-address recipients only)
 - Zilliqa ZIL
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
@@ -81,7 +83,9 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
 - Bitcoin 100 B100
+- CarmaCoin CARMA
 - EarnX EARNX
+- EverRise RISE
 - Fox Finance FOX
 - FREE Coin FREE
 - Goku Bank Coin GBC
@@ -90,6 +94,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - HyperChain HYPER
 - JulSwap JULD
 - Michi $ander MICHI
+- Military Finance MIL
 - Moeda SEEDS SEEDS
 - Moonpirate MOONPIRATE
 - xxxNifty NSFW
@@ -103,6 +108,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SPI Governance GSPI
 - Swipe SXP
 - TasteNFT TASTE
+- VccMix.com VMIX
 - VAI Stablecoin VAI
 - VELOREX VEX
 - Venus XVS
@@ -206,6 +212,8 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
 = Stellar Tokens supported: =
+
+- neokyne.com NEOK
 
 - Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
 
