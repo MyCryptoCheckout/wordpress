@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'a6f7d8484f33183cf20870098c4f5f8eadae1b3f',
+    'reference' => 'aeea4b5f96a96fcf837b10c4c924136d4e83b5f1',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'a6f7d8484f33183cf20870098c4f5f8eadae1b3f',
+      'reference' => 'aeea4b5f96a96fcf837b10c4c924136d4e83b5f1',
     ),
     'bitwasp/bitcoin' => 
     array (
@@ -94,12 +94,12 @@
     ),
     'mycryptocheckout/api' => 
     array (
-      'pretty_version' => '2.08',
-      'version' => '2.08.0.0',
+      'pretty_version' => '2.09',
+      'version' => '2.09.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '233c9903b0bdc09e61fc524d6375627227e72ce6',
+      'reference' => '2b43dd8f9963b9ba47a2a1df50d7a64f16c588fe',
     ),
     'paragonie/random_compat' => 
     array (

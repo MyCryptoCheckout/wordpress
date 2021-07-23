@@ -109,6 +109,7 @@ class API
 	public function send_post( $url, $data )
 	{
 		$url = sprintf( '%s%s', static::get_api_url(), $url );
+		$data = array( $data );		// Allow for CURL to serialize.
 		$r = wp_remote_post( $url, static::get_wp_remote_args( [
 			'body' => $data,
 		] ) );

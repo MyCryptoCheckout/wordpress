@@ -1,3 +1,7 @@
+2.09		20210723
+
+Fix Wordpress API to allow for serializing in WP 5.8
+
 2.08		20210215
 
 Use MCC API Exception instead of basic Exception.
