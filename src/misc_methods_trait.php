@@ -485,6 +485,9 @@ trait misc_methods_trait
 				throw new Exception( sprintf( 'Post %s does not exist.', $post_id ) );
 
 			$payment_id = get_post_meta( $post_id, '_mcc_payment_id', true );
+			// If there is no payment ID at ALL, then the payment was not created by us.
+			if ( $payment_id === false )
+				return;
 			if ( $payment_id <= 1 )
 			{
 				$mail = $this->mail();

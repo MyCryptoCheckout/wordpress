@@ -4,9 +4,9 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.97
+Stable tag: 2.98
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 5.7
+Tested up to: 5.8
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 150+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -314,6 +314,11 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.98 20210723 =
+
+* Fix: CURL account error with WP 5.8
+* Fix: Woocommerce: Do not send warning e-mails for orders that were manually created for the MCC gateway
 
 = 2.97 20210717 =
 
