@@ -866,7 +866,7 @@ trait admin_trait
 			// Input description.
 			->description( __( 'If you wish to mark your prices up (or down) when using cryptocurrency, enter the percentage in this box.', 'mycryptocheckout' ) )
 			// Input label.
-			->label( __( 'Markup %', 'mycryptocheckout' ) )
+			->label( __( 'Markup %%', 'mycryptocheckout' ) )
 			->max( 1000 )
 			->min( -100 )
 			->step( 0.01 )

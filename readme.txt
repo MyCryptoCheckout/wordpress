@@ -315,6 +315,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Global Settings tab not working with PHP 8
+
 = 2.98 20210723 =
 
 * Fix: CURL account error with WP 5.8
