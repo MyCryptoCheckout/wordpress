@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.98
+Stable tag: 2.99
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.8
 
@@ -315,6 +315,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.99 20210724 =
+
+* Fix: PHP 8 array fix when fetching account data.
 * Fix: Global Settings tab not working with PHP 8
 
 = 2.98 20210723 =
