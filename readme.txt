@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.99
+Stable tag: 2.101
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.8
 
@@ -320,6 +320,15 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.101 20210731 =
+
+* New currency: Avalanche AVAX
+* New currency: Centric SWAP CNS
+* New currency: FindToken FTK
+* New currency: Hokkaidu Inu HOKK
+* New currency: Polygon MATIC
+* Code: Added mycryptocheckout_api_account filter to allow for modifying the account data. See <a href="https://mycryptocheckout.com/doc/modify-the-exchange-rate-of-a-currency/">Modify the exchange rate of a currency</a>.
 
 = 2.99 20210724 =
 
