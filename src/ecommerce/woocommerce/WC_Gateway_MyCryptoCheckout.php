@@ -361,8 +361,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( isset( $_POST[ 'mcc_currency_id' ] ) )
 			if ( $order->get_meta( '_mcc_payment_id' ) < 1 )
 			{
-				MyCryptoCheckout()->woocommerce->woocommerce_checkout_create_order( $order, [] );
+				MyCryptoCheckout()->debug( 'Intercepted _POST.' );
+				$wc = MyCryptoCheckout()->woocommerce;
+				$wc->woocommerce_checkout_create_order( $order, [] );
 				$order->save();
+				// This is in order to send the payment to the API.
+				$wc->woocommerce_checkout_update_order_meta( $order->get_id() );
 			}
 
 		MyCryptoCheckout()->check_for_valid_payment_id( [

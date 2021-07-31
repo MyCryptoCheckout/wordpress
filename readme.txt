@@ -321,6 +321,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Retrieve an MCC payment ID when manually creating an order in the WooCommerce backend without setting the payment method.
+
 = 2.101 20210731 =
 
 * New currency: Avalanche AVAX
