@@ -42,6 +42,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = Cryptocurrencies supported: =
 
+- Avalanche AVAX
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
@@ -84,8 +85,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg USD Coin
 - Bitcoin 100 B100
 - CarmaCoin CARMA
+- Centric SWAP CNS
 - EarnX EARNX
 - EverRise RISE
+- FindToken FTK
 - Fox Finance FOX
 - FREE Coin FREE
 - Goku Bank Coin GBC
@@ -151,9 +154,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Golfcoin GOLF
 - GoodDollar G
 - Hoge Finance HOGE
+- Hokkaidu Inu HOKK
 - Huobi Token HT
 - IMSmart Token IMT
 - InnovaMinex MINX
+- Kudoken KDU
 - Kishu Inu KISHU
 - Kyber Network KNC
 - Loom LOOM
@@ -165,6 +170,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Micro Tuber MCT
 - Nexo Token NEXO
 - OMG Network OMG
+- Polygon MATIC
 - Polymath Network POLY
 - Populous PPT
 - Pundi X NPXS
