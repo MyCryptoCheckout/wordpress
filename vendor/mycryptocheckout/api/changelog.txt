@@ -1,3 +1,11 @@
+2.12		20210725
+
+Allow Wordpress API to filter the account data.
+
+2.11		20210724
+
+Fix Wordpress API incorrectly converting to array.
+
 2.09		20210723
 
 Fix Wordpress API to allow for serializing in WP 5.8

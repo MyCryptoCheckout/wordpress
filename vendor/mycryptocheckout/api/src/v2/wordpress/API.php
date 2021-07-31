@@ -69,7 +69,10 @@ class API
 	**/
 	public function new_account()
 	{
-		return new Account( $this );
+		$r = new Account( $this );
+		// Allow other plugins to modify the account data.
+		$r = apply_filters( 'mycryptocheckout_api_account', $r );
+		return $r;
 	}
 
 	/**
