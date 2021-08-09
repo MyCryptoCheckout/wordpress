@@ -103,6 +103,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - xxxNifty NSFW
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
+- Rewards RWD
 - SafeBTC SAFEBTC
 - SafeMoon SAFEMOON
 - SafeMoonCash SAFEMOONCASH
@@ -177,6 +178,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - QASH
 - Raiden RDN
 - Request REQ
+- Rewards RWD
 - Roks ROK
 - SALT
 - SHIBA INU SHIB
