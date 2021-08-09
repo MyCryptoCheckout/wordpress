@@ -247,6 +247,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-RWD_BEP20:before {
+  content: "\e9e2"; }
+
+.mcc-RWD_ERC20:before {
+  content: "\e9e3"; }
+
 .mcc-AVAX:before {
   content: "\e9dc"; }
 
@@ -1221,6 +1227,10 @@
   color: #0C424E; }
 .mcc_currency_icons.color i.mcc-ROK {
   color: #000000; }
+.mcc_currency_icons.color i.mcc-RWD_BEP20 {
+  color: #208475; }
+.mcc_currency_icons.color i.mcc-RWD_ERC20 {
+  color: #208475; }
 .mcc_currency_icons.color i.mcc-SAFEBTC {
   color: #8301FE; }
 .mcc_currency_icons.color i.mcc-SAFEMOON {
