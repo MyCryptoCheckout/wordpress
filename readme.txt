@@ -133,7 +133,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Clash Token SCT
 - Connect Coin XCON
 - Crypto.com Coin CRO
-- CuraDAI CURA
 - Curate XCUR
 - DDS.Store DDS
 - Devil's Dragon DDGN
@@ -141,7 +140,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Multi-collateral DAI DAI
 - MX Token MX
 - Decentraland MANA
-- DigitexFutures DGTX
 - DigixDAO DGD
 - Dogecoin DOGE
 - Dragonchain DRGN
@@ -157,7 +155,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Hoge Finance HOGE
 - Hokkaidu Inu HOKK
 - Huobi Token HT
-- IMSmart Token IMT
 - InnovaMinex MINX
 - Kudoken KDU
 - Kishu Inu KISHU
@@ -167,7 +164,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
-- Media Play Cash MPC
 - Micro Tuber MCT
 - Nexo Token NEXO
 - OMG Network OMG
@@ -179,7 +175,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Raiden RDN
 - Request REQ
 - Rewards RWD
-- Roks ROK
 - SALT
 - SHIBA INU SHIB
 - Shopping.io SPI
@@ -190,7 +185,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Telcoin TEL
 - TenXPay PAY
 - Tether USD USDT
-- TBC Shopping Token TST
 - TheCash TCH
 - TrueUSD TUSD
 - Ultra Token UOS
@@ -209,7 +203,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = WAVES Tokens supported (Including Waves Client): =
 
 - CoffeeCoin COF
-- CopyrightCoins CCIM
 - Crypto Shopping & Travelling Coin CSTC
 - Neutrino USD USDN
 - Waves World WW
