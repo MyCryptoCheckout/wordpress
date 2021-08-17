@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.103
+Stable tag: 2.104
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.8
 
@@ -318,6 +318,13 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.104 20210817 =
+
+* New currency: Birb BIRB
+* New currency: GateToken GT
+* New currency: Verasity VRA
+* Tweak: Display message about RWD token on the accounts and currency pages. Nowhere else.
 
 = 2.103 20210809 =
 
