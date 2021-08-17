@@ -83,6 +83,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
+- Birb BIRB
 - Bitcoin 100 B100
 - CarmaCoin CARMA
 - Centric SWAP CNS
@@ -146,6 +147,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Enjin Coin ENJ
 - FRTS Coin FRTS
 - FunFair FUN
+- GateToken GT
 - Gemini Dollar GUSD
 - Genesis Vision GVT
 - Gifto GTO
@@ -191,6 +193,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Uniswap UNI
 - USD Coin USDC
 - VcashPay VCP
+- Verasity VRA
 - Veritaseum VERI
 - World Token WORLD
 - YIELD App YLD
