@@ -246,6 +246,7 @@ trait autosettlement_trait
 				$binance_settlement_currency = $form->select( 'binance_settlement_currency' )
 					->description( __( 'The currency you wish to settle to.', 'mycryptocheckout' ) )
 					->label( __( 'Autosettlement currency', 'mycryptocheckout' ) )
+					->opt( 'BUSD', 'BUSD - Binance USD Coin' )
 					->opt( 'USDC', 'USDC - USD Coin' )
 					->opt( 'USDT', 'USDT - Tether' )
 					->opt( 'TUSD', 'TUSD - TrueUSD' )
