@@ -319,6 +319,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* New: Allow Binance autosettlement to BUSD.
+
 = 2.104 20210817 =
 
 * New currency: Birb BIRB
