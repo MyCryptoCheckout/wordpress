@@ -85,16 +85,19 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg USD Coin
 - Birb BIRB
 - Bitcoin 100 B100
+- BITTOKEN BITT
 - CarmaCoin CARMA
 - Centric SWAP CNS
+- DexKit KIT
 - EarnX EARNX
 - EverRise RISE
 - FindToken FTK
 - Fox Finance FOX
 - FREE Coin FREE
-- Goku Bank Coin GBC
+- Gamesafe.io GAMESAFE
 - GameToken GME
 - GameTokenV3 GMEV3
+- Goku Bank Coin GBC
 - HyperChain HYPER
 - JulSwap JULD
 - Michi $ander MICHI
@@ -104,6 +107,8 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - xxxNifty NSFW
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
+- PROSCOIN PRX
+- Refinable FINE
 - Rewards RWD
 - SafeBTC SAFEBTC
 - SafeMoon SAFEMOON
@@ -111,6 +116,8 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Shopaneum SPN
 - SkyBorn SKYBORN
 - SPI Governance GSPI
+- Sportemon-Go SGO
+- STARTUP BOOST TOKEN SUBX
 - Swipe SXP
 - TasteNFT TASTE
 - VccMix.com VMIX
@@ -130,13 +137,17 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Bancor BNT
 - Basic Attention Token BAT
 - CGBBank CGB
+- Chain Games CHAIN
 - Chainlink LINK
 - Clash Token SCT
 - Connect Coin XCON
+- Compound COMP
 - Crypto.com Coin CRO
 - Curate XCUR
 - DDS.Store DDS
 - Devil's Dragon DDGN
+- Efinity Token EFI
+- Gitcoin GTC
 - Moeda Loyalty Points MDA
 - Multi-collateral DAI DAI
 - MX Token MX
@@ -167,6 +178,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - MetalPay MTL
 - Monaco MCO
 - Micro Tuber MCT
+- NEST NEST
 - Nexo Token NEXO
 - OMG Network OMG
 - Polygon MATIC
@@ -190,6 +202,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - TheCash TCH
 - TrueUSD TUSD
 - Ultra Token UOS
+- Uniqly UNIQ
 - Uniswap UNI
 - USD Coin USDC
 - VcashPay VCP
@@ -207,6 +220,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - CoffeeCoin COF
 - Crypto Shopping & Travelling Coin CSTC
+- kriptocouponw KCW
 - Neutrino USD USDN
 - Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!

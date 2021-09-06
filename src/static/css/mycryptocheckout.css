@@ -247,6 +247,48 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+.mcc-KCW:before {
+  content: "\e9ef"; }
+
+.mcc-BITT:before {
+  content: "\e9e7"; }
+
+.mcc-CHAIN:before {
+  content: "\e9e8"; }
+
+.mcc-COMP:before {
+  content: "\e9e9"; }
+
+.mcc-DEXKIT:before {
+  content: "\e9ea"; }
+
+.mcc-EFI:before {
+  content: "\e9eb"; }
+
+.mcc-FINE:before {
+  content: "\e9ec"; }
+
+.mcc-GAMESAFE:before {
+  content: "\e9ed"; }
+
+.mcc-GTC:before {
+  content: "\e9ee"; }
+
+.mcc-NEST:before {
+  content: "\ea11"; }
+
+.mcc-PRX:before {
+  content: "\ea12"; }
+
+.mcc-SGO:before {
+  content: "\ea13"; }
+
+.mcc-SUBX:before {
+  content: "\ea14"; }
+
+.mcc-UNIQ:before {
+  content: "\ea15"; }
+
 .mcc-BIRB:before {
   content: "\e9e4"; }
 
@@ -982,6 +1024,8 @@
   color: #000000; }
 .mcc_currency_icons.color i.mcc-BIRB {
   color: #508BE0; }
+.mcc_currency_icons.color i.mcc-BITT {
+  color: #E37F24; }
 .mcc_currency_icons.color i.mcc-BLXS {
   color: #FDDE02; }
 .mcc_currency_icons.color i.mcc-BNB {
@@ -1008,6 +1052,8 @@
   color: #000000; }
 .mcc_currency_icons.color i.mcc-CGB {
   color: #cea920; }
+.mcc_currency_icons.color i.mcc-CHAIN {
+  color: #EB3926; }
 .mcc_currency_icons.color i.mcc-CHS {
   color: #8EC443; }
 .mcc_currency_icons.color i.mcc-CLOAK {
@@ -1017,6 +1063,8 @@
 .mcc_currency_icons.color i.mcc-COF {
   color: #35B629; }
 .mcc_currency_icons.color i.mcc-COLX {
+  color: #000; }
+.mcc_currency_icons.color i.mcc-COMP {
   color: #000; }
 .mcc_currency_icons.color i.mcc-CRO {
   color: #113F68; }
@@ -1038,6 +1086,8 @@
   color: #000000; }
 .mcc_currency_icons.color i.mcc-DDS {
   color: #673AB7; }
+.mcc_currency_icons.color i.mcc-DEXKIT {
+  color: #DB532A; }
 .mcc_currency_icons.color i.mcc-DGB {
   color: #0066cc; }
 .mcc_currency_icons.color i.mcc-DGD {
@@ -1054,6 +1104,8 @@
   color: #F37721; }
 .mcc_currency_icons.color i.mcc-ECA {
   color: #bd01fe; }
+.mcc_currency_icons.color i.mcc-EFI {
+  color: #4B6EDA; }
 .mcc_currency_icons.color i.mcc-EGLD {
   color: #0D022B; }
 .mcc_currency_icons.color i.mcc-ENIX {
@@ -1066,6 +1118,8 @@
   color: #282828; }
 .mcc_currency_icons.color i.mcc-ETM {
   color: #F25057; }
+.mcc_currency_icons.color i.mcc-FINE {
+  color: #000; }
 .mcc_currency_icons.color i.mcc-FLIX {
   color: #7D0A7F; }
 .mcc_currency_icons.color i.mcc-FOX {
@@ -1080,6 +1134,8 @@
   color: #ED1968; }
 .mcc_currency_icons.color i.mcc-G {
   color: #05B1FD; }
+.mcc_currency_icons.color i.mcc-GAMESAFE {
+  color: #000; }
 .mcc_currency_icons.color i.mcc-GBC {
   color: #F1B31E; }
 .mcc_currency_icons.color i.mcc-GME {
@@ -1093,6 +1149,8 @@
 .mcc_currency_icons.color i.mcc-GRS {
   color: #0093AB; }
 .mcc_currency_icons.color i.mcc-GT {
+  color: #DE5959; }
+.mcc_currency_icons.color i.mcc-GTC {
   color: #DE5959; }
 .mcc_currency_icons.color i.mcc-GSPI {
   color: #14ACAA; }
@@ -1130,6 +1188,8 @@
   color: #211566; }
 .mcc_currency_icons.color i.mcc-JULD {
   color: #9E1B1A; }
+.mcc_currency_icons.color i.mcc-KCW {
+  color: #000; }
 .mcc_currency_icons.color i.mcc-KDU {
   color: #62B9E7; }
 .mcc_currency_icons.color i.mcc-KISHU {
@@ -1190,6 +1250,8 @@
   color: #222; }
 .mcc_currency_icons.color i.mcc-NEOK {
   color: #F60101; }
+.mcc_currency_icons.color i.mcc-NEST {
+  color: #000; }
 .mcc_currency_icons.color i.mcc-NEXO {
   color: #2853C3; }
 .mcc_currency_icons.color i.mcc-NMN {
@@ -1226,6 +1288,8 @@
   color: #152743; }
 .mcc_currency_icons.color i.mcc-PRE {
   color: #2d8eff; }
+.mcc_currency_icons.color i.mcc-PRX {
+  color: #5DBA48; }
 .mcc_currency_icons.color i.mcc-QASH {
   color: #1347E8; }
 .mcc_currency_icons.color i.mcc-RDN {
@@ -1258,6 +1322,8 @@
   color: #000000; }
 .mcc_currency_icons.color i.mcc-SEEDS {
   color: #2F6747; }
+.mcc_currency_icons.color i.mcc-SGO {
+  color: #263A80; }
 .mcc_currency_icons.color i.mcc-SHIB {
   color: #FE8300; }
 .mcc_currency_icons.color i.mcc-SKYBORN {
@@ -1298,6 +1364,8 @@
   color: #080D98; }
 .mcc_currency_icons.color i.mcc-STQ {
   color: #2fbafd; }
+.mcc_currency_icons.color i.mcc-SUBX {
+  color: #000; }
 .mcc_currency_icons.color i.mcc-SXP {
   color: #FE6627; }
 .mcc_currency_icons.color i.mcc-TASTE {
@@ -1330,6 +1398,8 @@
   color: #f4ba3e; }
 .mcc_currency_icons.color i.mcc-UNI {
   color: #FF007A; }
+.mcc_currency_icons.color i.mcc-UNIQ {
+  color: #3952F5; }
 .mcc_currency_icons.color i.mcc-UOS {
   color: #7A51D0; }
 .mcc_currency_icons.color i.mcc-USDC {
