@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.104
+Stable tag: 2.105
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.8
 
@@ -333,6 +333,20 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.105 20210907 =
+
+* New currency: BITT BITTOKEN
+* New currency: CHAIN Chain Games
+* New currency: COMP Compound
+* New currency: KIT DexKit
+* New currency: EFI Efinity Token
+* New currency: FINE Refinable
+* New currency: GTC Gitcoin
+* New currency: KCW kriptocouponw
+* New currency: NEST NEST
+* New currency: PRX PROSCOIN
+* New currency: SGO Sportemon-Go
+* New currency: UNIQ Uniqly
 * New: Allow Binance autosettlement to BUSD.
 
 = 2.104 20210817 =
