@@ -88,7 +88,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - BITTOKEN BITT
 - CarmaCoin CARMA
 - Centric SWAP CNS
-- DexKit KIT
+- DeRace DERC_BEP20
 - EarnX EARNX
 - EverRise RISE
 - FindToken FTK
@@ -145,6 +145,8 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Crypto.com Coin CRO
 - Curate XCUR
 - DDS.Store DDS
+- DeRace DERC_ERC20
+- DEXTools DEXT
 - Devil's Dragon DDGN
 - Efinity Token EFI
 - Gitcoin GTC
