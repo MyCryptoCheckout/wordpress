@@ -161,8 +161,17 @@
 		&.mcc-DDS {
 			color: #673AB7;
 		}
+		&.mcc-DERC_BEP20 {
+			color: #000000;
+		}
+		&.mcc-DERC_ERC20 {
+			color: #000000;
+		}
 		&.mcc-DEXKIT {
 			color: #DB532A;
+		}
+		.mcc-DEXT {
+			color: #00A5C1;
 		}
 		&.mcc-DGB {
 			color: #0066cc;
@@ -261,7 +270,7 @@
 			color: #DE5959;
 		}
 		&.mcc-GSPI {
-			color: #14ACAA;
+			color: #0696A6;
 		}
 		&.mcc-GTO {
 			color: #7F27FF;
@@ -558,7 +567,7 @@
   			color: #D0C344;
 		}
 		&.mcc-SPI {
-			color: #14ACAA;
+			color: #1B96A6;
 		}
 		&.mcc-SPN {
 			color: #12496D;
