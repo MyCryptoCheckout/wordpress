@@ -409,6 +409,7 @@ class WooCommerce
 			// Help find_next_available_amount by increasing the value by 1.
 			$next_amount = MyCryptoCheckout()->increase_floating_point_number( $next_amount, $precision );
 			// And now find the next amount.
+			$next_amount = $currency->find_next_available_amount( $next_amount );
 			$next_amounts []= $next_amount;
 		}
 
