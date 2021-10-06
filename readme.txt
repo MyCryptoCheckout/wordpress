@@ -62,6 +62,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Monero XMR
 - NEM XEM
 - Neo NEO
+- Polygon MATIC
 - Stellar XLM
 - Terra LUNA
 - TRON TRX
