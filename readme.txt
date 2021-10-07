@@ -184,7 +184,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - NEST NEST
 - Nexo Token NEXO
 - OMG Network OMG
-- Polygon MATIC
+- Polygon MATIC_ERC20
 - Polymath Network POLY
 - Populous PPT
 - Pundi X NPXS
@@ -342,6 +342,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 = 2.107 20211007 =
 
+* New currency: Polygon MATIC
+* Tweak: Old ERC20 version of MATIC renamed to MATIC_ERC20
 * Fix: WooCommerce amount spreading not taking existing spread into account.
 * Fix: WooCommerce get_name() error.
 
