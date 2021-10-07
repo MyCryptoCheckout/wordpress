@@ -498,6 +498,8 @@ class WooCommerce
 		$mcc_currencies = mycryptocheckout()->currencies();
 		foreach( $wallets as $wallet )
 		{
+			if ( ! $wallet )
+				continue;
 			$currency_id = $wallet->get_currency_id();
 			$name = $mcc_currencies->get( $currency_id )->get_name();
 			$currencies[ $currency_id ] = $name;

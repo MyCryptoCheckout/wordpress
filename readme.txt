@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.106
+Stable tag: 2.107
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.8
 
@@ -335,7 +335,12 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-= 2.105 20210907 =
+= 2.107 20211007 =
+
+* Fix: WooCommerce amount spreading not taking existing spread into account.
+* Fix: WooCommerce get_name() error.
+
+= 2.106 20211004 =
 
 * New currency: DeRace DERC_BEP20
 * New currency: DeRace DERC_ERC20
