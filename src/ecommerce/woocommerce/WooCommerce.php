@@ -501,7 +501,10 @@ class WooCommerce
 			if ( ! $wallet )
 				continue;
 			$currency_id = $wallet->get_currency_id();
-			$name = $mcc_currencies->get( $currency_id )->get_name();
+			$currency = $mcc_currencies->get( $currency_id );
+			if ( ! $currency )
+				continue;
+			$name = $currency->get_name();
 			$currencies[ $currency_id ] = $name;
 		}
 		return $currencies;
