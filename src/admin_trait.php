@@ -38,7 +38,7 @@ trait admin_trait
 	**/
 	public function rwd_info_box()
 	{
-		return $this->info_message_box()->text( "We're proud to announce MyCryptoCheckout has recently launched a <a href=\"https://rwd.global\">Rewards Token \$RWD</a>. For some time, all customers of the webshops using the API are automatically eligible to earn up to 5%% cashback in $RWD on any purchases made using ETH, ERC20's, BNB, or BEP20's. Some restrictions apply. Additionally, if you add $RWD to your accepted currencies <a href=\"https://mycryptocheckout.com/contact/\">please reach out to us</a> and we will be happy to promote your webshop." );
+		return $this->info_message_box()->text( 'We\'re proud to announce MyCryptoCheckout has recently launched a <a href=\"https://rwd.global\">Rewards Token $RWD</a>. For some time, all customers of the webshops using the API are automatically eligible to earn up to 5%% cashback in $RWD on any purchases made using ETH, ERC20\'s, BNB, or BEP20\'s. Some restrictions apply. Additionally, if you add $RWD to your accepted currencies <a href=\"https://mycryptocheckout.com/contact/\">please reach out to us</a> and we will be happy to promote your webshop.' );
 	}
 
 	/**
