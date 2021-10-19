@@ -105,6 +105,14 @@ trait admin_trait
 			}
 		}
 
+		global $wpdb;
+		$query = "show variables like 'max_allowed_packet'";
+		$results = $wpdb->get_row( $query );
+		if ( $results->Value < 1500000 )
+		{
+			$r .= $this->error_message_box()->_( __( 'Please set your database max_allowed_packet setting to at least 1500000 bytes else MyCryptoCheckout will not be able to save your account data.' ) );
+		}
+
 		$account = $this->api()->account();
 
 		if ( ! $account->is_valid() )

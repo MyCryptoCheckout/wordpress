@@ -340,6 +340,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Add warning about the mysql max_allowed_packet setting being too small. This prevents the account data from being saved, even though the communications check with the API might be fine.
+
 = 2.108 20211007 =
 
 * Fix: WooCommerce get_name() error for disabled currencies also.
