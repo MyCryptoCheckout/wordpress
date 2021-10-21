@@ -42,6 +42,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = Cryptocurrencies supported: =
 
+- Algorand ALGO
 - Avalanche AVAX
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
@@ -87,6 +88,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Birb BIRB
 - Bitcoin 100 B100
 - BITTOKEN BITT
+- BNB Cash BNBCH
 - CarmaCoin CARMA
 - Centric SWAP CNS
 - DeRace DERC_BEP20
@@ -119,6 +121,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SPI Governance GSPI
 - Sportemon-Go SGO
 - STARTUP BOOST TOKEN SUBX
+- SuperWhale WAROO
 - Swipe SXP
 - TasteNFT TASTE
 - VccMix.com VMIX
@@ -144,12 +147,14 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Connect Coin XCON
 - Compound COMP
 - Crypto.com Coin CRO
+- CUDOS
 - Curate XCUR
 - DDS.Store DDS
 - DeRace DERC_ERC20
 - DEXTools DEXT
 - Devil's Dragon DDGN
 - Efinity Token EFI
+- Ethereum Push Notification Service PUSH
 - Gitcoin GTC
 - Moeda Loyalty Points MDA
 - Multi-collateral DAI DAI
