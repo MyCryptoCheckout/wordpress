@@ -25,6 +25,31 @@ abstract class Account
 	}
 
 	/**
+		@brief		Compress this account data object.
+		@details	This is to get past the Entity Too Large problem.
+		@since		2021-10-21 10:01:28
+	**/
+	public static function compress( $data )
+	{
+		$data = json_encode( $data );
+		$data = gzcompress( $data );
+		$data = base64_encode( $data );
+		return $data;
+	}
+
+	/**
+		@brief		Decompress this data.
+		@since		2021-10-21 10:02:36
+	**/
+	public static function decompress( $data )
+	{
+		$data = base64_decode( $data );
+		$data = gzuncompress( $data );
+		$data = json_decode( $data );
+		return $data;
+	}
+
+	/**
 		@brief		Delete the account from storage.
 		@details	This is used mostly for debugging.
 		@since		2018-10-14 15:08:45
@@ -207,11 +232,16 @@ abstract class Account
 		$this->data = (object)[];
 
 		$data = $this->api()->get_data( static::$account_data_site_option_key );
-		$data = json_decode( $data );
-		if ( ! $data )
-			$this->data = (object)[];
-		else
-			$this->data = $data;
+		$loaded_data = json_decode( $data );		// Uncompressed.
+		if ( ! $loaded_data )
+		{
+			// Try gunzipping?
+			$loaded_data = static::decompress( $data );
+			if ( ! $loaded_data )
+				$loaded_data = (object)[];
+		}
+
+		$this->data = $loaded_data;
 	}
 
 	/**
@@ -275,7 +305,8 @@ abstract class Account
 	**/
 	public function save()
 	{
-		$this->api()->save_data( static::$account_data_site_option_key, json_encode( $this->data ) );
+		$data_to_save = static::compress( $this->data );
+		$this->api()->save_data( static::$account_data_site_option_key, $data_to_save );
 		return $this;
 	}
 

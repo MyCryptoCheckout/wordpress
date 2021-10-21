@@ -219,7 +219,10 @@ abstract class API
 				throw new Exception( sprintf( 'Retrieve keys do not match: %s.', $message->retrieve_key ) );
 			// Everything looks good to go.
 			$new_account_data = (object) (array) $message->account;
-			$this->debug( 'Setting new account data: %d bytes', strlen( json_encode( $new_account_data ) ) );
+			$this->debug( 'Setting new account data: %d bytes plain, %s bytes compressed',
+				strlen( json_encode( $new_account_data ) ),
+				strlen( $this->account()->compress( $new_account_data ) )
+			);
 			$this->account()->set_data( $new_account_data )
 				->save();
 		}

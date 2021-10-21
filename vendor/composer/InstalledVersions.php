@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '7ab8dd758d49bcf146b112e9a5a9f2b486321cbd',
+    'reference' => 'ca8d1e96c1903f9f4c1f5ae707e373bab9b41c1b',
     'name' => '__root__',
   ),
   'versions' => 
@@ -41,7 +41,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '7ab8dd758d49bcf146b112e9a5a9f2b486321cbd',
+      'reference' => 'ca8d1e96c1903f9f4c1f5ae707e373bab9b41c1b',
     ),
     'bitwasp/bitcoin' => 
     array (
@@ -117,12 +117,12 @@ private static $installed = array (
     ),
     'mycryptocheckout/api' => 
     array (
-      'pretty_version' => '2.12',
-      'version' => '2.12.0.0',
+      'pretty_version' => '20211021',
+      'version' => '20211021',
       'aliases' => 
       array (
       ),
-      'reference' => 'f953d201165306a859a9f809183002d3e91c61f7',
+      'reference' => 'f9e33f34ab6dff5d7cfa2c327d2552f19bfd5f08',
     ),
     'paragonie/random_compat' => 
     array (
