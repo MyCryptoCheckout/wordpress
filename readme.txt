@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.108
+Stable tag: 2.109
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.8
 
@@ -345,7 +345,14 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-* Fix: Add warning about the mysql max_allowed_packet setting being too small. This prevents the account data from being saved, even though the communications check with the API might be fine.
+= 2.109 20211022 =
+
+* New currency: Algorand ALGO
+* New currency: BNB Cash BNBCH
+* New currency: CUDOS
+* New currency: Ethereum Push Notification Service PUSH
+* New currency: SuperWhale WAROO
+* Fix: Compress the account data in the database to work around small mysql max_allowed_packet settings. This fixes the account data not being abled to be updated for some people.
 
 = 2.108 20211007 =
 
