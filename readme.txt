@@ -64,6 +64,8 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - NEM XEM
 - Neo NEO
 - Polygon MATIC
+- PutinCoin PUT
+- Solana SOL
 - Stellar XLM
 - Terra LUNA
 - TRON TRX
@@ -89,12 +91,14 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Bitcoin 100 B100
 - BITTOKEN BITT
 - BNB Cash BNBCH
+- Buskercommcoin BKC
 - CarmaCoin CARMA
 - Centric SWAP CNS
 - DeRace DERC_BEP20
 - EarnX EARNX
 - EverRise RISE
 - FindToken FTK
+- Floki Inu FLOKI
 - Fox Finance FOX
 - FREE Coin FREE
 - Gamesafe.io GAMESAFE
@@ -107,7 +111,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Military Finance MIL
 - Moeda SEEDS SEEDS
 - Moonpirate MOONPIRATE
-- xxxNifty NSFW
+- ORE Token ORE
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
 - PROSCOIN PRX
@@ -127,7 +131,9 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VccMix.com VMIX
 - VAI Stablecoin VAI
 - VELOREX VEX
+- VELOX VLX
 - Venus XVS
+- xxxNifty NSFW
 - YUMMY
 - Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP20 tokens</a>!
 
