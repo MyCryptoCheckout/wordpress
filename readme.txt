@@ -57,6 +57,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - EOS
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Footballcoin XFC
+- Fruits FRTS
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
 - MktCoin MLM
@@ -67,7 +68,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Stellar XLM
 - Terra LUNA
 - TRON TRX
-- Ultragate ULG
 - Verge XVG
 - VeriBlock VBK
 - VeChain VET
