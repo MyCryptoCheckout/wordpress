@@ -65,7 +65,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Neo NEO
 - Polygon MATIC
 - PutinCoin PUT
-- Solana SOL
 - Stellar XLM
 - Terra LUNA
 - TRON TRX
@@ -91,19 +90,21 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Bitcoin 100 B100
 - BITTOKEN BITT
 - BNB Cash BNBCH
+- BSCurbate
 - Buskercommcoin BKC
 - CarmaCoin CARMA
 - Centric SWAP CNS
 - DeRace DERC_BEP20
 - EarnX EARNX
-- EverRise RISE
 - FindToken FTK
+- FireFly FFA
 - Floki Inu FLOKI
 - Fox Finance FOX
 - FREE Coin FREE
 - Gamesafe.io GAMESAFE
 - GameToken GME
 - GameTokenV3 GMEV3
+- GOCA
 - Goku Bank Coin GBC
 - HyperChain HYPER
 - JulSwap JULD
@@ -115,6 +116,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
 - PROSCOIN PRX
+- Radio Caca RACA
 - Refinable FINE
 - Rewards RWD
 - SafeBTC SAFEBTC
@@ -128,6 +130,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SuperWhale WAROO
 - Swipe SXP
 - TasteNFT TASTE
+- Tokocrypto TKO
 - VccMix.com VMIX
 - VAI Stablecoin VAI
 - VELOREX VEX
@@ -186,6 +189,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Kudoken KDU
 - Kishu Inu KISHU
 - Kyber Network KNC
+- LIFE Token
 - Loom LOOM
 - Lunyr LUN
 - Maker MKR
