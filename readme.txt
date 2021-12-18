@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 170+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Accept 180+ coins: Bitcoin, Ethereum, and more ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
@@ -8,7 +8,7 @@ Stable tag: 2.109
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.8
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 170+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 180+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -65,6 +65,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - NEM XEM
 - Neo NEO
 - Polygon MATIC
+- PutinCoin PUT
 - Stellar XLM
 - Terra LUNA
 - TRON TRX
@@ -89,17 +90,21 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Bitcoin 100 B100
 - BITTOKEN BITT
 - BNB Cash BNBCH
+- BSCurbate
+- Buskercommcoin BKC
 - CarmaCoin CARMA
 - Centric SWAP CNS
 - DeRace DERC_BEP20
 - EarnX EARNX
-- EverRise RISE
 - FindToken FTK
+- FireFly FFA
+- Floki Inu FLOKI
 - Fox Finance FOX
 - FREE Coin FREE
 - Gamesafe.io GAMESAFE
 - GameToken GME
 - GameTokenV3 GMEV3
+- GOCA
 - Goku Bank Coin GBC
 - HyperChain HYPER
 - JulSwap JULD
@@ -107,10 +112,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Military Finance MIL
 - Moeda SEEDS SEEDS
 - Moonpirate MOONPIRATE
-- xxxNifty NSFW
+- ORE Token ORE
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
 - PROSCOIN PRX
+- Radio Caca RACA
 - Refinable FINE
 - Rewards RWD
 - SafeBTC SAFEBTC
@@ -124,10 +130,13 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SuperWhale WAROO
 - Swipe SXP
 - TasteNFT TASTE
+- Tokocrypto TKO
 - VccMix.com VMIX
 - VAI Stablecoin VAI
 - VELOREX VEX
+- VELOX VLX
 - Venus XVS
+- xxxNifty NSFW
 - YUMMY
 - Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP20 tokens</a>!
 
@@ -180,6 +189,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Kudoken KDU
 - Kishu Inu KISHU
 - Kyber Network KNC
+- LIFE Token
 - Loom LOOM
 - Lunyr LUN
 - Maker MKR
