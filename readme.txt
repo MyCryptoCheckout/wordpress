@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.109
+Stable tag: 2.111
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.8
 
@@ -104,7 +104,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Gamesafe.io GAMESAFE
 - GameToken GME
 - GameTokenV3 GMEV3
-- GOCA
+- GoCaribe GOCA
 - Goku Bank Coin GBC
 - HyperChain HYPER
 - JulSwap JULD
@@ -354,6 +354,20 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.111 20211218 =
+
+* New currency: BSCurbate
+* New currency: Buskercommcoin BKC
+* New currency: FireFly FFA
+* New currency: Floki Inu FLOKI
+* New currency: GoCaribe GOCA
+* New currency: LIFE Token
+* New currency: ORE Token ORE
+* New currency: PutinCoin PUT
+* New currency: Radio Caca RACA
+* New currency: Tokocrypto TKO
+* New currency: VELOX VLX
 
 = 2.109 20211022 =
 
