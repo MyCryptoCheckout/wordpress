@@ -56,11 +56,9 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Elrond EGLD
 - EOS
 - Ethereum ETH (Including MetaMask, ENS addresses)
-- Footballcoin XFC
 - Fruits FRTS
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
-- MktCoin MLM
 - Monero XMR
 - NEM XEM
 - Neo NEO
@@ -185,7 +183,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Hoge Finance HOGE
 - Hokkaidu Inu HOKK
 - Huobi Token HT
-- InnovaMinex MINX
 - Kudoken KDU
 - Kishu Inu KISHU
 - Kyber Network KNC
@@ -217,7 +214,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Telcoin TEL
 - TenXPay PAY
 - Tether USD USDT
-- TheCash TCH
 - TrueUSD TUSD
 - Ultra Token UOS
 - Uniqly UNIQ
