@@ -60,7 +60,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
-- NEM XEM
 - Neo NEO
 - Polygon MATIC
 - PutinCoin PUT
@@ -238,10 +237,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Neutrino USD USDN
 - Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
-
-= NEM Mosaic tokens supported: =
-
-- Add your <a href="https://mycryptocheckout.com/nem-token/">custom NEM mosaic tokens</a>!
 
 = Polygon MATIC tokens supported: =
 
