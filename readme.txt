@@ -117,7 +117,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Refinable FINE
 - Rewards RWD
 - SafeBTC SAFEBTC
-- SafeMoon SAFEMOON
 - SafeMoonCash SAFEMOONCASH
 - Shopaneum SPN
 - SkyBorn SKYBORN
