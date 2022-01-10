@@ -57,6 +57,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - EOS
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Fruits FRTS
+- Fantom FTM
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
@@ -107,17 +108,21 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - JulSwap JULD
 - Michi $ander MICHI
 - Military Finance MIL
+- Melacoin MLCN
 - Moeda SEEDS SEEDS
 - Moonpirate MOONPIRATE
 - ORE Token ORE
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
 - PROSCOIN PRX
+- QOIN
 - Radio Caca RACA
 - Refinable FINE
 - Rewards RWD
 - SafeBTC SAFEBTC
+- SafeMoon SFM
 - SafeMoonCash SAFEMOONCASH
+- SAO
 - Shopaneum SPN
 - SkyBorn SKYBORN
 - SPI Governance GSPI
@@ -132,6 +137,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VELOREX VEX
 - VELOX VLX
 - Venus XVS
+- Wrapped Optical Bitcoin WOBTC
 - xxxNifty NSFW
 - YUMMY
 - Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP20 tokens</a>!
@@ -183,6 +189,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Huobi Token HT
 - Kudoken KDU
 - Kishu Inu KISHU
+- Kitty Inu KITTY
 - Kyber Network KNC
 - LIFE Token
 - Loom LOOM
@@ -194,6 +201,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - NEST NEST
 - Nexo Token NEXO
 - OMG Network OMG
+- OpenDAO SOS
 - Polygon MATIC_ERC20
 - Polymath Network POLY
 - Populous PPT
@@ -224,6 +232,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - YIELD App YLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
 
+= Polygon MATIC tokens supported: =
+
+- Penky PoS
+- Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
+
 = Terra Tokens supported =
 
 - TerraUSD UST
@@ -236,10 +249,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Neutrino USD USDN
 - Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
-
-= Polygon MATIC tokens supported: =
-
-- Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
 
 = Stellar Tokens supported: =
 
@@ -344,6 +353,15 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* New currency: Fantom FTM
+* New currency: Kitty Inu KITTY
+* New currency: OpenDAO SOS
+* New currency: Penky PoS PENKY
+* New currency: QOIN
+* New currency: SafeMoon SFM
+* New currency: SAO
+* New currency: Wrapped Optical Bitcoin WOBTC
 
 = 2.111 20211218 =
 
