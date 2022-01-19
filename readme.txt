@@ -72,6 +72,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VeChain VET
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
+- xDAI (Gnosis)
 - XinFin Network XDC
 - Zcash ZEC (T-address recipients only)
 - Zilliqa ZIL
@@ -106,6 +107,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Goku Bank Coin GBC
 - HyperChain HYPER
 - JulSwap JULD
+- Landshare LAND
 - Michi $ander MICHI
 - Military Finance MIL
 - Melacoin MLCN
@@ -120,7 +122,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Refinable FINE
 - Rewards RWD
 - SafeBTC SAFEBTC
-- SafeMoon SFM
+- SafeMoon v2 SFM
 - SafeMoonCash SAFEMOONCASH
 - SAO
 - Shopaneum SPN
@@ -252,9 +254,16 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = Stellar Tokens supported: =
 
+- Moneda MNDA
 - neokyne.com NEOK
 
 - Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
+
+= xDAI / Gnosis Tokens supported: =
+
+- PUNK
+
+- Add your <a href="https://mycryptocheckout.com/xdai-token/">custom xDAI / Gnoses tokens</a>!
 
 = Counterparty Tokens supported: =
 
@@ -356,10 +365,14 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 * New currency: Fantom FTM
 * New currency: Kitty Inu KITTY
+* New currency: Landshare LAND
+* New currency: Melacoin MLCN
+* New currency: Moneda MNDA
 * New currency: OpenDAO SOS
 * New currency: Penky PoS PENKY
+* New currency: PUNK
 * New currency: QOIN
-* New currency: SafeMoon SFM
+* New currency: SafeMoon v2 SFM
 * New currency: SAO
 * New currency: Wrapped Optical Bitcoin WOBTC
 
