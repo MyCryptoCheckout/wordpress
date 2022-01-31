@@ -269,6 +269,11 @@ trait admin_trait
 				$row->td( 'details' )->text( $text );
 
 				$row = $table->head()->row();
+				$row->th( 'key' )->text( __( 'Next scheduled hourly cron', 'mycryptocheckout' ) );
+				$next = wp_next_scheduled( 'mycryptocheckout_hourly' );
+				$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $next ) );
+
+				$row = $table->head()->row();
 				$row->th( 'key' )->text( __( 'Next scheduled account data update', 'mycryptocheckout' ) );
 				$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
 				$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $next ) );
@@ -1047,10 +1052,13 @@ trait admin_trait
 	{
 		// Schedule an account retrieval sometime.
 		// The timestamp shoule be anywhere between soon and 50 minutes later.
-		$timestamp = rand( 5, 50 ) * 60;
-		$timestamp = time() + $timestamp;
-		$this->debug( 'Scheduled for %s', $this->local_datetime( $timestamp ) );
+		$extra = rand( 5, 50 ) * 60;
+		$timestamp = time() + $extra;
+		$this->debug( 'Hourly running. Scheduled mycryptocheckout_retrieve_account at %s for %s + %s', $this->local_datetime( $timestamp ), time(), $extra );
+		wp_unschedule_event( $next, 'mycryptocheckout_retrieve_account' );
 		wp_schedule_single_event( $timestamp, 'mycryptocheckout_retrieve_account' );
+		$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
+		$this->debug( 'Next schedule: %s', date( 'Y-m-d H:i:s', $next ) );
 	}
 
 	/**
