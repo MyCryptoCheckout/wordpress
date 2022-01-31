@@ -72,7 +72,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VeChain VET
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
-- xDAI (Gnosis)
+- Gnosis (XDAI)
 - XinFin Network XDC
 - Zcash ZEC (T-address recipients only)
 - Zilliqa ZIL
@@ -259,11 +259,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
 
-= xDAI / Gnosis Tokens supported: =
+= Gnosis / XDAI Tokens supported: =
 
-- PUNK
+- Honey Token HNY
 
-- Add your <a href="https://mycryptocheckout.com/xdai-token/">custom xDAI / Gnoses tokens</a>!
+- Add your <a href="https://mycryptocheckout.com/xdai-token/">custom Gnosis / XDAI tokens</a>!
 
 = Counterparty Tokens supported: =
 
@@ -364,13 +364,13 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 * New currency: Fantom FTM
+* New currency: Honey Token HNY
 * New currency: Kitty Inu KITTY
 * New currency: Landshare LAND
 * New currency: Melacoin MLCN
 * New currency: Moneda MNDA
 * New currency: OpenDAO SOS
 * New currency: Penky PoS PENKY
-* New currency: PUNK
 * New currency: QOIN
 * New currency: SafeMoon v2 SFM
 * New currency: SAO
