@@ -507,6 +507,7 @@ trait misc_methods_trait
 				$mail->send();
 				throw new Exception( sprintf( 'Admin %s e-mailed for post %s.', $admin_email, $post_id ) );
 			}
+			$this->debug( 'Valid payment ID check for order %s went just fine.', $post_id );
 		}
 		catch ( Exception $e )
 		{
