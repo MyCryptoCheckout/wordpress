@@ -12,11 +12,11 @@ class AttributeTest extends TestCase
 
 	/**
 		@brief	Test setting an invalid key.
-		@expectedException plainview\sdk_mcc\html\exceptions\InvalidKeyException
 		@since		2017-10-02 00:46:43
 	**/
 	public function test_invalid_key()
 	{
+		$this->expectException( \plainview\sdk_mcc\html\exceptions\InvalidKeyException::class );
 		$this->div()->set_attribute( 'bad key', 'ignore' );
 	}
 

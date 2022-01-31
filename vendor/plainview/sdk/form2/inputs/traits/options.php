@@ -53,7 +53,7 @@ trait options
 		$args = func_get_args();
 		// First arg is the value, and not wanted.
 		array_shift( $args );
-		$result = call_user_func_array( 'sprintf', $args );
+		$result = call_user_func_array( [ $this->form(), 'sprintf' ], $args );
 		if ( $result == '' )
 			$result = $label;
 		$o->label = $result;

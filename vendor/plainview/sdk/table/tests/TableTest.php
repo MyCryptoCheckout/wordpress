@@ -36,7 +36,7 @@ class TableTest extends \plainview\sdk_mcc\tests\TestCase
 		// With an ID
 		$id = 'test1234';
 		$cell = $row->td( $id );
-		$this->assertEquals( $id, $cell->get_attribute( 'id' ) );
+		$this->assertEquals( $id, $cell->get_attribute( 'headers' ) );
 	}
 
 	public function test_count()

@@ -10,12 +10,12 @@ class DataTest extends TestCase
 {
 	/**
 		@brief		Set a data value with an invalid key.
-		@expectedException plainview\sdk_mcc\html\exceptions\InvalidKeyException
 		@since		2015-11-29 11:42:54
 	**/
 	public function test_bad_set()
 	{
 		$key = 'bad key';
+		$this->expectException( \plainview\sdk_mcc\html\exceptions\InvalidKeyException::class );
 		$div = $this->div()->data( $key, 'ignore' );
 	}
 

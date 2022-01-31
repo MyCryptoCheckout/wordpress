@@ -535,6 +535,24 @@ class form
 	}
 
 	/**
+		@brief		Wrap the sprintf call in a catch.
+		@since		2021-07-01 13:26:29
+	**/
+	public static function sprintf()
+	{
+		$args = func_get_args();
+		try
+		{
+			$r = @ call_user_func_array( 'sprintf' , $args );
+		}
+		catch ( \ArgumentCountError $e )
+		{
+			$r = $args[ 0 ];
+		}
+		return $r;
+	}
+
+	/**
 		@brief		Remove filtering from text.
 		@param		string		$text		String to unfilter.
 		@return		string		Unfiltered string.

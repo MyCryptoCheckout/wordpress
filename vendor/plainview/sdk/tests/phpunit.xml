@@ -22,9 +22,6 @@
         <testsuite name="html">
             <directory>../html/tests</directory>
         </testsuite>
-        <testsuite name="mail">
-            <directory>../mail/tests</directory>
-        </testsuite>
         <testsuite name="pagination">
             <directory>../pagination/tests</directory>
         </testsuite>

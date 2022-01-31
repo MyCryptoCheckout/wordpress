@@ -58,9 +58,7 @@ class markup
 	**/
 	public function p( $text )
 	{
-		$result = @call_user_func_array( 'sprintf' , func_get_args() );
-		if ( $result == '' )
-			$result = $text;
+		$result = call_user_func_array( [ $this->form, 'sprintf' ], func_get_args() );
 		return $this->markup( \plainview\sdk_mcc\base::wpautop( $result ) );
 	}
 

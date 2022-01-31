@@ -1,3 +1,11 @@
+20220125		Form2: Forgot to rename the readonly trait.
+				Fix table tests.
+20220122		Form2: Rename the readonly trait due to the name "readonly" being reserved in php8.1. The function within are the same, though.
+20211109		Wordpress: Update EDD Updater
+20211017		Table: Use headers attribute for td cells.
+20210906		Wordpress: Fix debug sprintf calls.
+20210810		Form2: Fix options trait pointing to form()
+20210701		Form2: Update sprintf calls for php8 compatibility.
 20210615		Wordpress: fix base URL.
 20210216		Form2: Fix checkbox value incorrectly reported using get_post_value().
 20210205		Wordpress: Add action name overrides.

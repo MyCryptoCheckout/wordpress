@@ -28,19 +28,26 @@ class cell
 
 	public function __construct( $row, $id = null )
 	{
-		if ( $id !== null )
-		{
-			$this->id = $id;
-			$this->attribute( 'id' )->set( $this->id );
-		}
-		else
-			$this->id = \plainview\sdk_mcc\base::uuid();
+		if ( $id === null )
+			$id = \plainview\sdk_mcc\base::uuid();
+		$this->construct_id( $id );
 		$this->row = $row;
 	}
 
 	public function __tostring()
 	{
 		return $this->indent() . $this->open_tag() . $this->text . $this->close_tag() . "\n";
+	}
+
+	/**
+		@brief		Set the cells ID.
+		@details	This is to allow td to instead set the header, instead of the id.
+		@since		2021-10-17 22:36:56
+	**/
+	public function construct_id( $id )
+	{
+		$this->id = $id;
+		$this->attribute( 'id' )->set( $this->id );
 	}
 
 	public function indentation()

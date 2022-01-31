@@ -201,9 +201,7 @@ trait value
 	**/
 	public function value( $text )
 	{
-		$result = @call_user_func_array( 'sprintf' , func_get_args() );
-		if ( $result == '' )
-			$result = $text;
+		$result = call_user_func_array( [ $this->container->form(), 'sprintf' ], func_get_args() );
 		return $this->set_value( $result );
 	}
 }

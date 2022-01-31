@@ -36,7 +36,7 @@ trait label
 	**/
 	public function label( $text )
 	{
-		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		$result = call_user_func_array( [ $this->container->form(), 'sprintf' ], func_get_args() );
 		if ( $result == '' )
 			$result = $text;
 		return $this->set_label( $result );
@@ -97,7 +97,7 @@ trait label
 	**/
 	public function unfiltered_label( $text )
 	{
-		$result = @call_user_func_array( 'sprintf' , func_get_args() );
+		$result = call_user_func_array( [ $this->container->form(), 'sprintf' ], func_get_args() );
 		if ( $result == '' )
 			$result = $text;
 		return $this->set_unfiltered_label( $result );
