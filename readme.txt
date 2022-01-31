@@ -363,6 +363,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Add extra account fetches for servers with badly behaved crons. Should prevent locked accounts in those cases.
 * New currency: Fantom FTM
 * New currency: Honey Token HNY
 * New currency: Kitty Inu KITTY
