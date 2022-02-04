@@ -108,11 +108,13 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - HyperChain HYPER
 - JulSwap JULD
 - Landshare LAND
+- Leon's Coin LEONS
 - Michi $ander MICHI
 - Military Finance MIL
 - Melacoin MLCN
 - Moeda SEEDS SEEDS
 - Moonpirate MOONPIRATE
+- Nueva Morralla MORRALLA
 - ORE Token ORE
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
@@ -368,8 +370,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * New currency: Honey Token HNY
 * New currency: Kitty Inu KITTY
 * New currency: Landshare LAND
+* New currency: Leon's Coin LEONS
 * New currency: Melacoin MLCN
 * New currency: Moneda MNDA
+* New currency: Nueva Morralla MORRALLA
 * New currency: OpenDAO SOS
 * New currency: Penky PoS PENKY
 * New currency: QOIN
