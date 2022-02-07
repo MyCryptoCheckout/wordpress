@@ -72,7 +72,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VeChain VET
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
-- Gnosis (XDAI)
+- Gnosis XDAI
 - XinFin Network XDC
 - Zcash ZEC (T-address recipients only)
 - Zilliqa ZIL
@@ -91,12 +91,14 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - BNB Cash BNBCH
 - BSCurbate
 - Buskercommcoin BKC
+- Card 2 Crypto C2C
 - CarmaCoin CARMA
 - Centric SWAP CNS
+- Coin Fast Alert CFA
 - DeRace DERC_BEP20
 - EarnX EARNX
 - FindToken FTK
-- FireFly FFA
+- FIREFLY
 - Floki Inu FLOKI
 - Fox Finance FOX
 - FREE Coin FREE
