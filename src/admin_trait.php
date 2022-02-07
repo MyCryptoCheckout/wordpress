@@ -33,15 +33,6 @@ trait admin_trait
 	}
 
 	/**
-		@brief
-		@since		2021-08-16 09:51:18
-	**/
-	public function rwd_info_box()
-	{
-		return $this->info_message_box()->text( 'We\'re proud to announce MyCryptoCheckout has recently launched a <a href=\"https://rwd.global\">Rewards Token $RWD</a>. For some time, all customers of the webshops using the API are automatically eligible to earn up to 5%% cashback in $RWD on any purchases made using ETH, ERC20\'s, BNB, or BEP20\'s. Some restrictions apply. Additionally, if you add $RWD to your accepted currencies <a href=\"https://mycryptocheckout.com/contact/\">please reach out to us</a> and we will be happy to promote your webshop.' );
-	}
-
-	/**
 		@brief		Admin the account.
 		@since		2017-12-11 14:20:17
 	**/
@@ -50,8 +41,6 @@ trait admin_trait
 		$form = $this->form();
 		$form->id( 'account' );
 		$r = '';
-
-		$r .= $this->rwd_info_box();
 
 		if ( ! function_exists('curl_version') )
 			$r .= $this->error_message_box()->_( __( 'Your PHP CURL module is missing. MyCryptoCheckout may not work 100% well.', 'mycryptocheckout' ) );
@@ -294,8 +283,6 @@ trait admin_trait
 		$form = $this->form();
 		$form->id( 'currencies' );
 		$r = '';
-
-		$r .= $this->rwd_info_box();
 
 		wp_enqueue_script( 'jquery-ui-sortable' );
 
