@@ -238,6 +238,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - YIELD App YLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
 
+= Fantom FTM tokens supported: =
+
+- TOR
+- Add your <a href="https://mycryptocheckout.com/ftm-token/">custom Fantom FTM tokens</a>!
+
 = Polygon MATIC tokens supported: =
 
 - Penky PoS
@@ -366,6 +371,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* New currency: TOR
 
 = 2.113 20220207 =
 
