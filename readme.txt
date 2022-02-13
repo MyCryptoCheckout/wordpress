@@ -59,6 +59,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Fruits FRTS
 - Fantom FTM
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
+- KuCoin Community Chain KCS
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
 - Neo NEO
@@ -97,6 +98,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Coin Fast Alert CFA
 - DeRace DERC_BEP20
 - EarnX EARNX
+- Empire Token EMPIRE
 - FindToken FTK
 - FIREFLY
 - Floki Inu FLOKI
@@ -243,6 +245,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - TOR
 - Add your <a href="https://mycryptocheckout.com/ftm-token/">custom Fantom FTM tokens</a>!
 
+= KCC tokens supported: =
+
+- Add your <a href="https://mycryptocheckout.com/kcc-token/">custom KCC tokens</a>!
+
 = Polygon MATIC tokens supported: =
 
 - Penky PoS
@@ -372,6 +378,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* New currency: Empire Token EMPIRE
 * New currency: TOR
 
 = 2.113 20220207 =
