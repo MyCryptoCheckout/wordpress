@@ -219,7 +219,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SALT
 - SHIBA INU SHIB
 - Shopping.io SPI
-- Snovian.Space SNOV
 - Status SNT
 - StormX STMX
 - Synthetix SNX
