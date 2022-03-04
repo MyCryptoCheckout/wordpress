@@ -187,7 +187,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - FunFair FUN
 - GateToken GT
 - Gemini Dollar GUSD
-- Genesis Vision GVT
 - Gifto GTO
 - Golem GNT
 - Golfcoin GOLF
