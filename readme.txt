@@ -225,7 +225,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Status SNT
 - StormX STMX
 - Synthetix SNX
-- Telcoin TEL
 - TenXPay PAY
 - Tether USD USDT
 - TrueUSD TUSD
