@@ -201,7 +201,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Kyber Network KNC
 - LIFE Token
 - Loom LOOM
-- Lunyr LUN
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
