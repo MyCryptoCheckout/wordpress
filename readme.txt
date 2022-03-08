@@ -374,6 +374,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: $next warning in admin_trait.php line 1058.
 * New currency: Empire Token EMPIRE
 * New currency: TOR
 

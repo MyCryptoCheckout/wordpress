@@ -1042,6 +1042,7 @@ trait admin_trait
 		$extra = rand( 5, 50 ) * 60;
 		$timestamp = time() + $extra;
 		$this->debug( 'Hourly running. Scheduled mycryptocheckout_retrieve_account at %s for %s + %s', $this->local_datetime( $timestamp ), time(), $extra );
+		$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
 		wp_unschedule_event( $next, 'mycryptocheckout_retrieve_account' );
 		wp_schedule_single_event( $timestamp, 'mycryptocheckout_retrieve_account' );
 		$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
