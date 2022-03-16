@@ -145,6 +145,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VELOREX VEX
 - VELOX VLX
 - Venus XVS
+- Vince chain VCE
 - Wrapped Optical Bitcoin WOBTC
 - xxxNifty NSFW
 - YUMMY
@@ -377,6 +378,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * Fix: $next warning in admin_trait.php line 1058.
 * New currency: Empire Token EMPIRE
 * New currency: TOR
+* New currency: Vince chain VCE
 
 = 2.113 20220207 =
 
