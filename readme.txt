@@ -96,6 +96,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - CarmaCoin CARMA
 - Centric SWAP CNS
 - Coin Fast Alert CFA
+- Deapcoin DEP_BEP20
 - DeRace DERC_BEP20
 - EarnX EARNX
 - Empire Token EMPIRE
@@ -119,6 +120,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Moeda SEEDS SEEDS
 - Moonpirate MOONPIRATE
 - Nueva Morralla MORRALLA
+- Numbers Protocol NUM
 - ORE Token ORE
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
@@ -376,7 +378,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 * Fix: $next warning in admin_trait.php line 1058.
+* New currency: Deapcoin DEP_BEP20
 * New currency: Empire Token EMPIRE
+* New currency: Numbers Protocol NUM
 * New currency: TOR
 * New currency: Vince chain VCE
 
