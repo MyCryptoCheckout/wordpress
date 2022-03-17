@@ -172,6 +172,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - CUDOS
 - Curate XCUR
 - DDS.Store DDS
+- Deapcoin DEP_ERC20
 - DeRace DERC_ERC20
 - DEXTools DEXT
 - Devil's Dragon DDGN
@@ -379,6 +380,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 * Fix: $next warning in admin_trait.php line 1058.
 * New currency: Deapcoin DEP_BEP20
+* New currency: Deapcoin DEP_ERC20
 * New currency: Empire Token EMPIRE
 * New currency: Numbers Protocol NUM
 * New currency: TOR
