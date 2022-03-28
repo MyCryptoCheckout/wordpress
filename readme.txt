@@ -114,6 +114,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - JulSwap JULD
 - Landshare LAND
 - Leon's Coin LEONS
+- METAGIN
 - Michi $ander MICHI
 - Military Finance MIL
 - Melacoin MLCN
@@ -381,6 +382,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * New currency: Deapcoin DEP_BEP20
 * New currency: Deapcoin DEP_ERC20
 * New currency: Empire Token EMPIRE
+* New currency: METAGIN
 * New currency: Numbers Protocol NUM
 * New currency: TOR
 * New currency: Vince chain VCE
