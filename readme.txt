@@ -386,6 +386,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * New currency: Numbers Protocol NUM
 * New currency: TOR
 * New currency: Vince chain VCE
+* Tweak: WooCommerce stock is reduced only on payment, not when the order is placed.
 
 = 2.113 20220207 =
 

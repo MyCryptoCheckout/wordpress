@@ -170,6 +170,9 @@ class WooCommerce
 			if ( ! $order )
 				return;
 
+			// Reduce stock levels
+			wc_reduce_stock_levels( $order_id );
+
 			// Consider this action finished as soon as we find the order.
 			$action->applied++;
 

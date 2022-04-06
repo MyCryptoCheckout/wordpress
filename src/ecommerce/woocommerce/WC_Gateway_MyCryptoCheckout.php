@@ -355,9 +355,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		// Mark as on-hold (we're awaiting the payment)
 		$order->update_status( 'pending', __( 'Awaiting cryptocurrency payment', 'mycryptocheckout' ) );
 
-		// Reduce stock levels
-		wc_reduce_stock_levels( $order_id );
-
 		if ( isset( $_POST[ 'mcc_currency_id' ] ) )
 			if ( $order->get_meta( '_mcc_payment_id' ) < 1 )
 			{
