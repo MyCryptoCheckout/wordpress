@@ -110,6 +110,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - GameTokenV3 GMEV3
 - GoCaribe GOCA
 - Goku Bank Coin GBC
+- HODL
 - HyperChain HYPER
 - JulSwap JULD
 - Landshare LAND
@@ -382,6 +383,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * New currency: Deapcoin DEP_BEP20
 * New currency: Deapcoin DEP_ERC20
 * New currency: Empire Token EMPIRE
+* New currency: HODL
 * New currency: METAGIN
 * New currency: Numbers Protocol NUM
 * New currency: TOR
