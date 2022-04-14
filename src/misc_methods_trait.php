@@ -389,11 +389,14 @@ trait misc_methods_trait
 		$amount = $options[ 'amount' ];
 
 		$marked_up_amount = $amount;
+		$marked_up_amount = floatval( $marked_up_amount );
 
 		$markup_amount = MyCryptoCheckout()->get_site_option( 'markup_amount' );
+		$markup_amount = floatval( $markup_amount );
 		$marked_up_amount += $markup_amount;
 
 		$markup_percent = MyCryptoCheckout()->get_site_option( 'markup_percent' );
+		$markup_percent = floatval( $markup_percent );
 		$marked_up_amount = $marked_up_amount * ( 1 + ( $markup_percent / 100 ) );
 
 		if ( strpos( $marked_up_amount, 'E' ) !== false )
