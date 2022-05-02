@@ -12,895 +12,309 @@
 }
 
 // Preset brand colors for icon font
-.mcc_currency_icons.color {
-	i {
-		&.mcc-1337 {
-			color: #4C1515;
-		}
-		&.mcc-AAVE {
-			color: #5687A8;
-		}
-		&.mcc-ABYCOIN {
-  			color: #FF6600;
-		}
-		&.mcc-ACAD {
-  			color: #024574;
-		}
-		&.mcc-ACTIV {
-			color: #ccaf3c;
-		}
-		&.mcc-ADULT {
-			color: #4F606A;
-		}
-		&.mcc-AE {
-			color: #DE3F6B;
-		}
-		&.mcc-ALGO {
-			color: #000000;
-		}
-		&.mcc-ANT {
-			color: #1cb7c4;
-		}
-		&.mcc-APE {
-			color: #5530f2;
-		}
-		&.mcc-AVAX {
-			color: #E84445;
-		}
-		&.mcc-B100 {
-			color: #002291;
-		}
-		&.mcc-BAKE {
-			color: #AC582D;
-		}
-		&.mcc-BAT {
-			color: #9e1f63;
-		}
-		&.mcc-BCH {
-			color: #00B400;
-		}
-		&.mcc-BEP20BUSD {
-			color: #F0B90B;
-		}
-		&.mcc-BEP20USDC {
-			color: #2775ca;
-		}
-		&.mcc-BEP20USDT {
-			color: #f0b90b;
-		}
-		&.mcc-BEST {
-  			color: #000000;
-		}
-		&.mcc-BIRB {
-			color: #508BE0;
-		}
-		&.mcc-BITT {
-			color: #E37F24;
-		}
-		&.mcc-BKC {
-			color: #4f2b5d;
-		}
-		&.mcc-BLXS {
-			color: #FDDE02;
-		}
-		&.mcc-BNB {
-			color: #F5BC00;
-		}
-		&.mcc-BNBCH {
-			color: #F3903F;
-		}
-		&.mcc-BNT {
-			color: #000D2B;
-		}
-		&.mcc-BSCURBATE {
-			color: #e499c2;
-		}
-		&.mcc-BSD {
-			color: #D1A41B;
-		}
-		&.mcc-BTC {
-			color: #F7931A;
-		}
-		&.mcc-BTG {
-			color: #eba809;
-		}
-		&.mcc-BTT {
-  			color: #000000;
-		}
-		&.mcc-BZX {
-			color: #000000;
-		}
-		&.mcc-C2C {
-			color: #000000;
-		}
-		&.mcc-CAKE {
-			color: #41d2da;
-		}
-		&.mcc-CARMA {
-			color: #9CABE3;
-		}
-		&.mcc-CATO {
-			color: #082D53;
-		}
-		&.mcc-CCIM {
-  			color: #000000;
-		}
-		&.mcc-CFA {
-			color: #000000;
-		}
-		&.mcc-CGB {
-			color: #cea920;
-		}
-		&.mcc-CHAIN {
-			color: #EB3926;
-		}
-		&.mcc-CHS {
-			color: #8EC443;
-		}
-		&.mcc-CLOAK {
-			color: #E44B2D;
-		}
-		&.mcc-CNS {
-			color: #00AA10;
-		}
-		&.mcc-COF {
-			color: #35B629;
-		}
-		&.mcc-COLX {
-			color: #000;
-		}
-		&.mcc-COMP {
-			color: #000;
-		}
-		&.mcc-CRO {
-			color: #113F68;
-		}
-		&.mcc-CRYFT {
-			color: #01ad08;
-		}
-		&.mcc-CRYP {
-			color: #000;
-		}
-		&.mcc-CSTC {
-			color: #840707;
-		}
-		&.mcc-CU {
-			color: #cb3524;
-		}
-		&.mcc-CUDOS {
-			color: #1B2031;
-		}
-		&.mcc-CURA {
-			color: #14377f;
-		}
-		&.mcc-CUSTOM {
-			color: #000000;
-		}
-		&.mcc-DAI {
-			color: #F5AC37;
-		}
-		&.mcc-DASH {
-			color: #1c75bc;
-		}
-		&.mcc-DCR {
-			color: #3b7cfb;
-		}
-		&.mcc-DDGN {
-			color: #000000;
-		}
-		&.mcc-DDS {
-			color: #673AB7;
-		}
-		&.mcc-DEFI {
-			color: #000000;
-		}
-		&.mcc-DEP_BEP20 {
-			color: #ce9b39;
-		}
-		&.mcc-DEP_ERC20 {
-			color: #ce9b39;
-		}
-		&.mcc-DERC_BEP20 {
-			color: #000000;
-		}
-		&.mcc-DERC_ERC20 {
-			color: #000000;
-		}
-		&.mcc-DEXKIT {
-			color: #DB532A;
-		}
-		.mcc-DEXT {
-			color: #00A5C1;
-		}
-		&.mcc-DGB {
-			color: #0066cc;
-		}
-		&.mcc-DGD {
-			color: #D8A24A;
-		}
-		&.mcc-DGTX {
-			color: #7b32e8;
-		}
-		&.mcc-DOGE {
-  			color: #C3A634;
-		}
-		&.mcc-DRGN {
-			color: #C91111;
-		}
-		&.mcc-EARNX {
-			color: #000000;
-		}
-		&.mcc-EBTC {
-			color: #F37721;
-		}
-		&.mcc-ECA {
-  			color: #bd01fe;
-		}
-		&.mcc-EFI {
-			color: #4B6EDA;
-		}
-		&.mcc-EGLD {
-			color: #0D022B;
-		}
-		&.mcc-EMPIRE {
-			color: #19e6d7;
-		}
-		&.mcc-ENIX {
-  			color: #18CCEA;
-		}
-		&.mcc-ENJ {
-			color: #7866d4;
-		}
-		&.mcc-EOS {
-  			color: #000000;
-		}
-		&.mcc-ETH {
-			color: #282828;
-		}
-		&.mcc-ETM {
-			color: #F25057;
-		}
-		&.mcc-EXSUCH {
-			color: #00b050;
-		}
-		&.mcc-FFA {
-			color: #fb5f76;
-		}
-		&.mcc-FINE {
-			color: #000;
-		}
-		&.mcc-FIRE {
-			color: #ea7419;
-		}
-		&.mcc-FIREFLY {
-			color: #fc5f74;
-		}
-		&.mcc-FLIX {
-			color: #7D0A7F;
-		}
-		&.mcc-FLOKI {
-			color: #5109ae;
-		}
-		&.mcc-FOX {
-			color: #E09622;
-		}
-		&.mcc-FREE {
-  			color: #F7B930;
-		}
-		&.mcc-FRTS {
-  			color: #ED6D00;
-		}
-		.mcc-FTK {
-			color: #004AAD;
-		}
-		&.mcc-FTM {
-			color: #1969ff;
-		}
-		&.mcc-FUN {
-			color: #ED1968;
-		}
-		&.mcc-G {
-			color: #05B1FD;
-		}
-		&.mcc-GAMESAFE {
-			color: #000;
-		}
-		&.mcc-GBC {
-			color: #F1B31E;
-		}
-		&.mcc-GME {
-			color: #9484C6;
-		}
-		&.mcc-GMEV3 {
-			color: #483674;
-		}
-		&.mcc-GOCA {
-			color: #061937;
-		}
-		&.mcc-GOLF {
-  			color: #000000;
-		}
-		&.mcc-GNT {
-			color: #001D57;
-		}
-		&.mcc-GRS {
-			color: #0093AB;
-		}
-		&.mcc-GT {
-			color: #DE5959;
-		}
-		&.mcc-GTC {
-			color: #DE5959;
-		}
-		&.mcc-GSPI {
-			color: #0696A6;
-		}
-		&.mcc-GTO {
-			color: #7F27FF;
-		}
-		&.mcc-GUSD {
-			color: #07c4e1;
-		}
-		&.mcc-GVT {
-			color: #16B9AD;
-		}
-		&.mcc-HEAT {
-  			color: #FF0701;
-		}
-		&.mcc-HERB {
-			color: #60AC04;
-		}
-		&.mcc-HNY {
-			color: #ffcc33;
-		}
-		&.mcc-HOGE {
-			color: #000000;
-		}
-		&.mcc-HOKK {
-			color: #2E3192;
-		}
-		&.mcc-HPB {
-			color: #3a6b93;
-		}
-		&.mcc-HT {
-			color: #1C2143;
-		}
-		&.mcc-HYPE {
-  			color: #E60606;
-		}
-		&.mcc-HYPER {
-			color: #6B2EFD;
-		}
-		&.mcc-ICX {
-			color: #1FC5C9;
-		}
-		&.mcc-IMT {
-  			color: #fcee21;
-		}
-		&.mcc-INCH {
-			color: #1C324F;
-		}
-		&.mcc-INV {
-			color: #35C1C7;
-		}
-		&.mcc-ITM {
-			color: #4AAAE0;
-		}
-		&.mcc-JOB {
-  			color: #211566;
-		}
-		&.mcc-JULD {
-			color: #9E1B1A;
-		}
-		&.mcc-KCS {
-			color: #25af91;
-		}
-		&.mcc-KCW {
-			color: #000;
-		}
-		&.mcc-KDU {
-			color: #62B9E7;
-		}
-		&.mcc-KISHU {
-			color: #13CAFE;
-		}
-		&.mcc-KITTY {
-			color: #f7a857;
-		}
-		&.mcc-KNC {
-			color: #188C92;
-		}
-		&.mcc-KUBO {
-  			color: #000000;
-		}
-		&.mcc-LATINO {
-			color: #1eb7eb;
-		}
-		&.mcc-LIFE {
-			color: #10164c;
-		}
-		&.mcc-LILE {
-			color: #deb846;
-		}
-		&.mcc-LINK {
-  			color: #2A5AD9;
-		}
-		&.mcc-LOOM {
-			color: #08839D;
-		}
-		&.mcc-LTC {
-			color: #838383;
-		}
-		&.mcc-LUN {
-			color: #F45954;
-		}
-		&.mcc-LUNA {
-			color: #172852;
-		}
-		&.mcc-LXC {
-  			color: #c8962c;
-		}
-		.mcc-MANA {
-  			color: #BFB5AF;
-		}
-		&.mcc-MARS {
-			color: #D13914;
-		}
-		.mcc-MATIC {
-			color: #8247E5;
-		}
-		&.mcc-MCO {
-			color: #103F68;
-		}
-		&.mcc-MDA {
-			color: #2F6747;
-		}
-		&.mcc-MCT {
-			color: #ef5c2c;
-		}
-		&.mcc-MERO {
-  			color: #127EBA;
-		}
-		&.mcc-METAGIN {
-			color: #000000;
-		}
-		&.mcc-MICHI {
-			color: #000000;
-		}
-		&.mcc-MIL {
-			color: #000000;
-		}
-		&.mcc-MINX {
-			color: #957955;
-		}
-		&.mcc-MKR {
-			color: #1abc9c;
-		}
-		&.mcc-MLCN {
-			color: #0188fe;
-		}
-		&.mcc-MLM {
-			color: #000000;
-		}
-		&.mcc-MNDA {
-			color: #378da0;
-		}
-		&.mcc-MOONPIRATE {
-			color: #000000;
-		}
-		&.mcc-MPC {
-			color: #000000;
-		}
-		&.mcc-MTL {
-			color: #1E1F25;
-		}
-		&.mcc-MX {
-			color: #008376;
-		}
-		&.mcc-NAS {
-			color: #222;
-		}
-		&.mcc-NEOK {
-			color: #F60101;
-		}
-		&.mcc-NEST {
-			color: #000;
-		}
-		&.mcc-NEXO {
-			color: #2853C3;
-		}
-		&.mcc-NMN {
-  			color: #4a63c0;
-		}
-		&.mcc-NPXS {
-			color: #221E22;
-		}
-		&.mcc-NSFW {
-			color: #000000;
-		}
-		&.mcc-NUM {
-			color: #000000;
-		}
-		&.mcc-NYC {
-			color: #6D6E71;
-		}
-		&.mcc-OAK {
-			color: #0292B4;
-		}
-		&.mcc-OMG {
-			color: #000000;
-		}
-		&.mcc-ONG {
-			color: #000000;
-		}
-		&.mcc-ORE {
-			color: #000000;
-		}
-		&.mcc-ORGT {
-  			color: #c717b0;
-		}
-		&.mcc-OROX {
-  			color: #000000;
-		}
-		&.mcc-PAPEL {
-			color: #D4232A;
-		}
-		&.mcc-PAY {
-			color: #302C2C;
-		}
-		&.mcc-PENKY {
-			color: #b80082;
-		}
-		&.mcc-PIEG {
-			color: #bc181e;
-		}
-		&.mcc-PLA {
-  			color: #FECB00;
-		}
-		&.mcc-PNY {
- 			color: #a29667;
-		}
-		&.mcc-POLY {
-  			color: #4C5A95;
-		}
-		&.mcc-PPT {
-			color: #152743;
-		}
-		&.mcc-PRE {
-  			color: #2d8eff;
-		}
-		&.mcc-PRX {
-			color: #5DBA48;
-		}
-		&.mcc-PUSH {
-			color: #674e9e;
-		}
-		&.mcc-PUT {
-			color: #000000;
-		}
-		&.mcc-QASH {
-			color: #1347E8;
-		}
-		&.mcc-QOIN {
-			color: #ff7733;
-		}
-		&.mcc-RACA {
-			color: #fcc33c;
-		}
-		&.mcc-RDN {
-			color: #2A2A2A;
-		}
-		&.mcc-REP {
-			color: #602A52;
-		}
-		&.mcc-REQ {
-			color: #075073;
-		}
-		&.mcc-RISE {
-			color: #EB4432;
-		}
-		&.mcc-RMESH {
-  			color: #0C424E;
-		}
-		&.mcc-ROK {
-			color: #000000;
-		}
-		&.mcc-RWD_BEP20 {
-			color: #208475;
-		}
-		&.mcc-RWD_ERC20 {
-			color: #208475;
-		}
-		&.mcc-SAFEBTC {
-			color: #8301FE;
-		}
-		&.mcc-SAFEMOON {
-			color: #25223D;
-		}
-		&.mcc-SAFEMOONCASH {
-			color: #000000;
-		}
-		&.mcc-SALT {
-			color: #0baba4;
-		}
-		&.mcc-SAO {
-			color: #5bbb91;
-		}
-		&.mcc-SCRAP {
-			color: #f4821c;
-		}
-		&.mcc-SCOUT {
-			color: #48C0BE;
-		}
-		&.mcc-SCT {
-			color: #000000;
-		}
-		&.mcc-SEEDS {
-			color: #2F6747;
-		}
-		&.mcc-SGO {
-			color: #263A80;
-		}
-		&.mcc-SHIB {
-			color: #FE8300;
-		}
-		&.mcc-SKYBORN {
-			color: #7EB7E3;
-		}
-		&.mcc-SNG {
-			color: #00b338;
-		}
-		&.mcc-SNOV {
-			color: #971EE6;
-		}
-		&.mcc-SOL {
-			color: #000000;
-		}
-		&.mcc-SOS {
-			color: #000000;
-		}
-		&.mcc-SPDR {
-  			color: #ad1ca6;
-		}
-		&.mcc-SPHYNX {
-			color: #000000;
-		}
-		&.mcc-SHC {
-			color: #000000;
-		}
-		&.mcc-SHEL {
-			color: #000000;
-		}
-		&.mcc-SIN {
-  			color: #0b2272;
-		}
-		&.mcc-SMC {
-  			color: #000000;
-		}
-		&.mcc-SMART {
-  			color: #ffc70d;
-		}
-		&.mcc-SNT {
-			color: #5B6DEE;
-		}
-		&.mcc-SNX {
-			color: #00D1FF;
-		}
-		&.mcc-SPAZ {
-  			color: #D0C344;
-		}
-		&.mcc-SPI {
-			color: #1B96A6;
-		}
-		&.mcc-SPN {
-			color: #12496D;
-		}
-		&.mcc-SPND {
-			color: #000;
-		}
-		&.mcc-STAK {
-			color: #F29514;
-		}
-		.mcc-STMX {
-			color: #FC2E53;
-		}
-		&.mcc-STORM {
-			color: #080D98;
-		}
-		&.mcc-STQ {
-			color: #2fbafd;
-		}
-		&.mcc-STX {
-			color: #5546ff;
-		}
-		&.mcc-SUBX {
-			color: #000;
-		}
-		&.mcc-SXP {
-			color: #FE6627;
-		}
-		&.mcc-TASTE {
-			color: #95011C;
-		}
-		&.mcc-TBTC {
-			color: #000;
-		}
-		&.mcc-TCH {
-			color: #3d6670;
-		}
-		&.mcc-TEL {
-			color: #14C8FF;
-		}
-		&.mcc-TKO {
-			color: #077fa2;
-		}
-		&.mcc-TKS {
-			color: #00b268;
-		}
-		&.mcc-TMT {
-  			color: #E3BB44;
-		}
-		&.mcc-TN {
-			color: #000;
-		}
-		&.mcc-TOR {
-			color: #be7c40;
-		}
-		&.mcc-TPAY {
-			color: #3058A6;
-		}
-		&.mcc-TRDS {
-  			color: #1C05DB;
-		}
-		&.mcc-TRX {
-			color: #000;
-		}
-		&.mcc-TST {
-			color: #4800ee;
-		}
-		&.mcc-TUSD {
-			color: #5ca4f5;
-		}
-		&.mcc-TXT {
-			color: #000000;
-		}
-		&.mcc-ULG {
-  			color: #f4ba3e;
-		}
-		&.mcc-UNI {
-			color: #FF007A;
-		}
-		&.mcc-UNIQ {
-			color: #3952F5;
-		}
-		&.mcc-UOS {
-			color: #7A51D0;
-		}
-		&.mcc-USDC {
-			color: #2775c9;
-		}
-		&.mcc-USDN {
-			color: #08B596;
-		}
-		&.mcc-USDT {
-			color: #229A77;
-		}
-		&.mcc-USDT_ERC20 {
-  			color: #282828;
-		}
-		&.mcc-USDT_TRC20 {
-  			color: #000000;
-		}
-		&.mcc-UST {
-			color: #103EA6;
-		}
-		&.mcc-VAI {
-			color: #73ba59;
-		}
-		&.mcc-VBK {
-			color: #2561A7;
-		}
-		&.mcc-VCE {
-			color: #ffcb00;
-		}
-		&.mcc-VCP {
-			color: #000000;
-		}
-		&.mcc-VERI {
-			color: #FF9933;
-		}
-		&.mcc-VET {
-			color: #589CE0;
-		}
-		&.mcc-VEX {
-			color: #03ABA3;
-		}
-		&.mcc-VIA {
-			color: #000000;
-		}
-		&.mcc-VLX {
-			color: #000000;
-		}
-		&.mcc-VMIX {
-			color: #035CA5;
-		}
-		&.mcc-VRA {
-			color: #E00A3D;
-		}
-		&.mcc-WAROO {
-			color: #000000;
-		}
-		&.mcc-WAVES {
-			color: #0155FF;
-		}
-		&.mcc-WOBTC {
-			color: #000000;
-		}
-		&.mcc-WORLD {
-			color: #666AFE;
-		}
-		&.mcc-WW {
-			color: #3609F9;
-		}
-		&.mcc-WRD1 {
-			color: #221F1F;
-		}
-		&.mcc-WWTK {
-			color: #73afc6;
-		}
-		&.mcc-XCON {
-  			color: #000000;
-		}
-		&.mcc-XDAI {
-			color: #0ae33a;
-		}
-		&.mcc-XDC {
-			color: #244B81;
-		}
-		&.mcc-XEM {
-			color: #67B2E8;
-		}
-		&.mcc-XFC {
-			color: #561263;
-		}
-		&.mcc-XLM {
-  			color: #14b6e7;
-		}
-		&.mcc-XLR {
-			color: #000;
-		}
-		&.mcc-XMR {
-			color: #FF6600;
-		}
-		&.mcc-XPR {
-			color: #4747c9;
-		}
-		&.mcc-XRP {
-  			color: #000;
-		}
-		&.mcc-XTROPTIONSGOLD {
-			color: #D4A332;
-		}
-		&.mcc-XVG {
-			color: #35bde1;
-		}
-		&.mcc-XVS {
-			color: #f7b647;
-		}
-		&.mcc-YLD {
-			color: #10367F;
-		}
-		&.mcc-YUMMY {
-			color: #582B08;
-		}
-		&.mcc-ZEC {
-			color: #e29f27;
-		}
-		&.mcc-ZIL:before {
-			color: #48C0BE;
-		}
-		&.mcc-ZRX {
-			color: #302C2C;
-		}
+// Icon symbol and glyph array
+$icons: (
+"1337": "#4C1515",
+"AAVE": "#5687A8",
+"ABYCOIN": "#FF6600",
+"ACAD": "#024574",
+"ACTIV": "#ccaf3c",
+"ADULT": "#4F606A",
+"AE": "#DE3F6B",
+"ALGO": "#000000",
+"ANT": "#1cb7c4",
+"APE": "#5530f2",
+"AVAX": "#E84445",
+"B100": "#002291",
+"BAKE": "#AC582D",
+"BAT": "#9e1f63",
+"BCH": "#00B400",
+"BEP20BUSD": "#F0B90B",
+"BEP20USDC": "#2775ca",
+"BEP20USDT": "#f0b90b",
+"BEST": "#000000",
+"BIRB": "#508BE0",
+"BITT": "#E37F24",
+"BKC": "#4f2b5d",
+"BLXS": "#FDDE02",
+"BNB": "#F5BC00",
+"BNBCH": "#F3903F",
+"BNT": "#000D2B",
+"BSCURBATE": "#e499c2",
+"BSD": "#D1A41B",
+"BTC": "#F7931A",
+"BTG": "#eba809",
+"BTT": "#000000",
+"BZX": "#000000",
+"C2C": "#000000",
+"CAKE": "#41d2da",
+"CARMA": "#9CABE3",
+"CATO": "#082D53",
+"CCIM": "#000000",
+"CFA": "#000000",
+"CGB": "#cea920",
+"CHAIN": "#EB3926",
+"CHS": "#8EC443",
+"CLOAK": "#E44B2D",
+"CNS": "#00AA10",
+"COF": "#35B629",
+"COLX": "#000",
+"COMP": "#000",
+"CRO": "#113F68",
+"CRYFT": "#01ad08",
+"CRYP": "#000",
+"CSTC": "#840707",
+"CU": "#cb3524",
+"CUDOS": "#1B2031",
+"CURA": "#14377f",
+"CUSTOM": "#000000",
+"DAI": "#F5AC37",
+"DASH": "#1c75bc",
+"DCR": "#3b7cfb",
+"DDGN": "#000000",
+"DDS": "#673AB7",
+"DEFI": "#000000",
+"DEP_BEP20": "#ce9b39",
+"DEP_ERC20": "#ce9b39",
+"DERC_BEP20": "#000000",
+"DERC_ERC20": "#000000",
+"DEXKIT": "#DB532A",
+"DEXT": "#00A5C1",
+"DGB": "#0066cc",
+"DGD": "#D8A24A",
+"DGTX": "#7b32e8",
+"DOGE": "#C3A634",
+"DRGN": "#C91111",
+"EARNX": "#000000",
+"EBTC": "#F37721",
+"ECA": "#bd01fe",
+"EFI": "#4B6EDA",
+"EGLD": "#0D022B",
+"EMPIRE": "#19e6d7",
+"ENIX": "#18CCEA",
+"ENJ": "#7866d4",
+"EOS": "#000000",
+"ETH": "#282828",
+"ETM": "#F25057",
+"EXSUCH": "#00b050",
+"FFA": "#fb5f76",
+"FINE": "#000",
+"FIRE": "#ea7419",
+"FIREFLY": "#fc5f74",
+"FLIX": "#7D0A7F",
+"FLOKI": "#5109ae",
+"FOX": "#E09622",
+"FREE": "#F7B930",
+"FRTS": "#ED6D00",
+"FTK": "#004AAD",
+"FTM": "#1969ff",
+"FUN": "#ED1968",
+"G": "#05B1FD",
+"GAMESAFE": "#000",
+"GBC": "#F1B31E",
+"GME": "#9484C6",
+"GMEV3": "#483674",
+"GOCA": "#061937",
+"GOLF": "#000000",
+"GNT": "#001D57",
+"GRS": "#0093AB",
+"GT": "#DE5959",
+"GTC": "#DE5959",
+"GSPI": "#0696A6",
+"GTO": "#7F27FF",
+"GUSD": "#07c4e1",
+"GVT": "#16B9AD",
+"HEAT": "#FF0701",
+"HERB": "#60AC04",
+"HNY": "#ffcc33",
+"HOGE": "#000000",
+"HOKK": "#2E3192",
+"HPB": "#3a6b93",
+"HT": "#1C2143",
+"HYPE": "#E60606",
+"HYPER": "#6B2EFD",
+"ICX": "#1FC5C9",
+"IMT": "#fcee21",
+"INCH": "#1C324F",
+"INV": "#35C1C7",
+"ITM": "#4AAAE0",
+"JOB": "#211566",
+"JULD": "#9E1B1A",
+"KCS": "#25af91",
+"KCW": "#000",
+"KDU": "#62B9E7",
+"KISHU": "#13CAFE",
+"KITTY": "#f7a857",
+"KNC": "#188C92",
+"KUBO": "#000000",
+"LATINO": "#1eb7eb",
+"LIFE": "#10164c",
+"LILE": "#deb846",
+"LINK": "#2A5AD9",
+"LOOM": "#08839D",
+"LTC": "#838383",
+"LUN": "#F45954",
+"LUNA": "#172852",
+"LXC": "#c8962c",
+"MANA": "#BFB5AF",
+"MARS": "#D13914",
+"MATIC": "#8247E5",
+"MCO": "#103F68",
+"MDA": "#2F6747",
+"MCT": "#ef5c2c",
+"MERO": "#127EBA",
+"METAGIN": "#000000",
+"MICHI": "#000000",
+"MIL": "#000000",
+"MINX": "#957955",
+"MKR": "#1abc9c",
+"MLCN": "#0188fe",
+"MLM": "#000000",
+"MNDA": "#378da0",
+"MOONPIRATE": "#000000",
+"MPC": "#000000",
+"MTL": "#1E1F25",
+"MX": "#008376",
+"NAS": "#222",
+"NEOK": "#F60101",
+"NEST": "#000",
+"NEXO": "#2853C3",
+"NMN": "#4a63c0",
+"NPXS": "#221E22",
+"NSFW": "#000000",
+"NUM": "#000000",
+"NYC": "#6D6E71",
+"OAK": "#0292B4",
+"OMG": "#000000",
+"ONG": "#000000",
+"ORE": "#000000",
+"ORGT": "#c717b0",
+"OROX": "#000000",
+"PAPEL": "#D4232A",
+"PAY": "#302C2C",
+"PENKY": "#b80082",
+"PIEG": "#bc181e",
+"PLA": "#FECB00",
+"PNY": " #a29667",
+"POLY": "#4C5A95",
+"PPT": "#152743",
+"PRE": "#2d8eff",
+"PRX": "#5DBA48",
+"PUSH": "#674e9e",
+"PUT": "#000000",
+"QASH": "#1347E8",
+"QOIN": "#ff7733",
+"RACA": "#fcc33c",
+"RDN": "#2A2A2A",
+"REP": "#602A52",
+"REQ": "#075073",
+"RISE": "#EB4432",
+"RMESH": "#0C424E",
+"ROK": "#000000",
+"RWD_BEP20": "#208475",
+"RWD_ERC20": "#208475",
+"SAFEBTC": "#8301FE",
+"SAFEMOON": "#25223D",
+"SAFEMOONCASH": "#000000",
+"SALT": "#0baba4",
+"SAO": "#5bbb91",
+"SCRAP": "#f4821c",
+"SCOUT": "#48C0BE",
+"SCT": "#000000",
+"SEEDS": "#2F6747",
+"SGO": "#263A80",
+"SHIB": "#FE8300",
+"SKYBORN": "#7EB7E3",
+"SNG": "#00b338",
+"SNOV": "#971EE6",
+"SOL": "#000000",
+"SOS": "#000000",
+"SPDR": "#ad1ca6",
+"SPHYNX": "#000000",
+"SHC": "#000000",
+"SHEL": "#000000",
+"SIN": "#0b2272",
+"SMC": "#000000",
+"SMART": "#ffc70d",
+"SNT": "#5B6DEE",
+"SNX": "#00D1FF",
+"SPAZ": "#D0C344",
+"SPI": "#1B96A6",
+"SPN": "#12496D",
+"SPND": "#000",
+"STAK": "#F29514",
+"STMX": "#FC2E53",
+"STORM": "#080D98",
+"STQ": "#2fbafd",
+"STX": "#5546ff",
+"SUBX": "#000",
+"SXP": "#FE6627",
+"TASTE": "#95011C",
+"TBTC": "#000",
+"TCH": "#3d6670",
+"TEL": "#14C8FF",
+"TKO": "#077fa2",
+"TKS": "#00b268",
+"TMT": "#E3BB44",
+"TN": "#000",
+"TOR": "#be7c40",
+"TPAY": "#3058A6",
+"TRDS": "#1C05DB",
+"TRX": "#000",
+"TST": "#4800ee",
+"TUSD": "#5ca4f5",
+"TXT": "#000000",
+"ULG": "#f4ba3e",
+"UNI": "#FF007A",
+"UNIQ": "#3952F5",
+"UOS": "#7A51D0",
+"USDC": "#2775c9",
+"USDN": "#08B596",
+"USDT": "#229A77",
+"USDT_ERC20": "#282828",
+"USDT_TRC20": "#000000",
+"UST": "#103EA6",
+"VAI": "#73ba59",
+"VBK": "#2561A7",
+"VCE": "#ffcb00",
+"VCP": "#000000",
+"VERI": "#FF9933",
+"VET": "#589CE0",
+"VEX": "#03ABA3",
+"VIA": "#000000",
+"VLX": "#000000",
+"VMIX": "#035CA5",
+"VRA": "#E00A3D",
+"WAROO": "#000000",
+"WAVES": "#0155FF",
+"WOBTC": "#000000",
+"WORLD": "#666AFE",
+"WW": "#3609F9",
+"WRD1": "#221F1F",
+"WWTK": "#73afc6",
+"XCON": "#000000",
+"XDAI": "#0ae33a",
+"XDC": "#244B81",
+"XEM": "#67B2E8",
+"XFC": "#561263",
+"XLM": "#14b6e7",
+"XLR": "#000",
+"XMR": "#FF6600",
+"XPR": "#4747c9",
+"XRP": "#000",
+"XTROPTIONSGOLD": "#D4A332",
+"XVG": "#35bde1",
+"XVS": "#f7b647",
+"YLD": "#10367F",
+"YUMMY": "#582B08",
+"ZEC": "#e29f27",
+"ZIL": "#48C0BE",
+"ZRX": "#302C2C",
+);
+
+// Loop icon array
+@each $name, $color in $icons {
+	.mcc_currency_icons.color i.mcc-#{$name} {
+	  color: #{$color};
 	}
 }
