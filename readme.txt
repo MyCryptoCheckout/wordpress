@@ -59,12 +59,14 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Fruits FRTS
 - Fantom FTM
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
+- High Performance Blockchain HPB
 - KuCoin Community Chain KCS
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
 - Neo NEO
 - Polygon MATIC
 - PutinCoin PUT
+- Stacks STX
 - Stellar XLM
 - Terra LUNA
 - TRON TRX
@@ -94,12 +96,15 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Buskercommcoin BKC
 - Card 2 Crypto C2C
 - CarmaCoin CARMA
+- Celestial Unity CU
 - Centric SWAP CNS
 - Coin Fast Alert CFA
-- Deapcoin DEP_BEP20
+- Cryft Coin CRYFT
+- DEAPCOIN DEP_BEP20
 - DeRace DERC_BEP20
 - EarnX EARNX
 - Empire Token EMPIRE
+- ExSuCh EXSUCH
 - FindToken FTK
 - FIREFLY
 - Floki Inu FLOKI
@@ -110,6 +115,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - GameTokenV3 GMEV3
 - GoCaribe GOCA
 - Goku Bank Coin GBC
+- HODL
 - HyperChain HYPER
 - JulSwap JULD
 - Landshare LAND
@@ -117,14 +123,17 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Michi $ander MICHI
 - Military Finance MIL
 - Melacoin MLCN
+- MetaGin METAGIN
 - Moeda SEEDS SEEDS
 - Moonpirate MOONPIRATE
 - Nueva Morralla MORRALLA
+- NUM Token NUM
 - Numbers Protocol NUM
 - ORE Token ORE
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
 - PROSCOIN PRX
+- Proton XPR
 - QOIN
 - Radio Caca RACA
 - Refinable FINE
@@ -135,6 +144,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SAO
 - Shopaneum SPN
 - SkyBorn SKYBORN
+- Sphynx BSC SPHYNX
 - SPI Governance GSPI
 - Sportemon-Go SGO
 - STARTUP BOOST TOKEN SUBX
@@ -159,6 +169,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - 1inch 1INCH
 - Aave AAVE
 - Aeternity AE
+- ApeCoin APE
 - Aragon ANT
 - Bancor BNT
 - Basic Attention Token BAT
@@ -172,7 +183,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - CUDOS
 - Curate XCUR
 - DDS.Store DDS
-- Deapcoin DEP_ERC20
+- DEAPCOIN DEP_ERC20
 - DeRace DERC_ERC20
 - DEXTools DEXT
 - Devil's Dragon DDGN
@@ -227,6 +238,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Synthetix SNX
 - TenXPay PAY
 - Tether USD USDT
+- The Refining Company SCRAP
 - TrueUSD TUSD
 - Ultra Token UOS
 - Uniqly UNIQ
@@ -251,6 +263,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = Polygon MATIC tokens supported: =
 
 - Penky PoS
+- Pleasure Coin NSFW
 - Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
 
 = Terra Tokens supported =
