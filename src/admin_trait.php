@@ -90,7 +90,7 @@ trait admin_trait
 					}
 				}
 				else
-					$r .= $this->error_message_box()->_( __( 'Error refreshing your account data. Please enable debug mode to find the error.', 'mycryptocheckout' ) );
+					$r .= $this->error_message_box()->_( __( 'Error refreshing your account data. Is your site password protected? Do you have coming soon / maintenance mode enabled? A firewall blocking api.mycryptocheckout.com?', 'mycryptocheckout' ) );
 			}
 		}
 
