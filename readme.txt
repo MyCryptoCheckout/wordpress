@@ -215,6 +215,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Kyber Network KNC
 - LIFE Token
 - Loom LOOM
+- LUFFY
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
@@ -390,6 +391,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* New currency: LUFFY
 
 = 2.114 20220502 =
 
