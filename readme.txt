@@ -8,7 +8,7 @@ Stable tag: 2.114
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
 Tested up to: 5.9
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 200+ coins: Bitcoin, BNB, Ethereum, Litecoin, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 200+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
 == Description ==
 
@@ -159,6 +159,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VELOX VLX
 - Venus XVS
 - Vince chain VCE
+- Volt Inu VOLT_BEP20
 - Wrapped Optical Bitcoin WOBTC
 - xxxNifty NSFW
 - YUMMY
@@ -249,6 +250,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - VcashPay VCP
 - Verasity VRA
 - Veritaseum VERI
+- Volt Inu VOLT_ERC20
 - World Token WORLD
 - YIELD App YLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
@@ -393,6 +395,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 * New currency: LUFFY
+- Volt Inu VOLT_BEP20
+- Volt Inu VOLT_ERC20
 
 = 2.114 20220502 =
 
