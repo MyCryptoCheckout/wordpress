@@ -143,6 +143,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SafeMoon v2 SFM
 - SafeMoonCash SAFEMOONCASH
 - SAO
+- Shiba Rewards SHREW
 - Shopaneum SPN
 - SkyBorn SKYBORN
 - Sphynx BSC SPHYNX
@@ -395,8 +396,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 * New currency: LUFFY
-- Volt Inu VOLT_BEP20
-- Volt Inu VOLT_ERC20
+* New currency: Volt Inu VOLT_BEP20 and VOLT_ERC20
+* New currency: Shiba Rewards SHREW
 
 = 2.114 20220502 =
 
