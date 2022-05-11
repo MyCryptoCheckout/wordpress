@@ -48,7 +48,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
 - Bitcoin Gold BTG
-- Counterparty XCP
 - Dash DASH (Including HD wallets)
 - Decred DCR
 - Digibyte DGB (Including SegWit)
@@ -278,10 +277,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Honey Token HNY
 
 - Add your <a href="https://mycryptocheckout.com/xdai-token/">custom Gnosis / XDAI tokens</a>!
-
-= Counterparty Tokens supported: =
-
-- XTROPTIONS.GOLD
 
 = Fiat Autosettlements =
 
