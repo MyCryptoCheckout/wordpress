@@ -372,6 +372,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Update Web3.js to v1.7.3
+* Fix: Updated metamask integration
 * New currency: LUFFY
 * New currency: Volt Inu VOLT_BEP20 and VOLT_ERC20
 * New currency: Shiba Rewards SHREW

@@ -288,16 +288,23 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 				if ( contractInstance === false )
 				{
+					if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas !== 'undefined' )
+					{
+						var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
+						send_parameters[ 'gasPrice' ] = web3.utils.toWei( metamask_gas.price + '', 'gwei' );
+						// Does the currency have its own custom gas limit?
+						if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit !== 'undefined' )
+							metamask_gas.limit = $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit;
+						send_parameters[ 'gas' ] = metamask_gas.limit + '';
+					}
+
 					send_parameters[ 'to' ] = $$.mycryptocheckout_checkout_data.to;
 					send_parameters[ 'value' ] = web3.utils.toHex(
 						web3.utils.toWei( $$.mycryptocheckout_checkout_data.amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency )
 					);
-					console.log( 'ETH send parameters', send_parameters );
-					await window.ethereum.request(
-					{
-						method: 'eth_sendTransaction',
-						params: [ send_parameters ],
-					}, function (err, transactionHash )
+					console.log( 'Mainnet send parameters', send_parameters );
+					web3.eth.sendTransaction( send_parameters,
+					function (err, transactionHash )
 					{
 						// No error logging for now.
 						console.log( 'Error sending Eth via Metamask', err );
@@ -316,17 +323,28 @@ var mycryptocheckout_checkout_javascript = function( data )
 					// .transfer loves plain strings.
 					amount = amount + "";
 
-					if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas !== 'undefined' )
+					var use_eip1559 = ( typeof $$.mycryptocheckout_checkout_data.supports.eip1559 !== 'undefined' );
+
+					if ( use_eip1559 )
 					{
-						var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
-						send_parameters[ 'gasPrice' ] = web3.utils.toWei( metamask_gas.price + '', 'gwei' );
-						// Does the currency have its own custom gas limit?
-						if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit !== 'undefined' )
-							metamask_gas.limit = $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit;
-						send_parameters[ 'gas' ] = metamask_gas.limit + '';
+						console.log( "Using EIP1559" );
+						send_parameters[ 'maxPriorityFeePerGas' ] = web3.utils.toWei( '2', 'gwei' );
+						send_parameters[ 'gas' ] = 70000;
+					}
+					else
+					{
+						if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas !== 'undefined' )
+						{
+							var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
+							send_parameters[ 'gasPrice' ] = web3.utils.toWei( metamask_gas.price + '', 'gwei' );
+							// Does the currency have its own custom gas limit?
+							if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit !== 'undefined' )
+								metamask_gas.limit = $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit;
+							send_parameters[ 'gas' ] = metamask_gas.limit + '';
+						}
 					}
 
-					console.log( "ERC20 parameters", send_parameters );
+					console.log( "Token parameters", send_parameters );
 
 					contractInstance.methods
 						.transfer( $$.mycryptocheckout_checkout_data.to, amount )
