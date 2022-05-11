@@ -68,7 +68,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - PutinCoin PUT
 - Stacks STX
 - Stellar XLM
-- Terra LUNA
 - TRON TRX
 - Verge XVG
 - VeriBlock VBK
@@ -114,7 +113,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - GameToken GME
 - GameTokenV3 GMEV3
 - GoCaribe GOCA
-- Goku Bank Coin GBC
 - HODL
 - HyperChain HYPER
 - JulSwap JULD
@@ -179,13 +177,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - CGBBank CGB
 - Chain Games CHAIN
 - Chainlink LINK
-- Clash Token SCT
 - Connect Coin XCON
 - Compound COMP
 - Crypto.com Coin CRO
 - CUDOS
-- Curate XCUR
-- DDS.Store DDS
 - DEAPCOIN DEP_ERC20
 - DeRace DERC_ERC20
 - DEXTools DEXT
@@ -193,9 +188,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Efinity Token EFI
 - Ethereum Push Notification Service PUSH
 - Gitcoin GTC
-- Moeda Loyalty Points MDA
 - Multi-collateral DAI DAI
-- MX Token MX
 - Decentraland MANA
 - DigixDAO DGD
 - Dogecoin DOGE
@@ -238,13 +231,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SHIBA INU SHIB
 - Shopping.io SPI
 - Status SNT
-- StormX STMX
 - Synthetix SNX
 - TenXPay PAY
 - Tether USD USDT
 - The Refining Company SCRAP
 - TrueUSD TUSD
-- Ultra Token UOS
 - Uniqly UNIQ
 - Uniswap UNI
 - USD Coin USDC
@@ -252,7 +243,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Verasity VRA
 - Veritaseum VERI
 - Volt Inu VOLT_ERC20
-- World Token WORLD
 - YIELD App YLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
 
@@ -270,10 +260,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Penky PoS
 - Pleasure Coin NSFW
 - Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
-
-= Terra Tokens supported =
-
-- TerraUSD UST
 
 = WAVES Tokens supported (Including Waves Client): =
 
