@@ -286,21 +286,38 @@ var mycryptocheckout_checkout_javascript = function( data )
 					'from' : accounts[0],		// First available.
 				};
 
-				if ( contractInstance === false )
+				var use_eip1559 = ( typeof $$.mycryptocheckout_checkout_data.supports.eip1559 !== 'undefined' );
+				var gas_set = false;
+
+				if ( use_eip1559 )
+				{
+					console.log( "Using EIP1559" );
+					send_parameters[ 'maxPriorityFeePerGas' ] = web3.utils.toWei( $$.mycryptocheckout_checkout_data.supports.eip1559.maxPriorityFeePerGas + "", 'gwei' );
+					send_parameters[ 'gas' ] = $$.mycryptocheckout_checkout_data.supports.eip1559.gas_limit;
+					gas_set = true;
+				}
+
+				if ( ! gas_set )
 				{
 					if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas !== 'undefined' )
 					{
+						console.log( 'Setting general metamask gas.' );
 						var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
 						send_parameters[ 'gasPrice' ] = web3.utils.toWei( metamask_gas.price + '', 'gwei' );
 						// Does the currency have its own custom gas limit?
 						if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit !== 'undefined' )
 							metamask_gas.limit = $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit;
 						send_parameters[ 'gas' ] = metamask_gas.limit + '';
+						gas_set = true;
 					}
+				}
+
+				if ( contractInstance === false )
+				{
 
 					send_parameters[ 'to' ] = $$.mycryptocheckout_checkout_data.to;
 					send_parameters[ 'value' ] = web3.utils.toHex(
-						web3.utils.toWei( $$.mycryptocheckout_checkout_data.amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency )
+						web3.utils.toWei( $$.mycryptocheckout_checkout_data.amount + "", $$.mycryptocheckout_checkout_data.supports.metamask_currency )
 					);
 					console.log( 'Mainnet send parameters', send_parameters );
 					web3.eth.sendTransaction( send_parameters,
@@ -318,31 +335,10 @@ var mycryptocheckout_checkout_javascript = function( data )
 					if ( typeof $$.mycryptocheckout_checkout_data.currency.divider !== 'undefined' )
 						amount *= $$.mycryptocheckout_checkout_data.currency.divider;
 						else
-						amount = web3.utils.toWei( amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency );
+						amount = web3.utils.toWei( amount + "", $$.mycryptocheckout_checkout_data.supports.metamask_currency );
 
 					// .transfer loves plain strings.
 					amount = amount + "";
-
-					var use_eip1559 = ( typeof $$.mycryptocheckout_checkout_data.supports.eip1559 !== 'undefined' );
-
-					if ( use_eip1559 )
-					{
-						console.log( "Using EIP1559" );
-						send_parameters[ 'maxPriorityFeePerGas' ] = web3.utils.toWei( '2', 'gwei' );
-						send_parameters[ 'gas' ] = 70000;
-					}
-					else
-					{
-						if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas !== 'undefined' )
-						{
-							var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
-							send_parameters[ 'gasPrice' ] = web3.utils.toWei( metamask_gas.price + '', 'gwei' );
-							// Does the currency have its own custom gas limit?
-							if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit !== 'undefined' )
-								metamask_gas.limit = $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit;
-							send_parameters[ 'gas' ] = metamask_gas.limit + '';
-						}
-					}
 
 					console.log( "Token parameters", send_parameters );
 
