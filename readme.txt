@@ -62,7 +62,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - KuCoin Community Chain KCS
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
-- Neo NEO
 - Polygon MATIC
 - PutinCoin PUT
 - Stacks STX
