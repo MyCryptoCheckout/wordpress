@@ -134,7 +134,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Venus XVS
 - Vince chain VCE
 - Volt Inu VOLT_BEP20
-- Wrapped Optical Bitcoin WOBTC
 - xxxNifty NSFW
 - Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP20 tokens</a>!
 
