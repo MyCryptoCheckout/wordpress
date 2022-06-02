@@ -80,32 +80,26 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = BEP-20 tokens supported (Including MetaMask): =
 
-- AirdropScout SCOUT
 - BakeryToken BAKE
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
 - Birb BIRB
-- Bitcoin 100 B100
 - BITTOKEN BITT
 - BNB Cash BNBCH
 - BSCurbate
-- Buskercommcoin BKC
 - Card 2 Crypto C2C
 - CarmaCoin CARMA
 - Celestial Unity CU
 - Centric SWAP CNS
 - Coin Fast Alert CFA
-- Cryft Coin CRYFT
 - DEAPCOIN DEP_BEP20
 - DeRace DERC_BEP20
 - Empire Token EMPIRE
 - ExSuCh EXSUCH
-- FindToken FTK
 - FIREFLY
 - Floki Inu FLOKI
 - Gamesafe.io GAMESAFE
-- GoCaribe GOCA
 - HODL
 - Landshare LAND
 - Leon's Coin LEONS
@@ -119,7 +113,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - ORE Token ORE
 - PancakeSwap Token CAKE
 - Papel Token PAPEL
-- PROSCOIN PRX
 - Proton XPR
 - QOIN
 - Radio Caca RACA
@@ -136,7 +129,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Swipe SXP
 - TasteNFT TASTE
 - Tokocrypto TKO
-- VccMix.com VMIX
 - VAI Stablecoin VAI
 - VELOX VLX
 - Venus XVS
@@ -245,8 +237,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = WAVES Tokens supported (Including Waves Client): =
 
 - CoffeeCoin COF
-- Crypto Shopping & Travelling Coin CSTC
-- kriptocouponw KCW
 - Neutrino USD USDN
 - Waves World WW
 - Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
