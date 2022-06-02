@@ -9,7 +9,7 @@
 		max-width: 820px;
 	}
 	.plainview_sdk_table.widefat.currencies {
-		td#currency {
+		td.ui-sortable-handle {
 			cursor: move;
 		}
 		.ui-sortable-helper {
