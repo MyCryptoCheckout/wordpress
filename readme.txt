@@ -111,7 +111,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Numbers Protocol NUM
 - ORE Token ORE
 - PancakeSwap Token CAKE
-- Papel Token PAPEL
 - Proton XPR
 - QOIN
 - Radio Caca RACA
