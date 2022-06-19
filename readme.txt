@@ -119,7 +119,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SafeMoon v2 SFM
 - SAO
 - Shiba Rewards SHREW
-- SkyBorn SKYBORN
 - Sphynx BSC SPHYNX
 - Sportemon-Go SGO
 - STARTUP BOOST TOKEN SUBX
