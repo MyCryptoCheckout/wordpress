@@ -75,7 +75,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Gnosis XDAI
 - XinFin Network XDC
 - Zcash ZEC (T-address recipients only)
-- Zilliqa ZIL
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
 = BEP-20 tokens supported (Including MetaMask): =
