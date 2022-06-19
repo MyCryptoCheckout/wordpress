@@ -172,7 +172,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Gemini Dollar GUSD
 - Gifto GTO
 - Golem GNT
-- Hoge Finance HOGE
 - Hokkaidu Inu HOKK
 - Huobi Token HT
 - Kudoken KDU
