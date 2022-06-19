@@ -175,7 +175,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Hokkaidu Inu HOKK
 - Huobi Token HT
 - Kudoken KDU
-- Kishu Inu KISHU
 - Kitty Inu KITTY
 - Kyber Network KNC
 - LIFE Token
