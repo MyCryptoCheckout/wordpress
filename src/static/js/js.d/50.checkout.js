@@ -82,6 +82,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_metamask();
 		$$.maybe_waves_link();
 		$$.maybe_browser_link();
+		$$.maybe_trustwallet_link();
 	}
 
 	/**
@@ -353,6 +354,28 @@ var mycryptocheckout_checkout_javascript = function( data )
 			}
 
 		} );
+	}
+
+	/**
+		@brief		Show a trustwallet payment link.
+		@since		2022-06-20 17:25:03
+	**/
+	$$.maybe_trustwallet_link = function()
+	{
+		if( typeof $$.mycryptocheckout_checkout_data.supports.trustwallet_chain == 'undefined' )
+			return;
+
+		var contract = '';
+		if ( typeof $$.mycryptocheckout_checkout_data.currency.contract != 'undefined' )
+			contract = '_t' + $$.mycryptocheckout_checkout_data.currency.contract;
+
+		var trustwallet_chain = $$.mycryptocheckout_checkout_data.supports.trustwallet_chain;
+
+		var html = '<a class="trustwallet_link" href="trust://send?asset=' + trustwallet_chain + contract + '&address=MCC_TO&amount=MCC_AMOUNT"><div class="trustwallet_link">Open in TrustWallet</div></a>';
+		html = $$.replace_keywords( html );
+		var $div = $( '<div>' );
+		$div.html( html );
+		$div.appendTo( $$.$payment_buttons );
 	}
 
 	/**
