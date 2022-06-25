@@ -25,18 +25,11 @@ module.exports = function(grunt) {
     			src: 'src/static/css/mycryptocheckout.css'
   			}
 		},
-		watch: {
-  			scripts: {
-				files: ['src/static/css/scss/*.scss'],
-				tasks: ['sass', 'postcss'],
-  			},
-		},
 	});
 
 	// Load plugins
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('@lodder/grunt-postcss');
-	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Register Tasks
 	grunt.registerTask('compile-sass', ['sass']);
