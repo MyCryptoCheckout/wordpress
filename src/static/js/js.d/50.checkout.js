@@ -116,7 +116,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if( typeof $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url != 'undefined' )
 			var html = $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url;
 		else
-			var html = '<a href="MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT"><div class="open_wallet_payment"></div></a>';
+			var html = '<a href="MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT"><div class="open_wallet_payment" role="img" aria-label="Open in wallet"></div></a>';
 		html = $$.replace_keywords( html );
 		html = html.replace( 'MCC_CURRENCY', currency_name );
 		var $div = $( '<div>' );
@@ -274,7 +274,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		$$.show_browser_link = false;
 
-		$$.$metamask = $( '<div class="metamask_payment"></div>' );
+		$$.$metamask = $( '<div class="metamask_payment" role="img" aria-label="metamask wallet"></div>' );
 		$$.$metamask.appendTo( $$.$payment_buttons );
 
 		$$.$metamask.click( async function()
@@ -371,7 +371,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		var trustwallet_chain = $$.mycryptocheckout_checkout_data.supports.trustwallet_chain;
 
-		var html = '<a class="trustwallet_link" href="trust://send?asset=' + trustwallet_chain + contract + '&address=MCC_TO&amount=MCC_AMOUNT"><div class="trustwallet_link">Open in TrustWallet</div></a>';
+		var html = '<a class="trustwallet_link" href="trust://send?asset=' + trustwallet_chain + contract + '&address=MCC_TO&amount=MCC_AMOUNT"><div class="trustwallet_link" role="img" aria-label="Trust wallet"></div></a>';
 		html = $$.replace_keywords( html );
 		var $div = $( '<div>' );
 		$div.html( html );
@@ -425,7 +425,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		//var url = 'https://waves.exchange/#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&referrer=' + encodeURIComponent( window.location ) + '&strict';
 		var url = 'https://waves.exchange/sign-in#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&strict';
 		url = $$.replace_keywords( url );
-		var html = '<a class="waves_payment" target="_blank" href="' + url + '"><div class="waves_payment"></div></a>';
+		var html = '<a class="waves_payment" target="_blank" href="' + url + '"><div class="waves_payment" role="img" aria-label="Waves wallet"></div></a>';
 		var $div = $( '<div>' );
 		$div.html( html );
 		$div.appendTo( $$.$payment_buttons );

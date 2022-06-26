@@ -57,6 +57,15 @@ trait misc_methods_trait
 	}
 
 	/**
+		@brief		Enqueue the Web3 JS.
+		@since		2012-06-25 18:24:00
+	**/
+	public function enqueue_web3_js()
+	{
+		wp_enqueue_script( 'mycryptocheckout-web3', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/web3.min.js', [ 'jquery' ], $this->plugin_version );
+	}
+
+	/**
 		@brief		Enqueue the MCC JS.
 		@since		2018-01-29 09:40:03
 	**/

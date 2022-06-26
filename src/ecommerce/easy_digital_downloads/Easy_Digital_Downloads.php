@@ -69,6 +69,7 @@ class Easy_Digital_Downloads
 
 		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
 
+		MyCryptoCheckout()->enqueue_web3_js();
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
 
