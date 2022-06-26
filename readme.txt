@@ -68,7 +68,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Stellar XLM
 - TRON TRX
 - Verge XVG
-- VeriBlock VBK
 - VeChain VET
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
