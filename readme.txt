@@ -4,9 +4,9 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.116
+Stable tag: 2.115
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 6.0
+Tested up to: 5.9
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 200+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -43,7 +43,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = Cryptocurrencies supported: =
 
 - Algorand ALGO
-- Avalanche AVAX
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
