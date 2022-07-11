@@ -50,6 +50,20 @@ module.exports = function(grunt) {
 							}
 						}
 					},
+					// copies clipboard.js file
+					{ 
+						expand: true,
+						flatten: true,
+						src: ['node_modules/clipboard/dist/clipboard.js'], 
+						dest: 'src/static/js/js.d/',
+						filter: 'isFile',
+						// Rename the file to include '40.' prefix 
+						rename: function (dest, matchedSrcPath) {
+							if (matchedSrcPath.substring(0, 1) !== '4') {
+								return dest + '40.' + matchedSrcPath;
+							}
+						}
+					},
 				],
 			},
 		},
