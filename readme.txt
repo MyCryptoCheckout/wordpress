@@ -340,6 +340,14 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.116 =
+
+* New: Trust wallet button
+* Tweak: Wallet buttons accessibility
+* Tweak: Add stand alone web3.js file
+* Fix: Only load web3.js on checkout pages
+* Fix: Currency sorting cursor
+
 = 2.115 20220514 =
 
 * Fix: Update Web3.js to v1.7.3
