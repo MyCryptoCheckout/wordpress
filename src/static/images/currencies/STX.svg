@@ -3,13 +3,13 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#5546FF;}
+	.st0{fill:#5546FF;}
 	.st1{fill:#FFFFFF;}
 </style>
-<g transform="matrix(1.87735 0 0 1.87735 130 50)">
-	<circle class="st0" cx="-60.724" cy="-18.111" r="8.389"/>
-	<path class="st1" d="M-57.301-13.69l-1.806-2.835h2.593v-1.071h-8.505v1.071h2.594l-1.806,2.835h1.344l2.121-3.328l2.121,3.328
-		H-57.301z M-56.513-18.636v-1.071h-2.541l1.785-2.803h-1.354l-2.142,3.381l-2.142-3.381h-1.354l1.785,2.803h-2.541v1.082
-		L-56.513-18.636z"/>
+<g>
+	<circle class="st0" cx="16.028" cy="16.028" r="15.75"/>
+	<path class="st1" d="M22.454,24.327l-3.39-5.322h4.869v-2.011H7.966v2.011h4.869l-3.39,5.322h2.523l3.982-6.249l3.982,6.249H22.454
+		z M23.932,15.042v-2.011h-4.77l3.351-5.263H19.97l-4.021,6.347l-4.021-6.347H9.385l3.351,5.263h-4.77v2.03L23.932,15.042
+		L23.932,15.042z"/>
 </g>
 </svg>
