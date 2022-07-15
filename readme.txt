@@ -347,6 +347,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 = 2.116 =
 
 * New: Trust wallet button
+* New: EIP-681 support for QR-codes and open in wallet button.
 * Tweak: Wallet buttons accessibility
 * Tweak: Add stand alone web3.js file
 * Fix: Only load web3.js on checkout pages
