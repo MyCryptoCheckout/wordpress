@@ -189,14 +189,19 @@ var mycryptocheckout_checkout_javascript = function( data )
 			}
 		}
 
-		// Generate a QR code?
-		var qr_code = new QRCode( $qr_code[ 0 ],
-		{
-			text: qr_code_text,
-			colorDark : "#000000",
-			colorLight : "#ffffff",
-			correctLevel : QRCode.CorrectLevel.H
-		} );
+		console.log( 'Generating qrcode', qr_code_text );
+		QRCode.toDataURL( qr_code_text )
+			.then( url =>
+				{
+					var $img = $( 'img' )
+						.prop( 'src', url )
+						.prop( 'title', qr_code_text );
+					$img.appendTo( $qr_code );
+				})
+		  .catch( err =>
+		  {
+			console.error( 'Error generating QR code', err );
+		  });
 	}
 
 	/**
