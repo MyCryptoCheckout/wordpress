@@ -350,6 +350,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * New: EIP-681 support for QR-codes and open in wallet button.
 * Tweak: Wallet buttons accessibility
 * Tweak: Add stand alone web3.js file
+* Tweak: Change EVM chains decimal precision to 5.
 * Fix: Only load web3.js on checkout pages
 * Fix: Currency sorting cursor
 
