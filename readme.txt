@@ -58,6 +58,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Fantom FTM
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - High Performance Blockchain HPB
+- Klever KLV
 - KuCoin Community Chain KCS
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
@@ -124,6 +125,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Swipe SXP
 - TasteNFT TASTE
 - Tokocrypto TKO
+- Universe Island Token UIM
 - VAI Stablecoin VAI
 - VELOX VLX
 - Venus XVS
@@ -142,6 +144,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Aragon ANT
 - Bancor BNT
 - Basic Attention Token BAT
+- Billion BLL
 - CGBBank CGB
 - Chain Games CHAIN
 - Chainlink LINK
@@ -223,6 +226,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = Polygon MATIC tokens supported: =
 
 - Penky PoS
+- Permission Coin ASK
 - Pleasure Coin NSFW
 - Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
 
