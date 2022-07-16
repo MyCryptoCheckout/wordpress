@@ -72,7 +72,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Viacoin VIA (Including SegWit, HD wallets)
 - Waves WAVES (Including Waves Client)
 - Gnosis XDAI
-- XinFin Network XDC
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
