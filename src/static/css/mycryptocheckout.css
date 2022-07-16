@@ -19,6 +19,7 @@
     text-align: center;
     display: inline-block;
     vertical-align: top;
+    margin-top: 15px;
     margin-bottom: 15px; }
     .mycryptocheckout.online_payment_instructions .mcc_payment_timer .paid.mcc_hidden {
       display: none; }
