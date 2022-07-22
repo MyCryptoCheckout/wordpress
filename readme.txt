@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Bitcoin, Ethereum, and more. Accept 200+ coins ===
+=== MyCryptoCheckout - Bitcoin, Ethereum, and 200+ altcoins for WooCommerce ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
