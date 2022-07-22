@@ -1,4 +1,4 @@
-=== MyCryptoCheckout - Accept 200+ coins: Bitcoin, Ethereum, and more ===
+=== MyCryptoCheckout - Bitcoin, Ethereum, and more. Accept 200+ coins ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
