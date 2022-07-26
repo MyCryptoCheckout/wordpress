@@ -1,3 +1,4 @@
+// 50.checkout
 var mycryptocheckout_checkout_javascript = function( data )
 {
 	var $$ = this;
@@ -65,6 +66,26 @@ var mycryptocheckout_checkout_javascript = function( data )
 		return data;
 	}
 
+	/**
+		@brief		Generate a eip681 wallet link.
+		@since		2022-06-29 20:27:32
+	**/
+	$$.generate_eip681 = function()
+	{
+		if ( typeof $$.mycryptocheckout_checkout_data.supports.eip681 === 'undefined' )
+			return '';
+		var r = $$.mycryptocheckout_checkout_data.supports.eip681.address;
+		var amount = $$.mycryptocheckout_checkout_data.amount;
+		var wei_amount = Web3.utils.toWei( amount );
+		var eip_amount = new BigNumber( wei_amount, 10 ).toExponential().replace('+', '').replace('e0', '');
+		r = r.replace( '[MCC_TO]', $$.mycryptocheckout_checkout_data.to );
+		r = r.replace( '[MCC_AMOUNT]', eip_amount );
+
+		if ( typeof $$.mycryptocheckout_checkout_data.currency.contract !== 'undefined' )
+			r = r.replace( '[MCC_CONTRACT]', $$.mycryptocheckout_checkout_data.currency.contract );
+		return r;
+	}
+
 	$$.init = function()
 	{
 		if ( $$.$div.length < 1 )
@@ -105,9 +126,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 			$$.show_browser_link = $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet;
 		if ( ! $$.show_browser_link )
 			return;
-		// Don't show browser link for erc20.
-		if ( $$.mycryptocheckout_checkout_data.currency.erc20 !== undefined )
-			return;
 		// Extract the currency name from the qr code, if possible.
 		var currency_name = $$.mycryptocheckout_checkout_data.currency_id;
 		if ( $$.data.qr_codes !== undefined )
@@ -116,7 +134,12 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if( typeof $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url != 'undefined' )
 			var html = $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url;
 		else
-			var html = '<a href="MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT"><div class="open_wallet_payment" role="img" aria-label="Open in wallet"></div></a>';
+		{
+			var open_in_wallet_url = $$.generate_eip681();
+			if ( open_in_wallet_url == '' )
+				open_in_wallet_url = 'MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT';
+			var html = '<a href="' + open_in_wallet_url + '"><div class="open_wallet_payment" role="img" aria-label="Open in wallet"></div></a>';
+		}
 		html = $$.replace_keywords( html );
 		html = html.replace( 'MCC_CURRENCY', currency_name );
 		var $div = $( '<div>' );
@@ -175,25 +198,32 @@ var mycryptocheckout_checkout_javascript = function( data )
 			$qr_code.html( $html.html() );
 		}
 
-		var qr_code_text = $$.data.to;
-		if ( $$.data.qr_codes !== undefined )
+		var qr_code_text = $$.generate_eip681();
+		if ( qr_code_text == '' )
 		{
-			if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
+			qr_code_text = $$.data.to;
+
+			if ( $$.data.qr_codes !== undefined )
 			{
-				var qr_code_text = $$.data.qr_codes[ $$.data.currency_id ];
-				// Replace the values.
-				qr_code_text = qr_code_text
-					.replace( '[MCC_TO]', $$.data.to )
-					.replace( '[MCC_AMOUNT]', $$.data.amount )
-					;
+				if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
+				{
+					qr_code_text = $$.data.qr_codes[ $$.data.currency_id ];
+				}
 			}
 		}
 
-		console.log( 'Generating qrcode', qr_code_text );
+		// Replace the values.
+		qr_code_text = qr_code_text
+			.replace( '[MCC_TO]', $$.data.to )
+			.replace( '[MCC_AMOUNT]', $$.data.amount )
+			;
+
+		console.log( 'Generating QR code', qr_code_text );
 		QRCode.toDataURL( qr_code_text )
 			.then( url =>
 				{
-					var $img = $( 'img' )
+					var $img = $( '<img>' )
+						.prop( 'data-src', url )
 						.prop( 'src', url )
 						.prop( 'title', qr_code_text );
 					$img.appendTo( $qr_code );

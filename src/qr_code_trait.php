@@ -54,15 +54,6 @@ trait qr_code_trait
 	}
 
 	/**
-		@brief		Enqueue the JS.
-		@since		2018-05-12 20:35:23
-	**/
-	public function qr_code_enqueue_js()
-	{
-		wp_enqueue_script( 'mcc_qrcode', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/qrcode.js', [ 'mycryptocheckout' ], MyCryptoCheckout()->plugin_version );
-	}
-
-	/**
 		@brief		Add QR code data to the js.
 		@since		2018-04-29 19:23:47
 	**/
@@ -83,8 +74,6 @@ trait qr_code_trait
 				$qr_codes[ $currency_id ] = $currency_data->qr_code;
 
 		$action->data->set( 'qr_codes', $qr_codes );
-
-		$this->qr_code_enqueue_js();
 	}
 
 	/**
