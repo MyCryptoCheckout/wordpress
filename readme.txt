@@ -4,9 +4,9 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.115
+Stable tag: 2.116
 Tags: bitcoin, ethereum, cryptocurrency, gateway, woocommerce
-Tested up to: 5.9
+Tested up to: 6.0
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 200+ coins: Bitcoin, Ethereum, Litecoin, and more. Peer-to-peer transactions.
 
@@ -342,7 +342,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-= 2.116 =
+= 2.116 20220726 =
 
 * New: Trust wallet button
 * New: EIP-681 support for QR-codes and open in wallet button.
