@@ -132,15 +132,19 @@
 							;
 						address = qr_code_text;
             		}
-					var qr_code = new QRCode( $qr_code[ 0 ],
-					{
-						text: address,
-						colorDark : "#000000",
-						colorLight : "#ffffff",
-						correctLevel : QRCode.CorrectLevel.H,
-						'height' : width,
-						'width' : width,
-					} );
+					QRCode.toDataURL( qr_code_text )
+						.then( url =>
+							{
+								var $img = $( '<img>' )
+									.prop( 'data-src', url )
+									.prop( 'src', url )
+									.prop( 'title', qr_code_text );
+								$img.appendTo( $qr_code );
+							})
+					  .catch( err =>
+					  {
+						console.error( 'Error generating QR code', err );
+					  });
             		$qr_code.show();
                 }
 

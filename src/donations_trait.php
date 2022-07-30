@@ -227,7 +227,6 @@ trait donations_trait
 		// Handle the QR code.
 		if ( $atts[ 'qr_code_enabled' ] )
 		{
-			$this->qr_code_enqueue_js();
 			$data->set( 'qr_code_enabled', true );
 			$qr_code_max_width = intval( $atts[ 'qr_code_max_width' ] );
 			$qr_code_max_width = max( $qr_code_max_width, 100 );
