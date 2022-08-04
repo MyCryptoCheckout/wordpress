@@ -101,7 +101,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Landshare LAND
 - Leon's Coin LEONS
 - METAGIN
-- Military Finance MIL
 - Melacoin MLCN
 - MetaGin METAGIN
 - Nueva Morralla MORRALLA
