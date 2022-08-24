@@ -25,7 +25,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Use any crypto wallet you want
 - Automagically detect unique payments using one wallet address
 - Hierarchically deterministic (HD) wallet support
-- 1-Click payment buttons, MetaMask, Waves Client, etc.
+- 1-Click payment buttons, MetaMask, etc.
 - Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
 - Tor support
@@ -70,7 +70,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Verge XVG
 - VeChain VET
 - Viacoin VIA (Including SegWit, HD wallets)
-- Waves WAVES (Including Waves Client)
 - Gnosis XDAI
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
@@ -226,13 +225,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Permission Coin ASK
 - Pleasure Coin NSFW
 - Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
-
-= WAVES Tokens supported (Including Waves Client): =
-
-- CoffeeCoin COF
-- Neutrino USD USDN
-- Waves World WW
-- Add your <a href="https://mycryptocheckout.com/waves-token/">custom WAVES tokens</a>!
 
 = Stellar Tokens supported: =
 
