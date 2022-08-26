@@ -111,7 +111,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - QOIN
 - Radio Caca RACA
 - Refinable FINE
-- Rewards RWD
 - SafeMoon v2 SFM
 - SAO
 - Shiba Rewards SHREW
@@ -190,7 +189,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - QASH
 - Raiden RDN
 - Request REQ
-- Rewards RWD
 - SALT
 - SHIBA INU SHIB
 - Shopping.io SPI
