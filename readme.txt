@@ -142,7 +142,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Basic Attention Token BAT
 - Billion BLL
 - CGBBank CGB
-- Chain Games CHAIN
 - Chainlink LINK
 - Connect Coin XCON
 - Compound COMP
@@ -163,7 +162,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Enjin Coin ENJ
 - FRTS Coin FRTS
 - FunFair FUN
-- GateToken GT
 - Gemini Dollar GUSD
 - Gifto GTO
 - Golem GNT
@@ -178,7 +176,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - MetalPay MTL
 - Monaco MCO
 - Micro Tuber MCT
-- NEST NEST
 - Nexo Token NEXO
 - OMG Network OMG
 - OpenDAO SOS
@@ -198,11 +195,9 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Tether USD USDT
 - The Refining Company SCRAP
 - TrueUSD TUSD
-- Uniqly UNIQ
 - Uniswap UNI
 - USD Coin USDC
 - VcashPay VCP
-- Verasity VRA
 - Veritaseum VERI
 - Volt Inu VOLT_ERC20
 - YIELD App YLD
