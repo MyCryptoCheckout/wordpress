@@ -80,7 +80,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
-- Birb BIRB
 - BITTOKEN BITT
 - BNB Cash BNBCH
 - BSCurbate
@@ -110,7 +109,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Proton XPR
 - QOIN
 - Radio Caca RACA
-- Refinable FINE
 - SafeMoon v2 SFM
 - SAO
 - Shiba Rewards SHREW
