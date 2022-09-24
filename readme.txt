@@ -167,6 +167,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Kudoken KDU
 - Kitty Inu KITTY
 - Kyber Network KNC
+- Lean Management Token LEAN
 - LIFE Token
 - Loom LOOM
 - LUFFY
@@ -323,6 +324,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* New currency: Lean Management Token LEAN
 
 = 2.117 20220730 =
 
