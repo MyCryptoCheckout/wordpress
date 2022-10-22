@@ -51,7 +51,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Decred DCR
 - Digibyte DGB (Including SegWit)
 - Electra ECA
-- Elrond EGLD
 - EOS
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Fruits FRTS
