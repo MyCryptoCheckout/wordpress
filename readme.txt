@@ -91,6 +91,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Empire Token EMPIRE
 - ExSuCh EXSUCH
 - FIREFLY
+- GameGuru GGT
 - Gamesafe.io GAMESAFE
 - HODL
 - Landshare LAND
@@ -317,6 +318,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* New currency: GameGuru GGT
 * New currency: Lean Management Token LEAN
 
 = 2.117 20220730 =
