@@ -88,6 +88,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Coin Fast Alert CFA
 - DEAPCOIN DEP_BEP20
 - DeRace DERC_BEP20
+- Digitalatto DGTL
 - Empire Token EMPIRE
 - ExSuCh EXSUCH
 - FIREFLY
@@ -103,6 +104,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - NUM Token NUM
 - Numbers Protocol NUM
 - PancakeSwap Token CAKE
+- panKUKU KUKU
 - Proton XPR
 - QOIN
 - Radio Caca RACA
