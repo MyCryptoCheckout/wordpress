@@ -76,7 +76,20 @@ var mycryptocheckout_checkout_javascript = function( data )
 			return '';
 		var r = $$.mycryptocheckout_checkout_data.supports.eip681.address;
 		var amount = $$.mycryptocheckout_checkout_data.amount;
-		var wei_amount = Web3.utils.toWei( amount );
+
+		var wei_amount = amount;
+
+		if ( typeof $$.mycryptocheckout_checkout_data.supports.eip681_towei !== 'undefined' )
+		{
+			console.debug( 'Using towei for eip681', $$.mycryptocheckout_checkout_data.supports.eip681_towei );
+			wei_amount = Web3.utils.toWei( amount + "", $$.mycryptocheckout_checkout_data.supports.eip681_towei );
+		}
+		else
+		{
+			console.debug( 'Using normal towei for eip681', $$.mycryptocheckout_checkout_data.supports.eip681_towei );
+			wei_amount = Web3.utils.toWei( amount );
+		}
+
 		var eip_amount = new BigNumber( wei_amount, 10 ).toExponential().replace('+', '').replace('e0', '');
 		r = r.replace( '[MCC_TO]', $$.mycryptocheckout_checkout_data.to );
 		r = r.replace( '[MCC_AMOUNT]', eip_amount );
@@ -92,7 +105,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			return;
 		$$.$div.addClass( 'mycryptocheckout' );
 		$$.mycryptocheckout_checkout_data = $$.extract_data( $( '#mycryptocheckout_checkout_data' ) );
-		console.log( 'MyCryptoCheckout: Checkout data', $$.mycryptocheckout_checkout_data );
+		console.debug( 'MyCryptoCheckout: Checkout data', $$.mycryptocheckout_checkout_data );
 		$$.maybe_ens_address();
 		$$.clipboard_inputs();
 		$$.maybe_hide_woocommerce_order_overview();
@@ -218,7 +231,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			.replace( '[MCC_AMOUNT]', $$.data.amount )
 			;
 
-		console.log( 'Generating QR code', qr_code_text );
+		console.debug( 'Generating QR code', qr_code_text );
 		QRCode.toDataURL( qr_code_text )
 			.then( url =>
 				{
@@ -327,7 +340,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 				if ( use_eip1559 )
 				{
-					console.log( "Using EIP1559" );
+					console.debug( "Using EIP1559" );
 					send_parameters[ 'maxPriorityFeePerGas' ] = web3.utils.toWei( $$.mycryptocheckout_checkout_data.supports.eip1559.maxPriorityFeePerGas + "", 'gwei' );
 					send_parameters[ 'gas' ] = $$.mycryptocheckout_checkout_data.supports.eip1559.gas_limit;
 					gas_set = true;
@@ -337,7 +350,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 				{
 					if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas !== 'undefined' )
 					{
-						console.log( 'Setting general metamask gas.' );
+						console.debug( 'Setting general metamask gas.' );
 						var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
 						send_parameters[ 'gasPrice' ] = web3.utils.toWei( metamask_gas.price + '', 'gwei' );
 						// Does the currency have its own custom gas limit?
@@ -355,12 +368,12 @@ var mycryptocheckout_checkout_javascript = function( data )
 					send_parameters[ 'value' ] = web3.utils.toHex(
 						web3.utils.toWei( $$.mycryptocheckout_checkout_data.amount + "", $$.mycryptocheckout_checkout_data.supports.metamask_currency )
 					);
-					console.log( 'Mainnet send parameters', send_parameters );
+					console.debug( 'Mainnet send parameters', send_parameters );
 					web3.eth.sendTransaction( send_parameters,
 					function (err, transactionHash )
 					{
 						// No error logging for now.
-						console.log( 'Error sending Eth via Metamask', err );
+						console.debug( 'Error sending Eth via Metamask', err );
 					}
 					);
 				}
@@ -376,7 +389,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					// .transfer loves plain strings.
 					amount = amount + "";
 
-					console.log( "Token parameters", send_parameters );
+					console.debug( "Token parameters", send_parameters );
 
 					contractInstance.methods
 						.transfer( $$.mycryptocheckout_checkout_data.to, amount )
@@ -385,7 +398,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 			} catch (error) {
 				// User denied account access...
-				console.log( 'User denied account access', error );
+				console.debug( 'User denied account access', error );
 			}
 
 		} );
@@ -447,7 +460,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( typeof ( $$.mycryptocheckout_checkout_data.waves ) !== 'undefined' )
 		{
 			add_waves = true;
-			console.log( 'MyCryptoCheckout: Waves link', $$.mycryptocheckout_checkout_data );
+			console.debug( 'MyCryptoCheckout: Waves link', $$.mycryptocheckout_checkout_data );
 			currency = $$.mycryptocheckout_checkout_data.token_id;
 		}
 		if ( $$.data.currency_id == 'WAVES' )
