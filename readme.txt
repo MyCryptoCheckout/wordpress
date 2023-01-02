@@ -53,7 +53,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Electra ECA
 - EOS
 - Ethereum ETH (Including MetaMask, ENS addresses)
-- Fruits FRTS
 - Fantom FTM
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - High Performance Blockchain HPB
@@ -98,7 +97,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Landshare LAND
 - Leon's Coin LEONS
 - METAGIN
-- Melacoin MLCN
 - MetaGin METAGIN
 - Nueva Morralla MORRALLA
 - NUM Token NUM
@@ -106,8 +104,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - PancakeSwap Token CAKE
 - panKUKU KUKU
 - Proton XPR
-- QOIN
-- Radio Caca RACA
 - SafeMoon v2 SFM
 - SAO
 - Shiba Rewards SHREW
@@ -116,7 +112,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - STARTUP BOOST TOKEN SUBX
 - Swipe SXP
 - TasteNFT TASTE
-- Tokocrypto TKO
 - Universe Island Token UIM
 - VAI Stablecoin VAI
 - Venus XVS
@@ -153,7 +148,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Dogecoin DOGE
 - Dragonchain DRGN
 - Enjin Coin ENJ
-- FRTS Coin FRTS
 - FunFair FUN
 - Gemini Dollar GUSD
 - Gifto GTO
@@ -163,16 +157,13 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Kitty Inu KITTY
 - Kyber Network KNC
 - Lean Management Token LEAN
-- LIFE Token
 - Loom LOOM
 - LUFFY
 - Maker MKR
 - MetalPay MTL
 - Monaco MCO
-- Micro Tuber MCT
 - Nexo Token NEXO
 - OMG Network OMG
-- OpenDAO SOS
 - Polygon MATIC_ERC20
 - Polymath Network POLY
 - Populous PPT
