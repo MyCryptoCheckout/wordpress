@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.119
+Stable tag: 2.121
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.1
 
@@ -64,7 +64,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - PutinCoin PUT
 - Stacks STX
 - Stellar XLM
-- TRON TRX
 - Verge XVG
 - VeChain VET
 - Viacoin VIA (Including SegWit, HD wallets)
@@ -310,6 +309,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.121 20230104 =
+
+* Removed Tron TRX and all TRC20 tokens due to the Tronscan API not being reliable at all and showing all transactions.
 
 = 2.119 20221219 =
 
