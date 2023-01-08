@@ -50,7 +50,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Dash DASH (Including HD wallets)
 - Decred DCR
 - Digibyte DGB (Including SegWit)
-- Electra ECA
 - EOS
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Fantom FTM
