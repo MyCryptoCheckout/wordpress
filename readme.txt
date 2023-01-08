@@ -64,9 +64,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - PutinCoin PUT
 - Stacks STX
 - Stellar XLM
-- Verge XVG
 - VeChain VET
-- Viacoin VIA (Including SegWit, HD wallets)
 - Gnosis XDAI
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
