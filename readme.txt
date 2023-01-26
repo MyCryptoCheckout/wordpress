@@ -61,8 +61,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - PutinCoin PUT
 - Stacks STX
 - Stellar XLM
-- VeChain VET
-- Gnosis XDAI
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
@@ -73,14 +71,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
 - BITTOKEN BITT
-- BSCurbate
 - Card 2 Crypto C2C
-- CarmaCoin CARMA
 - Celestial Unity CU
 - Centric SWAP CNS
-- Coin Fast Alert CFA
 - DEAPCOIN DEP_BEP20
-- DeRace DERC_BEP20
 - Digitalatto DGTL
 - Empire Token EMPIRE
 - ExSuCh EXSUCH
@@ -102,8 +96,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - SAO
 - Shiba Rewards SHREW
 - Sphynx BSC SPHYNX
-- Sportemon-Go SGO
-- STARTUP BOOST TOKEN SUBX
 - Swipe SXP
 - TasteNFT TASTE
 - Universe Island Token UIM
@@ -124,16 +116,12 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Aragon ANT
 - Bancor BNT
 - Basic Attention Token BAT
-- Billion BLL
-- CGBBank CGB
 - Chainlink LINK
-- Connect Coin XCON
 - Compound COMP
 - Crypto.com Coin CRO
 - DEAPCOIN DEP_ERC20
 - DeRace DERC_ERC20
 - DEXTools DEXT
-- Devil's Dragon DDGN
 - Efinity Token EFI
 - Gitcoin GTC
 - Multi-collateral DAI DAI
@@ -145,17 +133,13 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - FunFair FUN
 - Gemini Dollar GUSD
 - Gifto GTO
-- Golem GNT
 - Huobi Token HT
-- Kudoken KDU
-- Kitty Inu KITTY
 - Kyber Network KNC
 - Lean Management Token LEAN
 - Loom LOOM
 - LUFFY
 - Maker MKR
 - MetalPay MTL
-- Monaco MCO
 - Nexo Token NEXO
 - OMG Network OMG
 - Polygon MATIC_ERC20
@@ -167,7 +151,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - SALT
 - SHIBA INU SHIB
-- Shopping.io SPI
 - Status SNT
 - Synthetix SNX
 - TenXPay PAY
@@ -176,7 +159,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - TrueUSD TUSD
 - Uniswap UNI
 - USD Coin USDC
-- VcashPay VCP
 - Veritaseum VERI
 - Volt Inu VOLT_ERC20
 - YIELD App YLD
@@ -193,23 +175,15 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = Polygon MATIC tokens supported: =
 
-- Penky PoS
 - Permission Coin ASK
 - Pleasure Coin NSFW
 - Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
 
 = Stellar Tokens supported: =
 
-- Moneda MNDA
 - neokyne.com NEOK
 
 - Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
-
-= Gnosis / XDAI Tokens supported: =
-
-- Honey Token HNY
-
-- Add your <a href="https://mycryptocheckout.com/xdai-token/">custom Gnosis / XDAI tokens</a>!
 
 = Fiat Autosettlements =
 
