@@ -54,7 +54,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - High Performance Blockchain HPB
 - Klever KLV
-- KuCoin Community Chain KCS
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
 - Polygon MATIC
@@ -78,11 +77,9 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Digitalatto DGTL
 - Empire Token EMPIRE
 - ExSuCh EXSUCH
-- FIREFLY
 - GameGuru GGT
 - Gamesafe.io GAMESAFE
 - HODL
-- Landshare LAND
 - Leon's Coin LEONS
 - METAGIN
 - MetaGin METAGIN
@@ -93,7 +90,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - panKUKU KUKU
 - Proton XPR
 - SafeMoon v2 SFM
-- SAO
 - Shiba Rewards SHREW
 - Sphynx BSC SPHYNX
 - Swipe SXP
