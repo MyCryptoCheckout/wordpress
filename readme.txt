@@ -70,7 +70,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
 - BITTOKEN BITT
-- Card 2 Crypto C2C
 - Celestial Unity CU
 - Centric SWAP CNS
 - DEAPCOIN DEP_BEP20
@@ -80,10 +79,8 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - GameGuru GGT
 - Gamesafe.io GAMESAFE
 - HODL
-- Leon's Coin LEONS
 - METAGIN
 - MetaGin METAGIN
-- Nueva Morralla MORRALLA
 - NUM Token NUM
 - Numbers Protocol NUM
 - PancakeSwap Token CAKE
@@ -162,7 +159,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = Fantom FTM tokens supported: =
 
-- TOR
 - Add your <a href="https://mycryptocheckout.com/ftm-token/">custom Fantom FTM tokens</a>!
 
 = KCC tokens supported: =
