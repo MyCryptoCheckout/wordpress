@@ -174,44 +174,7 @@ class form
 
 	public function __construct()
 	{
-		// Add the standard input types.
-		$input_types = array(
-			'button',
-			'checkbox',
-			'checkboxes',
-			'datalist',
-			'date',
-			'datetime',
-			'datetimelocal',
-			'email',
-			'fieldset',
-			'file',
-			'hidden',
-			'markup',
-			'meter',
-			'month',
-			'number',
-			'password',
-			'radio',
-			'radios',
-			'range',
-			'search',
-			'select',
-			'submit',
-			'tel',
-			'time',
-			'text',
-			'textarea',
-			'url',
-			'week',
-		);
-		foreach( $input_types as $input_type )
-		{
-			$o = new \stdClass();
-			$o->name = $input_type;
-			$o->class = '\\plainview\\sdk_mcc\\form2\\inputs\\' . $input_type;
-			$this->register_input_type( $o );
-		}
+		$this->register_input_types();
 
 		// action may not be empty
 		$this->set_attribute( 'action', \plainview\sdk_mcc\base::current_url() );
@@ -357,6 +320,15 @@ class form
 	}
 
 	/**
+		@brief		Return the input registrar.
+		@since		2022-07-17 12:25:41
+	**/
+	public function input_registrar()
+	{
+		return new inputs\Registrar( $this );
+	}
+
+	/**
 		@brief		Returns if this input type is registered.
 		@param		string		$name		Name of input type.
 		@return		bool		True if the input type is registered.
@@ -495,6 +467,46 @@ class form
 	{
 		$this->input_types[ $o->name ] = $o;
 		return $this;
+	}
+
+	/**
+		@brief		Register all the input types we know of.
+		@since		2022-07-17 12:11:53
+	**/
+	public function register_input_types()
+	{
+		$registrar = $this->input_registrar();
+		foreach( [
+				'\\plainview\\sdk_mcc\\form2\\inputs\\button' => 'button',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\checkbox' => 'checkbox',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\checkboxes' => 'checkboxes',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\datalist' => 'datalist',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\date' => 'date',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\datetime' => 'datetime',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\datetimelocal' => 'datetimelocal',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\email' => 'email',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\fieldset' => 'fieldset',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\file' => 'file',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\hidden' => 'hidden',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\markup' => 'markup',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\meter' => 'meter',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\month' => 'month',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\number' => 'number',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\password' => 'password',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\radio' => 'radio',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\radios' => 'radios',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\range' => 'range',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\search' => 'search',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\select' => 'select',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\submit' => 'submit',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\tel' => 'tel',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\time' => 'time',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\text' => 'text',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\textarea' => 'textarea',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\url' => 'url',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\week' => 'week',
+			] as $input_class => $input_name )
+			$registrar->add( $input_name, $input_class );
 	}
 
 	/**

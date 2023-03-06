@@ -112,7 +112,7 @@ class tree
 		@brief		Count the number of nodes in the tree.
 		@since		20131209
 	**/
-	public function count()
+	public function count() : int
 	{
 		// -1 because root isn't really a node.
 		return count( $this->root ) - 1;

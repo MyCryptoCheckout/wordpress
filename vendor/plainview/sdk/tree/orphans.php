@@ -38,7 +38,7 @@ class orphans
 		$this->get( $parent_id )->set( $orphan->get_id(), $orphan );
 	}
 
-	public function count()
+	public function count() : int
 	{
 		$r = 0;
 		foreach( $this->items as $collection )

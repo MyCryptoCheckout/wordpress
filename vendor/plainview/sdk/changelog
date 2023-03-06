@@ -1,3 +1,10 @@
+20230104		Tree: Use return for count for php8.1
+20221214		Collection: fix 8.1 compatibility
+20220821		Form2: Add form checkbox class
+20220811		Collection: reverse() retains the keys.
+20220717		Form2: Buttons do not self close.
+20220717		Form2: Add Bootstrap 5 support
+20220619		Wordpress: Update EDD Updater
 20220125		Form2: Forgot to rename the readonly trait.
 				Fix table tests.
 20220122		Form2: Rename the readonly trait due to the name "readonly" being reserved in php8.1. The function within are the same, though.

@@ -4,6 +4,7 @@ namespace plainview\sdk_mcc\collections;
 
 use ArrayIterator;
 use Closure;
+use Traversable;
 
 /**
 	@brief		Collection / array class.
@@ -99,7 +100,7 @@ implements
 	 *
 	 * @return int
 	 */
-	public function count()
+	public function count() : int
 	{
 		return count( $this->items );
 	}
@@ -200,7 +201,7 @@ implements
 	 *
 	 * @return ArrayIterator
 	 */
-	public function getIterator()
+	public function getIterator() : Traversable
 	{
 		return new ArrayIterator( $this->items );
 	}
@@ -428,7 +429,7 @@ implements
 	 * @param  mixed  $key
 	 * @return bool
 	 */
-	public function offsetExists( $key )
+	public function offsetExists( $key ) : bool
 	{
 		return array_key_exists( $key, $this->items );
 	}
@@ -439,7 +440,7 @@ implements
 	 * @param  mixed  $key
 	 * @return mixed
 	 */
-	public function offsetGet( $key )
+	public function offsetGet( $key ) : mixed
 	{
 		return $this->items[ $key ];
 	}
@@ -451,13 +452,12 @@ implements
 	 * @param  mixed  $value
 	 * @return void
 	 */
-	public function offsetSet( $key, $value )
+	public function offsetSet( $key, $value ) : void
 	{
 		if ( is_null( $key ) )
 			$this->items[] = $value;
 		else
 			$this->items[ $key ] = $value;
-		return $this;
 	}
 
 	/**
@@ -466,7 +466,7 @@ implements
 	 * @param  string  $key
 	 * @return void
 	 */
-	public function offsetUnset( $key )
+	public function offsetUnset( $key ) : void
 	{
 		unset( $this->items[ $key ] );
 	}
@@ -513,7 +513,8 @@ implements
 	 */
 	public function reverse()
 	{
-		return new static( array_reverse( $this->items ) );
+		// True to keep the keys.
+		return new static( array_reverse( $this->items, true ) );
 	}
 
 	public function set( $key, $value )

@@ -47,7 +47,7 @@ class node
 		return $this;
 	}
 
-	public function count()
+	public function count() : int
 	{
 		$r = 1;
 		foreach( $this->subnodes as $subnode )

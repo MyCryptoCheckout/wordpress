@@ -14,7 +14,23 @@ class button
 	use traits\label;
 	use traits\value;
 
+	/**
+		@brief		The tag for this input.
+		@since		2022-07-17 13:51:45
+	**/
+	public $tag = 'button';
+
+	/**
+		@brief		The type of input.
+		@since		2022-07-17 13:53:59
+	**/
 	public $type = 'button';
+
+	/**
+		@brief		Buttons do not self close.
+		@since		2022-07-17 20:41:05
+	**/
+	public $self_closing = false;
 
 	/**
 		@brief		Buttons don't have labels.
@@ -23,6 +39,15 @@ class button
 	public function display_label()
 	{
 		return '';
+	}
+
+	/**
+		@brief		Show the value.
+		@since		2022-07-17 13:21:03
+	**/
+	public function display_value()
+	{
+		return $this->get_value();
 	}
 
 	/**
