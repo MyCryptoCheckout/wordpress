@@ -271,6 +271,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: EDD orders were not being shown as paid on checkout (no green tick).
+
 = 2.121 20230104 =
 
 * Removed Tron TRX and all TRC20 tokens due to the Tronscan API not being reliable at all and showing all transactions.

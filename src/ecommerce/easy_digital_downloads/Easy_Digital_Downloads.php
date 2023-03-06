@@ -78,7 +78,7 @@ class Easy_Digital_Downloads
 		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $payment_id );
 
 		$edd_payment = new \EDD_Payment( $payment_id );
-		if ( $edd_payment->status == 'publish' )
+		if ( in_array( $edd_payment->status, [ 'publish', 'processing', 'complete' ] ) )
 			$payment->paid = true;
 
 		$this->__current_payment = $payment;		// For the javascript later.
