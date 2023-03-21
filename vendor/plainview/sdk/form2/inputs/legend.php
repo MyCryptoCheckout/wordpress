@@ -14,6 +14,12 @@ class legend
 {
 	use traits\label;
 
+	/**
+		@brief		The fieldset we belong to.
+		@since		2023-03-21 12:10:32
+	**/
+	public $fieldset;
+
 	public $label;
 
 	public $self_closing = false;

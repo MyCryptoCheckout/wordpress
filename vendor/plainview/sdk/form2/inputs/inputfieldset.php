@@ -13,6 +13,12 @@ class inputfieldset
 	}
 
 	/**
+		@brief		A temporary variable for the name while displaying.
+		@since		2023-03-21 12:11:30
+	**/
+	public $__name;
+
+	/**
 		@brief		Fieldsets do not have names.
 		@since		2014-11-16 12:59:23
 	**/

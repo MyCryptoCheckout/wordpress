@@ -9,6 +9,12 @@ namespace plainview\sdk_mcc\form2\tests;
 class DateTest extends TestCase
 {
 	/**
+		@brief		Temporary form variable.
+		@since		2023-03-21 12:12:23
+	**/
+	public $form;
+
+	/**
 		@brief		Return a date input.
 		@since		2014-07-11 23:18:33
 	**/

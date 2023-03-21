@@ -45,7 +45,7 @@ class select
 		@return		int		A count of options and optgroups.
 		@since		20130730
 	**/
-	public function count()
+	public function count() : int
 	{
 		$c = 0;
 		foreach( $this->options as $option )

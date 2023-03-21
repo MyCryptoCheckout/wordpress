@@ -81,6 +81,12 @@ class table
 	public $body;
 
 	/**
+		@brief		the caption object.
+		@since		2023-03-21 12:03:31
+	**/
+	public $caption;
+
+	/**
 		@brief		The foot object.
 		@var		$foot
 	**/
@@ -160,7 +166,7 @@ class table
 		@return		int		How many rows the body has.
 		@since		20130803
 	**/
-	public function count()
+	public function count() : int
 	{
 		return count( $this->body );
 	}

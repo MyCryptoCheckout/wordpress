@@ -21,6 +21,12 @@ class error
 	use \plainview\sdk_mcc\form2\inputs\traits\label;
 
 	/**
+		@brief		The error's label.
+		@since		2023-03-21 12:13:48
+	**/
+	public $label;
+
+	/**
 		@brief		Which input this error belongs to.
 		@var		$container
 	**/

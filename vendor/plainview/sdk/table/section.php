@@ -63,7 +63,7 @@ class section
 		@return		int		How many rows this section has.
 		@since		20130803
 	**/
-	public function count()
+	public function count() : int
 	{
 		return count( $this->rows );
 	}

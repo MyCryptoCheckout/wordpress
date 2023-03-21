@@ -42,6 +42,12 @@ trait validation
 	public $validation_methods = array();
 
 	/**
+		@brief		The stored value.
+		@since		2023-03-21 12:13:02
+	**/
+	public $validation_value;
+
+	/**
 		@brief		Append a validation error.
 		@param		\\plainview\\sdk_mcc\\form2\\validation\\error		$error		Error to append.
 		@return		$this		Object chaining.

@@ -34,7 +34,7 @@ class selectoptgroup
 		@return		int		The amount of options this optgroup has.
 		@since		20130730
 	**/
-	public function count()
+	public function count() : int
 	{
 		return count( $this->options );
 	}

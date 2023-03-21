@@ -25,6 +25,12 @@ class input
 	public $description = '';
 
 	/**
+		@brief		The form we belong to.
+		@since		2023-03-21 12:10:00
+	**/
+	public $form;
+
+	/**
 		@brief		Does this input have a description?
 		@var		$has_description
 	**/

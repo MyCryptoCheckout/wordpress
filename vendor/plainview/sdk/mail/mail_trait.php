@@ -127,9 +127,14 @@ trait mail_trait
 	**/
 	public function html( $html )
 	{
-		$new_html = @call_user_func_array( 'sprintf', func_get_args() );
-		if ( $new_html == '' )
+		try
+		{
+			$new_html = call_user_func_array( 'sprintf', func_get_args() );
+		}
+		catch( \ArgumentCountError $e )
+		{
 			$new_html = $html;
+		}
 		$this->MsgHTML( $new_html );
 		return $this;
 	}

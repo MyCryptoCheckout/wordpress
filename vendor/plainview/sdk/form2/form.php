@@ -480,6 +480,7 @@ class form
 				'\\plainview\\sdk_mcc\\form2\\inputs\\button' => 'button',
 				'\\plainview\\sdk_mcc\\form2\\inputs\\checkbox' => 'checkbox',
 				'\\plainview\\sdk_mcc\\form2\\inputs\\checkboxes' => 'checkboxes',
+				'\\plainview\\sdk_mcc\\form2\\inputs\\color' => 'color',
 				'\\plainview\\sdk_mcc\\form2\\inputs\\datalist' => 'datalist',
 				'\\plainview\\sdk_mcc\\form2\\inputs\\date' => 'date',
 				'\\plainview\\sdk_mcc\\form2\\inputs\\datetime' => 'datetime',

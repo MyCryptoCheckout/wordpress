@@ -7,6 +7,12 @@ class optionsinput
 {
 	use traits\options;
 
+	/**
+		@brief		The inputs we contain.
+		@since		2023-03-21 12:14:55
+	**/
+	public $inputs;
+
 	public $options = [];
 
 	public function add_option( $option )

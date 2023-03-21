@@ -103,7 +103,7 @@ class row
 		@return		int		How many cells the row has.
 		@since		20130803
 	**/
-	public function count()
+	public function count() : int
 	{
 		return count( $this->cells );
 	}

@@ -97,7 +97,7 @@ class breadcrumbs
 		@return		int		The count of breadcrumbs.
 		@since		20130729
 	**/
-	public function count()
+	public function count() : int
 	{
 		return count( $this->breadcrumbs );
 	}

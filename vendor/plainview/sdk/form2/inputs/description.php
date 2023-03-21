@@ -13,6 +13,12 @@ class description
 	use \plainview\sdk_mcc\html\element;
 	use traits\label;
 
+	/**
+		@brief		The container we belong to.
+		@since		2023-03-21 12:06:27
+	**/
+	public $container;
+
 	public $input;
 	public $label;
 	public $tag = 'div';
