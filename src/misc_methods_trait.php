@@ -209,6 +209,8 @@ trait misc_methods_trait
 	**/
 	public function get_client_url()
 	{
+		if ( defined( 'MYCRYPTOCHECKOUT_CLIENT_URL' ) )
+			return MYCRYPTOCHECKOUT_CLIENT_URL;
 		if ( ! $this->is_network )
 			$server_name = get_bloginfo( 'url' );
 		else

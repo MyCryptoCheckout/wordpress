@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.121
+Stable tag: 2.122
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.1
 
@@ -271,7 +271,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.122 20230324 =
+
 * Fix: EDD orders were not being shown as paid on checkout (no green tick).
+* Code: SDK update.
 
 = 2.121 20230104 =
 
