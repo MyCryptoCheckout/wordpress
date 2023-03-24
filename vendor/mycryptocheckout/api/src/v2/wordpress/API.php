@@ -47,6 +47,8 @@ class API
 	**/
 	public function get_client_url()
 	{
+		if ( defined( 'MYCRYPTOCHECKOUT_CLIENT_URL' ) )
+			return MYCRYPTOCHECKOUT_CLIENT_URL;
 		return MyCryptoCheckout()->get_client_url();
 	}
 

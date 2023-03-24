@@ -1,3 +1,7 @@
+2.14		20230324
+
+In Wordpress get_client_url() function, allow MYCRYPTOCHECKOUT_CLIENT_URL define.
+
 2.13		20211021
 
 Compress the account data to prevent the mysql server from not accepting the large data.
