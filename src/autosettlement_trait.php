@@ -65,6 +65,7 @@ trait autosettlement_trait
 				'tab' => 'autosettlement_edit',
 				'autosettlement_id' => $index,
 			] );
+			$url = esc_url( $url );
 			$url = sprintf( '<a href="%s" title="%s">%s</a>',
 				$url,
 				__( 'Edit this autosettlement', 'mycryptocheckout' ),

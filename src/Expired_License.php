@@ -106,7 +106,7 @@ class Expired_License
 			{
 				$class = 'notice notice-warning';
 				$message = sprintf( 'Your MyCryptoCheckout license has expired! If you wish to renew it, please visit your <a href="options-general.php?page=mycryptocheckout">account settings</a>. Or you can <a href="%s">dismiss this notice</a>.',
-					add_query_arg( 'mcc_dismiss_notification', $key )
+					esc_url( add_query_arg( 'mcc_dismiss_notification', $key ) )
 				);
 
 				printf( '<div class="%1$s"><p>%2$s</p></div>',

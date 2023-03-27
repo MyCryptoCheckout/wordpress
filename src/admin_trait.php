@@ -347,6 +347,7 @@ trait admin_trait
 				'tab' => 'edit_wallet',
 				'wallet_id' => $index,
 			] );
+			$url = esc_url( $url );
 			$url = sprintf( '<a href="%s" title="%s">%s</a>',
 				$url,
 				__( 'Edit this currency', 'mycryptocheckout' ),
