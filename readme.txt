@@ -271,6 +271,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Code: Add esc_url() calls to links in admin URLs.
+
 = 2.123 20230325 =
 
 * Fix: Try adding missing Registrar.php file again.
