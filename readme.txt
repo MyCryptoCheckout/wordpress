@@ -135,6 +135,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - MetalPay MTL
 - Nexo Token NEXO
 - OMG Network OMG
+- PEPE
 - Polygon MATIC_ERC20
 - Polymath Network POLY
 - Populous PPT

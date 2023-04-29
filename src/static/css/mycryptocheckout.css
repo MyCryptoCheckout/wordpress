@@ -327,6 +327,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mcc-PEPE:before {
+  content: "\eaad";
+}
+
 .mcc-LEAN:before {
   content: "\eaa8";
 }
@@ -2309,6 +2313,10 @@
 
 .mcc_currency_icons.color i.mcc-PENKY {
   color: #b80082;
+}
+
+.mcc_currency_icons.color i.mcc-PEPE {
+  color: #4c9641;
 }
 
 .mcc_currency_icons.color i.mcc-PIEG {
