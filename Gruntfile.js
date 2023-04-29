@@ -2,16 +2,15 @@ module.exports = function(grunt) {
 
 	// Configuration
 	grunt.initConfig({
-		sass: {
-    		dist: {
-     			options: {
-        			style: 'nested',
-        			precision: 5,
-    			},
-      			files: {
-        			'src/static/css/mycryptocheckout.css': 'src/static/css/scss/mycryptocheckout.scss',
-      			}
-    		}
+		'dart-sass': {
+			target: {
+				options: {
+					sourceMap: false,
+				},
+				files: {
+					'src/static/css/mycryptocheckout.css': 'src/static/css/scss/mycryptocheckout.scss',
+				}
+			}
 		},
     	postcss: {
   			options: {
@@ -84,15 +83,11 @@ module.exports = function(grunt) {
 	});
 
 	// Load plugins
-	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-dart-sass');
 	grunt.loadNpmTasks('@lodder/grunt-postcss');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-
-	// Register Tasks
-	grunt.registerTask('compile-sass', ['sass']);
-	grunt.registerTask('prefix-css', ['postcss']);
 	
 	// Run All Tasks
-	grunt.registerTask('all', ['compile-sass', 'prefix-css', 'copy']);
+	grunt.registerTask('all', ['dart-sass', 'postcss', 'copy']);
 
 };
