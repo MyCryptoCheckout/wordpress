@@ -168,8 +168,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = Stellar Tokens supported: =
 
-- neokyne.com NEOK
-
 - Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
 
 = Fiat Autosettlements =

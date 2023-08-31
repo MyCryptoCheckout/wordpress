@@ -52,6 +52,13 @@ namespace mycryptocheckout
 			$this->easy_digital_downloads = new ecommerce\easy_digital_downloads\Easy_Digital_Downloads();
 			$this->woocommerce = new ecommerce\woocommerce\WooCommerce();
 
+			add_action( 'before_woocommerce_init', function()
+			{
+				if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+					\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+				}
+			} );
+
 			if ( defined( 'WP_CLI' ) && WP_CLI )
 			{
 				$cli = new cli\MyCryptoCheckout();

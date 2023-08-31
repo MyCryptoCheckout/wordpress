@@ -147,7 +147,7 @@ class Easy_Digital_Downloads
 		$currency = $currencies->get( $currency_id );
 		$wallet = $mcc->wallets()->get_dustiest_wallet( $currency_id );
 
-		$amount = edd_get_cart_total();
+		$amount = edd_get_cart_total( true );
 		$edd_currency = edd_get_currency();
 		$amount = $mcc->markup_amount( [
 			'amount' => $amount,
