@@ -47,7 +47,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
 - Dash DASH (Including HD wallets)
-- Decred DCR
 - Digibyte DGB (Including SegWit)
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Fantom FTM
