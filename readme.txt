@@ -52,7 +52,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Fantom FTM
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - High Performance Blockchain HPB
-- Klever KLV
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
 - Polygon MATIC
@@ -72,18 +71,15 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Celestial Unity CU
 - Centric SWAP CNS
 - DEAPCOIN DEP_BEP20
-- Digitalatto DGTL
 - Empire Token EMPIRE
 - ExSuCh EXSUCH
 - GameGuru GGT
-- Gamesafe.io GAMESAFE
 - HODL
 - METAGIN
 - MetaGin METAGIN
 - NUM Token NUM
 - Numbers Protocol NUM
 - PancakeSwap Token CAKE
-- panKUKU KUKU
 - Proton XPR
 - SafeMoon v2 SFM
 - Shiba Rewards SHREW
@@ -167,7 +163,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = Polygon MATIC tokens supported: =
 
-- Permission Coin ASK
 - Pleasure Coin NSFW
 - Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
 
