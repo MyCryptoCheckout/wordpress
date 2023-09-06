@@ -134,6 +134,8 @@ class text
 	**/
 	public function value_filter_trim( $value )
 	{
+		if ( ! $value )
+			$value = '';
 		if ( $this->trim )
 			$value = trim( $value );
 		return $value;

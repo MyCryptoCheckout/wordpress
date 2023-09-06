@@ -167,6 +167,59 @@ class form
 		return call_user_func_array( array( $this->base, '_' ), func_get_args() );
 	}
 
+	/**
+		@brief		Generate a nonce based on the ID.
+		@since		2023-09-06 06:39:34
+	**/
+	public function generate_nonce()
+	{
+		$nonce_key = $this->get_nonce_key();
+		$nonce = wp_create_nonce( $nonce_key );
+		$this->nonce_input = $this->hidden_input( $nonce_key )
+			->value( $nonce );
+		return $this;
+	}
+
+	/**
+		@brief		Return the key used for the nonce.
+		@since		2023-09-06 06:30:51
+	**/
+	public function get_nonce_key()
+	{
+		$form_id = $this->get_attribute( 'id' );
+		$nonce_key = 'automatic_nonce_' . $form_id;
+		return $nonce_key;
+	}
+
+	/**
+		@brief		Create a nonce together with the ID.
+		@since		2023-09-06 06:13:58
+	**/
+	public function id( $new_id )
+	{
+		parent::id( $new_id );
+		$this->generate_nonce();
+	}
+
+	/**
+		@brief		Automatically check the nonce.
+		@since		2023-09-06 06:16:45
+	**/
+	public function post( array $post = null )
+	{
+		parent::post( $post );
+		if ( ! isset( $this->nonce_input ) )
+			return;
+		$the_nonce = $this->nonce_input->get_post_value();
+
+		$nonce_key = $this->get_nonce_key();
+
+		if ( ! wp_verify_nonce( $the_nonce, $nonce_key ) )
+			wp_nonce_ays( 'Form validity check failed (missing token).' );
+
+		return $this;
+	}
+
 	public function start()
 	{
 		return $this->open_tag();
@@ -176,6 +229,5 @@ class form
 	{
 		return $this->close_tag();
 	}
-
 }
 

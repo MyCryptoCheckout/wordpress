@@ -1,3 +1,8 @@
+20230906		Add Wordpress form noncing.
+20230809		Fix current_url() when the host has the port.
+20230503		PHP 8.2 compat fixes
+20230420		PHP 8.2 compat fixes
+20230419		PHP 8.2 compat fixes
 20230321		Wordpress: Escape the form action.
 20230225		Form2: Add color input;
 20230205		Mail: Fix ArgumentCountError.

@@ -13,11 +13,23 @@ class base
 	use actions_and_filters_trait;
 
 	/**
+		@brief		The menu page object.
+		@since		2023-04-19 22:36:42
+	**/
+	public $__menu_page = null;
+
+	/**
 		@brief		Stores whether this blog is a network blog.
 		@since		20130416
 		@var		$is_network
 	**/
 	public $is_network;
+
+	/**
+		@brief		Synonym for is_network.
+		@since		2023-04-19 22:36:04
+	**/
+	public $is_multisite;
 
 	/**
 		@brief		Text domain of .PO translation.
@@ -51,6 +63,12 @@ class base
 		@var		$plugin_version
 	**/
 	public $plugin_version = 20000101;
+
+	/**
+		@brief		A collection of submenu pages to be added.
+		@since		2023-04-19 22:35:24
+	**/
+	public $submenu_pages;
 
 	/**
 		@brief		Links to Wordpress' database object.
@@ -1189,7 +1207,7 @@ class base
 	**/
 	public function menu_page()
 	{
-		if ( ! isset( $this->__menu_page ) )
+		if ( $this->__menu_page === null )
 		{
 			$this->__menu_page = new menu_page\Menu();
 			$this->__menu_page->set_parent( $this );

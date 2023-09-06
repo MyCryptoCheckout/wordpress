@@ -15,6 +15,12 @@ class textarea
 	public $tag = 'textarea';
 
 	/**
+		@brief		A temporary property used when displaying the textarea.
+		@since		2023-04-19 22:44:58
+	**/
+	public $_value;
+
+	/**
 		@brief		Set the amount of cols (and optionally also rows) for this textarea.
 		@param		int		$cols		Number of columns for this textarea.
 		@param		int		$rows		Number of rows for this textarea.

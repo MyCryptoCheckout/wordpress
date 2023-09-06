@@ -13,6 +13,11 @@ class plugins
 	extends \plainview\sdk_mcc\collections\collection
 {
 	/**
+		@brief		Do we need to save the plugins?
+		@since		2023-05-03 22:37:30
+	**/
+	public $__need_to_save = false;
+	/**
 		@brief		The plugin pack container class.
 		@since		2014-05-08 00:12:04
 	**/
@@ -115,7 +120,7 @@ class plugins
 	**/
 	public function maybe_save()
 	{
-		if ( ! isset( $this->__need_to_save ) )
+		if ( $this->__need_to_save )
 			return;
 		return $this->save();
 	}
@@ -126,10 +131,7 @@ class plugins
 	**/
 	public function need_to_save( $need_to_save = true )
 	{
-		if ( $need_to_save )
-			$this->__need_to_save = true;
-		else
-			unset( $this->__need_to_save );
+		$this->__need_to_save = $need_to_save;
 		return $this;
 	}
 

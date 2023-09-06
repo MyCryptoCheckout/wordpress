@@ -16,6 +16,12 @@ abstract class plugin_pack
 	public $plugins;
 
 	/**
+		@brief		Cached plugins object.
+		@since		2023-04-20 22:31:55
+	**/
+	public $__plugins = null;
+
+	/**
 		@brief		Constructor.
 		@since		2014-05-07 23:11:28
 	**/
@@ -245,7 +251,7 @@ abstract class plugin_pack
 	**/
 	public function plugins()
 	{
-		if ( isset( $this->__plugins ) )
+		if ( $this->__plugins !== null )
 			return $this->__plugins;
 		$this->__plugins = new plugins( $this );
 		$this->__plugins->populate( $this->get_enabled_plugins() );

@@ -151,7 +151,7 @@ abstract class tabs
 		@return		int		The count of tabs registered.
 		@since		20130809
 	**/
-	public function count()
+	public function count() : int
 	{
 		return count( $this->tabs );
 	}

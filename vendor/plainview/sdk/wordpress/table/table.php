@@ -29,6 +29,12 @@ class table
 	**/
 	public $base;
 
+	/**
+		@brief		Top tablenav row.
+		@since		2023-05-03 21:34:48
+	**/
+	public $top = false;
+
 	public function __construct( $base )
 	{
 		parent::__construct();
@@ -49,7 +55,7 @@ class table
 	public function __toString()
 	{
 		$r = '';
-		if ( isset( $this->top ) )
+		if ( $this->top !== false )
 			$r .= $this->top;
 		$r .= parent::__toString();
 
@@ -62,7 +68,7 @@ class table
 	**/
 	public function top()
 	{
-		if ( ! isset( $this->top ) )
+		if ( ! $this->top )
 			$this->top = new top\top;
 		return $this->top;
 	}

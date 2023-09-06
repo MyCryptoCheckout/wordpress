@@ -26,7 +26,7 @@ class base
 		@since		20130630
 		@var		$sdk_version
 	**/
-	protected $sdk_version = 20230321;
+	protected $sdk_version = 20230906;
 
 	/**
 		@brief		Constructor.
@@ -158,11 +158,15 @@ class base
 		if ( $port != '' )
 			$port = ':' . $port;
 
+		$host = $SERVER[ 'HTTP_HOST' ];
 		$url = $SERVER[ 'REQUEST_URI' ];
+
+		// Remove the port from the host, if any.
+		$host = str_replace( $port, '', $host );
 
 		return sprintf( '%s://%s%s%s',
 			$ssl ? 'https' : 'http',
-			$SERVER[ 'HTTP_HOST' ],
+			$host,
 			$port,
 			$url
 		);
