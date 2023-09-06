@@ -68,7 +68,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - BITTOKEN BITT
 - GameGuru GGT
 - PancakeSwap Token CAKE
-- Proton XPR
 - SafeMoon v2 SFM
 - Swipe SXP
 - TasteNFT TASTE
