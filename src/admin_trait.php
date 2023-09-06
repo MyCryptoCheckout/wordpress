@@ -797,6 +797,7 @@ trait admin_trait
 	public function admin_local_settings()
 	{
 		$form = $this->form();
+		$form->id( 'local_settings' );
 		$form->css_class( 'plainview_form_auto_tabs' );
 		$form->local_settings = true;
 		$r = '';
@@ -847,6 +848,7 @@ trait admin_trait
 	public function admin_global_settings()
 	{
 		$form = $this->form();
+		$form->id( 'global_settings' );
 		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
 
@@ -941,6 +943,7 @@ trait admin_trait
 	public function admin_tools()
 	{
 		$form = $this->form();
+		$form->id( 'tools' );
 		$form->css_class( 'plainview_form_auto_tabs' );
 		$r = '';
 
