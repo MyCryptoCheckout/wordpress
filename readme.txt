@@ -1,10 +1,10 @@
-=== MyCryptoCheckout - Bitcoin, Ethereum, and 100+ altcoins for WooCommerce ===
+ === MyCryptoCheckout - Bitcoin, Ethereum, and 100+ altcoins for WooCommerce ===
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.126
+Stable tag: 2.127
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.2
 
@@ -236,6 +236,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.127 20230927 =
+
+* Fix link expired error when bulk editing currencies.
 
 = 2.126 20230906 =
 
