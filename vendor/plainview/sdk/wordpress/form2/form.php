@@ -202,6 +202,17 @@ class form
 	}
 
 	/**
+		@brief		Remove the automatic nonce from the form, for the sake of ajax requests.
+		@since		2023-09-18 11:56:18
+	**/
+	public function no_automatic_nonce()
+	{
+		if ( isset( $this->nonce_input ) )
+			unset ( $this->nonce_input );
+		return $this;
+	}
+
+	/**
 		@brief		Automatically check the nonce.
 		@since		2023-09-06 06:16:45
 	**/
@@ -209,7 +220,7 @@ class form
 	{
 		parent::post( $post );
 		if ( ! isset( $this->nonce_input ) )
-			return;
+			return $this;
 		$the_nonce = $this->nonce_input->get_post_value();
 
 		$nonce_key = $this->get_nonce_key();

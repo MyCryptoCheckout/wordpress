@@ -1,3 +1,5 @@
+20230918		Wordpress: Add function to disable automatic nonce, for example when handling ajax requests.
+20230913		Wordpress: Return the post if no nonce.
 20230906		Add Wordpress form noncing.
 20230809		Fix current_url() when the host has the port.
 20230503		PHP 8.2 compat fixes
