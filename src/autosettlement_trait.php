@@ -27,6 +27,7 @@ trait autosettlement_trait
 	{
 		$form = $this->form();
 		$form->id( 'autosettlements' );
+		$form->no_automatic_nonce();
 		$r = '';
 
 		$table = $this->table();
@@ -109,7 +110,7 @@ trait autosettlement_trait
 						foreach( $ids as $id )
 							$autosettlements->forget( $id );
 						$autosettlements->save();
-						$r .= $this->info_message_box()->_( __( 'The selected wallets have been deleted.', 'mycryptocheckout' ) );
+						$r .= $this->info_message_box()->_( __( 'The selected autosettlements have been deleted.', 'mycryptocheckout' ) );
 					break;
 					case 'disable':
 						foreach( $ids as $id )
@@ -118,7 +119,7 @@ trait autosettlement_trait
 							$autosettlement->set_enabled( false );
 						}
 						$autosettlements->save();
-						$r .= $this->info_message_box()->_( __( 'The selected wallets have been disabled.', 'mycryptocheckout' ) );
+						$r .= $this->info_message_box()->_( __( 'The selected autosettlements have been disabled.', 'mycryptocheckout' ) );
 					break;
 					case 'enable':
 						foreach( $ids as $id )
@@ -127,7 +128,7 @@ trait autosettlement_trait
 							$autosettlement->set_enabled( true );
 						}
 						$autosettlements->save();
-						$r .= $this->info_message_box()->_( __( 'The selected wallets have been enabled.', 'mycryptocheckout' ) );
+						$r .= $this->info_message_box()->_( __( 'The selected autosettlements have been enabled.', 'mycryptocheckout' ) );
 					break;
 					case 'test':
 						foreach( $ids as $id )

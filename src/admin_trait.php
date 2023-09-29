@@ -282,6 +282,7 @@ trait admin_trait
 	{
 		$form = $this->form();
 		$form->id( 'currencies' );
+		$form->no_automatic_nonce();
 		$r = '';
 
 		wp_enqueue_script( 'jquery-ui-sortable' );
