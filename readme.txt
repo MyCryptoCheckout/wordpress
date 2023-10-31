@@ -6,7 +6,7 @@ Requires at least: 4.9
 Requires PHP: 5.6
 Stable tag: 2.128
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
-Tested up to: 6.2
+Tested up to: 6.3
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 100+ coins: Bitcoin, Ethereum, BNB, and more. Peer-to-peer transactions.
 
@@ -56,6 +56,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Polygon MATIC
 - PutinCoin PUT
 - Stellar XLM
+- XRP
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
