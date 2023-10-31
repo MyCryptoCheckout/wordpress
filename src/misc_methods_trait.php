@@ -124,6 +124,7 @@ trait misc_methods_trait
 	{
 		$options = array_merge( [
 			'as_html' => false,
+			'show_amount' => false,
 		], $options );
 		$options = (object) $options;
 
@@ -140,17 +141,25 @@ trait misc_methods_trait
 			// Currency is gone? Ignore.
 			if ( ! $currency )
 				continue;
-			$amount = $currency->normalize_amount( $options->amount );
-			$amount = $this->markup_amount( [
-				'amount' => $amount,
-				'currency_id' => $currency_id,
-			] );
-			$cryptocurrency_amount = $currency->convert( $options->original_currency, $amount );
-			$cryptocurrency_amount = $currency->find_next_available_amount( $cryptocurrency_amount );
+			if ( $options->show_amount )
+			{
+				$amount = $currency->normalize_amount( $options->amount );
+				$amount = $this->markup_amount( [
+					'amount' => $amount,
+					'currency_id' => $currency_id,
+				] );
+				$cryptocurrency_amount = $currency->convert( $options->original_currency, $amount );
+				$cryptocurrency_amount = $currency->find_next_available_amount( $cryptocurrency_amount );
+				$cryptocurrency_amount = $cryptocurrency_amount . ' ';
+			}
+			else
+			{
+				$cryptocurrency_amount = '';
+			}
 
 			if ( $options->as_html )
 			{
-				$value = sprintf( '<option value="%s"%s>%s (%s %s)</option>',
+				$value = sprintf( '<option value="%s"%s>%s (%s%s)</option>',
 					$currency_id,
 					( $selected ? ' selected="selected"' : '' ),
 					$currency->get_name(),
@@ -162,7 +171,7 @@ trait misc_methods_trait
 					$selected = false;
 			}
 			else
-				$value = sprintf( '%s (%s %s)',
+				$value = sprintf( '%s (%s%s)',
 					$currency->get_name(),
 					$cryptocurrency_amount,
 					$currency_id

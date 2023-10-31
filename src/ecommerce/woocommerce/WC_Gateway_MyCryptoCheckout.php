@@ -156,6 +156,14 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				'step' => 1,
 			],
 		];
+
+		$r[ 'show_amount' ] = [
+			'title'			=> __( 'Show amount', 'mycryptocheckout' ),
+			'type'			=> 'checkbox',
+			'default'     => 'no',
+			'description'	=> __( 'Show the amount in cryptocurrency in the currency selector during checkout.', 'mycryptocheckout' ),
+		];
+
 		$r[ 'reset_to_defaults' ] = [
 			'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
 			'type'			=> 'checkbox',
@@ -249,6 +257,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		return MyCryptoCheckout()->get_checkout_wallet_options( [
 			'amount' => $total,
 			'original_currency' => get_woocommerce_currency(),
+			'show_amount' => ( $this->get_option( 'show_amount' ) === 'yes' ),
 		] );
 
 	}
