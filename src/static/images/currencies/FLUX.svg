@@ -1,96 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   id="Flux_logo_blue_black"
-   width="358.064"
-   height="355.66199"
-   viewBox="0 0 358.06398 355.66198"
-   version="1.1"
-   sodipodi:docname="FLUX.svg"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
-  <metadata
-     id="metadata5158">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs5156" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="3840"
-     inkscape:window-height="2099"
-     id="namedview5154"
-     showgrid="false"
-     fit-margin-top="10"
-     fit-margin-left="10"
-     fit-margin-right="10"
-     fit-margin-bottom="10"
-     inkscape:zoom="1.7662312"
-     inkscape:cx="517.78101"
-     inkscape:cy="115.82363"
-     inkscape:window-x="0"
-     inkscape:window-y="31"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="Flux_logo_blue_black" />
-  <ellipse
-     id="Ellipse_64"
-     data-name="Ellipse 64"
-     cx="179.032"
-     cy="177.83099"
-     rx="169.032"
-     ry="167.83099"
-     style="fill:#2b61d1" />
-  <g
-     id="Group_179"
-     data-name="Group 179"
-     transform="translate(86.548,71.501)">
-    <path
-       id="Path_73"
-       data-name="Path 73"
-       d="m 144.555,190.421 -19.224,11.107 -41.3,-23.841 18.756,-10.832 0.469,-0.276 0.717,0.413 z"
-       transform="translate(-32.311,13.286)"
-       inkscape:connector-curvature="0"
-       style="fill:#ffffff" />
-    <path
-       id="Path_74"
-       data-name="Path 74"
-       d="m 232.54,89.764 v 22.352 l -40.653,-23.469 -11.025,-6.367 -11.025,6.367 -51.677,29.836 -11.025,6.367 v 13.16 L 87.25,126.531 76.225,120.164 65.2,126.531 46.5,137.321 V 89.764 l 93.02,-53.7 z"
-       transform="translate(-46.5,-36.06)"
-       inkscape:connector-curvature="0"
-       style="fill:#ffffff" />
-    <path
-       id="Path_75"
-       data-name="Path 75"
-       d="m 209.856,117.919 v 59.671 l -51.678,29.835 -0.069,-0.041 L 106.5,177.59 V 117.919 L 158.178,88.07 Z"
-       transform="translate(-23.815,-16.396)"
-       inkscape:connector-curvature="0"
-       style="fill:#ffffff" />
-    <path
-       id="Path_76"
-       data-name="Path 76"
-       d="m 105.95,132.727 v 34.314 L 76.225,184.212 46.5,167.041 V 132.727 L 76.225,115.57 Z"
-       transform="translate(-46.5,-5.999)"
-       inkscape:connector-curvature="0"
-       style="fill:#ffffff" />
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#2B61D1;}
+	.st1{fill:#FFFFFF;}
+</style>
+<g>
+	
+		<ellipse id="Ellipse_64_00000092445871628535193410000004275566499869759658_" class="st0" cx="16" cy="16" rx="15.846" ry="15.733"/>
+	<g id="Group_179_00000151534493468077715810000014914883398041962139_" transform="translate(86.548,71.501)">
+		<path id="Path_73_00000104679424257347002920000014953220924352663980_" class="st1" d="M-68.696-46.373l-1.802,1.041
+			l-3.872-2.235l1.758-1.015l0.044-0.026l0.067,0.039L-68.696-46.373z"/>
+		<path id="Path_74_00000001647598074562806360000006296658497911332249_" class="st1" d="M-61.778-60.434v2.095l-3.811-2.2
+			l-1.034-0.597l-1.034,0.597l-4.844,2.797l-1.034,0.597v1.234l-1.864-1.076l-1.034-0.597l-1.034,0.597l-1.753,1.011v-4.458
+			l8.72-5.034L-61.778-60.434z"/>
+		<path id="Path_75_00000101823364843330188670000002069458735630597808_" class="st1" d="M-61.778-55.952v5.594l-4.844,2.797
+			l-0.006-0.004l-4.838-2.793v-5.594l4.844-2.798L-61.778-55.952z"/>
+		<path id="Path_76_00000124129261139022405670000000075797713813857465_" class="st1" d="M-73.645-53.589v3.217l-2.787,1.61
+			l-2.786-1.61v-3.217l2.786-1.608L-73.645-53.589z"/>
+	</g>
+</g>
 </svg>
