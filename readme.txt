@@ -6,7 +6,7 @@ Requires at least: 4.9
 Requires PHP: 5.6
 Stable tag: 2.128
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
-Tested up to: 6.3
+Tested up to: 6.4
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 100+ coins: Bitcoin, Ethereum, BNB, and more. Peer-to-peer transactions.
 
