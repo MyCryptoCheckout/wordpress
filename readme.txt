@@ -48,14 +48,17 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Bitcoin Cash BCH (Including HD wallets)
 - Dash DASH (Including HD wallets)
 - Digibyte DGB (Including SegWit)
+- Dogecoin DOGE
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Fantom FTM
+- Flux FLUX
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
 - Monero XMR
 - Polygon MATIC
 - PutinCoin PUT
 - Stellar XLM
+- Tron TRX
 - XRP
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
@@ -67,9 +70,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
 - BITTOKEN BITT
+- Flux FLUX
 - GameGuru GGT
 - PancakeSwap Token CAKE
 - SafeMoon v2 SFM
+- SpacePi SPACEPI
 - Swipe SXP
 - TasteNFT TASTE
 - VAI Stablecoin VAI
@@ -83,6 +88,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - 1inch 1INCH
 - Aave AAVE
 - Aeternity AE
+- ApeCoin APE
 - Aragon ANT
 - Bancor BNT
 - Basic Attention Token BAT
@@ -98,6 +104,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Enjin Coin ENJ
 - FunFair FUN
 - Gemini Dollar GUSD
+- Immutable IMX
 - Huobi Token HT
 - Kyber Network KNC
 - Lean Management Token LEAN
@@ -119,13 +126,20 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Status SNT
 - Synthetix SNX
 - TenXPay PAY
-- Tether USD USDT
+- Tether USDT
+- Toncoin TON
 - TrueUSD TUSD
 - Uniswap UNI
+- UNUS SED LEO
 - USD Coin USDC
 - Veritaseum VERI
+- Wrapped Bitcoin WBTC
 - YIELD App YLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
+
+= TRC-20 tokens supported: =
+
+- Tether USDT
 
 = Fantom FTM tokens supported: =
 
