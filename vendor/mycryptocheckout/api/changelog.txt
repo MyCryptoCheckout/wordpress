@@ -1,3 +1,7 @@
+2.15		20231113
+
+Add filters and actions to allow the WooCommerce code to fetch the order data from the external table instead of the postmeta table.
+
 2.14		20230324
 
 In Wordpress get_client_url() function, allow MYCRYPTOCHECKOUT_CLIENT_URL define.

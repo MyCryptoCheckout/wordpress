@@ -252,6 +252,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix payments stored only in WooCommerce external database. This solves a lot of account locking problems.
+
 = 2.128 20230929 =
 
 * Fix link expired error when bulk editing autosettlements.

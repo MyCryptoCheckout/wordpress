@@ -153,7 +153,9 @@ class Payments
 		try
 		{
 			$payment = static::generate_payment_from_order( $post_id );
+			$payment = apply_filters( 'mycryptocheckout_generate_payment_from_order', $payment, $post_id );
 			$payment_id = $this->add( $payment );
+			do_action( 'mycryptocheckout_set_order_payment_id', $post_id, $payment_id );
 			update_post_meta( $post_id, '_mcc_payment_id', $payment_id );
 			$this->api()->debug( 'Payment for order %d has been added as payment #%d.', $post_id, $payment_id );
 		}
@@ -174,6 +176,9 @@ class Payments
 				wp_schedule_single_event( time() + 60, 'mycryptocheckout_send_payment', [ $post_id, microtime() ] );
 				$this->api()->debug( 'Will try to send payment %d again.', $post_id );
 			}
+
+			// We are unlocking because not being able to send a broken payment (with no currency info, for example) should not result in a locked account forever.
+			MyCryptoCheckout()->api()->account()->unlock()->save();
 		}
 	}
 

@@ -26,6 +26,8 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
+		$this->add_filter( 'mycryptocheckout_generate_payment_from_order', 10, 2 );
+		$this->add_action( 'mycryptocheckout_set_order_payment_id', 10, 2 );
 		$this->add_action( 'template_redirect' );
 		//$this->add_action( 'before_woocommerce_pay' );
 		$this->add_action( 'wcs_new_order_created' );
@@ -197,6 +199,49 @@ class WooCommerce
 					$order->save();
 				}
 		} );
+	}
+
+	/**
+		@brief		Overwrite the payment data with the data from WC.
+		@details	This overrides the payment generation code from vendor/mycryptocheckout/api/src/v2/wordpress/Payments.php since WC now stores its postmeta in a separate table.
+		@since		2023-11-12 18:36:37
+	**/
+	public function mycryptocheckout_generate_payment_from_order( $ignore, $order_id )
+	{
+		return static::payment_from_order( $order_id );
+	}
+
+	/**
+		@brief		Save the payment ID to this fancy WC order.
+		@since		2023-11-12 18:39:18
+	**/
+	public function mycryptocheckout_set_order_payment_id( $order_id, $payment_id )
+	{
+		$order = wc_get_order( $order_id );
+		$order->update_meta_data( '_mcc_payment_id', $payment_id );
+		$order->save();
+	}
+
+	/**
+		@brief		Create a payment object for this order.
+		@details	This is because their idiotic "high performance" database tables no longer stores the data in postmeta.
+		@since		2023-11-12 18:16:41
+	**/
+	public static function payment_from_order( $order_id )
+	{
+		$order = wc_get_order( $order_id );
+		$payment = MyCryptoCheckout()->api()->payments()->create_new();
+
+		$payment->amount = $order->get_meta( '_mcc_amount', true );
+		$payment->confirmations = $order->get_meta( '_mcc_confirmations', true );
+		$payment->created_at = $order->get_meta( '_mcc_created_at', true );
+		$payment->currency_id = $order->get_meta( '_mcc_currency_id', true );
+		$payment->timeout_hours = $order->get_meta( '_mcc_payment_timeout_hours', true );
+		$payment->to = $order->get_meta( '_mcc_to', true );
+
+		$payment->data = $order->get_meta( '_mcc_payment_data', true );
+
+		return $payment;
 	}
 
 	/**
@@ -461,6 +506,7 @@ class WooCommerce
 		$order->update_meta_data( '_mcc_payment_timeout_hours', $payment->timeout_hours );
 		$order->update_meta_data( '_mcc_to', $payment->to );
 		$order->update_meta_data( '_mcc_payment_data', $payment->data );
+		$order->save();
 
 		$action = MyCryptoCheckout()->new_action( 'woocommerce_create_order' );
 		$action->order = $order;

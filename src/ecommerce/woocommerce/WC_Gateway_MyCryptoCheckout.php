@@ -432,7 +432,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			return;
 
 		$instructions = $this->get_option( 'email_instructions' );
-		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order->get_id() );
+		$payment = mycryptocheckout\ecommerce\woocommerce\WooCommerce::payment_from_order( $order->get_id() );
 		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment, $instructions );
 		echo wpautop( wptexturize( $instructions ) ) . PHP_EOL;
 	}
@@ -489,7 +489,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		MyCryptoCheckout()->enqueue_js();
 		MyCryptoCheckout()->enqueue_css();
 		$instructions = $this->get_option( 'online_instructions' );
-		$payment = MyCryptoCheckout()->api()->payments()->generate_payment_from_order( $order_id );
+		$payment = mycryptocheckout\ecommerce\woocommerce\WooCommerce::payment_from_order( $order_id );
 		$this->__current_payment = $payment;
 		if ( ! $order->needs_payment() )
 			$payment->paid = $order->is_paid();

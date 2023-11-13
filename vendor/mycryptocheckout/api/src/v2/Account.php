@@ -172,7 +172,10 @@ abstract class Account
 	public function is_available_for_payment()
 	{
 		if ( isset( $this->data->locked ) )
-			throw new Exception( 'The account is locked, probably due to a payment not being able to be send to the API server. The account will unlock upon next contact with the API server.' );
+		{
+			if ( $this->data->locked )
+				throw new Exception( 'The account is locked, probably due to a payment not being able to be send to the API server. The account will unlock upon next contact with the API server.' );
+		}
 
 		// The account needs payments available.
 		if ( ! $this->has_payments_left() )
@@ -336,6 +339,17 @@ abstract class Account
 	public function set_data( $data )
 	{
 		$this->data = $data;
+		return $this;
+	}
+
+	/**
+		@brief		Unlock the account manually.
+		@details	This is better done from the API server.
+		@since		2023-11-04 20:47:57
+	**/
+	public function unlock()
+	{
+		unset( $this->data->locked );
 		return $this;
 	}
 }
