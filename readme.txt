@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.128
+Stable tag: 2.129
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.4
 
@@ -252,7 +252,13 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.129 20231113 =
+
 * Fix payments stored only in WooCommerce external database. This solves a lot of account locking problems.
+* Re-added: TRX and USDT_TRON
+* New currency: Wrapped TON Coin
+* New currency: Wrapped BTC
+* New currency: UNUS SED LEO
 
 = 2.128 20230929 =
 
