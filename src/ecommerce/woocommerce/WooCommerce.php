@@ -206,8 +206,10 @@ class WooCommerce
 		@details	This overrides the payment generation code from vendor/mycryptocheckout/api/src/v2/wordpress/Payments.php since WC now stores its postmeta in a separate table.
 		@since		2023-11-12 18:36:37
 	**/
-	public function mycryptocheckout_generate_payment_from_order( $ignore, $order_id )
+	public function mycryptocheckout_generate_payment_from_order( $payment_data, $order_id )
 	{
+		if ( ! function_exists( 'wc_get_order' ) )
+			return $payment_data;
 		return static::payment_from_order( $order_id );
 	}
 

@@ -253,6 +253,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Check for WC before inserting WC payment data (fix for EDD users).
 * Added info about incompatible plugin: Cost of Goods for WooCommerce
 
 = 2.129 20231113 =
