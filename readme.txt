@@ -247,10 +247,13 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 - Plugin Organizer by Jeff Sterup. Deactivate plugin.
 - <a href="https://booster.io/">Booster Plus for WooCommerce</a> completes transactions directly.
+- <a href="https://wordpress.org/plugins/cost-of-goods-for-woocommerce/">Cost of Goods for WooCommerce</a> prevents the MCC API server from contacting your webshop.
 - <a href="https://wordpress.org/plugins/woocommerce-checkout-manager/">WooCommerce Checkout Manager</a> breaks the currency selector during checkout. Deactivate plugin.
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* Added info about incompatible plugin: Cost of Goods for WooCommerce
 
 = 2.129 20231113 =
 
