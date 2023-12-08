@@ -231,6 +231,9 @@ class WooCommerce
 	**/
 	public static function payment_from_order( $order_id )
 	{
+		if ( ! function_exists( 'wc_get_order' ) )
+			return;
+
 		$order = wc_get_order( $order_id );
 		$payment = MyCryptoCheckout()->api()->payments()->create_new();
 
