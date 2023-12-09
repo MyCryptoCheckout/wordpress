@@ -137,7 +137,7 @@ class WooCommerce
 	{
 		$this->do_with_payment_action( $action, function( $action, $order_id )
 		{
-			if ( ! function_exists( 'WC' ) )
+			if ( ! function_exists( 'wc_get_order' ) )
 				return;
 
 			$order = wc_get_order( $order_id );
@@ -165,7 +165,7 @@ class WooCommerce
 	{
 		$this->do_with_payment_action( $payment, function( $action, $order_id )
 		{
-			if ( ! function_exists( 'WC' ) )
+			if ( ! function_exists( 'wc_get_order' ) )
 				return;
 
 			$order = wc_get_order( $order_id );
@@ -219,6 +219,8 @@ class WooCommerce
 	**/
 	public function mycryptocheckout_set_order_payment_id( $order_id, $payment_id )
 	{
+		if ( ! function_exists( 'wc_get_order' ) )
+			return;
 		$order = wc_get_order( $order_id );
 		$order->update_meta_data( '_mcc_payment_id', $payment_id );
 		$order->save();
