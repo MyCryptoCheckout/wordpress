@@ -253,6 +253,11 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.132 20240326 =
+
+* Update: bignumber.js to v9.1.2
+* Update: web3.js to v4.7.0
+
 = 2.131 20231209 =
 
 * Fix: Check for WC before inserting WC payment data (fix for EDD users).
