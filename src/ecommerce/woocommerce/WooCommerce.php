@@ -11,6 +11,13 @@ use Exception;
 class WooCommerce
 	extends \mycryptocheckout\ecommerce\Ecommerce
 {
+
+	/**
+		@brief		This is to keep the account locked, but still enable checkouts, since this gateway->is_available is called twice during the checkout process.
+		@since		2024-04-01 19:49:34
+	**/
+	public $__just_used = false;
+
 	/**
 		@brief		The ID of the gateway.
 		@since		2017-12-08 16:45:27
@@ -23,6 +30,7 @@ class WooCommerce
 	**/
 	public function _construct()
 	{
+		$this->add_action( 'before_woocommerce_init' );
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
@@ -33,6 +41,7 @@ class WooCommerce
 		$this->add_action( 'wcs_new_order_created' );
 		$this->add_filter( 'wcs_renewal_order_meta' );
 		$this->add_action( 'woocommerce_admin_order_data_after_order_details' );
+		$this->add_action( 'woocommerce_blocks_loaded' );
 		$this->add_action( 'woocommerce_checkout_create_order', 10, 2 );
 		$this->add_action( 'woocommerce_checkout_update_order_meta' );
 		$this->add_filter( 'woocommerce_currencies' );
@@ -43,6 +52,20 @@ class WooCommerce
 		$this->add_filter( 'woocommerce_payment_gateways' );
 		$this->add_action( 'woocommerce_review_order_before_payment' );
 		$this->add_action( 'woocommerce_sections_general' );
+	}
+
+	/**
+		@brief		before_woocommerce_init
+		@since		2024-03-31 07:42:50
+	**/
+	public function before_woocommerce_init()
+	{
+		// Check if the required class exists
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) )
+		{
+			// Declare compatibility for 'cart_checkout_blocks'
+			$r = \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', $this->paths( '__FILE__' ), true );
+		}
 	}
 
 	/**
@@ -376,6 +399,30 @@ class WooCommerce
 		}
 
 		echo $r;
+	}
+
+	/**
+		@brief		woocommerce_blocks_loaded
+		@since		2024-03-31 07:50:51
+	**/
+	public function woocommerce_blocks_loaded()
+	{
+		// Check if the required class exists
+		if ( ! class_exists( 'Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType' ) ) {
+			return;
+		}
+
+		// Include the custom Blocks Checkout class
+		require_once plugin_dir_path(__FILE__) . 'class-block.php';
+
+		// Hook the registration function to the 'woocommerce_blocks_payment_method_type_registration' action
+		add_action(
+			'woocommerce_blocks_payment_method_type_registration',
+			function( \Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry ) {
+				// Register an instance of My_Custom_Gateway_Blocks
+				$payment_method_registry->register( new \Mycryptocheckout_Gateway_Blocks );
+			}
+		);
 	}
 
 	/**

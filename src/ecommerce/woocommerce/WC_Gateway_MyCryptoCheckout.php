@@ -7,6 +7,19 @@
 class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 {
 	/**
+		@brief		A temporary variable used during checkout so that the parts of the gateway can communicate with each other.
+		@since		2024-04-01 19:07:34
+	**/
+	public $__current_payment;
+
+	/**
+		@brief		The instance of this gateway.
+		@since		2024-04-01 19:12:15
+	**/
+	public static $instance;
+
+
+	/**
 		@brief		Constructor.
 		@since		2017-12-15 08:06:14
 	**/
@@ -16,6 +29,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$this->method_title			= $this->get_method_title();
 		$this->method_description	= $this->get_method_description();
 		$this->has_fields			= true;
+
+		static::$instance == $this;
 
 		$this->init_form_fields();
 		$this->init_settings();
@@ -289,12 +304,16 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function is_available()
 	{
 		$mcc = MyCryptoCheckout();
+
 		// This is to keep the account locked, but still enable checkouts, since this is called twice during the checkout process.
 		if ( isset( $mcc->woocommerce->__just_used ) )
-			return true;
+			if ( $mcc->woocommerce->__just_used )
+				return true;
 
 		if ( $this->get_option( 'enabled' ) != 'yes' )
-			return;
+		{
+			return false;
+		}
 
 		try
 		{
