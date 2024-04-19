@@ -9,22 +9,22 @@ final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
 
     public function initialize()
     {
-    	require_once( __DIR__ . DIRECTORY_SEPARATOR . 'WC_Gateway_MyCryptoCheckout.php' );
+        require_once( __DIR__ . DIRECTORY_SEPARATOR . 'WC_Gateway_MyCryptoCheckout.php' );
         $this->settings = get_option( 'woocommerce_mycryptocheckout_settings', [] );
         $this->gateway = WC_Gateway_MyCryptoCheckout::instance();
     }
 
     public function is_active()
     {
-    	$r =  $this->gateway->is_available();
-    	return $r;
+        $r =  $this->gateway->is_available();
+        return $r;
     }
 
     public function get_payment_method_script_handles()
     {
         wp_register_script(
             'mycryptocheckout_gateway_blocks_integration',
-            plugin_dir_url(__FILE__) . 'checkout.js',
+            plugin_dir_url(__FILE__) . '/js/index.js',
             [
                 'wc-blocks-registry',
                 'wc-settings',

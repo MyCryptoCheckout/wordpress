@@ -1,0 +1,43 @@
+
+
+import { decodeEntities } from '@wordpress/html-entities';
+
+const { registerPaymentMethod } = window.wc.wcBlocksRegistry
+const { getSetting } = window.wc.wcSettings
+
+const settings = getSetting( 'mycryptocheckout_data', {} );
+
+const label = decodeEntities( settings.title )
+
+/**
+ * Content component
+ */
+const Content = () => {
+	return decodeEntities( settings.description || '' );
+};
+/**
+ * Label component
+ *
+ * @param {*} props Props from payment API.
+ */
+const Label = ( props ) => {
+	const { PaymentMethodLabel } = props.components;
+	return <PaymentMethodLabel text={ label } />;
+};
+
+/**
+ * Payment method config object.
+ */
+const MCC_Block_Gateway = {
+	name: "MyCryptoCheckout",
+	label: <Label />,
+	content: <Content />,
+	edit: <Content />,
+	canMakePayment: () => true,
+	ariaLabel: label,
+	supports: {
+		features: settings.supports,
+	},
+};
+
+registerPaymentMethod( MCC_Block_Gateway );
