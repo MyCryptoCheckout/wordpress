@@ -25,20 +25,23 @@ final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
         wp_register_script(
             'mycryptocheckout_gateway_blocks_integration',
             plugin_dir_url(__FILE__) . '/js/index.js',
-            [
+            [		// dependencies
                 'wc-blocks-registry',
                 'wc-settings',
                 'wp-element',
                 'wp-html-entities',
                 'wp-i18n',
             ],
-            null,
+            MYCRYPTOCHECKOUT_PLUGIN_VERSION,
             true
         );
+
+        /**
         if( function_exists( 'wp_set_script_translations' ) ) {
             wp_set_script_translations( 'mycryptocheckout_gateway_blocks_integration');
-
         }
+        **/
+
         return [ 'mycryptocheckout_gateway_blocks_integration' ];
     }
 
