@@ -30,7 +30,6 @@ class WooCommerce
 	**/
 	public function _construct()
 	{
-		$this->add_action( 'before_woocommerce_init' );
 		$this->add_action( 'mycryptocheckout_hourly' );
 		$this->add_action( 'mycryptocheckout_cancel_payment' );
 		$this->add_action( 'mycryptocheckout_complete_payment' );
@@ -52,20 +51,6 @@ class WooCommerce
 		$this->add_filter( 'woocommerce_payment_gateways' );
 		$this->add_action( 'woocommerce_review_order_before_payment' );
 		$this->add_action( 'woocommerce_sections_general' );
-	}
-
-	/**
-		@brief		before_woocommerce_init
-		@since		2024-03-31 07:42:50
-	**/
-	public function before_woocommerce_init()
-	{
-		// Check if the required class exists
-		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) )
-		{
-			// Declare compatibility for 'cart_checkout_blocks'
-			$r = \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', $this->paths( '__FILE__' ), true );
-		}
 	}
 
 	/**
@@ -418,7 +403,8 @@ class WooCommerce
 		// Hook the registration function to the 'woocommerce_blocks_payment_method_type_registration' action
 		add_action(
 			'woocommerce_blocks_payment_method_type_registration',
-			function( \Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry ) {
+			function( \Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry $payment_method_registry )
+			{
 				// Register an instance of My_Custom_Gateway_Blocks
 				$payment_method_registry->register( new \Mycryptocheckout_Gateway_Blocks );
 			}
