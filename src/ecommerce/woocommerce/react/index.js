@@ -29,7 +29,7 @@ const Label = ( props ) => {
  * Payment method config object.
  */
 const MCC_Block_Gateway = {
-	name: "MyCryptoCheckout",
+	name: "mycryptocheckout",
 	label: <Label />,
 	content: <Content />,
 	edit: <Content />,
