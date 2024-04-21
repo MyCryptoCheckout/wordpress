@@ -47,9 +47,13 @@ final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
 
     public function get_payment_method_data()
     {
+    	ob_start();
+    	$this->gateway->payment_fields();
+    	$pf = ob_get_clean();
+
         return [
             'title' => $this->gateway->title,
-            //'description' => $this->gateway->description,
+            'payment_fields' => $pf,
         ];
     }
 

@@ -13,7 +13,7 @@ const label = decodeEntities( settings.title )
  * Content component
  */
 const Content = () => {
-	return decodeEntities( settings.description || '' );
+	return decodeEntities( settings.payment_fields );
 };
 /**
  * Label component
