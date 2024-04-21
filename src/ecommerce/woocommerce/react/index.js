@@ -1,6 +1,5 @@
-
-
 import { decodeEntities } from '@wordpress/html-entities';
+import DOMPurify from 'dompurify';
 
 const { registerPaymentMethod } = window.wc.wcBlocksRegistry
 const { getSetting } = window.wc.wcSettings
@@ -13,10 +12,19 @@ const label = decodeEntities( settings.title )
  * Content component
  */
 const Content = () => {
+    // Ensure any HTML entities are decoded before sanitization
+    const rawHTML = decodeEntities(settings.payment_fields);
+
+    // Sanitize the HTML
+    const safeHTML = DOMPurify.sanitize(rawHTML, {
+        ADD_ATTR: ['data-plugin', 'data-allow-clear', 'aria-hidden', 'data-placeholder', 'data-priority'], // Add any non-standard attributes
+    });
+
     return (
-        <div dangerouslySetInnerHTML={{ __html: decodeEntities(settings.payment_fields) }} />
+        <div dangerouslySetInnerHTML={{ __html: safeHTML }} />
     );
 };
+
 /**
  * Label component
  *
