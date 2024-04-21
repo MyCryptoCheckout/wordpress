@@ -13,7 +13,9 @@ const label = decodeEntities( settings.title )
  * Content component
  */
 const Content = () => {
-	return decodeEntities( settings.payment_fields );
+    return (
+        <div dangerouslySetInnerHTML={{ __html: decodeEntities(settings.payment_fields) }} />
+    );
 };
 /**
  * Label component
