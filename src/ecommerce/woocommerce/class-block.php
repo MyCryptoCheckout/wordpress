@@ -49,6 +49,7 @@ final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
     {
     	ob_start();
     	$this->gateway->payment_fields();
+    	echo $this->gateway->woocommerce_gateway_icon( '', \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id );
     	$pf = ob_get_clean();
 
         return [
