@@ -53,7 +53,7 @@ trait misc_methods_trait
 	**/
 	public function enqueue_css()
 	{
-		wp_enqueue_style( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/css/mycryptocheckout.css', $this->plugin_version );
+		wp_enqueue_style( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/css/mycryptocheckout.css', array(), MYCRYPTOCHECKOUT_PLUGIN_VERSION, 'all' );
 	}
 
 	/**
@@ -62,7 +62,7 @@ trait misc_methods_trait
 	**/
 	public function enqueue_web3_js()
 	{
-		wp_enqueue_script( 'mycryptocheckout-web3', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/web3.min.js', [ 'jquery' ], $this->plugin_version );
+		wp_enqueue_script( 'mycryptocheckout-web3', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/web3.min.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
 	}
 
 	/**
@@ -71,7 +71,7 @@ trait misc_methods_trait
 	**/
 	public function enqueue_js()
 	{
-		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/mycryptocheckout.js', [ 'jquery' ], $this->plugin_version );
+		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/mycryptocheckout.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
 	}
 
 	/**
