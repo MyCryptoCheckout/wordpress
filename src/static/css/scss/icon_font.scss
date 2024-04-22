@@ -5,15 +5,22 @@
 	height: 100%;
 	width: auto;
 }
+
 // current icon styles
 .woocommerce-checkout #payment ul.wc_payment_methods li.payment_method_mycryptocheckout label {
 	.mcc_currency_icons {
 		display: flex;
-    flex-wrap: wrap;
-    word-break: break-all;
-    word-wrap: break-word;
+		flex-wrap: wrap;
+		word-break: break-all;
+		word-wrap: break-word;
 	}
 }
+
+// Blocks spacing
+.wc-block-components-checkout-step__container .mcc_currency_icons {
+    margin-bottom: 12px;
+}
+
 @font-face {
 	font-family: 'mcc';
 	src:  url('../fonts/mcc.ttf?hqq0o6') format('truetype');

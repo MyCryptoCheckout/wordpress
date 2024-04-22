@@ -9,7 +9,7 @@ final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
 
     public function initialize()
     {
-        require_once( __DIR__ . DIRECTORY_SEPARATOR . 'WC_Gateway_MyCryptoCheckout.php' );
+		require_once( __DIR__ . DIRECTORY_SEPARATOR . 'WC_Gateway_MyCryptoCheckout.php' );
         $this->settings = get_option( 'woocommerce_mycryptocheckout_settings', [] );
         $this->gateway = WC_Gateway_MyCryptoCheckout::instance();
     }
@@ -47,10 +47,10 @@ final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
 
     public function get_payment_method_data()
     {
-    	ob_start();
-    	$this->gateway->payment_fields();
-    	echo $this->gateway->woocommerce_gateway_icon( '', \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id );
-    	$pf = ob_get_clean();
+        ob_start();
+        echo $this->gateway->woocommerce_gateway_icon( '', \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id );
+		$this->gateway->payment_fields();
+		$pf = ob_get_clean();
 
         return [
             'title' => $this->gateway->title,

@@ -303,6 +303,10 @@
   word-wrap: break-word;
 }
 
+.wc-block-components-checkout-step__container .mcc_currency_icons {
+  margin-bottom: 12px;
+}
+
 @font-face {
   font-family: "mcc";
   src: url("../fonts/mcc.ttf?hqq0o6") format("truetype");
