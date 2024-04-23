@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from 'react';
 import { decodeEntities } from '@wordpress/html-entities';
 import DOMPurify from 'dompurify';
 
@@ -6,22 +7,58 @@ const { getSetting } = window.wc.wcSettings
 
 const settings = getSetting( 'mycryptocheckout_data', {} );
 
-const label = decodeEntities( settings.title )
+const label = decodeEntities( settings.title );
 
 /**
  * Content component
  */
-const Content = () => {
-    // Ensure any HTML entities are decoded before sanitization
-    const rawHTML = decodeEntities(settings.payment_fields);
+const Content = (props) => {
+    const { eventRegistration } = props;
+    const { onPaymentProcessing } = eventRegistration;
 
-    // Sanitize the HTML
-    const safeHTML = DOMPurify.sanitize(rawHTML, {
-        ADD_ATTR: ['data-plugin', 'data-allow-clear', 'aria-hidden', 'data-placeholder', 'data-priority'], // Add any non-standard attributes
-    });
+    // State to store the selected currency
+    const [selectedCurrency, setSelectedCurrency] = useState('');
+
+    // Ref for the container to render the unsafe HTML
+    const containerRef = useRef(null);
+
+    // Effect to handle payment processing
+    useEffect(() => {
+        const unsubscribe = onPaymentProcessing(() => {
+            if (selectedCurrency) {
+                return {
+                    type: 'success',
+                    meta: {
+                        paymentMethodData: {
+                            selectedCurrency,
+                        },
+                    },
+                };
+            } else {
+                return {
+                    type: 'error',
+                    message: 'Please select a currency.',
+                };
+            }
+        });
+
+        return () => unsubscribe();
+    }, [selectedCurrency, onPaymentProcessing]);
+
+    // Effect to handle dynamic HTML and event binding
+    useEffect(() => {
+        if (containerRef.current) {
+            const selectElement = containerRef.current.querySelector('select#mcc_currency_id');
+            if (selectElement) {
+                selectElement.addEventListener('change', (event) => {
+                    setSelectedCurrency(event.target.value);
+                });
+            }
+        }
+    }, []); // Empty dependency array ensures this runs only once on mount
 
     return (
-        <div dangerouslySetInnerHTML={{ __html: safeHTML }} />
+        <div ref={containerRef} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(decodeEntities(settings.payment_fields)) }} />
     );
 };
 
