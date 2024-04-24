@@ -52,6 +52,13 @@ const Content = (props) => {
         if (containerRef.current) {
             const selectElement = containerRef.current.querySelector('select#mcc_currency_id');
             if (selectElement) {
+                // Set initial state to the first option's value if not already set
+                if (selectElement.length > 0 && !selectedCurrency) {
+                    const firstCurrency = selectElement.options[0].value;
+                    setSelectedCurrency(firstCurrency);
+                    console.log("Initial currency set to:", firstCurrency);  // Debugging initial set
+                }
+
                 selectElement.addEventListener('change', (event) => {
                     console.log("Currency changed to:", event.target.value);  // Debugging currency change
                     setSelectedCurrency(event.target.value);
