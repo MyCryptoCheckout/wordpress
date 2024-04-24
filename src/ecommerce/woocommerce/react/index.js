@@ -14,7 +14,7 @@ const label = decodeEntities( settings.title );
  */
 const Content = (props) => {
     const { eventRegistration } = props;
-    const { onPaymentProcessing } = eventRegistration;
+    const { onPaymentSetup } = eventRegistration;
 
     // State to store the selected currency
     const [selectedCurrency, setSelectedCurrency] = useState('');
@@ -24,7 +24,7 @@ const Content = (props) => {
 
     // Effect to handle payment processing
     useEffect(() => {
-        const unsubscribe = onPaymentProcessing(() => {
+        const unsubscribe = onPaymentSetup(() => {
             if (selectedCurrency) {
                 return {
                     type: 'success',
@@ -43,7 +43,7 @@ const Content = (props) => {
         });
 
         return () => unsubscribe();
-    }, [selectedCurrency, onPaymentProcessing]);
+    }, [selectedCurrency, onPaymentSetup]);
 
     // Effect to handle dynamic HTML and event binding
     useEffect(() => {
