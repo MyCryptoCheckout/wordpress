@@ -2,19 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import { decodeEntities } from '@wordpress/html-entities';
 import DOMPurify from 'dompurify';
 
-const { registerPaymentMethod } = window.wc.wcBlocksRegistry
-const { getSetting } = window.wc.wcSettings
+const { registerPaymentMethod } = window.wc.wcBlocksRegistry;
+const { getSetting } = window.wc.wcSettings;
 
-const settings = getSetting( 'mycryptocheckout_data', {} );
+const settings = getSetting('mycryptocheckout_data', {});
 
-const label = decodeEntities( settings.title );
+const label = decodeEntities(settings.title);
 
 /**
  * Content component
  */
 const Content = (props) => {
-    const { eventRegistration } = props;
-    const { onPaymentSetup } = eventRegistration;
+    const { eventRegistration, emitResponse } = props;
+	const { onPaymentSetup } = eventRegistration;
 
     // State to store the selected currency
     const [selectedCurrency, setSelectedCurrency] = useState('');
@@ -25,25 +25,27 @@ const Content = (props) => {
     // Effect to handle payment processing
     useEffect(() => {
         const unsubscribe = onPaymentSetup(() => {
+            console.log("Setup called with selectedCurrency:", selectedCurrency);  // Debugging selected currency
             if (selectedCurrency) {
                 return {
-                    type: 'success',
+                    type: emitResponse.responseTypes.SUCCESS,
                     meta: {
                         paymentMethodData: {
-                            selectedCurrency,
+                            selectedCurrency,  // Key used to send data
                         },
                     },
                 };
             } else {
                 return {
-                    type: 'error',
+                    type: emitResponse.responseTypes.ERROR,
                     message: 'Please select a currency.',
                 };
             }
         });
 
         return () => unsubscribe();
-    }, [selectedCurrency, onPaymentSetup]);
+    }, [emitResponse.responseTypes.ERROR,
+		emitResponse.responseTypes.SUCCESS, selectedCurrency, onPaymentSetup]);
 
     // Effect to handle dynamic HTML and event binding
     useEffect(() => {
@@ -51,6 +53,7 @@ const Content = (props) => {
             const selectElement = containerRef.current.querySelector('select#mcc_currency_id');
             if (selectElement) {
                 selectElement.addEventListener('change', (event) => {
+                    console.log("Currency changed to:", event.target.value);  // Debugging currency change
                     setSelectedCurrency(event.target.value);
                 });
             }
@@ -67,24 +70,24 @@ const Content = (props) => {
  *
  * @param {*} props Props from payment API.
  */
-const Label = ( props ) => {
-	const { PaymentMethodLabel } = props.components;
-	return <PaymentMethodLabel text={ label } />;
+const Label = (props) => {
+    const { PaymentMethodLabel } = props.components;
+    return <PaymentMethodLabel text={label} />;
 };
 
 /**
  * Payment method config object.
  */
 const MCC_Block_Gateway = {
-	name: "mycryptocheckout",
-	label: <Label />,
-	content: <Content />,
-	edit: <Content />,
-	canMakePayment: () => true,
-	ariaLabel: label,
-	supports: {
-		features: settings.supports,
-	},
+    name: "mycryptocheckout",
+    label: React.createElement( Label, null ),
+	content: React.createElement( Content, null ),
+	edit: React.createElement( Content, null ),
+    canMakePayment: () => true,
+    ariaLabel: label,
+    supports: {
+        features: settings.supports,
+    },
 };
 
-registerPaymentMethod( MCC_Block_Gateway );
+registerPaymentMethod(MCC_Block_Gateway);
