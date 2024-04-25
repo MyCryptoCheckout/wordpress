@@ -52,6 +52,59 @@
   background-repeat: no-repeat;
   background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiMwMDgwMDE7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTg4LDMwLjNMNzUuMSwxNy40Yy0wLjUtMC41LTEuMS0wLjctMS43LTAuN2MtMC42LDAtMS4zLDAuMy0xLjcsMC43TDM3LjQsNTEuN2wtOS4xLTkuMWMtMC45LTAuOS0yLjUtMC45LTMuNCwwTDEyLDU1LjVjLTAuNSwwLjUtMC43LDEuMS0wLjcsMS43czAuMywxLjMsMC43LDEuN2wyMy42LDIzLjZjMC41LDAuNSwxLjEsMC43LDEuNywwLjdjMCwwLDAuMSwwLDAuMSwwYzAsMCwwLDAsMC4xLDBjMC42LDAsMS4yLTAuMiwxLjctMC43TDg4LDMzLjdDODksMzIuOCw4OSwzMS4zLDg4LDMwLjN6Ii8+PC9zdmc+);
 }
+@keyframes outline {
+  from {
+    stroke-dasharray: 0, 345.576px;
+  }
+  to {
+    stroke-dasharray: 345.576px, 345.576px;
+  }
+}
+.mycryptocheckout.online_payment_instructions .paid #outline {
+  animation: 0.38s ease-in outline;
+  transform: rotate(0deg);
+  transform-origin: center;
+}
+@keyframes circle {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+.mycryptocheckout.online_payment_instructions .paid #white-circle {
+  animation: 0.35s ease-in 0.35s forwards circle;
+  transform: none;
+  transform-origin: center;
+}
+@keyframes check {
+  from {
+    stroke-dasharray: 0, 75px;
+  }
+  to {
+    stroke-dasharray: 75px, 75px;
+  }
+}
+.mycryptocheckout.online_payment_instructions .paid #check {
+  animation: 0.34s cubic-bezier(0.65, 0, 1, 1) 0.8s forwards check;
+  stroke-dasharray: 0, 75px;
+}
+@keyframes check-group {
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.09);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.mycryptocheckout.online_payment_instructions .paid #check-group {
+  animation: 0.32s ease-in-out 1.03s check-group;
+  transform-origin: center;
+}
 .mycryptocheckout.online_payment_instructions .mcc_qr_code {
   margin-bottom: 1em;
   margin-right: 20px;
