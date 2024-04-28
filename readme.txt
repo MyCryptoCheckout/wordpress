@@ -6,7 +6,7 @@ Requires at least: 4.9
 Requires PHP: 5.6
 Stable tag: 2.131
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
-Tested up to: 6.4
+Tested up to: 6.5.2
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 100+ coins: Bitcoin, Ethereum, BNB, and more. Peer-to-peer transactions.
 
@@ -255,8 +255,15 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 = 2.132 20240326 =
 
+* New: WooCommerce checkout block integration
+* New: Animated paid checkmark
+* New chain: Base chain
+* New currency: ETH on Base
+* New currency: WETH on Base
+* New currency: USDC on Base
+* Update: Better scripts and styles versioning
 * Update: bignumber.js to v9.1.2
-* Update: web3.js to v4.7.0
+* Update: web3.js to v1.10.4
 
 = 2.131 20231209 =
 
