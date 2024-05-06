@@ -114,6 +114,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_generate_payment_timer();
 		$$.$payment_buttons.appendTo( $$.$online_pay_box );
 		$$.maybe_metamask();
+		$$.maybe_phantom();
 		$$.maybe_waves_link();
 		$$.maybe_browser_link();
 		$$.maybe_trustwallet_link();
@@ -340,7 +341,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 				if (use_eip1559) {
 					console.debug("Using EIP1559");
-				
+
 					// Round the values to avoid too many decimal places
 					const maxPriorityFeePerGasWei = web3.utils.toWei(
 						parseFloat($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxPriorityFeePerGas).toFixed(9),
@@ -350,14 +351,14 @@ var mycryptocheckout_checkout_javascript = function( data )
 						parseFloat($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxFeePerGas).toFixed(9),
 						'gwei'
 					);
-				
+
 					// Set priority fee and max fee per gas
 					send_parameters['maxPriorityFeePerGas'] = maxPriorityFeePerGasWei;
 					send_parameters['maxFeePerGas'] = maxFeePerGasWei;
-				
+
 					// Set gas limit
 					send_parameters['gasLimit'] = Math.ceil($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].avgGas);
-				
+
 					gas_set = true;
 				}
 
@@ -417,6 +418,64 @@ var mycryptocheckout_checkout_javascript = function( data )
 			}
 
 		} );
+	}
+
+
+	/**
+		@brief		Maybe generate a phantom link
+		@since		2024-05-06 18:50:10
+	**/
+	$$.maybe_phantom = function()
+	{
+		if ( $$.$online_pay_box.length < 1 )
+			return;
+
+		// The data must support metamask.
+		if ( typeof $$.mycryptocheckout_checkout_data.supports === 'undefined' )
+			return;
+
+		// sol must be supported and phantom enabled.
+		if ( typeof window.solana === 'undefined' )
+			return;
+
+		var provider = window.solana;
+
+		provider.connect().then(function()
+		{
+			console.log("Connected with Public Key:", provider.publicKey.toString());
+			var connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
+
+			if ( $$.mycryptocheckout_checkout_data.currency_id == 'SOL' )
+			{
+				// Normal SOL
+				console.debug( 'Normal SOL transaction.' );
+				var transaction = new solanaWeb3.Transaction().add(
+					solanaWeb3.SystemProgram.transfer(
+					{
+						fromPubkey: provider.publicKey,
+						toPubkey: $$.mycryptocheckout_checkout_data.to,
+						lamports: solanaWeb3.LAMPORTS_PER_SOL * $$.mycryptocheckout_checkout_data.amount,
+					} )
+				);
+					connection.getRecentBlockhash().then(function(response)
+					{
+						transaction.recentBlockhash = response.blockhash;
+						transaction.feePayer = provider.publicKey;
+						provider.signAndSendTransaction(transaction).then(function(signed)
+						{
+								console.log("SOL Transaction signature", signed.signature);
+						} )
+						.catch(function(error)
+						{
+							console.error("Signing and sending transaction failed:", error);
+						} );
+					} );
+			}
+			else
+			{
+				// Token!
+			}
+		} ); // provider.connect().then(function()
 	}
 
 	/**
