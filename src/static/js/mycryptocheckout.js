@@ -7294,11 +7294,26 @@ var mycryptocheckout_checkout_javascript = function( data )
 				var use_eip1559 = ( typeof $$.mycryptocheckout_checkout_data.supports.eip1559 !== 'undefined' );
 				var gas_set = false;
 
-				if ( use_eip1559 )
-				{
-					console.debug( "Using EIP1559" );
-					send_parameters[ 'maxPriorityFeePerGas' ] = web3.utils.toWei( $$.mycryptocheckout_checkout_data.supports.eip1559.maxPriorityFeePerGas + "", 'gwei' );
-					send_parameters[ 'gas' ] = $$.mycryptocheckout_checkout_data.supports.eip1559.gas_limit;
+				if (use_eip1559) {
+					console.debug("Using EIP1559");
+				
+					// Round the values to avoid too many decimal places
+					const maxPriorityFeePerGasWei = web3.utils.toWei(
+						parseFloat($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxPriorityFeePerGas).toFixed(9),
+						'gwei'
+					);
+					const maxFeePerGasWei = web3.utils.toWei(
+						parseFloat($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxFeePerGas).toFixed(9),
+						'gwei'
+					);
+				
+					// Set priority fee and max fee per gas
+					send_parameters['maxPriorityFeePerGas'] = maxPriorityFeePerGasWei;
+					send_parameters['maxFeePerGas'] = maxFeePerGasWei;
+				
+					// Set gas limit
+					send_parameters['gasLimit'] = Math.ceil($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].avgGas);
+				
 					gas_set = true;
 				}
 
