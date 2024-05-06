@@ -19,7 +19,7 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 = Key Features & Highlights =
 
 - 0% transaction fees
-- No KYC or product restrictions
+- No product restrictions
 - Peer-to-peer transactions
 - No redirection to 3rd parties or iframes
 - Use any crypto wallet you want
@@ -28,7 +28,6 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - 1-Click payment buttons, MetaMask, etc.
 - Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
-- Tor support
 - 0-conf (mempool) support for some coins
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
 - Take MCC for a test ride by visiting our <a href="https://wpdemo.mycryptocheckout.com/">demo store</a>
@@ -264,6 +263,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * Update: Better scripts and styles versioning
 * Update: bignumber.js to v9.1.2
 * Update: web3.js to v1.10.4
+* Update: Better eip1559 gas calculations
 
 = 2.131 20231209 =
 
