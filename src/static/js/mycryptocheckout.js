@@ -7381,7 +7381,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		@brief		Maybe generate a phantom link
 		@since		2024-05-06 18:50:10
 	**/
-	$$.maybe_phantom = function()
+	$$.maybe_phantom = async function() // Changed to async
 	{
 		if ( $$.$online_pay_box.length < 1 )
 			return;
@@ -7404,12 +7404,12 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.$phantom = $( '<div class="phantom_payment" role="img" aria-label="phantom wallet"></div>' );
 		$$.$phantom.appendTo( $$.$payment_buttons );
 
-		provider.connect().then(function()
-		{
+		try {
+			await provider.connect(); // Added await to the connection
 			console.log("Connected with Public Key:", provider.publicKey.toString());
 			// var connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
 			const network = "https://nameless-icy-friday.solana-mainnet.quiknode.pro/2f1deb55bdca48ebafc179d8eee99c6da41b8a30/";
-    		var connection = new solanaWeb3.Connection(network);
+			var connection = new solanaWeb3.Connection(network);
 
 			if ( $$.mycryptocheckout_checkout_data.currency_id == 'SOL' )
 			{
@@ -7421,23 +7421,17 @@ var mycryptocheckout_checkout_javascript = function( data )
 						fromPubkey: provider.publicKey,
 						toPubkey: $$.mycryptocheckout_checkout_data.to,
 						lamports: solanaWeb3.LAMPORTS_PER_SOL * $$.mycryptocheckout_checkout_data.amount,
-					} )
+					})
 				);
-					connection.getRecentBlockhash().then(function(response)
-					{
-						transaction.recentBlockhash = response.blockhash;
-						transaction.feePayer = provider.publicKey;
-						provider.signAndSendTransaction(transaction).then(function(signed)
-						{
-								console.log("SOL Transaction signature", signed.signature);
-						} )
-						.catch(function(error)
-						{
-							console.error("Signing and sending transaction failed:", error);
-						} );
-					} );
+
+				const { blockhash } = await connection.getRecentBlockhash();
+				transaction.recentBlockhash = blockhash;
+				transaction.feePayer = provider.publicKey;
+
+				const signed = await provider.signAndSendTransaction(transaction);
+				console.log("SOL Transaction signature", signed.signature);
 			}
-			else
+			else 
 			{
 				// Token!
 				const tokenPublicKey = new solanaWeb3.PublicKey( $$.mycryptocheckout_checkout_data.currency.contract );
@@ -7471,8 +7465,10 @@ var mycryptocheckout_checkout_javascript = function( data )
 				let signed = await provider.signAndSendTransaction(transaction);
 				console.log("Token transfer signature", signed.signature);
 			}
-		} ); // provider.connect().then(function()
-	}
+		} catch (error) {
+			console.error("Signing and sending transaction failed:", error);
+		}
+	};
 
 	/**
 		@brief		Show a trustwallet payment link.
