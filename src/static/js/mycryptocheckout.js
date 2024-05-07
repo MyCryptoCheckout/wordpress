@@ -7399,6 +7399,11 @@ var mycryptocheckout_checkout_javascript = function( data )
 		// If the Buffer object is not yet available, define it.
 		window.Buffer = window.Buffer ?? buffer.Buffer;
 
+		$$.show_browser_link = false;
+
+		$$.$phantom = $( '<div class="phantom_payment" role="img" aria-label="phantom wallet"></div>' );
+		$$.$phantom.appendTo( $$.$payment_buttons );
+
 		provider.connect().then(function()
 		{
 			console.log("Connected with Public Key:", provider.publicKey.toString());
