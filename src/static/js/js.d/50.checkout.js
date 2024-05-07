@@ -440,10 +440,15 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		var provider = window.solana;
 
+		// If the Buffer object is not yet available, define it.
+		window.Buffer = window.Buffer ?? buffer.Buffer;
+
 		provider.connect().then(function()
 		{
 			console.log("Connected with Public Key:", provider.publicKey.toString());
-			var connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
+			// var connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
+			const network = "https://nameless-icy-friday.solana-mainnet.quiknode.pro/2f1deb55bdca48ebafc179d8eee99c6da41b8a30/";
+    		var connection = new solanaWeb3.Connection(network);
 
 			if ( $$.mycryptocheckout_checkout_data.currency_id == 'SOL' )
 			{
