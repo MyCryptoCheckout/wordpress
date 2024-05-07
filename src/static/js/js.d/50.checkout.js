@@ -425,7 +425,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		@brief		Maybe generate a phantom link
 		@since		2024-05-06 18:50:10
 	**/
-	$$.maybe_phantom = async function() // Changed to async
+	$$.maybe_phantom = function()
 	{
 		if ( $$.$online_pay_box.length < 1 )
 			return;
@@ -448,70 +448,73 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.$phantom = $( '<div class="phantomwallet_link" role="img" aria-label="phantom wallet"></div>' );
 		$$.$phantom.appendTo( $$.$payment_buttons );
 
-		try {
-			await provider.connect(); // Added await to the connection
-			console.log("Connected with Public Key:", provider.publicKey.toString());
-			// var connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
-			const network = "https://nameless-icy-friday.solana-mainnet.quiknode.pro/2f1deb55bdca48ebafc179d8eee99c6da41b8a30/";
-			var connection = new solanaWeb3.Connection(network);
+		$$.$phantom.click( async function()
+		{
+			try {
+				await provider.connect(); // Added await to the connection
+				console.log("Connected with Public Key:", provider.publicKey.toString());
+				// var connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
+				const network = "https://nameless-icy-friday.solana-mainnet.quiknode.pro/2f1deb55bdca48ebafc179d8eee99c6da41b8a30/";
+				var connection = new solanaWeb3.Connection(network);
 
-			if ( $$.mycryptocheckout_checkout_data.currency_id == 'SOL' )
-			{
-				// Normal SOL
-				console.debug( 'Normal SOL transaction.' );
-				var transaction = new solanaWeb3.Transaction().add(
-					solanaWeb3.SystemProgram.transfer(
-					{
-						fromPubkey: provider.publicKey,
-						toPubkey: $$.mycryptocheckout_checkout_data.to,
-						lamports: solanaWeb3.LAMPORTS_PER_SOL * $$.mycryptocheckout_checkout_data.amount,
-					})
-				);
+				if ( $$.mycryptocheckout_checkout_data.currency_id == 'SOL' )
+				{
+					// Normal SOL
+					console.debug( 'Normal SOL transaction.' );
+					var transaction = new solanaWeb3.Transaction().add(
+						solanaWeb3.SystemProgram.transfer(
+						{
+							fromPubkey: provider.publicKey,
+							toPubkey: $$.mycryptocheckout_checkout_data.to,
+							lamports: solanaWeb3.LAMPORTS_PER_SOL * $$.mycryptocheckout_checkout_data.amount,
+						})
+					);
 
-				const { blockhash } = await connection.getRecentBlockhash();
-				transaction.recentBlockhash = blockhash;
-				transaction.feePayer = provider.publicKey;
+					const { blockhash } = await connection.getRecentBlockhash();
+					transaction.recentBlockhash = blockhash;
+					transaction.feePayer = provider.publicKey;
 
-				const signed = await provider.signAndSendTransaction(transaction);
-				console.log("SOL Transaction signature", signed.signature);
-			}
-			else 
-			{
-				// Token!
-				const tokenPublicKey = new solanaWeb3.PublicKey( $$.mycryptocheckout_checkout_data.currency.contract );
-				const recipientPublicKey = new solanaWeb3.PublicKey( $$.mycryptocheckout_checkout_data.to );
-				const amount = $$.mycryptocheckout_checkout_data.amount;
+					const signed = await provider.signAndSendTransaction(transaction);
+					console.log("SOL Transaction signature", signed.signature);
+				}
+				else
+				{
+					// Token!
+					const tokenPublicKey = new solanaWeb3.PublicKey( $$.mycryptocheckout_checkout_data.currency.contract );
+					const recipientPublicKey = new solanaWeb3.PublicKey( $$.mycryptocheckout_checkout_data.to );
+					const amount = $$.mycryptocheckout_checkout_data.amount;
 
-				const token = new splToken.Token(
-					connection,
-					tokenPublicKey,
-					splToken.TOKEN_PROGRAM_ID,
-					provider.publicKey
-				);
-
-				const senderTokenAccount = await token.getOrCreateAssociatedAccountInfo( provider.publicKey );
-				const recipientTokenAccount = await token.getOrCreateAssociatedAccountInfo( recipientPublicKey );
-
-				const transaction = new solanaWeb3.Transaction().add(
-					splToken.Token.createTransferInstruction(
+					const token = new splToken.Token(
+						connection,
+						tokenPublicKey,
 						splToken.TOKEN_PROGRAM_ID,
-						senderTokenAccount.address,
-						recipientTokenAccount.address,
-						provider.publicKey,
-						[],
-						amount
-					)
-				);
+						provider.publicKey
+					);
 
-				let { blockhash } = await connection.getRecentBlockhash();
-				transaction.recentBlockhash = blockhash;
-				transaction.feePayer = provider.publicKey;
-				let signed = await provider.signAndSendTransaction(transaction);
-				console.log("Token transfer signature", signed.signature);
+					const senderTokenAccount = await token.getOrCreateAssociatedAccountInfo( provider.publicKey );
+					const recipientTokenAccount = await token.getOrCreateAssociatedAccountInfo( recipientPublicKey );
+
+					const transaction = new solanaWeb3.Transaction().add(
+						splToken.Token.createTransferInstruction(
+							splToken.TOKEN_PROGRAM_ID,
+							senderTokenAccount.address,
+							recipientTokenAccount.address,
+							provider.publicKey,
+							[],
+							amount
+						)
+					);
+
+					let { blockhash } = await connection.getRecentBlockhash();
+					transaction.recentBlockhash = blockhash;
+					transaction.feePayer = provider.publicKey;
+					let signed = await provider.signAndSendTransaction(transaction);
+					console.log("Token transfer signature", signed.signature);
+				}
+			} catch (error) {
+				console.error("Signing and sending transaction failed:", error);
 			}
-		} catch (error) {
-			console.error("Signing and sending transaction failed:", error);
-		}
+		} );
 	};
 
 	/**
