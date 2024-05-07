@@ -7401,7 +7401,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		$$.show_browser_link = false;
 
-		$$.$phantom = $( '<div class="phantom_payment" role="img" aria-label="phantom wallet"></div>' );
+		$$.$phantom = $( '<div class="phantomwallet_link" role="img" aria-label="phantom wallet"></div>' );
 		$$.$phantom.appendTo( $$.$payment_buttons );
 
 		try {
