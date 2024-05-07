@@ -479,6 +479,36 @@ var mycryptocheckout_checkout_javascript = function( data )
 			else
 			{
 				// Token!
+				const tokenPublicKey = new solanaWeb3.PublicKey( $$.mycryptocheckout_checkout_data.currency.contract );
+				const recipientPublicKey = new solanaWeb3.PublicKey( $$.mycryptocheckout_checkout_data.to );
+				const amount = $$.mycryptocheckout_checkout_data.amount;
+
+				const token = new splToken.Token(
+					connection,
+					tokenPublicKey,
+					splToken.TOKEN_PROGRAM_ID,
+					provider.publicKey
+				);
+
+				const senderTokenAccount = await token.getOrCreateAssociatedAccountInfo( provider.publicKey );
+				const recipientTokenAccount = await token.getOrCreateAssociatedAccountInfo( recipientPublicKey );
+
+				const transaction = new solanaWeb3.Transaction().add(
+					splToken.Token.createTransferInstruction(
+						splToken.TOKEN_PROGRAM_ID,
+						senderTokenAccount.address,
+						recipientTokenAccount.address,
+						provider.publicKey,
+						[],
+						amount
+					)
+				);
+
+				let { blockhash } = await connection.getRecentBlockhash();
+				transaction.recentBlockhash = blockhash;
+				transaction.feePayer = provider.publicKey;
+				let signed = await provider.signAndSendTransaction(transaction);
+				console.log("Token transfer signature", signed.signature);
 			}
 		} ); // provider.connect().then(function()
 	}
