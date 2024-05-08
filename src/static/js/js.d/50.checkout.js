@@ -486,7 +486,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					// console.log("Recipient Public Key:", recipientPublicKey.toString());
 
 					// Use the known decimal count directly
-					const decimals = $$.mycryptocheckout_checkout_data.currency.decimal_precision;
+					const decimals = $$.mycryptocheckout_checkout_data.supports.sol20_decimal_precision;
 					const floatAmount = parseFloat($$.mycryptocheckout_checkout_data.amount);
 					// console.log("Float Amount:", floatAmount);
 					// console.log("Token Decimals:", decimals);
