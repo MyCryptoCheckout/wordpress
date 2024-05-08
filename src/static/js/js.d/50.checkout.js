@@ -479,35 +479,48 @@ var mycryptocheckout_checkout_javascript = function( data )
 				}
 				else
 				{
-					// Token!
-					const tokenPublicKey = new solanaWeb3.PublicKey( $$.mycryptocheckout_checkout_data.currency.contract );
-					const recipientPublicKey = new solanaWeb3.PublicKey( $$.mycryptocheckout_checkout_data.to );
-					const amount = $$.mycryptocheckout_checkout_data.amount;
+					console.debug('Token transfer transaction.');
+	
+					const tokenPublicKey = new solanaWeb3.PublicKey($$.mycryptocheckout_checkout_data.currency.contract);
+					const recipientPublicKey = new solanaWeb3.PublicKey($$.mycryptocheckout_checkout_data.to);
+					console.log("Token Public Key:", tokenPublicKey.toString());
+					console.log("Recipient Public Key:", recipientPublicKey.toString());
 
+					// Use the known decimal count directly
+					const decimals = 6;
+					const floatAmount = parseFloat($$.mycryptocheckout_checkout_data.amount);
+					console.log("Float Amount:", floatAmount);
+					console.log("Token Decimals:", decimals);
+		
+					// Adjust the amount for the token's known decimals
+					const adjustedAmount = Math.round(floatAmount * Math.pow(10, decimals));
+					console.log("Adjusted Amount for Token Decimals:", adjustedAmount);
+	
 					const token = new splToken.Token(
 						connection,
 						tokenPublicKey,
 						splToken.TOKEN_PROGRAM_ID,
 						provider.publicKey
 					);
+	
+					const senderTokenAccount = await token.getOrCreateAssociatedAccountInfo(provider.publicKey);
+        			const recipientTokenAccount = await token.getOrCreateAssociatedAccountInfo(recipientPublicKey);
 
-					const senderTokenAccount = await token.getOrCreateAssociatedAccountInfo( provider.publicKey );
-					const recipientTokenAccount = await token.getOrCreateAssociatedAccountInfo( recipientPublicKey );
-
-					const transaction = new solanaWeb3.Transaction().add(
-						splToken.Token.createTransferInstruction(
-							splToken.TOKEN_PROGRAM_ID,
-							senderTokenAccount.address,
-							recipientTokenAccount.address,
-							provider.publicKey,
-							[],
-							amount
-						)
-					);
-
+        			const transaction = new solanaWeb3.Transaction().add(
+            			splToken.Token.createTransferInstruction(
+                			splToken.TOKEN_PROGRAM_ID,
+                			senderTokenAccount.address,
+                			recipientTokenAccount.address,
+                			provider.publicKey,
+                			[],
+                			adjustedAmount // Use the adjusted amount
+            			)
+        			);
+	
 					let { blockhash } = await connection.getRecentBlockhash();
 					transaction.recentBlockhash = blockhash;
 					transaction.feePayer = provider.publicKey;
+	
 					let signed = await provider.signAndSendTransaction(transaction);
 					console.log("Token transfer signature", signed.signature);
 				}

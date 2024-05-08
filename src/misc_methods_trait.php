@@ -66,6 +66,7 @@ trait misc_methods_trait
 		// Buffer.js downloaded from bundle.run/buffer@6.0.3
 		wp_enqueue_script( 'mycryptocheckout-web3-sol-buffer', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/buffer.min.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
 		wp_enqueue_script( 'mycryptocheckout-web3-sol', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/index.iife.min.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
+		wp_enqueue_script( 'mycryptocheckout-web3-sol-spltoken', MyCryptoCheckout()->paths( 'url' ) . '/src/static/js/spl-token.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
 	}
 
 	/**
