@@ -452,7 +452,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		{
 			try {
 				await provider.connect(); // Added await to the connection
-				console.log("Connected with Public Key:", provider.publicKey.toString());
+				// console.log("Connected with Public Key:", provider.publicKey.toString());
 				const network = $$.mycryptocheckout_checkout_data.supports.connection;
 				var connection = new solanaWeb3.Connection(network);
 
@@ -474,7 +474,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					transaction.feePayer = provider.publicKey;
 
 					const signed = await provider.signAndSendTransaction(transaction);
-					console.log("SOL Transaction signature", signed.signature);
+					// console.log("SOL Transaction signature", signed.signature);
 				}
 				else
 				{
@@ -482,18 +482,18 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 					const tokenPublicKey = new solanaWeb3.PublicKey($$.mycryptocheckout_checkout_data.currency.contract);
 					const recipientPublicKey = new solanaWeb3.PublicKey($$.mycryptocheckout_checkout_data.to);
-					console.log("Token Public Key:", tokenPublicKey.toString());
-					console.log("Recipient Public Key:", recipientPublicKey.toString());
+					// console.log("Token Public Key:", tokenPublicKey.toString());
+					// console.log("Recipient Public Key:", recipientPublicKey.toString());
 
 					// Use the known decimal count directly
 					const decimals = $$.mycryptocheckout_checkout_data.currency.decimal_precision;
 					const floatAmount = parseFloat($$.mycryptocheckout_checkout_data.amount);
-					console.log("Float Amount:", floatAmount);
-					console.log("Token Decimals:", decimals);
+					// console.log("Float Amount:", floatAmount);
+					// console.log("Token Decimals:", decimals);
 
 					// Adjust the amount for the token's known decimals
 					const adjustedAmount = Math.round(floatAmount * Math.pow(10, decimals));
-					console.log("Adjusted Amount for Token Decimals:", adjustedAmount);
+					// console.log("Adjusted Amount for Token Decimals:", adjustedAmount);
 
 					const token = new splToken.Token(
 						connection,
@@ -521,7 +521,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					transaction.feePayer = provider.publicKey;
 
 					let signed = await provider.signAndSendTransaction(transaction);
-					console.log("Token transfer signature", signed.signature);
+					// console.log("Token transfer signature", signed.signature);
 				}
 			} catch (error) {
 				console.error("Signing and sending transaction failed:", error);
