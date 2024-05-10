@@ -42,6 +42,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = Cryptocurrencies supported: =
 
 - Algorand ALGO
+- Base Chain BASE
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
@@ -56,11 +57,18 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Monero XMR
 - Polygon MATIC
 - PutinCoin PUT
+- Solana SOL
 - Stellar XLM
 - Tron TRX
 - XRP
 - Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
+
+= BASE tokens supported (Including MetaMask): =
+
+- Degen DEGEN
+- USD Coin USDC
+- Wrapped Ether WETH
 
 = BEP-20 tokens supported (Including MetaMask): =
 
@@ -78,6 +86,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - TasteNFT TASTE
 - VAI Stablecoin VAI
 - Venus XVS
+- Value Flow VFLOW
 - xxxNifty NSFW
 - Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP20 tokens</a>!
 
@@ -91,6 +100,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Aragon ANT
 - Bancor BNT
 - Basic Attention Token BAT
+- Bobby BOBBY
 - Chainlink LINK
 - Compound COMP
 - Efinity Token EFI
@@ -135,6 +145,13 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Wrapped Bitcoin WBTC
 - YIELD App YLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
+
+= SPL tokens =
+
+- dogwifhat WIF
+- Popcat POPCAT
+- Tether USDT
+- USD Coin USDC
 
 = TRC-20 tokens supported: =
 
@@ -260,6 +277,14 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * New currency: ETH on Base
 * New currency: WETH on Base
 * New currency: USDC on Base
+* New currency: DEGEN
+* New chain: Solana SOL
+* New currency: dogwifhat WIF
+* New currency: Popcat POPCAT
+* New currency: USDT on SOL
+* New currency: USDC on SOL
+* New currency: Bobby BOBBY
+* New currency: Value Flow VFLOW
 * Update: Better scripts and styles versioning
 * Update: bignumber.js to v9.1.2
 * Update: web3.js to v1.10.4
