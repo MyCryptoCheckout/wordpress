@@ -407,6 +407,50 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mcc-BASE:before {
+  content: "\ea38";
+}
+
+.mcc-BASE_USDC:before {
+  content: "\ea39";
+}
+
+.mcc-BASE_USDT:before {
+  content: "\ea3a";
+}
+
+.mcc-BASE_WETH:before {
+  content: "\ea3b";
+}
+
+.mcc-BOBBY:before {
+  content: "\ea3c";
+}
+
+.mcc-DEGEN:before {
+  content: "\ea3d";
+}
+
+.mcc-POPCAT:before {
+  content: "\ea3e";
+}
+
+.mcc-SOL_USDC:before {
+  content: "\ea3f";
+}
+
+.mcc-SOL_USDT:before {
+  content: "\ea40";
+}
+
+.mcc-VFLOW:before {
+  content: "\ea41";
+}
+
+.mcc-WIF:before {
+  content: "\ea42";
+}
+
 .mcc-DYDX:before {
   content: "\ea30";
 }
@@ -1739,6 +1783,22 @@
   color: #AC582D;
 }
 
+.mcc_currency_icons.color i.mcc-BASE {
+  color: #2775ca;
+}
+
+.mcc_currency_icons.color i.mcc-BASE_USDC {
+  color: #2775ca;
+}
+
+.mcc_currency_icons.color i.mcc-BASE_USDT {
+  color: #26a17b;
+}
+
+.mcc_currency_icons.color i.mcc-BASE_WETH {
+  color: #d23b78;
+}
+
 .mcc_currency_icons.color i.mcc-BAT {
   color: #9e1f63;
 }
@@ -1793,6 +1853,10 @@
 
 .mcc_currency_icons.color i.mcc-BNT {
   color: #000D2B;
+}
+
+.mcc_currency_icons.color i.mcc-BOBBY {
+  color: #000000;
 }
 
 .mcc_currency_icons.color i.mcc-BSCURBATE {
@@ -1929,6 +1993,10 @@
 
 .mcc_currency_icons.color i.mcc-DEFI {
   color: #000000;
+}
+
+.mcc_currency_icons.color i.mcc-DEGEN {
+  color: #a26dfc;
 }
 
 .mcc_currency_icons.color i.mcc-DEP_BEP20 {
@@ -2463,6 +2531,10 @@
   color: #4C5A95;
 }
 
+.mcc_currency_icons.color i.mcc-POPCAT {
+  color: #000000;
+}
+
 .mcc_currency_icons.color i.mcc-PPT {
   color: #152743;
 }
@@ -2585,6 +2657,14 @@
 
 .mcc_currency_icons.color i.mcc-SOL {
   color: #000000;
+}
+
+.mcc_currency_icons.color i.mcc-SOL_USDC {
+  color: #2775ca;
+}
+
+.mcc_currency_icons.color i.mcc-SOL_USDT {
+  color: #26a17b;
 }
 
 .mcc_currency_icons.color i.mcc-SOS {
@@ -2815,6 +2895,10 @@
   color: #03ABA3;
 }
 
+.mcc_currency_icons.color i.mcc-VFLOW {
+  color: #000000;
+}
+
 .mcc_currency_icons.color i.mcc-VIA {
   color: #000000;
 }
@@ -2845,6 +2929,10 @@
 
 .mcc_currency_icons.color i.mcc-WBTC {
   color: #282138;
+}
+
+.mcc_currency_icons.color i.mcc-WIF {
+  color: #efbfa8;
 }
 
 .mcc_currency_icons.color i.mcc-WOBTC {
