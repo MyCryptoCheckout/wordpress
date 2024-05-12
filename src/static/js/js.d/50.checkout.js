@@ -430,8 +430,11 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( $$.$online_pay_box.length < 1 )
 			return;
 
-		// The data must support metamask.
+		// The data must support phantom wallet.
 		if ( typeof $$.mycryptocheckout_checkout_data.supports === 'undefined' )
+			return;
+
+		if ( typeof $$.mycryptocheckout_checkout_data.supports.phantom_wallet === 'undefined' )
 			return;
 
 		// sol must be supported and phantom enabled.
