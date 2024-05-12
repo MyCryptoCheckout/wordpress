@@ -53,7 +53,7 @@ module.exports = function(grunt) {
 						// Rename the file to include '40.' prefix 
 						rename: function (dest, matchedSrcPath) {
 							if (matchedSrcPath.substring(0, 1) !== '4') {
-								return dest + '40.' + matchedSrcPath;
+								return dest + '10.' + matchedSrcPath;
 							}
 						}
 					},
