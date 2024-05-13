@@ -88,14 +88,36 @@ module.exports = function(grunt) {
 				],
 			},
 		},
+		concat: {
+			basic_and_extras: {
+				files: {
+					'src/static/js/mycryptocheckout.js':
+					[
+						'src/static/js/js.d/10.bignumber.js',
+						'src/static/js/js.d/10.mcc_make_clipboard.js',
+						'src/static/js/js.d/10.new_currency.js',
+						'src/static/js/js.d/10.plainview_auto_tabs.js',
+						'src/static/js/js.d/10.sort_wallets.js',
+						'src/static/js/js.d/20.header.js',
+						'src/static/js/js.d/40.clipboard.js',
+						'src/static/js/js.d/40.qrcode.js',
+						'src/static/js/js.d/50.checkout.js',
+						'src/static/js/js.d/50.donations.js',
+						'src/static/js/js.d/98.init.js',
+						'src/static/js/js.d/99.footer.js',
+					],
+				},
+			},
+		},
 	});
 
 	// Load plugins
 	grunt.loadNpmTasks('grunt-dart-sass');
 	grunt.loadNpmTasks('@lodder/grunt-postcss');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	
 	// Run All Tasks
-	grunt.registerTask('all', ['dart-sass', 'postcss', 'copy']);
+	grunt.registerTask('all', ['dart-sass', 'postcss', 'copy', 'concat']);
 
 };
