@@ -4380,6 +4380,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.$metamask.click( async function()
 		{
 			try {
+
 				// Request account access if needed
 				const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
@@ -4408,7 +4409,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					send_parameters['maxFeePerGas'] = maxFeePerGasWei;
 
 					// Set gas limit
-					send_parameters['gasLimit'] = Math.ceil($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].avgGas);
+					send_parameters['gasLimit'] = web3.utils.toHex(Math.ceil($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].avgGas));
 
 					gas_set = true;
 				}
