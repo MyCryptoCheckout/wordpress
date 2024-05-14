@@ -4381,6 +4381,28 @@ var mycryptocheckout_checkout_javascript = function( data )
 		{
 			try {
 
+				if( typeof $$.mycryptocheckout_checkout_data.supports.metamask_id != 'undefined' ) {
+					
+					// Retrieve the desired network's chain ID and convert to hex
+					const chainIdNumber = $$.mycryptocheckout_checkout_data.supports.metamask_id;
+    				const desiredChainId = '0x' + parseInt(chainIdNumber).toString(16);
+					
+					// Switch to the desired network if necessary
+					try {
+						await window.ethereum.request({
+							method: 'wallet_switchEthereumChain',
+							params: [{ chainId: desiredChainId }],
+						});
+					} catch (error) {
+						if (error.code === 4902) {
+							console.error('The network is not available in MetaMask.');
+						} else {
+							console.error('Failed to switch the network:', error);
+							return; // Exit if network switch fails
+						}
+					}
+				}
+
 				// Request account access if needed
 				const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
