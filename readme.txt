@@ -288,6 +288,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * Update: Better scripts and styles versioning
 * Update: bignumber.js to v9.1.2
 * Update: web3.js to v1.10.4
+* Update: Metamask auto network switching
 * Update: Better eip1559 gas calculations
 
 = 2.131 20231209 =
