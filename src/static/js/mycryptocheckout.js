@@ -4410,7 +4410,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					'from' : accounts[0],		// First available.
 				};
 
-				var use_eip1559 = ( typeof $$.mycryptocheckout_checkout_data.supports.eip1559 !== 'undefined' );
+				var use_eip1559 = ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxPriorityFeePerGas !== 'undefined' );
 				var gas_set = false;
 
 				if (use_eip1559) {
