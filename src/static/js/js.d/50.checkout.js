@@ -114,7 +114,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_generate_payment_timer();
 		$$.$payment_buttons.appendTo( $$.$online_pay_box );
 		$$.maybe_metamask();
-		$$.maybe_phantom();
+		// $$.maybe_phantom();
 		$$.maybe_waves_link();
 		$$.maybe_browser_link();
 		$$.maybe_trustwallet_link();
@@ -447,7 +447,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 	/**
 		@brief		Maybe generate a phantom link
 		@since		2024-05-06 18:50:10
-	**/
+	
 	$$.maybe_phantom = function()
 	{
 		if ( $$.$online_pay_box.length < 1 )
@@ -554,6 +554,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			}
 		} );
 	};
+	**/
 
 	/**
 		@brief		Show a trustwallet payment link.
