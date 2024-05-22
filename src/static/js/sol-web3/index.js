@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer';
-import { Connection, PublicKey, Transaction, ComputeBudgetProgram } from '@solana/web3.js';
+import { SystemProgram, Connection, PublicKey, Transaction, ComputeBudgetProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { createAssociatedTokenAccountInstruction, createTransferInstruction, getOrCreateAssociatedTokenAccount, getAssociatedTokenAddress, TOKEN_PROGRAM_ID, ASSOCIATED_TOKEN_PROGRAM_ID } from '@solana/spl-token';
 
 // Ensure the Buffer object is globally available

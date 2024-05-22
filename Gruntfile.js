@@ -35,14 +35,6 @@ module.exports = function(grunt) {
 						dest: 'src/static/js/',
 						filter: 'isFile'
 					},
-					// copies solana web3.js file
-					{ 
-						expand: true,
-						flatten: true,
-						src: ['node_modules/@solana/web3.js/lib/index.iife.min.js'], 
-						dest: 'src/static/js/',
-						filter: 'isFile'
-					},
 					// copies bignumber.js file
 					{ 
 						expand: true,
