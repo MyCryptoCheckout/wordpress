@@ -390,7 +390,25 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		}
 
 		if ( isset( $_POST[ 'mcc_currency_id' ] ) )
-			if ( $order->get_meta( '_mcc_payment_id' ) < 1 )
+		{
+			$create = true;
+
+			if ( $order->get_meta( '_mcc_payment_id' ) > 0 )
+			{
+				// Is this a new currency?
+				if ( $order->get_meta( '_mcc_currency_id' ) == $_POST[ 'mcc_currency_id' ] )
+				{
+					// Same currency? Do nothing.
+					$create = false;
+				}
+				else
+				{
+					// Clear the payment ID.
+					$order->delete_meta_data( '_mcc_payment_id' );
+				}
+			}
+
+			if ( $create )
 			{
 				MyCryptoCheckout()->debug( 'Intercepted _POST.' );
 				$wc = MyCryptoCheckout()->woocommerce;
@@ -399,6 +417,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				// This is in order to send the payment to the API.
 				$wc->woocommerce_checkout_update_order_meta( $order->get_id() );
 			}
+		}
+
 
 		MyCryptoCheckout()->check_for_valid_payment_id( [
 			'post_id' => $order_id,
