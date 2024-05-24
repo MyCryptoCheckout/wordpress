@@ -408,13 +408,15 @@ var mycryptocheckout_checkout_javascript = function( data )
 						web3.utils.toWei( $$.mycryptocheckout_checkout_data.amount + "", $$.mycryptocheckout_checkout_data.supports.metamask_currency )
 					);
 					console.debug( 'Mainnet send parameters', send_parameters );
-					web3.eth.sendTransaction( send_parameters,
-					function (err, transactionHash )
-					{
-						// No error logging for now.
-						console.debug( 'Error sending Eth via Metamask', err );
-					}
-					);
+					web3.eth.sendTransaction(send_parameters, function (err, transactionHash) {
+						if (err) {
+							// Only log if there's an actual error
+							console.error('Error sending ETH via Metamask', err);
+						} else {
+							// Optionally log the success with transaction hash
+							console.debug('ETH successful sent via Metamask.');
+						}
+					});
 				}
 				else
 				{
