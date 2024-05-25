@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.131
+Stable tag: 2.132
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.5.2
 
@@ -273,12 +273,12 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 * New: WooCommerce checkout block integration
 * New: Animated paid checkmark
+* New chain: Solana SOL
 * New chain: Base chain
 * New currency: ETH on Base
 * New currency: WETH on Base
 * New currency: USDC on Base
 * New currency: DEGEN
-* New chain: Solana SOL
 * New currency: dogwifhat WIF
 * New currency: Popcat POPCAT
 * New currency: USDT on SOL
