@@ -4455,7 +4455,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					}).catch((err) => {
 						console.error('Error sending ETH via Metamask', err);
 				
-						if (err.error && err.error.code === -32000) {
+						if ((err.error && err.error.code === -32000) || (err.message && err.message.includes("insufficient funds"))) {
 							// Notify user or handle insufficient funds error gracefully
 							alert("Insufficient funds for the transaction. Please check your balance.");
 						}
