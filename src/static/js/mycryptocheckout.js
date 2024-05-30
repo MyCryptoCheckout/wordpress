@@ -4375,6 +4375,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 	
 		$$.$metamask.click(async function() {
 			try {
+
+				const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
 				if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_id != 'undefined') {
 					const chainIdNumber = $$.mycryptocheckout_checkout_data.supports.metamask_id;
 					const desiredChainId = '0x' + parseInt(chainIdNumber).toString(16);
@@ -4393,8 +4396,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 						}
 					}
 				}
-	
-				const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 	
 				var send_parameters = {
 					'from': accounts[0],
