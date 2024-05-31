@@ -8,7 +8,7 @@ Stable tag: 2.132
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.5.2
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 100+ coins: Bitcoin, Ethereum, BNB, and more. Peer-to-peer transactions.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 100+ coins: Bitcoin, Ethereum, BNB, Solana. Peer-to-peer transactions.
 
 == Description ==
 
@@ -42,7 +42,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = Cryptocurrencies supported: =
 
 - Algorand ALGO
-- Base Chain BASE
+- Base Chain BASE (Including Metamask)
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
@@ -57,7 +57,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Monero XMR
 - Polygon MATIC
 - PutinCoin PUT
-- Solana SOL
+- Solana SOL (Including Phantom)
 - Stellar XLM
 - Tron TRX
 - XRP
@@ -146,7 +146,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - YIELD App YLD
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
 
-= SPL tokens =
+= SPL tokens (Including Phantom) =
 
 - dogwifhat WIF
 - Popcat POPCAT
