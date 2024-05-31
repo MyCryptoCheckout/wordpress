@@ -101,6 +101,16 @@ module.exports = function(grunt) {
 				},
 			},
 		},
+		uglify: {
+			options: {
+				mangle: false,
+			},
+			my_target: {
+				files: {
+					'src/static/js/mycryptocheckout.min.js': ['src/static/js/mycryptocheckout.js'],
+				}
+			}
+		},
 	});
 
 	// Load plugins
@@ -108,8 +118,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('@lodder/grunt-postcss');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	
 	// Run All Tasks
-	grunt.registerTask('all', ['dart-sass', 'postcss', 'copy', 'concat']);
+	grunt.registerTask('all', ['dart-sass', 'postcss', 'copy', 'concat', 'uglify']);
 
 };

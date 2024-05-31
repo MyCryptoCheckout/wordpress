@@ -38,6 +38,7 @@
     "dompurify": "^3.1.0",
     "grunt-contrib-concat": "^2.1.0",
     "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^5.2.2",
     "grunt-dart-sass": "^2.0.1",
     "postcss": "^8.4.23",
     "qrcode": "^1.5.1",
