@@ -13,6 +13,14 @@ const maybePhantom = async () => {
         return;
     }
 
+    if (typeof window.solana === 'undefined') {
+        console.error("Phantom wallet is not available in the window object.");
+        return;
+    }
+
+    // console.log("Setting up the Phantom wallet button");
+    const provider = window.solana;
+
     const rawCheckoutData = document.getElementById('mycryptocheckout_checkout_data');
     const checkoutData = extractData(rawCheckoutData);
     if (!checkoutData) {
@@ -23,14 +31,6 @@ const maybePhantom = async () => {
         console.error("Phantom wallet not supported or data missing");
         return;
     }
-
-    if (typeof window.solana === 'undefined') {
-        console.error("Phantom wallet is not available in the window object.");
-        return;
-    }
-
-    // console.log("Setting up the Phantom wallet button");
-    const provider = window.solana;
 
     const phantomButton = document.createElement('div');
     phantomButton.className = "phantomwallet_link";
