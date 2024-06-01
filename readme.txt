@@ -274,6 +274,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * Update: web3.js to v4.9.0
 * Update: minor mcc script mods for web3.js v4.9.0
 * Update: minify main JS file
+* Update: minor SOL JS script optimizations
 * Result: -38% scripts size reduction in total!
 
 = 2.132 20240326 =
