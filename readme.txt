@@ -269,6 +269,13 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.133 =
+
+* Update: web3.js to v4.9.0
+* Update: minor mcc script mods for web3.js v4.9.0
+* Update: minify main JS file
+* Result: -38% scripts size reduction in total!
+
 = 2.132 20240326 =
 
 * New: WooCommerce checkout block integration
