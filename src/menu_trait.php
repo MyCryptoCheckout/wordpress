@@ -44,7 +44,11 @@ trait menu_trait
 	{
 		$tabs = $this->tabs();
 
-		if ( ! defined( 'MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR' ) )
+		if (
+			( ! defined( 'MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR' ) )
+			||
+			( MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR !== true )
+		)
 		{
 			$tabs->tab( 'currencies' )
 				->callback_this( 'admin_currencies' )
