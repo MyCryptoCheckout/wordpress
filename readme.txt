@@ -164,22 +164,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - Tether USDT
 
-= Fantom FTM tokens supported: =
-
-- Add your <a href="https://mycryptocheckout.com/ftm-token/">custom Fantom FTM tokens</a>!
-
-= KCC tokens supported: =
-
-- Add your <a href="https://mycryptocheckout.com/kcc-token/">custom KCC tokens</a>!
-
 = Polygon MATIC tokens supported: =
 
 - Pleasure Coin NSFW
 - Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
-
-= Stellar Tokens supported: =
-
-- Add your <a href="https://mycryptocheckout.com/stellar-token/">custom Stellar tokens</a>!
 
 = Fiat Autosettlements =
 
