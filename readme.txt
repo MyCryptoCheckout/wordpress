@@ -54,6 +54,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Flux FLUX
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
+- MAZA
 - Monero XMR
 - Polygon MATIC
 - PutinCoin PUT
@@ -67,6 +68,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = BASE tokens supported (Including MetaMask): =
 
 - Degen DEGEN
+- HOLD EARN
 - USD Coin USDC
 - Wrapped Ether WETH
 
@@ -79,6 +81,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - BITTOKEN BITT
 - Flux FLUX
 - GameGuru GGT
+- HOLD EARN
 - PancakeSwap Token CAKE
 - SafeMoon v2 SFM
 - SpacePi SPACEPI
@@ -104,6 +107,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Chainlink LINK
 - Compound COMP
 - Efinity Token EFI
+- Fetch.ai FET
 - Gitcoin GTC
 - Multi-collateral DAI DAI
 - Decentraland MANA
@@ -149,9 +153,12 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = SPL tokens (Including Phantom) =
 
 - dogwifhat WIF
+- HOLD EARN
+- Jupiter JUP
 - Popcat POPCAT
 - Tether USDT
 - USD Coin USDC
+- Add your <a href="https://mycryptocheckout.com/sol-token/">custom SPL tokens</a>!
 
 = TRC-20 tokens supported: =
 
@@ -276,6 +283,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * Update: minify main JS file
 * Update: minor SOL JS script optimizations
 * Result: -38% scripts size reduction in total!
+* New currency: HOLD EARN
+* New currency: Fetch.ai FET
+* New currency: Jupiter JUP
+* New currency: MAZA
 
 = 2.132 20240326 =
 
