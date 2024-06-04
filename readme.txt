@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.132
+Stable tag: 2.133
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.5.2
 
@@ -71,6 +71,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - HOLD EARN
 - USD Coin USDC
 - Wrapped Ether WETH
+- Add your <a href="https://mycryptocheckout.com/base-token/">custom Base tokens</a>!
 
 = BEP-20 tokens supported (Including MetaMask): =
 
