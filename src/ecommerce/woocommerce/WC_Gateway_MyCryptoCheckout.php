@@ -46,6 +46,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		add_filter( 'woocommerce_gateway_icon', [ $this, 'woocommerce_gateway_icon' ], 10, 2 );
 		add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, [ $this, 'post_process_admin_options' ] );
 		add_action( 'woocommerce_thankyou_mycryptocheckout', [ $this, 'woocommerce_thankyou_mycryptocheckout' ] );
+		add_action( 'wp_head', [ $this, 'wp_head' ] );
 	}
 
 	/**
@@ -568,5 +569,16 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		WC()->mailer()
 			->get_emails()['WC_Email_New_Order']
 			->trigger( $order_id );
+	}
+
+	/**
+		@brief		WP head
+		@since		2024-06-07 15:47:49
+	**/
+	public function wp_head()
+	{
+		if ( ! is_wc_endpoint_url( 'order-received' ) )
+			return;
+		echo '<meta name="format-detection" content="telephone=no">';
 	}
 }
