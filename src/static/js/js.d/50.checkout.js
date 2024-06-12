@@ -451,6 +451,10 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ($$.$online_pay_box.length < 1)
 			return;
 
+		// only show if metamask is supported.
+		if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_id === 'undefined')
+			return;
+
 		// only show if web3 is not in window.
 		if (typeof window.ethereum !== 'undefined')
 			return;
