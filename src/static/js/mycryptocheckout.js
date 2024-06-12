@@ -4165,7 +4165,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.maybe_generate_payment_timer();
 		$$.$payment_buttons.appendTo( $$.$online_pay_box );
 		$$.maybe_metamask();
-		// $$.maybe_phantom();
+		$$.maybe_metamask_mobile_link();
 		$$.maybe_waves_link();
 		$$.maybe_browser_link();
 		$$.maybe_trustwallet_link();
@@ -4492,6 +4492,54 @@ var mycryptocheckout_checkout_javascript = function( data )
 			}
 
 		} );
+	}
+
+	/**
+		@brief		Show a MetaMask mobile payment link.
+		@since		2024-06-10 17:25:03
+	**/
+	$$.maybe_metamask_mobile_link = function() {
+		if ($$.$online_pay_box.length < 1)
+			return;
+
+		// only show if web3 is not in window.
+		if (typeof window.ethereum !== 'undefined')
+			return;
+
+		$$.show_browser_link = false;
+
+		// Chain ID
+		var chainId = $$.mycryptocheckout_checkout_data.supports.metamask_id;
+
+		// To address
+		var toAddress = $$.mycryptocheckout_checkout_data.to;
+
+		// Amount
+		var amount = new BigNumber($$.mycryptocheckout_checkout_data.amount);
+
+		// Decimals
+		var decimals = $$.mycryptocheckout_checkout_data.supports.metamask_mobile_decimals || 18;
+		var decimalFactor = new BigNumber(10).pow(decimals);
+
+		// Convert amount to the smallest unit based on decimals
+		var amountInSmallestUnit = amount.multipliedBy(decimalFactor);
+
+		// Convert to exponential notation, and replace 'e+' with 'e'
+		var formattedNumber = amountInSmallestUnit.toExponential().replace("e+", "e");
+
+		// Create URL
+		var url = '';
+		if ($$.mycryptocheckout_checkout_data.currency.contract) {
+			var contract = $$.mycryptocheckout_checkout_data.currency.contract;
+			// Note: The MetaMask deeplink may not actually support direct contract interactions like this
+			url = `https://metamask.app.link/send/${contract}@${chainId}/transfer?address=${toAddress}&uint256=${formattedNumber}`;
+		} else {
+			url = `https://metamask.app.link/send/${toAddress}@${chainId}?value=${formattedNumber}`;
+		}
+
+		// Append the MetaMask link
+		var $metamaskLink = $(`<a href="${url}"><div class="metamask_payment" role="img" aria-label="MetaMask wallet"></div></a>`);
+		$metamaskLink.appendTo($$.$payment_buttons);
 	}
 
 	/**
