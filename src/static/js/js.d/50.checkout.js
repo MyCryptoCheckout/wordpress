@@ -484,7 +484,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		var url = '';
 		if ($$.mycryptocheckout_checkout_data.currency.contract) {
 			var contract = $$.mycryptocheckout_checkout_data.currency.contract;
-			// Note: The MetaMask deeplink may not actually support direct contract interactions like this
+			// Note: token link
 			url = `https://metamask.app.link/send/${contract}@${chainId}/transfer?address=${toAddress}&uint256=${formattedNumber}`;
 		} else {
 			url = `https://metamask.app.link/send/${toAddress}@${chainId}?value=${formattedNumber}`;
