@@ -11,6 +11,13 @@ use Exception;
 class Currency
 {
 	use btc_hd_public_key_trait;
+
+	/**
+		@brief		The supports class contains data about what features we support.
+		@since		2024-06-13 19:59:21
+	**/
+	public $supports;
+
 	/**
 		@brief		Convert this amount to this currency.
 		@since		2017-12-10 20:05:14
