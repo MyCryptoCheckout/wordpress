@@ -19,6 +19,12 @@ class Currency
 	public $address_length;
 
 	/**
+		@brief		How many decimals we have.
+		@since		2024-06-13 20:00:39
+	**/
+	public $decimal_precision;
+
+	/**
 		@brief		The name of the currency.
 		@since		2024-06-13 20:00:01
 	**/
