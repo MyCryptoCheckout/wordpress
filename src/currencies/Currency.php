@@ -13,6 +13,12 @@ class Currency
 	use btc_hd_public_key_trait;
 
 	/**
+		@brief		The char length of addresses.
+		@since		2024-06-13 20:00:19
+	**/
+	public $address_length;
+
+	/**
 		@brief		The name of the currency.
 		@since		2024-06-13 20:00:01
 	**/
