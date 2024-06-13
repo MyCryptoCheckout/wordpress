@@ -31,6 +31,12 @@ class Currency
 	public $name;
 
 	/**
+		@brief		The QR code string.
+		@since		2024-06-13 20:01:00
+	**/
+	public $qr_code;
+
+	/**
 		@brief		The supports class contains data about what features we support.
 		@since		2024-06-13 19:59:21
 	**/
