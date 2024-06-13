@@ -25,6 +25,12 @@ class Currency
 	public $decimal_precision;
 
 	/**
+		@brief		The ID / symbol of the currency.
+		@since		2024-06-13 20:01:27
+	**/
+	public $id;
+
+	/**
 		@brief		The name of the currency.
 		@since		2024-06-13 20:00:01
 	**/
