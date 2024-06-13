@@ -13,6 +13,12 @@ class Currency
 	use btc_hd_public_key_trait;
 
 	/**
+		@brief		The name of the currency.
+		@since		2024-06-13 20:00:01
+	**/
+	public $name;
+
+	/**
 		@brief		The supports class contains data about what features we support.
 		@since		2024-06-13 19:59:21
 	**/
