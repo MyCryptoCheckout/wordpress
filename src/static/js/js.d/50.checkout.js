@@ -294,7 +294,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			@brief          Maybe generate a metamask payment link.
 			@since          2018-08-27 20:42:19
 	**/
-	$$.maybe_metamask = function() {
+	$$.maybe_metamask = async function() {
 		if ($$.$online_pay_box.length < 1)
 			return;
 	
@@ -302,145 +302,168 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if (typeof window.ethereum === 'undefined' || !ethereum.isMetaMask)
 			return;
 	
-		window.web3 = new Web3(ethereum);
-	
 		// The data must support metamask.
 		if (typeof $$.mycryptocheckout_checkout_data.supports === 'undefined')
-			return;
-	
-		var contractInstance = false;
-		if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined') {
-			var contractInstance = new web3.eth.Contract(JSON.parse($$.mycryptocheckout_checkout_data.supports.metamask_abi), $$.mycryptocheckout_checkout_data.currency.contract);
-		}
-	
-		if (contractInstance === false)
-			if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined')
-				return;
+		return;
 	
 		$$.show_browser_link = false;
 	
 		$$.$metamask = $('<div class="metamask_payment" role="img" aria-label="metamask wallet"></div>');
 		$$.$metamask.appendTo($$.$payment_buttons);
 	
-		$$.$metamask.click(async function() {
-			try {
-
-				const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-				if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_id != 'undefined') {
-					const chainIdNumber = $$.mycryptocheckout_checkout_data.supports.metamask_id;
-					const desiredChainId = '0x' + parseInt(chainIdNumber).toString(16);
+		try {
+			let providers = await Web3.requestEIP6963Providers();
+			let metamaskProvider = null;
+			for (const [key, value] of providers) {
+				console.log(value);
 	
-					try {
-						await window.ethereum.request({
-							method: 'wallet_switchEthereumChain',
-							params: [{ chainId: desiredChainId }],
-						});
-					} catch (error) {
-						if (error.code === 4902) {
-							console.error('The network is not available in MetaMask.');
-						} else {
-							console.error('Failed to switch the network:', error);
-							return;
+				// List of providers and get selected provider's UUID EIP6963ProviderDetail.provider
+				if (value.info.name === 'MetaMask') {
+					   window.web3 = new Web3(value.provider);
+					metamaskProvider = value.provider;
+	
+					break;
+				}
+			}
+	
+			if (metamaskProvider === null) {
+				console.error('MetaMask is not available.');
+				return;
+			}
+	
+			var contractInstance = false;
+		if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined') {
+			contractInstance = new web3.eth.Contract(JSON.parse($$.mycryptocheckout_checkout_data.supports.metamask_abi), $$.mycryptocheckout_checkout_data.currency.contract);
+		}
+	
+		if (contractInstance === false && typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined')
+			return;
+	
+			$$.$metamask.click(async function() {
+			   try {
+	
+					// const accounts = await window.web3.eth.getAccounts();
+					const accounts = await metamaskProvider.request({ method: 'eth_requestAccounts' });
+	
+					if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_id != 'undefined') {
+						const chainIdNumber = $$.mycryptocheckout_checkout_data.supports.metamask_id;
+						const desiredChainId = '0x' + parseInt(chainIdNumber).toString(16);
+		
+						try {
+							await metamaskProvider.request({
+								method: 'wallet_switchEthereumChain',
+								params: [{ chainId: desiredChainId }],
+							});
+						} catch (error) {
+							if (error.code === 4902) {
+								console.error('The network is not available in MetaMask.');
+							} else {
+								console.error('Failed to switch the network:', error);
+								return;
+							}
 						}
 					}
-				}
-	
-				var send_parameters = {
-					'from': accounts[0],
-				};
-	
-				var use_eip1559 = (typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxPriorityFeePerGas !== 'undefined');
-				var gas_set = false;
-	
-				if (use_eip1559) {
-					console.debug("Using EIP1559");
-	
-					const maxPriorityFeePerGasWei = web3.utils.toWei(
-						parseFloat($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxPriorityFeePerGas).toFixed(9),
-						'gwei'
-					);
-					const maxFeePerGasWei = web3.utils.toWei(
-						parseFloat($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxFeePerGas).toFixed(9),
-						'gwei'
-					);
-	
-					// console.debug("maxPriorityFeePerGasWei:", maxPriorityFeePerGasWei);
-					// console.debug("maxFeePerGasWei:", maxFeePerGasWei);
-	
-					send_parameters['maxPriorityFeePerGas'] = maxPriorityFeePerGasWei;
-					send_parameters['maxFeePerGas'] = maxFeePerGasWei;
-	
-					send_parameters['gasLimit'] = web3.utils.toHex(Math.ceil($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].avgGas));
-					// console.debug("gasLimit:", send_parameters['gasLimit']);
-	
-					gas_set = true;
-				}
-	
-				if (!gas_set) {
-					if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas !== 'undefined') {
-						console.debug('Setting general metamask gas.');
-						var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
-						send_parameters['gasPrice'] = web3.utils.toWei(metamask_gas.price + '', 'gwei');
-						// console.debug("gasPrice:", send_parameters['gasPrice']);
-	
-						if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit !== 'undefined')
-							metamask_gas.limit = $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit;
-						send_parameters['gas'] = metamask_gas.limit + '';
-						// console.debug("gasLimit:", send_parameters['gas']);
-	
+		
+					var send_parameters = {
+						'from': accounts[0],
+					};
+		
+					// var use_eip1559 = (typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxPriorityFeePerGas !== 'undefined');
+					var gas_set = false;
+		
+					if ($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"] != null) {
+						console.debug("Using EIP1559");
+		
+						const maxPriorityFeePerGasWei = web3.utils.toWei(
+							parseFloat($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxPriorityFeePerGas).toFixed(9),
+							'gwei'
+						);
+						const maxFeePerGasWei = web3.utils.toWei(
+							parseFloat($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxFeePerGas).toFixed(9),
+							'gwei'
+						);
+		
+						// console.debug("maxPriorityFeePerGasWei:", maxPriorityFeePerGasWei);
+						// console.debug("maxFeePerGasWei:", maxFeePerGasWei);
+		
+						send_parameters['maxPriorityFeePerGas'] = maxPriorityFeePerGasWei;
+						send_parameters['maxFeePerGas'] = maxFeePerGasWei;
+		
+						send_parameters['gasLimit'] = web3.utils.toHex(Math.ceil($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].avgGas));
+						// console.debug("gasLimit:", send_parameters['gasLimit']);
+		
 						gas_set = true;
 					}
-				}	
-
-				if (contractInstance === false) {
-					send_parameters['to'] = $$.mycryptocheckout_checkout_data.to;
-					send_parameters['value'] = web3.utils.toHex(
-						Number(web3.utils.toWei($$.mycryptocheckout_checkout_data.amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency))
-					);
-					console.debug('Mainnet send parameters', send_parameters);
-				
-					web3.eth.sendTransaction(send_parameters).then((transactionHash) => {
-						console.debug('ETH successfully sent via Metamask.', transactionHash);
-					}).catch((err) => {
-						console.error('Error sending ETH via Metamask', err);
-				
-						if ((err.error && err.error.code === -32000) || (err.message && err.message.includes("insufficient funds"))) {
-							// Notify user or handle insufficient funds error gracefully
-							alert("Insufficient funds for the transaction. Please check your balance.");
+		
+					if (!gas_set) {
+						if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas !== 'undefined') {
+							console.debug('Setting general metamask gas.');
+							var metamask_gas = $$.mycryptocheckout_checkout_data.supports.metamask_gas;
+							send_parameters['gasPrice'] = web3.utils.toWei(metamask_gas.price + '', 'gwei');
+							// console.debug("gasPrice:", send_parameters['gasPrice']);
+		
+							if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit !== 'undefined')
+								metamask_gas.limit = $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit;
+							send_parameters['gas'] = metamask_gas.limit + '';
+							// console.debug("gasLimit:", send_parameters['gas']);
+		
+							gas_set = true;
 						}
-					});
-				}
-				else
-				{
-					var amount = $$.mycryptocheckout_checkout_data.amount;
-					// If there is a divider, use it.
-					if ( typeof $$.mycryptocheckout_checkout_data.currency.divider !== 'undefined' ) {
-						amount *= $$.mycryptocheckout_checkout_data.currency.divider;
-					} else {
-						if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency !== 'undefined') {
-							amount = web3.utils.toWei( amount + "", $$.mycryptocheckout_checkout_data.supports.metamask_currency );
-						} else {
-							amount = web3.utils.toWei( amount + "", 'ether' );
-						}
+					}	
+	
+					if (contractInstance === false) {
+						send_parameters['to'] = $$.mycryptocheckout_checkout_data.to;
+						send_parameters['value'] = web3.utils.toHex(
+							Number(web3.utils.toWei($$.mycryptocheckout_checkout_data.amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency))
+						);
+						console.debug('Mainnet send parameters', send_parameters);
+					
+						web3.eth.sendTransaction(send_parameters).then((transactionHash) => {
+							console.debug('ETH successfully sent via Metamask.', transactionHash);
+						}).catch((err) => {
+							console.error('Error sending ETH via Metamask', err);
+					
+							if ((err.error && err.error.code === -32000) || (err.message && err.message.includes("insufficient funds")) || (err.data && err.data.code === -32000)) {
+								// Notify user or handle insufficient funds error gracefully
+								alert("Insufficient funds for the transaction. Please check your balance.");
+							}
+						});
 					}
-
-					// .transfer loves plain strings.
-					amount = amount + "";
-
-					console.debug( "Token parameters", send_parameters );
-
-					contractInstance.methods
-						.transfer( $$.mycryptocheckout_checkout_data.to, amount )
-						.send( send_parameters );
+					else
+					{
+						var amount = $$.mycryptocheckout_checkout_data.amount;
+						// If there is a divider, use it.
+						if ( typeof $$.mycryptocheckout_checkout_data.currency.divider !== 'undefined' ) {
+							amount *= $$.mycryptocheckout_checkout_data.currency.divider;
+						} else {
+							if ( typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency !== 'undefined') {
+								amount = web3.utils.toWei( amount + "", $$.mycryptocheckout_checkout_data.supports.metamask_currency );
+							} else {
+								amount = web3.utils.toWei( amount + "", 'ether' );
+							}
+						}
+	
+						// .transfer loves plain strings.
+						amount = amount + "";
+	
+						console.debug( "Token parameters", send_parameters );
+	
+						contractInstance.methods
+							.transfer( $$.mycryptocheckout_checkout_data.to, amount )
+							.send( send_parameters );
+					}
+	
+				} catch (error) {
+					console.error('An error occurred during the MetaMask operation:', error);
+					if (error.code === 4001) {
+						// User denied transaction signature
+						console.debug('User denied transaction signature.');
+					}
 				}
-
-			} catch (error) {
-				// User denied account access...
-				console.debug( 'User denied account access', error );
-			}
-
-		} );
+			});
+		} catch (error) {
+			console.error('Failed to load providers using EIP-6963:', error);
+		}
 	}
 
 	/**
