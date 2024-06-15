@@ -4354,8 +4354,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 			return;
 	
 		// The data must support metamask.
-		if (typeof $$.mycryptocheckout_checkout_data.supports === 'undefined')
-		return;
+		if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_id === 'undefined')
+			return;
 	
 		$$.show_browser_link = false;
 	
@@ -4383,12 +4383,12 @@ var mycryptocheckout_checkout_javascript = function( data )
 			}
 	
 			var contractInstance = false;
-		if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined') {
-			contractInstance = new web3.eth.Contract(JSON.parse($$.mycryptocheckout_checkout_data.supports.metamask_abi), $$.mycryptocheckout_checkout_data.currency.contract);
-		}
+			if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_abi !== 'undefined') {
+				contractInstance = new web3.eth.Contract(JSON.parse($$.mycryptocheckout_checkout_data.supports.metamask_abi), $$.mycryptocheckout_checkout_data.currency.contract);
+			}
 	
-		if (contractInstance === false && typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined')
-			return;
+			if (contractInstance === false && typeof $$.mycryptocheckout_checkout_data.supports.metamask_currency === 'undefined')
+				return;
 	
 			$$.$metamask.click(async function() {
 			   try {
