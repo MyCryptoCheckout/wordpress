@@ -6,7 +6,7 @@ Requires at least: 4.9
 Requires PHP: 5.6
 Stable tag: 2.134
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
-Tested up to: 6.5.2
+Tested up to: 6.5.4
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 100+ coins: Bitcoin, Ethereum, BNB, Solana. Peer-to-peer transactions.
 
@@ -84,7 +84,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - GameGuru GGT
 - HOLD EARN
 - PancakeSwap Token CAKE
-- SafeMoon v2 SFM
 - SpacePi SPACEPI
 - Swipe SXP
 - TasteNFT TASTE
@@ -99,7 +98,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - 0x ZRX
 - 1inch 1INCH
 - Aave AAVE
-- Aeternity AE
 - ApeCoin APE
 - Aragon ANT
 - Bancor BNT
@@ -112,11 +110,10 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Gitcoin GTC
 - Multi-collateral DAI DAI
 - Decentraland MANA
-- DigixDAO DGD
 - Dogecoin DOGE
 - Dragonchain DRGN
 - Enjin Coin ENJ
-- FunFair FUN
+- FUNToken FUN
 - Gemini Dollar GUSD
 - Immutable IMX
 - Huobi Token HT
@@ -125,17 +122,15 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Loom LOOM
 - Maker MKR
 - MetalPay MTL
-- Nexo Token NEXO
+- Nexo NEXO
 - OMG Network OMG
 - PEPE
 - Polygon MATIC_ERC20
 - Polymath Network POLY
 - Populous PPT
-- Pundi X NPXS
-- QASH
-- Raiden RDN
+- Pundi X PUNDIX
+- REEF
 - Request REQ
-- SALT
 - SHIBA INU SHIB
 - Status SNT
 - Synthetix SNX
@@ -148,7 +143,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - USD Coin USDC
 - Veritaseum VERI
 - Wrapped Bitcoin WBTC
-- YIELD App YLD
+- ZRX 0x Protocol
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
 
 = SPL tokens (Including Phantom) =
@@ -264,6 +259,13 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.135 =
+
+* New: Add Metamask mobile app support.
+* Update: Add EIP-6963 support for EVM wallet buttons.
+* Update: Add network id to EIP-681 QR codes.
+* Fix: Some PHP notices.
 
 = 2.134 =
 
