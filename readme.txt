@@ -19,13 +19,13 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 = Key Features & Highlights =
 
 - 0% transaction fees
-- No product restrictions
+- No KYC or product restrictions
 - Peer-to-peer transactions
 - No redirection to 3rd parties or iframes
 - Use any crypto wallet you want
 - Automagically detect unique payments using one wallet address
 - Hierarchically deterministic (HD) wallet support
-- 1-Click payment buttons, MetaMask, etc.
+- 1-Click payment buttons, Electrum, MetaMask, Trust Wallet, Phantom, etc.
 - Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
 - 0-conf (mempool) support for some coins
@@ -265,7 +265,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * New: Add Metamask mobile app support.
 * Update: Add EIP-6963 support for EVM wallet buttons.
 * Update: Add network id to EIP-681 QR codes.
-* Fix: Some PHP notices.
+* Fix: PHP 8.2 notices.
 
 = 2.134 =
 
