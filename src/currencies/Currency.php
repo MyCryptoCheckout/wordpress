@@ -11,6 +11,43 @@ use Exception;
 class Currency
 {
 	use btc_hd_public_key_trait;
+
+	/**
+		@brief		The char length of addresses.
+		@since		2024-06-13 20:00:19
+	**/
+	public $address_length;
+
+	/**
+		@brief		How many decimals we have.
+		@since		2024-06-13 20:00:39
+	**/
+	public $decimal_precision;
+
+	/**
+		@brief		The ID / symbol of the currency.
+		@since		2024-06-13 20:01:27
+	**/
+	public $id;
+
+	/**
+		@brief		The name of the currency.
+		@since		2024-06-13 20:00:01
+	**/
+	public $name;
+
+	/**
+		@brief		The QR code string.
+		@since		2024-06-13 20:01:00
+	**/
+	public $qr_code;
+
+	/**
+		@brief		The supports class contains data about what features we support.
+		@since		2024-06-13 19:59:21
+	**/
+	public $supports;
+
 	/**
 		@brief		Convert this amount to this currency.
 		@since		2017-12-10 20:05:14
