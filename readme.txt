@@ -12,7 +12,7 @@ Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accep
 
 == Description ==
 
-Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Receive coins directly into the wallet of your choice.
+Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Receive coins, including Bitcoin, directly into the wallet of your choice.
 
 https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 
