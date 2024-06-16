@@ -4142,7 +4142,14 @@ var mycryptocheckout_checkout_javascript = function( data )
 		}
 
 		var eip_amount = new BigNumber( wei_amount, 10 ).toExponential().replace('+', '').replace('e0', '');
-		r = r.replace( '[MCC_TO]', $$.mycryptocheckout_checkout_data.to );
+		
+		if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_id !== 'undefined') {
+			 // If metamask_id is defined
+			 r = r.replace('[MCC_TO]', $$.mycryptocheckout_checkout_data.to + '@' + $$.mycryptocheckout_checkout_data.supports.metamask_id);
+		} else {
+			r = r.replace( '[MCC_TO]', $$.mycryptocheckout_checkout_data.to );
+		}
+
 		r = r.replace( '[MCC_AMOUNT]', eip_amount );
 
 		if ( typeof $$.mycryptocheckout_checkout_data.currency.contract !== 'undefined' )
