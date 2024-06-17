@@ -92,7 +92,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		var eip_amount = new BigNumber( wei_amount, 10 ).toExponential().replace('+', '').replace('e0', '');
 		
-		if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_id !== 'undefined') {
+		if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_id !== 'undefined' && typeof $$.mycryptocheckout_checkout_data.currency.contract === 'undefined') {
 			 // If metamask_id is defined
 			 r = r.replace('[MCC_TO]', $$.mycryptocheckout_checkout_data.to + '@' + $$.mycryptocheckout_checkout_data.supports.metamask_id);
 		} else {
