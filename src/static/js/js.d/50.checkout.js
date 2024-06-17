@@ -378,7 +378,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					// var use_eip1559 = (typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxPriorityFeePerGas !== 'undefined');
 					var gas_set = false;
 		
-					if ($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"] != null) {
+					if ($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0] != null && $$.mycryptocheckout_checkout_data.supports.metamask_id !== 56) {
 						console.debug("Using EIP1559");
 		
 						const maxPriorityFeePerGasWei = web3.utils.toWei(
@@ -409,9 +409,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 							send_parameters['gasPrice'] = web3.utils.toWei(metamask_gas.price + '', 'gwei');
 							// console.debug("gasPrice:", send_parameters['gasPrice']);
 		
-							if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit !== 'undefined')
-								metamask_gas.limit = $$.mycryptocheckout_checkout_data.supports.metamask_gas_limit;
-							send_parameters['gas'] = metamask_gas.limit + '';
+							
+							send_parameters['gasLimit'] = web3.utils.toHex(Math.ceil($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].avgGas));
 							// console.debug("gasLimit:", send_parameters['gas']);
 		
 							gas_set = true;
