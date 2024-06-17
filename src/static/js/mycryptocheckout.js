@@ -4429,6 +4429,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 					// var use_eip1559 = (typeof $$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0].maxPriorityFeePerGas !== 'undefined');
 					var gas_set = false;
 		
+					// Supports EIP 1559 and is not BSC
 					if ($$.mycryptocheckout_checkout_data.supports.metamask_gas["1559"].speeds[0] != null && $$.mycryptocheckout_checkout_data.supports.metamask_id !== 56) {
 						console.debug("Using EIP1559");
 		
