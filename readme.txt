@@ -91,7 +91,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Venus XVS
 - Value Flow VFLOW
 - xxxNifty NSFW
-- Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP20 tokens</a>!
+- Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP-20 tokens</a>!
 
 = ERC-20 tokens supported (Including MetaMask, ENS addresses): =
 
@@ -144,7 +144,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Veritaseum VERI
 - Wrapped Bitcoin WBTC
 - ZRX 0x Protocol
-- Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC20 tokens</a>!
+- Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC-20 tokens</a>!
 
 = SPL tokens (Including Phantom) =
 
@@ -159,6 +159,8 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = TRC-20 tokens supported: =
 
 - Tether USDT
+
+- Add your <a href="https://mycryptocheckout.com/trc20-token/">custom TRC-20 tokens</a>!
 
 = Polygon MATIC tokens supported: =
 
@@ -350,7 +352,7 @@ Fix: Tell IOS Safari to not auto-format the amount field on the checkout page.
 
 = 2.121 20230104 =
 
-* Removed Tron TRX and all TRC20 tokens due to the Tronscan API not being reliable at all and showing all transactions.
+* Removed Tron TRX and all TRC-20 tokens due to the Tronscan API not being reliable at all and showing all transactions.
 
 = 2.119 20221219 =
 
