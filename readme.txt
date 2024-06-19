@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.134
+Stable tag: 2.135
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.5.4
 
@@ -262,7 +262,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-= 2.135 =
+= 2.135 20240619 =
 
 * New: Add Metamask mobile app support.
 * Update: Add EIP-6963 support for EVM wallet buttons.
