@@ -72,37 +72,34 @@ var mycryptocheckout_checkout_javascript = function( data )
 	**/
 	$$.generate_eip681 = function()
 	{
-		if ( typeof $$.mycryptocheckout_checkout_data.supports.eip681 === 'undefined' )
+		if ( typeof $$.mycryptocheckout_checkout_data.supports.eip681 === 'undefined' ) {
 			return '';
+		}
 		var r = $$.mycryptocheckout_checkout_data.supports.eip681.address;
 		var amount = $$.mycryptocheckout_checkout_data.amount;
-
-		var wei_amount = amount;
-
-		if ( typeof $$.mycryptocheckout_checkout_data.supports.eip681_towei !== 'undefined' )
-		{
-			console.debug( 'Using towei for eip681', $$.mycryptocheckout_checkout_data.supports.eip681_towei );
-			wei_amount = Web3.utils.toWei( amount + "", $$.mycryptocheckout_checkout_data.supports.eip681_towei );
-		}
-		else
-		{
-			console.debug( 'Using normal towei for eip681', $$.mycryptocheckout_checkout_data.supports.eip681_towei );
-			wei_amount = Web3.utils.toWei( amount, 'ether' );
-		}
-
-		var eip_amount = new BigNumber( wei_amount, 10 ).toExponential().replace('+', '').replace('e0', '');
-		
+	
+		// Decimals
+		var decimals = $$.mycryptocheckout_checkout_data.supports.metamask_mobile_decimals || 18;
+		var decimalFactor = new BigNumber(10).pow(decimals);
+	
+		// Convert amount to the smallest unit based on decimals
+		var amountInSmallestUnit = new BigNumber(amount).multipliedBy(decimalFactor);
+	
+		// Format the amount using exponential notation correctly
+		var formattedNumber = amountInSmallestUnit.toExponential().replace('+', '').replace('e0', '');
+	
 		if (typeof $$.mycryptocheckout_checkout_data.supports.metamask_id !== 'undefined' && typeof $$.mycryptocheckout_checkout_data.currency.contract === 'undefined') {
-			 // If metamask_id is defined
-			 r = r.replace('[MCC_TO]', $$.mycryptocheckout_checkout_data.to + '@' + $$.mycryptocheckout_checkout_data.supports.metamask_id);
+			// If metamask_id is defined
+			r = r.replace('[MCC_TO]', $$.mycryptocheckout_checkout_data.to + '@' + $$.mycryptocheckout_checkout_data.supports.metamask_id);
 		} else {
 			r = r.replace( '[MCC_TO]', $$.mycryptocheckout_checkout_data.to );
 		}
-
-		r = r.replace( '[MCC_AMOUNT]', eip_amount );
-
-		if ( typeof $$.mycryptocheckout_checkout_data.currency.contract !== 'undefined' )
-			r = r.replace( '[MCC_CONTRACT]', $$.mycryptocheckout_checkout_data.currency.contract );
+	
+		r = r.replace( '[MCC_AMOUNT]', formattedNumber );
+	
+		if ( typeof $$.mycryptocheckout_checkout_data.currency.contract !== 'undefined' ) {
+			r = r.replace('[MCC_CONTRACT]', $$.mycryptocheckout_checkout_data.currency.contract);
+		}
 		return r;
 	}
 
