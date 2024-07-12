@@ -407,6 +407,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mcc-DAPPER:before {
+  content: "\ea4a";
+}
+
+.mcc-GLIZZY:before {
+  content: "\ea4b";
+}
+
+.mcc-GROW:before {
+  content: "\ea4c";
+}
+
+.mcc-SWITCH:before {
+  content: "\ea4d";
+}
+
 .mcc-BASE_EARN:before {
   content: "\ea47";
 }
@@ -2011,6 +2027,10 @@
   color: #F5AC37;
 }
 
+.mcc_currency_icons.color i.mcc-DAPPER {
+  color: #000000;
+}
+
 .mcc_currency_icons.color i.mcc-DASH {
   color: #1c75bc;
 }
@@ -2211,6 +2231,10 @@
   color: #125ae7;
 }
 
+.mcc_currency_icons.color i.mcc-GLIZZY {
+  color: #7a80d6;
+}
+
 .mcc_currency_icons.color i.mcc-GME {
   color: #9484C6;
 }
@@ -2231,8 +2255,16 @@
   color: #001D57;
 }
 
+.mcc_currency_icons.color i.mcc-GROW {
+  color: #24a12f;
+}
+
 .mcc_currency_icons.color i.mcc-GRS {
   color: #0093AB;
+}
+
+.mcc_currency_icons.color i.mcc-GSPI {
+  color: #0696A6;
 }
 
 .mcc_currency_icons.color i.mcc-GT {
@@ -2241,10 +2273,6 @@
 
 .mcc_currency_icons.color i.mcc-GTC {
   color: #DE5959;
-}
-
-.mcc_currency_icons.color i.mcc-GSPI {
-  color: #0696A6;
 }
 
 .mcc_currency_icons.color i.mcc-GTO {
@@ -2809,6 +2837,10 @@
 
 .mcc_currency_icons.color i.mcc-SUBX {
   color: #000;
+}
+
+.mcc_currency_icons.color i.mcc-SWITCH {
+  color: #4e8dcb;
 }
 
 .mcc_currency_icons.color i.mcc-SXP {
