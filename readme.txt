@@ -108,6 +108,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Efinity Token EFI
 - Fetch.ai FET
 - Gitcoin GTC
+- GROW
 - Multi-collateral DAI DAI
 - Decentraland MANA
 - Dogecoin DOGE
@@ -133,6 +134,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - SHIBA INU SHIB
 - Status SNT
+- SWITCH
 - Synthetix SNX
 - TenXPay PAY
 - Tether USDT
@@ -149,6 +151,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 = SPL tokens (Including Phantom) =
 
 - dogwifhat WIF
+- GLIZZY
 - HOLD EARN
 - Jupiter JUP
 - Popcat POPCAT
@@ -259,6 +262,13 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.136 =
+
+* New currency: GLIZZY
+* New currency: GROW
+* New currency: SWITCH
+* Fix: EIP-681 QR code for tokens with less than 18 decimals.
 
 = 2.135 =
 
