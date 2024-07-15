@@ -407,6 +407,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mcc-BRETTGOLD:before {
+  content: "\ea4e";
+}
+
+.mcc-USDT_TRON:before {
+  content: "\ea4f";
+}
+
 .mcc-DAPPER:before {
   content: "\ea4a";
 }
@@ -1911,6 +1919,10 @@
   color: #000000;
 }
 
+.mcc_currency_icons.color i.mcc-BRETTGOLD {
+  color: #2d9935;
+}
+
 .mcc_currency_icons.color i.mcc-BSCURBATE {
   color: #e499c2;
 }
@@ -2948,6 +2960,10 @@
 }
 
 .mcc_currency_icons.color i.mcc-USDT_TRC20 {
+  color: #000000;
+}
+
+.mcc_currency_icons.color i.mcc-USDT_TRON {
   color: #000000;
 }
 
