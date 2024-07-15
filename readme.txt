@@ -150,6 +150,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = SPL tokens (Including Phantom) =
 
+- Brett Gold BRETTGOLD
 - dogwifhat WIF
 - GLIZZY
 - HOLD EARN
@@ -268,7 +269,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * New currency: GLIZZY
 * New currency: GROW
 * New currency: SWITCH
+* New currency: BRETTGOLD
 * Fix: EIP-681 QR code for tokens with less than 18 decimals.
+* Fix: USDT TRON icon
 
 = 2.135 =
 
