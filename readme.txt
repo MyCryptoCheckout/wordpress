@@ -4,9 +4,9 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.135
+Stable tag: 2.136
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
-Tested up to: 6.5.4
+Tested up to: 6.5.5
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 100+ coins: Bitcoin, Ethereum, BNB, Solana. Peer-to-peer transactions.
 
@@ -108,6 +108,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Efinity Token EFI
 - Fetch.ai FET
 - Gitcoin GTC
+- GROW
 - Multi-collateral DAI DAI
 - Decentraland MANA
 - Dogecoin DOGE
@@ -133,6 +134,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Request REQ
 - SHIBA INU SHIB
 - Status SNT
+- SWITCH
 - Synthetix SNX
 - TenXPay PAY
 - Tether USDT
@@ -148,7 +150,9 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = SPL tokens (Including Phantom) =
 
+- Brett Gold BRETTGOLD
 - dogwifhat WIF
+- GLIZZY
 - HOLD EARN
 - Jupiter JUP
 - Popcat POPCAT
@@ -262,7 +266,16 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-= 2.135 20240619 =
+= 2.136 20240717 =
+
+* New currency: GLIZZY
+* New currency: GROW
+* New currency: SWITCH
+* New currency: BRETTGOLD
+* Fix: EIP-681 QR code for tokens with less than 18 decimals.
+* Fix: USDT TRON icon
+
+= 2.135 =
 
 * New: Add Metamask mobile app support.
 * Update: Add EIP-6963 support for EVM wallet buttons.
