@@ -63,7 +63,7 @@ trait misc_methods_trait
 	public function enqueue_web3_js()
 	{
 		wp_enqueue_script( 'mycryptocheckout-web3', MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/web3.min.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
-		wp_enqueue_script( 'mycryptocheckout-web3-sol', MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/sol-web3/dist/index.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
+		// wp_enqueue_script( 'mycryptocheckout-web3-sol', MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/sol-web3/dist/index.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
 	}
 
 	/**
