@@ -266,6 +266,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: SOL web3 is only loaded when necessary.
+
 = 2.136 20240717 =
 
 * New currency: GLIZZY
