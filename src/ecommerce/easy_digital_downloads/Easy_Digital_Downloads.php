@@ -52,6 +52,7 @@ class Easy_Digital_Downloads
 			return $output;
 
 		$session = edd_get_purchase_session();
+
 		if ( isset( $_GET['payment_key'] ) ){
 			$payment_key = urldecode( $_GET['payment_key'] );
 		} else if ( $session ) {
@@ -64,10 +65,13 @@ class Easy_Digital_Downloads
 		if ( ! isset( $payment_key ) )
 			return $output;
 
-		if ( $session[ 'gateway' ] != 'mycryptocheckout' )
-			return $output;
-
 		$payment_id    = edd_get_purchase_id_by_key( $payment_key );
+
+		$purchase = edd_get_payment( $payment_id );
+		$gateway = $purchase->gateway;
+
+		if ( $gateway != 'mycryptocheckout' )
+			return;
 
 		MyCryptoCheckout()->enqueue_web3_js();
 		MyCryptoCheckout()->enqueue_js();

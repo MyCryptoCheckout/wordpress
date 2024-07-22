@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.136
+Stable tag: 2.137
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.5.5
 
@@ -152,7 +152,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - Brett Gold BRETTGOLD
 - dogwifhat WIF
-- GLIZZY
 - HOLD EARN
 - Jupiter JUP
 - Popcat POPCAT
@@ -266,6 +265,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.137 20240722 =
+
+* Fix: Support for EDD v3.3
 * Fix: SOL web3 is only loaded when necessary.
 
 = 2.136 20240717 =
