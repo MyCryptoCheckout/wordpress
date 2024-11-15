@@ -58,8 +58,9 @@ const maybePhantom = async () => {
                     })
                 );
 
-                const { blockhash } = await connection.getRecentBlockhash();
-                transaction.recentBlockhash = blockhash;
+                const latestBlockhash = await connection.getLatestBlockhash();
+                transaction.recentBlockhash = latestBlockhash.blockhash;
+                transaction.lastValidBlockHeight = latestBlockhash.lastValidBlockHeight;
                 transaction.feePayer = publicKey;
 
                 const signature = await provider.signAndSendTransaction(transaction);
@@ -139,8 +140,9 @@ const maybePhantom = async () => {
                 );
                 
                 try {
-                    const { blockhash } = await connection.getRecentBlockhash();
-                    transaction.recentBlockhash = blockhash;
+                    const latestBlockhash = await connection.getLatestBlockhash();
+                    transaction.recentBlockhash = latestBlockhash.blockhash;
+                    transaction.lastValidBlockHeight = latestBlockhash.lastValidBlockHeight;
                     transaction.feePayer = publicKey;
                 
                     const signature = await provider.signAndSendTransaction(transaction);
