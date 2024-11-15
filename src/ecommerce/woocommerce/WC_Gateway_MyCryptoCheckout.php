@@ -581,12 +581,15 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			return;
 		echo '<meta name="format-detection" content="telephone=no">';
 
+		// Retrieve the plugin version
+		$plugin_version = MYCRYPTOCHECKOUT_PLUGIN_VERSION;
+
 		echo '<script type="text/javascript">
         	document.addEventListener("DOMContentLoaded", function () {
             	// Check if Phantom wallet is available and load the script if it is
             	if (typeof window.solana !== "undefined") {
                 	var script = document.createElement("script");
-                	script.src = "' . MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/sol-web3/dist/index.js";
+                	script.src = "' . MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/sol-web3/dist/index.js?v=' . $plugin_version . '";
                 	document.body.appendChild(script);
             	}
         	});
