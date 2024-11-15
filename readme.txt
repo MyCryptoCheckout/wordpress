@@ -265,6 +265,11 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.138 =
+
+* Fix: SOL - getRecentBlockhash replaced with getLatestBlockhash.
+* Update: SOL - Add versioning to web3 js.
+
 = 2.137 20240722 =
 
 * Fix: Support for EDD v3.3
