@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.137
+Stable tag: 2.138
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.7
 
@@ -265,7 +265,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-= 2.138 =
+= 2.138 20241116 =
 
 * Fix: SOL - getRecentBlockhash replaced with getLatestBlockhash.
 * Update: SOL - Add versioning to web3 js.
