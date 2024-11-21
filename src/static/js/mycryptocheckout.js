@@ -4468,21 +4468,40 @@ var mycryptocheckout_checkout_javascript = function( data )
 	
 					if (contractInstance === false) {
 						send_parameters['to'] = $$.mycryptocheckout_checkout_data.to;
-						send_parameters['value'] = web3.utils.toHex(
-							Number(web3.utils.toWei($$.mycryptocheckout_checkout_data.amount, $$.mycryptocheckout_checkout_data.supports.metamask_currency))
-						);
-						console.debug('Mainnet send parameters', send_parameters);
 					
-						web3.eth.sendTransaction(send_parameters).then((transactionHash) => {
-							console.debug('ETH successfully sent via Metamask.', transactionHash);
-						}).catch((err) => {
-							console.error('Error sending ETH via Metamask', err);
+						try {
+							// Step 1: Convert amount to Wei (string)
+							var amountInWeiString = web3.utils.toWei(
+								$$.mycryptocheckout_checkout_data.amount,
+								$$.mycryptocheckout_checkout_data.supports.metamask_currency
+							);
 					
-							if ((err.error && err.error.code === -32000) || (err.message && err.message.includes("insufficient funds")) || (err.data && err.data.code === -32000)) {
-								// Notify user or handle insufficient funds error gracefully
-								alert("Insufficient funds for the transaction. Please check your balance.");
-							}
-						});
+							// Step 2: Assign the amount string directly to send_parameters
+							send_parameters['value'] = amountInWeiString;
+
+							// Remove manual gas fee settings to let MetaMask handle it
+        					delete send_parameters['maxPriorityFeePerGas'];
+        					delete send_parameters['maxFeePerGas'];
+					
+							console.debug('Mainnet send parameters', send_parameters);
+					
+							// Proceed with sending the transaction
+							web3.eth.sendTransaction(send_parameters)
+								.then((transactionHash) => {
+									console.debug('ETH successfully sent via MetaMask.', transactionHash);
+								})
+								.catch((err) => {
+									console.error('Error sending ETH via MetaMask', err);
+					
+									if ((err.error && err.error.code === -32000) ||
+										(err.message && err.message.includes("insufficient funds")) ||
+										(err.data && err.data.code === -32000)) {
+										alert("Insufficient funds for the transaction. Please check your balance.");
+									}
+								});
+						} catch (error) {
+							console.error('An error occurred during the transaction preparation:', error);
+						}
 					}
 					else
 					{
