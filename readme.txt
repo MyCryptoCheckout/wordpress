@@ -265,6 +265,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* New currency: MIRX
+
 = 2.139 20241121 =
 
 * Fix: Metamask ETH gas
