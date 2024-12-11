@@ -81,7 +81,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg USD Coin
 - BITTOKEN BITT
 - Flux FLUX
-- GameGuru GGT
 - HOLD EARN
 - PancakeSwap Token CAKE
 - SpacePi SPACEPI
