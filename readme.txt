@@ -115,7 +115,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Immutable IMX
 - Huobi Token HT
 - Kyber Network KNC
-- Lean Management Token LEAN
 - Loom LOOM
 - Maker MKR
 - MetalPay MTL
