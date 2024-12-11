@@ -83,7 +83,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Flux FLUX
 - HOLD EARN
 - PancakeSwap Token CAKE
-- SpacePi SPACEPI
 - Swipe SXP
 - TasteNFT TASTE
 - VAI Stablecoin VAI
