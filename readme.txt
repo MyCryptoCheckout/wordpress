@@ -138,7 +138,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Synthetix SNX
 - TenXPay PAY
 - Tether USDT
-- Toncoin TON
 - TrueUSD TUSD
 - Uniswap UNI
 - UNUS SED LEO
