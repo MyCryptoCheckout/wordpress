@@ -51,7 +51,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Dogecoin DOGE
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Fantom FTM
-- Flux FLUX
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
 - MAZA
@@ -80,7 +79,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
 - BITTOKEN BITT
-- Flux FLUX
 - HOLD EARN
 - PancakeSwap Token CAKE
 - Swipe SXP
