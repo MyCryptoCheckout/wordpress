@@ -123,6 +123,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Loom LOOM
 - Maker MKR
 - MetalPay MTL
+- Mirada AI MIRX
 - Nexo NEXO
 - OMG Network OMG
 - PEPE
