@@ -407,6 +407,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mcc-MIRX:before {
+  content: "\ea50";
+}
+
+.mcc-PYUSD:before {
+  content: "\ea51";
+}
+
 .mcc-BRETTGOLD:before {
   content: "\ea4e";
 }
@@ -2499,6 +2507,10 @@
   color: #957955;
 }
 
+.mcc_currency_icons.color i.mcc-MIRX {
+  color: #991E14;
+}
+
 .mcc_currency_icons.color i.mcc-MKR {
   color: #1abc9c;
 }
@@ -2645,6 +2657,10 @@
 
 .mcc_currency_icons.color i.mcc-PUT {
   color: #000000;
+}
+
+.mcc_currency_icons.color i.mcc-PYUSD {
+  color: #0A75D8;
 }
 
 .mcc_currency_icons.color i.mcc-QASH {
