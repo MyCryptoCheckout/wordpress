@@ -157,6 +157,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Jupiter JUP
 - PayPal USD PYUSD
 - Popcat POPCAT
+- Sallar ALL
 - Tether USDT
 - USD Coin USDC
 - Add your <a href="https://mycryptocheckout.com/sol-token/">custom SPL tokens</a>!
