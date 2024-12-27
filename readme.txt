@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.139
+Stable tag: 2.141
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.7
 
@@ -118,11 +118,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Loom LOOM
 - Maker MKR
 - MetalPay MTL
-<<<<<<< HEAD
 - Mirada AI MIRX
-=======
-- MIRX
->>>>>>> b6881b45ec9b7cb176861f07010ac2b930fb19c0
 - Nexo NEXO
 - OMG Network OMG
 - PEPE
