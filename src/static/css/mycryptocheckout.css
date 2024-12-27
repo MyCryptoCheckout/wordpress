@@ -407,6 +407,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mcc-ALL:before {
+  content: "\ea52";
+}
+
+.mcc-MIRX:before {
+  content: "\ea50";
+}
+
+.mcc-PYUSD:before {
+  content: "\ea51";
+}
+
 .mcc-BRETTGOLD:before {
   content: "\ea4e";
 }
@@ -1807,6 +1819,10 @@
   color: #DE3F6B;
 }
 
+.mcc_currency_icons.color i.mcc-ALL {
+  color: #242021;
+}
+
 .mcc_currency_icons.color i.mcc-ALGO {
   color: #000000;
 }
@@ -2499,6 +2515,10 @@
   color: #957955;
 }
 
+.mcc_currency_icons.color i.mcc-MIRX {
+  color: #991E14;
+}
+
 .mcc_currency_icons.color i.mcc-MKR {
   color: #1abc9c;
 }
@@ -2645,6 +2665,10 @@
 
 .mcc_currency_icons.color i.mcc-PUT {
   color: #000000;
+}
+
+.mcc_currency_icons.color i.mcc-PYUSD {
+  color: #0A75D8;
 }
 
 .mcc_currency_icons.color i.mcc-QASH {

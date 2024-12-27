@@ -118,7 +118,11 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Loom LOOM
 - Maker MKR
 - MetalPay MTL
+<<<<<<< HEAD
 - Mirada AI MIRX
+=======
+- MIRX
+>>>>>>> b6881b45ec9b7cb176861f07010ac2b930fb19c0
 - Nexo NEXO
 - OMG Network OMG
 - PEPE
@@ -149,7 +153,9 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - dogwifhat WIF
 - HOLD EARN
 - Jupiter JUP
+- PayPal USD PYUSD
 - Popcat POPCAT
+- Sallar ALL
 - Tether USDT
 - USD Coin USDC
 - Add your <a href="https://mycryptocheckout.com/sol-token/">custom SPL tokens</a>!
@@ -199,9 +205,9 @@ Disable the MCC currencies tab: after you have wallets setup you can prevent the
 
 = Technical disclosure =
 
-Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version. The URL is used by the API server to know where to send updated account info (license status, payment statistics), exchange rates, and completed purchase notifications. The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently).
+Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version. This info allows the API—which functions solely as a blockchain crawler—to return updated exchange rates, blockchain transaction confirmations, and license status (if any) to your site. The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently). See <a href="https://mycryptocheckout.com/how-mycryptocheckout-works/">how MyCryptoCheckout works.</a>
 
-If your server cannot be reached by the API server this plugin will not function.
+If your server cannot be reached by the API server this plugin will not be able to autoconfirm blockchain transactions.
 
 == Installation ==
 
