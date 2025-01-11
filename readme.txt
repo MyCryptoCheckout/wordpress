@@ -262,6 +262,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.141 20241227 =
+
 * New currency: MIRX
 
 = 2.139 20241121 =
