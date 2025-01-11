@@ -50,7 +50,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Digibyte DGB (Including SegWit)
 - Dogecoin DOGE
 - Ethereum ETH (Including MetaMask, ENS addresses)
-- Fantom FTM
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
 - Litecoin LTC (Including SegWit, HD wallets)
 - MAZA
