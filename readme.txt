@@ -152,7 +152,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - OFFICIAL TRUMP
 - PayPal USD PYUSD
 - Popcat POPCAT
-- Pudgy Penguins PENGU
 - Sallar ALL
 - Tether USDT
 - USD Coin USDC
