@@ -8,6 +8,7 @@ use Exception;
 	@brief		The base currency that is loaded into the Currencies collection.
 	@since		2017-12-09 20:00:32
 **/
+#[\AllowDynamicProperties]
 class Currency
 {
 	use btc_hd_public_key_trait;
