@@ -11,6 +11,7 @@ Version:			2.141
 WC tested up to:	9.4.1
 */
 
+#[\AllowDynamicProperties]
 namespace mycryptocheckout
 {
 	require_once( __DIR__ . '/vendor/autoload.php' );
