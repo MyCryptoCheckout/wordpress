@@ -4,20 +4,27 @@ use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodTyp
 
 final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
 {
-    private $gateway;
     protected $name = 'mycryptocheckout';// your payment gateway name
 
     public function initialize()
     {
 		require_once( __DIR__ . DIRECTORY_SEPARATOR . 'WC_Gateway_MyCryptoCheckout.php' );
         $this->settings = get_option( 'woocommerce_mycryptocheckout_settings', [] );
-        $this->gateway = WC_Gateway_MyCryptoCheckout::instance();
     }
 
     public function is_active()
     {
-        $r =  $this->gateway->is_available();
-        return $r;
+        return $this->gateway()->is_available();
+    }
+
+    /**
+     * Return the gateway instance.
+     *
+     * @since		2025-03-11 17:40:49
+     **/
+    public function gateway()
+    {
+        return WC_Gateway_MyCryptoCheckout::instance();
     }
 
     public function get_payment_method_script_handles()
@@ -48,12 +55,12 @@ final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
     public function get_payment_method_data()
     {
         ob_start();
-        echo $this->gateway->woocommerce_gateway_icon( '', \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id );
-		$this->gateway->payment_fields();
+        echo $this->gateway()->woocommerce_gateway_icon( '', \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id );
+		$this->gateway()->payment_fields();
 		$pf = ob_get_clean();
 
         return [
-            'title' => $this->gateway->title,
+            'title' => $this->gateway()->title,
             'payment_fields' => $pf,
         ];
     }
