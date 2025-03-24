@@ -19,8 +19,8 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 = Key Features & Highlights =
 
 - 0% transaction fees
-- No KYC or product restrictions
 - Peer-to-peer transactions
+- No KYC or product restrictions
 - No redirection to 3rd parties or iframes
 - Use any crypto wallet you want
 - Automagically detect unique payments using one wallet address
@@ -144,10 +144,12 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 = SPL tokens (Including Phantom) =
 
+- BONK
 - Brett Gold BRETTGOLD
 - dogwifhat WIF
 - HOLD EARN
 - Jupiter JUP
+- OFFICIAL TRUMP
 - PayPal USD PYUSD
 - Popcat POPCAT
 - Sallar ALL
@@ -260,6 +262,12 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.142 =
+
+* New currency: BONK
+* New currency: Pudgy Penguins PENGU
+* New currency: OFFICIAL TRUMP
 
 = 2.141 20241227 =
 

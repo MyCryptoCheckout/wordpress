@@ -407,6 +407,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mcc-BONK:before {
+  content: "\ea53";
+}
+
+.mcc-PENGU:before {
+  content: "\ea54";
+}
+
+.mcc-TRUMP:before {
+  content: "\ea55";
+}
+
 .mcc-ALL:before {
   content: "\ea52";
 }
@@ -1935,6 +1947,10 @@
   color: #000000;
 }
 
+.mcc_currency_icons.color i.mcc-BONK {
+  color: #fdde00;
+}
+
 .mcc_currency_icons.color i.mcc-BRETTGOLD {
   color: #2d9935;
 }
@@ -2619,6 +2635,10 @@
   color: #302C2C;
 }
 
+.mcc_currency_icons.color i.mcc-PENGU {
+  color: #8db4fd;
+}
+
 .mcc_currency_icons.color i.mcc-PENKY {
   color: #b80082;
 }
@@ -2929,6 +2949,10 @@
 
 .mcc_currency_icons.color i.mcc-TRDS {
   color: #1C05DB;
+}
+
+.mcc_currency_icons.color i.mcc-TRUMP {
+  color: #000000;
 }
 
 .mcc_currency_icons.color i.mcc-TRX {
