@@ -29,7 +29,13 @@ trait element
 		@var		$attributes
 		@since		20130506
 	**/
-	public $attributes = array();
+	public $attributes = [];
+
+	/**
+		@brief		These attributes do not show values, only keys.
+		@since		2023-12-10 21:10:34
+	**/
+	public $attributes_with_no_value = [];
 
 	/**
 		@brief		Content between the tags, if any.
@@ -104,8 +110,9 @@ trait element
 	**/
 	public function clear_attribute( $type )
 	{
-		if ( isset( $this->attributes[ $type ] ) )
-			unset( $this->attributes[ $type ] );
+		foreach( [ 'attributes', 'attributes_with_no_value' ] as $key )
+			if ( isset( $this->$key[ $type ] ) )
+				unset( $this->$key[ $type ] );
 		return $this;
 	}
 
@@ -239,14 +246,18 @@ trait element
 	**/
 	public function open_tag()
 	{
-		$attributes = array();
+		$attributes = [];
 
 		ksort( $this->attributes );
 		foreach( $this->attributes as $key => $attribute )
 		{
 			$value = $attribute->value();
 			$value = str_replace( '"', '\\"', $value );
-			$attributes[] = sprintf( '%s="%s"', $key, $value );
+
+			if ( ! isset( $this->attributes_with_no_value[ $key ] ) )
+				$attributes[] = sprintf( '%s="%s"', $key, $value );
+			else
+				$attributes[] = sprintf( '%s', $key );
 		}
 
 		if ( count( $attributes ) > 0 )
@@ -290,6 +301,17 @@ trait element
 		if ( is_bool( $text ) )
 			$text = ( $text ? 'true' : 'false' );
 		$this->attribute( $type )->set( $text );
+		return $this;
+	}
+
+	/**
+		@brief		Set this attribute that has no value.
+		@since		2023-12-10 21:11:46
+	**/
+	public function set_attribute_with_no_value( $key )
+	{
+		$this->set_attribute( $key, true );
+		$this->attributes_with_no_value[ $key ] = true;
 		return $this;
 	}
 
@@ -417,7 +439,7 @@ trait attributes
 	**/
 	public function is_required()
 	{
-		return $this->get_boolean_attribute( 'required' );
+		return $this->has_attribute( 'required' );
 	}
 
 	public function lang( $lang )
@@ -432,8 +454,17 @@ trait attributes
 
 	public function required( $required = true )
 	{
-		$this->set_boolean_attribute( 'aria-required', $required );
-		return $this->set_boolean_attribute( 'required', $required );
+		if ( $required )
+		{
+			$this->set_boolean_attribute( 'aria-required', true );
+			$this->set_attribute_with_no_value( 'required' );
+		}
+		else
+		{
+			$this->clear_attribute( 'aria-required' );
+			$this->clear_attribute( 'required' );
+		}
+		return $this;
 	}
 
 	public function spellcheck( $spellcheck = true )

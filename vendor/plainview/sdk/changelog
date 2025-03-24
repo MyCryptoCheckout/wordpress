@@ -1,3 +1,11 @@
+20250319		Wordpress: Allow for checking of the is_multisite function. For legacy installs.
+20250210		PHP 8.2 compat fixes
+20240902		Worpdress: remove EDD https workaround. Deprecated.
+20240902		Form: Allow setting of checkboxes value() with an array.
+20240511		Worpdress: 8.2 form warning
+20240213		Wordpress: Add extra nonce checking when outputting forms.
+20231210		Form2: Make required an attribute that does not have a value, only a key.
+20231202		Form2: Add test for data function
 20230918		Wordpress: Add function to disable automatic nonce, for example when handling ajax requests.
 20230913		Wordpress: Return the post if no nonce.
 20230906		Add Wordpress form noncing.

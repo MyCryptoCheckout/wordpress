@@ -112,8 +112,20 @@ class base
 		global $wpdb;
 		$this->wpdb = $wpdb;
 
-		$this->is_network = MULTISITE;
-		$this->is_multisite = MULTISITE;
+		$multisite_enabled = false;
+
+		if ( function_exists( 'is_multisite' ) )
+		{
+			$multisite_enabled = is_multisite();
+		}
+		else
+		{
+			if ( defined( 'MULTISITE' ) )
+				$multisite_enabled = MULTISITE;
+		}
+
+		$this->is_network = $multisite_enabled;
+		$this->is_multisite = $multisite_enabled;
 
 		$this->submenu_pages = new \plainview\sdk_mcc\collections\collection;
 

@@ -223,8 +223,16 @@ trait options
 		foreach ( $values as $value )
 			foreach( $this->get_options() as $option )
 			{
-				if ( $option->get_value() == $value )
-					$option->check();
+				if ( is_array( $value ) )
+				{
+					if ( in_array( $option->get_value(), $value ) )
+						$option->check();
+				}
+				else
+				{
+					if ( $option->get_value() == $value )
+						$option->check();
+				}
 			}
 		return $this;
 	}

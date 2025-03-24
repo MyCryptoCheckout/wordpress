@@ -49,4 +49,28 @@ class AttributeTest extends TestCase
 		$div->clear_attribute( 'test' );
 		$this->assertEquals( $div->get_attribute( 'test' ), null );
 	}
+
+	/**
+		@brief		Test attributes with no value.
+		@group		now
+		@since		2023-12-10 21:13:56
+	**/
+	public function test_attributes_with_no_value()
+	{
+		$div = $this->div();
+
+		// Make sure there is no required there at all.
+		$strpos = strpos( $div, 'required' );
+		$this->assertFalse( $strpos );
+
+		$div->required();
+
+		// Check that is has no value.
+		$strpos = strpos( $div, 'required=' );
+		$this->assertFalse( $strpos );
+
+		// Check that it exists.
+		$strpos = strpos( $div, 'required' );
+		$this->assertEquals( '5', $strpos );
+	}
 }

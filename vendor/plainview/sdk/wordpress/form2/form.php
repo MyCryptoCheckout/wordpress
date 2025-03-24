@@ -24,6 +24,12 @@ class form
 {
 	public $base;
 
+	/**
+		@brief		The nonce input used to control XHR.
+		@since		2024-05-11 20:59:53
+	**/
+	public $nonce_input = -1;
+
 	public function __construct( $base )
 	{
 		parent::__construct();
@@ -202,13 +208,28 @@ class form
 	}
 
 	/**
+		@brief		Check that the nonce exists, otherwise the form is not being posted.
+		@details	Created to prevent a conflict of POSTs when two forms are on the same page.
+		@since		2024-02-13 17:24:49
+	**/
+	public function is_posting( array $post = null )
+	{
+		if ( is_object( $this->nonce_input ) )
+		{
+			$nonce_key = $this->get_nonce_key();
+			if ( ! isset( $_POST[ $nonce_key ] ) )
+				return false;
+		}
+		return parent::is_posting( $post );
+	}
+
+	/**
 		@brief		Remove the automatic nonce from the form, for the sake of ajax requests.
 		@since		2023-09-18 11:56:18
 	**/
 	public function no_automatic_nonce()
 	{
-		if ( isset( $this->nonce_input ) )
-			unset ( $this->nonce_input );
+		$this->nonce_input = -1;
 		return $this;
 	}
 
@@ -219,7 +240,7 @@ class form
 	public function post( array $post = null )
 	{
 		parent::post( $post );
-		if ( ! isset( $this->nonce_input ) )
+		if ( ! is_object( $this->nonce_input ) )
 			return $this;
 		$the_nonce = $this->nonce_input->get_post_value();
 
