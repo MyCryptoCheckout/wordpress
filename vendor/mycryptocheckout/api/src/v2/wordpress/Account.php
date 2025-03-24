@@ -85,6 +85,10 @@ class Account
 	{
 		remove_filter( 'http_request_args', 'trp_strip_trpst_from_requests', 10, 2 );
 		$result = parent::send_client_account_data( $client_account_data );
+		if ( apply_filters( 'mycryptocheckout_send_client_account_data_wp_cache_flush', true ) )
+			wp_cache_flush();
+		else
+			MyCryptoCheckout()->debug( 'Not clearing cache after send_client_account_data' );
 		wp_cache_flush();
 		return $result;
 	}

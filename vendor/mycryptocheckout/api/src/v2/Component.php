@@ -9,6 +9,12 @@ namespace mycryptocheckout\api\v2;
 class Component
 {
 	/**
+	 *	@brief	A reference to the API.
+	 *	@since	2025-03-11 18:03:01
+	 **/
+	public $__api;
+
+	/**
 		@brief		Construct.
 		@since		2018-10-08 19:17:14
 	**/

@@ -10,6 +10,12 @@ abstract class Account
 	extends Component
 {
 	/**
+	 *	@brief	The data we store.
+	 *	@since	2025-03-11 18:02:20
+	 **/
+	public $data;
+
+	/**
 		@brief		The site option name under which the account data is stored.
 		@since		2018-10-08 20:13:36
 	**/

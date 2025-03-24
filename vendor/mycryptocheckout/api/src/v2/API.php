@@ -9,6 +9,12 @@ namespace mycryptocheckout\api\v2;
 abstract class API
 {
 	/**
+	 *	@brief	A temp reference to the account instance.
+	 *	@since	2025-03-11 18:03:19
+	 **/
+	public $__account;
+
+	/**
 		@brief		The API server address.
 		@since		2017-12-11 14:07:24
 	**/
