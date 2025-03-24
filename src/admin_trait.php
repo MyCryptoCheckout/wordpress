@@ -45,11 +45,6 @@ trait admin_trait
 		if ( ! function_exists('curl_version') )
 			$r .= $this->error_message_box()->_( __( 'Your PHP CURL module is missing. MyCryptoCheckout may not work 100%% well.', 'mycryptocheckout' ) );
 
-		$public_listing = $form->checkbox( 'public_listing' )
-			->checked( $this->get_site_option( 'public_listing' ) )
-			->description( __( 'Check the box and refresh your account if you want your webshop listed in the upcoming store directory on mycryptocheckout.com. Your store name and URL will be listed.', 'mycryptocheckout' ) )
-			->label( __( 'Be featured in the MCC store directory?', 'mycryptocheckout' ) );
-
 		$retrieve_account = $form->secondary_button( 'retrieve_account' )
 			->value( __( 'Refresh your account data', 'mycryptocheckout' ) );
 
@@ -70,10 +65,7 @@ trait admin_trait
 
 			if ( $retrieve_account->pressed() )
 			{
-				if ( $public_listing->is_checked() )
-					MyCryptoCheckout()->update_site_option( 'public_listing', true );
-				else
-					MyCryptoCheckout()->delete_site_option( 'public_listing' );
+				MyCryptoCheckout()->delete_site_option( 'public_listing' );
 
 				$result = $this->mycryptocheckout_retrieve_account();
 				if ( $result )

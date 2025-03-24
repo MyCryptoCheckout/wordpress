@@ -630,12 +630,6 @@ trait misc_methods_trait
 			'payment_timer_html' => '',
 
 			/**
-				@brief		List the webshop on the public MCC webshop directly?
-				@since		2018-10-13 10:54:41
-			**/
-			'public_listing' => false,
-
-			/**
 				@brief		The status of the QR code globally.
 				@since		2018-04-26 22:09:12
 			**/
