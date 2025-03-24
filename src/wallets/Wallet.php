@@ -6,6 +6,7 @@ namespace mycryptocheckout\wallets;
 	@brief		A wallet.
 	@since		2017-12-09 09:02:26
 **/
+#[\AllowDynamicProperties]
 class Wallet
 	extends \mycryptocheckout\Collection
 {
