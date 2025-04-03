@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 4.9
 Requires PHP: 5.6
-Stable tag: 2.141
+Stable tag: 2.142
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.7
 
@@ -263,7 +263,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-= 2.142 =
+= 2.142 20250403 =
 
 * New currency: BONK
 * New currency: Pudgy Penguins PENGU
