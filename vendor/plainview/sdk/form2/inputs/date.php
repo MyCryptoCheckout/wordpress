@@ -11,6 +11,9 @@ namespace plainview\sdk_mcc\form2\inputs;
 class date
 	extends number
 {
+	use traits\max_date;
+	use traits\min_date;
+
 	public $type = 'date';
 
 	public function _construct()
