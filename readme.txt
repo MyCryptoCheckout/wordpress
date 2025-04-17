@@ -97,7 +97,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Aragon ANT
 - Bancor BNT
 - Basic Attention Token BAT
-- Bobby BOBBY
 - Chainlink LINK
 - Compound COMP
 - Efinity Token EFI
