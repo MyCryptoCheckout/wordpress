@@ -60,7 +60,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Stellar XLM
 - Tron TRX
 - XRP
-- Zcash ZEC (T-address recipients only)
 - We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
 = BASE tokens supported (Including MetaMask): =
