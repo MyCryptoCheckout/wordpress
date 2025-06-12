@@ -81,6 +81,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - PancakeSwap Token CAKE
 - Swipe SXP
 - TasteNFT TASTE
+- Unity UNT
 - VAI Stablecoin VAI
 - Venus XVS
 - Value Flow VFLOW
@@ -107,6 +108,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Dogecoin DOGE
 - Dragonchain DRGN
 - Enjin Coin ENJ
+- EURC
 - FUNToken FUN
 - Gemini Dollar GUSD
 - Immutable IMX
@@ -260,6 +262,11 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.143 =
+
+* New currency: EURC
+* New currency: Unity UNT
 
 = 2.142 20250403 =
 
