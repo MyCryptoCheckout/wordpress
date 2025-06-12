@@ -15,10 +15,18 @@ abstract class API
 	public $__account;
 
 	/**
+	 *	@brief	The payments component.
+	 *	@since	2025-06-12 19:32:42
+	 **/
+	public $__payments = false;
+
+	/**
 		@brief		The API server address.
 		@since		2017-12-11 14:07:24
 	**/
 	public static $api_url = 'https://api.mycryptocheckout.com/v2/';
+
+
 
 	/**
 		@brief		Return the account component.
@@ -199,10 +207,9 @@ abstract class API
 	**/
 	public function payments()
 	{
-		if ( isset( $this->__payments ) )
-			return $this->__payments;
+		if ( ! $this->__payments )
+			$this->__payments = $this->new_payments();
 
-		$this->__payments = $this->new_payments();
 		return $this->__payments;
 	}
 

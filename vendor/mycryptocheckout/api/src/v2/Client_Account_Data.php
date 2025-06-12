@@ -21,4 +21,10 @@ class Client_Account_Data
 		@since		2018-10-13 15:42:04
 	**/
 	public $plugin_version = '0.1';
+
+	/**
+	 *	@brief	The temporary key used to tell whether the API contacting us is real.
+	 *	@since	2025-06-12 19:31:23
+	 **/
+	public $retrieve_key;
 }
