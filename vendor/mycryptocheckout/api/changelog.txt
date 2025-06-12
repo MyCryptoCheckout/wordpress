@@ -1,3 +1,7 @@
+2.16		20250311
+
+Clean up 8.2 warnings.
+
 2.15		20231113
 
 Add filters and actions to allow the WooCommerce code to fetch the order data from the external table instead of the postmeta table.
