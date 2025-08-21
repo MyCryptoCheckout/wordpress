@@ -2,10 +2,10 @@
   'use strict';
 
 /*
- *      bignumber.js v9.1.2
+ *      bignumber.js v9.3.1
  *      A JavaScript library for arbitrary-precision arithmetic.
  *      https://github.com/MikeMcl/bignumber.js
- *      Copyright (c) 2022 Michael Mclaughlin <M8ch88l@gmail.com>
+ *      Copyright (c) 2025 Michael Mclaughlin <M8ch88l@gmail.com>
  *      MIT Licensed.
  *
  *      BigNumber.prototype methods     |  BigNumber methods
@@ -906,7 +906,7 @@
 
         // xc now represents str converted to baseOut.
 
-        // THe index of the rounding digit.
+        // The index of the rounding digit.
         d = e + dp + 1;
 
         // The rounding digit: the digit to the right of the digit that may be rounded up.
@@ -1270,7 +1270,7 @@
 
         // Fixed-point notation.
         } else {
-          i -= ne;
+          i -= ne + (id === 2 && e > ne);
           str = toFixedPoint(str, e, '0');
 
           // Append zeros?
@@ -4468,6 +4468,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 	
 					if (contractInstance === false) {
 						send_parameters['to'] = $$.mycryptocheckout_checkout_data.to;
+						send_parameters['gasLimit'] = web3.utils.toHex(40000);
 					
 						try {
 							// Step 1: Convert amount to Wei (string)
@@ -4480,8 +4481,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 							send_parameters['value'] = amountInWeiString;
 
 							// Remove manual gas fee settings to let MetaMask handle it
-        					delete send_parameters['maxPriorityFeePerGas'];
-        					delete send_parameters['maxFeePerGas'];
+							// 8-21-25 MetaMask needs this now
+        					// delete send_parameters['maxPriorityFeePerGas'];
+        					// delete send_parameters['maxFeePerGas'];
 					
 							console.debug('Mainnet send parameters', send_parameters);
 					

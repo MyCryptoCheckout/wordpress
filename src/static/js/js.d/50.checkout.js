@@ -417,6 +417,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 	
 					if (contractInstance === false) {
 						send_parameters['to'] = $$.mycryptocheckout_checkout_data.to;
+						send_parameters['gasLimit'] = web3.utils.toHex(40000);
 					
 						try {
 							// Step 1: Convert amount to Wei (string)
@@ -429,8 +430,9 @@ var mycryptocheckout_checkout_javascript = function( data )
 							send_parameters['value'] = amountInWeiString;
 
 							// Remove manual gas fee settings to let MetaMask handle it
-        					delete send_parameters['maxPriorityFeePerGas'];
-        					delete send_parameters['maxFeePerGas'];
+							// 8-21-25 MetaMask needs this now
+        					// delete send_parameters['maxPriorityFeePerGas'];
+        					// delete send_parameters['maxFeePerGas'];
 					
 							console.debug('Mainnet send parameters', send_parameters);
 					
