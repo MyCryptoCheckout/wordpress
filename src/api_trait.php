@@ -2,6 +2,8 @@
 
 namespace mycryptocheckout;
 
+use Exception;
+
 /**
 	@brief		Handles all things related to the api.
 	@since		2017-12-09 07:05:04
@@ -38,7 +40,14 @@ trait api_trait
 	**/
 	public function api_template_redirect()
 	{
-		$this->api()->maybe_process_messages();
+		try
+		{
+			$this->api()->maybe_process_messages();
+		}
+		catch( Exception $e )
+		{
+			$this->debug( 'Exception: %s', $e->getMessage() );
+		}
 	}
 
 	/**
