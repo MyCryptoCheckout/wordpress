@@ -647,7 +647,7 @@ trait admin_trait
 					$pubs = implode( '/', $currency->supports->btc_hd_public_key_pubs );
 
 				$btc_hd_public_key = $fs->text( 'btc_hd_public_key' )
-					->description( __( sprintf( 'If you have an HD wallet and want to generate a new address after each purchase, enter your %s public key here.', $pubs ), 'mycryptocheckout' ) )
+					->description( sprintf( __( 'If you have an HD wallet and want to generate a new address after each purchase, enter your %s public key here.', 'mycryptocheckout' ), $pubs ) )
 					// Input label
 					->label( __( 'HD public key', 'mycryptocheckout' ) )
 					->trim()
