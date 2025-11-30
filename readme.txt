@@ -55,7 +55,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - MAZA
 - Monero XMR
 - Polygon MATIC
-- PutinCoin PUT
 - Solana SOL (Including Phantom)
 - Stellar XLM
 - Tron TRX
