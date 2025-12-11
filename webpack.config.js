@@ -1,29 +1,40 @@
 const path = require('path');
+// Import the default config
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    mode: 'production', // Add this line
+    // 1. Keep the default settings (Spread them first)
     ...defaultConfig,
+
+    // 2. Your custom settings
+    mode: 'production', 
     devtool: false,
+
     entry: {
-        // Change the entry point to your specific file
         index: path.resolve(__dirname, 'src/ecommerce/woocommerce/react/index.js'),
     },
+
     output: {
         ...defaultConfig.output,
-        // Change the output directory and filename
         path: path.resolve(__dirname, 'src/ecommerce/woocommerce/js'),
         filename: 'index.js'
     },
+
     optimization: {
-        minimize: true, // Ensure this is true if not already set by default in production mode
+        // 3. Keep other optimization defaults (like runtime chunks if any)
+        ...defaultConfig.optimization,
+
+        minimize: true,
         minimizer: [
+            // This string tells Webpack to "EXTEND" defaults, not replace them.
+            // Without this, you lose the CSS minimizer!
+            '...', 
+            
             new TerserPlugin({
                 terserOptions: {
-                    // You can specify additional options here according to your needs
                     compress: {
-                        drop_console: true, // Removes console logs for production
+                        drop_console: true, 
                     },
                 },
             }),
