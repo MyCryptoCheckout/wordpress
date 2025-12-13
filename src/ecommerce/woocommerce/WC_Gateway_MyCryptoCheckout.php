@@ -457,7 +457,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	public function validate_textarea_field( $key, $value )
 	{
 		if ( in_array( $key, [ 'online_instructions' ] ) )
-			return trim( stripslashes( $value ) );
+			return wp_kses_post( trim( stripslashes( $value ) ) );
 		return $this->validate_text_field( $key, $value );
 	}
 

@@ -399,6 +399,13 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Check if our custom nonce exists and is valid
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_currencies' ) )
+			{
+				// Stop everything if the check fails
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -540,10 +547,15 @@ trait admin_trait
 
 		$r .= $this->h2( __( 'Current currencies / wallets', 'mycryptocheckout' ) );
 
+		// Render form 1
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_currencies', 'mcc_nonce', true, false );
 		$r .= $table;
 		$r .= $form->close_tag();
+
+		// Render form 2
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_currencies', 'mcc_nonce', true, false );
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
