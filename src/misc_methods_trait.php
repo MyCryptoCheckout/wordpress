@@ -161,11 +161,11 @@ trait misc_methods_trait
 			if ( $options->as_html )
 			{
 				$value = sprintf( '<option value="%s"%s>%s (%s%s)</option>',
-					$currency_id,
-					( $selected ? ' selected="selected"' : '' ),
-					$currency->get_name(),
-					$cryptocurrency_amount,
-					$currency_id
+					esc_attr( $currency_id ),
+    				( $selected ? ' selected="selected"' : '' ),
+    				esc_html( $currency->get_name() ),
+    				esc_html( $cryptocurrency_amount ),
+    				esc_html( $currency_id )
 				);
 				// Select the first.
 				if ( $selected )
