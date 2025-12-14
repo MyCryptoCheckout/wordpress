@@ -4,7 +4,6 @@ namespace mycryptocheckout\traits;
 
 /**
 	@brief		Functions common to things that can be network enabled and on specific sites.
-	@see		\mycryptocheckout\autosettlements\Autosettlement
 	@see		\mycryptocheckout\wallets\Wallet
 	@since		2019-02-22 21:40:44
 **/

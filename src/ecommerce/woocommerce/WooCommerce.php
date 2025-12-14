@@ -534,7 +534,6 @@ class WooCommerce
 		$payment->timeout_hours = intval( $gateway->get_option( 'payment_timeout_hours' ) );
 
 		$wallet->apply_to_payment( $payment );
-		MyCryptoCheckout()->autosettlements()->apply_to_payment( $payment );
 
 		MyCryptoCheckout()->debug( 'Payment as created: %s', $payment );
 
