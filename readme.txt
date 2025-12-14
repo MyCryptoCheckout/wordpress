@@ -26,7 +26,6 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Automagically detect unique payments using one wallet address
 - Hierarchically deterministic (HD) wallet support
 - 1-Click payment buttons, Electrum, MetaMask, Trust Wallet, Phantom, etc.
-- Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
 - 0-conf (mempool) support for some coins
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
@@ -167,16 +166,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Pleasure Coin NSFW
 - Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
 
-= Fiat Autosettlements =
-
-Autosettlement is a feature that enables you to connect MyCryptoCheckout to exchange(s) and automatically sell any received cryptocurrencies into fiat or stablecoins (USD, USDC, USDT, TUSD). This is a great tool for merchants who want to accept bitcoin/altcoins but prefer to cash out immediately to avoid market volatility.
-
-Supported exchanges:
-
-- Binance
-- Bittrex
-- More coming soon!
-
 = Cryptocurrency Donations Widget =
 
 Receive donations in any of the cryptocurrencies supported by MyCryptoCheckout. Generate a widget using our simple shortcode generator and add it into any text widget or text editor. Shortcode generation options:
@@ -225,12 +214,11 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 3. Account overview tab
 4. Currencies tab
 5. Edit wallet
-6. Autosettlement tab
-7. Edit Autosettlement
-8. WooCommerce settings
-9. Easy Digital Downloads settings
-10. Donations widget
-11. Donations shortcode generator
+6. Edit Autosettlement
+7. WooCommerce settings
+8. Easy Digital Downloads settings
+9. Donations widget
+10. Donations shortcode generator
 
 == Frequently Asked Questions ==
 
