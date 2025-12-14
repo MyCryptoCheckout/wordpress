@@ -93,6 +93,10 @@ trait donations_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_donations' ) ) {
+                wp_die( 'Security check failed. Please reload the page and try again.' );
+            }
 			$form->post();
 			$form->use_post_values();
 
@@ -131,6 +135,7 @@ trait donations_trait
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_donations', 'mcc_nonce', true, false );
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
