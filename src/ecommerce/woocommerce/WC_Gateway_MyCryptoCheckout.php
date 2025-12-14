@@ -516,7 +516,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 			$handled_currencies[ $currency_id ] = true;
 
-			$r .= sprintf( '<i class="mcc-%s"></i>', $currency_id );
+			$r .= sprintf( '<i class="mcc-%s"></i>', esc_attr( $currency_id ) );
 		}
 
 		$r .= '</div>';
