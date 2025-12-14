@@ -96,6 +96,10 @@ trait autosettlement_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify nonce.
+            if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_autosettlements' ) ) {
+                wp_die( 'Security check failed. Please reload the page and try again.' );
+            }
 			$form->post();
 			$form->use_post_values();
 
@@ -193,11 +197,13 @@ trait autosettlement_trait
 		$r .= $this->h2( __( 'Autosettlements', 'mycryptocheckout' ) );
 
 		$r .= $form->open_tag();
-		$r .= $table;
-		$r .= $form->close_tag();
-		$r .= $form->open_tag();
-		$r .= $form->display_form_table();
-		$r .= $form->close_tag();
+        $r .= wp_nonce_field( 'mcc_autosettlements', 'mcc_nonce', true, false );
+        $r .= $table;
+        $r .= $form->close_tag();
+        $r .= $form->open_tag();
+        $r .= wp_nonce_field( 'mcc_autosettlements', 'mcc_nonce', true, false );
+        $r .= $form->display_form_table();
+        $r .= $form->close_tag();
 
 		echo $r;
 	}
@@ -316,6 +322,10 @@ trait autosettlement_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify nonce.
+            if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_autosettlement_edit' ) ) {
+                wp_die( 'Security check failed. Please reload the page and try again.' );
+            }
 			$form->post();
 			$form->use_post_values();
 
@@ -373,8 +383,9 @@ trait autosettlement_trait
 		}
 
 		$r .= $form->open_tag();
-		$r .= $form->display_form_table();
-		$r .= $form->close_tag();
+        $r .= wp_nonce_field( 'mcc_autosettlement_edit', 'mcc_nonce', true, false ); // Add nonce
+        $r .= $form->display_form_table();
+        $r .= $form->close_tag();
 
 		echo $r;
 	}
