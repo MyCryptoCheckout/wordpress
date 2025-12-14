@@ -54,6 +54,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_account' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -94,6 +99,7 @@ trait admin_trait
 			$r .= $this->admin_account_valid( $account );
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_account', 'mcc_nonce', true, false ); // Add nonce field
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
@@ -399,10 +405,9 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
-			// Check if our custom nonce exists and is valid
+			// Verify Nonce.
 			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_currencies' ) )
 			{
-				// Stop everything if the check fails
 				wp_die( 'Security check failed. Please reload the page and try again.' );
 			}
 
@@ -714,6 +719,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_wallet' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -789,6 +799,7 @@ trait admin_trait
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_wallet', 'mcc_nonce', true, false ); // Add nonce
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
@@ -824,6 +835,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_local_settings' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -840,6 +856,7 @@ trait admin_trait
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_local_settings', 'mcc_nonce', true, false ); // Add nonce
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
@@ -915,6 +932,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_global_settings' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -935,6 +957,7 @@ trait admin_trait
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_global_settings', 'mcc_nonce', true, false ); // Add nonce
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
@@ -972,6 +995,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_tools_action' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -1006,6 +1034,7 @@ trait admin_trait
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_tools_action', 'mcc_nonce', true, false ); // Add nonce
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
