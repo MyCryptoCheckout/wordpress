@@ -45,6 +45,21 @@ trait admin_trait
 		if ( ! function_exists('curl_version') )
 			$r .= $this->error_message_box()->_( __( 'Your PHP CURL module is missing. MyCryptoCheckout may not work 100%% well.', 'mycryptocheckout' ) );
 
+		$safe_message_dismissed_nonce = md5( wp_salt() . 'safe_message_dismissed' );
+		if ( isset( $_GET[ 'safe_message_dismissed' ] ) )
+			if ( $_GET[ 'safe_message_dismissed' ] == $safe_message_dismissed_nonce )
+			{
+				$this->update_option( 'safe_message_dismissed', time() );
+			}
+
+		if ( ! $this->get_option( 'safe_message_dismissed' ) )
+		{
+			$url = add_query_arg( 'safe_message_dismissed', $safe_message_dismissed_nonce );
+			$message_box_text = '<strong>Keep Your Store Safe:</strong> Due to increased attacks on WordPress sites, we recommend you <a href="https://wordpress.org/plugins/wp-2fa/" target="_blank" rel="noopener">enable login 2FA</a>, use <a href="https://wordpress.org/plugins/sucuri-scanner/" target="_blank" rel="noopener">Sucuri</a> to monitor activity, <a href="https://docs.sucuri.net/plugins/wordpress-hardening-options/" target="_blank" rel="noopener">disable the Plugin/Theme Editor</a>, and <a href="https://wordpress.org/plugins/disable-xml-rpc/" target="_blank" rel="noopener">disable XML-RPC</a>.';
+			$message_box_text .= '<br/><a href="' . $url . '">Dismiss this message.</a>';
+			$r .= $this->info_message_box()->_( $message_box_text );
+		}
+
 		$retrieve_account = $form->secondary_button( 'retrieve_account' )
 			->value( __( 'Refresh your account data', 'mycryptocheckout' ) );
 

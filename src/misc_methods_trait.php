@@ -636,6 +636,12 @@ trait misc_methods_trait
 			'qr_code_enabled' => 'default_enabled',
 
 			/**
+				@brief		Has the user dismissed the message on the account tab regarding safe practices?
+				@since		2025-12-14 19:49:36
+			**/
+			'safe_message_dismissed' => false,
+
+			/**
 				@brief		The Wallets collection in which all wallet info is stored.
 				@see		Wallets()
 				@since		2017-12-09 09:15:52
