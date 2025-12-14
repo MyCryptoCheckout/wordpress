@@ -245,7 +245,7 @@ trait admin_trait
 					$amounts = (array)$amounts;
 					ksort( $amounts );
 					$amounts = implode( ', ', array_keys( $amounts ) );
-					$text .= sprintf( '<p>%s: %s</p>', $currency_id, $amounts );
+					$text .= sprintf( '<p>%s: %s</p>', htmlspecialchars( $currency_id ), htmlspecialchars( $amounts ) );
 				}
 				$row->td( 'details' )->text( $text );
 
