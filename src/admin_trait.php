@@ -245,7 +245,7 @@ trait admin_trait
 					$amounts = (array)$amounts;
 					ksort( $amounts );
 					$amounts = implode( ', ', array_keys( $amounts ) );
-					$text .= sprintf( '<p>%s: %s</p>', $currency_id, $amounts );
+					$text .= sprintf( '<p>%s: %s</p>', wp_kses_post( $currency_id ), wp_kses_post( $amounts ) );
 				}
 				$row->td( 'details' )->text( $text );
 
@@ -1089,6 +1089,10 @@ trait admin_trait
 
 		if ( ! wp_verify_nonce( $nonce, 'mycryptocheckout_sort_wallets' ) )
 			wp_die( 'Invalid nonce.' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+        	wp_die( 'Unauthorized user.' );
+    	}
 
 		// Load the wallets.
 		$wallets = $this->wallets();
