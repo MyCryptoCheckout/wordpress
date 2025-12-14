@@ -140,21 +140,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - ZRX 0x Protocol
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC-20 tokens</a>!
 
-= SPL tokens (Including Phantom) =
-
-- BONK
-- Brett Gold BRETTGOLD
-- dogwifhat WIF
-- HOLD EARN
-- Jupiter JUP
-- OFFICIAL TRUMP
-- PayPal USD PYUSD
-- Popcat POPCAT
-- Sallar ALL
-- Tether USDT
-- USD Coin USDC
-- Add your <a href="https://mycryptocheckout.com/sol-token/">custom SPL tokens</a>!
-
 = TRC-20 tokens supported: =
 
 - Tether USDT
@@ -251,10 +236,12 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 == Changelog ==
 
 = 2.151 20251214 =
-* Update: @wordpress/scripts to 31.1.0
-* Update: webpack config scripts
-* Update: woocommerce/react/index.js
-* Update: other NPM dependencies
+* Added: Admin alert for security messages.
+* Removed: Autosettlement feature.
+* Update: @wordpress/scripts to v31.1.0 and refreshed Webpack config.
+* Update: WooCommerce React integration.
+* Update: Other NPM dependencies.
+* Security: Added extra nonce checks to some admin actions.
 
 = 2.144 =
 
