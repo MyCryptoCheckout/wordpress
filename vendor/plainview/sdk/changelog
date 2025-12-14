@@ -1,3 +1,8 @@
+20251214		Wordpress: Better escaping of string variables.
+20251201		Form2: Fix php 8.4 error about null.
+20250918		Wordpress: Add get_meta to post object store.
+20250917		Collection: Allow return of a subcollection key immediately.
+20250421		Form2: Fix missing minlength attribute.
 20250326		Form2: Add correct min and max handling for date inputs.
 20250319		Wordpress: Allow for checking of the is_multisite function. For legacy installs.
 20250210		PHP 8.2 compat fixes

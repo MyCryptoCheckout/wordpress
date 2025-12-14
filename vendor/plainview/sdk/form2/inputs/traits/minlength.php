@@ -28,7 +28,7 @@ trait minlength
 	{
 		$this->add_validation_method( 'minlength' );
 		$this->minlength = intval( $minlength );
-		return $this;
+		return $this->set_attribute( 'minlength', $this->minlength );
 	}
 
 	/**

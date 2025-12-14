@@ -354,7 +354,7 @@ class form
 		@see		post()
 		@since		20130524
 	**/
-	public function is_posting( array $post = null )
+	public function is_posting( ?array $post = null )
 	{
 		if ( $this->has_posted )
 			return count( $this->post ) > 0;

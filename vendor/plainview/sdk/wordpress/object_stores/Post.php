@@ -150,7 +150,14 @@ trait Post
 
 	public static function load_from_store( $key )
 	{
-		$post = get_post( $key );
+		if ( is_a( $key, 'WP_Post' ) )
+		{
+			$post = $key;
+			$key = $post->ID;
+		}
+		else
+			$post = get_post( $key );
+
 		if ( ! $post )
 			return false;
 
@@ -168,6 +175,17 @@ trait Post
 		$r->load_meta();
 
 		return $r;
+	}
+
+	/**
+		@brief		Retrieve a meta key.
+		@since		2025-09-10 20:19:26
+	**/
+	public function get_meta( $key, $default_value = null )
+	{
+		if ( ! isset( $this->meta->$key ) )
+			return $default_value;
+		return $this->meta->$key;
 	}
 
 	/**

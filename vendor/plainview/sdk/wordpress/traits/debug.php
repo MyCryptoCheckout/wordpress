@@ -114,6 +114,8 @@ trait debug
 			$export |= is_object( $arg );
 			if ( $export )
 				$args[ $index ] = sprintf( '<pre><code>%s</code></pre>', htmlspecialchars( var_export( $arg, true ) ) );
+			if ( is_string( $arg ) )
+				$args[ $index ] = htmlspecialchars( $arg );
 		}
 
 		// Put all of the arguments into one string.
