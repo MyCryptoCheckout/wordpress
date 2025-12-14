@@ -250,7 +250,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-= 2.151 =
+= 2.151 20251214 =
 * Update: @wordpress/scripts to 31.1.0
 * Update: webpack config scripts
 * Update: woocommerce/react/index.js
