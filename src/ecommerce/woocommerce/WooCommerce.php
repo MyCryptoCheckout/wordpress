@@ -366,9 +366,9 @@ class WooCommerce
 			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
 				// Received 123 BTC to xyzabc
 				sprintf( __( 'Received %s&nbsp;%s<br/>to %s', 'mycryptocheckout'),
-					$amount,
-					$order->get_meta( '_mcc_currency_id' ),
-					$order->get_meta( '_mcc_to' )
+					esc_html( $amount ),
+					esc_html( $order->get_meta( '_mcc_currency_id' ) ),
+					esc_html( $order->get_meta( '_mcc_to' ) )
 				)
 			);
 		else
@@ -376,9 +376,9 @@ class WooCommerce
 			$r .= sprintf( '<p class="form-field form-field-wide">%s</p>',
 				// Expecting 123 BTC to xyzabc
 				sprintf( __( 'Expecting %s&nbsp;%s<br/>to %s', 'mycryptocheckout'),
-					$amount,
-					$order->get_meta( '_mcc_currency_id' ),
-					$order->get_meta( '_mcc_to' )
+					esc_html( $amount ),
+					esc_html( $order->get_meta( '_mcc_currency_id' ) ),
+					esc_html( $order->get_meta( '_mcc_to' ) )
 				)
 			);
 		}
