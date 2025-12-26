@@ -31,11 +31,12 @@ namespace mycryptocheckout
 		use api_trait;
 		use currencies_trait;
 		use donations_trait;
-		use wallets_trait;
 		use menu_trait;
 		use misc_methods_trait;
-		use qr_code_trait;
 		use payment_timer_trait;
+		use qr_code_trait;
+		use security_trait;
+		use wallets_trait;
 
 		/**
 			@brief		Constructor.
@@ -49,6 +50,7 @@ namespace mycryptocheckout
 			$this->init_donations_trait();
 			$this->init_menu_trait();
 			$this->init_misc_methods_trait();
+			$this->init_security_trait();
 			$this->easy_digital_downloads = new ecommerce\easy_digital_downloads\Easy_Digital_Downloads();
 			$this->woocommerce = new ecommerce\woocommerce\WooCommerce();
 

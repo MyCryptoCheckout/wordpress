@@ -642,6 +642,24 @@ trait misc_methods_trait
 			'safe_message_dismissed' => false,
 
 			/**
+				@brief		Prevent admins from being created.
+				@since		2025-12-26 10:04:41
+			**/
+			'security_block_rogue_admins' => false,
+
+			/**
+				@brief		Disable the internal file / theme / plugin editor.
+				@since		2025-12-26 10:04:25
+			**/
+			'security_disable_file_editor' => false,
+
+			/**
+				@brief		Disable the XMLRPC to maybe, perhaps, not allow hackers in.
+				@since		2025-12-26 10:03:43
+			**/
+			'security_disable_xmlrpc' => false,
+
+			/**
 				@brief		The Wallets collection in which all wallet info is stored.
 				@see		Wallets()
 				@since		2017-12-09 09:15:52

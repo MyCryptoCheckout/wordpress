@@ -940,6 +940,11 @@ trait admin_trait
 
 		$this->add_payment_timer_inputs( $fs );
 
+        $fs = $form->fieldset( 'fs_security' );
+        $fs->legend->label( __( 'Security Lockdown', 'mycryptocheckout' ) );
+
+		$this->add_security_inputs_to_form( $fs );
+
 		$this->add_debug_settings_to_form( $form );
 
 		$save = $form->primary_button( 'save' )
@@ -960,6 +965,7 @@ trait admin_trait
 
 			$this->save_payment_timer_inputs( $form );
 			$this->save_qr_code_inputs( $form );
+			$this->save_security_inputs( $form );
 
 			$this->save_debug_settings_from_form( $form );
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
