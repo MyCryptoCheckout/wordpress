@@ -35,7 +35,6 @@ namespace mycryptocheckout
 		use misc_methods_trait;
 		use payment_timer_trait;
 		use qr_code_trait;
-		use security_trait;
 		use wallets_trait;
 
 		/**
