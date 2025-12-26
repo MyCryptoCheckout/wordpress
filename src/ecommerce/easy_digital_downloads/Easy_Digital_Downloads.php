@@ -503,28 +503,28 @@ class Easy_Digital_Downloads
 
 		?>
 		<div id="mcc_payment_details" class="postbox">
-			<h3 class="hndle"><span><?php _e( 'MyCryptoCheckout details', 'mycryptocheckout' ); ?></span></h3>
+			<h3 class="hndle"><span><?php echo esc_html( 'MyCryptoCheckout details', 'mycryptocheckout' ); ?></span></h3>
 			<div class="inside">
 				<div id="mcc_payment_details_inner">
 					<div class="data column-container">
 						<div class="column">
 							<p>
-								<strong class="mcc_amount"><?php _e( 'Amount', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( get_post_meta( $post_id, '_mcc_amount', true ) ); ?> <?php _e( get_post_meta( $post_id, '_mcc_currency_id', true ) ); ?></span>
+								<strong class="mcc_amount"><?php echo esc_html( 'Amount', 'mycryptocheckout' ); ?></strong><br/>
+								<span><?php echo esc_html( get_post_meta( $post_id, '_mcc_amount', true ) ); ?> <?php echo esc_html( get_post_meta( $post_id, '_mcc_currency_id', true ) ); ?></span>
 							</p>
 						</div>
 						<div class="column">
 							<p>
-								<strong class="mcc_to"><?php _e( 'To', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( get_post_meta( $post_id, '_mcc_to', true ) ); ?></span>
+								<strong class="mcc_to"><?php echo esc_html( 'To', 'mycryptocheckout' ); ?></strong><br/>
+								<span><?php echo esc_html( get_post_meta( $post_id, '_mcc_to', true ) ); ?></span>
 							</p>
 						</div>
 					</div><!-- column-container -->
 					<div class="data column-container">
 						<div class="column">
 							<p>
-								<strong class="mcc_status"><?php _e( 'Status', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( $status ); ?></span>
+								<strong class="mcc_status"><?php echo esc_html( 'Status', 'mycryptocheckout' ); ?></strong><br/>
+								<span><?php echo esc_html( $status ); ?></span>
 							</p>
 						</div>
 					<?php
@@ -532,14 +532,16 @@ class Easy_Digital_Downloads
 					?>
 						<div class="column">
 							<p>
-								<strong class="mcc_payment_id"><?php _e( 'API payment ID', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( $api_payment_id ); ?></span>
+								<strong class="mcc_payment_id"><?php echo esc_html( 'API payment ID', 'mycryptocheckout' ); ?></strong><br/>
+								<span><?php echo esc_html( $api_payment_id ); ?></span>
 							</p>
 						</div>
 						<div class="column">
 							<p>
-								<strong class="mcc_transaction_id"><?php _e( 'Transaction ID', 'mycryptocheckout' ); ?></strong><br/>
-								<?php _e( $transaction_id_span ); ?>
+								<strong class="mcc_transaction_id"><?php echo esc_html( 'Transaction ID', 'mycryptocheckout' ); ?></strong><br/>
+								<?php
+								echo wp_kses_post( $transaction_id_span ); 
+								?>
 							</p>
 						</div>
 					<?php
@@ -547,8 +549,12 @@ class Easy_Digital_Downloads
 					?>
 						<div class="column">
 							<p>
-								<strong class="mcc_attempts"><?php _e( 'API connection attempts', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( intval( get_post_meta( $post_id, '_mcc_attempts', true ) ) ); ?></span>
+								<strong class="mcc_attempts"><?php echo esc_html( 'API connection attempts', 'mycryptocheckout' ); ?></strong><br/>
+								<span>
+								<?php
+								echo intval( get_post_meta( $post_id, '_mcc_attempts', true ) ); 
+								?>
+								</span>
 							</p>
 						</div>
 					<?php

@@ -386,8 +386,20 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 		if ( ! empty( $_POST['selectedcurrency'] ) )
 		{
-			$_POST[ 'mcc_currency_id' ] = $_POST['selectedcurrency'];
-			MyCryptoCheckout()->debug( 'selectedcurrency detected in post.' );
+			// Sanitize the input.
+			$selected_currency = sanitize_text_field( $_POST['selectedcurrency'] );
+
+			// Check if this currency actually has an active wallet.
+			$wallet = MyCryptoCheckout()->wallets()->get_dustiest_wallet( $selected_currency );
+
+			if ( $wallet ) {
+				// Valid currency found, proceed.
+				$_POST[ 'mcc_currency_id' ] = $selected_currency;
+				MyCryptoCheckout()->debug( 'selectedcurrency detected in post.' );
+			} else {
+				// Stop execution safely if the currency is invalid.
+				throw new Exception( __( 'Invalid cryptocurrency selected. Please choose a valid option.', 'mycryptocheckout' ) );
+			}
 		}
 
 		if ( isset( $_POST[ 'mcc_currency_id' ] ) )
