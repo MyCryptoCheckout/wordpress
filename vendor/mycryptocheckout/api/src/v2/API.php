@@ -219,6 +219,14 @@ abstract class API
 	**/
 	public function process_messages( $json )
 	{
+		// Only accept messages from the MCC API server.
+		$allowed_ips = [ '136.144.254.215', '2a01:7c8:d008:e:5054:ff:fe62:ede32a01:7c8:d008:e:5054:ff:fe62:ede3' ];
+		$remote_ip = $_SERVER['REMOTE_ADDR'];
+		if ( ! in_array( $remote_ip, $allowed_ips ) )
+		{
+			throw new Exception( 'Exception: Invalid origin IP: ' . $remote_ip );
+		}
+
 		// This must be an array.
 		if ( ! is_array( $json->messages ) )
 			return $this->debug( 'JSON does not contain a messages array.' );

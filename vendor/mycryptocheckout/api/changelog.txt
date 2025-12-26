@@ -1,3 +1,8 @@
+2.18		20251226
+
+Added origin IP check. The MCC server API IPs are hardcoded.
+Added retrieve key length check, as extra security that the correct retrieve key has been given to the webshop.
+
 2.17		20250311
 
 Cleaning up tags

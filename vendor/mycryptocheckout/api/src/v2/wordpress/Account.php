@@ -73,6 +73,8 @@ class Account
 		if ( ! $stored_value )
 			throw new Exception( 'No retrieve key is set. Not expecting an account retrieval.' );
 		// Does it match the one we got?
+		if ( strlen( $stored_value ) !== strlen( $retrieve_key ) )
+			throw new Exception( 'Retrieve key is of incorrect length.' );
 		return ( $stored_value == $retrieve_key );
 	}
 
