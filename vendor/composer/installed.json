@@ -483,20 +483,20 @@
         },
         {
             "name": "mycryptocheckout/api",
-            "version": "2.17",
-            "version_normalized": "2.17.0.0",
+            "version": "2.18",
+            "version_normalized": "2.18.0.0",
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/mycryptocheckout/api.git",
-                "reference": "ae4b3e5ea303332ae4ec5623db7947a5d8e69080"
+                "reference": "a1456ecc1a5d8e8c6775c31487102443a8233aba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/mycryptocheckout/api/get/ae4b3e5ea303332ae4ec5623db7947a5d8e69080.zip",
-                "reference": "ae4b3e5ea303332ae4ec5623db7947a5d8e69080",
+                "url": "https://bitbucket.org/mycryptocheckout/api/get/a1456ecc1a5d8e8c6775c31487102443a8233aba.zip",
+                "reference": "a1456ecc1a5d8e8c6775c31487102443a8233aba",
                 "shasum": ""
             },
-            "time": "2025-06-12T17:42:59+00:00",
+            "time": "2025-12-26T22:02:12+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -515,7 +515,7 @@
             ],
             "support": {
                 "issues": "https://bitbucket.org/mycryptocheckout/api/issues",
-                "source": "https://bitbucket.org/mycryptocheckout/api/src/ae4b3e5ea303332ae4ec5623db7947a5d8e69080/?at=2.17"
+                "source": "https://bitbucket.org/mycryptocheckout/api/src/a1456ecc1a5d8e8c6775c31487102443a8233aba/?at=2.18"
             },
             "install-path": "../mycryptocheckout/api"
         },
