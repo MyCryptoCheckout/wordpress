@@ -42,12 +42,6 @@ trait api_trait
 	{
 		try
 		{
-			if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
-			{
-				$json = file_get_contents('php://input');
-				//$json = json_decode( $json );
-				$this->debug( $json );
-			}
 			$this->api()->maybe_process_messages();
 		}
 		catch( Exception $e )
