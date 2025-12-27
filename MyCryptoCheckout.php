@@ -35,6 +35,7 @@ namespace mycryptocheckout
 		use misc_methods_trait;
 		use payment_timer_trait;
 		use qr_code_trait;
+		use security_trait;
 		use wallets_trait;
 
 		/**
@@ -43,12 +44,14 @@ namespace mycryptocheckout
 		**/
 		public function _construct()
 		{
+			add_action( 'plugins_loaded', [ $this, 'init_security_trait' ], -999 );
 			$this->init_admin_trait();
 			$this->init_api_trait();
 			$this->init_currencies_trait();
 			$this->init_donations_trait();
 			$this->init_menu_trait();
 			$this->init_misc_methods_trait();
+
 			$this->easy_digital_downloads = new ecommerce\easy_digital_downloads\Easy_Digital_Downloads();
 			$this->woocommerce = new ecommerce\woocommerce\WooCommerce();
 
@@ -71,7 +74,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.153 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.152 );
 	/**
 		@brief		Return the instance of MCC.
 		@since		2014-10-18 14:48:37
