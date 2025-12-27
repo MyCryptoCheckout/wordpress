@@ -7,7 +7,7 @@ Description:		Cryptocurrency payment gateway for WooCommerce and Easy Digital Do
 Plugin Name:		MyCryptoCheckout
 Plugin URI:			https://mycryptocheckout.com
 Text Domain:		mycryptocheckout
-Version:			2.152
+Version:			2.153
 WC tested up to:	10.4.0
 */
 
@@ -71,7 +71,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.152 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.153 );
 	/**
 		@brief		Return the instance of MCC.
 		@since		2014-10-18 14:48:37
