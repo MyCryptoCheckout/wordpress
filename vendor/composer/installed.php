@@ -3,11 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-<<<<<<< HEAD
         'reference' => '586bba81801e114235c49645649cc284273e4c43',
-=======
-        'reference' => '8bf83db161dd0d595bb4a144028146768a9fbde6',
->>>>>>> 20251226_jesse_security
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -17,11 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-<<<<<<< HEAD
             'reference' => '586bba81801e114235c49645649cc284273e4c43',
-=======
-            'reference' => '8bf83db161dd0d595bb4a144028146768a9fbde6',
->>>>>>> 20251226_jesse_security
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
