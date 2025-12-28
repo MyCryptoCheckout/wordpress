@@ -941,7 +941,7 @@ trait admin_trait
 		$this->add_payment_timer_inputs( $fs );
 
         $fs = $form->fieldset( 'fs_security' );
-        $fs->legend->label( __( 'Security Lockdown', 'mycryptocheckout' ) );
+        $fs->legend->label( __( 'Security', 'mycryptocheckout' ) );
 
 		$this->add_security_inputs_to_form( $fs );
 

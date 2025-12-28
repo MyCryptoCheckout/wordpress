@@ -235,6 +235,14 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.154 20251228 =
+
+* Security: Added security subtab under the global settings.
+* Security: Added admin user freeze setting, preventing admin users from being created or users promoted to admin level.
+* Security: The admin freeze setting is ON by default.
+* Security: Added setting to disable XMLRPC. Off by default. Recommended: on.
+* Security: Added setting to disable Wordpress' internal file editor. Off by default. Recommended: on.
+
 = 2.153 20251227 =
 
 * Security: Fixed the allowed ipv6 address for servers running ipv6.

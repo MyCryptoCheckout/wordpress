@@ -16,17 +16,17 @@ trait security_trait
     {
         $fs->checkbox( 'security_block_rogue_admins' )
             ->checked( $this->get_site_option( 'security_block_rogue_admins', true ) )
-            ->description( __( 'TOTAL FREEZE: Blocks the creation of ANY new Administrators. You can still see the option in menus, but saving will fail. Uncheck this temporarily if you need to add a new admin.', 'mycryptocheckout' ) )
+            ->description( __( 'TOTAL FREEZE: Blocks the creation of ANY new administrators. You can still see the option in menus, but saving will fail. Uncheck this temporarily if you need to add a new admin. Recommended: ON', 'mycryptocheckout' ) )
             ->label( __( 'Freeze Admin Creation', 'mycryptocheckout' ) );
 
         $fs->checkbox( 'security_disable_file_editor' )
             ->checked( $this->get_site_option( 'security_disable_file_editor', true ) )
-            ->description( __( 'Disables the internal theme and plugin editors to prevent hackers from injecting code if they get into the dashboard.', 'mycryptocheckout' ) )
+            ->description( __( 'Disables the internal theme and plugin editors to prevent hackers from injecting code if they get into the dashboard. Recommended: ON', 'mycryptocheckout' ) )
             ->label( __( 'Disable File Editor', 'mycryptocheckout' ) );
 
         $fs->checkbox( 'security_disable_xmlrpc' )
             ->checked( $this->get_site_option( 'security_disable_xmlrpc', true ) )
-            ->description( __( 'Completely disables XML-RPC (xmlrpc.php) to block brute-force attacks and DDoS vectors.', 'mycryptocheckout' ) )
+            ->description( __( 'Completely disables XML-RPC (xmlrpc.php) to block brute-force attacks and DDoS vectors. Recommended: ON', 'mycryptocheckout' ) )
             ->label( __( 'Disable XML-RPC', 'mycryptocheckout' ) );
     }
 
@@ -176,9 +176,9 @@ trait security_trait
         // Note: We do NOT need to revert the user here because we used a Filter Interceptor.
         // The malicious data was never written to the DB.
         wp_die(
-            '<h1>Security Violation</h1>' .
-            '<p>Administrator creation is currently <strong>FROZEN</strong> by MyCryptoCheckout security settings.</p>' .
-            '<p>To add a new admin, please go to <em>Settings > MyCryptoCheckout</em> and uncheck "Freeze Admin Creation".</p>',
+            '<h1>Action Blocked: Security Lockdown</h1>' .
+            '<p>The creation of new administrator accounts is currently <strong>disabled</strong> by your MyCryptoCheckout security settings.</p>' .
+            '<p>To authorize this action, please go to <em>Settings > MyCryptoCheckout</em> and temporarily uncheck <strong>"Freeze Admin Creation"</strong>.</p>',
             'Security Violation',
             [ 'response' => 403 ]
         );
