@@ -249,6 +249,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.156 =
+
+* Update: Code refactoring.
+
 = 2.155 20251231 =
 
 * Fix: If using cloudflare, extract the real IP from the cloudflare HTTP_CF_CONNECTING_IP header.
