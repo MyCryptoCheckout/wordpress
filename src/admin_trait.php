@@ -72,7 +72,7 @@ trait admin_trait
 		if ( $form->is_posting() )
 		{
 			// Verify Nonce.
-			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_account' ) ) {
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_account' ) ) {
 				wp_die( 'Security check failed. Please reload the page and try again.' );
 			}
 
@@ -417,7 +417,7 @@ trait admin_trait
 		if ( $form->is_posting() )
 		{
 			// Verify Nonce.
-			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_currencies' ) )
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_currencies' ) )
 			{
 				wp_die( 'Security check failed. Please reload the page and try again.' );
 			}
@@ -722,7 +722,7 @@ trait admin_trait
 		if ( $form->is_posting() )
 		{
 			// Verify Nonce.
-			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_wallet' ) ) {
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_wallet' ) ) {
 				wp_die( 'Security check failed. Please reload the page and try again.' );
 			}
 
@@ -838,7 +838,7 @@ trait admin_trait
 		if ( $form->is_posting() )
 		{
 			// Verify Nonce.
-			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_local_settings' ) ) {
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_local_settings' ) ) {
 				wp_die( 'Security check failed. Please reload the page and try again.' );
 			}
 
@@ -940,7 +940,7 @@ trait admin_trait
 		if ( $form->is_posting() )
 		{
 			// Verify Nonce.
-			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_save_global_settings' ) ) {
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_global_settings' ) ) {
 				wp_die( 'Security check failed. Please reload the page and try again.' );
 			}
 
@@ -1004,7 +1004,7 @@ trait admin_trait
 		if ( $form->is_posting() )
 		{
 			// Verify Nonce.
-			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( $_POST['mcc_nonce'], 'mcc_tools_action' ) ) {
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_tools_action' ) ) {
 				wp_die( 'Security check failed. Please reload the page and try again.' );
 			}
 
