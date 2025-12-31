@@ -76,7 +76,7 @@ trait misc_methods_trait
 	**/
 	public function enqueue_js()
 	{
-		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/mycryptocheckout.min.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
+		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/mycryptocheckout.min.js', [ 'jquery', 'clipboard' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
 	}
 
 	/**

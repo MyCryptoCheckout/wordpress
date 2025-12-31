@@ -49,20 +49,6 @@ module.exports = function(grunt) {
 							}
 						}
 					},
-					// copies clipboard.js file
-					{ 
-						expand: true,
-						flatten: true,
-						src: ['node_modules/clipboard/dist/clipboard.js'], 
-						dest: 'src/static/js/js.d/',
-						filter: 'isFile',
-						// Rename the file to include '40.' prefix 
-						rename: function (dest, matchedSrcPath) {
-							if (matchedSrcPath.substring(0, 1) !== '4') {
-								return dest + '40.' + matchedSrcPath;
-							}
-						}
-					},
 					// copies qrcode.js file
 					{ 
 						expand: true,
@@ -91,7 +77,6 @@ module.exports = function(grunt) {
 						'src/static/js/js.d/10.plainview_auto_tabs.js',
 						'src/static/js/js.d/10.sort_wallets.js',
 						'src/static/js/js.d/20.header.js',
-						'src/static/js/js.d/40.clipboard.js',
 						'src/static/js/js.d/40.qrcode.js',
 						'src/static/js/js.d/50.checkout.js',
 						'src/static/js/js.d/50.donations.js',
