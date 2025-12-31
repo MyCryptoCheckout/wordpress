@@ -116,7 +116,7 @@ class Expired_License
 				// Translators: css class, 2 = message string
 				printf( '<div class="%1$s"><p>%2$s</p></div>',
 					esc_attr( $class ),
-					$message
+					wp_kses_post( $message )
 				);
 			} );
 		}
