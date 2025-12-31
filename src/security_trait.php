@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
     @brief      Security / hardening related functions.
     @since      2025-12-26 10:06:47
