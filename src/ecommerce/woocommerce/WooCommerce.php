@@ -80,7 +80,7 @@ class WooCommerce
 		// And now redirect the buyer to the correct page.
 		$url = $order->get_checkout_order_received_url();
 
-		wp_redirect( $url );
+		wp_safe_redirect( $url );
 		exit;
 	}
 
@@ -304,7 +304,7 @@ class WooCommerce
 		// And now redirect the buyer to the correct page.
 		$url = $order->get_checkout_order_received_url();
 
-		wp_redirect( $url );
+		wp_safe_redirect( $url );
 		exit;
 	}
 
