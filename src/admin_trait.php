@@ -2,6 +2,8 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 use Exception;
 
 /**
@@ -118,7 +120,7 @@ trait admin_trait
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -273,12 +275,12 @@ trait admin_trait
 				$row = $table->head()->row();
 				$row->th( 'key' )->text( __( 'Next scheduled hourly cron', 'mycryptocheckout' ) );
 				$next = wp_next_scheduled( 'mycryptocheckout_hourly' );
-				$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $next ) );
+				$row->td( 'details' )->text( gmdate( 'Y-m-d H:i:s', $next ) );
 
 				$row = $table->head()->row();
 				$row->th( 'key' )->text( __( 'Next scheduled account data update', 'mycryptocheckout' ) );
 				$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
-				$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $next ) );
+				$row->td( 'details' )->text( gmdate( 'Y-m-d H:i:s', $next ) );
 			}
 		}
 
@@ -302,7 +304,7 @@ trait admin_trait
 		if ( ! $account->is_valid() )
 		{
 			$r .= $this->error_message_box()->_( __( 'You cannot modify your currencies until you have a valid account. Please see the Accounts tab.', 'mycryptocheckout' ) );
-			echo $r;
+			echo wp_kses_post( $r );
 			return;
 		}
 
@@ -501,10 +503,10 @@ trait admin_trait
 
 			if ( $reshow )
 			{
-				echo $r;
+				echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 				$_POST = [];
 				$function = __FUNCTION__;
-				echo $this->$function();
+				echo $this->$function();			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 				return;
 			}
 		}
@@ -513,11 +515,9 @@ trait admin_trait
 
 		$r .= wpautop( __( 'If you have several wallets of the same currency, they will be used in sequential order.', 'mycryptocheckout' ) );
 
-		$wallets_text = sprintf(
-			// perhaps <a>we can ...you</a>
-			__( "If you don't have a wallet address to use, perhaps %swe can recommend some wallets for you%s?", 'mycryptocheckout' ),
+		$wallets_text = sprintf( __( "If you don't have a wallet address to use, perhaps %1\$sswe can recommend some wallets for you%2\$s?", 'mycryptocheckout' ),
 			'<a href="https://mycryptocheckout.com/doc/recommended-wallets-exchanges/" target="_blank">',
-			'</a>'
+			'</a>',
 		);
 
 		if ( count( $wallets ) < 1 )
@@ -529,8 +529,8 @@ trait admin_trait
 		{
 			$home_url = home_url();
 			$woo_text = sprintf(
-				// perhaps <a>WooCommerce Settings</a>
-				__( "After adding currencies, visit the %sWooCommerce Settings%s to enable the gateway and more.", 'mycryptocheckout' ),
+				// Translators: First and second %s are anchors.
+				__( "After adding currencies, visit the %1\$sWooCommerce Settings%2\$s to enable the gateway and more.", 'mycryptocheckout' ),
 				'<a href="' . esc_url( $home_url ) . '/wp-admin/admin.php?page=wc-settings&tab=checkout&section=mycryptocheckout">',
 				'</a>'
 			);
@@ -542,8 +542,8 @@ trait admin_trait
 		{
 			$home_url = home_url();
 			$edd_text = sprintf(
-				// perhaps <a>Easy Digital Downloads Settings</a>
-				__( "After adding currencies, visit the %sEasy Digital Downloads Settings%s to enable the gateway and more.", 'mycryptocheckout' ),
+				// Translators: First and second %s are anchors.
+				__( "After adding currencies, visit the %1$\sEasy Digital Downloads Settings%2\$s to enable the gateway and more.", 'mycryptocheckout' ),
 				'<a href="' . esc_url( $home_url ) . '/wp-admin/edit.php?post_type=download&page=edd-settings&tab=gateways">',
 				'</a>'
 			);
@@ -566,7 +566,7 @@ trait admin_trait
 
 		$this->enqueue_css();
 
-		echo $r;
+		echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -664,7 +664,8 @@ trait admin_trait
 					$pubs = implode( '/', $currency->supports->btc_hd_public_key_pubs );
 
 				$btc_hd_public_key = $fs->text( 'btc_hd_public_key' )
-					->description( __( sprintf( 'If you have an HD wallet and want to generate a new address after each purchase, enter your %s public key here.', $pubs ), 'mycryptocheckout' ) )
+					// Translators: enter your XPUB/YPUB/ZPUB public key
+					->description( sprintf( __( 'If you have an HD wallet and want to generate a new address after each purchase, enter your %s public key here.', 'mycryptocheckout' ), $pubs ) )
 					// Input label
 					->label( __( 'HD public key', 'mycryptocheckout' ) )
 					->trim()
@@ -688,7 +689,8 @@ trait admin_trait
 					$new_address = $e->getMessage();
 				}
 				$fs->markup( 'm_btc_hd_public_key_generate_address_path' )
-					->p( __( 'The address at index %d is %s.', 'mycryptocheckout' ), $path, $new_address );
+					// Translators: The address at index 12345 is BTCADDRESS
+					->p( __( 'The address at index %1$d is %2$s.', 'mycryptocheckout' ), $path, $new_address );
 
 				$circa_amount = $fs->number( 'circa_amount' )
 					->description( __( "When using an HD wallet, you can accept amounts that are lower than requested.", 'mycryptocheckout' ) )
@@ -790,10 +792,10 @@ trait admin_trait
 
 			if ( $reshow )
 			{
-				echo $r;
+				echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 				$_POST = [];
 				$function = __FUNCTION__;
-				echo $this->$function( $wallet_id );
+				echo $this->$function( $wallet_id );		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 				return;
 			}
 		}
@@ -803,7 +805,7 @@ trait admin_trait
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -848,10 +850,10 @@ trait admin_trait
 
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
 
-			echo $r;
+			echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			$_POST = [];
 			$function = __FUNCTION__;
-			echo $this->$function();
+			echo $this->$function();		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			return;
 		}
 
@@ -860,7 +862,7 @@ trait admin_trait
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -955,10 +957,10 @@ trait admin_trait
 			$this->save_debug_settings_from_form( $form );
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
 
-			echo $r;
+			echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			$_POST = [];
 			$function = __FUNCTION__;
-			echo $this->$function();
+			echo $this->$function();		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			return;
 		}
 
@@ -967,7 +969,7 @@ trait admin_trait
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -1019,8 +1021,10 @@ trait admin_trait
 			{
 				$result = $this->api()->test_communication();
 				if ( $result->result == 'ok' )
+					// Translators: %s is the success message. Usually just the domain name.
 					$r .= $this->info_message_box()->_( __( 'Success! %s', 'mycryptocheckout' ), $result->message );
 				else
+					// Translators: %s is the error message.
 					$r .= $this->error_message_box()->_( __( 'Communications failure: %s', 'mycryptocheckout' ),
 						$result->message
 					);
@@ -1032,10 +1036,10 @@ trait admin_trait
 				$r .= $this->info_message_box()->_( __( 'Notifications reset! The next time your account is refreshed, you might see an expired license notification. ', 'mycryptocheckout' ) );
 			}
 
-			echo $r;
+			echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			$_POST = [];
 			$function = __FUNCTION__;
-			echo $this->$function();
+			echo $this->$function();		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			return;
 		}
 
@@ -1044,7 +1048,7 @@ trait admin_trait
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -1080,14 +1084,14 @@ trait admin_trait
 	{
 		// Schedule an account retrieval sometime.
 		// The timestamp shoule be anywhere between soon and 50 minutes later.
-		$extra = rand( 5, 50 ) * 60;
+		$extra = wp_rand( 5, 50 ) * 60;
 		$timestamp = time() + $extra;
 		$this->debug( 'Hourly running. Scheduled mycryptocheckout_retrieve_account at %s for %s + %s', $this->local_datetime( $timestamp ), time(), $extra );
 		$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
 		wp_unschedule_event( $next, 'mycryptocheckout_retrieve_account' );
 		wp_schedule_single_event( $timestamp, 'mycryptocheckout_retrieve_account' );
 		$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
-		$this->debug( 'Next schedule: %s', date( 'Y-m-d H:i:s', $next ) );
+		$this->debug( 'Next schedule: %s', gmdate( 'Y-m-d H:i:s', $next ) );
 	}
 
 	/**

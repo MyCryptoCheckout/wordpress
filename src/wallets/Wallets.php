@@ -38,7 +38,7 @@ class Wallets
 			$currency_ids[ $wallet->currency_id ] = $wallet->currency_id;
 		ksort( $currency_ids );
 
-		// ANCHOR Link to wallet configuration page. ENDANCHOR
+		// Translators: %s is a comma separated list of currencies.
 		return "\n\n" . sprintf( __( 'You currently have the following currencies configured: %s', 'mycryptocheckout' ),
 			implode( ', ', $currency_ids )
 		);
