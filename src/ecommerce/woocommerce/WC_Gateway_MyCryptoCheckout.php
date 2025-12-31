@@ -59,7 +59,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$strings = MyCryptoCheckout()->gateway_strings();
 
 		$r[ 'enabled' ] = [
-			'title'       => __( 'Enable/Disable', 'woocommerce' ),
+			'title'       => __( 'Enable/Disable', 'mycryptocheckout' ),
 			'label'       => __( 'Enable MyCryptoCheckout', 'mycryptocheckout' ),
 			'type'        => 'checkbox',
 			'description' => '',
@@ -137,13 +137,13 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'type' => 'select',
 			'options' => [
 				// Order status
-				'wc-completed'  => __( 'Completed', 'woocommerce' ),
+				'wc-completed'  => __( 'Completed', 'mycryptocheckout' ),
 				// Order status
-				'wc-on-hold'    => __( 'On hold', 'woocommerce' ),
+				'wc-on-hold'    => __( 'On hold', 'mycryptocheckout' ),
 				// Order status
-				'wc-pending'    => __( 'Pending payment', 'woocommerce' ),
+				'wc-pending'    => __( 'Pending payment', 'mycryptocheckout' ),
 				// Order status
-				''				=> __( 'Processing', 'woocommerce' ),
+				''				=> __( 'Processing', 'mycryptocheckout' ),
 			],
 			'description' => __( 'After payment is complete, change the order to this status.', 'mycryptocheckout' ),
 			'default' => '',
@@ -208,9 +208,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			$r .= "\n\n<em>" . __( 'You cannot currently accept any payments using this service:', 'mycryptocheckout' ) . '</em> ' . $e->getMessage();
 		}
 
-		$r .= "\n" . sprintf( __( '%sConfigure your wallets here.%s', 'mycryptocheckout' ),
-			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
-			'</a>'
+		$r .= "\n"
+			. '<a href="options-general.php?page=mycryptocheckout&tab=currencies">'
+			. sprintf( __( 'Configure your wallets here.', 'mycryptocheckout' )
+			. '</a>'
 		);
 
 
@@ -366,7 +367,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'type' => 'select',
 			'class' => [ 'mcc_currency' ],
 			'default' => reset( $currencies ),
-			'label' => esc_html__( $this->get_option( 'currency_selection_text' ) ),
+			'label' => esc_html( $this->get_option( 'currency_selection_text' ) ),
 			'options' => $options,
 			'required' => true,
 		] );
@@ -398,7 +399,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				MyCryptoCheckout()->debug( 'selectedcurrency detected in post.' );
 			} else {
 				// Stop execution safely if the currency is invalid.
-				throw new Exception( __( 'Invalid cryptocurrency selected. Please choose a valid option.', 'mycryptocheckout' ) );
+				$message = __( 'Invalid cryptocurrency selected. Please choose a valid option.', 'mycryptocheckout' );
+				throw new Exception( $message );
 			}
 		}
 

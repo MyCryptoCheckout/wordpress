@@ -299,6 +299,7 @@ class Currency
 			$length = [ $length ];
 		if ( ! in_array( strlen( $address ), $length ) )
 			throw new Exception( sprintf(
+				// Translators: %s is a number.
 				__( 'The address must be exactly %s characters long.', 'mycryptocheckout' ),
 				implode( ' or ', $length )
 			) );

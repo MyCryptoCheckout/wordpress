@@ -73,7 +73,7 @@ trait network_available
 			else
 			{
 				$details []= sprintf(
-					// This wallet is available on SITE1, SITE2, SITE3
+					// Translators: This wallet is available on SITE1, SITE2, SITE3
 					__( 'Available on %s', 'mycryptocheckout' ),
 					implode( ', ', $this->get_site_names() )
 				);

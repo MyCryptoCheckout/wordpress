@@ -709,7 +709,9 @@ trait misc_methods_trait
 	**/
 	public static function wordpress_ago( $time )
 	{
-		$ago = sprintf( __( '%s ago' ), human_time_diff( $time ) );
+		// Translators: %s is a number and minutes / hours / days.
+		$ago = sprintf( __( '%s ago', 'mycryptocheckout' ), human_time_diff( $time ) );
+		// Translators: Nothing to translate.
 		$text = sprintf( '<span title="%s">%s</span>',
 			MyCryptoCheckout()->local_datetime( $time ),
 			$ago
