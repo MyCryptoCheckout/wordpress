@@ -597,7 +597,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	{
 		if ( ! is_wc_endpoint_url( 'order-received' ) )
 			return;
-		echo '<meta name="format-detection" content="telephone=no">';
+		echo '<meta name="format-detection" content="telephone=no">';	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- actual html in the head
 
 		// Retrieve the plugin version
 		$plugin_version = MYCRYPTOCHECKOUT_PLUGIN_VERSION;
@@ -611,6 +611,6 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
                 	document.body.appendChild(script);
             	}
         	});
-    	</script>';
+    	</script>';	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- actual js in the head;
 	}
 }
