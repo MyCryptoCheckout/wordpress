@@ -32,9 +32,8 @@ class Ecommerce
 
 		// Find the payment with this ID.
 		global $wpdb;
-		$query = sprintf( "SELECT `post_id` FROM `%s` WHERE `meta_key` = '_mcc_payment_id' AND `meta_value` = '%d'",
-			$wpdb->postmeta,
-			$payment->payment_id
+		$query = $wpdb->prepare( "SELECT `post_id` FROM %s WHERE `meta_key` = '_mcc_payment_id' AND `meta_value` = %d",
+			[ $wpdb->postmeta, $payment->payment_id ],
 		);
 		$results = $wpdb->get_col( $query );
 		foreach( $results as $order_id )
