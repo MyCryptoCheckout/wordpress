@@ -104,7 +104,7 @@ class Easy_Digital_Downloads
 	**/
 	public function echo_option_or_default( $key )
 	{
-		_e( $this->get_option_or_default( $key ) );
+		echo wp_kses_post( $this->get_option_or_default( $key ) );
 	}
 
 	/**
@@ -301,11 +301,10 @@ class Easy_Digital_Downloads
 	{
 		$wallets_text = MyCryptoCheckout()->wallets()->build_enabled_string();
 		$wallets_text .= "<br/>";
-		$wallets_text .= sprintf(
-			__( "%sConfigure your wallets here.%s", 'mycryptocheckout' ),
-			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
-			'</a>'
-		);
+		$wallets_text .=
+			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">'
+			. __( "Configure your wallets here.", 'mycryptocheckout' )
+			. '</a>';
 
 		$settings = array (
 			'mycryptocheckout_settings' =>
@@ -332,7 +331,7 @@ class Easy_Digital_Downloads
 			),
 			'mcc_test_mode' => [
 				'id'	=> 'mcc_test_mode',
-				'name'	=> __( 'Test mode', 'woocommerce' ),
+				'name'	=> __( 'Test mode', 'mycryptocheckout' ),
 				'type'	=> 'checkbox',
 				'desc'	=> __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server. No payments will be processed in this mode.', 'mycryptocheckout' ),
 			],
@@ -440,6 +439,7 @@ class Easy_Digital_Downloads
 		catch ( Exception $e )
 		{
 			$settings[ 'mcc_info_no_wallets' ][ 'desc' ] = sprintf(
+				// Translators: The parameter is the exception's message.
 				__( 'Warning! Payments using MyCryptoCheckout are not possible: %s', 'mycryptocheckout' ),
 				$e->getMessage()
 			);
@@ -544,7 +544,7 @@ class Easy_Digital_Downloads
 							<p>
 								<strong class="mcc_transaction_id"><?php echo esc_html( 'Transaction ID', 'mycryptocheckout' ); ?></strong><br/>
 								<?php
-								echo wp_kses_post( $transaction_id_span ); 
+								echo wp_kses_post( $transaction_id_span );
 								?>
 							</p>
 						</div>
@@ -556,7 +556,7 @@ class Easy_Digital_Downloads
 								<strong class="mcc_attempts"><?php echo esc_html( 'API connection attempts', 'mycryptocheckout' ); ?></strong><br/>
 								<span>
 								<?php
-								echo intval( get_post_meta( $post_id, '_mcc_attempts', true ) ); 
+								echo intval( get_post_meta( $post_id, '_mcc_attempts', true ) );
 								?>
 								</span>
 							</p>
