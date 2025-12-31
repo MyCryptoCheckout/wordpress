@@ -9,6 +9,7 @@ Plugin URI:			https://mycryptocheckout.com
 Text Domain:		mycryptocheckout
 Version:			2.155
 WC tested up to:	10.4.0
+License:			GPLv3
 */
 
 namespace mycryptocheckout
