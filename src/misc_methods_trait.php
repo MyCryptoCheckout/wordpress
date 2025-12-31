@@ -363,7 +363,7 @@ trait misc_methods_trait
 	{
 		$date_format = get_option( 'date_format' );
 		$timestamp = $this->adjust_timestamp( $timestamp );
-		return date( $date_format, $timestamp );
+		return gmdate( $date_format, $timestamp );
 	}
 
 	/**
@@ -404,7 +404,7 @@ trait misc_methods_trait
 	{
 		$time_format = get_option( 'time_format' );
 		$timestamp = $this->adjust_timestamp( $timestamp );
-		return date( $time_format, $timestamp );
+		return gmdate( $time_format, $timestamp );
 	}
 
 	/**
