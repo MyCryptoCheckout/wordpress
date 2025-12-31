@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\ecommerce\easy_digital_downloads;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Exception;
 
 /**

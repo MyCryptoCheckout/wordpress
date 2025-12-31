@@ -14,6 +14,10 @@ License:			GPLv3
 
 namespace mycryptocheckout
 {
+	if ( ! defined( 'ABSPATH' ) ) {
+        exit;
+    }
+
 	require_once( __DIR__ . '/vendor/autoload.php' );
 
 	#[\AllowDynamicProperties]

@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Class for handling expired license notifications and dismissals.
 	@since		2019-11-15 21:09:24

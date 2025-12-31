@@ -175,9 +175,23 @@ Disable the MCC currencies tab: after you have wallets setup you can prevent the
 
 == External services ==
 
-Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version. This info allows the API - which functions solely as a blockchain crawler - to return updated exchange rates, blockchain transaction confirmations, and license status (if any) to your site. The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently). See <a href="https://mycryptocheckout.com/how-mycryptocheckout-works/">how MyCryptoCheckout works.</a>
+**MyCryptoCheckout API**
+* **Usage:** Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version. This info allows the API - which functions solely as a blockchain crawler - to return updated exchange rates, blockchain transaction confirmations, and license status (if any) to your site. The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently). See <a href="https://mycryptocheckout.com/how-mycryptocheckout-works/">how MyCryptoCheckout works.</a> If your server cannot be reached by the API server this plugin will not be able to autoconfirm blockchain transactions.
+* **Data Sent:** Selected currency, currency amount, destination wallet addresses, and license keys are sent when an order is created.
+* **Link:** [MyCryptoCheckout](https://mycryptocheckout.com)
+* **Privacy Policy:** https://mycryptocheckout.com/privacy-policy/
+* **Terms of Service:** https://mycryptocheckout.com/terms-conditions/
 
-If your server cannot be reached by the API server this plugin will not be able to autoconfirm blockchain transactions.
+**Solana Public RPC Nodes**
+* **Usage:** Used by the included `@solana/web3.js` library to query the Solana blockchain state and facilitate direct wallet transactions (e.g., Phantom Wallet) during checkout.
+* **Data Sent:** Public transaction data (wallet addresses, amounts, and block hashes) is queried directly from the user's browser to the Solana network to estimate fees and propose transactions.
+* **Link:** [Solana](https://solana.com)
+* **Privacy Policy:** https://solana.com/privacy-policy
+* **Terms of Service:** https://solana.com/tos
+
+**Web3 Wallet Integration (Ethereum & Solana)**
+* **Usage:** Allows users to click a "Pay with Wallet" button to automatically fill in payment details in their browser extension.
+* **Data Sent:** Transaction details (destination address and amount) are passed locally to the user's installed wallet extension.
 
 == Installation ==
 

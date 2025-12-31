@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\ecommerce\woocommerce;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Exception;
 
 /**
