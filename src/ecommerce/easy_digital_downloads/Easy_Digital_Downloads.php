@@ -252,12 +252,13 @@ class Easy_Digital_Downloads
 			<p>
 				<label class="edd-label" for="mcc_currency_id"><?php $this->echo_option_or_default( 'currency_selection_text' ); ?></label>
 				<select id="mcc_currency_id" name="mcc_currency_id" class="mcc_currency_id edd-input required">
-					<?php echo $wallet_options; ?>
+					<?php echo $wallet_options; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- these are html options
+					?>
 				</select>
 			</p>
 		</fieldset>
 		<?php
-		echo ob_get_clean();
+		echo ob_get_clean();	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**

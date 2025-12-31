@@ -113,6 +113,7 @@ class Expired_License
 					esc_url( add_query_arg( 'mcc_dismiss_notification', $key ) )
 				);
 
+				// Translators: css class, 2 = message string
 				printf( '<div class="%1$s"><p>%2$s</p></div>',
 					esc_attr( $class ),
 					$message

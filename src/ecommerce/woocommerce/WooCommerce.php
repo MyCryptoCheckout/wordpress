@@ -102,7 +102,7 @@ class WooCommerce
 			// Translators: 1 is the shop currency symbol, 2 is a number of decimals, 3 is the currency's decimal preicison.
 			__( "Since you are using virtual currency %1\$s as your WooCommerce currency, please change the decimal precision from %2\$d to match MyCyyptoCheckout's: %3\$s", 'mycryptocheckout' ),
 			$wc_currency, $wc_decimals, $currency->decimal_precision );
-		throw new Exception( $message );
+		throw new Exception( esc_html( $message ) );
 	}
 
 	/**
@@ -128,7 +128,7 @@ class WooCommerce
 					__( 'Your WooCommerce installation is using an unknown currency: %s', 'mycryptocheckout' ),
 					$wc_currency,
 				);
-				throw new Exception( $message );
+				throw new Exception( esc_html( $message ) );
 			}
 
 		return true;
@@ -399,7 +399,7 @@ class WooCommerce
 			);
 		}
 
-		echo $r;	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
+		echo $r;	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- needs to output real html
 	}
 
 	/**
