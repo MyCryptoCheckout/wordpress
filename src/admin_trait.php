@@ -311,8 +311,6 @@ trait admin_trait
 		$table = $this->table();
 		$table->css_class( 'currencies' );
 
-		$table->data( 'nonce', wp_create_nonce( 'mycryptocheckout_sort_wallets' ) );
-
 		$table->bulk_actions()
 			->form( $form )
 			// Bulk action for wallets
@@ -1083,9 +1081,6 @@ trait admin_trait
 		$this->add_filter( 'network_admin_plugin_action_links', 'plugin_action_links', 10, 4 );
 		$this->add_filter( 'plugin_action_links', 'plugin_action_links', 10, 4 );
 
-		// Sort the wallets.
-		$this->add_action( 'wp_ajax_mycryptocheckout_sort_wallets' );
-
 		// Display the expired warning?
 		$this->expired_license()->show();
 	}
@@ -1125,38 +1120,5 @@ trait admin_trait
 			__( 'Settings', 'mycryptocheckout' )
 		);
 		return $links;
-	}
-
-	/**
-		@brief		Allow the user to sort the wallets via ajax.
-		@since		2018-10-17 18:54:22
-	**/
-	public function wp_ajax_mycryptocheckout_sort_wallets()
-	{
-		if ( ! isset( $_REQUEST[ 'nonce' ] ) )
-			wp_die( 'No nonce.' );
-		$nonce = $_REQUEST[ 'nonce' ];
-
-		if ( ! wp_verify_nonce( $nonce, 'mycryptocheckout_sort_wallets' ) )
-			wp_die( 'Invalid nonce.' );
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-        	wp_die( 'Unauthorized user.' );
-    	}
-
-		// Load the wallets.
-		$wallets = $this->wallets();
-
-		foreach( $wallets as $wallet_id => $wallet )
-		{
-			foreach( $_POST[ 'wallets' ] as $wallet_order => $post_wallet_id )
-			{
-				if ( $wallet_id != $post_wallet_id )
-					continue;
-				$wallet->set_order( $wallet_order );
-			}
-		}
-
-		$wallets->save();
 	}
 }
