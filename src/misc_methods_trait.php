@@ -101,9 +101,11 @@ trait misc_methods_trait
 		$r = $this->collection();
 		$r->set( 'currency_selection_text', __( 'Please select a currency', 'mycryptocheckout' ) );
 		$r->set( 'gateway_name', __( 'Cryptocurrency', 'mycryptocheckout' ) );
+		// Translators: [AMOUNT], [CURRENCY], [TO] are placeholders and should not be translated.
 		$r->set( 'online_payment_instructions_description', __( 'Instructions for payment that will be shown on the purchase confirmation page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
 		$r->set( 'online_payment_instructions', $this->wpautop_file( 'online_payment_instructions' ) );
 		$r->set( 'email_payment_instructions', $this->wpautop_file( 'email_payment_instructions' ) );
+		// Translators: [AMOUNT], [CURRENCY], [TO] are placeholders and should not be translated.
 		$r->set( 'email_payment_instructions_description', __( 'Instructions for payment that will be added to the e-mail receipt. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
 		return $r;
 	}
