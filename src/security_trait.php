@@ -41,7 +41,7 @@ trait security_trait
     public function init_security_trait()
     {
         // 1. DISABLE XML-RPC
-        if ( $this->get_site_option( 'security_disable_xmlrpc', true ) ) {
+        if ( $this->get_site_option( 'security_disable_xmlrpc', false ) ) {
             add_filter( 'xmlrpc_enabled', '__return_false' );
             remove_action( 'wp_head', 'rsd_link' );
             add_filter( 'wp_headers', function( $headers ) {
@@ -51,7 +51,7 @@ trait security_trait
         }
 
         // 2. DISABLE FILE EDITOR
-        if ( $this->get_site_option( 'security_disable_file_editor', true ) ) {
+        if ( $this->get_site_option( 'security_disable_file_editor', false ) ) {
             if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
                 define( 'DISALLOW_FILE_EDIT', true );
             }
