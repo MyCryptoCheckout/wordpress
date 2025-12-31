@@ -90,7 +90,7 @@ trait security_trait
      */
     public function security_validate_profile_update( &$errors, $update, &$user )
     {
-        if ( isset( $_POST['role'] ) && $_POST['role'] === 'administrator' ) {
+        if ( isset( $_POST['role'] ) && $_POST['role'] === 'administrator' ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Hooked into user_profile_update_errors; WP Core verifies nonce.
             $current_roles = isset( $user->roles ) ? (array) $user->roles : [];
             if ( ! in_array( 'administrator', $current_roles ) ) {
                 $errors->add( 'mcc_security_error', __( 'SECURITY BLOCK: Administrator creation is currently FROZEN by MyCryptoCheckout settings.', 'mycryptocheckout' ) );
@@ -173,7 +173,7 @@ trait security_trait
     {
         // Log to debug.log if enabled
         if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-            error_log( "MCC SECURITY VIOLATION: $message User ID: " . ( isset($user->ID) ? $user->ID : 'Unknown' ) );
+            error_log( "MCC SECURITY VIOLATION: $message User ID: " . ( isset($user->ID) ? $user->ID : 'Unknown' ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Logging security violations is intended behavior.
         }
 
         // Kill the script immediately.
