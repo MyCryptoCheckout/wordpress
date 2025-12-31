@@ -72,7 +72,7 @@ module.exports = function(grunt) {
 					'src/static/js/mycryptocheckout.js':
 					[
 						'src/static/js/js.d/10.bignumber.js',
-						'src/static/js/js.d/10.mcc_make_clipboard.js',
+						'src/static/js/js.d/10.mcc_make_clip.js',
 						'src/static/js/js.d/10.new_currency.js',
 						'src/static/js/js.d/10.plainview_auto_tabs.js',
 						'src/static/js/js.d/10.sort_wallets.js',
