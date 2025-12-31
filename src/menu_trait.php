@@ -68,7 +68,7 @@ trait menu_trait
 				$wallet = $wallets->get( $wallet_id );
 				$tabs->tab( 'edit_wallet' )
 					->callback_this( 'admin_edit_wallet' )
-					// Editing BTC wallet
+					// Translators: Editing BTC wallet
 					->heading( sprintf(  __( 'Editing %s wallet', 'mycryptocheckout' ), $wallet->get_currency_id() ) )
 					// Name of tab
 					->name( __( 'Edit wallet', 'mycryptocheckout' ) )

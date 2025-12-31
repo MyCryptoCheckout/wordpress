@@ -124,6 +124,7 @@ trait donations_trait
 						$shortcode .= sprintf( ' %s="%s"', $key, str_replace( '"', '\"', $value ) );
 					$shortcode .= ']';
 
+					// Translators: The %s is the generated shortcode to use for donations.
 					$r .= $this->info_message_box()->_( __( 'Your shortcode is: %s', 'mycryptocheckout' ), $shortcode );
 					$reshow = true;
 				}
