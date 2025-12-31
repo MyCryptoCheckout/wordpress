@@ -404,7 +404,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			} else {
 				// Stop execution safely if the currency is invalid.
 				$message = __( 'Invalid cryptocurrency selected. Please choose a valid option.', 'mycryptocheckout' );
-				throw new Exception( $message );
+				throw new Exception( esc_html( $message ) );
 			}
 		}
 
@@ -498,7 +498,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$instructions = $this->get_option( 'email_instructions' );
 		$payment = mycryptocheckout\ecommerce\woocommerce\WooCommerce::payment_from_order( $order->get_id() );
 		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment, $instructions );
-		echo wpautop( wptexturize( $instructions ) ) . PHP_EOL;
+		echo wp_kses_post( wpautop( wptexturize( $instructions ) ) ) . PHP_EOL;
 	}
 
 	/**
@@ -561,12 +561,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		if ( ! $instructions )
 			return;
 
-		echo MyCryptoCheckout()->generate_checkout_js();
+		echo MyCryptoCheckout()->generate_checkout_js();	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- needs to output js and html.
 
 		if ( ! $order->needs_payment() )
 			return;
 
-		echo wpautop( wptexturize( $instructions ) );
+		echo wpautop( wptexturize( $instructions ) );	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- needs to output js and html.
 	}
 
 	/**
@@ -607,7 +607,11 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
             	// Check if Phantom wallet is available and load the script if it is
             	if (typeof window.solana !== "undefined") {
                 	var script = document.createElement("script");
-                	script.src = "' . MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/sol-web3/dist/index.js?v=' . $plugin_version . '";
+                	script.src = "'
+                		. esc_url( MyCryptoCheckout()->paths( 'url' ) )
+                		. 'src/static/js/sol-web3/dist/index.js?v='
+                		. esc_html( $plugin_version )
+                		. '";
                 	document.body.appendChild(script);
             	}
         	});
