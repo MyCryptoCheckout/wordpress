@@ -298,8 +298,6 @@ trait admin_trait
 		$form->no_automatic_nonce();
 		$r = '';
 
-		wp_enqueue_script( 'jquery-ui-sortable' );
-
 		$account = $this->api()->account();
 		if ( ! $account->is_valid() )
 		{
@@ -320,9 +318,7 @@ trait admin_trait
 			// Bulk action for wallets
 			->add( __( 'Enable', 'mycryptocheckout' ), 'enable' )
 			// Bulk action for wallets
-			->add( __( 'Mark as used', 'mycryptocheckout' ), 'mark_as_used' )
-			// Bulk action for wallets
-			->add( __( 'Reset sorting', 'mycryptocheckout' ), 'reset_sorting' );
+			->add( __( 'Mark as used', 'mycryptocheckout' ), 'mark_as_used' );
 
 		// Assemble the current wallets into the table.
 		$row = $table->head()->row();
@@ -470,15 +466,6 @@ trait admin_trait
 						$wallets->save();
 						$r .= $this->info_message_box()->_( __( 'The selected wallets have been marked as used.', 'mycryptocheckout' ) );
 					break;
-					case 'reset_sorting':
-						$ids = $table->bulk_actions()->get_rows();
-						foreach( $ids as $id )
-						{
-							$wallet = $wallets->get( $id );
-							$wallet->set_order();
-						}
-						$wallets->save();
-						$r .= $this->info_message_box()->_( __( 'The selected wallets have had their sort order reset.', 'mycryptocheckout' ) );
 					break;
 				}
 				$reshow = true;
@@ -522,7 +509,7 @@ trait admin_trait
 			}
 		}
 
-		$r .= wpautop( __( 'This table shows the currencies you have setup. To edit a currency, click the address. To sort them, drag the currency name up or down.', 'mycryptocheckout' ) );
+		$r .= wpautop( __( 'This table shows the currencies you have setup. To edit a currency, click the address.', 'mycryptocheckout' ) );
 
 		$r .= wpautop( __( 'If you have several wallets of the same currency, they will be used in sequential order.', 'mycryptocheckout' ) );
 
