@@ -120,7 +120,7 @@ trait menu_trait
 			->name( __( 'Uninstall', 'mycryptocheckout' ) )
 			->sort_order( 90 );		// Always last.
 
-		echo $tabs->render();
+		echo $tabs->render();	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- already escaped html
 	}
 
 	/**

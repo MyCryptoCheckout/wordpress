@@ -140,7 +140,7 @@ trait donations_trait
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- already escaped
 	}
 
 	/**
