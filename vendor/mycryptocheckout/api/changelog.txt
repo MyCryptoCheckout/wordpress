@@ -1,3 +1,7 @@
+2.20		20251231
+
+Fix allowing Cloudflare IP header, if available, to be used as the remote IP.
+
 2.19		20251227
 
 Fix the ipv6 of the allowed IPs.

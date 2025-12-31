@@ -222,6 +222,11 @@ abstract class API
 		// Only accept messages from the MCC API server.
 		$allowed_ips = [ '136.144.254.215', '2a01:7c8:d008:e:5054:ff:fe62:ede3' ];
 		$remote_ip = $_SERVER['REMOTE_ADDR'];
+
+		// Cloudflare adds a header with the visitor's real IP.
+		if ( isset( $_SERVER[ 'HTTP_CF_CONNECTING_IP' ] ) )
+			$remote_ip = $_SERVER[ 'HTTP_CF_CONNECTING_IP' ];
+
 		if ( ! in_array( $remote_ip, $allowed_ips ) )
 		{
 			throw new Exception( 'Exception: Invalid origin IP: ' . $remote_ip );
