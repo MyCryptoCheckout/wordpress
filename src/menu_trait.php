@@ -63,7 +63,7 @@ trait menu_trait
 
 			if ( $tabs->get_is( 'edit_wallet' ) )
 			{
-				$wallet_id = esc_html( $_GET[ 'wallet_id' ] );
+				$wallet_id = sanitize_title( $_GET[ 'wallet_id' ] );
 				$wallets = $this->wallets();
 				$wallet = $wallets->get( $wallet_id );
 				$tabs->tab( 'edit_wallet' )
