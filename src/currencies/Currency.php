@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\currencies;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Exception;
 
 /**

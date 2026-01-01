@@ -1,10 +1,14 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
 final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
 {
-    protected $name = 'mycryptocheckout';// your payment gateway name
+    protected $name = 'mycryptocheckout'; // Payment gateway name.
 
     public function initialize()
     {

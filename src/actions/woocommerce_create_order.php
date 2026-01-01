@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\actions;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Action for when WooCommerce is busy creating the order.
 	@details	The order has not been saved to disk yet, so the meta can still be modified.

@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\currencies;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		The smart currency collection.
 	@since		2017-12-09 19:59:15

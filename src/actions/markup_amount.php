@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\actions;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Modify the amount / price of an item with these markup percent and fixed values.
 	@since		2018-01-05 16:11:46

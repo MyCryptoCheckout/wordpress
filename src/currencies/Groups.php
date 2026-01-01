@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\currencies;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Manage the currency groups.
 	@since		2018-02-23 15:26:33

@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\actions;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Base action class.
 	@since		2018-01-05 16:11:46

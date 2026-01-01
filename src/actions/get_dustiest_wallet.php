@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\actions;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Return the dustiest wallet for this currency.
 	@details	This is called during checkout to find the "dustiest" = the one used first. Or least used, or whatever.

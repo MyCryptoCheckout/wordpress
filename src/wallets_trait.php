@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Anything with wallets goes here.
 	@since		2017-12-09 18:46:22

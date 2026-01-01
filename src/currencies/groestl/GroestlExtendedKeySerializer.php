@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\currencies\groestl;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use BitWasp\Bitcoin\Key\Deterministic\HierarchicalKey;
 use BitWasp\Bitcoin\Network\NetworkInterface;
 use BitWasp\Bitcoin\Serializer\Key\HierarchicalKey\ExtendedKeySerializer;

@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\currencies;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use BitWasp\Bitcoin\Bitcoin;
 use BitWasp\Bitcoin\Address\AddressCreator;
 use BitWasp\Bitcoin\Key\Deterministic\HdPrefix\GlobalPrefixConfig;
