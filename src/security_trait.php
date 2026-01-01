@@ -53,7 +53,7 @@ trait security_trait
         // 2. DISABLE FILE EDITOR
         if ( $this->get_site_option( 'security_disable_file_editor', false ) ) {
             if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
-                // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFoundGlobal -- Defining core constant for security option.
+                // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Defining core constant for security option.
                 define( 'DISALLOW_FILE_EDIT', true );
             }
         }
