@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\currencies\groestl;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Basically base58, but without the checksum.
 	@since		2019-01-17 22:50:50

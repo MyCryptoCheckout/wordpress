@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\ecommerce;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Base ecommerce class.
 	@since		2018-01-06 16:14:25

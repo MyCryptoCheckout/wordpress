@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\cli;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Exception;
 use WP_CLI;
 
