@@ -167,11 +167,18 @@ We have various code snippets that allow you to customize MyCryptoCheckout toget
 
 <a href="https://mycryptocheckout.com/doc/snippets/">See all available code snippets</a>
 
-= Security =
+= Security Features =
 
-Disable the MCC currencies tab: after you have wallets setup you can prevent them from being edited in the WordPress admin. Add the following code to your wp-config file-
-
+**Disable Wallet Editing**
+Once wallets are set up, prevent edits by adding this to your wp-config.php:
 <code>define( 'MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR', true );</code>
+
+**Admin Hardening**
+Toggle these options in **Settings > MyCryptoCheckout > Global Settings > Security**:
+
+* **Administrator Lockdown (Freeze Admin Creation):** Proactively blocks the creation of *new* Administrator accounts to prevent privilege escalation attacks. Enabled by default.
+* **Disable Built-in File Editor:** Disables the native WordPress Theme and Plugin editors to prevent code injection.
+* **Disable XML-RPC:** Shuts down xmlrpc.php to block common brute-force and DDoS attack vectors.
 
 == External services ==
 
