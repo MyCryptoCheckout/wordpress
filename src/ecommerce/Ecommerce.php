@@ -39,7 +39,7 @@ class Ecommerce
 		$query = $wpdb->prepare( "SELECT `post_id` FROM %s WHERE `meta_key` = '_mcc_payment_id' AND `meta_value` = %d",
 			[ $wpdb->postmeta, $payment->payment_id ],
 		);
-		$results = $wpdb->get_col( $query );
+		$results = $wpdb->get_col( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery -- Query is prepared above; direct query is necessary.
 		foreach( $results as $order_id )
 			$function( $action, $order_id );
 
