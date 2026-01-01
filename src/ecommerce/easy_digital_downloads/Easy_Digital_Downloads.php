@@ -57,8 +57,8 @@ class Easy_Digital_Downloads
 
 		$session = edd_get_purchase_session();
 
-		if ( isset( $_GET['payment_key'] ) ){
-			$payment_key = urldecode( $_GET['payment_key'] );
+        if ( isset( $_GET['payment_key'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Context is shortcode display based on URL param, not form processing.
+            $payment_key = urldecode( sanitize_text_field( wp_unslash( $_GET['payment_key'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Verified by context.
 		} else if ( $session ) {
 			$payment_key = $session['purchase_key'];
 		} elseif ( $edd_receipt_args['payment_key'] ) {
