@@ -70,9 +70,12 @@ class Expired_License
 			if ( $dismissed )
 				continue;
 			$key = $this->get_dismissal_key( $dismissal );
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Custom verification using hashed key derived from AUTH_SALT.
 			if ( ! isset( $_GET[ 'mcc_dismiss_notification' ] ) )
 				continue;
-			if ( $_GET[ 'mcc_dismiss_notification' ] != $key )
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Custom verification using hashed key.
+			if ( sanitize_text_field( wp_unslash( $_GET[ 'mcc_dismiss_notification' ] ) ) != $key )
 				continue;
 			$dismissals[ $dismissal ] = time();
 			$save = true;
