@@ -63,7 +63,10 @@ trait menu_trait
 
 			if ( $tabs->get_is( 'edit_wallet' ) )
 			{
-				$wallet_id = sanitize_title( $_GET[ 'wallet_id' ] );
+				if ( isset( $_GET[ 'wallet_id' ] ) )
+					$wallet_id = sanitize_title( wp_unslash( $_GET[ 'wallet_id' ] ) );
+				else
+					$wallet_id = md5( microtime() );		// Get a random value that won't exist.
 				$wallets = $this->wallets();
 				$wallet = $wallets->get( $wallet_id );
 				$tabs->tab( 'edit_wallet' )

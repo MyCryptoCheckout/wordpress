@@ -1,3 +1,7 @@
+2.21		20260102
+
+Do a === check for retrieve key validity.
+
 2.20		20251231
 
 Fix allowing Cloudflare IP header, if available, to be used as the remote IP.

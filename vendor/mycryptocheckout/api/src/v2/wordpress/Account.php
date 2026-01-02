@@ -75,7 +75,7 @@ class Account
 		// Does it match the one we got?
 		if ( strlen( $stored_value ) !== strlen( $retrieve_key ) )
 			throw new Exception( 'Retrieve key is of incorrect length.' );
-		return ( $stored_value == $retrieve_key );
+		return ( $stored_value === $retrieve_key );
 	}
 
 	/**
