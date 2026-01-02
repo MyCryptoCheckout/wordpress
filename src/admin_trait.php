@@ -819,7 +819,7 @@ trait admin_trait
 		$form = $this->form();
 		$form->id( 'local_settings' );
 		$form->css_class( 'plainview_form_auto_tabs' );
-		$form->local_settings = true;
+		$form->set_attribute( 'local_settings', 1 );
 		$r = '';
 
 		$fs = $form->fieldset( 'fs_qr_code' );
@@ -912,20 +912,15 @@ trait admin_trait
 		$fs->legend->label( __( 'QR code', 'mycryptocheckout' ) );
 
 		if ( $this->is_network )
-			$form->global_settings = true;
+			$form->set_attribute( 'global_settings', 1 );
 		else
-			$form->local_settings = true;
+			$form->set_attribute( 'local_settings', 1 );
 
 		$this->add_qr_code_inputs( $fs );
 
 		$fs = $form->fieldset( 'fs_payment_timer' );
 		// Label for fieldset
 		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
-
-		if ( $this->is_network )
-			$form->global_settings = true;
-		else
-			$form->local_settings = true;
 
 		$this->add_payment_timer_inputs( $fs );
 

@@ -258,7 +258,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 = 2.156 =
 
-* Update: Code refactoring.
+* Fix: Code refactoring.
+* Fix: Cleaned up PHP 8.2+ notices.
 
 = 2.155 20251231 =
 

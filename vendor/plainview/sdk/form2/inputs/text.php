@@ -123,7 +123,8 @@ class text
 	public function value_filter_stripslashes( $value )
 	{
 		if ( $this->stripslashes )
-			$value = stripslashes( $value );
+			if ( $value )
+				$value = stripslashes( $value );
 		return $value;
 	}
 
