@@ -63,7 +63,7 @@ trait menu_trait
 
 			if ( $tabs->get_is( 'edit_wallet' ) )
 			{
-				$wallet_id = sanitize_title( $_GET[ 'wallet_id' ] );
+				$wallet_id = sanitize_title( $_GET[ 'wallet_id' ] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- View logic (tab navigation), no state change.
 				$wallets = $this->wallets();
 				$wallet = $wallets->get( $wallet_id );
 				$tabs->tab( 'edit_wallet' )
