@@ -1,3 +1,7 @@
+2.22		20260102
+
+Add Cloudflare IP validity check.
+
 2.21		20260102
 
 Do a === check for retrieve key validity.
