@@ -3,8 +3,8 @@ Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 6.2
-Requires PHP: 5.6
-Stable tag: 2.155
+Requires PHP: 8.0
+Stable tag: 2.156
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.9
 
