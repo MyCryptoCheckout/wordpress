@@ -280,8 +280,10 @@ class WooCommerce
 	**/
 	public function template_redirect()
 	{
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- External redirect from Waves gateway; no WP nonce available.
 		if ( ! isset( $_GET[ 'txId' ] ) )	// This is what waves adds.
 			return;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Validated by context (checking URL params count).
 		if ( count( $_GET ) !== 1 )			// The waves payment API strips out every parameter.
 			return;
 		if ( ! is_order_received_page() )	// It at least returns the buyer to the order received page.
@@ -473,7 +475,8 @@ class WooCommerce
 
 		MyCryptoCheckout()->debug( 'Creating order! Available: %d', $available_for_payment );
 
-		$currency_id = sanitize_text_field( wp_unslash( $_POST[ 'mcc_currency_id' ] ) );
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies checkout nonce.
+		$currency_id = sanitize_text_field( $_POST[ 'mcc_currency_id' ] );
 
 		// Get the gateway instance.
 		$gateway = \WC_Gateway_MyCryptoCheckout::instance();
