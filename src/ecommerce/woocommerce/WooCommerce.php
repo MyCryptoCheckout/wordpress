@@ -467,6 +467,7 @@ class WooCommerce
 		if ( $order->get_payment_method() != static::$gateway_id )
 			return;
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies checkout nonce.
 		if ( ! isset( $_POST[ 'mcc_currency_id' ] ) )
 			wp_die( 'MCC currency ID does not exist in POST.' );
 
@@ -476,7 +477,7 @@ class WooCommerce
 		MyCryptoCheckout()->debug( 'Creating order! Available: %d', $available_for_payment );
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies checkout nonce.
-		$currency_id = sanitize_text_field( $_POST[ 'mcc_currency_id' ] );
+		$currency_id = sanitize_text_field( wp_unslash( $_POST['mcc_currency_id'] ) );
 
 		// Get the gateway instance.
 		$gateway = \WC_Gateway_MyCryptoCheckout::instance();
