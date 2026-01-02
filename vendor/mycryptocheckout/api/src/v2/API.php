@@ -313,7 +313,7 @@ abstract class API
 			if ( $this->is_cloudflare_ip() )
 				$remote_ip = $_SERVER[ 'HTTP_CF_CONNECTING_IP' ];
 			else
-				throw new Exception( 'Spoofed IP address generated from ' . $remote_ip );
+				throw new Exception( sprintf( 'Spoofed IP address generated from %s' . $remote_ip ) );
 
 		if ( ! in_array( $remote_ip, $allowed_ips ) )
 		{

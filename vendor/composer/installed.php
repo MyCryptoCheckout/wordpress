@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'c6c7d17a7737de205ede00319ec45f298264e064',
+        'reference' => '2adfb80c351afebb787778fbfaf2bc9f76c8bbbf',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'c6c7d17a7737de205ede00319ec45f298264e064',
+            'reference' => '2adfb80c351afebb787778fbfaf2bc9f76c8bbbf',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -94,7 +94,7 @@
         'mycryptocheckout/api' => array(
             'pretty_version' => '2.22',
             'version' => '2.22.0.0',
-            'reference' => '76cc741c0a12412b7be18af708b42cd966380dc4',
+            'reference' => 'b73fe3db6838c1b59980ec1999000acc591946f2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../mycryptocheckout/api',
             'aliases' => array(),
