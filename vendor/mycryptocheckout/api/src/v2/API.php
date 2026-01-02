@@ -313,7 +313,7 @@ abstract class API
 			if ( $this->is_cloudflare_ip() )
 				$remote_ip = $_SERVER[ 'HTTP_CF_CONNECTING_IP' ];
 			else
-				throw new Exception( sprintf( 'Spoofed IP address generated from %s' . $remote_ip ) );
+				throw new Exception( sprintf( 'Spoofed IP address generated from %s', $remote_ip ) );
 
 		if ( ! in_array( $remote_ip, $allowed_ips ) )
 		{
@@ -382,6 +382,11 @@ abstract class API
 				break;
 				case 'test_communication':
 					$this->json_reply( [ 'result' => 'ok', 'message' => date( 'Y-m-d H:i:s' ) ] );
+				break;
+				case 'update_account':
+					// Save our new account data.
+					$new_account_data = (object) (array) $message->account;
+					$this->save_data( 'account_data', json_encode( $new_account_data ) );
 				break;
 				default:
 					throw new Exception( sprintf( 'Unknown message type: %s', $message->type ) );
