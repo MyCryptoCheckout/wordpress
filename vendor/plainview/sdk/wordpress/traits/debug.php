@@ -117,14 +117,6 @@ trait debug
 			if ( is_string( $arg ) )
 				$args[ $index ] = htmlspecialchars( $arg );
 		}
-		foreach( $args as $index => $arg )
-		{
-			if ( is_array( $arg ) || is_object( $arg ) ) {
-				$args[ $index ] = sprintf( '<pre><code>%s</code></pre>', htmlspecialchars( var_export( $arg, true ) ) );
-			} else if ( is_string( $arg ) ) {
-				$args[ $index ] = htmlspecialchars( $arg );
-			}
-		}
 
 		// Put all of the arguments into one string.
 		try

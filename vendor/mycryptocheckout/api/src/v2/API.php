@@ -310,10 +310,12 @@ abstract class API
 
 		// Cloudflare adds a header with the visitor's real IP, which is what we need to check.
 		if ( isset( $_SERVER[ 'HTTP_CF_CONNECTING_IP' ] ) )
-			if ( $this->is_cloudflare_ip() )
+		{
+			if ( $this->is_cloudflare_ip( $remote_ip ) )
 				$remote_ip = $_SERVER[ 'HTTP_CF_CONNECTING_IP' ];
 			else
-				throw new Exception( sprintf( 'Spoofed IP address generated from %s', $remote_ip ) );
+				throw new Exception( sprintf( 'Spoofed IP address %s generated from %s', $_SERVER[ 'HTTP_CF_CONNECTING_IP' ] , $remote_ip ) );
+		}
 
 		if ( ! in_array( $remote_ip, $allowed_ips ) )
 		{
