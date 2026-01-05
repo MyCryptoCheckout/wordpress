@@ -545,7 +545,7 @@ trait admin_trait
 			$home_url = home_url();
 			$edd_text = sprintf(
 				// Translators: First and second %s are anchors.
-				__( "After adding currencies, visit the %1$\sEasy Digital Downloads Settings%2\$s to enable the gateway and more.", 'mycryptocheckout' ),
+				__( "After adding currencies, visit the %1\$sEasy Digital Downloads Settings%2\$s to enable the gateway and more.", 'mycryptocheckout' ),
 				'<a href="' . esc_url( $home_url ) . '/wp-admin/edit.php?post_type=download&page=edd-settings&tab=gateways">',
 				'</a>'
 			);
