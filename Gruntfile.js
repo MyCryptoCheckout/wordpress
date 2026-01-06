@@ -80,6 +80,7 @@ module.exports = function(grunt) {
 						'src/static/js/js.d/40.qrcode.js',
 						'src/static/js/js.d/50.checkout.js',
 						'src/static/js/js.d/50.donations.js',
+						'src/static/js/js.d/95.heartbeat_address.js',
 						'src/static/js/js.d/98.init.js',
 						'src/static/js/js.d/99.footer.js',
 					],

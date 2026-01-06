@@ -563,6 +563,28 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$instructions = $this->get_option( 'online_instructions' );
 		$payment = mycryptocheckout\ecommerce\woocommerce\WooCommerce::payment_from_order( $order_id );
 		$this->__current_payment = $payment;
+
+        // Heartbeat Address Checker.
+        // Address.
+		$verified_address = isset($payment->to) ? sanitize_text_field( $payment->to ) : '';
+
+        // Only proceed if we actually have an address to protect.
+        if ( ! empty( $verified_address ) ) {
+            
+            // Generate a Safe URL (Redirect to Shop or Home).
+            $raw_redirect_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
+            $safe_redirect_url = esc_url_raw( $raw_redirect_url );
+
+            // Localize the script.
+            // We use html_entity_decode to ensure strict string matching in JS.
+            wp_localize_script( 'mycryptocheckout', 'mcc_security', [
+                'verified_address' => html_entity_decode( $verified_address ),
+                'redirect_url'     => $safe_redirect_url,
+                'check_interval'   => 2000 
+            ]);
+        }
+		// End Heartbeat Address Checker.
+
 		if ( ! $order->needs_payment() )
 			$payment->paid = $order->is_paid();
 		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment,  $instructions );

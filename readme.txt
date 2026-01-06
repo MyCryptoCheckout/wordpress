@@ -169,6 +169,8 @@ We have various code snippets that allow you to customize MyCryptoCheckout toget
 
 = Security Features =
 
+MyCryptoCheckout includes security measures to protect your store and your customers.
+
 **Disable Wallet Editing**
 Once wallets are set up, prevent edits by adding this to your wp-config.php:
 <code>define( 'MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR', true );</code>
@@ -179,6 +181,12 @@ Toggle these options in **Settings > MyCryptoCheckout > Global Settings > Securi
 * **Administrator Lockdown (Freeze Admin Creation):** Proactively blocks the creation of *new* Administrator accounts to prevent privilege escalation attacks. Enabled by default.
 * **Disable Built-in File Editor:** Disables the native WordPress Theme and Plugin editors to prevent code injection.
 * **Disable XML-RPC:** Shuts down xmlrpc.php to block common brute-force and DDoS attack vectors.
+
+**Wallet Change Watchdog**
+Automatically emails the site administrator with details if wallet addresses are manually modified in the dashboard.
+
+**Frontend Heartbeat Protection**
+Real-time verification ensures the displayed wallet address matches the database, immediately redirecting the user to safety if tampering is detected.
 
 == External services ==
 

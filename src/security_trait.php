@@ -40,7 +40,7 @@ trait security_trait
     **/
     public function init_security_trait()
     {
-        // 1. DISABLE XML-RPC
+        // DISABLE XML-RPC.
         if ( $this->get_site_option( 'security_disable_xmlrpc', false ) ) {
             add_filter( 'xmlrpc_enabled', '__return_false' );
             remove_action( 'wp_head', 'rsd_link' );
@@ -50,7 +50,7 @@ trait security_trait
             } );
         }
 
-        // 2. DISABLE FILE EDITOR
+        // DISABLE FILE EDITOR.
         if ( $this->get_site_option( 'security_disable_file_editor', false ) ) {
             if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
                 // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Defining core constant for security option.
@@ -58,7 +58,7 @@ trait security_trait
             }
         }
 
-        // 3. FREEZE ADMIN CREATION (Rogue Admin Block)
+        // FREEZE ADMIN CREATION.
         if ( $this->get_site_option( 'security_block_rogue_admins', true ) ) {
 
             // LAYER 1: UI Validation (Nice User Experience)
@@ -73,6 +73,9 @@ trait security_trait
             add_filter( 'update_user_metadata', [ $this, 'security_intercept_meta_update' ], 1, 5 );
             add_filter( 'add_user_metadata', [ $this, 'security_intercept_meta_add' ], 1, 5 );
         }
+
+        // WALLET CHANGE EMAIL.
+        add_action( 'updated_option', [ $this, 'mcc_security_monitor_wallets' ], 999, 1 );
     }
 
     /**
@@ -187,5 +190,75 @@ trait security_trait
             'Security Violation',
             [ 'response' => 403 ]
         );
+    }
+
+    /**
+     * Monitor Wallet Changes and Email Admin.
+     *
+     * @param string $option Option name.
+     * @since 2026-01-03
+     */
+    public function mcc_security_monitor_wallets( $option ) {
+        
+       // Option Name Check.
+        if ( 'MyCryptoCheckout_wallets' !== $option && 'mycryptocheckout_wallets' !== $option ) {
+            return;
+        }
+
+        // Context Check: Is this a manual admin save.
+        // We ensure we are in the admin area, on the specific settings page.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- We are reading global state to determine context, not processing user input for a DB write.
+        $is_mcc_page = ( is_admin() && isset( $_GET['page'] ) && 'mycryptocheckout' === $_GET['page'] );
+
+        if ( ! $is_mcc_page ) {
+            return; // Ignore automated background updates.
+        }
+
+        // Input Field Check.
+        // We scan raw POST data to see if wallet inputs were actually submitted.
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- We are purely detecting presence of keys for a notification trigger, not processing data.
+        $post_data_string = isset( $_POST ) ? wp_json_encode( $_POST ) : '';
+
+        // Check for specific input names used by the settings form.
+        $has_wallet_input = ( strpos( $post_data_string, 'wallet_address' ) !== false );
+        $has_hd_input     = ( strpos( $post_data_string, 'btc_hd_public_key' ) !== false );
+
+        if ( ! $has_wallet_input && ! $has_hd_input ) {
+            return;
+        }
+
+        // Rate Limiting (Prevent double-send on a single save).
+        $transient_key = 'mcc_security_alert_' . md5( $option );
+        if ( get_transient( $transient_key ) ) {
+            return;
+        }
+        set_transient( $transient_key, true, 300 );
+
+        // Send Notification Email.
+        $to      = get_option( 'admin_email' );
+        /* translators: %s: The site name. */
+        $subject = sprintf( __( '[%s] Wallet Settings Updated', 'mycryptocheckout' ), get_bloginfo( 'name' ) );
+        $headers = [ 'Content-Type: text/plain; charset=UTF-8' ];
+
+        $current_user = wp_get_current_user();
+        $user_login   = $current_user->exists() ? sanitize_user( $current_user->user_login ) : 'Unknown/System';
+        $timestamp    = current_time( 'mysql' );
+
+        $raw_ip  = filter_input( INPUT_SERVER, 'REMOTE_ADDR', FILTER_VALIDATE_IP );
+        $user_ip = $raw_ip ? $raw_ip : 'Unknown/Hidden';
+
+        /* translators: 1: The timestamp, 2: The username, 3: The user IP address. */
+        $message = sprintf(
+            __( "Just a quick notification that the MyCryptoCheckout wallet addresses were manually updated via the WordPress Dashboard.\n\nTime: %1\$s\nUser: %2\$s\nIP:   %3\$s\n\n", 'mycryptocheckout' ),
+            $timestamp,
+            $user_login,
+            $user_ip
+        );
+
+        $message .= __( "If you made this change, you can safely ignore this email.\n", 'mycryptocheckout' );
+        $message .= __( "If you do not recognize this activity, please verify your wallet addresses immediately:\n", 'mycryptocheckout' );
+        $message .= admin_url( 'options-general.php?page=mycryptocheckout&tab=currencies' );
+
+        wp_mail( $to, $subject, $message, $headers );
     }
 }
