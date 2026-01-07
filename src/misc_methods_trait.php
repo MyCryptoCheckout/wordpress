@@ -654,6 +654,12 @@ trait misc_methods_trait
 			'security_block_rogue_admins' => true,
 
 			/**
+				@brief		Disable application passwords.
+				@since		2026-01-07 10:12:07
+			**/
+			'security_disable_application_passwords' => false,
+
+			/**
 				@brief		Disable the internal file / theme / plugin editor.
 				@since		2025-12-26 10:04:25
 			**/

@@ -19,17 +19,22 @@ trait security_trait
     public function add_security_inputs_to_form( $fs )
     {
         $fs->checkbox( 'security_block_rogue_admins' )
-            ->checked( $this->get_site_option( 'security_block_rogue_admins', true ) )
+            ->checked( $this->get_site_option( 'security_block_rogue_admins' ) )
             ->description( __( 'TOTAL FREEZE: Blocks the creation of ANY new administrators. You can still see the option in menus, but saving will fail. Uncheck this temporarily if you need to add a new admin. Recommended: ON', 'mycryptocheckout' ) )
             ->label( __( 'Freeze Admin Creation', 'mycryptocheckout' ) );
 
+        $fs->checkbox( 'security_disable_application_passwords' )
+            ->checked( $this->get_site_option( 'security_disable_application_passwords' ) )
+            ->description( __( 'Disables application passwords, preventing hackers from accessing admin functions externally. Recommended: ON', 'mycryptocheckout' ) )
+            ->label( __( 'Disable Application Passwords', 'mycryptocheckout' ) );
+
         $fs->checkbox( 'security_disable_file_editor' )
-            ->checked( $this->get_site_option( 'security_disable_file_editor', true ) )
+            ->checked( $this->get_site_option( 'security_disable_file_editor' ) )
             ->description( __( 'Disables the internal theme and plugin editors to prevent hackers from injecting code if they get into the dashboard. Recommended: ON', 'mycryptocheckout' ) )
             ->label( __( 'Disable File Editor', 'mycryptocheckout' ) );
 
         $fs->checkbox( 'security_disable_xmlrpc' )
-            ->checked( $this->get_site_option( 'security_disable_xmlrpc', true ) )
+            ->checked( $this->get_site_option( 'security_disable_xmlrpc' ) )
             ->description( __( 'Completely disables XML-RPC (xmlrpc.php) to block brute-force attacks and DDoS vectors. Recommended: ON', 'mycryptocheckout' ) )
             ->label( __( 'Disable XML-RPC', 'mycryptocheckout' ) );
     }
@@ -41,7 +46,7 @@ trait security_trait
     public function init_security_trait()
     {
         // DISABLE XML-RPC.
-        if ( $this->get_site_option( 'security_disable_xmlrpc', false ) ) {
+        if ( $this->get_site_option( 'security_disable_xmlrpc' ) ) {
             add_filter( 'xmlrpc_enabled', '__return_false' );
             remove_action( 'wp_head', 'rsd_link' );
             add_filter( 'wp_headers', function( $headers ) {
@@ -50,8 +55,13 @@ trait security_trait
             } );
         }
 
+        // DISABLE APPLICATION PASSWORDS.
+        if ( $this->get_site_option( 'security_disable_application_passwords' ) ) {
+			add_filter( 'wp_is_application_passwords_available', '__return_false' );
+        }
+
         // DISABLE FILE EDITOR.
-        if ( $this->get_site_option( 'security_disable_file_editor', false ) ) {
+        if ( $this->get_site_option( 'security_disable_file_editor' ) ) {
             if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
                 // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Defining core constant for security option.
                 define( 'DISALLOW_FILE_EDIT', true );
@@ -85,6 +95,7 @@ trait security_trait
     public function save_security_inputs( $form )
     {
         $this->update_site_option( 'security_block_rogue_admins', $form->input( 'security_block_rogue_admins' )->is_checked() );
+        $this->update_site_option( 'security_disable_application_passwords', $form->input( 'security_disable_application_passwords' )->is_checked() );
         $this->update_site_option( 'security_disable_file_editor', $form->input( 'security_disable_file_editor' )->is_checked() );
         $this->update_site_option( 'security_disable_xmlrpc', $form->input( 'security_disable_xmlrpc' )->is_checked() );
     }
@@ -199,7 +210,7 @@ trait security_trait
      * @since 2026-01-03
      */
     public function mcc_security_monitor_wallets( $option ) {
-        
+
        // Option Name Check.
         if ( 'MyCryptoCheckout_wallets' !== $option && 'mycryptocheckout_wallets' !== $option ) {
             return;

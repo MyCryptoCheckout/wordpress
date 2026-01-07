@@ -264,6 +264,9 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Security: Added global option to disable application passwords.
+* Fix: php 8.3 sprintf error fixed.
+
 = 2.158 =
 
 * Fix: Fixed cloudflare ipv6 detection code.
