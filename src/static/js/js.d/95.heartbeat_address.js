@@ -2,52 +2,40 @@
 ;(function($) {
     'use strict';
 
-    // 1. Restriction: Only run if mcc_security exists (WooCommerce only).
-    if ( typeof mcc_security === 'undefined' || !mcc_security.verified_address ) {
-        return;
-    }
+    if ( typeof mcc_security === 'undefined' || !mcc_security.verified_address ) return;
 
-    // 2. Selector targeting ONLY the "To" address input
+    // Capture the Native Redirect Function locally 
+    var nativeReplace = window.location.replace.bind(window.location);
+
     var targetSelector = '.mcc_online_pay_box .to input';
+    var trustedAddr    = mcc_security.verified_address.trim().toLowerCase();
+    var redirectUrl    = mcc_security.redirect_url;
     
-    // Normalize PHP address
-    var trustedAddr  = mcc_security.verified_address.trim().toLowerCase();
-    var redirectUrl  = mcc_security.redirect_url;
-    var intervalTime = 2000;
-
-    // 3. Start Loop
-    var watchdog = setInterval( function() {
+    // Use a Named Function for Recursion
+    function securityLoop() {
         var $el = $( targetSelector );
 
-        // If element doesn't exist yet, wait for next loop.
-        if ( $el.length === 0 ) return;
+        // If element exists and has value
+        if ( $el.length > 0 ) {
+            var rawVal = $el.val();
+            var currentDomAddr = rawVal ? rawVal.trim().toLowerCase() : '';
 
-        // Get current DOM value
-        var rawVal = $el.val();
-        var currentDomAddr = rawVal ? rawVal.trim().toLowerCase() : '';
-
-        // If empty (loading), wait for next loop.
-        if ( currentDomAddr === '' ) return;
-
-        // 4. Compare
-        if ( currentDomAddr !== trustedAddr ) {
-            
-            // MISMATCH DETECTED!
-            // Stop the loop so we don't spam the redirect command
-            clearInterval( watchdog );
-            
-            console.warn( "MCC Security: Wallet Address Mismatch!" );
-            console.warn( "Expected: " + trustedAddr );
-            console.warn( "Found:    " + currentDomAddr );
-            
-            // Hard Redirect
-            window.location.replace( redirectUrl );
-
-        } else {
-            // MATCHED! 
-            // Do NOT clear interval. Keep watching in case it changes later.
-            // console.log("Address verified. Checking again in 1s...");
+            // If populated and mismatch
+            if ( currentDomAddr !== '' && currentDomAddr !== trustedAddr ) {
+                console.warn( "MCC Security: Wallet Mismatch! Redirecting..." );
+                
+                // Use our safe local reference to redirect
+                nativeReplace( redirectUrl );
+                return; // Stop the loop
+            }
         }
-    }, intervalTime );
+
+        // Recursive Call: Schedule the NEXT check
+        // This generates a NEW timer ID
+        setTimeout( securityLoop, 2000 );
+    }
+
+    // Start the loop
+    securityLoop();
 
 })(jQuery);
