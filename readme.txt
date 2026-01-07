@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 6.2
 Requires PHP: 8.0
-Stable tag: 2.158
+Stable tag: 2.159
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.9
 
@@ -264,21 +264,23 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.159 20270107 =
+
 * Security: Added wallet settings change email notification.
 * Security: Added frontend heartbeat address protection.
 * Security: Added global option to disable application passwords.
 * Fix: php 8.3 sprintf error fixed.
 
-= 2.158 =
+= 2.158 20270104 =
 
 * Fix: Fixed cloudflare ipv6 detection code.
 * Fix: Added support for hosts that pretend they are behind cloudflare, but aren't.
 
-= 2.157 =
+= 2.157 20270103 =
 
 * Code: Cloudflare IP check updated. SDK update.
 
-= 2.156 =
+= 2.156 20270102 =
 
 * Fix: Code refactoring.
 * Fix: Cleaned up PHP 8.2+ notices.
