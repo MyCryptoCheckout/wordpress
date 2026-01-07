@@ -264,6 +264,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Security: Added wallet settings change email notification.
+* Security: Added frontend heartbeat address protection.
 * Security: Added global option to disable application passwords.
 * Fix: php 8.3 sprintf error fixed.
 
