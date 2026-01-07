@@ -532,7 +532,7 @@ trait admin_trait
 
 		$r .= wpautop( __( 'If you have several wallets of the same currency, they will be used in sequential order.', 'mycryptocheckout' ) );
 
-		$wallets_text = sprintf( __( "If you don't have a wallet address to use, perhaps %1\$sswe can recommend some wallets for you%2\$s?", 'mycryptocheckout' ),
+		$wallets_text = sprintf( __( "If you don't have a wallet address to use, perhaps %1\$swe can recommend some wallets for you%2\$s?", 'mycryptocheckout' ),
 			'<a href="https://mycryptocheckout.com/doc/recommended-wallets-exchanges/" target="_blank">',
 			'</a>',
 		);
