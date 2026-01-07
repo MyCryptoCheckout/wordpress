@@ -67,7 +67,7 @@ trait api_trait
 		{
 			$account = $this->api()->account();
 			if ( isset( $account->data->license_expired ) )
-				if ( $account->data->license_expired )
+				if ( $account->data->license_expired === true )
 					$this->expired_license()->add( $account->data->license_expired );
 		}
 		return $result;
