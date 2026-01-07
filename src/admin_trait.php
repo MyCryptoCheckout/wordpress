@@ -1134,27 +1134,40 @@ trait admin_trait
 	**/
 	public function wp_ajax_mycryptocheckout_sort_wallets()
 	{
-		if ( ! isset( $_REQUEST[ 'nonce' ] ) )
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- We are verifying the nonce immediately after retrieval.
+		if ( ! isset( $_REQUEST['nonce'] ) ) {
 			wp_die( 'No nonce.' );
-		$nonce = $_REQUEST[ 'nonce' ];
+		}
 
-		if ( ! wp_verify_nonce( $nonce, 'mycryptocheckout_sort_wallets' ) )
+		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) );
+
+		if ( ! wp_verify_nonce( $nonce, 'mycryptocheckout_sort_wallets' ) ) {
 			wp_die( 'Invalid nonce.' );
+		}
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-        	wp_die( 'Unauthorized user.' );
-    	}
+			wp_die( 'Unauthorized user.' );
+		}
+
+		// Validate that wallets exist in POST and is an array.
+		if ( ! isset( $_POST['wallets'] ) || ! is_array( $_POST['wallets'] ) ) {
+			wp_die( 'No wallet data provided.' );
+		}
 
 		// Load the wallets.
 		$wallets = $this->wallets();
 
+		// Unslash and sanitize the array of wallet IDs.
+		$posted_wallets = array_map( 'sanitize_text_field', wp_unslash( $_POST['wallets'] ) );
+
 		foreach( $wallets as $wallet_id => $wallet )
 		{
-			foreach( $_POST[ 'wallets' ] as $wallet_order => $post_wallet_id )
+			foreach( $posted_wallets as $wallet_order => $post_wallet_id )
 			{
 				if ( $wallet_id != $post_wallet_id )
 					continue;
-				$wallet->set_order( $wallet_order );
+				// Cast order to int to be safe.
+				$wallet->set_order( (int) $wallet_order );
 			}
 		}
 
