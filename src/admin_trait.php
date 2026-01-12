@@ -59,7 +59,13 @@ trait admin_trait
 		if ( ! $this->get_option( 'safe_message_dismissed' ) )
 		{
 			$url = add_query_arg( 'safe_message_dismissed', $safe_message_dismissed_nonce );
-			$message_box_text = '<strong>Keep Your Store Safe:</strong> Due to increased attacks on WordPress sites, we recommend you <a href="https://wordpress.org/plugins/wp-2fa/" target="_blank" rel="noopener">enable login 2FA</a>, use <a href="https://wordpress.org/plugins/sucuri-scanner/" target="_blank" rel="noopener">Sucuri</a> to monitor activity, <a href="https://docs.sucuri.net/plugins/wordpress-hardening-options/" target="_blank" rel="noopener">disable the Plugin/Theme Editor</a>, and <a href="https://wordpress.org/plugins/disable-xml-rpc/" target="_blank" rel="noopener">disable XML-RPC</a>.';
+			$message_box_text = sprintf(
+				/* translators: 1: Internal Security Settings URL, 2: WP 2FA plugin URL, 3: Sucuri plugin URL */
+				__( '<strong>Keep Your Store Safe:</strong> Protect your site using our built-in <strong>Hardening Tools</strong> (Admin Lockdown, Disable File Editors, etc.) found in <a href="%1$s">Global Settings &gt; Security</a>. We also strongly recommend you <a href="%2$s" target="_blank" rel="noopener">enable login 2FA</a> and <a href="%3$s" target="_blank" rel="noopener">Sucuri Monitor</a>.', 'mycryptocheckout' ),
+				esc_url( admin_url( 'options-general.php?page=mycryptocheckout&tab=global_settings' ) ),
+				'https://wordpress.org/plugins/wp-2fa/',
+				'https://wordpress.org/plugins/sucuri-scanner/'
+			);
 			$message_box_text .= '<br/><a href="' . $url . '">Dismiss this message.</a>';
 			$r .= $this->info_message_box()->_( $message_box_text );
 		}
