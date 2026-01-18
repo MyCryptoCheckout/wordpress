@@ -67,6 +67,12 @@ trait menu_trait
 				$wallet_id = isset( $_GET['wallet_id'] ) ? sanitize_title( wp_unslash( $_GET['wallet_id'] ) ) : '';
 				$wallets = $this->wallets();
 				$wallet = $wallets->get( $wallet_id );
+				if ( $wallet == false )
+				{
+					// Wallet no longer exists. Go back to status page.
+					wp_redirect( remove_query_arg( [ 'wallet_id', 'tab' ] ) );
+					exit;
+				}
 				$tabs->tab( 'edit_wallet' )
 					->callback_this( 'admin_edit_wallet' )
 					// Translators: Editing BTC wallet
