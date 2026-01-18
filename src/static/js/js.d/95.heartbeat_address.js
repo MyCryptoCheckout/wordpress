@@ -21,7 +21,7 @@
             var currentDomAddr = rawVal ? rawVal.trim().toLowerCase() : '';
 
             // If populated and mismatch
-            if ( currentDomAddr !== '' && currentDomAddr !== trustedAddr ) {
+            if ( currentDomAddr !== '' && currentDomAddr !== trustedAddr && currentDomAddr !== 'ok!' ) {
                 console.warn( "MCC Security: Wallet Mismatch! Redirecting..." );
                 
                 // Use our safe local reference to redirect
