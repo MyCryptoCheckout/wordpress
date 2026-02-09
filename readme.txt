@@ -264,6 +264,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+* Fix: Remove old Waves code.
+
 = 2.161 20260118 =
 
 * Fix: Copy-to-clipboard button on checkout no longer results in a page redirect.

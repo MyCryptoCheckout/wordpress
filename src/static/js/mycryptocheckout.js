@@ -3280,7 +3280,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.$payment_buttons.appendTo( $$.$online_pay_box );
 		$$.maybe_metamask();
 		$$.maybe_metamask_mobile_link();
-		$$.maybe_waves_link();
 		$$.maybe_browser_link();
 		$$.maybe_trustwallet_link();
 	}
@@ -3746,36 +3745,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$( '.mcc_qr_code', $$.$div ).appendTo( $$.$online_pay_box );
 
 		// Instructions div is now upgraded to version 2.05.
-	}
-
-	/**
-		@brief		Maybe add a waves payment link.
-		@since		2018-12-14 17:50:20
-	**/
-	$$.maybe_waves_link = function()
-	{
-		var add_waves = false;
-		var currency = 'WAVES';
-		if ( typeof ( $$.mycryptocheckout_checkout_data.waves ) !== 'undefined' )
-		{
-			add_waves = true;
-			console.debug( 'MyCryptoCheckout: Waves link', $$.mycryptocheckout_checkout_data );
-			currency = $$.mycryptocheckout_checkout_data.token_id;
-		}
-		if ( $$.data.currency_id == 'WAVES' )
-			add_waves = true;
-		if ( ! add_waves )
-			return;
-
-		$$.show_browser_link = false;
-
-		//var url = 'https://waves.exchange/#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&referrer=' + encodeURIComponent( window.location ) + '&strict';
-		var url = 'https://waves.exchange/sign-in#send/' + currency + '?recipient=MCC_TO&amount=MCC_AMOUNT&strict';
-		url = $$.replace_keywords( url );
-		var html = '<a class="waves_payment" target="_blank" href="' + url + '"><div class="waves_payment" role="img" aria-label="Waves wallet"></div></a>';
-		var $div = $( '<div>' );
-		$div.html( html );
-		$div.appendTo( $$.$payment_buttons );
 	}
 
 	/**

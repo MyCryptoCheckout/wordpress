@@ -39,7 +39,6 @@ class WooCommerce
 		$this->add_action( 'mycryptocheckout_complete_payment' );
 		$this->add_filter( 'mycryptocheckout_generate_payment_from_order', 10, 2 );
 		$this->add_action( 'mycryptocheckout_set_order_payment_id', 10, 2 );
-		$this->add_action( 'template_redirect' );
 		//$this->add_action( 'before_woocommerce_pay' );
 		$this->add_action( 'wcs_new_order_created' );
 		$this->add_filter( 'wcs_renewal_order_meta' );
@@ -272,42 +271,6 @@ class WooCommerce
 		$payment->data = $order->get_meta( '_mcc_payment_data', true );
 
 		return $payment;
-	}
-
-	/**
-		@brief		Maybe redirect to the order recieved page for Waves transactions.
-		@since		2019-07-27 19:43:13
-	**/
-	public function template_redirect()
-	{
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- External redirect from Waves gateway; no WP nonce available.
-		if ( ! isset( $_GET[ 'txId' ] ) )	// This is what waves adds.
-			return;
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Validated by context (checking URL params count).
-		if ( count( $_GET ) !== 1 )			// The waves payment API strips out every parameter.
-			return;
-		if ( ! is_order_received_page() )	// It at least returns the buyer to the order received page.
-			return;
-
-		// Extract the order ID.
-		global $wp;
-		$order_id = intval( $wp->query_vars['order-received'] );
-
-		// Order must be valid.
-		$order = new \WC_Order( $order_id );
-		if ( ! $order )
-			return;
-
-		// Is this an mcc transaction?
-		$mcc_currency_id = $order->get_meta( '_mcc_currency_id' );
-		if ( ! $mcc_currency_id )
-			return;
-
-		// And now redirect the buyer to the correct page.
-		$url = $order->get_checkout_order_received_url();
-
-		wp_safe_redirect( $url );
-		exit;
 	}
 
 	/**
