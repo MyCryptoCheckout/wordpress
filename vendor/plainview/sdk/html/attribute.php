@@ -56,7 +56,12 @@ class attribute
 	**/
 	public function add( $value )
 	{
-		$this->value[ $value ] = $value;
+		$key = $value;
+
+		if ( is_float( $value ) )
+			$key = str_replace( '.', '_', $value );
+
+		$this->value[ $key ] = $value;
 		return $this;
 	}
 

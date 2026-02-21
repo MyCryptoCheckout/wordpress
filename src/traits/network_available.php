@@ -4,7 +4,6 @@ namespace mycryptocheckout\traits;
 
 /**
 	@brief		Functions common to things that can be network enabled and on specific sites.
-	@see		\mycryptocheckout\autosettlements\Autosettlement
 	@see		\mycryptocheckout\wallets\Wallet
 	@since		2019-02-22 21:40:44
 **/
@@ -33,13 +32,13 @@ trait network_available
 		// Fieldset legend
 		$fs->legend->label( __( 'Network settings', 'mycryptocheckout' ) );
 
-		$form->network_available = $fs->checkbox( 'network_available' )
+		$fs->checkbox( 'network_available' )
 			->checked( $this->get_network() )
 			->description( __( 'Do you want this to be available on the whole network?', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Network available', 'mycryptocheckout' ) );
 
-		$form->network_sites = $fs->select( 'site_ids' )
+		$network_sites = $fs->select( 'site_ids' )
 			->description( __( 'If not network enabled, on which sites should this be available.', 'mycryptocheckout' ) )
 			// Input label
 			->label( __( 'Sites', 'mycryptocheckout' ) )
@@ -47,9 +46,9 @@ trait network_available
 			->value( $this->get_sites() );
 
 		foreach( MyCryptoCheckout()->get_sorted_sites() as $site_id => $site_name )
-			$form->network_sites->opt( $site_id, $site_name );
+			$network_sites->opt( $site_id, $site_name );
 
-		$form->network_sites->autosize();
+		$network_sites->autosize();
 	}
 
 	/**
@@ -74,7 +73,7 @@ trait network_available
 			else
 			{
 				$details []= sprintf(
-					// This wallet is available on SITE1, SITE2, SITE3
+					// Translators: This wallet is available on SITE1, SITE2, SITE3
 					__( 'Available on %s', 'mycryptocheckout' ),
 					implode( ', ', $this->get_site_names() )
 				);
@@ -117,8 +116,10 @@ trait network_available
 			return;
 		if( ! is_super_admin() )
 			return;
-		$this->set_network( $form->network_available->is_checked() );
-		$this->set_sites( $form->network_sites->get_post_value() );
+		$input = $form->input( 'network_available' );
+		$this->set_network( $input->is_checked() );
+		$input = $form->input( 'site_ids' );
+		$this->set_sites( $input->get_post_value() );
 	}
 
 	/**

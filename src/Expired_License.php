@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Class for handling expired license notifications and dismissals.
 	@since		2019-11-15 21:09:24
@@ -66,9 +70,12 @@ class Expired_License
 			if ( $dismissed )
 				continue;
 			$key = $this->get_dismissal_key( $dismissal );
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Custom verification using hashed key derived from AUTH_SALT.
 			if ( ! isset( $_GET[ 'mcc_dismiss_notification' ] ) )
 				continue;
-			if ( $_GET[ 'mcc_dismiss_notification' ] != $key )
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Custom verification using hashed key.
+			if ( sanitize_text_field( wp_unslash( $_GET[ 'mcc_dismiss_notification' ] ) ) != $key )
 				continue;
 			$dismissals[ $dismissal ] = time();
 			$save = true;
@@ -109,9 +116,10 @@ class Expired_License
 					esc_url( add_query_arg( 'mcc_dismiss_notification', $key ) )
 				);
 
+				// Translators: css class, 2 = message string
 				printf( '<div class="%1$s"><p>%2$s</p></div>',
 					esc_attr( $class ),
-					$message
+					wp_kses_post( $message )
 				);
 			} );
 		}

@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		For the handling of QR codes.
 	@since		2018-05-01 20:42:45
@@ -10,7 +14,6 @@ trait qr_code_trait
 {
 	/**
 		@brief		Add the QR code inputs to the settings form.
-		@details	Set $form->local_settings if local. Else global is assumed.
 		@since		2018-04-26 17:24:27
 	**/
 	public function add_qr_code_inputs( $form )
@@ -29,7 +32,7 @@ trait qr_code_trait
 			->label( __( 'QR code HTML', 'mycryptocheckout' ) )
 			->rows( 5, 40 );
 
-		if ( isset( $form->form()->local_settings ) )
+		if ( $form->form()->get_attribute( 'local_settings' ) == 1 )
 		{
 			$qr_code_enabled->opt( 'enabled', __( 'Enabled', 'mycryptocheckout' ) );
 			$qr_code_enabled->opt( 'disabled', __( 'Disabled', 'mycryptocheckout' ) );
@@ -82,7 +85,7 @@ trait qr_code_trait
 	**/
 	public function save_qr_code_inputs( $form )
 	{
-		if ( isset( $form->form()->local_settings ) )
+		if ( $form->form()->get_attribute( 'local_settings' ) == 1 )
 		{
 			// Local
 			$this->update_local_global_disk_option( $form, 'qr_code_html' );

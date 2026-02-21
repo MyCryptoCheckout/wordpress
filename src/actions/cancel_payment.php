@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\actions;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Mark a payment as cancelled.
 	@since		2018-03-04 18:25:50

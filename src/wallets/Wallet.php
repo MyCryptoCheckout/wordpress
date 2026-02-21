@@ -134,21 +134,21 @@ class Wallet
 
 		if ( $this->confirmations > 1 )
 			$r []= sprintf(
-				// Used 123 times
+				// Translators: 123 confirmations
 				__( '%d confirmations', 'mycryptocheckout' ),
 				$this->confirmations
 			);
 
 		if ( $this->last_used > 0 )
 			$r []= sprintf(
-				// Used 123 times
+				// Translators: Last used: DATETIME
 				__( 'Last used %s', 'mycryptocheckout' ),
 				( MyCryptoCheckout()->local_datetime( $this->last_used ) )
 			);
 
 		if ( $this->times_used > 0 )
 			$r []= sprintf(
-				// Used 123 times
+				// Translators: Used 123 times
 				__( 'Used %d times', 'mycryptocheckout' ),
 				$this->times_used
 			);

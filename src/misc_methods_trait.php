@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Exception;
 
 /**
@@ -72,7 +76,7 @@ trait misc_methods_trait
 	**/
 	public function enqueue_js()
 	{
-		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/mycryptocheckout.min.js', [ 'jquery' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
+		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/mycryptocheckout.min.js', [ 'jquery', 'clipboard' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
 	}
 
 	/**
@@ -97,9 +101,11 @@ trait misc_methods_trait
 		$r = $this->collection();
 		$r->set( 'currency_selection_text', __( 'Please select a currency', 'mycryptocheckout' ) );
 		$r->set( 'gateway_name', __( 'Cryptocurrency', 'mycryptocheckout' ) );
+		// Translators: [AMOUNT], [CURRENCY], [TO] are placeholders and should not be translated.
 		$r->set( 'online_payment_instructions_description', __( 'Instructions for payment that will be shown on the purchase confirmation page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
 		$r->set( 'online_payment_instructions', $this->wpautop_file( 'online_payment_instructions' ) );
 		$r->set( 'email_payment_instructions', $this->wpautop_file( 'email_payment_instructions' ) );
+		// Translators: [AMOUNT], [CURRENCY], [TO] are placeholders and should not be translated.
 		$r->set( 'email_payment_instructions_description', __( 'Instructions for payment that will be added to the e-mail receipt. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
 		return $r;
 	}
@@ -161,11 +167,11 @@ trait misc_methods_trait
 			if ( $options->as_html )
 			{
 				$value = sprintf( '<option value="%s"%s>%s (%s%s)</option>',
-					$currency_id,
-					( $selected ? ' selected="selected"' : '' ),
-					$currency->get_name(),
-					$cryptocurrency_amount,
-					$currency_id
+					esc_attr( $currency_id ),
+    				( $selected ? ' selected="selected"' : '' ),
+    				esc_html( $currency->get_name() ),
+    				esc_html( $cryptocurrency_amount ),
+    				esc_html( $currency_id )
 				);
 				// Select the first.
 				if ( $selected )
@@ -357,7 +363,7 @@ trait misc_methods_trait
 	{
 		$date_format = get_option( 'date_format' );
 		$timestamp = $this->adjust_timestamp( $timestamp );
-		return date( $date_format, $timestamp );
+		return gmdate( $date_format, $timestamp );
 	}
 
 	/**
@@ -398,7 +404,7 @@ trait misc_methods_trait
 	{
 		$time_format = get_option( 'time_format' );
 		$timestamp = $this->adjust_timestamp( $timestamp );
-		return date( $time_format, $timestamp );
+		return gmdate( $time_format, $timestamp );
 	}
 
 	/**
@@ -636,6 +642,36 @@ trait misc_methods_trait
 			'qr_code_enabled' => 'default_enabled',
 
 			/**
+				@brief		Has the user dismissed the message on the account tab regarding safe practices?
+				@since		2025-12-14 19:49:36
+			**/
+			'safe_message_dismissed' => false,
+
+			/**
+				@brief		Prevent admins from being created.
+				@since		2025-12-26 10:04:41
+			**/
+			'security_block_rogue_admins' => true,
+
+			/**
+				@brief		Disable application passwords.
+				@since		2026-01-07 10:12:07
+			**/
+			'security_disable_application_passwords' => false,
+
+			/**
+				@brief		Disable the internal file / theme / plugin editor.
+				@since		2025-12-26 10:04:25
+			**/
+			'security_disable_file_editor' => false,
+
+			/**
+				@brief		Disable the XMLRPC to maybe, perhaps, not allow hackers in.
+				@since		2025-12-26 10:03:43
+			**/
+			'security_disable_xmlrpc' => false,
+
+			/**
 				@brief		The Wallets collection in which all wallet info is stored.
 				@see		Wallets()
 				@since		2017-12-09 09:15:52
@@ -685,7 +721,9 @@ trait misc_methods_trait
 	**/
 	public static function wordpress_ago( $time )
 	{
-		$ago = sprintf( __( '%s ago' ), human_time_diff( $time ) );
+		// Translators: %s is a number and minutes / hours / days.
+		$ago = sprintf( __( '%s ago', 'mycryptocheckout' ), human_time_diff( $time ) );
+		// Translators: Nothing to translate.
 		$text = sprintf( '<span title="%s">%s</span>',
 			MyCryptoCheckout()->local_datetime( $time ),
 			$ago

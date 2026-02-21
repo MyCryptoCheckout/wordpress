@@ -1,10 +1,14 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
 final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
 {
-    protected $name = 'mycryptocheckout';// your payment gateway name
+    protected $name = 'mycryptocheckout'; // Payment gateway name.
 
     public function initialize()
     {
@@ -55,7 +59,7 @@ final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
     public function get_payment_method_data()
     {
         ob_start();
-        echo $this->gateway()->woocommerce_gateway_icon( '', \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id );
+        echo $this->gateway()->woocommerce_gateway_icon( '', \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output is HTML for icons; attributes are escaped internally.
 		$this->gateway()->payment_fields();
 		$pf = ob_get_clean();
 

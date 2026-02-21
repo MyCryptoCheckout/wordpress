@@ -7,12 +7,17 @@ Description:		Cryptocurrency payment gateway for WooCommerce and Easy Digital Do
 Plugin Name:		MyCryptoCheckout
 Plugin URI:			https://mycryptocheckout.com
 Text Domain:		mycryptocheckout
-Version:			2.144
-WC tested up to:	10.1.0
+Version:			2.161
+WC tested up to:	10.4.3
+License:			GPLv3
 */
 
 namespace mycryptocheckout
 {
+	if ( ! defined( 'ABSPATH' ) ) {
+        exit;
+    }
+
 	require_once( __DIR__ . '/vendor/autoload.php' );
 
 	#[\AllowDynamicProperties]
@@ -29,14 +34,14 @@ namespace mycryptocheckout
 
 		use admin_trait;
 		use api_trait;
-		use autosettlement_trait;
 		use currencies_trait;
 		use donations_trait;
-		use wallets_trait;
 		use menu_trait;
 		use misc_methods_trait;
-		use qr_code_trait;
 		use payment_timer_trait;
+		use qr_code_trait;
+		use security_trait;
+		use wallets_trait;
 
 		/**
 			@brief		Constructor.
@@ -44,12 +49,14 @@ namespace mycryptocheckout
 		**/
 		public function _construct()
 		{
+			add_action( 'plugins_loaded', [ $this, 'init_security_trait' ], -999 );
 			$this->init_admin_trait();
 			$this->init_api_trait();
 			$this->init_currencies_trait();
 			$this->init_donations_trait();
 			$this->init_menu_trait();
 			$this->init_misc_methods_trait();
+			$this->init_security_trait();
 			$this->easy_digital_downloads = new ecommerce\easy_digital_downloads\Easy_Digital_Downloads();
 			$this->woocommerce = new ecommerce\woocommerce\WooCommerce();
 
@@ -72,7 +79,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.144 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.161 );
 	/**
 		@brief		Return the instance of MCC.
 		@since		2014-10-18 14:48:37

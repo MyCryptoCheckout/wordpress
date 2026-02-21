@@ -70,8 +70,8 @@ trait debug
 		{
 			$basename = basename( $filename );
 			$filename = sprintf( '<a href="%s">%s</a>',
-				$this->paths( 'url' ) . '/' . $basename,
-				$basename
+    			esc_url( $this->paths( 'url' ) . '/' . $basename ),
+    			esc_html( $basename )
 			);
 			$description = $this->_( 'The debug data will be saved to the file %s. This link is distributable.', $filename );
 		}
@@ -89,7 +89,7 @@ trait debug
 			->checked( false );
 
 		$fs->textarea( 'debug_ips' )
-			->description( 'Only show debugging info to specific IP addresses. Use spaces between IPs. You can also specify part of an IP address. Your address is %s', $_SERVER[ 'REMOTE_ADDR' ] )
+			->description( 'Only show debugging info to specific IP addresses. Use spaces between IPs. You can also specify part of an IP address. Your address is %s', htmlspecialchars( $_SERVER[ 'REMOTE_ADDR' ] ) )
 			->label( 'Debug IPs' )
 			->rows( 5, 16 )
 			->trim()
@@ -114,6 +114,8 @@ trait debug
 			$export |= is_object( $arg );
 			if ( $export )
 				$args[ $index ] = sprintf( '<pre><code>%s</code></pre>', htmlspecialchars( var_export( $arg, true ) ) );
+			if ( is_string( $arg ) )
+				$args[ $index ] = htmlspecialchars( $arg );
 		}
 
 		// Put all of the arguments into one string.

@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\ecommerce;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Base ecommerce class.
 	@since		2018-01-06 16:14:25
@@ -32,11 +36,10 @@ class Ecommerce
 
 		// Find the payment with this ID.
 		global $wpdb;
-		$query = sprintf( "SELECT `post_id` FROM `%s` WHERE `meta_key` = '_mcc_payment_id' AND `meta_value` = '%d'",
-			$wpdb->postmeta,
-			$payment->payment_id
+		$query = $wpdb->prepare( "SELECT `post_id` FROM %i WHERE `meta_key` = '_mcc_payment_id' AND `meta_value` = %d",
+			[ $wpdb->postmeta, $payment->payment_id ],
 		);
-		$results = $wpdb->get_col( $query );
+		$results = $wpdb->get_col( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery -- Query is prepared above; direct query is necessary.
 		foreach( $results as $order_id )
 			$function( $action, $order_id );
 

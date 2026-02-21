@@ -26,8 +26,6 @@ abstract class API
 	**/
 	public static $api_url = 'https://api.mycryptocheckout.com/v2/';
 
-
-
 	/**
 		@brief		Return the account component.
 		@since		2017-12-11 14:03:50
@@ -109,6 +107,64 @@ abstract class API
 		@since		2018-10-13 11:46:01
 	**/
 	public abstract function get_client_url();
+
+	function is_cloudflare_ip( string $ip ): bool
+	{
+		// Cloudflare Ranges (Recommend fetching these via transient cache instead)
+		$ipv4_ranges = [
+			'173.245.48.0/20', '103.21.244.0/22', '103.22.200.0/22', '103.31.4.0/22',
+			'141.101.64.0/18', '108.162.192.0/18', '190.93.240.0/20', '188.114.96.0/20',
+			'197.234.240.0/22', '198.41.128.0/17', '162.158.0.0/15', '104.16.0.0/13',
+			'104.24.0.0/14', '172.64.0.0/13', '131.0.72.0/22'
+		];
+
+		$ipv6_ranges = [
+			'2400:cb00::/32', '2606:4700::/32', '2803:f800::/32', '2405:b500::/32',
+			'2405:8100::/32', '2a06:98c0::/29', '2c0f:f248::/32'
+		];
+
+		// Check IPv4
+		if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ) {
+			$ip_long = ip2long( $ip );
+			foreach ( $ipv4_ranges as $range ) {
+				list( $subnet, $bits ) = explode( '/', $range );
+				$subnet_long = ip2long( $subnet );
+				$mask = -1 << ( 32 - $bits );
+				$subnet_long &= $mask;
+				if ( ( $ip_long & $mask ) == $subnet_long ) {
+					return true;
+				}
+			}
+		}
+		// Check IPv6 (No GMP required)
+		elseif ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 ) ) {
+			$ip_binary = inet_pton( $ip );
+			foreach ( $ipv6_ranges as $range ) {
+				list( $subnet, $bits ) = explode( '/', $range );
+				$subnet_binary = inet_pton( $subnet );
+
+				// Create the mask
+				// IPv6 is 16 bytes (128 bits)
+				$mask = str_repeat( "\x00", 16 );
+				for( $i = 0; $i < 16; $i++ ) {
+					if( $bits >= 8 ) {
+						$mask[$i] = "\xff";
+						$bits -= 8;
+					} else {
+						$mask[$i] = chr( 0xff << ( 8 - $bits ) );
+						$bits = 0;
+					}
+				}
+
+				// Binary string comparison
+				if ( ( $ip_binary & $mask ) === ( $subnet_binary & $mask ) ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
 
 	/**
 		@brief		Echo a json object.
@@ -219,6 +275,30 @@ abstract class API
 	**/
 	public function process_messages( $json )
 	{
+		// Only accept messages from the MCC API server.
+		$allowed_ips = [ '136.144.254.215', '2a01:7c8:d008:e:5054:ff:fe62:ede3' ];
+		$remote_ip = $_SERVER['REMOTE_ADDR'];
+
+		// Some hosts add a Cloudflare header with the visitor's real IP, which is what we need to check.
+		if ( isset( $_SERVER[ 'HTTP_CF_CONNECTING_IP' ] ) )
+		{
+			// We are only interested in the HTTP_CF_CONNECTING_IP if it is NOT the same as the remote IP.
+			if ( $_SERVER[ 'HTTP_CF_CONNECTING_IP' ] !== $remote_ip )
+			{
+				if ( $this->is_cloudflare_ip( $remote_ip ) )
+					$remote_ip = $_SERVER[ 'HTTP_CF_CONNECTING_IP' ];
+				else
+				{
+					throw new Exception( sprintf( 'Spoofed IP address %s generated from %s', $_SERVER[ 'HTTP_CF_CONNECTING_IP' ] , $remote_ip ) );
+				}
+			}
+		}
+
+		if ( ! in_array( $remote_ip, $allowed_ips ) )
+		{
+			throw new Exception( 'Invalid origin IP: ' . $remote_ip );
+		}
+
 		// This must be an array.
 		if ( ! is_array( $json->messages ) )
 			return $this->debug( 'JSON does not contain a messages array.' );

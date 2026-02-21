@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Handles the setup of menus.
 	@since		2017-12-09 07:05:04
@@ -59,12 +63,19 @@ trait menu_trait
 
 			if ( $tabs->get_is( 'edit_wallet' ) )
 			{
-				$wallet_id = $_GET[ 'wallet_id' ];
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- View logic (tab navigation), no state change.
+				$wallet_id = isset( $_GET['wallet_id'] ) ? sanitize_title( wp_unslash( $_GET['wallet_id'] ) ) : '';
 				$wallets = $this->wallets();
 				$wallet = $wallets->get( $wallet_id );
+				if ( $wallet == false )
+				{
+					// Wallet no longer exists. Go back to status page.
+					wp_redirect( remove_query_arg( [ 'wallet_id', 'tab' ] ) );
+					exit;
+				}
 				$tabs->tab( 'edit_wallet' )
 					->callback_this( 'admin_edit_wallet' )
-					// Editing BTC wallet
+					// Translators: Editing BTC wallet
 					->heading( sprintf(  __( 'Editing %s wallet', 'mycryptocheckout' ), $wallet->get_currency_id() ) )
 					// Name of tab
 					->name( __( 'Edit wallet', 'mycryptocheckout' ) )
@@ -78,27 +89,6 @@ trait menu_trait
 			->heading( __( 'MyCryptoCheckout Account', 'mycryptocheckout' ) )
 			// Name of tab
 			->name( __( 'Account', 'mycryptocheckout' ) );
-
-		$tabs->tab( 'autosettlements' )
-			->callback_this( 'autosettlement_admin' )
-			// Tab heading
-			->heading( __( 'MyCryptoCheckout Autosettlement Settings', 'mycryptocheckout' ) )
-			// Name of tab
-			->name( __( 'Autosettlements', 'mycryptocheckout' ) );
-
-		if ( $tabs->get_is( 'autosettlement_edit' ) )
-		{
-			$autosettlement_id = $_GET[ 'autosettlement_id' ];
-			$autosettlements = $this->autosettlements();
-			$autosettlement = $autosettlements->get( $autosettlement_id );
-			$tabs->tab( 'autosettlement_edit' )
-				->callback_this( 'autosettlement_edit' )
-				// Editing autosettlement TYPE
-				->heading( sprintf( __( 'Editing autosettlement %s', 'mycryptocheckout' ), $autosettlement->get_type() ) )
-				// Name of tab
-				->name( __( 'Edit autosettlement', 'mycryptocheckout' ) )
-				->parameters( $autosettlement_id );
-		}
 
 		$tabs->tab( 'donations' )
 			->callback_this( 'admin_donations' )
@@ -137,7 +127,7 @@ trait menu_trait
 			->name( __( 'Uninstall', 'mycryptocheckout' ) )
 			->sort_order( 90 );		// Always last.
 
-		echo $tabs->render();
+		echo $tabs->render();	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- already escaped html
 	}
 
 	/**

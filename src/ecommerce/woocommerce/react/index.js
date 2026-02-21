@@ -59,10 +59,19 @@ const Content = (props) => {
                     console.log("Initial currency set to:", firstCurrency);  // Debugging initial set
                 }
 
-                selectElement.addEventListener('change', (event) => {
-                    console.log("Currency changed to:", event.target.value);  // Debugging currency change
+                // 1. Define the function properly so we can remove it later
+                const handleCurrencyChange = (event) => {
+                    console.log("Currency changed to:", event.target.value);
                     setSelectedCurrency(event.target.value);
-                });
+                };
+
+                // 2. Add Listener
+                selectElement.addEventListener('change', handleCurrencyChange);
+
+                // 3. Return the cleanup function
+                return () => {
+                    selectElement.removeEventListener('change', handleCurrencyChange);
+                };
             }
         }
     }, []); // Empty dependency array ensures this runs only once on mount

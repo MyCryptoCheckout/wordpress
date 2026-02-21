@@ -88,11 +88,20 @@ implements
 		@details	Think of this method as recursive collections. If the key is not set, a new collection is created and returned.
 		@since		2015-02-09 13:17:44
 	**/
-	public function collection( $key )
+	public function collection( $key, $subcollection_key = null )
 	{
 		if ( ! $this->has( $key ) )
 			$this->set( $key, new static() );
-		return $this->get( $key );
+		$subcollection = $this->get( $key );
+
+		if ( $subcollection_key !== null )
+		{
+			if ( ! $subcollection->has( $subcollection_key ) )
+				$subcollection->set( $subcollection_key, new static() );
+			return $subcollection->get( $subcollection_key );
+		}
+		else
+			return $subcollection;
 	}
 
 	/**

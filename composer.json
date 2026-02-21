@@ -14,6 +14,6 @@
 	"require": {
 		"btccom/cashaddress": "^0.0.3",
 		"bitwasp/bitcoin": "v0.0.35.1",
-		"mycryptocheckout/api": "2.17"
+		"mycryptocheckout/api": "^2.20"
 	}
 }

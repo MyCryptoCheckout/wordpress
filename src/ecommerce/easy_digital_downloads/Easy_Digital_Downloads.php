@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\ecommerce\easy_digital_downloads;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Exception;
 
 /**
@@ -53,8 +57,8 @@ class Easy_Digital_Downloads
 
 		$session = edd_get_purchase_session();
 
-		if ( isset( $_GET['payment_key'] ) ){
-			$payment_key = urldecode( $_GET['payment_key'] );
+        if ( isset( $_GET['payment_key'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Context is shortcode display based on URL param, not form processing.
+            $payment_key = urldecode( sanitize_text_field( wp_unslash( $_GET['payment_key'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Verified by context.
 		} else if ( $session ) {
 			$payment_key = $session['purchase_key'];
 		} elseif ( $edd_receipt_args['payment_key'] ) {
@@ -100,7 +104,7 @@ class Easy_Digital_Downloads
 	**/
 	public function echo_option_or_default( $key )
 	{
-		_e( $this->get_option_or_default( $key ) );
+		echo wp_kses_post( $this->get_option_or_default( $key ) );
 	}
 
 	/**
@@ -215,7 +219,6 @@ class Easy_Digital_Downloads
 		edd_update_payment_meta( $payment_id, '_mcc_payment_id', $mcc_payment_id );
 
 		$wallet->apply_to_payment( $payment );
-		MyCryptoCheckout()->autosettlements()->apply_to_payment( $payment );
 
 		$mcc->api()->payments()->save( $payment_id, $payment );
 
@@ -249,12 +252,13 @@ class Easy_Digital_Downloads
 			<p>
 				<label class="edd-label" for="mcc_currency_id"><?php $this->echo_option_or_default( 'currency_selection_text' ); ?></label>
 				<select id="mcc_currency_id" name="mcc_currency_id" class="mcc_currency_id edd-input required">
-					<?php echo $wallet_options; ?>
+					<?php echo $wallet_options; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
+					?>
 				</select>
 			</p>
 		</fieldset>
 		<?php
-		echo ob_get_clean();
+		echo ob_get_clean();	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -298,11 +302,10 @@ class Easy_Digital_Downloads
 	{
 		$wallets_text = MyCryptoCheckout()->wallets()->build_enabled_string();
 		$wallets_text .= "<br/>";
-		$wallets_text .= sprintf(
-			__( "%sConfigure your wallets here.%s", 'mycryptocheckout' ),
-			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
-			'</a>'
-		);
+		$wallets_text .=
+			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">'
+			. __( "Configure your wallets here.", 'mycryptocheckout' )
+			. '</a>';
 
 		$settings = array (
 			'mycryptocheckout_settings' =>
@@ -329,7 +332,7 @@ class Easy_Digital_Downloads
 			),
 			'mcc_test_mode' => [
 				'id'	=> 'mcc_test_mode',
-				'name'	=> __( 'Test mode', 'woocommerce' ),
+				'name'	=> __( 'Test mode', 'mycryptocheckout' ),
 				'type'	=> 'checkbox',
 				'desc'	=> __( 'Allow purchases to be made without sending any payment information to the MyCryptoCheckout API server. No payments will be processed in this mode.', 'mycryptocheckout' ),
 			],
@@ -437,6 +440,7 @@ class Easy_Digital_Downloads
 		catch ( Exception $e )
 		{
 			$settings[ 'mcc_info_no_wallets' ][ 'desc' ] = sprintf(
+				// Translators: The parameter is the exception's message.
 				__( 'Warning! Payments using MyCryptoCheckout are not possible: %s', 'mycryptocheckout' ),
 				$e->getMessage()
 			);
@@ -504,28 +508,28 @@ class Easy_Digital_Downloads
 
 		?>
 		<div id="mcc_payment_details" class="postbox">
-			<h3 class="hndle"><span><?php _e( 'MyCryptoCheckout details', 'mycryptocheckout' ); ?></span></h3>
+			<h3 class="hndle"><span><?php echo esc_html( 'MyCryptoCheckout details', 'mycryptocheckout' ); ?></span></h3>
 			<div class="inside">
 				<div id="mcc_payment_details_inner">
 					<div class="data column-container">
 						<div class="column">
 							<p>
-								<strong class="mcc_amount"><?php _e( 'Amount', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( get_post_meta( $post_id, '_mcc_amount', true ) ); ?> <?php _e( get_post_meta( $post_id, '_mcc_currency_id', true ) ); ?></span>
+								<strong class="mcc_amount"><?php echo esc_html( 'Amount', 'mycryptocheckout' ); ?></strong><br/>
+								<span><?php echo esc_html( get_post_meta( $post_id, '_mcc_amount', true ) ); ?> <?php echo esc_html( get_post_meta( $post_id, '_mcc_currency_id', true ) ); ?></span>
 							</p>
 						</div>
 						<div class="column">
 							<p>
-								<strong class="mcc_to"><?php _e( 'To', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( get_post_meta( $post_id, '_mcc_to', true ) ); ?></span>
+								<strong class="mcc_to"><?php echo esc_html( 'To', 'mycryptocheckout' ); ?></strong><br/>
+								<span><?php echo esc_html( get_post_meta( $post_id, '_mcc_to', true ) ); ?></span>
 							</p>
 						</div>
 					</div><!-- column-container -->
 					<div class="data column-container">
 						<div class="column">
 							<p>
-								<strong class="mcc_status"><?php _e( 'Status', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( $status ); ?></span>
+								<strong class="mcc_status"><?php echo esc_html( 'Status', 'mycryptocheckout' ); ?></strong><br/>
+								<span><?php echo esc_html( $status ); ?></span>
 							</p>
 						</div>
 					<?php
@@ -533,14 +537,16 @@ class Easy_Digital_Downloads
 					?>
 						<div class="column">
 							<p>
-								<strong class="mcc_payment_id"><?php _e( 'API payment ID', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( $api_payment_id ); ?></span>
+								<strong class="mcc_payment_id"><?php echo esc_html( 'API payment ID', 'mycryptocheckout' ); ?></strong><br/>
+								<span><?php echo esc_html( $api_payment_id ); ?></span>
 							</p>
 						</div>
 						<div class="column">
 							<p>
-								<strong class="mcc_transaction_id"><?php _e( 'Transaction ID', 'mycryptocheckout' ); ?></strong><br/>
-								<?php _e( $transaction_id_span ); ?>
+								<strong class="mcc_transaction_id"><?php echo esc_html( 'Transaction ID', 'mycryptocheckout' ); ?></strong><br/>
+								<?php
+								echo wp_kses_post( $transaction_id_span );
+								?>
 							</p>
 						</div>
 					<?php
@@ -548,8 +554,12 @@ class Easy_Digital_Downloads
 					?>
 						<div class="column">
 							<p>
-								<strong class="mcc_attempts"><?php _e( 'API connection attempts', 'mycryptocheckout' ); ?></strong><br/>
-								<span><?php _e( intval( get_post_meta( $post_id, '_mcc_attempts', true ) ) ); ?></span>
+								<strong class="mcc_attempts"><?php echo esc_html( 'API connection attempts', 'mycryptocheckout' ); ?></strong><br/>
+								<span>
+								<?php
+								echo intval( get_post_meta( $post_id, '_mcc_attempts', true ) );
+								?>
+								</span>
 							</p>
 						</div>
 					<?php

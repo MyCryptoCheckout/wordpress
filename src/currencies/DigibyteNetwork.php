@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\currencies;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 Public key for tests:
 xpub69HeFrui51qASN5oK1rnzMBacAM7go69u7d1oZq4MRYZmwzHFKT283yQCoYGZAgqqQEPfnLbyCjJaDhFp5CG6b93rQV7dDu26yTrj25Uei4

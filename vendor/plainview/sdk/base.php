@@ -26,7 +26,7 @@ class base
 		@since		20130630
 		@var		$sdk_version
 	**/
-	protected $sdk_version = 20250326;
+	protected $sdk_version = 20251214;
 
 	/**
 		@brief		Constructor.

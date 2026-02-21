@@ -1,3 +1,28 @@
+2.23		20250103
+
+Fixed CF IP validity check.
+
+2.22		20260102
+
+Add Cloudflare IP validity check.
+
+2.21		20260102
+
+Do a === check for retrieve key validity.
+
+2.20		20251231
+
+Fix allowing Cloudflare IP header, if available, to be used as the remote IP.
+
+2.19		20251227
+
+Fix the ipv6 of the allowed IPs.
+
+2.18		20251226
+
+Added origin IP check. The MCC server API IPs are hardcoded.
+Added retrieve key length check, as extra security that the correct retrieve key has been given to the webshop.
+
 2.17		20250311
 
 Cleaning up tags

@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use \Exception;
 
 /**
@@ -93,6 +97,10 @@ trait donations_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_donations' ) ) {
+                wp_die( 'Security check failed. Please reload the page and try again.' );
+            }
 			$form->post();
 			$form->use_post_values();
 
@@ -120,6 +128,7 @@ trait donations_trait
 						$shortcode .= sprintf( ' %s="%s"', $key, str_replace( '"', '\"', $value ) );
 					$shortcode .= ']';
 
+					// Translators: The %s is the generated shortcode to use for donations.
 					$r .= $this->info_message_box()->_( __( 'Your shortcode is: %s', 'mycryptocheckout' ), $shortcode );
 					$reshow = true;
 				}
@@ -131,10 +140,11 @@ trait donations_trait
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_donations', 'mcc_nonce', true, false );
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- already escaped
 	}
 
 	/**

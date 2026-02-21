@@ -2,6 +2,8 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 use Exception;
 
 /**
@@ -20,8 +22,10 @@ trait admin_trait
 
 		// Rename the wallets key.
 		if ( $this->is_network )
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Database update required during activation.
 			$wpdb->update( $wpdb->sitemeta, [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_wallets' ], [ 'meta_key' => 'mycryptocheckout\MyCryptoCheckout_' ] );
 		else
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Database update required during activation.
 			$wpdb->update( $wpdb->options, [ 'option_name' => 'MyCryptoCheckout_wallets' ], [ 'option_name' => 'MyCryptoCheckout_' ] );
 
 		wp_schedule_event( time(), 'hourly', 'mycryptocheckout_hourly' );
@@ -45,6 +49,27 @@ trait admin_trait
 		if ( ! function_exists('curl_version') )
 			$r .= $this->error_message_box()->_( __( 'Your PHP CURL module is missing. MyCryptoCheckout may not work 100%% well.', 'mycryptocheckout' ) );
 
+		$safe_message_dismissed_nonce = md5( wp_salt() . 'safe_message_dismissed' );
+		if ( isset( $_GET[ 'safe_message_dismissed' ] ) )
+			if ( $_GET[ 'safe_message_dismissed' ] == $safe_message_dismissed_nonce )
+			{
+				$this->update_option( 'safe_message_dismissed', time() );
+			}
+
+		if ( ! $this->get_option( 'safe_message_dismissed' ) )
+		{
+			$url = add_query_arg( 'safe_message_dismissed', $safe_message_dismissed_nonce );
+			$message_box_text = sprintf(
+				/* translators: 1: Internal Security Settings URL, 2: WP 2FA plugin URL, 3: Sucuri plugin URL */
+				__( '<strong>Keep Your Store Safe:</strong> Protect your site using our built-in <strong>Hardening Tools</strong> (Admin Lockdown, Disable File Editors, etc.) found in <a href="%1$s">Global Settings &gt; Security</a>. We also strongly recommend you <a href="%2$s" target="_blank" rel="noopener">enable login 2FA</a> and <a href="%3$s" target="_blank" rel="noopener">Sucuri Monitor</a>.', 'mycryptocheckout' ),
+				esc_url( admin_url( 'options-general.php?page=mycryptocheckout&tab=global_settings' ) ),
+				'https://wordpress.org/plugins/wp-2fa/',
+				'https://wordpress.org/plugins/sucuri-scanner/'
+			);
+			$message_box_text .= '<br/><a href="' . $url . '">Dismiss this message.</a>';
+			$r .= $this->info_message_box()->_( $message_box_text );
+		}
+
 		$retrieve_account = $form->secondary_button( 'retrieve_account' )
 			->value( __( 'Refresh your account data', 'mycryptocheckout' ) );
 
@@ -54,6 +79,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_account' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -94,10 +124,11 @@ trait admin_trait
 			$r .= $this->admin_account_valid( $account );
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_account', 'mcc_nonce', true, false ); // Add nonce field
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -245,19 +276,19 @@ trait admin_trait
 					$amounts = (array)$amounts;
 					ksort( $amounts );
 					$amounts = implode( ', ', array_keys( $amounts ) );
-					$text .= sprintf( '<p>%s: %s</p>', $currency_id, $amounts );
+					$text .= sprintf( '<p>%s: %s</p>', wp_kses_post( $currency_id ), wp_kses_post( $amounts ) );
 				}
 				$row->td( 'details' )->text( $text );
 
 				$row = $table->head()->row();
 				$row->th( 'key' )->text( __( 'Next scheduled hourly cron', 'mycryptocheckout' ) );
 				$next = wp_next_scheduled( 'mycryptocheckout_hourly' );
-				$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $next ) );
+				$row->td( 'details' )->text( gmdate( 'Y-m-d H:i:s', $next ) );
 
 				$row = $table->head()->row();
 				$row->th( 'key' )->text( __( 'Next scheduled account data update', 'mycryptocheckout' ) );
 				$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
-				$row->td( 'details' )->text( date( 'Y-m-d H:i:s', $next ) );
+				$row->td( 'details' )->text( gmdate( 'Y-m-d H:i:s', $next ) );
 			}
 		}
 
@@ -283,7 +314,7 @@ trait admin_trait
 		if ( ! $account->is_valid() )
 		{
 			$r .= $this->error_message_box()->_( __( 'You cannot modify your currencies until you have a valid account. Please see the Accounts tab.', 'mycryptocheckout' ) );
-			echo $r;
+			echo wp_kses_post( $r );
 			return;
 		}
 
@@ -399,6 +430,12 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_currencies' ) )
+			{
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -489,10 +526,10 @@ trait admin_trait
 
 			if ( $reshow )
 			{
-				echo $r;
+				echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 				$_POST = [];
 				$function = __FUNCTION__;
-				echo $this->$function();
+				echo $this->$function();			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 				return;
 			}
 		}
@@ -501,11 +538,9 @@ trait admin_trait
 
 		$r .= wpautop( __( 'If you have several wallets of the same currency, they will be used in sequential order.', 'mycryptocheckout' ) );
 
-		$wallets_text = sprintf(
-			// perhaps <a>we can ...you</a>
-			__( "If you don't have a wallet address to use, perhaps %swe can recommend some wallets for you%s?", 'mycryptocheckout' ),
+		$wallets_text = sprintf( __( "If you don't have a wallet address to use, perhaps %1\$swe can recommend some wallets for you%2\$s?", 'mycryptocheckout' ),
 			'<a href="https://mycryptocheckout.com/doc/recommended-wallets-exchanges/" target="_blank">',
-			'</a>'
+			'</a>',
 		);
 
 		if ( count( $wallets ) < 1 )
@@ -517,8 +552,8 @@ trait admin_trait
 		{
 			$home_url = home_url();
 			$woo_text = sprintf(
-				// perhaps <a>WooCommerce Settings</a>
-				__( "After adding currencies, visit the %sWooCommerce Settings%s to enable the gateway and more.", 'mycryptocheckout' ),
+				// Translators: First and second %s are anchors.
+				__( "After adding currencies, visit the %1\$sWooCommerce Settings%2\$s to enable the gateway and more.", 'mycryptocheckout' ),
 				'<a href="' . esc_url( $home_url ) . '/wp-admin/admin.php?page=wc-settings&tab=checkout&section=mycryptocheckout">',
 				'</a>'
 			);
@@ -530,8 +565,8 @@ trait admin_trait
 		{
 			$home_url = home_url();
 			$edd_text = sprintf(
-				// perhaps <a>Easy Digital Downloads Settings</a>
-				__( "After adding currencies, visit the %sEasy Digital Downloads Settings%s to enable the gateway and more.", 'mycryptocheckout' ),
+				// Translators: First and second %s are anchors.
+				__( "After adding currencies, visit the %1\$sEasy Digital Downloads Settings%2\$s to enable the gateway and more.", 'mycryptocheckout' ),
 				'<a href="' . esc_url( $home_url ) . '/wp-admin/edit.php?post_type=download&page=edd-settings&tab=gateways">',
 				'</a>'
 			);
@@ -540,16 +575,21 @@ trait admin_trait
 
 		$r .= $this->h2( __( 'Current currencies / wallets', 'mycryptocheckout' ) );
 
+		// Render form 1
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_currencies', 'mcc_nonce', true, false );
 		$r .= $table;
 		$r .= $form->close_tag();
+
+		// Render form 2
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_currencies', 'mcc_nonce', true, false );
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
 		$this->enqueue_css();
 
-		echo $r;
+		echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -647,6 +687,7 @@ trait admin_trait
 					$pubs = implode( '/', $currency->supports->btc_hd_public_key_pubs );
 
 				$btc_hd_public_key = $fs->text( 'btc_hd_public_key' )
+					// Translators: enter your XPUB/YPUB/ZPUB public key
 					->description( sprintf( __( 'If you have an HD wallet and want to generate a new address after each purchase, enter your %s public key here.', 'mycryptocheckout' ), $pubs ) )
 					// Input label
 					->label( __( 'HD public key', 'mycryptocheckout' ) )
@@ -671,7 +712,8 @@ trait admin_trait
 					$new_address = $e->getMessage();
 				}
 				$fs->markup( 'm_btc_hd_public_key_generate_address_path' )
-					->p( __( 'The address at index %d is %s.', 'mycryptocheckout' ), $path, $new_address );
+					// Translators: The address at index 12345 is BTCADDRESS
+					->p( __( 'The address at index %1$d is %2$s.', 'mycryptocheckout' ), $path, $new_address );
 
 				$circa_amount = $fs->number( 'circa_amount' )
 					->description( __( "When using an HD wallet, you can accept amounts that are lower than requested.", 'mycryptocheckout' ) )
@@ -702,6 +744,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_wallet' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -768,19 +815,20 @@ trait admin_trait
 
 			if ( $reshow )
 			{
-				echo $r;
+				echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 				$_POST = [];
 				$function = __FUNCTION__;
-				echo $this->$function( $wallet_id );
+				echo $this->$function( $wallet_id );		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 				return;
 			}
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_wallet', 'mcc_nonce', true, false ); // Add nonce
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -792,7 +840,7 @@ trait admin_trait
 		$form = $this->form();
 		$form->id( 'local_settings' );
 		$form->css_class( 'plainview_form_auto_tabs' );
-		$form->local_settings = true;
+		$form->set_attribute( 'local_settings', 1 );
 		$r = '';
 
 		$fs = $form->fieldset( 'fs_qr_code' );
@@ -812,6 +860,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_local_settings' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -820,18 +873,19 @@ trait admin_trait
 
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
 
-			echo $r;
+			echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			$_POST = [];
 			$function = __FUNCTION__;
-			echo $this->$function();
+			echo $this->$function();		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			return;
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_local_settings', 'mcc_nonce', true, false ); // Add nonce
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -879,9 +933,9 @@ trait admin_trait
 		$fs->legend->label( __( 'QR code', 'mycryptocheckout' ) );
 
 		if ( $this->is_network )
-			$form->global_settings = true;
+			$form->set_attribute( 'global_settings', 1 );
 		else
-			$form->local_settings = true;
+			$form->set_attribute( 'local_settings', 1 );
 
 		$this->add_qr_code_inputs( $fs );
 
@@ -889,12 +943,12 @@ trait admin_trait
 		// Label for fieldset
 		$fs->legend->label( __( 'Payment timer', 'mycryptocheckout' ) );
 
-		if ( $this->is_network )
-			$form->global_settings = true;
-		else
-			$form->local_settings = true;
-
 		$this->add_payment_timer_inputs( $fs );
+
+        $fs = $form->fieldset( 'fs_security' );
+        $fs->legend->label( __( 'Security', 'mycryptocheckout' ) );
+
+		$this->add_security_inputs_to_form( $fs );
 
 		$this->add_debug_settings_to_form( $form );
 
@@ -903,6 +957,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_global_settings' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -911,22 +970,24 @@ trait admin_trait
 
 			$this->save_payment_timer_inputs( $form );
 			$this->save_qr_code_inputs( $form );
+			$this->save_security_inputs( $form );
 
 			$this->save_debug_settings_from_form( $form );
 			$r .= $this->info_message_box()->_( __( 'Settings saved!', 'mycryptocheckout' ) );
 
-			echo $r;
+			echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			$_POST = [];
 			$function = __FUNCTION__;
-			echo $this->$function();
+			echo $this->$function();		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			return;
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_save_global_settings', 'mcc_nonce', true, false ); // Add nonce
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -960,6 +1021,11 @@ trait admin_trait
 
 		if ( $form->is_posting() )
 		{
+			// Verify Nonce.
+			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_tools_action' ) ) {
+				wp_die( 'Security check failed. Please reload the page and try again.' );
+			}
+
 			$form->post();
 			$form->use_post_values();
 
@@ -973,8 +1039,10 @@ trait admin_trait
 			{
 				$result = $this->api()->test_communication();
 				if ( $result->result == 'ok' )
+					// Translators: %s is the success message. Usually just the domain name.
 					$r .= $this->info_message_box()->_( __( 'Success! %s', 'mycryptocheckout' ), $result->message );
 				else
+					// Translators: %s is the error message.
 					$r .= $this->error_message_box()->_( __( 'Communications failure: %s', 'mycryptocheckout' ),
 						$result->message
 					);
@@ -986,18 +1054,19 @@ trait admin_trait
 				$r .= $this->info_message_box()->_( __( 'Notifications reset! The next time your account is refreshed, you might see an expired license notification. ', 'mycryptocheckout' ) );
 			}
 
-			echo $r;
+			echo $r;		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			$_POST = [];
 			$function = __FUNCTION__;
-			echo $this->$function();
+			echo $this->$function();		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 			return;
 		}
 
 		$r .= $form->open_tag();
+		$r .= wp_nonce_field( 'mcc_tools_action', 'mcc_nonce', true, false ); // Add nonce
 		$r .= $form->display_form_table();
 		$r .= $form->close_tag();
 
-		echo $r;
+		echo $r;			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
 	}
 
 	/**
@@ -1036,14 +1105,14 @@ trait admin_trait
 	{
 		// Schedule an account retrieval sometime.
 		// The timestamp shoule be anywhere between soon and 50 minutes later.
-		$extra = rand( 5, 50 ) * 60;
+		$extra = wp_rand( 5, 50 ) * 60;
 		$timestamp = time() + $extra;
 		$this->debug( 'Hourly running. Scheduled mycryptocheckout_retrieve_account at %s for %s + %s', $this->local_datetime( $timestamp ), time(), $extra );
 		$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
 		wp_unschedule_event( $next, 'mycryptocheckout_retrieve_account' );
 		wp_schedule_single_event( $timestamp, 'mycryptocheckout_retrieve_account' );
 		$next = wp_next_scheduled( 'mycryptocheckout_retrieve_account' );
-		$this->debug( 'Next schedule: %s', date( 'Y-m-d H:i:s', $next ) );
+		$this->debug( 'Next schedule: %s', gmdate( 'Y-m-d H:i:s', $next ) );
 	}
 
 	/**
@@ -1071,23 +1140,40 @@ trait admin_trait
 	**/
 	public function wp_ajax_mycryptocheckout_sort_wallets()
 	{
-		if ( ! isset( $_REQUEST[ 'nonce' ] ) )
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- We are verifying the nonce immediately after retrieval.
+		if ( ! isset( $_REQUEST['nonce'] ) ) {
 			wp_die( 'No nonce.' );
-		$nonce = $_REQUEST[ 'nonce' ];
+		}
 
-		if ( ! wp_verify_nonce( $nonce, 'mycryptocheckout_sort_wallets' ) )
+		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) );
+
+		if ( ! wp_verify_nonce( $nonce, 'mycryptocheckout_sort_wallets' ) ) {
 			wp_die( 'Invalid nonce.' );
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Unauthorized user.' );
+		}
+
+		// Validate that wallets exist in POST and is an array.
+		if ( ! isset( $_POST['wallets'] ) || ! is_array( $_POST['wallets'] ) ) {
+			wp_die( 'No wallet data provided.' );
+		}
 
 		// Load the wallets.
 		$wallets = $this->wallets();
 
+		// Unslash and sanitize the array of wallet IDs.
+		$posted_wallets = array_map( 'sanitize_text_field', wp_unslash( $_POST['wallets'] ) );
+
 		foreach( $wallets as $wallet_id => $wallet )
 		{
-			foreach( $_POST[ 'wallets' ] as $wallet_order => $post_wallet_id )
+			foreach( $posted_wallets as $wallet_order => $post_wallet_id )
 			{
 				if ( $wallet_id != $post_wallet_id )
 					continue;
-				$wallet->set_order( $wallet_order );
+				// Cast order to int to be safe.
+				$wallet->set_order( (int) $wallet_order );
 			}
 		}
 

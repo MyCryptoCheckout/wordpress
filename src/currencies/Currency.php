@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\currencies;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use Exception;
 
 /**
@@ -298,10 +302,14 @@ class Currency
 		if ( ! is_array( $length ) )
 			$length = [ $length ];
 		if ( ! in_array( strlen( $address ), $length ) )
-			throw new Exception( sprintf(
+		{
+			$message = sprintf(
+				// Translators: %s is a number.
 				__( 'The address must be exactly %s characters long.', 'mycryptocheckout' ),
 				implode( ' or ', $length )
-			) );
+			);
+			throw new Exception( esc_html( $message ) );
+		}
 	}
 
 	/**

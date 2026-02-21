@@ -1,34 +1,38 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
-	@brief		The gateway itself.
-	@since		2017-12-08 16:36:26
+    @brief      The gateway itself.
+    @since      2017-12-08 16:36:26
 **/
 class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 {
 	/**
-		@brief		A temporary variable used during checkout so that the parts of the gateway can communicate with each other.
-		@since		2024-04-01 19:07:34
+		@brief      A temporary variable used during checkout so that the parts of the gateway can communicate with each other.
+		@since      2024-04-01 19:07:34
 	**/
 	public $__current_payment;
 
 	/**
-		@brief		The instance of this gateway.
-		@since		2024-04-01 19:12:15
+		@brief      The instance of this gateway.
+		@since      2024-04-01 19:12:15
 	**/
 	public static $instance;
 
 
 	/**
-		@brief		Constructor.
-		@since		2017-12-15 08:06:14
+		@brief      Constructor.
+		@since      2017-12-15 08:06:14
 	**/
 	public function __construct()
 	{
-		$this->id					= \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
-		$this->method_title			= $this->get_method_title();
-		$this->method_description	= $this->get_method_description();
-		$this->has_fields			= true;
+		$this->id                   = \mycryptocheckout\ecommerce\woocommerce\WooCommerce::$gateway_id;
+		$this->method_title         = $this->get_method_title();
+		$this->method_description   = $this->get_method_description();
+		$this->has_fields           = true;
 
 		static::$instance == $this;
 
@@ -50,8 +54,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Return the form fields used for the settings.
-		@since		2017-12-30 21:14:39
+		@brief      Return the form fields used for the settings.
+		@since      2017-12-30 21:14:39
 	**/
 	public function get_form_fields()
 	{
@@ -59,7 +63,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$strings = MyCryptoCheckout()->gateway_strings();
 
 		$r[ 'enabled' ] = [
-			'title'       => __( 'Enable/Disable', 'woocommerce' ),
+			'title'       => __( 'Enable/Disable', 'mycryptocheckout' ),
 			'label'       => __( 'Enable MyCryptoCheckout', 'mycryptocheckout' ),
 			'type'        => 'checkbox',
 			'description' => '',
@@ -99,10 +103,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'default' => $strings->get( 'online_payment_instructions' ),
 		];
 		$r[ 'hide_woocommerce_order_overview' ] = [
-			'title'			=> __( 'Hide order overview', 'mycryptocheckout' ),
-			'type'			=> 'checkbox',
+			'title'         => __( 'Hide order overview', 'mycryptocheckout' ),
+			'type'          => 'checkbox',
 			'default'     => 'yes',
-			'description'	=> __( 'The order overview is usually placed above crypto payment instructions. Use this option to hide the overview and show the payment instructions higher up.', 'mycryptocheckout' ),
+			'description'   => __( 'The order overview is usually placed above crypto payment instructions. Use this option to hide the overview and show the payment instructions higher up.', 'mycryptocheckout' ),
 		];
 		$r[ 'title' ] = [
 			'title' => __( 'Payment type name', 'mycryptocheckout' ),
@@ -118,7 +122,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		];
 		$r[ 'colorize_icons' ] = [
 			'default'     => '',
-			'description'	=> __( 'Show the cryptocurrency icons on the checkout page in various colors instead of the default black.', 'mycryptocheckout' ),
+			'description'   => __( 'Show the cryptocurrency icons on the checkout page in various colors instead of the default black.', 'mycryptocheckout' ),
 			'options' => [
 				// WooCommerce checkout icon coloring
 				''  => __( 'Black', 'mycryptocheckout' ),
@@ -129,21 +133,21 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 				// WooCommerce checkout icon coloring
 				'white'  => __( 'White', 'mycryptocheckout' ),
 			],
-			'title'			=> __( 'Colorize icons', 'mycryptocheckout' ),
-			'type'			=> 'select',
+			'title'         => __( 'Colorize icons', 'mycryptocheckout' ),
+			'type'          => 'select',
 		];
 		$r[ 'payment_complete_status' ] = [
 			'title' => __( 'Payment complete status', 'mycryptocheckout' ),
 			'type' => 'select',
 			'options' => [
 				// Order status
-				'wc-completed'  => __( 'Completed', 'woocommerce' ),
+				'wc-completed'  => __( 'Completed', 'mycryptocheckout' ),
 				// Order status
-				'wc-on-hold'    => __( 'On hold', 'woocommerce' ),
+				'wc-on-hold'    => __( 'On hold', 'mycryptocheckout' ),
 				// Order status
-				'wc-pending'    => __( 'Pending payment', 'woocommerce' ),
+				'wc-pending'    => __( 'Pending payment', 'mycryptocheckout' ),
 				// Order status
-				''				=> __( 'Processing', 'woocommerce' ),
+				''              => __( 'Processing', 'mycryptocheckout' ),
 			],
 			'description' => __( 'After payment is complete, change the order to this status.', 'mycryptocheckout' ),
 			'default' => '',
@@ -174,25 +178,25 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		];
 
 		$r[ 'show_amount' ] = [
-			'title'			=> __( 'Show amount', 'mycryptocheckout' ),
-			'type'			=> 'checkbox',
+			'title'         => __( 'Show amount', 'mycryptocheckout' ),
+			'type'          => 'checkbox',
 			'default'     => 'no',
-			'description'	=> __( 'Show the amount in cryptocurrency in the currency selector during checkout.', 'mycryptocheckout' ),
+			'description'   => __( 'Show the amount in cryptocurrency in the currency selector during checkout.', 'mycryptocheckout' ),
 		];
 
 		$r[ 'reset_to_defaults' ] = [
-			'title'			=> __( 'Reset to defaults', 'mycryptocheckout' ),
-			'type'			=> 'checkbox',
+			'title'         => __( 'Reset to defaults', 'mycryptocheckout' ),
+			'type'          => 'checkbox',
 			'default'     => 'no',
-			'description'	=> __( 'If you wish to reset all of these settings to the defaults, check this box and save your changes.', 'mycryptocheckout' ),
+			'description'   => __( 'If you wish to reset all of these settings to the defaults, check this box and save your changes.', 'mycryptocheckout' ),
 		];
 
-    	return $r;
+		return $r;
 	}
 
 	/**
-		@brief		Return the description of this gateway.
-		@since		2017-12-30 21:40:51
+		@brief      Return the description of this gateway.
+		@since      2017-12-30 21:40:51
 	**/
 	public function get_method_description()
 	{
@@ -208,9 +212,10 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			$r .= "\n\n<em>" . __( 'You cannot currently accept any payments using this service:', 'mycryptocheckout' ) . '</em> ' . $e->getMessage();
 		}
 
-		$r .= "\n" . sprintf( __( '%sConfigure your wallets here.%s', 'mycryptocheckout' ),
-			'<a href="options-general.php?page=mycryptocheckout&tab=currencies">',
-			'</a>'
+		$r .= "\n"
+			. '<a href="options-general.php?page=mycryptocheckout&tab=currencies">'
+			. sprintf( __( 'Configure your wallets here.', 'mycryptocheckout' )
+			. '</a>'
 		);
 
 
@@ -229,8 +234,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Return the title of this gateway.
-		@since		2017-12-30 21:43:30
+		@brief      Return the title of this gateway.
+		@since      2017-12-30 21:43:30
 	**/
 	public function get_method_title()
 	{
@@ -238,8 +243,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Get the possible wallets as an array of select options.
-		@since		2018-03-16 03:30:21
+		@brief      Get the possible wallets as an array of select options.
+		@since      2018-03-16 03:30:21
 	**/
 	public function get_wallet_options()
 	{
@@ -259,9 +264,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		// No total? Perhaps we are on the pay-for-order page.
 		if ( $total == 0 )
 		{
-			if ( isset( $_REQUEST[ 'pay_for_order' ] ) )
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Context is display logic based on URL params, not a state-changing form submission.
+			if ( isset( $_REQUEST[ 'pay_for_order' ] ) && isset( $_REQUEST[ 'key' ] ) )
 			{
-				$order = wc_get_order_id_by_order_key( $_REQUEST[ 'key' ] );
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Verified by context.
+				$order_key = sanitize_text_field( wp_unslash( $_REQUEST[ 'key' ] ) );
+				$order = wc_get_order_id_by_order_key( $order_key );
 				if ( $order )
 				{
 					$order = new \WC_Order( $order );
@@ -279,8 +287,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Init the form fields.
-		@since		2017-12-09 22:05:11
+		@brief      Init the form fields.
+		@since      2017-12-09 22:05:11
 	**/
 	public function init_form_fields()
 	{
@@ -288,8 +296,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Return our instance.
-		@since		2018-02-09 18:42:13
+		@brief      Return our instance.
+		@since      2018-02-09 18:42:13
 	**/
 	public static function instance()
 	{
@@ -299,8 +307,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Is this available?
-		@since		2017-12-08 17:20:48
+		@brief      Is this available?
+		@since      2017-12-08 17:20:48
 	**/
 	public function is_available()
 	{
@@ -328,8 +336,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Add our stuff to the checkout data.
-		@since		2018-04-25 15:58:40
+		@brief      Add our stuff to the checkout data.
+		@since      2018-04-25 15:58:40
 	**/
 	public function mycryptocheckout_generate_checkout_javascript_data( $action )
 	{
@@ -344,8 +352,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Show the extra MCC payment fields on the checkout form.
-		@since		2017-12-14 19:16:46
+		@brief      Show the extra MCC payment fields on the checkout form.
+		@since      2017-12-14 19:16:46
 	**/
 	function payment_fields()
 	{
@@ -366,15 +374,15 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 			'type' => 'select',
 			'class' => [ 'mcc_currency' ],
 			'default' => reset( $currencies ),
-			'label' => esc_html__( $this->get_option( 'currency_selection_text' ) ),
+			'label' => esc_html( $this->get_option( 'currency_selection_text' ) ),
 			'options' => $options,
 			'required' => true,
 		] );
 	}
 
 	/**
-		@brief		Internal method.
-		@since		2018-01-26 14:00:58
+		@brief      Internal method.
+		@since      2018-01-26 14:00:58
 	**/
 	function process_payment( $order_id )
 	{
@@ -384,20 +392,38 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		// Mark as on-hold (we're awaiting the payment)
 		$order->update_status( 'pending', __( 'Awaiting cryptocurrency payment', 'mycryptocheckout' ) );
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the checkout nonce before calling process_payment.
 		if ( ! empty( $_POST['selectedcurrency'] ) )
 		{
-			$_POST[ 'mcc_currency_id' ] = $_POST['selectedcurrency'];
-			MyCryptoCheckout()->debug( 'selectedcurrency detected in post.' );
+			// Sanitize the input.
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified by WC.
+			$selected_currency = sanitize_text_field( wp_unslash( $_POST['selectedcurrency'] ) );
+
+			// Check if this currency actually has an active wallet.
+			$wallet = MyCryptoCheckout()->wallets()->get_dustiest_wallet( $selected_currency );
+
+			if ( $wallet ) {
+				// Valid currency found, proceed.
+				$_POST[ 'mcc_currency_id' ] = $selected_currency;
+				MyCryptoCheckout()->debug( 'selectedcurrency detected in post.' );
+			} else {
+				// Stop execution safely if the currency is invalid.
+				$message = __( 'Invalid cryptocurrency selected. Please choose a valid option.', 'mycryptocheckout' );
+				throw new Exception( esc_html( $message ) );
+			}
 		}
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified by WC.
 		if ( isset( $_POST[ 'mcc_currency_id' ] ) )
 		{
 			$create = true;
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified by WC.
+			$mcc_currency_id = sanitize_text_field( wp_unslash( $_POST[ 'mcc_currency_id' ] ) );
 
 			if ( $order->get_meta( '_mcc_payment_id' ) > 0 )
 			{
 				// Is this a new currency?
-				if ( $order->get_meta( '_mcc_currency_id' ) == $_POST[ 'mcc_currency_id' ] )
+				if ( $order->get_meta( '_mcc_currency_id' ) == $mcc_currency_id )
 				{
 					// Same currency? Do nothing.
 					$create = false;
@@ -436,8 +462,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Handle the resetting of the settings.
-		@since		2017-12-30 21:24:38
+		@brief      Handle the resetting of the settings.
+		@since      2017-12-30 21:24:38
 	**/
 	public function post_process_admin_options()
 	{
@@ -451,19 +477,19 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		Prevent the online payment instructions from losing its data-HTML.
-		@since		2018-03-23 10:26:07
+		@brief      Prevent the online payment instructions from losing its data-HTML.
+		@since      2018-03-23 10:26:07
 	**/
 	public function validate_textarea_field( $key, $value )
 	{
 		if ( in_array( $key, [ 'online_instructions' ] ) )
-			return trim( stripslashes( $value ) );
+			return wp_kses_post( trim( stripslashes( $value ) ) );
 		return $this->validate_text_field( $key, $value );
 	}
 
 	/**
-		@brief		woocommerce_email_before_order_table
-		@since		2017-12-10 21:53:27
+		@brief      woocommerce_email_before_order_table
+		@since      2017-12-10 21:53:27
 	**/
 	public function woocommerce_email_before_order_table( $order, $sent_to_admin, $plain_text = false )
 	{
@@ -480,12 +506,12 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$instructions = $this->get_option( 'email_instructions' );
 		$payment = mycryptocheckout\ecommerce\woocommerce\WooCommerce::payment_from_order( $order->get_id() );
 		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment, $instructions );
-		echo wpautop( wptexturize( $instructions ) ) . PHP_EOL;
+		echo wp_kses_post( wpautop( wptexturize( $instructions ) ) ) . PHP_EOL;
 	}
 
 	/**
-		@brief		Override the img tag with a div with fonts.
-		@since		2018-10-18 17:11:54
+		@brief      Override the img tag with a div with fonts.
+		@since      2018-10-18 17:11:54
 	**/
 	public function woocommerce_gateway_icon( $icon, $id )
 	{
@@ -516,7 +542,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 
 			$handled_currencies[ $currency_id ] = true;
 
-			$r .= sprintf( '<i class="mcc-%s"></i>', $currency_id );
+			$r .= sprintf( '<i class="mcc-%s"></i>', esc_attr( $currency_id ) );
 		}
 
 		$r .= '</div>';
@@ -525,8 +551,8 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		woocommerce_thankyou_mycryptocheckout
-		@since		2017-12-10 21:44:51
+		@brief      woocommerce_thankyou_mycryptocheckout
+		@since      2017-12-10 21:44:51
 	**/
 	public function woocommerce_thankyou_mycryptocheckout( $order_id )
 	{
@@ -537,24 +563,46 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 		$instructions = $this->get_option( 'online_instructions' );
 		$payment = mycryptocheckout\ecommerce\woocommerce\WooCommerce::payment_from_order( $order_id );
 		$this->__current_payment = $payment;
+
+        // Heartbeat Address Checker.
+        // Address.
+		$verified_address = isset($payment->to) ? sanitize_text_field( $payment->to ) : '';
+
+        // Only proceed if we actually have an address to protect.
+        if ( ! empty( $verified_address ) ) {
+            
+            // Generate a Safe URL (Redirect to Shop or Home).
+            $raw_redirect_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
+            $safe_redirect_url = esc_url_raw( $raw_redirect_url );
+
+            // Localize the script.
+            // We use html_entity_decode to ensure strict string matching in JS.
+            wp_localize_script( 'mycryptocheckout', 'mcc_security', [
+                'verified_address' => html_entity_decode( $verified_address ),
+                'redirect_url'     => $safe_redirect_url,
+                'check_interval'   => 2000 
+            ]);
+        }
+		// End Heartbeat Address Checker.
+
 		if ( ! $order->needs_payment() )
 			$payment->paid = $order->is_paid();
 		$instructions = MyCryptoCheckout()->api()->payments()->replace_shortcodes( $payment,  $instructions );
 		if ( ! $instructions )
 			return;
 
-		echo MyCryptoCheckout()->generate_checkout_js();
+		echo MyCryptoCheckout()->generate_checkout_js();    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- needs to output js and html.
 
 		if ( ! $order->needs_payment() )
 			return;
 
-		echo wpautop( wptexturize( $instructions ) );
+		echo wpautop( wptexturize( $instructions ) );   // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- needs to output js and html.
 	}
 
 	/**
-		@brief		Send the new order e-mail when the order is placed.
-		@see		https://stackoverflow.com/questions/45375143/send-an-email-notification-to-the-admin-for-pending-order-status-in-woocommerce
-		@since		2021-06-30 23:06:57
+		@brief      Send the new order e-mail when the order is placed.
+		@see        https://stackoverflow.com/questions/45375143/send-an-email-notification-to-the-admin-for-pending-order-status-in-woocommerce
+		@since      2021-06-30 23:06:57
 	**/
 	public function woocommerce_checkout_order_processed( $order_id )
 	{
@@ -572,27 +620,31 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	}
 
 	/**
-		@brief		WP head
-		@since		2024-06-07 15:47:49
+		@brief      WP head
+		@since      2024-06-07 15:47:49
 	**/
 	public function wp_head()
 	{
 		if ( ! is_wc_endpoint_url( 'order-received' ) )
 			return;
-		echo '<meta name="format-detection" content="telephone=no">';
+		echo '<meta name="format-detection" content="telephone=no">';   // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- actual html in the head
 
 		// Retrieve the plugin version
 		$plugin_version = MYCRYPTOCHECKOUT_PLUGIN_VERSION;
 
 		echo '<script type="text/javascript">
-        	document.addEventListener("DOMContentLoaded", function () {
-            	// Check if Phantom wallet is available and load the script if it is
-            	if (typeof window.solana !== "undefined") {
-                	var script = document.createElement("script");
-                	script.src = "' . MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/sol-web3/dist/index.js?v=' . $plugin_version . '";
-                	document.body.appendChild(script);
-            	}
-        	});
-    	</script>';
+			document.addEventListener("DOMContentLoaded", function () {
+				// Check if Phantom wallet is available and load the script if it is
+				if (typeof window.solana !== "undefined") {
+					var script = document.createElement("script");
+					script.src = "'
+						. esc_url( MyCryptoCheckout()->paths( 'url' ) )
+						. 'src/static/js/sol-web3/dist/index.js?v='
+						. esc_html( $plugin_version )
+						. '";
+					document.body.appendChild(script);
+				}
+			});
+		</script>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- actual js in the head;
 	}
 }

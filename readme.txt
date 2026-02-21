@@ -2,11 +2,11 @@
 Contributors: edward_plainview
 Donate link: https://mycryptocheckout.com
 License: GPLv3
-Requires at least: 4.9
-Requires PHP: 5.6
-Stable tag: 2.144
+Requires at least: 6.2
+Requires PHP: 8.0
+Stable tag: 2.161
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
-Tested up to: 6.8
+Tested up to: 6.9
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 100+ coins: Bitcoin, Ethereum, BNB, Solana. Peer2Peer transactions.
 
@@ -26,7 +26,6 @@ https://www.youtube.com/watch?v=nUoJ9ziaAJQ
 - Automagically detect unique payments using one wallet address
 - Hierarchically deterministic (HD) wallet support
 - 1-Click payment buttons, Electrum, MetaMask, Trust Wallet, Phantom, etc.
-- Fiat autosettlement enables you to connect to exchange(s) and instantly convert selected coins to fiat or stablecoins
 - Donations widget shortcode generator
 - 0-conf (mempool) support for some coins
 - Compare MyCryptoCheckout to several other traditional and crypto solutions - <a href="https://mycryptocheckout.com/comparison/">Payment Gateway Comparison</a>
@@ -55,7 +54,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - MAZA
 - Monero XMR
 - Polygon MATIC
-- PutinCoin PUT
 - Solana SOL (Including Phantom)
 - Stellar XLM
 - Tron TRX
@@ -142,21 +140,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - ZRX 0x Protocol
 - Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC-20 tokens</a>!
 
-= SPL tokens (Including Phantom) =
-
-- BONK
-- Brett Gold BRETTGOLD
-- dogwifhat WIF
-- HOLD EARN
-- Jupiter JUP
-- OFFICIAL TRUMP
-- PayPal USD PYUSD
-- Popcat POPCAT
-- Sallar ALL
-- Tether USDT
-- USD Coin USDC
-- Add your <a href="https://mycryptocheckout.com/sol-token/">custom SPL tokens</a>!
-
 = TRC-20 tokens supported: =
 
 - Tether USDT
@@ -167,16 +150,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - Pleasure Coin NSFW
 - Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
-
-= Fiat Autosettlements =
-
-Autosettlement is a feature that enables you to connect MyCryptoCheckout to exchange(s) and automatically sell any received cryptocurrencies into fiat or stablecoins (USD, USDC, USDT, TUSD). This is a great tool for merchants who want to accept bitcoin/altcoins but prefer to cash out immediately to avoid market volatility.
-
-Supported exchanges:
-
-- Binance
-- Bittrex
-- More coming soon!
 
 = Cryptocurrency Donations Widget =
 
@@ -194,17 +167,46 @@ We have various code snippets that allow you to customize MyCryptoCheckout toget
 
 <a href="https://mycryptocheckout.com/doc/snippets/">See all available code snippets</a>
 
-= Security =
+= Security Features =
 
-Disable the MCC currencies tab: after you have wallets setup you can prevent them from being edited in the WordPress admin. Add the following code to your wp-config file-
+MyCryptoCheckout includes security measures to protect your store and your customers.
 
+**Disable Wallet Editing**
+Once wallets are set up, prevent edits by adding this to your wp-config.php:
 <code>define( 'MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR', true );</code>
 
-= Technical disclosure =
+**Admin Hardening**
+Toggle these options in **Settings > MyCryptoCheckout > Global Settings > Security**:
 
-Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version. This info allows the API—which functions solely as a blockchain crawler—to return updated exchange rates, blockchain transaction confirmations, and license status (if any) to your site. The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently). See <a href="https://mycryptocheckout.com/how-mycryptocheckout-works/">how MyCryptoCheckout works.</a>
+* **Administrator Lockdown (Freeze Admin Creation):** Proactively blocks the creation of *new* Administrator accounts to prevent privilege escalation attacks. Enabled by default.
+* **Disable Built-in File Editor:** Disables the native WordPress Theme and Plugin editors to prevent code injection.
+* **Disable XML-RPC:** Shuts down xmlrpc.php to block common brute-force and DDoS attack vectors.
 
-If your server cannot be reached by the API server this plugin will not be able to autoconfirm blockchain transactions.
+**Wallet Change Watchdog**
+Automatically emails the site administrator with details if wallet addresses are manually modified in the dashboard.
+
+**Frontend Heartbeat Protection**
+Real-time verification ensures the displayed wallet address matches the database, immediately redirecting the user to safety if tampering is detected.
+
+== External services ==
+
+**MyCryptoCheckout API**
+* **Usage:** Upon plugin activation an account is created on the MyCryptoCheckout API server: api.mycryptocheckout.com. The only data that is sent is your WordPress install's public URL and the plugin version. This info allows the API - which functions solely as a blockchain crawler - to return updated exchange rates, blockchain transaction confirmations, and license status (if any) to your site. The plugin version is used to help answer requests made by the plugin (different plugin versions speak to the API server differently). See <a href="https://mycryptocheckout.com/how-mycryptocheckout-works/">how MyCryptoCheckout works.</a> If your server cannot be reached by the API server this plugin will not be able to autoconfirm blockchain transactions.
+* **Data Sent:** Selected currency, currency amount, destination wallet addresses, and license keys are sent when an order is created.
+* **Link:** [MyCryptoCheckout](https://mycryptocheckout.com)
+* **Privacy Policy:** https://mycryptocheckout.com/privacy-policy/
+* **Terms of Service:** https://mycryptocheckout.com/terms-conditions/
+
+**Solana Public RPC Nodes**
+* **Usage:** Used by the included `@solana/web3.js` library to query the Solana blockchain state and facilitate direct wallet transactions (e.g., Phantom Wallet) during checkout.
+* **Data Sent:** Public transaction data (wallet addresses, amounts, and block hashes) is queried directly from the user's browser to the Solana network to estimate fees and propose transactions.
+* **Link:** [Solana](https://solana.com)
+* **Privacy Policy:** https://solana.com/privacy-policy
+* **Terms of Service:** https://solana.com/tos
+
+**Web3 Wallet Integration (Ethereum & Solana)**
+* **Usage:** Allows users to click a "Pay with Wallet" button to automatically fill in payment details in their browser extension.
+* **Data Sent:** Transaction details (destination address and amount) are passed locally to the user's installed wallet extension.
 
 == Installation ==
 
@@ -226,12 +228,11 @@ View a detailed step-by-step <a href="https://mycryptocheckout.com/doc/installat
 3. Account overview tab
 4. Currencies tab
 5. Edit wallet
-6. Autosettlement tab
-7. Edit Autosettlement
-8. WooCommerce settings
-9. Easy Digital Downloads settings
-10. Donations widget
-11. Donations shortcode generator
+6. Edit Autosettlement
+7. WooCommerce settings
+8. Easy Digital Downloads settings
+9. Donations widget
+10. Donations shortcode generator
 
 == Frequently Asked Questions ==
 
@@ -262,6 +263,62 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* Fix: Remove old Waves code.
+
+= 2.161 20260118 =
+
+* Fix: Copy-to-clipboard button on checkout no longer results in a page redirect.
+* Fix: Check if a wallet currency exists before trying to edit the wallet.
+
+= 2.159 20260107 =
+
+* Security: Added wallet settings change email notification.
+* Security: Added frontend heartbeat address protection.
+* Security: Added global option to disable application passwords.
+* Fix: php 8.3 sprintf error fixed.
+
+= 2.158 20260104 =
+
+* Fix: Fixed cloudflare ipv6 detection code.
+* Fix: Added support for hosts that pretend they are behind cloudflare, but aren't.
+
+= 2.157 20260103 =
+
+* Code: Cloudflare IP check updated. SDK update.
+
+= 2.156 20260102 =
+
+* Fix: Code refactoring.
+* Fix: Cleaned up PHP 8.2+ notices.
+
+= 2.155 20251231 =
+
+* Fix: If using cloudflare, extract the real IP from the cloudflare HTTP_CF_CONNECTING_IP header.
+
+= 2.154 20251228 =
+
+* Security: Added security subtab under the global settings.
+* Security: Added admin user freeze setting, preventing admin users from being created or users promoted to admin level.
+* Security: The admin freeze setting is ON by default.
+* Security: Added setting to disable XMLRPC. Off by default. Recommended: on.
+* Security: Added setting to disable Wordpress' internal file editor. Off by default. Recommended: on.
+
+= 2.153 20251227 =
+
+* Security: Fixed the allowed ipv6 address for servers running ipv6.
+
+= 2.152 20251226 =
+
+* Security: Hardcoded the MCC API server IP addresses, so any MCC activity is restricted.
+
+= 2.151 20251214 =
+* Added: Admin alert for security messages.
+* Removed: Autosettlement feature.
+* Update: @wordpress/scripts to v31.1.0 and refreshed Webpack config.
+* Update: WooCommerce React integration.
+* Update: Other NPM dependencies.
+* Security: Added extra nonce checks to some admin actions.
 
 = 2.144 =
 

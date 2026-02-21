@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 use \Exception;
 
 /**
@@ -12,7 +16,6 @@ trait payment_timer_trait
 {
 	/**
 		@brief		Add the payment timer inputs to the settings form.
-		@details	Set $form->local_settings if local. Else global is assumed.
 		@since		2018-04-26 17:24:27
 	**/
 	public function add_payment_timer_inputs( $form )
@@ -31,7 +34,7 @@ trait payment_timer_trait
 			->label( __( 'Payment timer HTML', 'mycryptocheckout' ) )
 			->rows( 5, 40 );
 
-		if ( isset( $form->form()->local_settings ) )
+		if ( $form->form()->get_attribute( 'local_settings' ) == 1 )
 		{
 			$payment_timer_enabled->opt( 'enabled', __( 'Enabled', 'mycryptocheckout' ) );
 			$payment_timer_enabled->opt( 'disabled', __( 'Disabled', 'mycryptocheckout' ) );
@@ -73,7 +76,7 @@ trait payment_timer_trait
 	**/
 	public function save_payment_timer_inputs( $form )
 	{
-		if ( isset( $form->form()->local_settings ) )
+		if ( $form->form()->get_attribute( 'local_settings' ) == 1 )
 		{
 			// Local
 			$this->update_local_global_disk_option( $form, 'payment_timer_html' );

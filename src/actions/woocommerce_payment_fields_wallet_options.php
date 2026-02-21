@@ -2,6 +2,10 @@
 
 namespace mycryptocheckout\actions;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 /**
 	@brief		Modify the wallet options, adding or removing currencies.
 	@since		2019-09-01 20:50:48
