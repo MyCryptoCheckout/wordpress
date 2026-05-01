@@ -91,7 +91,6 @@ class Account
 			wp_cache_flush();
 		else
 			MyCryptoCheckout()->debug( 'Not clearing cache after send_client_account_data' );
-		wp_cache_flush();
 		return $result;
 	}
 
