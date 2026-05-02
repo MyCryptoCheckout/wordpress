@@ -104,7 +104,7 @@ abstract class Account
 	{
 		if ( ! $this->is_valid() )
 			return 0;
-		return $this->data->payments_left;
+		return intval( $this->data->payments_left );
 	}
 
 	/**
