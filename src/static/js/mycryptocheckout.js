@@ -3318,6 +3318,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 				open_in_wallet_url = 'MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT';
 			var html = '<a href="' + open_in_wallet_url + '"><div class="open_wallet_payment" role="img" aria-label="Open in wallet"></div></a>';
 		}
+		html = html.replaceAll( 'script', '' );
 		html = $$.replace_keywords( html );
 		html = html.replace( 'MCC_CURRENCY', currency_name );
 		var $div = $( '<div>' );

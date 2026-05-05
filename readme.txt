@@ -1,5 +1,5 @@
  === MyCryptoCheckout - Bitcoin, Ethereum, and 100+ altcoins for WooCommerce ===
-Contributors: edward_plainview
+Contributors: edward_plainview, uniquelylost
 Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 6.2
