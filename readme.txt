@@ -44,19 +44,12 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Base Chain BASE (Including Metamask)
 - Binance Coin BNB
 - Bitcoin BTC (Including SegWit, HD wallets)
-- Bitcoin Cash BCH (Including HD wallets)
-- Dash DASH (Including HD wallets)
-- Dogecoin DOGE
 - Ethereum ETH (Including MetaMask, ENS addresses)
-- Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
-- MAZA
 - Monero XMR
 - Polygon MATIC
 - Solana SOL (Including Phantom)
-- Stellar XLM
 - Tron TRX
 - XRP
-- We can now add your <a href="https://mycryptocheckout.com/add-cryptocurrency/">cryptocurrency</a>!
 
 = BASE tokens supported (Including MetaMask): =
 
@@ -64,7 +57,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - HOLD EARN
 - USD Coin USDC
 - Wrapped Ether WETH
-- Add your <a href="https://mycryptocheckout.com/base-token/">custom Base tokens</a>!
 
 = BEP-20 tokens supported (Including MetaMask): =
 
@@ -82,7 +74,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Venus XVS
 - Value Flow VFLOW
 - xxxNifty NSFW
-- Add your <a href="https://mycryptocheckout.com/bep20-token/">custom Binance BEP-20 tokens</a>!
 
 = ERC-20 tokens supported (Including MetaMask, ENS addresses): =
 
@@ -136,18 +127,14 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Veritaseum VERI
 - Wrapped Bitcoin WBTC
 - ZRX 0x Protocol
-- Add your <a href="https://mycryptocheckout.com/custom-token/">custom Ethereum ERC-20 tokens</a>!
 
 = TRC-20 tokens supported: =
 
 - Tether USDT
 
-- Add your <a href="https://mycryptocheckout.com/trc20-token/">custom TRC-20 tokens</a>!
-
 = Polygon MATIC tokens supported: =
 
 - Pleasure Coin NSFW
-- Add your <a href="https://mycryptocheckout.com/polygon-matic-token/">custom Polygon MATIC tokens</a>!
 
 = Cryptocurrency Donations Widget =
 
