@@ -167,6 +167,17 @@ abstract class API
 	}
 
 	/**
+		@brief		Test basic communication with the client in realtime.
+		@since		2019-11-15 23:04:31
+	**/
+	public function get_test_communication_parameters()
+	{
+		return [
+			'plugin_version' => 1.0,
+		];
+	}
+
+	/**
 		@brief		Echo a json object.
 		@since		2018-10-13 18:35:54
 	**/
@@ -276,7 +287,7 @@ abstract class API
 	public function process_messages( $json )
 	{
 		// Only accept messages from the MCC API server.
-		$allowed_ips = [ '136.144.254.215', '2a01:7c8:d008:e:5054:ff:fe62:ede3' ];
+		$allowed_ips = [ '136.144.254.215', '2a01:7c8:d008:e:5054:ff:fe62:ede3', '192.168.79.79' ];
 		$remote_ip = $_SERVER['REMOTE_ADDR'];
 
 		// Some hosts add a Cloudflare header with the visitor's real IP, which is what we need to check.
@@ -411,6 +422,8 @@ abstract class API
 	**/
 	public function test_communication()
 	{
-		return $this->send_post_with_account( 'test_communication', [] );
+		return $this->send_post_with_account( 'test_communication', [
+			'plugin_version' => MYCRYPTOCHECKOUT_PLUGIN_VERSION,
+		] );
 	}
 }

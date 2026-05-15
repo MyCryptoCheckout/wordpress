@@ -53,6 +53,17 @@ class API
 	}
 
 	/**
+		@brief		Test basic communication with the client in realtime.
+		@since		2019-11-15 23:04:31
+	**/
+	public function get_test_communication_parameters()
+	{
+		return [
+			'plugin_version' => MYCRYPTOCHECKOUT_PLUGIN_VERSION,
+		];
+	}
+
+	/**
 		@brief		Return the standard WP Remote Get/Post args.
 		@since		2017-12-21 23:32:33
 	**/
