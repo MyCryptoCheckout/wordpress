@@ -265,6 +265,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 * Removed Dash DASH
 * Removed Digibyte DGB
+* Removed DOGE
 * Removed the "Open in wallet" link
 
 = 2.163 20260502 =
