@@ -249,14 +249,16 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-= 2.164 xxxxxxxxxxxxxxxxxxxx =
+= 2.164 20260515 =
 
-* Updated to newer API version. The API will not talk to plugin versions earlier than 2.163
+* Updated to newer API version. The API will not talk to plugin versions earlier than 2.164
 * Removed Dash DASH
 * Removed Digibyte DGB
 * Removed DOGE
 * Removed Stellar XLM
 * Removed the "Open in wallet" link during checkout.
+
+After upgrading, check your currencies to see that they are correct.
 
 = 2.163 20260502 =
 
