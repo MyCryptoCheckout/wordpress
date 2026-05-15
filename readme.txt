@@ -49,7 +49,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Dogecoin DOGE
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
-- Litecoin LTC (Including SegWit, HD wallets)
 - MAZA
 - Monero XMR
 - Polygon MATIC
@@ -266,6 +265,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * Removed Dash DASH
 * Removed Digibyte DGB
 * Removed DOGE
+* Removed Stellar XLM
 * Removed the "Open in wallet" link
 
 = 2.163 20260502 =
