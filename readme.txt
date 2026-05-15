@@ -46,7 +46,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Bitcoin Cash BCH (Including HD wallets)
 - Dash DASH (Including HD wallets)
-- Digibyte DGB (Including SegWit)
 - Dogecoin DOGE
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Groestlcoin GRS (Including SegWit, ZPUB HD wallets)
@@ -263,6 +262,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* Removed Dash DASH
+* Removed Digibyte DGB
+* Removed the "Open in wallet" link
 
 = 2.163 20260502 =
 

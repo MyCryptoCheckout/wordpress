@@ -3280,7 +3280,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$$.$payment_buttons.appendTo( $$.$online_pay_box );
 		$$.maybe_metamask();
 		$$.maybe_metamask_mobile_link();
-		$$.maybe_browser_link();
 		$$.maybe_trustwallet_link();
 	}
 
@@ -3292,38 +3291,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 	{
 		// On the purchase confirmation page, convert the amount and address to a copyable input.
 		$( '.to_input', $$.$div ).mcc_make_clipboard();
-	}
-
-	/**
-		@brief		Add a payment link for the browser.
-		@since		2018-12-09 12:08:06
-	**/
-	$$.maybe_browser_link = function()
-	{
-		if( typeof $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet != 'undefined' )
-			$$.show_browser_link = $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet;
-		if ( ! $$.show_browser_link )
-			return;
-		// Extract the currency name from the qr code, if possible.
-		var currency_name = $$.mycryptocheckout_checkout_data.currency_id;
-		if ( $$.data.qr_codes !== undefined )
-			if ( $$.data.qr_codes[ $$.data.currency_id ] !== undefined )
-				currency_name = $$.data.qr_codes[ $$.data.currency_id ].replace( /:.*/, '' );
-		if( typeof $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url != 'undefined' )
-			var html = $$.mycryptocheckout_checkout_data.supports.wp_plugin_open_in_wallet_url;
-		else
-		{
-			var open_in_wallet_url = $$.generate_eip681();
-			if ( open_in_wallet_url == '' )
-				open_in_wallet_url = 'MCC_CURRENCY:MCC_TO?amount=MCC_AMOUNT';
-			var html = '<a href="' + open_in_wallet_url + '"><div class="open_wallet_payment" role="img" aria-label="Open in wallet"></div></a>';
-		}
-		html = html.replaceAll( 'script', '' );
-		html = $$.replace_keywords( html );
-		html = html.replace( 'MCC_CURRENCY', currency_name );
-		var $div = $( '<div>' );
-		$div.html( html );
-		$div.appendTo( $$.$payment_buttons );
 	}
 
 	/**
