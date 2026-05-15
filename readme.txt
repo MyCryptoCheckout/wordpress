@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 6.2
 Requires PHP: 8.0
-Stable tag: 2.163
+Stable tag: 2.164
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 6.9
 
@@ -249,11 +249,14 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.164 xxxxxxxxxxxxxxxxxxxx =
+
+* Updated to newer API version. The API will not talk to plugin versions earlier than 2.163
 * Removed Dash DASH
 * Removed Digibyte DGB
 * Removed DOGE
 * Removed Stellar XLM
-* Removed the "Open in wallet" link
+* Removed the "Open in wallet" link during checkout.
 
 = 2.163 20260502 =
 
