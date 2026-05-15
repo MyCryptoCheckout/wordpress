@@ -287,7 +287,7 @@ abstract class API
 	public function process_messages( $json )
 	{
 		// Only accept messages from the MCC API server.
-		$allowed_ips = [ '136.144.254.215', '2a01:7c8:d008:e:5054:ff:fe62:ede3', '192.168.79.79' ];
+		$allowed_ips = [ '136.144.254.215', '2a01:7c8:d008:e:5054:ff:fe62:ede3' ];
 		$remote_ip = $_SERVER['REMOTE_ADDR'];
 
 		// Some hosts add a Cloudflare header with the visitor's real IP, which is what we need to check.
