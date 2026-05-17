@@ -322,7 +322,7 @@ abstract class API
 			if ( ! $this->account()->is_retrieve_key_valid( $message->retrieve_key ) )
 				throw new Exception( sprintf( 'Retrieve keys do not match: %s.', $message->retrieve_key ) );
 			// Everything looks good to go.
-			$new_account_data = (object) (array) $message->account;
+			$new_account_data = $this->sanitize_account_data_for_storage( $message->account );
 			$this->debug( 'Setting new account data: %d bytes plain, %s bytes compressed',
 				strlen( json_encode( $new_account_data ) ),
 				strlen( $this->account()->compress( $new_account_data ) )
@@ -337,7 +337,7 @@ abstract class API
 
 		// Check that the domain key matches ours.
 		if ( $account->get_domain_key() != $json->mycryptocheckout )
-			return $this->debug( 'Invalid domain key. Received %s', $json->mycryptocheckout );
+			return $this->debug( 'Invalid domain key received.' );
 
 		// Handle the messages, one by one.
 		foreach( $json->messages as $message )
@@ -375,14 +375,165 @@ abstract class API
 				break;
 				case 'update_account':
 					// Save our new account data.
-					$new_account_data = (object) (array) $message->account;
-					$this->save_data( 'account_data', json_encode( $new_account_data ) );
+					$new_account_data = $this->sanitize_account_data_for_storage( $message->account );
+					$this->save_data( 'account_data', wp_json_encode( $new_account_data ) );
 				break;
 				default:
 					throw new Exception( sprintf( 'Unknown message type: %s', $message->type ) );
 					break;
 			}
 		}
+	}
+
+	protected function sanitize_account_data_for_storage( $account )
+	{
+		$account = json_decode( wp_json_encode( $account ) );
+
+		if ( ! is_object( $account ) )
+			return new \stdClass();
+
+		// Hard-type fields that should never contain HTML.
+		if ( isset( $account->payments_left ) )
+			$account->payments_left = absint( $account->payments_left );
+
+		if ( isset( $account->payments_used ) )
+			$account->payments_used = absint( $account->payments_used );
+
+		if ( isset( $account->updated ) )
+			$account->updated = absint( $account->updated );
+
+		if ( isset( $account->license_valid ) )
+			$account->license_valid = (bool) $account->license_valid;
+
+		if ( isset( $account->domain_key ) )
+			$account->domain_key = sanitize_text_field( $account->domain_key );
+
+		if ( isset( $account->currency_data ) && is_object( $account->currency_data ) )
+		{
+			foreach ( get_object_vars( $account->currency_data ) as $currency_id => $currency )
+				$account->currency_data->$currency_id = $this->sanitize_currency_data_for_storage( $currency );
+		}
+
+		// Last-pass script/style cleanup without trying to redesign the whole payload.
+		$account = $this->strip_executable_payloads_from_value( $account );
+
+		return $account;
+	}
+
+	protected function sanitize_currency_data_for_storage( $currency )
+	{
+		if ( ! is_object( $currency ) )
+			return $currency;
+
+		if ( isset( $currency->qr_code ) )
+		{
+			$currency->qr_code = $this->sanitize_mcc_uri_template( $currency->qr_code );
+
+			if ( $currency->qr_code === '' )
+				unset( $currency->qr_code );
+		}
+
+		if ( isset( $currency->supports ) && is_object( $currency->supports ) )
+		{
+			if ( isset( $currency->supports->wp_plugin_open_in_wallet_url ) )
+			{
+				$url = $this->sanitize_mcc_wallet_url_template( $currency->supports->wp_plugin_open_in_wallet_url );
+
+				if ( $url === '' )
+					unset( $currency->supports->wp_plugin_open_in_wallet_url );
+				else
+					$currency->supports->wp_plugin_open_in_wallet_url = $url;
+			}
+
+			if ( isset( $currency->supports->eip681 ) && is_object( $currency->supports->eip681 ) )
+			{
+				if ( isset( $currency->supports->eip681->address ) )
+				{
+					$currency->supports->eip681->address = $this->sanitize_mcc_uri_template( $currency->supports->eip681->address );
+
+					if ( $currency->supports->eip681->address === '' )
+						unset( $currency->supports->eip681->address );
+				}
+			}
+		}
+
+		return $currency;
+	}
+
+	protected function sanitize_mcc_wallet_url_template( $value )
+	{
+		if ( ! is_string( $value ) )
+			return '';
+
+		$value = trim( $value );
+
+		if ( $value === '' )
+			return '';
+
+		// Backwards compatibility with legacy API config that sent a full anchor.
+		if ( preg_match( '/<a\b[^>]*\bhref=(["\'])(.*?)\1/i', $value, $matches ) )
+			$value = $matches[ 2 ];
+
+		$value = $this->sanitize_mcc_uri_template( $value );
+
+		if ( $value === '' )
+			return '';
+
+		if ( ! preg_match( '#^(bitcoin|bitcoincash|litecoin|dogecoin|dash|digibyte|verge|ethereum|tron|solana|monero|xrp|xrpl|web\+stellar|trust):#i', $value )
+			&& ! preg_match( '#^https://metamask\.app\.link/#i', $value ) )
+			return '';
+
+		return $value;
+	}
+
+	protected function sanitize_mcc_uri_template( $value )
+	{
+		if ( ! is_string( $value ) )
+			return '';
+
+		$value = html_entity_decode( trim( $value ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+
+		if ( $value === '' )
+			return '';
+
+		if ( preg_match( '/[<>\x00-\x1F\x7F]/', $value ) )
+			return '';
+
+		if ( preg_match( '/^\s*(javascript|data|vbscript)\s*:/i', $value ) )
+			return '';
+
+		return $value;
+	}
+
+	protected function strip_executable_payloads_from_value( $value )
+	{
+		if ( is_object( $value ) )
+		{
+			foreach ( get_object_vars( $value ) as $key => $child_value )
+				$value->$key = $this->strip_executable_payloads_from_value( $child_value );
+
+			return $value;
+		}
+
+		if ( is_array( $value ) )
+		{
+			foreach ( $value as $key => $child_value )
+				$value[ $key ] = $this->strip_executable_payloads_from_value( $child_value );
+
+			return $value;
+		}
+
+		if ( ! is_string( $value ) )
+			return $value;
+
+		$value = wp_check_invalid_utf8( $value );
+
+		$value = preg_replace( '#<\s*/?\s*(script|style|iframe|object|embed|link|meta|svg|math)[^>]*>#i', '', $value );
+		$value = preg_replace( '#\son[a-z]+\s*=\s*(["\']).*?\1#is', '', $value );
+		$value = preg_replace( '#\son[a-z]+\s*=\s*[^\s>]+#is', '', $value );
+		$value = preg_replace( '#(?:javascript|data|vbscript)\s*:#i', '', $value );
+
+		return trim( $value );
 	}
 
 	/**
