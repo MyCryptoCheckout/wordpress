@@ -4,9 +4,9 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 6.2
 Requires PHP: 8.0
-Stable tag: 2.165
+Stable tag: 2.166
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
-Tested up to: 6.9
+Tested up to: 7.0
 
 Cryptocurrency payment gateway for WooCommerce and Easy Digital Downloads. Accept 100+ coins: Bitcoin, Ethereum, BNB, Solana. Peer2Peer transactions.
 
@@ -249,6 +249,12 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
+= 2.166 20260517 =
+
+* Version bump for Wordpress v7
+* DOGE is still being synced and will be up soon.
+* Removed Bitcoin Cash BCH
+
 = 2.165 20260517 =
 
 * Add extra account data filtering upon receipt from the API server.
@@ -258,7 +264,6 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 * Updated to newer API version. The API will not talk to plugin versions earlier than 2.164
 * Removed Dash DASH
 * Removed Digibyte DGB
-* Removed DOGE
 * Removed Stellar XLM
 * Removed the "Open in wallet" link during checkout.
 
