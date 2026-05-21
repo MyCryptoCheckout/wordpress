@@ -64,11 +64,9 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Binance-Peg BUSD
 - Binance-Peg BUSD-T
 - Binance-Peg USD Coin
-- BITTOKEN BITT
 - HOLD EARN
 - PancakeSwap Token CAKE
 - Swipe SXP
-- TasteNFT TASTE
 - Unity UNT
 - VAI Stablecoin VAI
 - Venus XVS
@@ -122,7 +120,6 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Tether USDT
 - TrueUSD TUSD
 - Uniswap UNI
-- UNUS SED LEO
 - USD Coin USDC
 - Veritaseum VERI
 - Wrapped Bitcoin WBTC
