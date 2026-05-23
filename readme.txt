@@ -48,6 +48,7 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 - Monero XMR
 - Polygon MATIC
 - Solana SOL (Including Phantom)
+- Stellar XLM
 - Tron TRX
 - XRP
 
@@ -245,6 +246,8 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+* Stellar XLM has been restored
 
 = 2.166 20260517 =
 
