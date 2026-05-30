@@ -928,6 +928,18 @@ trait admin_trait
 			->size( 6, 6 )
 			->value( $this->get_site_option( 'markup_percent' ) );
 
+		$fs = $form->fieldset( 'fs_checkout_display' );
+		$fs->legend->label( __( 'Checkout display', 'mycryptocheckout' ) );
+
+		$checkout_payment_style = $fs->select( 'checkout_payment_style' )
+			->description( __( 'Choose the payment page layout shown after checkout. Classic keeps the existing layout. Modern uses the new card-style payment page.', 'mycryptocheckout' ) )
+			->label( __( 'Payment page style', 'mycryptocheckout' ) );
+
+		$checkout_payment_style->opt( 'classic', __( 'Classic', 'mycryptocheckout' ) );
+		$checkout_payment_style->opt( 'modern', __( 'Modern', 'mycryptocheckout' ) );
+
+		$checkout_payment_style->value( $this->get_site_option( 'checkout_payment_style' ) );
+
 		$fs = $form->fieldset( 'fs_qr_code' );
 		// Label for fieldset
 		$fs->legend->label( __( 'QR code', 'mycryptocheckout' ) );
@@ -967,6 +979,13 @@ trait admin_trait
 
 			$this->update_site_option( 'markup_amount', $markup_amount->get_filtered_post_value() );
 			$this->update_site_option( 'markup_percent', $markup_percent->get_filtered_post_value() );
+
+			$checkout_payment_style_value = $checkout_payment_style->get_post_value();
+
+			if ( ! in_array( $checkout_payment_style_value, [ 'classic', 'modern' ], true ) )
+				$checkout_payment_style_value = 'classic';
+
+			$this->update_site_option( 'checkout_payment_style', $checkout_payment_style_value );
 
 			$this->save_payment_timer_inputs( $form );
 			$this->save_qr_code_inputs( $form );

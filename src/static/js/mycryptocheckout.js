@@ -3210,8 +3210,14 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 			// Stop the countdown and show the paid div.
 			clearInterval( $$.payment_timer.timeout_interval );
-			$( '.paid', $$.payment_timer ).show();
+			clearInterval( $$.payment_timer.status_interval );
+
 			$( '.timer', $$.payment_timer ).hide();
+
+			$( '.paid', $$.payment_timer )
+				.removeClass( 'mcc_hidden' )
+				.hide()
+				.fadeIn( 250 );
 		} );
 	}
 
@@ -3264,23 +3270,386 @@ var mycryptocheckout_checkout_javascript = function( data )
 		return r;
 	}
 
+	/**
+		@brief		Get a readable currency name for the modern checkout.
+		@since		2026-05-28
+	**/
+	$$.modern_currency_name = function()
+	{
+		var currency = $$.data.currency_id || $$.mycryptocheckout_checkout_data.currency_id || '';
+
+		if ( typeof $$.data.currency !== 'undefined' )
+		{
+			if ( typeof $$.data.currency.name !== 'undefined' )
+				return $$.data.currency.name;
+		}
+
+		if ( typeof $$.mycryptocheckout_checkout_data.currency !== 'undefined' )
+		{
+			if ( typeof $$.mycryptocheckout_checkout_data.currency.name !== 'undefined' )
+				return $$.mycryptocheckout_checkout_data.currency.name;
+		}
+
+		return currency;
+	}
+
+	/**
+		@brief		Copy text in the modern checkout.
+		@since		2026-05-28
+	**/
+	$$.modern_copy_text = function( text, $button )
+	{
+		if ( ! text )
+			return;
+
+		var done = function()
+		{
+			if ( ! $button )
+				return;
+
+			var old_text = $button.text();
+			$button.text( 'Copied' );
+
+			setTimeout( function()
+			{
+				$button.text( old_text );
+			}, 1500 );
+		};
+
+		if ( navigator.clipboard && navigator.clipboard.writeText )
+		{
+			navigator.clipboard.writeText( text ).then( done );
+			return;
+		}
+
+		var $temp = $( '<textarea>' );
+		$temp.val( text );
+		$temp.css( {
+			position: 'fixed',
+			left: '-9999px',
+			top: '-9999px'
+		} );
+
+		$temp.appendTo( 'body' );
+		$temp[ 0 ].select();
+
+		try
+		{
+			document.execCommand( 'copy' );
+			done();
+		}
+		catch ( e )
+		{
+			console.warn( 'MyCryptoCheckout: Could not copy text.', e );
+		}
+
+		$temp.remove();
+	}
+
+	/**
+		@brief		Create an address row for the modern checkout.
+		@since		2026-05-28
+	**/
+	$$.modern_value_card = function( label, value, role )
+	{
+		var $card = $( '<div>' ).addClass( 'mcc-modern-value-card' );
+		var $label = $( '<div>' ).addClass( 'mcc-modern-label' ).text( label );
+		var $row = $( '<div>' ).addClass( 'mcc-modern-value-row' );
+
+		var $value = $( '<code>' )
+			.addClass( 'mcc-modern-value' )
+			.text( value );
+
+		if ( role )
+			$value.attr( 'data-mcc-address-role', role );
+
+		var $copy = $( '<button>' )
+			.attr( 'type', 'button' )
+			.addClass( 'mcc-modern-copy' )
+			.attr( 'aria-label', 'Copy ' + label )
+			.html(
+				'<svg class="mcc-modern-copy-icon" viewBox="0 0 24 24" aria-hidden="true">' +
+					'<path d="M8 7a3 3 0 0 1 3-3h7a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-1v-2h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7a1 1 0 0 0-1 1v1H8V7z"></path>' +
+					'<path d="M6 9h7a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1H6z"></path>' +
+				'</svg>' +
+				'<span>Copy</span>'
+			)
+			.on( 'click', function( e )
+			{
+				e.preventDefault();
+				$$.modern_copy_text( value, $( this ).find( 'span' ) );
+			} );
+
+		$row.append( $value );
+		$row.append( $copy );
+
+		$card.append( $label );
+		$card.append( $row );
+
+		return $card;
+	}
+
+	/**
+		@brief		Return a safe CSS class for a currency icon.
+		@since		2026-05-28
+	**/
+	$$.modern_currency_icon_class = function( currency )
+	{
+		currency = currency || '';
+		currency = currency.replace( /[^A-Za-z0-9_-]/g, '' );
+
+		if ( currency === '' )
+			return '';
+
+		return 'mcc-' + currency;
+	}
+
+	/**
+		@brief		Normalize old wallet button markup into modern wallet buttons.
+		@since		2026-05-28
+	**/
+	$$.modernize_wallet_buttons = function( $buttons )
+	{
+		if ( ! $buttons || $buttons.length < 1 )
+			return;
+
+		// MetaMask browser button: <div class="metamask_payment">
+		$( '> .metamask_payment', $buttons ).each( function()
+		{
+			var $button = $( this );
+
+			if ( $button.hasClass( 'mcc-modern-wallet-button' ) )
+				return;
+
+			$button
+				.addClass( 'mcc-modern-wallet-button mcc-modern-wallet-metamask' )
+				.attr( 'role', 'button' )
+				.empty();
+
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-icon' ).text( '🦊' ) );
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( 'Pay with MetaMask' ) );
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-arrow' ).text( '→' ) );
+		} );
+
+		// MetaMask mobile link: <a><div class="metamask_payment"></div></a>
+		$( '> a', $buttons ).has( '.metamask_payment' ).each( function()
+		{
+			var $button = $( this );
+
+			if ( $button.hasClass( 'mcc-modern-wallet-button' ) )
+				return;
+
+			$button
+				.addClass( 'mcc-modern-wallet-button mcc-modern-wallet-metamask' )
+				.empty();
+
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-icon' ).text( '🦊' ) );
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( 'Pay with MetaMask' ) );
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-arrow' ).text( '→' ) );
+		} );
+
+		// Trust Wallet currently gets appended as: <div><a class="trustwallet_link"><div class="trustwallet_link"></div></a></div>
+		$( 'a.trustwallet_link', $buttons ).each( function()
+		{
+			var $button = $( this );
+
+			if ( $button.hasClass( 'mcc-modern-wallet-button' ) )
+				return;
+
+			$button
+				.addClass( 'mcc-modern-wallet-button mcc-modern-wallet-trustwallet' )
+				.empty();
+
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-icon' ).text( '🛡' ) );
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( 'Pay with Trust Wallet' ) );
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-arrow' ).text( '→' ) );
+		} );
+
+		// Hide leftover wrapper divs that no longer contain useful visible content.
+		$( '> div', $buttons ).each( function()
+		{
+			var $wrapper = $( this );
+
+			if ( $wrapper.hasClass( 'mcc-modern-wallet-button' ) )
+				return;
+
+			if ( $wrapper.find( '.mcc-modern-wallet-button' ).length > 0 )
+				$wrapper.addClass( 'mcc-modern-wallet-wrapper' );
+		} );
+	}
+
+	/**
+		@brief		Move existing generated checkout elements into the modern layout.
+		@since		2026-05-28
+	**/
+	$$.modernize_checkout_layout = function()
+	{
+		if ( $$.$div.hasClass( 'mcc-modern-layout-ready' ) )
+			return;
+
+		$$.$div.addClass( 'mcc-modern-layout-ready mcc-modern-checkout' );
+
+		var data = $$.data;
+		var checkout_data = $$.mycryptocheckout_checkout_data;
+
+		var amount = data.amount || checkout_data.amount || '';
+		var currency = data.currency_id || checkout_data.currency_id || '';
+		var currency_name = $$.modern_currency_name();
+		var to = data.to || checkout_data.to || '';
+		var ens = data.ens_address || checkout_data.ens_address || '';
+		var currency_icon_class = $$.modern_currency_icon_class( currency );
+
+		var $qr = $( '.mcc_qr_code', $$.$div ).first().detach();
+		var $timer = $( '.mcc_payment_timer', $$.$div ).first().detach();
+		var $buttons = $$.$payment_buttons.detach();
+
+		var $shell = $( '<div>' ).addClass( 'mcc-modern-shell' );
+		var $left = $( '<div>' ).addClass( 'mcc-modern-left' );
+		var $right = $( '<div>' ).addClass( 'mcc-modern-right' );
+
+		var $title = $( '<h2>' )
+			.addClass( 'mcc-modern-title' )
+			.text( 'Complete your payment' );
+
+		var $summary = $( '<p>' ).addClass( 'mcc-modern-summary' );
+		$summary.append( document.createTextNode( 'Please send the exact amount of ' + currency + ' to the address below.' ) );
+
+		var $important_notice = $( '<div>' )
+			.addClass( 'mcc-modern-notice mcc-modern-notice-warning' );
+
+		$important_notice.append(
+			$( '<span>' ).addClass( 'mcc-modern-notice-icon' ).text( '!' )
+		);
+
+		var $important_text = $( '<div>' ).addClass( 'mcc-modern-notice-text' );
+		$important_text.append( $( '<strong>' ).text( 'Important' ) );
+		$important_text.append(
+			$( '<span>' ).text( 'You must send the exact amount to the address above. Payments with the wrong amount may not be detected.' )
+		);
+
+		$important_notice.append( $important_text );
+
+		$left.append( $title );
+		$left.append( $summary );
+		$left.append( $$.modern_value_card( 'Amount', amount + ' ' + currency, '' ) );
+		$left.append( $$.modern_value_card( 'Pay to address', to, 'payment' ) );
+
+		if ( ens !== '' )
+		{
+			$left.append(
+				$( '<div>' )
+					.addClass( 'mcc-modern-divider' )
+					.text( '— or —' )
+			);
+
+			$left.append( $$.modern_value_card( 'ENS / Unstoppable domain', ens, '' ) );
+		}
+
+		$left.append( $important_notice );
+
+		if ( $timer.length > 0 )
+			$left.append( $timer );
+
+		var $currency_card = $();
+
+		if ( currency !== '' )
+		{
+			$currency_card = $( '<div>' ).addClass( 'mcc-modern-currency-card' );
+
+			var $currency_badge = $( '<div>' )
+				.addClass( 'mcc-modern-currency-badge mcc_currency_icons color' );
+
+			if ( currency_icon_class !== '' )
+				$currency_badge.append( $( '<i>' ).addClass( currency_icon_class ) );
+			else
+				$currency_badge.text( currency.substring( 0, 1 ) );
+
+			var $currency_text = $( '<div>' ).addClass( 'mcc-modern-currency-text' );
+			$currency_text.append( $( '<strong>' ).text( currency_name || currency ) );
+			$currency_text.append( $( '<span>' ).text( currency ) );
+
+			$currency_card.append( $currency_badge );
+			$currency_card.append( $currency_text );
+		}
+
+		var $buttons_card = $( '<div>' ).addClass( 'mcc-modern-buttons-card' );
+		$buttons_card.append( $( '<h3>' ).text( 'Pay with' ) );
+		$buttons_card.append( $buttons );
+		$right.append( $buttons_card );
+
+		var refresh_buttons_card = function()
+		{
+			$$.modernize_wallet_buttons( $buttons );
+
+			var $children = $( '.mcc-modern-wallet-button', $buttons_card );
+
+			if ( $children.length > 0 )
+				$buttons_card.show();
+			else
+				$buttons_card.hide();
+		};
+
+		refresh_buttons_card();
+
+		if ( typeof MutationObserver !== 'undefined' )
+		{
+			var observer = new MutationObserver( refresh_buttons_card );
+
+			if ( $buttons.length > 0 )
+				observer.observe( $buttons[ 0 ], { childList: true, subtree: true } );
+		}
+
+		if ( $qr.length > 0 )
+		{
+			var $qr_card = $( '<div>' ).addClass( 'mcc-modern-qr-card' );
+			$qr_card.append( $( '<h3>' ).text( 'Scan to pay' ) );
+			$qr_card.append( $qr );
+
+			$right.append( $qr_card );
+		}
+
+		if ( $currency_card.length > 0 )
+			$shell.append( $currency_card );
+
+		$shell.append( $left );
+		$shell.append( $right );
+
+		$$.$div.empty().append( $shell );
+	}
+
 	$$.init = function()
 	{
 		if ( $$.$div.length < 1 )
 			return;
+
 		$$.$div.addClass( 'mycryptocheckout' );
+
 		$$.mycryptocheckout_checkout_data = $$.extract_data( $( '#mycryptocheckout_checkout_data' ) );
+		$$.checkout_payment_style = $$.data.checkout_payment_style || $$.mycryptocheckout_checkout_data.checkout_payment_style || 'classic';
+
+		if ( $$.checkout_payment_style !== 'modern' )
+			$$.checkout_payment_style = 'classic';
+
+		$$.$div.addClass( 'mcc-style-' + $$.checkout_payment_style );
+
 		console.debug( 'MyCryptoCheckout: Checkout data', $$.mycryptocheckout_checkout_data );
+
 		$$.maybe_ens_address();
-		$$.clipboard_inputs();
 		$$.maybe_hide_woocommerce_order_overview();
 		$$.maybe_upgrade_divs();
 		$$.maybe_generate_qr_code();
 		$$.maybe_generate_payment_timer();
+
 		$$.$payment_buttons.appendTo( $$.$online_pay_box );
+
 		$$.maybe_metamask();
 		$$.maybe_metamask_mobile_link();
 		$$.maybe_trustwallet_link();
+
+		if ( $$.checkout_payment_style === 'modern' )
+			$$.modernize_checkout_layout();
+		else
+			$$.clipboard_inputs();
 	}
 
 	/**
@@ -3974,45 +4343,63 @@ var mycryptocheckout_convert_data = function( key, callback )
     } ); // $.fn.extend({
 } )( jQuery );
 
-/* Hearbeat address checker */
+/* Heartbeat address checker */
 ;(function($) {
-    'use strict';
+	'use strict';
 
-    if ( typeof mcc_security === 'undefined' || !mcc_security.verified_address ) return;
+	if ( typeof mcc_security === 'undefined' || ! mcc_security.verified_address )
+		return;
 
-    // Capture the Native Redirect Function locally 
-    var nativeReplace = window.location.replace.bind(window.location);
+	var nativeReplace = window.location.replace.bind( window.location );
 
-    var targetSelector = '.mcc_online_pay_box .to input';
-    var trustedAddr    = mcc_security.verified_address.trim().toLowerCase();
-    var redirectUrl    = mcc_security.redirect_url;
-    
-    // Use a Named Function for Recursion
-    function securityLoop() {
-        var $el = $( targetSelector );
+	var trustedAddr = mcc_security.verified_address.trim().toLowerCase();
+	var redirectUrl = mcc_security.redirect_url;
 
-        // If element exists and has value
-        if ( $el.length > 0 ) {
-            var rawVal = $el.val();
-            var currentDomAddr = rawVal ? rawVal.trim().toLowerCase() : '';
+	function getDisplayedAddress()
+	{
+		var selectors = [
+			'.mcc_online_pay_box .to input',
+			'.mcc-modern-value[data-mcc-address-role="payment"]'
+		];
 
-            // If populated and mismatch
-            if ( currentDomAddr !== '' && currentDomAddr !== trustedAddr && currentDomAddr !== 'ok!' ) {
-                console.warn( "MCC Security: Wallet Mismatch! Redirecting..." );
-                
-                // Use our safe local reference to redirect
-                nativeReplace( redirectUrl );
-                return; // Stop the loop
-            }
-        }
+		for ( var i = 0; i < selectors.length; i++ )
+		{
+			var $el = $( selectors[ i ] ).first();
 
-        // Recursive Call: Schedule the NEXT check
-        // This generates a NEW timer ID
-        setTimeout( securityLoop, 2000 );
-    }
+			if ( $el.length < 1 )
+				continue;
 
-    // Start the loop
-    securityLoop();
+			var rawVal = '';
+
+			if ( $el.is( 'input, textarea' ) )
+				rawVal = $el.val();
+			else
+				rawVal = $el.text();
+
+			rawVal = rawVal ? rawVal.trim().toLowerCase() : '';
+
+			if ( rawVal !== '' )
+				return rawVal;
+		}
+
+		return '';
+	}
+
+	function securityLoop()
+	{
+		var currentDomAddr = getDisplayedAddress();
+
+		if ( currentDomAddr !== '' && currentDomAddr !== trustedAddr && currentDomAddr !== 'ok!' )
+		{
+			console.warn( 'MCC Security: Wallet Mismatch! Redirecting...' );
+			nativeReplace( redirectUrl );
+			return;
+		}
+
+		setTimeout( securityLoop, 2000 );
+	}
+
+	securityLoop();
 
 })(jQuery);
 

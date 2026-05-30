@@ -1,41 +1,59 @@
-/* Hearbeat address checker */
+/* Heartbeat address checker */
 ;(function($) {
-    'use strict';
+	'use strict';
 
-    if ( typeof mcc_security === 'undefined' || !mcc_security.verified_address ) return;
+	if ( typeof mcc_security === 'undefined' || ! mcc_security.verified_address )
+		return;
 
-    // Capture the Native Redirect Function locally 
-    var nativeReplace = window.location.replace.bind(window.location);
+	var nativeReplace = window.location.replace.bind( window.location );
 
-    var targetSelector = '.mcc_online_pay_box .to input';
-    var trustedAddr    = mcc_security.verified_address.trim().toLowerCase();
-    var redirectUrl    = mcc_security.redirect_url;
-    
-    // Use a Named Function for Recursion
-    function securityLoop() {
-        var $el = $( targetSelector );
+	var trustedAddr = mcc_security.verified_address.trim().toLowerCase();
+	var redirectUrl = mcc_security.redirect_url;
 
-        // If element exists and has value
-        if ( $el.length > 0 ) {
-            var rawVal = $el.val();
-            var currentDomAddr = rawVal ? rawVal.trim().toLowerCase() : '';
+	function getDisplayedAddress()
+	{
+		var selectors = [
+			'.mcc_online_pay_box .to input',
+			'.mcc-modern-value[data-mcc-address-role="payment"]'
+		];
 
-            // If populated and mismatch
-            if ( currentDomAddr !== '' && currentDomAddr !== trustedAddr && currentDomAddr !== 'ok!' ) {
-                console.warn( "MCC Security: Wallet Mismatch! Redirecting..." );
-                
-                // Use our safe local reference to redirect
-                nativeReplace( redirectUrl );
-                return; // Stop the loop
-            }
-        }
+		for ( var i = 0; i < selectors.length; i++ )
+		{
+			var $el = $( selectors[ i ] ).first();
 
-        // Recursive Call: Schedule the NEXT check
-        // This generates a NEW timer ID
-        setTimeout( securityLoop, 2000 );
-    }
+			if ( $el.length < 1 )
+				continue;
 
-    // Start the loop
-    securityLoop();
+			var rawVal = '';
+
+			if ( $el.is( 'input, textarea' ) )
+				rawVal = $el.val();
+			else
+				rawVal = $el.text();
+
+			rawVal = rawVal ? rawVal.trim().toLowerCase() : '';
+
+			if ( rawVal !== '' )
+				return rawVal;
+		}
+
+		return '';
+	}
+
+	function securityLoop()
+	{
+		var currentDomAddr = getDisplayedAddress();
+
+		if ( currentDomAddr !== '' && currentDomAddr !== trustedAddr && currentDomAddr !== 'ok!' )
+		{
+			console.warn( 'MCC Security: Wallet Mismatch! Redirecting...' );
+			nativeReplace( redirectUrl );
+			return;
+		}
+
+		setTimeout( securityLoop, 2000 );
+	}
+
+	securityLoop();
 
 })(jQuery);
