@@ -173,7 +173,7 @@ abstract class API
 	public function get_test_communication_parameters()
 	{
 		return [
-			'plugin_version' => 1.0,
+			'plugin_version' => 2.166,			// The current version of the Wordpress plugin.
 		];
 	}
 
@@ -573,8 +573,7 @@ abstract class API
 	**/
 	public function test_communication()
 	{
-		return $this->send_post_with_account( 'test_communication', [
-			'plugin_version' => MYCRYPTOCHECKOUT_PLUGIN_VERSION,
-		] );
+		$parameters = $this->get_test_communication_parameters();
+		return $this->send_post_with_account( 'test_communication', $parameters );
 	}
 }
