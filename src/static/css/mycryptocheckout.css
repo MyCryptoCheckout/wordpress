@@ -554,6 +554,9 @@
 .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .payment_buttons .mcc-modern-wallet-trustwallet {
   background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
 }
+.mycryptocheckout.online_payment_instructions.mcc-modern-checkout .payment_buttons .mcc-modern-wallet-open-wallet {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+}
 .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .mcc_payment_timer {
   display: block;
   width: 100%;
@@ -652,7 +655,7 @@
     gap: 18px;
   }
   .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .mcc-modern-currency-card {
-    margin-bottom: 0;
+    display: none;
   }
   .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .mcc-modern-value-row {
     grid-template-columns: 1fr;

@@ -244,6 +244,116 @@ var mycryptocheckout_checkout_javascript = function( data )
 	}
 
 	/**
+		@brief		Build a local open-in-wallet URI for non-EVM currencies.
+		@since		2026-05-30
+	**/
+	$$.build_basic_wallet_uri = function()
+	{
+		var currency = ( $$.data.currency_id || $$.mycryptocheckout_checkout_data.currency_id || '' ).toUpperCase();
+		var to = $$.data.to || $$.mycryptocheckout_checkout_data.to || '';
+		var amount = $$.data.amount || $$.mycryptocheckout_checkout_data.amount || '';
+
+		var schemes = {
+			'BTC': 'bitcoin',
+			'DOGE': 'dogecoin',
+			'LTC': 'litecoin'
+		};
+
+		if ( typeof schemes[ currency ] === 'undefined' )
+			return '';
+
+		if ( to === '' || amount === '' )
+			return '';
+
+		amount = String( amount ).trim();
+
+		if ( ! /^[0-9]+(\.[0-9]+)?$/.test( amount ) )
+			return '';
+
+		return schemes[ currency ] + ':' + encodeURIComponent( to ) + '?amount=' + encodeURIComponent( amount );
+	}
+
+	/**
+		@brief		Add a basic open-in-wallet button for supported non-EVM currencies.
+		@since		2026-05-30
+	**/
+	$$.maybe_basic_open_wallet_link = function()
+	{
+		var uri = $$.build_basic_wallet_uri();
+
+		if ( uri === '' )
+			return;
+
+		if ( ! $$.is_safe_wallet_url( uri ) )
+			return;
+
+		var currency = ( $$.data.currency_id || $$.mycryptocheckout_checkout_data.currency_id || '' ).toUpperCase();
+
+		var $a = $( '<a>' )
+			.attr( 'href', uri )
+			.addClass( 'mcc-modern-wallet-button mcc-modern-wallet-open-wallet' )
+			.attr( 'data-mcc-wallet-button', 'open-wallet' );
+
+		$a.append( $( '<span>' ).addClass( 'mcc-modern-wallet-icon' ).text( '↗' ) );
+		$a.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( 'Open in ' + currency + ' Wallet' ) );
+		$a.append( $( '<span>' ).addClass( 'mcc-modern-wallet-arrow' ).text( '→' ) );
+
+		$a.appendTo( $$.$payment_buttons );
+	}
+
+	/**
+		@brief		Allow wallet URI schemes, reject executable/browser schemes.
+		@since		2026-05-30
+	**/
+	$$.is_safe_wallet_url = function( url )
+	{
+		if ( typeof url !== 'string' )
+			return false;
+
+		url = $$.decode_html_entities_basic( url ).trim();
+
+		if ( url === '' )
+			return false;
+
+		if ( /[<>\x00-\x1F\x7F]/.test( url ) )
+			return false;
+
+		if ( /^\s*(javascript|data|vbscript)\s*:/i.test( url ) )
+			return false;
+
+		return /^(bitcoin|litecoin|dogecoin):/i.test( url );
+	}
+
+	/**
+		@brief		Decode basic HTML entities before URL safety checks.
+		@since		2026-05-30
+	**/
+	$$.decode_html_entities_basic = function( value )
+	{
+		if ( typeof value !== 'string' )
+			return '';
+
+		return value
+			.replace( /&#x([0-9a-f]+);/gi, function( match, hex )
+			{
+				var code = parseInt( hex, 16 );
+				return isFinite( code ) ? String.fromCharCode( code ) : match;
+			} )
+			.replace( /&#([0-9]+);/g, function( match, num )
+			{
+				var code = parseInt( num, 10 );
+				return isFinite( code ) ? String.fromCharCode( code ) : match;
+			} )
+			.replace( /&amp;/gi, '&' )
+			.replace( /&quot;/gi, '"' )
+			.replace( /&#039;/gi, "'" )
+			.replace( /&apos;/gi, "'" )
+			.replace( /&lt;/gi, '<' )
+			.replace( /&gt;/gi, '>' )
+			.replace( /&colon;/gi, ':' );
+	}
+
+	/**
 		@brief		Normalize old wallet button markup into modern wallet buttons.
 		@since		2026-05-28
 	**/
@@ -363,13 +473,14 @@ var mycryptocheckout_checkout_javascript = function( data )
 		var $important_text = $( '<div>' ).addClass( 'mcc-modern-notice-text' );
 		$important_text.append( $( '<strong>' ).text( 'Important' ) );
 		$important_text.append(
-			$( '<span>' ).text( 'You must send the exact amount to the address above. Payments with the wrong amount may not be detected.' )
+			$( '<span>' ).text( 'Send the exact amount shown to help ensure the payment is detected automatically.' )
 		);
 
 		$important_notice.append( $important_text );
 
 		$left.append( $title );
 		$left.append( $summary );
+		$left.append( $important_notice );
 		$left.append( $$.modern_value_card( 'Amount', amount + ' ' + currency, '' ) );
 		$left.append( $$.modern_value_card( 'Pay to address', to, 'payment' ) );
 
@@ -383,8 +494,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 			$left.append( $$.modern_value_card( 'ENS / Unstoppable domain', ens, '' ) );
 		}
-
-		$left.append( $important_notice );
 
 		if ( $timer.length > 0 )
 			$left.append( $timer );
@@ -483,6 +592,10 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		$$.maybe_metamask();
 		$$.maybe_metamask_mobile_link();
+
+		if ( $$.checkout_payment_style === 'modern' )
+			$$.maybe_basic_open_wallet_link();
+
 		$$.maybe_trustwallet_link();
 
 		if ( $$.checkout_payment_style === 'modern' )

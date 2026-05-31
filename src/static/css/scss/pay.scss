@@ -631,6 +631,10 @@
 		background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
 	}
 
+	.payment_buttons .mcc-modern-wallet-open-wallet {
+		background: linear-gradient(135deg, #059669, #047857) !important;
+	}
+
 	.mcc_payment_timer {
 		display: block;
 		width: 100%;
@@ -745,7 +749,7 @@
 		}
 
 		.mcc-modern-currency-card {
-			margin-bottom: 0;
+			display: none;
 		}
 
 		.mcc-modern-value-row {
