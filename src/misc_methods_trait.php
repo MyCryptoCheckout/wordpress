@@ -558,6 +558,13 @@ trait misc_methods_trait
 		$this->payment_timer_generate_checkout_javascript_data( $action );
 		$this->qr_code_generate_checkout_javascript_data( $action );
 
+		$checkout_payment_style = $this->get_site_option( 'checkout_payment_style' );
+
+		if ( ! in_array( $checkout_payment_style, [ 'classic', 'modern' ], true ) )
+			$checkout_payment_style = 'classic';
+
+		$action->data->set( 'checkout_payment_style', $checkout_payment_style );
+
 		// ENS address. This requires finding the wallet that has this address and extracting the ENS address from it.
 		$to = $action->data->get( 'to' );
 		$wallets = $this->wallets();
@@ -622,6 +629,13 @@ trait misc_methods_trait
 				@since		2017-12-14 16:50:25
 			**/
 			'markup_percent' => 0,
+
+			/**
+				@brief		Checkout payment page style.
+				@details	classic keeps the existing template-based layout. modern rebuilds the payment page UI in checkout JS.
+				@since		2026-05-28
+			**/
+			'checkout_payment_style' => 'classic',
 
 			/**
 				@brief		Enable the timer on the checkout page?
