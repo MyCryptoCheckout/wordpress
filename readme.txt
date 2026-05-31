@@ -249,13 +249,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 
 == Changelog ==
 
-<<<<<<< HEAD
-* Stellar XLM has been restored
-=======
-= 2.167 =
+= 2.167 xxxxxxxxxxx =
 
 * New: Modernized payment page: Enable at Settings > MyCryptoCheckout > Global settings > Checkout display.
->>>>>>> b908e9b67263391fc57b6fb205046effe600ca2c
+* Stellar XLM has been restored
 
 = 2.166 20260517 =
 
