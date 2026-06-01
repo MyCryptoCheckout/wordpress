@@ -70,6 +70,32 @@ trait admin_trait
 			$r .= $this->info_message_box()->_( $message_box_text );
 		}
 
+		// Maybe show the user the info about the modern checkout.
+		$checkout_payment_style = $this->get_option( 'checkout_payment_style' );
+		if ( $checkout_payment_style !== 'modern' )
+		{
+			$modern_checkout_message_dismissed_nonce = md5( wp_salt() . 'modern_checkout_message_dismissed' );
+			if ( isset( $_GET[ 'modern_checkout_message_dismissed' ] ) )
+				if ( $_GET[ 'modern_checkout_message_dismissed' ] == $modern_checkout_message_dismissed_nonce )
+				{
+					$this->update_option( 'modern_checkout_message_dismissed', time() );
+				}
+
+			if ( ! $this->get_option( 'modern_checkout_message_dismissed' ) )
+			{
+				$url = add_query_arg( 'modern_checkout_message_dismissed', $modern_checkout_message_dismissed_nonce );
+				$setting_url = add_query_arg( 'tab', 'global_settings' );
+				$setting_url .= '#checkout_display';
+				$message_box_text = sprintf(
+					/* translators: 1: Checkout style setting URL */
+					__( 'Have you tried the <a href="%1$s">new modern checkout style</a>?', 'mycryptocheckout' ),
+					$setting_url,
+				);
+				$message_box_text .= '<br/><br/><a href="' . $url . '">Dismiss this message.</a>';
+				$r .= $this->info_message_box()->_( $message_box_text );
+			}
+		}
+
 		$retrieve_account = $form->secondary_button( 'retrieve_account' )
 			->value( __( 'Refresh your account data', 'mycryptocheckout' ) );
 
@@ -203,16 +229,6 @@ trait admin_trait
 		}
 		else
 		{
-		}
-
-		$checkout_payment_style = $this->get_option( 'checkout_payment_style' );
-		if ( $checkout_payment_style !== 'modern' )
-		{
-			$row = $table->head()->row();
-			$row->th( 'key' )->text( __( 'Checkout style', 'mycryptocheckout' ) );
-			$url = add_query_arg( 'tab', 'global_settings' );
-			$url .= '#checkout_display';
-			$row->td( 'details' )->text( 'Classic - <a href="' . $url . '">Try the modern style!</a>' );
 		}
 
 		$row = $table->head()->row();
