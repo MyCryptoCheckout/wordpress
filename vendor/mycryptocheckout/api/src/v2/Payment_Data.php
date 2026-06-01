@@ -10,6 +10,12 @@ namespace mycryptocheckout\api\v2;
 class Payment_Data
 {
 	/**
+		@brief		This object will contain the payment.
+		@since		2026-06-01 10:37:28
+	**/
+	public $payment;
+
+	/**
 		@brief		The payment class.
 		@since		2017-12-30 19:46:17
 	**/
@@ -24,7 +30,9 @@ class Payment_Data
 	**/
 	public function load()
 	{
-		$r = json_decode( $this->payment->data );
+		$r = false;
+		if ( isset( $this->payment->data ) )
+			$r = json_decode( $this->payment->data );
 		if ( ! $r )
 			$r = (object)[];
 		return $r;

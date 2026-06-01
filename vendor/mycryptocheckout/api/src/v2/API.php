@@ -167,6 +167,24 @@ abstract class API
 	}
 
 	/**
+		@brief		Check that the specified IP is a local network.
+		@since		2026-06-01 09:50:58
+	**/
+	public function is_private_network_ip( $ip )
+	{
+		if ( ! is_string( $ip ) || $ip === '' )
+			return false;
+
+		$ip = trim( $ip );
+
+		// Handles IPv4 and IPv6 private/reserved ranges.
+		return
+			( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) === false )
+			&&
+			( filter_var( $ip, FILTER_VALIDATE_IP ) !== false );
+	}
+
+	/**
 		@brief		Test basic communication with the client in realtime.
 		@since		2019-11-15 23:04:31
 	**/
@@ -288,6 +306,7 @@ abstract class API
 	{
 		// Only accept messages from the MCC API server.
 		$allowed_ips = [ '136.144.254.215', '2a01:7c8:d008:e:5054:ff:fe62:ede3' ];
+
 		$remote_ip = $_SERVER['REMOTE_ADDR'];
 
 		// Some hosts add a Cloudflare header with the visitor's real IP, which is what we need to check.
@@ -305,9 +324,17 @@ abstract class API
 			}
 		}
 
-		if ( ! in_array( $remote_ip, $allowed_ips ) )
+		$allowed_private_ips = defined( 'MYCRYPTOCHECKOUT_ALLOWED_PRIVATE_API_IPS' )
+			? MYCRYPTOCHECKOUT_ALLOWED_PRIVATE_API_IPS
+			: [];
+
+		if ( ! is_array( $allowed_private_ips ) )
+			$allowed_private_ips = [];
+
+		if ( ! in_array( $remote_ip, $allowed_ips, true ) )
 		{
-			throw new Exception( 'Invalid origin IP: ' . $remote_ip );
+			if ( ! in_array( $remote_ip, $allowed_private_ips, true ) )
+				throw new Exception( 'Invalid origin IP: ' . $remote_ip );
 		}
 
 		// This must be an array.
