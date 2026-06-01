@@ -49,18 +49,27 @@
 						$(this).addClass( 'current' );
 						$fieldsets.hide();
 						$item.show();
+
+						// Also add the hash to the forma action.
+						var $form = $subsubsub.closest( 'form' );
+						var form_action = $form.prop( 'action' );
+						// Remove the hash.
+						form_action = form_action.replace( /#.*/, '' );
+						$form.prop( 'action', form_action + '#' + h3_slug );
 					} );
 
 				} );
 
-				// Check if there is a #
+				// Check if there is a # in the location
 				if ( document.location.hash.length > 1 )
 				{
+					// Select it
 					var tab_hash = document.location.hash.replace( '#', '' );
 					$( 'li a.' + tab_hash , $subsubsub ).click();
 				}
 				else
 				{
+					// Select the first tab
 					$( 'li a', $subsubsub ).first().click();
 				}
             } ); // return this.each( function()
