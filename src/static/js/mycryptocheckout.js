@@ -3350,8 +3350,11 @@ var mycryptocheckout_checkout_javascript = function( data )
 		@brief		Create an address row for the modern checkout.
 		@since		2026-05-28
 	**/
-	$$.modern_value_card = function( label, value, role )
+	$$.modern_value_card = function( label, value, role, copy_value )
 	{
+		if ( typeof copy_value === 'undefined' )
+			copy_value = value;
+
 		var $card = $( '<div>' ).addClass( 'mcc-modern-value-card' );
 		var $label = $( '<div>' ).addClass( 'mcc-modern-label' ).text( label );
 		var $row = $( '<div>' ).addClass( 'mcc-modern-value-row' );
@@ -3377,7 +3380,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			.on( 'click', function( e )
 			{
 				e.preventDefault();
-				$$.modern_copy_text( value, $( this ).find( 'span' ) );
+				$$.modern_copy_text( copy_value, $( this ).find( 'span' ) );
 			} );
 
 		$row.append( $value );
@@ -3642,7 +3645,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$left.append( $title );
 		$left.append( $summary );
 		$left.append( $important_notice );
-		$left.append( $$.modern_value_card( 'Amount', amount + ' ' + currency, '' ) );
+		$left.append( $$.modern_value_card( 'Amount', amount + ' ' + currency, '', amount ) );
 		$left.append( $$.modern_value_card( 'Pay to address', to, 'payment' ) );
 
 		if ( ens !== '' )
