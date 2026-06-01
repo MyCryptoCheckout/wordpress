@@ -565,6 +565,28 @@ trait misc_methods_trait
 
 		$action->data->set( 'checkout_payment_style', $checkout_payment_style );
 
+		$action->data->set(
+			'modern_checkout_i18n',
+			[
+				'complete_payment'     => __( 'Complete your payment', 'mycryptocheckout' ),
+				'summary'              => __( 'Please send the exact amount of %s to the address below.', 'mycryptocheckout' ),
+				'important'            => __( 'Important', 'mycryptocheckout' ),
+				'exact_amount_notice'  => __( 'Send the exact amount shown to help ensure the payment is detected automatically.', 'mycryptocheckout' ),
+				'amount'               => __( 'Amount', 'mycryptocheckout' ),
+				'pay_to_address'       => __( 'Pay to address', 'mycryptocheckout' ),
+				'ens_address'          => __( 'ENS / Unstoppable domain', 'mycryptocheckout' ),
+				'copy'                 => __( 'Copy', 'mycryptocheckout' ),
+				'copy_label'           => __( 'Copy %s', 'mycryptocheckout' ),
+				'copied'               => __( 'Copied', 'mycryptocheckout' ),
+				'pay_with'             => __( 'Pay with', 'mycryptocheckout' ),
+				'scan_to_pay'          => __( 'Scan to pay', 'mycryptocheckout' ),
+				'pay_with_metamask'    => __( 'Pay with MetaMask', 'mycryptocheckout' ),
+				'pay_with_trustwallet' => __( 'Pay with Trust Wallet', 'mycryptocheckout' ),
+				'open_in_wallet'       => __( 'Open in %s Wallet', 'mycryptocheckout' ),
+				'or'                   => __( 'or', 'mycryptocheckout' ),
+			]
+		);
+
 		// ENS address. This requires finding the wallet that has this address and extracting the ENS address from it.
 		$to = $action->data->get( 'to' );
 		$wallets = $this->wallets();

@@ -3271,6 +3271,29 @@ var mycryptocheckout_checkout_javascript = function( data )
 	}
 
 	/**
+		@brief		Get a translated modern checkout string.
+		@since		2026-05-31
+	**/
+	$$.modern_i18n = function( key, fallback )
+	{
+		var strings = $$.data.modern_checkout_i18n || $$.mycryptocheckout_checkout_data.modern_checkout_i18n || {};
+
+		if ( typeof strings[ key ] !== 'undefined' && strings[ key ] !== '' )
+			return strings[ key ];
+
+		return fallback;
+	}
+
+	/**
+		@brief		Simple %s replacement for translated checkout strings.
+		@since		2026-05-31
+	**/
+	$$.modern_sprintf = function( text, value )
+	{
+		return String( text ).replace( '%s', value );
+	}
+
+	/**
 		@brief		Get a readable currency name for the modern checkout.
 		@since		2026-05-28
 	**/
@@ -3308,7 +3331,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 				return;
 
 			var old_text = $button.text();
-			$button.text( 'Copied' );
+			$button.text( $$.modern_i18n( 'copied', 'Copied' ) );
 
 			setTimeout( function()
 			{
@@ -3369,19 +3392,31 @@ var mycryptocheckout_checkout_javascript = function( data )
 		var $copy = $( '<button>' )
 			.attr( 'type', 'button' )
 			.addClass( 'mcc-modern-copy' )
-			.attr( 'aria-label', 'Copy ' + label )
-			.html(
-				'<svg class="mcc-modern-copy-icon" viewBox="0 0 24 24" aria-hidden="true">' +
-					'<path d="M8 7a3 3 0 0 1 3-3h7a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-1v-2h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7a1 1 0 0 0-1 1v1H8V7z"></path>' +
-					'<path d="M6 9h7a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1H6z"></path>' +
-				'</svg>' +
-				'<span>Copy</span>'
+			.attr(
+				'aria-label',
+				$$.modern_sprintf(
+					$$.modern_i18n( 'copy_label', 'Copy %s' ),
+					label
+				)
 			)
 			.on( 'click', function( e )
 			{
 				e.preventDefault();
 				$$.modern_copy_text( copy_value, $( this ).find( 'span' ) );
 			} );
+
+		$copy.append(
+			$(
+				'<svg class="mcc-modern-copy-icon" viewBox="0 0 24 24" aria-hidden="true">' +
+					'<path d="M8 7a3 3 0 0 1 3-3h7a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-1v-2h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7a1 1 0 0 0-1 1v1H8V7z"></path>' +
+					'<path d="M6 9h7a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1H6z"></path>' +
+				'</svg>'
+			)
+		);
+
+		$copy.append(
+			$( '<span>' ).text( $$.modern_i18n( 'copy', 'Copy' ) )
+		);
 
 		$row.append( $value );
 		$row.append( $copy );
@@ -3459,7 +3494,12 @@ var mycryptocheckout_checkout_javascript = function( data )
 			.attr( 'data-mcc-wallet-button', 'open-wallet' );
 
 		$a.append( $( '<span>' ).addClass( 'mcc-modern-wallet-icon' ).text( '↗' ) );
-		$a.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( 'Open in ' + currency + ' Wallet' ) );
+		$a.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text(
+			$$.modern_sprintf(
+				$$.modern_i18n( 'open_in_wallet', 'Open in %s Wallet' ),
+				currency
+			)
+		) );
 		$a.append( $( '<span>' ).addClass( 'mcc-modern-wallet-arrow' ).text( '→' ) );
 
 		$a.appendTo( $$.$payment_buttons );
@@ -3540,7 +3580,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 				.empty();
 
 			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-icon' ).text( '🦊' ) );
-			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( 'Pay with MetaMask' ) );
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( $$.modern_i18n( 'pay_with_metamask', 'Pay with MetaMask' ) ) );
 			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-arrow' ).text( '→' ) );
 		} );
 
@@ -3557,7 +3597,11 @@ var mycryptocheckout_checkout_javascript = function( data )
 				.empty();
 
 			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-icon' ).text( '🦊' ) );
-			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( 'Pay with MetaMask' ) );
+			$button.append(
+				$( '<span>' )
+					.addClass( 'mcc-modern-wallet-label' )
+					.text( $$.modern_i18n( 'pay_with_metamask', 'Pay with MetaMask' ) )
+			);
 			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-arrow' ).text( '→' ) );
 		} );
 
@@ -3574,7 +3618,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 				.empty();
 
 			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-icon' ).text( '🛡' ) );
-			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( 'Pay with Trust Wallet' ) );
+			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-label' ).text( $$.modern_i18n( 'pay_with_trustwallet', 'Pay with Trust Wallet' ) ) );
 			$button.append( $( '<span>' ).addClass( 'mcc-modern-wallet-arrow' ).text( '→' ) );
 		} );
 
@@ -3622,10 +3666,17 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		var $title = $( '<h2>' )
 			.addClass( 'mcc-modern-title' )
-			.text( 'Complete your payment' );
+			.text( $$.modern_i18n( 'complete_payment', 'Complete your payment' ) );
 
 		var $summary = $( '<p>' ).addClass( 'mcc-modern-summary' );
-		$summary.append( document.createTextNode( 'Please send the exact amount of ' + currency + ' to the address below.' ) );
+		$summary.append(
+			document.createTextNode(
+				$$.modern_sprintf(
+					$$.modern_i18n( 'summary', 'Please send the exact amount of %s to the address below.' ),
+					currency
+				)
+			)
+		);
 
 		var $important_notice = $( '<div>' )
 			.addClass( 'mcc-modern-notice mcc-modern-notice-warning' );
@@ -3635,9 +3686,14 @@ var mycryptocheckout_checkout_javascript = function( data )
 		);
 
 		var $important_text = $( '<div>' ).addClass( 'mcc-modern-notice-text' );
-		$important_text.append( $( '<strong>' ).text( 'Important' ) );
+		$important_text.append( $( '<strong>' ).text( $$.modern_i18n( 'important', 'Important' ) ) );
 		$important_text.append(
-			$( '<span>' ).text( 'Send the exact amount shown to help ensure the payment is detected automatically.' )
+			$( '<span>' ).text(
+				$$.modern_i18n(
+					'exact_amount_notice',
+					'Send the exact amount shown to help ensure the payment is detected automatically.'
+				)
+			)
 		);
 
 		$important_notice.append( $important_text );
@@ -3645,18 +3701,31 @@ var mycryptocheckout_checkout_javascript = function( data )
 		$left.append( $title );
 		$left.append( $summary );
 		$left.append( $important_notice );
-		$left.append( $$.modern_value_card( 'Amount', amount + ' ' + currency, '', amount ) );
-		$left.append( $$.modern_value_card( 'Pay to address', to, 'payment' ) );
+		$left.append( $$.modern_value_card(
+			$$.modern_i18n( 'amount', 'Amount' ),
+			amount + ' ' + currency,
+			'',
+			amount
+		) );
+		$left.append( $$.modern_value_card(
+			$$.modern_i18n( 'pay_to_address', 'Pay to address' ),
+			to,
+			'payment'
+		) );
 
 		if ( ens !== '' )
 		{
 			$left.append(
 				$( '<div>' )
 					.addClass( 'mcc-modern-divider' )
-					.text( '— or —' )
+					.text( '— ' + $$.modern_i18n( 'or', 'or' ) + ' —' )
 			);
 
-			$left.append( $$.modern_value_card( 'ENS / Unstoppable domain', ens, '' ) );
+			$left.append( $$.modern_value_card(
+				$$.modern_i18n( 'ens_address', 'ENS / Unstoppable domain' ),
+				ens,
+				''
+			) );
 		}
 
 		if ( $timer.length > 0 )
@@ -3685,7 +3754,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		}
 
 		var $buttons_card = $( '<div>' ).addClass( 'mcc-modern-buttons-card' );
-		$buttons_card.append( $( '<h3>' ).text( 'Pay with' ) );
+		$buttons_card.append( $( '<h3>' ).text( $$.modern_i18n( 'pay_with', 'Pay with' ) ) );
 		$buttons_card.append( $buttons );
 		$right.append( $buttons_card );
 
@@ -3714,7 +3783,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		if ( $qr.length > 0 )
 		{
 			var $qr_card = $( '<div>' ).addClass( 'mcc-modern-qr-card' );
-			$qr_card.append( $( '<h3>' ).text( 'Scan to pay' ) );
+			$qr_card.append( $( '<h3>' ).text( $$.modern_i18n( 'scan_to_pay', 'Scan to pay' ) ) );
 			$qr_card.append( $qr );
 
 			$right.append( $qr_card );
