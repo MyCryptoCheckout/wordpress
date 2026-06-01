@@ -136,6 +136,8 @@ trait menu_trait
 	**/
 	public function network_admin_menu()
 	{
+		$this->enqueue_js();
+
 		add_submenu_page(
 			'settings.php',
 			// Page heading
