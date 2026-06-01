@@ -651,7 +651,7 @@
   }
   .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .mcc-modern-shell {
     grid-template-columns: 1fr;
-    grid-template-areas: "currency" "left" "right";
+    grid-template-areas: "left" "right";
     gap: 18px;
   }
   .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .mcc-modern-currency-card {
@@ -665,6 +665,11 @@
   }
   .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .payment_buttons .mcc-modern-wallet-button {
     min-height: 52px !important;
+  }
+  .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .payment_buttons .mcc-modern-wallet-label {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
   }
   .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .mcc_payment_timer .timer,
   .mycryptocheckout.online_payment_instructions.mcc-modern-checkout .mcc_payment_timer .paid:not(.mcc_hidden) {

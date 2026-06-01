@@ -742,7 +742,6 @@
 		.mcc-modern-shell {
 			grid-template-columns: 1fr;
 			grid-template-areas:
-				"currency"
 				"left"
 				"right";
 			gap: 18px;
@@ -762,6 +761,12 @@
 
 		.payment_buttons .mcc-modern-wallet-button {
 			min-height: 52px !important;
+		}
+
+		.payment_buttons .mcc-modern-wallet-label {
+			white-space: normal;
+			overflow: visible;
+			text-overflow: clip;
 		}
 
 		.mcc_payment_timer {
