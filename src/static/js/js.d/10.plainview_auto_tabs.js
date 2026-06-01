@@ -31,7 +31,8 @@
 				{
 					var $item = $(item);
 					var $h3 = $( 'h3.title', $item );
-					var $a = $( '<a href="#">' ).html( $h3.html() );
+					var h3_slug = $h3.text().replace( /[^0-9a-zA-Z]/g, '_' ).toLowerCase();
+					var $a = $( '<a class="' + h3_slug + '" href="#' + h3_slug + '">' ).html( $h3.html() );
 					$h3.remove();
 					var $li = $( '<li>' );
 					$a.appendTo( $li );
@@ -52,7 +53,16 @@
 
 				} );
 
-				$( 'li a', $subsubsub ).first().click();
+				// Check if there is a #
+				if ( document.location.hash.length > 1 )
+				{
+					var tab_hash = document.location.hash.replace( '#', '' );
+					$( 'li a.' + tab_hash , $subsubsub ).click();
+				}
+				else
+				{
+					$( 'li a', $subsubsub ).first().click();
+				}
             } ); // return this.each( function()
         } // plugin: function()
     } ); // $.fn.extend({
