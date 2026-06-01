@@ -28,21 +28,21 @@ module.exports = function(grunt) {
 			main: {
 				files: [
 					// copies web3.js file
-					{ 
+					{
 						expand: true,
 						flatten: true,
-						src: ['node_modules/web3/dist/web3.min.js'], 
+						src: ['node_modules/web3/dist/web3.min.js'],
 						dest: 'src/static/js/',
 						filter: 'isFile'
 					},
 					// copies bignumber.js file
-					{ 
+					{
 						expand: true,
 						flatten: true,
-						src: ['node_modules/bignumber.js/bignumber.js'], 
+						src: ['node_modules/bignumber.js/bignumber.js'],
 						dest: 'src/static/js/js.d/',
 						filter: 'isFile',
-						// Rename the file to include '40.' prefix 
+						// Rename the file to include '40.' prefix
 						rename: function (dest, matchedSrcPath) {
 							if (matchedSrcPath.substring(0, 1) !== '4') {
 								return dest + '10.' + matchedSrcPath;
@@ -50,13 +50,13 @@ module.exports = function(grunt) {
 						}
 					},
 					// copies qrcode.js file
-					{ 
+					{
 						expand: true,
 						flatten: true,
-						src: ['node_modules/qrcode/build/qrcode.js'], 
+						src: ['node_modules/qrcode/build/qrcode.js'],
 						dest: 'src/static/js/js.d/',
 						filter: 'isFile',
-						// Rename the file to include '40.' prefix 
+						// Rename the file to include '40.' prefix
 						rename: function (dest, matchedSrcPath) {
 							if (matchedSrcPath.substring(0, 1) !== '4') {
 								return dest + '40.' + matchedSrcPath;
@@ -97,6 +97,11 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		watch: {
+			files: 'src/static/js/js.d/*.js',
+			tasks: [ 'copy', 'concat', 'uglify' ],
+			options : { nospawn : true }
+		},
 	});
 
 	// Load plugins
@@ -105,8 +110,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	
+	grunt.loadNpmTasks('grunt-contrib-watch');
+
 	// Run All Tasks
 	grunt.registerTask('all', ['dart-sass', 'postcss', 'copy', 'concat', 'uglify']);
 
 };
+
