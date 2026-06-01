@@ -205,6 +205,16 @@ trait admin_trait
 		{
 		}
 
+		$checkout_payment_style = $this->get_option( 'checkout_payment_style' );
+		if ( $checkout_payment_style !== 'modern' )
+		{
+			$row = $table->head()->row();
+			$row->th( 'key' )->text( __( 'Checkout style', 'mycryptocheckout' ) );
+			$url = add_query_arg( 'tab', 'global_settings' );
+			$url .= '#checkout_display';
+			$row->td( 'details' )->text( 'Classic - <a href="' . $url . '">Try the modern style!</a>' );
+		}
+
 		$row = $table->head()->row();
 		if ( $account->has_license() )
 			$text =  __( 'Extend your license', 'mycryptocheckout' );
