@@ -1,3 +1,5 @@
+20260121		HTML: Attributes can't do floats.
+				Wordpress: A little less htmlspecialchars in the debug function.
 20251214		Wordpress: Better escaping of string variables.
 20251201		Form2: Fix php 8.4 error about null.
 20250918		Wordpress: Add get_meta to post object store.
