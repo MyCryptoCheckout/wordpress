@@ -303,7 +303,7 @@
 
 	.mcc-modern-title {
 		margin: 0 0 14px;
-		font-size: 30px;
+		font-size: 28px;
 		line-height: 1.2;
 		font-weight: 800;
 		letter-spacing: -0.025em;
@@ -362,9 +362,11 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 8px;
+		width: 54px;
+		min-width: 54px;
 		min-height: 54px;
-		padding: 0 16px;
+		max-height: 55px;
+		padding: 0;
 		border: 1px solid rgba(15, 23, 42, 0.12);
 		border-radius: 14px;
 		background: #fff;
@@ -377,6 +379,12 @@
 
 	.mcc-modern-copy:hover {
 		background: #f3f4f6;
+	}
+
+	.mcc-modern-copy-copied {
+		border-color: rgba(16, 185, 129, 0.35);
+		background: #ecfdf5;
+		color: #047857;
 	}
 
 	.mcc-modern-copy-icon {
@@ -747,16 +755,13 @@
 			gap: 18px;
 		}
 
-		.mcc-modern-currency-card {
+		.mcc-modern-title {
+    		font-size: 22px;
+		}
+
+		.mcc-modern-currency-card,
+		.mcc-modern-summary {
 			display: none;
-		}
-
-		.mcc-modern-value-row {
-			grid-template-columns: 1fr;
-		}
-
-		.mcc-modern-copy {
-			min-height: 44px;
 		}
 
 		.payment_buttons .mcc-modern-wallet-button {
@@ -772,11 +777,13 @@
 		.mcc_payment_timer {
 			.timer,
 			.paid:not(.mcc_hidden) {
-				grid-template-columns: auto 1fr;
+				display: flex;
+				flex-direction: column;
 				background: #ecfdf5;
 				border-color: rgba(16, 185, 129, 0.22);
 				color: #047857;
 				align-items: center;
+
 			}
 
 			.paid:not(.mcc_hidden) svg {

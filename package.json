@@ -4,9 +4,8 @@
   "description": "MyCryptoCheckout plugin for WordPress",
   "main": "Gruntfile.js",
   "scripts": {
-    "build:solweb3": "webpack --config webpack.config.solweb3.js",
     "build:woocommerce": "webpack --config webpack.config.js",
-    "build": "npm run build:woocommerce && npm run build:solweb3"
+    "build": "npm run build:woocommerce"
   },
   "repository": {
     "type": "git",
@@ -29,8 +28,6 @@
     "grunt": "^1.6.1"
   },
   "dependencies": {
-    "@solana/spl-token": "^0.4.6",
-    "@solana/web3.js": "^1.91.8",
     "bignumber.js": "^9.0.2",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",

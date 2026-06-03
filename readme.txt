@@ -4,7 +4,7 @@ Donate link: https://mycryptocheckout.com
 License: GPLv3
 Requires at least: 6.2
 Requires PHP: 8.0
-Stable tag: 2.167
+Stable tag: 2.168
 Tags: bitcoin, ethereum, payments, woocommerce, bitcoin woocommerce
 Tested up to: 7.0
 
@@ -42,14 +42,14 @@ The free license can process 5 sales per month. A <a href="https://mycryptocheck
 
 - Algorand ALGO
 - Base Chain BASE (Including Metamask)
-- Binance Coin BNB
+- Binance Coin BNB (Including Metamask)
 - Bitcoin BTC (Including SegWit, HD wallets)
 - Doge
 - Ethereum ETH (Including MetaMask, ENS addresses)
 - Litecoin LTC
 - Monero XMR
 - Polygon MATIC
-- Solana SOL (Including Phantom)
+- Solana SOL
 - Stellar XLM
 - Tron TRX
 - XRP
@@ -182,14 +182,7 @@ Real-time verification ensures the displayed wallet address matches the database
 * **Privacy Policy:** https://mycryptocheckout.com/privacy-policy/
 * **Terms of Service:** https://mycryptocheckout.com/terms-conditions/
 
-**Solana Public RPC Nodes**
-* **Usage:** Used by the included `@solana/web3.js` library to query the Solana blockchain state and facilitate direct wallet transactions (e.g., Phantom Wallet) during checkout.
-* **Data Sent:** Public transaction data (wallet addresses, amounts, and block hashes) is queried directly from the user's browser to the Solana network to estimate fees and propose transactions.
-* **Link:** [Solana](https://solana.com)
-* **Privacy Policy:** https://solana.com/privacy-policy
-* **Terms of Service:** https://solana.com/tos
-
-**Web3 Wallet Integration (Ethereum & Solana)**
+**Web3 Wallet Integration (Ethereum)**
 * **Usage:** Allows users to click a "Pay with Wallet" button to automatically fill in payment details in their browser extension.
 * **Data Sent:** Transaction details (destination address and amount) are passed locally to the user's installed wallet extension.
 
@@ -248,6 +241,10 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 - <a href="https://wordpress.org/plugins/really-simple-ssl/">Really Simple SSL</a> causes payments to be canceled as soon as they are paid.
 
 == Changelog ==
+
+= 2.168 =
+* Update: Modern checkout styles
+* Removed: Phantom wallet button
 
 = 2.167 20260601 =
 
