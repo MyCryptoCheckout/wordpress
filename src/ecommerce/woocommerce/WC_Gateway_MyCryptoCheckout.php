@@ -627,24 +627,7 @@ class WC_Gateway_MyCryptoCheckout extends \WC_Payment_Gateway
 	{
 		if ( ! is_wc_endpoint_url( 'order-received' ) )
 			return;
+
 		echo '<meta name="format-detection" content="telephone=no">';   // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- actual html in the head
-
-		// Retrieve the plugin version
-		$plugin_version = MYCRYPTOCHECKOUT_PLUGIN_VERSION;
-
-		echo '<script type="text/javascript">
-			document.addEventListener("DOMContentLoaded", function () {
-				// Check if Phantom wallet is available and load the script if it is
-				if (typeof window.solana !== "undefined") {
-					var script = document.createElement("script");
-					script.src = "'
-						. esc_url( MyCryptoCheckout()->paths( 'url' ) )
-						. 'src/static/js/sol-web3/dist/index.js?v='
-						. esc_html( $plugin_version )
-						. '";
-					document.body.appendChild(script);
-				}
-			});
-		</script>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- actual js in the head;
 	}
 }

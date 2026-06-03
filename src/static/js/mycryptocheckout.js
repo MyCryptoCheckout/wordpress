@@ -3346,15 +3346,29 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		var done = function()
 		{
-			if ( ! $button )
+			if ( ! $button || $button.length < 1 )
 				return;
 
-			var old_text = $button.text();
-			$button.text( $$.modern_i18n( 'copied', 'Copied' ) );
+			var $icon = $button.find( '.mcc-modern-copy-icon' );
+			var old_html = $icon.html();
+			var old_aria_label = $button.attr( 'aria-label' );
+
+			$button.addClass( 'mcc-modern-copy-copied' );
+			$button.attr( 'aria-live', 'polite' );
+			$button.attr( 'aria-label', $$.modern_i18n( 'copied', 'Copied' ) );
+
+			$icon.html(
+				'<path d="M9.2 16.6 4.9 12.3l1.4-1.4 2.9 2.9 8.5-8.5 1.4 1.4-9.9 9.9z"></path>'
+			);
 
 			setTimeout( function()
 			{
-				$button.text( old_text );
+				$button.removeClass( 'mcc-modern-copy-copied' );
+
+				if ( typeof old_aria_label !== 'undefined' )
+					$button.attr( 'aria-label', old_aria_label );
+
+				$icon.html( old_html );
 			}, 1500 );
 		};
 
@@ -3421,7 +3435,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 			.on( 'click', function( e )
 			{
 				e.preventDefault();
-				$$.modern_copy_text( copy_value, $( this ).find( 'span' ) );
+				$$.modern_copy_text( copy_value, $( this ) );
 			} );
 
 		$copy.append(
@@ -3431,10 +3445,6 @@ var mycryptocheckout_checkout_javascript = function( data )
 					'<path d="M6 9h7a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1H6z"></path>' +
 				'</svg>'
 			)
-		);
-
-		$copy.append(
-			$( '<span>' ).text( $$.modern_i18n( 'copy', 'Copy' ) )
 		);
 
 		$row.append( $value );
