@@ -231,6 +231,25 @@ trait admin_trait
 		{
 		}
 
+		$unmatched_payments = $account->get_unmatched_payments();
+		if ( count($unmatched_payments ) > 0 )
+		{
+			$row_text = [];
+			foreach( $unmatched_payments as $unmatched_payment )
+			{
+				$row_text []= sprintf( '%s %s &rarr; %s (%s) @ %s',
+					floatval( $unmatched_payment->amount ),
+					wp_kses_post( $unmatched_payment->currency_id ),
+					wp_kses_post( $unmatched_payment->to ),
+					wp_kses_post( $unmatched_payment->transaction_id ),
+					wp_kses_post( $unmatched_payment->created_at ),
+				);
+			}
+			$text =  __( 'Unmatched payments', 'mycryptocheckout' );
+			$row->th( 'key' )->text( $text );
+			$row->td( 'details' )->text( implode( "<br/>", $row_text ) );
+		}
+
 		$row = $table->head()->row();
 		if ( $account->has_license() )
 			$text =  __( 'Extend your license', 'mycryptocheckout' );
