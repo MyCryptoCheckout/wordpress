@@ -1148,7 +1148,7 @@ trait admin_trait
 			$row->td( 'since' )->text( static::wordpress_ago( strtotime( $unmatched_payment->created_at ) ) );
 		}
 
-		echo wpautop( __( 'The table shows recent transactions to any of your addresses, that could not be matched to orders.', 'mycryptocheckout' ) );
+		echo wpautop( __( 'Unmatched payments are detected blockchain transactions to your wallet addresses that could not be automatically matched to an MCC order. Review the currency, amount, receiving address, and transaction ID, then verify the transaction on-chain before deciding whether it belongs to a customer order.', 'mycryptocheckout' ) );
 
 		echo wpautop( __( 'Unmatched payments disappear automatically from the table after 7 days.', 'mycryptocheckout' ) );
 
