@@ -231,25 +231,6 @@ trait admin_trait
 		{
 		}
 
-		$unmatched_payments = $account->get_unmatched_payments();
-		if ( count($unmatched_payments ) > 0 )
-		{
-			$row_text = [];
-			foreach( $unmatched_payments as $unmatched_payment )
-			{
-				$row_text []= sprintf( '%s %s &rarr; %s (%s) @ %s',
-					floatval( $unmatched_payment->amount ),
-					wp_kses_post( $unmatched_payment->currency_id ),
-					wp_kses_post( $unmatched_payment->to ),
-					wp_kses_post( $unmatched_payment->transaction_id ),
-					wp_kses_post( $unmatched_payment->created_at ),
-				);
-			}
-			$text =  __( 'Unmatched payments', 'mycryptocheckout' );
-			$row->th( 'key' )->text( $text );
-			$row->td( 'details' )->text( implode( "<br/>", $row_text ) );
-		}
-
 		$row = $table->head()->row();
 		if ( $account->has_license() )
 			$text =  __( 'Extend your license', 'mycryptocheckout' );
@@ -1131,6 +1112,47 @@ trait admin_trait
 		$r .= $form->close_tag();
 
 		echo $r;			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped earlier
+	}
+
+	/**
+		@brief		Show the unmatched payments.
+		@since		2026-06-04 20:59:57
+	**/
+	public function admin_unmatched_payments()
+	{
+		$account = $this->api()->account();
+		$table = $this->table();
+		$table->caption()->text( __( 'Unmatched payments to your addresses', 'mycryptocheckout' ) );
+
+		$row = $table->head()->row();
+		// Table column name
+		$row->th( 'address' )->text( __( 'Address', 'mycryptocheckout' ) );
+		// Table column name
+		$row->th( 'amount' )->text( __( 'Amount', 'mycryptocheckout' ) );
+		// Table column name
+		$row->th( 'transaction_id' )->text( __( 'Transaction ID', 'mycryptocheckout' ) );
+		// Table column name
+		$row->th( 'since' )->text( __( 'Since', 'mycryptocheckout' ) );
+
+		$unmatched_payments = $account->get_unmatched_payments();
+
+		// Show newest up top.
+		$unmatched_payments = array_reverse( $unmatched_payments );
+
+		foreach( $unmatched_payments as $unmatched_payment )
+		{
+			$row = $table->body()->row();
+			$row->td( 'address' )->text( wp_kses_post( floatval( $unmatched_payment->amount ) . ' ' . $unmatched_payment->currency_id ) );
+			$row->td( 'amount' )->text( wp_kses_post( $unmatched_payment->to ) );
+			$row->td( 'transaction_id' )->text( wp_kses_post( $unmatched_payment->transaction_id ) );
+			$row->td( 'since' )->text( static::wordpress_ago( strtotime( $unmatched_payment->created_at ) ) );
+		}
+
+		echo wpautop( __( 'The table shows recent transactions to any of your addresses, that could not be matched to orders.', 'mycryptocheckout' ) );
+
+		echo wpautop( __( 'Unmatched payments disappear automatically from the table after 7 days.', 'mycryptocheckout' ) );
+
+		echo $table;
 	}
 
 	/**

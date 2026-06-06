@@ -183,6 +183,17 @@ abstract class Account
 	}
 
 	/**
+		@brief		Does this account have any unmatched payments?
+		@since		2026-06-04 20:58:35
+	**/
+	public function has_unmatched_payments()
+	{
+		if ( ! $this->is_valid() )
+			return false;
+		return count( $this->data->unmatched_payments ) > 0;
+	}
+
+	/**
 		@brief		Is MCC available for payment?
 		@return		True if avaiable, else an exception containing the reason why it is not.
 		@since		2017-12-23 09:22:12

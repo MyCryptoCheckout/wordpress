@@ -97,6 +97,15 @@ trait menu_trait
 			// Name of tab
 			->name( __( 'Donations', 'mycryptocheckout' ) );
 
+		$account = $this->api()->account();
+		if ( $account->has_unmatched_payments() )
+			$tabs->tab( 'unmatched_payments' )
+				->callback_this( 'admin_unmatched_payments' )
+				// Tab heading
+				->heading( __( 'MyCryptoCheckout Unmatched Payments', 'mycryptocheckout' ) )
+				// Name of tab
+				->name( __( 'Unmatched Payments', 'mycryptocheckout' ) );
+
 		if ( $this->is_network )
 			$tabs->tab( 'local_settings' )
 				->callback_this( 'admin_local_settings' )
