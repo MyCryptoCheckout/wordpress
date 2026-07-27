@@ -1,0 +1,1630 @@
+# Français translations for MyCryptoCheckout.
+# Copyright (C) 2026 MyCryptoCheckout
+# This file is distributed under the same license as the MyCryptoCheckout project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MyCryptoCheckout 2.170\n"
+"Report-Msgid-Bugs-To: https://mycryptocheckout.com\n"
+"POT-Creation-Date: 2026-07-20 00:00+0000\n"
+"PO-Revision-Date: 2026-07-20 00:00+0000\n"
+"Last-Translator: MyCryptoCheckout\n"
+"Language-Team: French (Belgium)\n"
+"Language: fr_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: src/Expired_License.php:117
+#, php-format
+msgid ""
+"Your MyCryptoCheckout license has expired! If you wish to renew it, please "
+"visit your <a href=\"%1$s\">account settings</a>. Or you can <a "
+"href=\"%2$s\">dismiss this notice</a>."
+msgstr ""
+"Votre licence MyCryptoCheckout a expiré ! Pour la renouveler, consultez les "
+"<a href=\"%1$s\">réglages de votre compte</a>. Vous pouvez également <a "
+"href=\"%2$s\">ignorer cet avis</a>."
+
+#: src/admin_trait.php:50
+#, php-format
+msgid ""
+"Your PHP CURL module is missing. MyCryptoCheckout may not work 100%% well."
+msgstr ""
+"Le module PHP cURL est absent. MyCryptoCheckout risque de ne pas fonctionner"
+" correctement à 100%%."
+
+#: src/admin_trait.php:64
+#, php-format
+msgid ""
+"<strong>Keep Your Store Safe:</strong> Protect your site using our built-in "
+"<strong>Hardening Tools</strong> (Admin Lockdown, Disable File Editors, "
+"etc.) found in <a href=\"%1$s\">Global Settings &gt; Security</a>. We also "
+"strongly recommend you <a href=\"%2$s\" target=\"_blank\" "
+"rel=\"noopener\">enable login 2FA</a> and <a href=\"%3$s\" target=\"_blank\""
+" rel=\"noopener\">Sucuri Monitor</a>."
+msgstr ""
+"<strong>Protégez votre boutique :</strong> sécurisez votre site à l’aide de "
+"nos <strong>outils de durcissement</strong> intégrés (verrouillage des "
+"administrateurs, désactivation des éditeurs de fichiers, etc.), disponibles "
+"dans <a href=\"%1$s\">Réglages globaux &gt; Sécurité</a>. Nous vous "
+"recommandons également vivement d’<a href=\"%2$s\" target=\"_blank\" "
+"rel=\"noopener\">activer l’authentification à deux facteurs pour les "
+"connexions</a> et le <a href=\"%3$s\" target=\"_blank\" "
+"rel=\"noopener\">moniteur Sucuri</a>."
+
+#: src/admin_trait.php:69 src/admin_trait.php:94
+msgid "Dismiss this message."
+msgstr "Ignorer ce message."
+
+#: src/admin_trait.php:91
+#, php-format
+msgid "Have you tried the <a href=\"%1$s\">new modern checkout style</a>?"
+msgstr ""
+"Avez-vous essayé le <a href=\"%1$s\">nouveau style de paiement moderne</a> ?"
+
+#: src/admin_trait.php:100
+msgid "Refresh your account data"
+msgstr "Actualiser les données du compte"
+
+#: src/admin_trait.php:104
+msgid "Delete account data"
+msgstr "Supprimer les données du compte"
+
+#: src/admin_trait.php:110 src/admin_trait.php:462 src/admin_trait.php:775
+#: src/admin_trait.php:891 src/admin_trait.php:1000 src/admin_trait.php:1071
+#: src/donations_trait.php:102
+msgid "Security check failed. Please reload the page and try again."
+msgstr "La vérification de sécurité a échoué. Rechargez la page et réessayez."
+
+#: src/admin_trait.php:129
+msgid "Account data refreshed!"
+msgstr "Données du compte actualisées !"
+
+#: src/admin_trait.php:141
+msgid ""
+"Error refreshing your account data. Is your site password protected? Do you "
+"have coming soon / maintenance mode enabled? A firewall blocking "
+"api.mycryptocheckout.com?"
+msgstr ""
+"Erreur lors de l’actualisation des données de votre compte. Votre site est-"
+"il protégé par un mot de passe ? Le mode « bientôt disponible » ou "
+"maintenance est-il activé ? Un pare-feu bloque-t-il api.mycryptocheckout.com"
+" ?"
+
+#: src/admin_trait.php:167
+msgid ""
+"It appears as if MyCryptoCheckout was unable to retrieve your account data "
+"from the API server."
+msgstr ""
+"MyCryptoCheckout semble ne pas avoir pu récupérer les données de votre "
+"compte depuis le serveur d’API."
+
+#: src/admin_trait.php:168
+msgid ""
+"Click the Refresh your account data button below to try and retrieve your "
+"account data again."
+msgstr ""
+"Cliquez sur le bouton « Actualiser les données du compte » ci-dessous pour "
+"tenter de les récupérer à nouveau."
+
+#: src/admin_trait.php:187
+msgid "Payments using MyCryptoCheckout are currently not available"
+msgstr ""
+"Les paiements avec MyCryptoCheckout ne sont actuellement pas disponibles"
+
+#: src/admin_trait.php:194
+msgid "Your MyCryptoCheckout account details"
+msgstr "Détails de votre compte MyCryptoCheckout"
+
+#: src/admin_trait.php:198
+msgid "Key"
+msgstr "Clé"
+
+#: src/admin_trait.php:200 src/admin_trait.php:373
+msgid "Details"
+msgstr "Détails"
+
+#: src/admin_trait.php:205
+msgid "API key"
+msgstr "Clé API"
+
+#: src/admin_trait.php:211
+msgid "Server name"
+msgstr "Nom du serveur"
+
+#: src/admin_trait.php:215
+msgid "Account data refreshed"
+msgstr "Données du compte actualisées"
+
+#: src/admin_trait.php:221
+msgid "Your license expires"
+msgstr "Votre licence expire"
+
+#: src/admin_trait.php:236
+msgid "Extend your license"
+msgstr "Prolonger votre licence"
+
+#: src/admin_trait.php:238
+msgid "Purchase a license for unlimited payments"
+msgstr "Acheter une licence pour des paiements illimités"
+
+#: src/admin_trait.php:241
+msgid "Extend my license"
+msgstr "Prolonger ma licence"
+
+#: src/admin_trait.php:241
+msgid "Add an unlimited license to my cart"
+msgstr "Ajouter une licence illimitée à mon panier"
+
+#: src/admin_trait.php:249
+msgid "Payments remaining this month"
+msgstr "Paiements restants ce mois-ci"
+
+#: src/admin_trait.php:253
+msgid "Payments processed"
+msgstr "Paiements traités"
+
+#: src/admin_trait.php:257
+msgid "Physical currency exchange rates updated"
+msgstr "Taux de change des monnaies fiduciaires mis à jour"
+
+#: src/admin_trait.php:261
+msgid "Cryptocurrency exchange rates updated"
+msgstr "Taux de change des cryptomonnaies mis à jour"
+
+#: src/admin_trait.php:278
+#, php-format
+msgid "Currency %s is no longer available!"
+msgstr "La devise %s n’est plus disponible !"
+
+#: src/admin_trait.php:288
+msgid "Exchange rates for your currencies"
+msgstr "Taux de change de vos devises"
+
+#: src/admin_trait.php:296
+msgid "Reserved amounts"
+msgstr "Montants réservés"
+
+#: src/admin_trait.php:310
+msgid "Next scheduled hourly cron"
+msgstr "Prochaine tâche cron horaire planifiée"
+
+#: src/admin_trait.php:315
+msgid "Next scheduled account data update"
+msgstr "Prochaine mise à jour planifiée des données du compte"
+
+#: src/admin_trait.php:342
+msgid ""
+"You cannot modify your currencies until you have a valid account. Please see"
+" the Accounts tab."
+msgstr ""
+"Vous ne pouvez pas modifier vos devises tant que vous ne disposez pas d’un "
+"compte valide. Consultez l’onglet « Compte »."
+
+#: src/admin_trait.php:355
+msgid "Delete"
+msgstr "Supprimer"
+
+#: src/admin_trait.php:357
+msgid "Disable"
+msgstr "Désactiver"
+
+#: src/admin_trait.php:359
+msgid "Enable"
+msgstr "Activer"
+
+#: src/admin_trait.php:361
+msgid "Mark as used"
+msgstr "Marquer comme utilisé"
+
+#: src/admin_trait.php:363
+msgid "Reset sorting"
+msgstr "Réinitialiser le tri"
+
+#: src/admin_trait.php:369 src/admin_trait.php:422
+msgid "Currency"
+msgstr "Devise"
+
+#: src/admin_trait.php:371
+msgid "Wallet"
+msgstr "Portefeuille"
+
+#: src/admin_trait.php:403
+msgid "Edit this currency"
+msgstr "Modifier cette devise"
+
+#: src/admin_trait.php:416
+msgid "Add new currency / wallet"
+msgstr "Ajouter une devise / un portefeuille"
+
+#: src/admin_trait.php:420
+msgid "Which currency shall the new wallet belong to?"
+msgstr "À quelle devise le nouveau portefeuille doit-il être associé ?"
+
+#: src/admin_trait.php:425 src/admin_trait.php:666
+msgid "The address of your wallet to which you want to receive funds."
+msgstr ""
+"L’adresse du portefeuille sur lequel vous souhaitez recevoir les fonds."
+
+#: src/admin_trait.php:427
+msgid ""
+"If your currency has HD wallet support, you can add your public key when "
+"editing the wallet."
+msgstr ""
+"Si votre devise prend en charge les portefeuilles HD, vous pouvez ajouter "
+"votre clé publique lors de la modification du portefeuille."
+
+#: src/admin_trait.php:431 src/admin_trait.php:440 src/admin_trait.php:668
+#: src/admin_trait.php:1129
+msgid "Address"
+msgstr "Adresse"
+
+#: src/admin_trait.php:447 src/admin_trait.php:756
+msgid ""
+"Your private view key that is used to see the amounts in private "
+"transactions to your wallet."
+msgstr ""
+"Votre clé de visualisation privée, utilisée pour consulter les montants des "
+"transactions privées envoyées à votre portefeuille."
+
+#: src/admin_trait.php:449 src/admin_trait.php:758
+msgid "Monero private view key"
+msgstr "Clé de visualisation privée Monero"
+
+#: src/admin_trait.php:455 src/admin_trait.php:769 src/admin_trait.php:885
+#: src/admin_trait.php:994
+msgid "Save settings"
+msgstr "Enregistrer les réglages"
+
+#: src/admin_trait.php:479
+msgid "The selected wallets have been deleted."
+msgstr "Les portefeuilles sélectionnés ont été supprimés."
+
+#: src/admin_trait.php:489
+msgid "The selected wallets have been disabled."
+msgstr "Les portefeuilles sélectionnés ont été désactivés."
+
+#: src/admin_trait.php:499
+msgid "The selected wallets have been enabled."
+msgstr "Les portefeuilles sélectionnés ont été activés."
+
+#: src/admin_trait.php:509
+msgid "The selected wallets have been marked as used."
+msgstr "Les portefeuilles sélectionnés ont été marqués comme utilisés."
+
+#: src/admin_trait.php:519
+msgid "The selected wallets have had their sort order reset."
+msgstr "L’ordre de tri des portefeuilles sélectionnés a été réinitialisé."
+
+#: src/admin_trait.php:544 src/admin_trait.php:833 src/admin_trait.php:900
+#: src/admin_trait.php:1021
+msgid "Settings saved!"
+msgstr "Réglages enregistrés !"
+
+#: src/admin_trait.php:563
+msgid ""
+"This table shows the currencies you have setup. To edit a currency, click "
+"the address. To sort them, drag the currency name up or down."
+msgstr ""
+"Ce tableau affiche les devises que vous avez configurées. Pour modifier une "
+"devise, cliquez sur son adresse. Pour les trier, faites glisser le nom de la"
+" devise vers le haut ou vers le bas."
+
+#: src/admin_trait.php:565
+msgid ""
+"If you have several wallets of the same currency, they will be used in "
+"sequential order."
+msgstr ""
+"Si vous disposez de plusieurs portefeuilles pour une même devise, ils seront"
+" utilisés successivement."
+
+#: src/admin_trait.php:567
+#, php-format
+msgid ""
+"If you don't have a wallet address to use, perhaps %1$swe can recommend some"
+" wallets for you%2$s?"
+msgstr ""
+"Si vous n’avez pas d’adresse de portefeuille à utiliser, %1$snous pouvons "
+"peut-être vous recommander quelques portefeuilles%2$s."
+
+#: src/admin_trait.php:582
+#, php-format
+msgid ""
+"After adding currencies, visit the %1$sWooCommerce Settings%2$s to enable "
+"the gateway and more."
+msgstr ""
+"Après avoir ajouté des devises, accédez aux %1$sréglages WooCommerce%2$s "
+"pour activer la passerelle et configurer d’autres options."
+
+#: src/admin_trait.php:595
+#, php-format
+msgid ""
+"After adding currencies, visit the %1$sEasy Digital Downloads Settings%2$s "
+"to enable the gateway and more."
+msgstr ""
+"Après avoir ajouté des devises, accédez aux %1$sréglages Easy Digital "
+"Downloads%2$s pour activer la passerelle et configurer d’autres options."
+
+#: src/admin_trait.php:602
+msgid "Current currencies / wallets"
+msgstr "Devises / portefeuilles actuels"
+
+#: src/admin_trait.php:630
+msgid "Invalid wallet ID!"
+msgstr "Identifiant de portefeuille non valide !"
+
+#: src/admin_trait.php:654
+msgid "Basic settings"
+msgstr "Réglages de base"
+
+#: src/admin_trait.php:657
+msgid "Describe the wallet to yourself."
+msgstr "Ajoutez une description personnelle du portefeuille."
+
+#: src/admin_trait.php:659
+msgid "Label"
+msgstr "Libellé"
+
+#: src/admin_trait.php:678
+msgid ""
+"The ENS address of your wallet to which you want to receive funds. The "
+"resolving address must match your normal address."
+msgstr ""
+"L’adresse ENS du portefeuille sur lequel vous souhaitez recevoir les fonds. "
+"L’adresse résolue doit correspondre à votre adresse normale."
+
+#: src/admin_trait.php:680
+msgid "ENS Address"
+msgstr "Adresse ENS"
+
+#: src/admin_trait.php:688
+msgid "Is this wallet enabled and ready to receive funds?"
+msgstr "Ce portefeuille est-il activé et prêt à recevoir des fonds ?"
+
+#: src/admin_trait.php:690 src/payment_timer_trait.php:39
+#: src/qr_code_trait.php:37
+msgid "Enabled"
+msgstr "Activé"
+
+#: src/admin_trait.php:694
+msgid ""
+"How many confirmations needed to regard orders as paid. 1 is the default. "
+"Only some blockchains support 0-conf (mempool)."
+msgstr ""
+"Nombre de confirmations nécessaires pour considérer les commandes comme "
+"payées. La valeur par défaut est 1. Seules certaines blockchains prennent en"
+" charge 0 confirmation (mempool)."
+
+#: src/admin_trait.php:696
+msgid "Confirmations"
+msgstr "Confirmations"
+
+#: src/admin_trait.php:704
+msgid ""
+"This wallet supports HD public keys, but your system is missing the required"
+" PHP GMP library."
+msgstr ""
+"Ce portefeuille prend en charge les clés publiques HD, mais la bibliothèque "
+"PHP GMP requise est absente de votre système."
+
+#: src/admin_trait.php:709
+msgid "HD wallet settings"
+msgstr "Réglages du portefeuille HD"
+
+#: src/admin_trait.php:717
+#, php-format
+msgid ""
+"If you have an HD wallet and want to generate a new address after each "
+"purchase, enter your %s public key here."
+msgstr ""
+"Si vous possédez un portefeuille HD et souhaitez générer une nouvelle "
+"adresse après chaque achat, saisissez ici votre clé publique %s."
+
+#: src/admin_trait.php:719
+msgid "HD public key"
+msgstr "Clé publique HD"
+
+#: src/admin_trait.php:726
+msgid ""
+"The index of the next public wallet address to use. The default is 0 and "
+"gets increased each time the wallet is used. This is related to your "
+"wallet's gap length."
+msgstr ""
+"L’index de la prochaine adresse publique du portefeuille à utiliser. La "
+"valeur par défaut est 0 et elle augmente à chaque utilisation du "
+"portefeuille. Ceci est lié à la longueur d’écart de votre portefeuille."
+
+#: src/admin_trait.php:728
+msgid "Wallet index"
+msgstr "Index du portefeuille"
+
+#: src/admin_trait.php:742
+#, php-format
+msgid "The address at index %1$d is %2$s."
+msgstr "L’adresse à l’index %1$d est %2$s."
+
+#: src/admin_trait.php:745
+msgid ""
+"When using an HD wallet, you can accept amounts that are lower than "
+"requested."
+msgstr ""
+"Avec un portefeuille HD, vous pouvez accepter des montants inférieurs au "
+"montant demandé."
+
+#: src/admin_trait.php:746
+msgid "Payment tolerance percent"
+msgstr "Pourcentage de tolérance du paiement"
+
+#: src/admin_trait.php:813
+#, php-format
+msgid "This public key type is not supported. Please use only: %s"
+msgstr ""
+"Ce type de clé publique n’est pas pris en charge. Utilisez uniquement : %s"
+
+#: src/admin_trait.php:874 src/admin_trait.php:971
+msgid "QR code"
+msgstr "Code QR"
+
+#: src/admin_trait.php:880 src/admin_trait.php:982
+msgid "Payment timer"
+msgstr "Minuteur de paiement"
+
+#: src/admin_trait.php:930
+msgid "Gateway fees"
+msgstr "Frais de passerelle"
+
+#: src/admin_trait.php:933
+msgid ""
+"If you wish to charge (or discount) visitors for using MyCryptoCheckout as "
+"the payment gateway, you can enter the fixed or percentage amounts in the "
+"boxes below. The cryptocurrency checkout price will be modified in "
+"accordance with the combined values below. These are applied to the original"
+" currency."
+msgstr ""
+"Si vous souhaitez facturer un supplément aux visiteurs, ou leur accorder une"
+" remise, lorsqu’ils utilisent MyCryptoCheckout comme passerelle de paiement,"
+" saisissez ci-dessous les montants fixes ou en pourcentage. Le prix en "
+"cryptomonnaie affiché lors du paiement sera modifié selon la somme des "
+"valeurs ci-dessous. Ces valeurs s’appliquent à la devise d’origine."
+
+#: src/admin_trait.php:937
+msgid ""
+"If you wish to mark your prices up (or down) when using cryptocurrency, "
+"enter the fixed amount in this box."
+msgstr ""
+"Si vous souhaitez augmenter ou diminuer vos prix d’un montant fixe lors d’un"
+" paiement en cryptomonnaie, saisissez ce montant ici."
+
+#: src/admin_trait.php:939
+msgid "Markup amount"
+msgstr "Montant de la majoration"
+
+#: src/admin_trait.php:948
+msgid ""
+"If you wish to mark your prices up (or down) when using cryptocurrency, "
+"enter the percentage in this box."
+msgstr ""
+"Si vous souhaitez augmenter ou diminuer vos prix d’un pourcentage lors d’un "
+"paiement en cryptomonnaie, saisissez ce pourcentage ici."
+
+#: src/admin_trait.php:950
+#, php-format
+msgid "Markup %%"
+msgstr "Majoration %%"
+
+#: src/admin_trait.php:958
+msgid "Checkout display"
+msgstr "Affichage du paiement"
+
+#: src/admin_trait.php:961
+msgid ""
+"Choose the payment page layout shown after checkout. Classic keeps the "
+"existing layout. Modern uses the new card-style payment page."
+msgstr ""
+"Choisissez la mise en page de la page de paiement affichée après la "
+"commande. « Classique » conserve la mise en page existante. « Moderne » "
+"utilise la nouvelle page de paiement sous forme de cartes."
+
+#: src/admin_trait.php:962
+msgid "Payment page style"
+msgstr "Style de la page de paiement"
+
+#: src/admin_trait.php:964
+msgid "Classic"
+msgstr "Classique"
+
+#: src/admin_trait.php:965
+msgid "Modern"
+msgstr "Moderne"
+
+#: src/admin_trait.php:987
+msgid "Security"
+msgstr "Sécurité"
+
+#: src/admin_trait.php:1050
+msgid ""
+"The hourly run cron job will do things like update the account information, "
+"exchange rates, send unsent data to the API server, etc."
+msgstr ""
+"La tâche cron horaire met notamment à jour les informations du compte et les"
+" taux de change, et envoie au serveur d’API les données qui ne l’ont pas "
+"encore été."
+
+#: src/admin_trait.php:1053
+msgid "Run hourly cron job"
+msgstr "Exécuter la tâche cron horaire"
+
+#: src/admin_trait.php:1056
+msgid ""
+"Test the communication with the API server. If it doesn't work, then there "
+"is a conflict with another plugin or the theme."
+msgstr ""
+"Teste la communication avec le serveur d’API. Si le test échoue, il existe "
+"un conflit avec une autre extension ou avec le thème."
+
+#: src/admin_trait.php:1059
+msgid "Test communication"
+msgstr "Tester la communication"
+
+#: src/admin_trait.php:1062
+msgid "Make all expired license notifications appear again."
+msgstr "Afficher de nouveau toutes les notifications de licence expirée."
+
+#: src/admin_trait.php:1065
+msgid "Reset expired license notifications"
+msgstr "Réinitialiser les notifications de licence expirée"
+
+#: src/admin_trait.php:1080
+msgid "MyCryptoCheckout hourly cron job run."
+msgstr "Tâche cron horaire de MyCryptoCheckout exécutée."
+
+#: src/admin_trait.php:1088
+#, php-format
+msgid "Success! %s"
+msgstr "Réussite ! %s"
+
+#: src/admin_trait.php:1091
+#, php-format
+msgid "Communications failure: %s"
+msgstr "Échec de la communication : %s"
+
+#: src/admin_trait.php:1099
+msgid ""
+"Notifications reset! The next time your account is refreshed, you might see "
+"an expired license notification. "
+msgstr ""
+"Notifications réinitialisées ! Lors de la prochaine actualisation de votre "
+"compte, une notification de licence expirée pourra s’afficher. "
+
+#: src/admin_trait.php:1125
+msgid "Unmatched payments to your addresses"
+msgstr "Paiements non rapprochés vers vos adresses"
+
+#: src/admin_trait.php:1131
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:517
+#: src/misc_methods_trait.php:608
+msgid "Amount"
+msgstr "Montant"
+
+#: src/admin_trait.php:1133
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:546
+msgid "Transaction ID"
+msgstr "Identifiant de transaction"
+
+#: src/admin_trait.php:1135
+msgid "Since"
+msgstr "Depuis"
+
+#: src/admin_trait.php:1151
+msgid ""
+"Unmatched payments are detected blockchain transactions to your wallet "
+"addresses that could not be automatically matched to an MCC order. Review "
+"the currency, amount, receiving address, and transaction ID, then verify the"
+" transaction on-chain before deciding whether it belongs to a customer "
+"order."
+msgstr ""
+"Les paiements non rapprochés sont des transactions blockchain détectées vers"
+" vos adresses de portefeuille, mais qui n’ont pas pu être associées "
+"automatiquement à une commande MCC. Examinez la devise, le montant, "
+"l’adresse de réception et l’identifiant de transaction, puis vérifiez la "
+"transaction sur la blockchain avant de décider si elle appartient à une "
+"commande client."
+
+#: src/admin_trait.php:1153
+msgid ""
+"Unmatched payments disappear automatically from the table after 7 days."
+msgstr ""
+"Les paiements non rapprochés disparaissent automatiquement du tableau après "
+"7 jours."
+
+#: src/admin_trait.php:1218
+msgid "Settings"
+msgstr "Réglages"
+
+#: src/admin_trait.php:1231
+msgid "No nonce."
+msgstr "Nonce absent."
+
+#: src/admin_trait.php:1237
+msgid "Invalid nonce."
+msgstr "Nonce non valide."
+
+#: src/admin_trait.php:1241
+msgid "Unauthorized user."
+msgstr "Utilisateur non autorisé."
+
+#: src/admin_trait.php:1246
+msgid "No wallet data provided."
+msgstr "Aucune donnée de portefeuille fournie."
+
+#: src/currencies/Currency.php:145
+msgid "Main blockchains"
+msgstr "Blockchains principales"
+
+#: src/currencies/Currency.php:308
+#, php-format
+msgid "The address must be exactly %s characters long."
+msgstr "L’adresse doit comporter exactement %s caractères."
+
+#: src/donations_trait.php:29
+msgid ""
+"Use the form below to customize a shortcode that can be placed in your posts"
+" or a HTML widget."
+msgstr ""
+"Utilisez le formulaire ci-dessous pour personnaliser un code court que vous "
+"pourrez insérer dans vos publications ou dans un widget HTML."
+
+#: src/donations_trait.php:36
+msgid "If no currencies are selected, all available currencies will be shown."
+msgstr ""
+"Si aucune devise n’est sélectionnée, toutes les devises disponibles seront "
+"affichées."
+
+#: src/donations_trait.php:38
+msgid "Show these currencies"
+msgstr "Afficher ces devises"
+
+#: src/donations_trait.php:45
+msgid "Preselect this currency when showing the donation data."
+msgstr ""
+"Présélectionner cette devise lors de l’affichage des informations de don."
+
+#: src/donations_trait.php:47
+msgid "Primary currency"
+msgstr "Devise principale"
+
+#: src/donations_trait.php:48
+msgid "Random"
+msgstr "Aléatoire"
+
+#: src/donations_trait.php:54
+msgid "User selects currency with icons"
+msgstr "L’utilisateur choisit la devise à l’aide d’icônes"
+
+#: src/donations_trait.php:58
+msgid "User selects currency with a dropdown box"
+msgstr "L’utilisateur choisit la devise dans une liste déroulante"
+
+#: src/donations_trait.php:62
+msgid "Show the name of the currently selected currency."
+msgstr "Afficher le nom de la devise actuellement sélectionnée."
+
+#: src/donations_trait.php:64
+msgid "Show the currency name"
+msgstr "Afficher le nom de la devise"
+
+#: src/donations_trait.php:68
+msgid "Show a QR code for the wallet address."
+msgstr "Afficher un code QR pour l’adresse du portefeuille."
+
+#: src/donations_trait.php:70
+msgid "Show QR code"
+msgstr "Afficher le code QR"
+
+#: src/donations_trait.php:74
+msgid "The width is specified in pixels. The height is the same as the width."
+msgstr ""
+"La largeur est indiquée en pixels. La hauteur est identique à la largeur."
+
+#: src/donations_trait.php:76
+msgid "QR code max width"
+msgstr "Largeur maximale du code QR"
+
+#: src/donations_trait.php:81
+msgid "Show the address of the wallet as a text string."
+msgstr "Afficher l’adresse du portefeuille sous forme de texte."
+
+#: src/donations_trait.php:83
+msgid "Show the wallet address"
+msgstr "Afficher l’adresse du portefeuille"
+
+#: src/donations_trait.php:87
+msgid "How to align the widget on the page."
+msgstr "Alignement du widget sur la page."
+
+#: src/donations_trait.php:89
+msgid "Alignment"
+msgstr "Alignement"
+
+#: src/donations_trait.php:90
+msgid "None"
+msgstr "Aucun"
+
+#: src/donations_trait.php:91
+msgid "Left"
+msgstr "Gauche"
+
+#: src/donations_trait.php:92
+msgid "Center"
+msgstr "Centré"
+
+#: src/donations_trait.php:93
+msgid "Right"
+msgstr "Droite"
+
+#: src/donations_trait.php:96
+msgid "Generate shortcode"
+msgstr "Générer le code court"
+
+#: src/donations_trait.php:132
+#, php-format
+msgid "Your shortcode is: %s"
+msgstr "Votre code court est : %s"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:307
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:217
+msgid "Configure your wallets here."
+msgstr "Configurez vos portefeuilles ici."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:314
+msgid "MyCryptoCheckout settings"
+msgstr "Réglages de MyCryptoCheckout"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:330
+msgid "If left empty, the texts below will use the MyCryptoCheckout defaults."
+msgstr ""
+"Si les champs restent vides, les textes par défaut de MyCryptoCheckout "
+"seront utilisés."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:335
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:73
+msgid "Test mode"
+msgstr "Mode test"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:337
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:74
+msgid ""
+"Allow purchases to be made without sending any payment information to the "
+"MyCryptoCheckout API server. No payments will be processed in this mode."
+msgstr ""
+"Autoriser les achats sans envoyer d’informations de paiement au serveur "
+"d’API MyCryptoCheckout. Aucun paiement ne sera traité dans ce mode."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:342
+msgid "This is the name of the payment gateway as visible to the visitor."
+msgstr "Nom de la passerelle de paiement visible par le visiteur."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:343
+msgid "Gateway name"
+msgstr "Nom de la passerelle"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:349
+msgid "E-mail instructions"
+msgstr "Instructions par e-mail"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:355
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:100
+msgid "Online instructions"
+msgstr "Instructions en ligne"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:362
+msgid ""
+"MyCryptoCheckout normally automatically inserts payment instructions into "
+"the [edd_receipt] shortcode that is used on the purchase confirmation page."
+msgstr ""
+"MyCryptoCheckout insère normalement et automatiquement les instructions de "
+"paiement dans le code court [edd_receipt] utilisé sur la page de "
+"confirmation d’achat."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:363
+msgid "Do not insert payment instructions into the [edd_receipt] shortcode."
+msgstr ""
+"Ne pas insérer les instructions de paiement dans le code court "
+"[edd_receipt]."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:369
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:120
+msgid "This is the text for the currency selection input."
+msgstr "Texte affiché pour la sélection de la devise."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:370
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:118
+msgid "Text for currency selection"
+msgstr "Texte de sélection de la devise"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:378
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:158
+msgid ""
+"How many hours to wait for the payment to come through before marking the "
+"order as abandoned."
+msgstr ""
+"Nombre d’heures d’attente du paiement avant de marquer la commande comme "
+"abandonnée."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:379
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:156
+msgid "Payment timeout"
+msgstr "Délai de paiement"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:390
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:170
+msgid ""
+"If you are anticipating several purchases a second with the same currency, "
+"increase this amount to 100 or more to help prevent duplicate amount "
+"payments by slightly increasing the payment at random."
+msgstr ""
+"Si vous prévoyez plusieurs achats par seconde dans la même devise, augmentez"
+" cette valeur à 100 ou plus afin d’éviter les paiements de montants "
+"identiques, en augmentant légèrement et aléatoirement le montant demandé."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:391
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:168
+msgid "Payment amount spread"
+msgstr "Variation du montant du paiement"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:400
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:188
+msgid "Reset to defaults"
+msgstr "Rétablir les valeurs par défaut"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:402
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:191
+msgid ""
+"If you wish to reset all of these settings to the defaults, check this box "
+"and save your changes."
+msgstr ""
+"Pour rétablir tous ces réglages à leurs valeurs par défaut, cochez cette "
+"case et enregistrez vos modifications."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:444
+#, php-format
+msgid "Warning! Payments using MyCryptoCheckout are not possible: %s"
+msgstr ""
+"Attention ! Les paiements avec MyCryptoCheckout ne sont pas possibles : %s"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:469
+msgid "Payment complete"
+msgstr "Paiement terminé"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:479
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:480
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:505
+#: src/ecommerce/woocommerce/WooCommerce.php:327
+msgid "Test"
+msgstr "Test"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:484
+msgid "Awaiting blockchain transaction"
+msgstr "En attente d’une transaction blockchain"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:485
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:502
+msgid "Pending"
+msgstr "En attente"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:493
+msgid "Attempting to contact API server"
+msgstr "Tentative de connexion au serveur d’API"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:499
+msgid "Abandoned"
+msgstr "Abandonné"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:511
+#: src/ecommerce/woocommerce/WooCommerce.php:318
+msgid "MyCryptoCheckout details"
+msgstr "Détails MyCryptoCheckout"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:523
+#: src/misc_methods_trait.php:120 src/misc_methods_trait.php:610
+msgid "To"
+msgstr "À"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:531
+msgid "Status"
+msgstr "État"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:540
+msgid "API payment ID"
+msgstr "Identifiant de paiement API"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:557
+msgid "API connection attempts"
+msgstr "Tentatives de connexion à l’API"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:66
+msgid "Enable/Disable"
+msgstr "Activer/Désactiver"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:67
+msgid "Enable MyCryptoCheckout"
+msgstr "Activer MyCryptoCheckout"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:80
+msgid "Send new order e-mail"
+msgstr "Envoyer l’e-mail de nouvelle commande"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:81
+msgid ""
+"Send the new order e-mail before the order is paid. Normally, the new order "
+"e-mail is only sent when then order has been paid."
+msgstr ""
+"Envoyer l’e-mail de nouvelle commande avant que la commande soit payée. "
+"Normalement, cet e-mail n’est envoyé qu’une fois la commande payée."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:87
+msgid "Send invoice"
+msgstr "Envoyer la facture"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:88
+msgid ""
+"Send an e-mail invoice to the customer after purchase with the order details"
+" and payment instructions."
+msgstr ""
+"Envoyer au client, après l’achat, une facture par e-mail contenant les "
+"détails de la commande et les instructions de paiement."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:94
+msgid "E-mail Instructions"
+msgstr "Instructions par e-mail"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:106
+msgid "Hide order overview"
+msgstr "Masquer le récapitulatif de commande"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:109
+msgid ""
+"The order overview is usually placed above crypto payment instructions. Use "
+"this option to hide the overview and show the payment instructions higher "
+"up."
+msgstr ""
+"Le récapitulatif de commande est généralement placé au-dessus des "
+"instructions de paiement en cryptomonnaie. Utilisez cette option pour le "
+"masquer et afficher les instructions de paiement plus haut."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:112
+msgid "Payment type name"
+msgstr "Nom du type de paiement"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:114
+msgid ""
+"This is the name of the payment option the user will see during checkout."
+msgstr ""
+"Nom de l’option de paiement que l’utilisateur verra lors du passage de la "
+"commande."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:125
+msgid ""
+"Show the cryptocurrency icons on the checkout page in various colors instead"
+" of the default black."
+msgstr ""
+"Afficher les icônes de cryptomonnaies sur la page de paiement dans "
+"différentes couleurs plutôt qu’en noir par défaut."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:128
+msgid "Black"
+msgstr "Noir"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:130
+msgid "Brand colors"
+msgstr "Couleurs de la marque"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:132
+msgid "Orange"
+msgstr "Orange"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:134
+msgid "White"
+msgstr "Blanc"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:136
+msgid "Colorize icons"
+msgstr "Colorer les icônes"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:140
+msgid "Payment complete status"
+msgstr "État après paiement terminé"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:144
+msgid "Completed"
+msgstr "Terminée"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:146
+msgid "On hold"
+msgstr "En attente de validation"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:148
+msgid "Pending payment"
+msgstr "Paiement en attente"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:150
+msgid "Processing"
+msgstr "En cours de traitement"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:152
+msgid "After payment is complete, change the order to this status."
+msgstr "Une fois le paiement terminé, attribuer cet état à la commande."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:181
+msgid "Show amount"
+msgstr "Afficher le montant"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:184
+msgid ""
+"Show the amount in cryptocurrency in the currency selector during checkout."
+msgstr ""
+"Afficher le montant en cryptomonnaie dans le sélecteur de devise lors du "
+"paiement."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:203
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:222
+msgid ""
+"Accept cryptocurrency payments directly into your wallet using the "
+"MyCryptoCheckout service."
+msgstr ""
+"Acceptez les paiements en cryptomonnaie directement dans votre portefeuille "
+"grâce au service MyCryptoCheckout."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:212
+msgid "You cannot currently accept any payments using this service:"
+msgstr "Vous ne pouvez actuellement accepter aucun paiement avec ce service :"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:393
+msgid "Awaiting cryptocurrency payment"
+msgstr "En attente du paiement en cryptomonnaie"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:411
+msgid "Invalid cryptocurrency selected. Please choose a valid option."
+msgstr "Cryptomonnaie sélectionnée non valide. Choisissez une option valide."
+
+#: src/ecommerce/woocommerce/WooCommerce.php:102
+#, php-format
+msgid ""
+"Since you are using virtual currency %1$s as your WooCommerce currency, "
+"please change the decimal precision from %2$d to match MyCyyptoCheckout's: "
+"%3$s"
+msgstr ""
+"Comme vous utilisez la monnaie virtuelle %1$s comme devise WooCommerce, "
+"modifiez la précision décimale de %2$d afin qu’elle corresponde à celle de "
+"MyCyyptoCheckout : %3$s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:127
+#, php-format
+msgid "Your WooCommerce installation is using an unknown currency: %s"
+msgstr "Votre installation WooCommerce utilise une devise inconnue : %s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:177
+msgid "Payment timed out."
+msgstr "Le délai de paiement a expiré."
+
+#: src/ecommerce/woocommerce/WooCommerce.php:330
+#, php-format
+msgid "MyCryptoCheckout payment ID: %s"
+msgstr "Identifiant de paiement MyCryptoCheckout : %s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:340
+#, php-format
+msgid "%d attempts made to contact the API server."
+msgstr "Nombre de tentatives de connexion au serveur d’API : %d."
+
+#: src/ecommerce/woocommerce/WooCommerce.php:349
+#, php-format
+msgid "Received %1$s&nbsp;%2$s<br/>to %3$s"
+msgstr "%1$s&nbsp;%2$s<br/>reçus à l’adresse %3$s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:359
+#, php-format
+msgid "Expecting %1$s&nbsp;%2$s<br/>to %3$s"
+msgstr "Montant attendu : %1$s&nbsp;%2$s<br/>à l’adresse %3$s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:435
+msgid "MCC currency ID does not exist in POST."
+msgstr "L’identifiant de devise MCC n’existe pas dans POST."
+
+#: src/ecommerce/woocommerce/class-block.php:69
+msgid "Please select a currency."
+msgstr "Veuillez sélectionner une devise."
+
+#: src/menu_trait.php:37 src/menu_trait.php:153
+msgid "MyCryptoCheckout Settings"
+msgstr "Réglages de MyCryptoCheckout"
+
+#: src/menu_trait.php:39 src/menu_trait.php:155
+msgid "MyCryptoCheckout"
+msgstr "MyCryptoCheckout"
+
+#: src/menu_trait.php:60
+msgid "MyCryptoCheckout Currencies"
+msgstr "Devises MyCryptoCheckout"
+
+#: src/menu_trait.php:62
+msgid "Currencies"
+msgstr "Devises"
+
+#: src/menu_trait.php:79
+#, php-format
+msgid "Editing %s wallet"
+msgstr "Modification du portefeuille %s"
+
+#: src/menu_trait.php:81
+msgid "Edit wallet"
+msgstr "Modifier le portefeuille"
+
+#: src/menu_trait.php:89
+msgid "MyCryptoCheckout Account"
+msgstr "Compte MyCryptoCheckout"
+
+#: src/menu_trait.php:91
+msgid "Account"
+msgstr "Compte"
+
+#: src/menu_trait.php:96
+msgid "MyCryptoCheckout Donations"
+msgstr "Dons MyCryptoCheckout"
+
+#: src/menu_trait.php:98
+msgid "Donations"
+msgstr "Dons"
+
+#: src/menu_trait.php:105
+msgid "MyCryptoCheckout Unmatched Payments"
+msgstr "Paiements MyCryptoCheckout non rapprochés"
+
+#: src/menu_trait.php:107
+msgid "Unmatched Payments"
+msgstr "Paiements non rapprochés"
+
+#: src/menu_trait.php:113
+msgid "MyCryptoCheckout Local Settings"
+msgstr "Réglages locaux de MyCryptoCheckout"
+
+#: src/menu_trait.php:115
+msgid "Local Settings"
+msgstr "Réglages locaux"
+
+#: src/menu_trait.php:120
+msgid "MyCryptoCheckout Global Settings"
+msgstr "Réglages globaux de MyCryptoCheckout"
+
+#: src/menu_trait.php:122
+msgid "Global Settings"
+msgstr "Réglages globaux"
+
+#: src/menu_trait.php:127
+msgid "MyCryptoCheckout Tools"
+msgstr "Outils MyCryptoCheckout"
+
+#: src/menu_trait.php:129
+msgid "Tools"
+msgstr "Outils"
+
+#: src/menu_trait.php:134
+msgid "Uninstall MyCryptoCheckout"
+msgstr "Désinstaller MyCryptoCheckout"
+
+#: src/menu_trait.php:136
+msgid "Uninstall"
+msgstr "Désinstaller"
+
+#: src/misc_methods_trait.php:82 src/misc_methods_trait.php:614
+msgid "Copied"
+msgstr "Copié"
+
+#: src/misc_methods_trait.php:106
+msgid "Please select a currency"
+msgstr "Veuillez sélectionner une devise"
+
+#: src/misc_methods_trait.php:107
+msgid "Cryptocurrency"
+msgstr "Cryptomonnaie"
+
+#: src/misc_methods_trait.php:109
+msgid ""
+"Instructions for payment that will be shown on the purchase confirmation "
+"page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]"
+msgstr ""
+"Instructions de paiement affichées sur la page de confirmation d’achat. Les "
+"codes courts suivants sont disponibles : [AMOUNT], [CURRENCY], [TO]"
+
+#: src/misc_methods_trait.php:118
+msgid "To complete your order"
+msgstr "Finaliser votre commande"
+
+#: src/misc_methods_trait.php:119
+msgid "Send"
+msgstr "Envoyer"
+
+#: src/misc_methods_trait.php:134
+msgid "Please complete your order by"
+msgstr "Veuillez finaliser votre commande en"
+
+#: src/misc_methods_trait.php:135
+msgid "sending"
+msgstr "envoyant"
+
+#: src/misc_methods_trait.php:136
+msgid "to"
+msgstr "à"
+
+#: src/misc_methods_trait.php:142
+msgid ""
+"Instructions for payment that will be added to the e-mail receipt. The "
+"following shortcodes are available: [AMOUNT], [CURRENCY], [TO]"
+msgstr ""
+"Instructions de paiement ajoutées au reçu envoyé par e-mail. Les codes "
+"courts suivants sont disponibles : [AMOUNT], [CURRENCY], [TO]"
+
+#: src/misc_methods_trait.php:548
+#, php-format
+msgid "Post %s does not exist."
+msgstr "La publication %s n’existe pas."
+
+#: src/misc_methods_trait.php:560
+msgid "MyCryptoCheckout: Unable to contact the API server"
+msgstr "MyCryptoCheckout : impossible de contacter le serveur d’API"
+
+#: src/misc_methods_trait.php:563
+msgid "Dear admin!\n"
+msgstr "Bonjour, administrateur !\n"
+
+#: src/misc_methods_trait.php:565
+msgid ""
+"MyCryptoCheckout was recently unable to contact the API server in order to "
+"retrieve a payment ID. The plugin will continue to attempt to contact the "
+"API. The gateway will be unable to process payments until it has re-"
+"established a connection.\n"
+msgstr ""
+"MyCryptoCheckout n’a récemment pas pu contacter le serveur d’API pour "
+"récupérer un identifiant de paiement. L’extension continuera d’essayer de "
+"contacter l’API. La passerelle ne pourra pas traiter les paiements tant que "
+"la connexion ne sera pas rétablie.\n"
+
+#: src/misc_methods_trait.php:567
+msgid ""
+"Please log in and try refreshing your MyCryptoCheckout account settings.\n"
+msgstr ""
+"Connectez-vous et essayez d’actualiser les réglages de votre compte "
+"MyCryptoCheckout.\n"
+
+#: src/misc_methods_trait.php:604
+msgid "Complete your payment"
+msgstr "Finalisez votre paiement"
+
+#: src/misc_methods_trait.php:605
+#, php-format
+msgid "Please send the exact amount of %s to the address below."
+msgstr "Veuillez envoyer le montant exact de %s à l’adresse ci-dessous."
+
+#: src/misc_methods_trait.php:606
+msgid "Important"
+msgstr "Important"
+
+#: src/misc_methods_trait.php:607
+msgid ""
+"Send the exact amount shown to help ensure the payment is detected "
+"automatically."
+msgstr ""
+"Envoyez exactement le montant indiqué afin que le paiement puisse être "
+"détecté automatiquement."
+
+#: src/misc_methods_trait.php:609
+msgid "Pay to address"
+msgstr "Adresse de paiement"
+
+#: src/misc_methods_trait.php:611
+msgid "ENS / Unstoppable domain"
+msgstr "Domaine ENS / Unstoppable"
+
+#: src/misc_methods_trait.php:612
+msgid "Copy"
+msgstr "Copier"
+
+#: src/misc_methods_trait.php:613
+#, php-format
+msgid "Copy %s"
+msgstr "Copier %s"
+
+#: src/misc_methods_trait.php:615
+msgid "Pay with"
+msgstr "Payer avec"
+
+#: src/misc_methods_trait.php:616
+msgid "Scan to pay"
+msgstr "Scanner pour payer"
+
+#: src/misc_methods_trait.php:617
+msgid "Pay with MetaMask"
+msgstr "Payer avec MetaMask"
+
+#: src/misc_methods_trait.php:618
+msgid "Pay with Trust Wallet"
+msgstr "Payer avec Trust Wallet"
+
+#: src/misc_methods_trait.php:619
+#, php-format
+msgid "Open in %s Wallet"
+msgstr "Ouvrir dans le portefeuille %s"
+
+#: src/misc_methods_trait.php:620
+msgid "Insufficient funds for the transaction. Please check your balance."
+msgstr "Fonds insuffisants pour la transaction. Vérifiez votre solde."
+
+#: src/misc_methods_trait.php:621
+msgid "or"
+msgstr "ou"
+
+#: src/misc_methods_trait.php:796
+#, php-format
+msgid "%s ago"
+msgstr "il y a %s"
+
+#: src/payment_timer_trait.php:25
+msgid "Enable a payment timer on the order confirmation page."
+msgstr ""
+"Activer un minuteur de paiement sur la page de confirmation de commande."
+
+#: src/payment_timer_trait.php:27
+msgid "Payment timer status"
+msgstr "État du minuteur de paiement"
+
+#: src/payment_timer_trait.php:32
+msgid ""
+"This is the HTML code used to display the payment timer. Leave empty to use "
+"the default value."
+msgstr ""
+"Code HTML utilisé pour afficher le minuteur de paiement. Laissez ce champ "
+"vide pour utiliser la valeur par défaut."
+
+#: src/payment_timer_trait.php:34
+msgid "Payment timer HTML"
+msgstr "HTML du minuteur de paiement"
+
+#: src/payment_timer_trait.php:40 src/qr_code_trait.php:38
+msgid "Disabled"
+msgstr "Désactivé"
+
+#: src/payment_timer_trait.php:46 src/qr_code_trait.php:44
+msgid "Use network admin default"
+msgstr "Utiliser la valeur par défaut de l’administration du réseau"
+
+#: src/payment_timer_trait.php:51 src/qr_code_trait.php:49
+msgid "Enabled on all sites"
+msgstr "Activé sur tous les sites"
+
+#: src/payment_timer_trait.php:52 src/qr_code_trait.php:50
+msgid "Disabled on all sites"
+msgstr "Désactivé sur tous les sites"
+
+#: src/payment_timer_trait.php:53 src/qr_code_trait.php:51
+msgid "Default enabled on all sites"
+msgstr "Activé par défaut sur tous les sites"
+
+#: src/payment_timer_trait.php:54 src/qr_code_trait.php:52
+msgid "Default disabled on all sites"
+msgstr "Désactivé par défaut sur tous les sites"
+
+#: src/payment_timer_trait.php:78
+msgid "Awaiting payment"
+msgstr "En attente du paiement"
+
+#: src/payment_timer_trait.php:79
+msgid "(checked every 15 secs)"
+msgstr "(vérification toutes les 15 secondes)"
+
+#: src/payment_timer_trait.php:80
+msgid "Payment complete!"
+msgstr "Paiement terminé !"
+
+#: src/qr_code_trait.php:23
+msgid ""
+"Enable a QR code for the wallet address on the order confirmation page."
+msgstr ""
+"Activer un code QR pour l’adresse du portefeuille sur la page de "
+"confirmation de commande."
+
+#: src/qr_code_trait.php:25
+msgid "QR code status"
+msgstr "État du code QR"
+
+#: src/qr_code_trait.php:30
+msgid ""
+"This is the HTML code used to display the QR code. Leave empty to use the "
+"default value."
+msgstr ""
+"Code HTML utilisé pour afficher le code QR. Laissez ce champ vide pour "
+"utiliser la valeur par défaut."
+
+#: src/qr_code_trait.php:32
+msgid "QR code HTML"
+msgstr "HTML du code QR"
+
+#: src/security_trait.php:23
+msgid ""
+"TOTAL FREEZE: Blocks the creation of ANY new administrators. You can still "
+"see the option in menus, but saving will fail. Uncheck this temporarily if "
+"you need to add a new admin. Recommended: ON"
+msgstr ""
+"GEL TOTAL : bloque la création de TOUT nouvel administrateur. L’option reste"
+" visible dans les menus, mais l’enregistrement échouera. Désactivez "
+"temporairement ce réglage si vous devez ajouter un nouvel administrateur. "
+"Recommandation : ACTIVÉ"
+
+#: src/security_trait.php:24
+msgid "Freeze Admin Creation"
+msgstr "Bloquer la création d’administrateurs"
+
+#: src/security_trait.php:28
+msgid ""
+"Disables application passwords, preventing hackers from accessing admin "
+"functions externally. Recommended: ON"
+msgstr ""
+"Désactive les mots de passe d’application afin d’empêcher les pirates "
+"d’accéder à distance aux fonctions d’administration. Recommandation : ACTIVÉ"
+
+#: src/security_trait.php:29
+msgid "Disable Application Passwords"
+msgstr "Désactiver les mots de passe d’application"
+
+#: src/security_trait.php:33
+msgid ""
+"Disables the internal theme and plugin editors to prevent hackers from "
+"injecting code if they get into the dashboard. Recommended: ON"
+msgstr ""
+"Désactive les éditeurs internes de thèmes et d’extensions afin d’empêcher "
+"l’injection de code si un pirate accède au tableau de bord. Recommandation :"
+" ACTIVÉ"
+
+#: src/security_trait.php:34
+msgid "Disable File Editor"
+msgstr "Désactiver l’éditeur de fichiers"
+
+#: src/security_trait.php:38
+msgid ""
+"Completely disables XML-RPC (xmlrpc.php) to block brute-force attacks and "
+"DDoS vectors. Recommended: ON"
+msgstr ""
+"Désactive complètement XML-RPC (xmlrpc.php) afin de bloquer les attaques par"
+" force brute et les vecteurs DDoS. Recommandation : ACTIVÉ"
+
+#: src/security_trait.php:39
+msgid "Disable XML-RPC"
+msgstr "Désactiver XML-RPC"
+
+#: src/security_trait.php:111
+msgid ""
+"SECURITY BLOCK: Administrator creation is currently FROZEN by "
+"MyCryptoCheckout settings."
+msgstr ""
+"BLOCAGE DE SÉCURITÉ : la création d’administrateurs est actuellement GELÉE "
+"par les réglages de MyCryptoCheckout."
+
+#: src/security_trait.php:197
+msgid "Action Blocked: Security Lockdown"
+msgstr "Action bloquée : verrouillage de sécurité"
+
+#: src/security_trait.php:198
+msgid ""
+"The creation of new administrator accounts is currently "
+"<strong>disabled</strong> by your MyCryptoCheckout security settings."
+msgstr ""
+"La création de nouveaux comptes administrateur est actuellement "
+"<strong>désactivée</strong> par vos réglages de sécurité MyCryptoCheckout."
+
+#: src/security_trait.php:199
+msgid ""
+"To authorize this action, please go to <em>Settings &gt; "
+"MyCryptoCheckout</em> and temporarily uncheck <strong>\"Freeze Admin "
+"Creation\"</strong>."
+msgstr ""
+"Pour autoriser cette action, accédez à <em>Réglages &gt; "
+"MyCryptoCheckout</em> et décochez temporairement <strong>« Bloquer la "
+"création d’administrateurs »</strong>."
+
+#: src/security_trait.php:203
+msgid "Security Violation"
+msgstr "Violation de sécurité"
+
+#: src/security_trait.php:253
+#, php-format
+msgid "[%s] Wallet Settings Updated"
+msgstr "[%s] Réglages des portefeuilles mis à jour"
+
+#: src/security_trait.php:265
+#, php-format
+msgid ""
+"Just a quick notification that the MyCryptoCheckout wallet addresses were manually updated via the WordPress Dashboard.\n"
+"\n"
+"Time: %1$s\n"
+"User: %2$s\n"
+"IP:   %3$s\n"
+"\n"
+msgstr ""
+"Petite notification : les adresses de portefeuille MyCryptoCheckout ont été mises à jour manuellement depuis le tableau de bord WordPress.\n"
+"\n"
+"Heure : %1$s\n"
+"Utilisateur : %2$s\n"
+"IP :   %3$s\n"
+"\n"
+
+#: src/security_trait.php:271
+msgid "If you made this change, you can safely ignore this email.\n"
+msgstr ""
+"Si vous avez effectué cette modification, vous pouvez ignorer cet e-mail.\n"
+
+#: src/security_trait.php:272
+msgid ""
+"If you do not recognize this activity, please verify your wallet addresses "
+"immediately:\n"
+msgstr ""
+"Si vous ne reconnaissez pas cette activité, vérifiez immédiatement vos "
+"adresses de portefeuille :\n"
+
+#: src/traits/network_available.php:33
+msgid "Network settings"
+msgstr "Réglages du réseau"
+
+#: src/traits/network_available.php:37
+msgid "Do you want this to be available on the whole network?"
+msgstr ""
+"Souhaitez-vous rendre cette fonctionnalité disponible sur l’ensemble du "
+"réseau ?"
+
+#: src/traits/network_available.php:39
+msgid "Network available"
+msgstr "Disponible sur le réseau"
+
+#: src/traits/network_available.php:42
+msgid "If not network enabled, on which sites should this be available."
+msgstr ""
+"Si elle n’est pas activée sur tout le réseau, sur quels sites doit-elle être"
+" disponible ?"
+
+#: src/traits/network_available.php:44
+msgid "Sites"
+msgstr "Sites"
+
+#: src/traits/network_available.php:72
+msgid "Not available on any sites."
+msgstr "Indisponible sur tous les sites."
+
+#: src/traits/network_available.php:77
+#, php-format
+msgid "Available on %s"
+msgstr "Disponible sur %s"
+
+#: src/wallets/Wallet.php:128
+msgid "This wallet is disabled."
+msgstr "Ce portefeuille est désactivé."
+
+#: src/wallets/Wallet.php:138
+#, php-format
+msgid "%d confirmations"
+msgstr "Nombre de confirmations : %d"
+
+#: src/wallets/Wallet.php:145
+#, php-format
+msgid "Last used %s"
+msgstr "Dernière utilisation : %s"
+
+#: src/wallets/Wallet.php:152
+#, php-format
+msgid "Used %d times"
+msgstr "Nombre d’utilisations : %d"
+
+#: src/wallets/Wallets.php:42
+#, php-format
+msgid "You currently have the following currencies configured: %s"
+msgstr "Les devises suivantes sont actuellement configurées : %s"

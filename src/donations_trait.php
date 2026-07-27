@@ -99,7 +99,7 @@ trait donations_trait
 		{
 			// Verify nonce.
 			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_donations' ) ) {
-                wp_die( 'Security check failed. Please reload the page and try again.' );
+                wp_die( esc_html__( 'Security check failed. Please reload the page and try again.', 'mycryptocheckout' ) );
             }
 			$form->post();
 			$form->use_post_values();

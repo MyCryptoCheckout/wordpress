@@ -47,6 +47,7 @@ trait menu_trait
 	public function admin_menu_tabs()
 	{
 		$tabs = $this->tabs();
+		$tabs->default_tab( 'account' );
 
 		if (
 			( ! defined( 'MYCRYPTOCHECKOUT_DISABLE_WALLET_EDITOR' ) )
@@ -59,7 +60,8 @@ trait menu_trait
 				// Tab heading
 				->heading( __( 'MyCryptoCheckout Currencies', 'mycryptocheckout' ) )
 				// Name of tab
-				->name( __( 'Currencies', 'mycryptocheckout' ) );
+				->name( __( 'Currencies', 'mycryptocheckout' ) )
+				->sort_order( 20 );
 
 			if ( $tabs->get_is( 'edit_wallet' ) )
 			{
@@ -79,6 +81,7 @@ trait menu_trait
 					->heading( sprintf(  __( 'Editing %s wallet', 'mycryptocheckout' ), $wallet->get_currency_id() ) )
 					// Name of tab
 					->name( __( 'Edit wallet', 'mycryptocheckout' ) )
+					->sort_order( 25 )
 					->parameters( $wallet_id );
 			}
 		}
@@ -88,14 +91,16 @@ trait menu_trait
 			// Tab heading
 			->heading( __( 'MyCryptoCheckout Account', 'mycryptocheckout' ) )
 			// Name of tab
-			->name( __( 'Account', 'mycryptocheckout' ) );
+			->name( __( 'Account', 'mycryptocheckout' ) )
+			->sort_order( 10 );
 
 		$tabs->tab( 'donations' )
 			->callback_this( 'admin_donations' )
 			// Tab heading
 			->heading( __( 'MyCryptoCheckout Donations', 'mycryptocheckout' ) )
 			// Name of tab
-			->name( __( 'Donations', 'mycryptocheckout' ) );
+			->name( __( 'Donations', 'mycryptocheckout' ) )
+			->sort_order( 30 );
 
 		$account = $this->api()->account();
 		if ( $account->has_unmatched_payments() )
@@ -104,7 +109,8 @@ trait menu_trait
 				// Tab heading
 				->heading( __( 'MyCryptoCheckout Unmatched Payments', 'mycryptocheckout' ) )
 				// Name of tab
-				->name( __( 'Unmatched Payments', 'mycryptocheckout' ) );
+				->name( __( 'Unmatched Payments', 'mycryptocheckout' ) )
+				->sort_order( 70 );
 
 		if ( $this->is_network )
 			$tabs->tab( 'local_settings' )
@@ -112,21 +118,24 @@ trait menu_trait
 				// Tab heading
 				->heading( __( 'MyCryptoCheckout Local Settings', 'mycryptocheckout' ) )
 				// Name of tab
-				->name( __( 'Local Settings', 'mycryptocheckout' ) );
+				->name( __( 'Local Settings', 'mycryptocheckout' ) )
+				->sort_order( 50 );
 
 		$tabs->tab( 'global_settings' )
 			->callback_this( 'admin_global_settings' )
 			// Tab heading
 			->heading( __( 'MyCryptoCheckout Global Settings', 'mycryptocheckout' ) )
 			// Name of tab
-			->name( __( 'Global Settings', 'mycryptocheckout' ) );
+			->name( __( 'Global Settings', 'mycryptocheckout' ) )
+			->sort_order( 40 );
 
 		$tabs->tab( 'tools' )
 			->callback_this( 'admin_tools' )
 			// Tab heading
 			->heading( __( 'MyCryptoCheckout Tools', 'mycryptocheckout' ) )
 			// Name of tab
-			->name( __( 'Tools', 'mycryptocheckout' ) );
+			->name( __( 'Tools', 'mycryptocheckout' ) )
+			->sort_order( 60 );
 
 		$tabs->tab( 'uninstall' )
 			->callback_this( 'admin_uninstall' )

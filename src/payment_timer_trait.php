@@ -67,6 +67,21 @@ trait payment_timer_trait
 		$html = $this->maybe_enable_option_html( 'payment_timer_enabled', 'payment_timer_html' );
 		if ( ! $html )
 			return;
+
+		$html = str_replace(
+			[
+				'Awaiting payment',
+				'(checked every 15 secs)',
+				'Payment complete!',
+			],
+			[
+				esc_html__( 'Awaiting payment', 'mycryptocheckout' ),
+				esc_html__( '(checked every 15 secs)', 'mycryptocheckout' ),
+				esc_html__( 'Payment complete!', 'mycryptocheckout' ),
+			],
+			$html
+		);
+
 		$action->data->set( 'payment_timer_html', $html );
 	}
 

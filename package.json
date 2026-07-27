@@ -4,7 +4,7 @@
   "description": "MyCryptoCheckout plugin for WordPress",
   "main": "Gruntfile.js",
   "scripts": {
-    "build:woocommerce": "webpack --config webpack.config.js",
+    "build:woocommerce": "wp-scripts build --config webpack.config.js",
     "build": "npm run build:woocommerce"
   },
   "repository": {
@@ -22,10 +22,11 @@
     "@babel/plugin-transform-runtime": "^7.24.3",
     "@babel/preset-env": "^7.24.5",
     "@lodder/grunt-postcss": "^3.0.1",
-    "@wordpress/scripts": "^31.1.0",
+    "@wordpress/scripts": "33.0.0",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^10.0.0",
-    "grunt": "^1.6.1"
+    "grunt": "^1.6.1",
+    "terser-webpack-plugin": "^5.6.1"
   },
   "dependencies": {
     "bignumber.js": "^9.0.2",

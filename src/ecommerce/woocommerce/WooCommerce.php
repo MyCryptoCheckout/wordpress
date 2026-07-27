@@ -174,7 +174,7 @@ class WooCommerce
 				return MyCryptoCheckout()->debug( 'WC order %d on blog %d is not unpaid. Can not cancel.', $order_id, get_current_blog_id() );
 
 			MyCryptoCheckout()->debug( 'Marking WC payment %s on blog %d as cancelled.', $order_id, get_current_blog_id() );
-			$order->update_status( 'cancelled', 'Payment timed out.' );
+			$order->update_status( 'cancelled', __( 'Payment timed out.', 'mycryptocheckout' ) );
 			do_action( 'woocommerce_cancelled_order', $order->get_id() );
 		} );
 	}
@@ -432,7 +432,7 @@ class WooCommerce
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies checkout nonce.
 		if ( ! isset( $_POST[ 'mcc_currency_id' ] ) )
-			wp_die( 'MCC currency ID does not exist in POST.' );
+			wp_die( esc_html__( 'MCC currency ID does not exist in POST.', 'mycryptocheckout' ) );
 
 		$account = MyCryptoCheckout()->api()->account();
 		$available_for_payment = $account->is_available_for_payment();

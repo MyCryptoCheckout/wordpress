@@ -38,7 +38,7 @@ const Content = (props) => {
             } else {
                 return {
                     type: emitResponse.responseTypes.ERROR,
-                    message: 'Please select a currency.',
+                    message: settings.select_currency_error || 'Please select a currency.',
                 };
             }
         });

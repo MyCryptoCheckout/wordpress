@@ -194,11 +194,13 @@ trait security_trait
         // Kill the script immediately.
         // Note: We do NOT need to revert the user here because we used a Filter Interceptor.
         // The malicious data was never written to the DB.
+        $blocked_message = '<h1>' . esc_html__( 'Action Blocked: Security Lockdown', 'mycryptocheckout' ) . '</h1>';
+        $blocked_message .= '<p>' . wp_kses_post( __( 'The creation of new administrator accounts is currently <strong>disabled</strong> by your MyCryptoCheckout security settings.', 'mycryptocheckout' ) ) . '</p>';
+        $blocked_message .= '<p>' . wp_kses_post( __( 'To authorize this action, please go to <em>Settings &gt; MyCryptoCheckout</em> and temporarily uncheck <strong>"Freeze Admin Creation"</strong>.', 'mycryptocheckout' ) ) . '</p>';
+
         wp_die(
-            '<h1>Action Blocked: Security Lockdown</h1>' .
-            '<p>The creation of new administrator accounts is currently <strong>disabled</strong> by your MyCryptoCheckout security settings.</p>' .
-            '<p>To authorize this action, please go to <em>Settings > MyCryptoCheckout</em> and temporarily uncheck <strong>"Freeze Admin Creation"</strong>.</p>',
-            'Security Violation',
+            $blocked_message, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Each translated fragment is escaped above.
+            esc_html__( 'Security Violation', 'mycryptocheckout' ),
             [ 'response' => 403 ]
         );
     }

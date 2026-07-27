@@ -709,7 +709,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 		var $p = $( 'p', $$.$div ).first();
 		var $to = $( '.to', $p );
 		$p.append( '<br>' );
-		$p.append( 'To ' );
+		$p.append( document.createTextNode( $$.modern_i18n( 'to', 'To' ) + ' ' ) );
 		$to.clone().appendTo( $p );
 
 		// Change the first to ens.
@@ -842,7 +842,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		$$.show_browser_link = false;
 
-		$$.$metamask = $('<div class="metamask_payment" role="img" aria-label="metamask wallet"></div>');
+		$$.$metamask = $('<div class="metamask_payment" role="img"></div>');
+		$$.$metamask.attr( 'aria-label', $$.modern_i18n( 'pay_with_metamask', 'Pay with MetaMask' ) );
 		$$.$metamask.appendTo($$.$payment_buttons);
 
 		try {
@@ -977,7 +978,7 @@ var mycryptocheckout_checkout_javascript = function( data )
 									if ((err.error && err.error.code === -32000) ||
 										(err.message && err.message.includes("insufficient funds")) ||
 										(err.data && err.data.code === -32000)) {
-										alert("Insufficient funds for the transaction. Please check your balance.");
+										alert( $$.modern_i18n( "insufficient_funds", "Insufficient funds for the transaction. Please check your balance." ) );
 									}
 								});
 						} catch (error) {
@@ -1069,7 +1070,8 @@ var mycryptocheckout_checkout_javascript = function( data )
 		}
 
 		// Append the MetaMask link
-		var $metamaskLink = $(`<a href="${url}"><div class="metamask_payment" role="img" aria-label="MetaMask wallet"></div></a>`);
+		var $metamaskLink = $(`<a href="${url}"><div class="metamask_payment" role="img"></div></a>`);
+		$( '.metamask_payment', $metamaskLink ).attr( 'aria-label', $$.modern_i18n( 'pay_with_metamask', 'Pay with MetaMask' ) );
 		$metamaskLink.appendTo($$.$payment_buttons);
 	}
 
@@ -1088,10 +1090,11 @@ var mycryptocheckout_checkout_javascript = function( data )
 
 		var trustwallet_chain = $$.mycryptocheckout_checkout_data.supports.trustwallet_chain;
 
-		var html = '<a class="trustwallet_link" href="trust://send?asset=' + trustwallet_chain + contract + '&address=MCC_TO&amount=MCC_AMOUNT"><div class="trustwallet_link" role="img" aria-label="Trust wallet"></div></a>';
+		var html = '<a class="trustwallet_link" href="trust://send?asset=' + trustwallet_chain + contract + '&address=MCC_TO&amount=MCC_AMOUNT"><div class="trustwallet_link" role="img"></div></a>';
 		html = $$.replace_keywords( html );
 		var $div = $( '<div>' );
 		$div.html( html );
+		$( '.trustwallet_link[role="img"]', $div ).attr( 'aria-label', $$.modern_i18n( 'pay_with_trustwallet', 'Pay with Trust Wallet' ) );
 		$div.appendTo( $$.$payment_buttons );
 	}
 

@@ -76,6 +76,11 @@ trait misc_methods_trait
 	public function enqueue_js()
 	{
 		wp_enqueue_script( 'mycryptocheckout', MyCryptoCheckout()->paths( 'url' ) . 'src/static/js/mycryptocheckout.min.js', [ 'jquery', 'clipboard' ], MYCRYPTOCHECKOUT_PLUGIN_VERSION );
+		wp_localize_script(
+			'mycryptocheckout',
+			'mycryptocheckout_i18n',
+			[ 'copied' => __( 'Copied', 'mycryptocheckout' ) ]
+		);
 	}
 
 	/**
@@ -102,8 +107,37 @@ trait misc_methods_trait
 		$r->set( 'gateway_name', __( 'Cryptocurrency', 'mycryptocheckout' ) );
 		// Translators: [AMOUNT], [CURRENCY], [TO] are placeholders and should not be translated.
 		$r->set( 'online_payment_instructions_description', __( 'Instructions for payment that will be shown on the purchase confirmation page. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
-		$r->set( 'online_payment_instructions', $this->wpautop_file( 'online_payment_instructions' ) );
-		$r->set( 'email_payment_instructions', $this->wpautop_file( 'email_payment_instructions' ) );
+		$online_payment_instructions = $this->get_static_file( 'online_payment_instructions' );
+		$online_payment_instructions = str_replace(
+			[
+				'To complete your order',
+				'Send <span',
+				'To <span',
+			],
+			[
+				esc_html__( 'To complete your order', 'mycryptocheckout' ),
+				esc_html__( 'Send', 'mycryptocheckout' ) . ' <span',
+				esc_html__( 'To', 'mycryptocheckout' ) . ' <span',
+			],
+			$online_payment_instructions
+		);
+		$r->set( 'online_payment_instructions', wpautop( $online_payment_instructions ) );
+
+		$email_payment_instructions = $this->get_static_file( 'email_payment_instructions' );
+		$email_payment_instructions = str_replace(
+			[
+				'Please complete your order by',
+				'sending <strong>',
+				'to <strong>',
+			],
+			[
+				esc_html__( 'Please complete your order by', 'mycryptocheckout' ),
+				esc_html__( 'sending', 'mycryptocheckout' ) . ' <strong>',
+				esc_html__( 'to', 'mycryptocheckout' ) . ' <strong>',
+			],
+			$email_payment_instructions
+		);
+		$r->set( 'email_payment_instructions', wpautop( $email_payment_instructions ) );
 		// Translators: [AMOUNT], [CURRENCY], [TO] are placeholders and should not be translated.
 		$r->set( 'email_payment_instructions_description', __( 'Instructions for payment that will be added to the e-mail receipt. The following shortcodes are available: [AMOUNT], [CURRENCY], [TO]', 'mycryptocheckout' ) );
 		return $r;
@@ -511,7 +545,7 @@ trait misc_methods_trait
 		{
 			$post = get_post( $post_id );
 			if ( ! $post )
-				throw new Exception( sprintf( 'Post %s does not exist.', $post_id ) );
+				throw new Exception( sprintf( __( 'Post %s does not exist.', 'mycryptocheckout' ), $post_id ) );
 
 			$payment_id = get_post_meta( $post_id, '_mcc_payment_id', true );
 			// If there is no payment ID at ALL, then the payment was not created by us.
@@ -523,14 +557,14 @@ trait misc_methods_trait
 				$admin_email = get_option( 'admin_email' );
 				$mail->to( $admin_email );
 				$mail->from( $admin_email );
-				$mail->subject( 'MyCryptoCheckout: Unable to contact the API server' );
+				$mail->subject( __( 'MyCryptoCheckout: Unable to contact the API server', 'mycryptocheckout' ) );
 				$url = sprintf( '<a href="%s">%s</a>', get_permalink( $post_id ), $post->post_title );
 				$text = '';
-				$text .= "Dear admin!\n";
+				$text .= __( "Dear admin!\n", 'mycryptocheckout' );
 				$text .= "\n";
-				$text .= "MyCryptoCheckout was recently unable to contact the API server in order to retrieve a payment ID. The plugin will continue to attempt to contact the API. The gateway will be unable to process payments until it has re-established a connection.\n";
+				$text .= __( "MyCryptoCheckout was recently unable to contact the API server in order to retrieve a payment ID. The plugin will continue to attempt to contact the API. The gateway will be unable to process payments until it has re-established a connection.\n", 'mycryptocheckout' );
 				$text .= "\n";
-				$text .= "Please log in and try refreshing your MyCryptoCheckout account settings.\n";
+				$text .= __( "Please log in and try refreshing your MyCryptoCheckout account settings.\n", 'mycryptocheckout' );
 				$text = wpautop( $text );
 				$mail->html( $text );
 				$mail->send();
@@ -573,6 +607,7 @@ trait misc_methods_trait
 				'exact_amount_notice'  => __( 'Send the exact amount shown to help ensure the payment is detected automatically.', 'mycryptocheckout' ),
 				'amount'               => __( 'Amount', 'mycryptocheckout' ),
 				'pay_to_address'       => __( 'Pay to address', 'mycryptocheckout' ),
+				'to'                   => __( 'To', 'mycryptocheckout' ),
 				'ens_address'          => __( 'ENS / Unstoppable domain', 'mycryptocheckout' ),
 				'copy'                 => __( 'Copy', 'mycryptocheckout' ),
 				'copy_label'           => __( 'Copy %s', 'mycryptocheckout' ),
@@ -582,6 +617,7 @@ trait misc_methods_trait
 				'pay_with_metamask'    => __( 'Pay with MetaMask', 'mycryptocheckout' ),
 				'pay_with_trustwallet' => __( 'Pay with Trust Wallet', 'mycryptocheckout' ),
 				'open_in_wallet'       => __( 'Open in %s Wallet', 'mycryptocheckout' ),
+				'insufficient_funds'    => __( 'Insufficient funds for the transaction. Please check your balance.', 'mycryptocheckout' ),
 				'or'                   => __( 'or', 'mycryptocheckout' ),
 			]
 		);

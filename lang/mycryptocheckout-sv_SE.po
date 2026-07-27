@@ -1,0 +1,1495 @@
+# Svenska translations for MyCryptoCheckout.
+# Copyright (C) 2026 MyCryptoCheckout
+# This file is distributed under the same license as the MyCryptoCheckout project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MyCryptoCheckout 2.170\n"
+"Report-Msgid-Bugs-To: https://mycryptocheckout.com\n"
+"POT-Creation-Date: 2026-07-20 00:00+0000\n"
+"PO-Revision-Date: 2026-07-20 00:00+0000\n"
+"Last-Translator: MyCryptoCheckout\n"
+"Language: sv_SE\n"
+"Language-Team: Svenska\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: src/Expired_License.php:117
+#, php-format
+msgid ""
+"Your MyCryptoCheckout license has expired! If you wish to renew it, please visit your <a "
+"href=\"%1$s\">account settings</a>. Or you can <a href=\"%2$s\">dismiss this notice</a>."
+msgstr ""
+"Din MyCryptoCheckout-licens har upphört. Om du vill förnya den går du till dina <a "
+"href=\"%1$s\">kontoinställningar</a>. Du kan också <a href=\"%2$s\">dölja meddelandet</a>."
+
+#: src/admin_trait.php:50
+#, php-format
+msgid "Your PHP CURL module is missing. MyCryptoCheckout may not work 100%% well."
+msgstr "PHP-modulen cURL saknas. MyCryptoCheckout kanske inte fungerar 100%% korrekt."
+
+#: src/admin_trait.php:64
+#, php-format
+msgid ""
+"<strong>Keep Your Store Safe:</strong> Protect your site using our built-in <strong>Hardening "
+"Tools</strong> (Admin Lockdown, Disable File Editors, etc.) found in <a href=\"%1$s\">Global "
+"Settings &gt; Security</a>. We also strongly recommend you <a href=\"%2$s\" target=\"_blank\" "
+"rel=\"noopener\">enable login 2FA</a> and <a href=\"%3$s\" target=\"_blank\" "
+"rel=\"noopener\">Sucuri Monitor</a>."
+msgstr ""
+"<strong>Skydda din butik:</strong> skydda webbplatsen med våra inbyggda "
+"<strong>härdningsverktyg</strong> (låsning av administratörsskapande, inaktivering av "
+"filredigerare med mera) under <a href=\"%1$s\">Globala inställningar &gt; Säkerhet</a>. Vi "
+"rekommenderar också starkt att du <a href=\"%2$s\" target=\"_blank\" rel=\"noopener\">aktiverar "
+"tvåfaktorsautentisering för inloggning</a> och <a href=\"%3$s\" target=\"_blank\" "
+"rel=\"noopener\">Sucuri Monitor</a>."
+
+#: src/admin_trait.php:69 src/admin_trait.php:94
+msgid "Dismiss this message."
+msgstr "Dölj detta meddelande."
+
+#: src/admin_trait.php:91
+#, php-format
+msgid "Have you tried the <a href=\"%1$s\">new modern checkout style</a>?"
+msgstr "Har du provat den <a href=\"%1$s\">nya moderna kassastilen</a>?"
+
+#: src/admin_trait.php:100
+msgid "Refresh your account data"
+msgstr "Uppdatera kontodata"
+
+#: src/admin_trait.php:104
+msgid "Delete account data"
+msgstr "Ta bort kontodata"
+
+#: src/admin_trait.php:110 src/admin_trait.php:462 src/admin_trait.php:775 src/admin_trait.php:891
+#: src/admin_trait.php:1000 src/admin_trait.php:1071 src/donations_trait.php:102
+msgid "Security check failed. Please reload the page and try again."
+msgstr "Säkerhetskontrollen misslyckades. Ladda om sidan och försök igen."
+
+#: src/admin_trait.php:129
+msgid "Account data refreshed!"
+msgstr "Kontodata har uppdaterats!"
+
+#: src/admin_trait.php:141
+msgid ""
+"Error refreshing your account data. Is your site password protected? Do you have coming soon / "
+"maintenance mode enabled? A firewall blocking api.mycryptocheckout.com?"
+msgstr ""
+"Det gick inte att uppdatera dina kontodata. Är webbplatsen lösenordsskyddad? Är läget ”kommer "
+"snart” eller underhållsläge aktiverat? Blockerar en brandvägg api.mycryptocheckout.com?"
+
+#: src/admin_trait.php:167
+msgid "It appears as if MyCryptoCheckout was unable to retrieve your account data from the API server."
+msgstr "MyCryptoCheckout kunde tydligen inte hämta dina kontodata från API-servern."
+
+#: src/admin_trait.php:168
+msgid "Click the Refresh your account data button below to try and retrieve your account data again."
+msgstr "Klicka på knappen ”Uppdatera kontodata” nedan för att försöka hämta kontodata igen."
+
+#: src/admin_trait.php:187
+msgid "Payments using MyCryptoCheckout are currently not available"
+msgstr "Betalningar med MyCryptoCheckout är inte tillgängliga för närvarande"
+
+#: src/admin_trait.php:194
+msgid "Your MyCryptoCheckout account details"
+msgstr "Dina MyCryptoCheckout-kontouppgifter"
+
+#: src/admin_trait.php:198
+msgid "Key"
+msgstr "Nyckel"
+
+#: src/admin_trait.php:200 src/admin_trait.php:373
+msgid "Details"
+msgstr "Detaljer"
+
+#: src/admin_trait.php:205
+msgid "API key"
+msgstr "API-nyckel"
+
+#: src/admin_trait.php:211
+msgid "Server name"
+msgstr "Servernamn"
+
+#: src/admin_trait.php:215
+msgid "Account data refreshed"
+msgstr "Kontodata uppdaterades"
+
+#: src/admin_trait.php:221
+msgid "Your license expires"
+msgstr "Din licens upphör"
+
+#: src/admin_trait.php:236
+msgid "Extend your license"
+msgstr "Förläng din licens"
+
+#: src/admin_trait.php:238
+msgid "Purchase a license for unlimited payments"
+msgstr "Köp en licens för obegränsade betalningar"
+
+#: src/admin_trait.php:241
+msgid "Extend my license"
+msgstr "Förläng min licens"
+
+#: src/admin_trait.php:241
+msgid "Add an unlimited license to my cart"
+msgstr "Lägg till en obegränsad licens i varukorgen"
+
+#: src/admin_trait.php:249
+msgid "Payments remaining this month"
+msgstr "Återstående betalningar denna månad"
+
+#: src/admin_trait.php:253
+msgid "Payments processed"
+msgstr "Behandlade betalningar"
+
+#: src/admin_trait.php:257
+msgid "Physical currency exchange rates updated"
+msgstr "Växelkurser för vanliga valutor har uppdaterats"
+
+#: src/admin_trait.php:261
+msgid "Cryptocurrency exchange rates updated"
+msgstr "Växelkurser för kryptovalutor har uppdaterats"
+
+#: src/admin_trait.php:278
+#, php-format
+msgid "Currency %s is no longer available!"
+msgstr "Valutan %s är inte längre tillgänglig!"
+
+#: src/admin_trait.php:288
+msgid "Exchange rates for your currencies"
+msgstr "Växelkurser för dina valutor"
+
+#: src/admin_trait.php:296
+msgid "Reserved amounts"
+msgstr "Reserverade belopp"
+
+#: src/admin_trait.php:310
+msgid "Next scheduled hourly cron"
+msgstr "Nästa schemalagda timvisa cron-körning"
+
+#: src/admin_trait.php:315
+msgid "Next scheduled account data update"
+msgstr "Nästa schemalagda uppdatering av kontodata"
+
+#: src/admin_trait.php:342
+msgid "You cannot modify your currencies until you have a valid account. Please see the Accounts tab."
+msgstr "Du kan inte ändra dina valutor förrän du har ett giltigt konto. Se fliken ”Konto”."
+
+#: src/admin_trait.php:355
+msgid "Delete"
+msgstr "Ta bort"
+
+#: src/admin_trait.php:357
+msgid "Disable"
+msgstr "Inaktivera"
+
+#: src/admin_trait.php:359
+msgid "Enable"
+msgstr "Aktivera"
+
+#: src/admin_trait.php:361
+msgid "Mark as used"
+msgstr "Markera som använd"
+
+#: src/admin_trait.php:363
+msgid "Reset sorting"
+msgstr "Återställ sortering"
+
+#: src/admin_trait.php:369 src/admin_trait.php:422
+msgid "Currency"
+msgstr "Valuta"
+
+#: src/admin_trait.php:371
+msgid "Wallet"
+msgstr "Plånbok"
+
+#: src/admin_trait.php:403
+msgid "Edit this currency"
+msgstr "Redigera denna valuta"
+
+#: src/admin_trait.php:416
+msgid "Add new currency / wallet"
+msgstr "Lägg till ny valuta / plånbok"
+
+#: src/admin_trait.php:420
+msgid "Which currency shall the new wallet belong to?"
+msgstr "Vilken valuta ska den nya plånboken tillhöra?"
+
+#: src/admin_trait.php:425 src/admin_trait.php:666
+msgid "The address of your wallet to which you want to receive funds."
+msgstr "Adressen till plånboken där du vill ta emot pengar."
+
+#: src/admin_trait.php:427
+msgid "If your currency has HD wallet support, you can add your public key when editing the wallet."
+msgstr ""
+"Om valutan har stöd för HD-plånböcker kan du lägga till din publika nyckel när du redigerar "
+"plånboken."
+
+#: src/admin_trait.php:431 src/admin_trait.php:440 src/admin_trait.php:668 src/admin_trait.php:1129
+msgid "Address"
+msgstr "Adress"
+
+#: src/admin_trait.php:447 src/admin_trait.php:756
+msgid "Your private view key that is used to see the amounts in private transactions to your wallet."
+msgstr ""
+"Din privata visningsnyckel som används för att se beloppen i privata transaktioner till din "
+"plånbok."
+
+#: src/admin_trait.php:449 src/admin_trait.php:758
+msgid "Monero private view key"
+msgstr "Privat visningsnyckel för Monero"
+
+#: src/admin_trait.php:455 src/admin_trait.php:769 src/admin_trait.php:885 src/admin_trait.php:994
+msgid "Save settings"
+msgstr "Spara inställningar"
+
+#: src/admin_trait.php:479
+msgid "The selected wallets have been deleted."
+msgstr "De valda plånböckerna har tagits bort."
+
+#: src/admin_trait.php:489
+msgid "The selected wallets have been disabled."
+msgstr "De valda plånböckerna har inaktiverats."
+
+#: src/admin_trait.php:499
+msgid "The selected wallets have been enabled."
+msgstr "De valda plånböckerna har aktiverats."
+
+#: src/admin_trait.php:509
+msgid "The selected wallets have been marked as used."
+msgstr "De valda plånböckerna har markerats som använda."
+
+#: src/admin_trait.php:519
+msgid "The selected wallets have had their sort order reset."
+msgstr "Sorteringsordningen för de valda plånböckerna har återställts."
+
+#: src/admin_trait.php:544 src/admin_trait.php:833 src/admin_trait.php:900 src/admin_trait.php:1021
+msgid "Settings saved!"
+msgstr "Inställningarna har sparats!"
+
+#: src/admin_trait.php:563
+msgid ""
+"This table shows the currencies you have setup. To edit a currency, click the address. To sort "
+"them, drag the currency name up or down."
+msgstr ""
+"Tabellen visar de valutor du har konfigurerat. Klicka på adressen för att redigera en valuta. Dra"
+" valutan uppåt eller nedåt för att sortera."
+
+#: src/admin_trait.php:565
+msgid "If you have several wallets of the same currency, they will be used in sequential order."
+msgstr "Om du har flera plånböcker för samma valuta används de i tur och ordning."
+
+#: src/admin_trait.php:567
+#, php-format
+msgid "If you don't have a wallet address to use, perhaps %1$swe can recommend some wallets for you%2$s?"
+msgstr "Om du inte har någon plånboksadress kanske %1$svi kan rekommendera några plånböcker%2$s."
+
+#: src/admin_trait.php:582
+#, php-format
+msgid "After adding currencies, visit the %1$sWooCommerce Settings%2$s to enable the gateway and more."
+msgstr ""
+"När du har lagt till valutor går du till %1$sWooCommerce-inställningarna%2$s för att aktivera "
+"betalningsmetoden och konfigurera fler alternativ."
+
+#: src/admin_trait.php:595
+#, php-format
+msgid ""
+"After adding currencies, visit the %1$sEasy Digital Downloads Settings%2$s to enable the gateway "
+"and more."
+msgstr ""
+"När du har lagt till valutor går du till %1$sEasy Digital Downloads-inställningarna%2$s för att "
+"aktivera betalningsmetoden och konfigurera fler alternativ."
+
+#: src/admin_trait.php:602
+msgid "Current currencies / wallets"
+msgstr "Aktuella valutor / plånböcker"
+
+#: src/admin_trait.php:630
+msgid "Invalid wallet ID!"
+msgstr "Ogiltigt plånboks-ID!"
+
+#: src/admin_trait.php:654
+msgid "Basic settings"
+msgstr "Grundinställningar"
+
+#: src/admin_trait.php:657
+msgid "Describe the wallet to yourself."
+msgstr "Skriv en egen beskrivning av plånboken."
+
+#: src/admin_trait.php:659
+msgid "Label"
+msgstr "Etikett"
+
+#: src/admin_trait.php:678
+msgid ""
+"The ENS address of your wallet to which you want to receive funds. The resolving address must "
+"match your normal address."
+msgstr ""
+"ENS-adressen till plånboken där du vill ta emot pengar. Den upplösta adressen måste stämma "
+"överens med din vanliga adress."
+
+#: src/admin_trait.php:680
+msgid "ENS Address"
+msgstr "ENS-adress"
+
+#: src/admin_trait.php:688
+msgid "Is this wallet enabled and ready to receive funds?"
+msgstr "Är plånboken aktiverad och redo att ta emot pengar?"
+
+#: src/admin_trait.php:690 src/payment_timer_trait.php:39 src/qr_code_trait.php:37
+msgid "Enabled"
+msgstr "Aktiverad"
+
+#: src/admin_trait.php:694
+msgid ""
+"How many confirmations needed to regard orders as paid. 1 is the default. Only some blockchains "
+"support 0-conf (mempool)."
+msgstr ""
+"Antal bekräftelser som krävs för att beställningar ska betraktas som betalda. Standardvärdet är "
+"1. Endast vissa blockkedjor stöder 0 bekräftelser (mempool)."
+
+#: src/admin_trait.php:696
+msgid "Confirmations"
+msgstr "Bekräftelser"
+
+#: src/admin_trait.php:704
+msgid "This wallet supports HD public keys, but your system is missing the required PHP GMP library."
+msgstr ""
+"Den här plånboken stöder publika HD-nycklar, men systemet saknar det nödvändiga PHP-biblioteket "
+"GMP."
+
+#: src/admin_trait.php:709
+msgid "HD wallet settings"
+msgstr "Inställningar för HD-plånbok"
+
+#: src/admin_trait.php:717
+#, php-format
+msgid ""
+"If you have an HD wallet and want to generate a new address after each purchase, enter your %s "
+"public key here."
+msgstr ""
+"Om du har en HD-plånbok och vill skapa en ny adress efter varje köp anger du din publika "
+"%s-nyckel här."
+
+#: src/admin_trait.php:719
+msgid "HD public key"
+msgstr "Publik HD-nyckel"
+
+#: src/admin_trait.php:726
+msgid ""
+"The index of the next public wallet address to use. The default is 0 and gets increased each time"
+" the wallet is used. This is related to your wallet's gap length."
+msgstr ""
+"Indexet för nästa publika plånboksadress som ska användas. Standardvärdet är 0 och ökas varje "
+"gång plånboken används. Detta hör ihop med plånbokens gap length."
+
+#: src/admin_trait.php:728
+msgid "Wallet index"
+msgstr "Plånboksindex"
+
+#: src/admin_trait.php:742
+#, php-format
+msgid "The address at index %1$d is %2$s."
+msgstr "Adressen vid index %1$d är %2$s."
+
+#: src/admin_trait.php:745
+msgid "When using an HD wallet, you can accept amounts that are lower than requested."
+msgstr "När du använder en HD-plånbok kan du acceptera belopp som är lägre än det begärda beloppet."
+
+#: src/admin_trait.php:746
+msgid "Payment tolerance percent"
+msgstr "Betalningstolerans i procent"
+
+#: src/admin_trait.php:813
+#, php-format
+msgid "This public key type is not supported. Please use only: %s"
+msgstr "Denna typ av publik nyckel stöds inte. Använd endast: %s"
+
+#: src/admin_trait.php:874 src/admin_trait.php:971
+msgid "QR code"
+msgstr "QR-kod"
+
+#: src/admin_trait.php:880 src/admin_trait.php:982
+msgid "Payment timer"
+msgstr "Betalningstimer"
+
+#: src/admin_trait.php:930
+msgid "Gateway fees"
+msgstr "Avgifter för betalningsmetoden"
+
+#: src/admin_trait.php:933
+msgid ""
+"If you wish to charge (or discount) visitors for using MyCryptoCheckout as the payment gateway, "
+"you can enter the fixed or percentage amounts in the boxes below. The cryptocurrency checkout "
+"price will be modified in accordance with the combined values below. These are applied to the "
+"original currency."
+msgstr ""
+"Om du vill ta ut en avgift av besökare, eller ge dem rabatt, när de använder MyCryptoCheckout som"
+" betalningsmetod kan du ange fasta belopp eller procentvärden nedan. Kryptovalutapriset i kassan "
+"ändras enligt den sammanlagda effekten av värdena nedan. Värdena tillämpas på den ursprungliga "
+"valutan."
+
+#: src/admin_trait.php:937
+msgid ""
+"If you wish to mark your prices up (or down) when using cryptocurrency, enter the fixed amount in"
+" this box."
+msgstr ""
+"Om du vill höja eller sänka priserna med ett fast belopp vid betalning med kryptovaluta anger du "
+"beloppet här."
+
+#: src/admin_trait.php:939
+msgid "Markup amount"
+msgstr "Påslagsbelopp"
+
+#: src/admin_trait.php:948
+msgid ""
+"If you wish to mark your prices up (or down) when using cryptocurrency, enter the percentage in "
+"this box."
+msgstr ""
+"Om du vill höja eller sänka priserna procentuellt vid betalning med kryptovaluta anger du "
+"procentvärdet här."
+
+#: src/admin_trait.php:950
+#, php-format
+msgid "Markup %%"
+msgstr "Påslag %%"
+
+#: src/admin_trait.php:958
+msgid "Checkout display"
+msgstr "Kassavisning"
+
+#: src/admin_trait.php:961
+msgid ""
+"Choose the payment page layout shown after checkout. Classic keeps the existing layout. Modern "
+"uses the new card-style payment page."
+msgstr ""
+"Välj layouten för betalningssidan som visas efter kassan. ”Klassisk” behåller den befintliga "
+"layouten. ”Modern” använder den nya kortbaserade betalningssidan."
+
+#: src/admin_trait.php:962
+msgid "Payment page style"
+msgstr "Stil för betalningssidan"
+
+#: src/admin_trait.php:964
+msgid "Classic"
+msgstr "Klassisk"
+
+#: src/admin_trait.php:965
+msgid "Modern"
+msgstr "Modern"
+
+#: src/admin_trait.php:987
+msgid "Security"
+msgstr "Säkerhet"
+
+#: src/admin_trait.php:1050
+msgid ""
+"The hourly run cron job will do things like update the account information, exchange rates, send "
+"unsent data to the API server, etc."
+msgstr ""
+"Det timvisa cron-jobbet uppdaterar bland annat kontoinformation och växelkurser samt skickar data"
+" som ännu inte har skickats till API-servern."
+
+#: src/admin_trait.php:1053
+msgid "Run hourly cron job"
+msgstr "Kör timvis cron-jobb"
+
+#: src/admin_trait.php:1056
+msgid ""
+"Test the communication with the API server. If it doesn't work, then there is a conflict with "
+"another plugin or the theme."
+msgstr ""
+"Testar kommunikationen med API-servern. Om testet misslyckas finns det en konflikt med ett annat "
+"tillägg eller temat."
+
+#: src/admin_trait.php:1059
+msgid "Test communication"
+msgstr "Testa kommunikationen"
+
+#: src/admin_trait.php:1062
+msgid "Make all expired license notifications appear again."
+msgstr "Visa alla meddelanden om utgångna licenser igen."
+
+#: src/admin_trait.php:1065
+msgid "Reset expired license notifications"
+msgstr "Återställ meddelanden om utgångna licenser"
+
+#: src/admin_trait.php:1080
+msgid "MyCryptoCheckout hourly cron job run."
+msgstr "MyCryptoCheckouts timvisa cron-jobb har körts."
+
+#: src/admin_trait.php:1088
+#, php-format
+msgid "Success! %s"
+msgstr "Klart! %s"
+
+#: src/admin_trait.php:1091
+#, php-format
+msgid "Communications failure: %s"
+msgstr "Kommunikationsfel: %s"
+
+#: src/admin_trait.php:1099
+msgid ""
+"Notifications reset! The next time your account is refreshed, you might see an expired license "
+"notification. "
+msgstr ""
+"Meddelandena har återställts! Nästa gång kontot uppdateras kan ett meddelande om utgången licens "
+"visas. "
+
+#: src/admin_trait.php:1125
+msgid "Unmatched payments to your addresses"
+msgstr "Omatchade betalningar till dina adresser"
+
+#: src/admin_trait.php:1131 src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:517
+#: src/misc_methods_trait.php:608
+msgid "Amount"
+msgstr "Belopp"
+
+#: src/admin_trait.php:1133 src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:546
+msgid "Transaction ID"
+msgstr "Transaktions-ID"
+
+#: src/admin_trait.php:1135
+msgid "Since"
+msgstr "Sedan"
+
+#: src/admin_trait.php:1151
+msgid ""
+"Unmatched payments are detected blockchain transactions to your wallet addresses that could not "
+"be automatically matched to an MCC order. Review the currency, amount, receiving address, and "
+"transaction ID, then verify the transaction on-chain before deciding whether it belongs to a "
+"customer order."
+msgstr ""
+"Omatchade betalningar är upptäckta blockkedjetransaktioner till dina plånboksadresser som inte "
+"kunde matchas automatiskt mot en MCC-beställning. Kontrollera valuta, belopp, mottagaradress och "
+"transaktions-ID och verifiera sedan transaktionen på blockkedjan innan du avgör om den hör till "
+"en kundbeställning."
+
+#: src/admin_trait.php:1153
+msgid "Unmatched payments disappear automatically from the table after 7 days."
+msgstr "Omatchade betalningar tas automatiskt bort från tabellen efter 7 dagar."
+
+#: src/admin_trait.php:1218
+msgid "Settings"
+msgstr "Inställningar"
+
+#: src/admin_trait.php:1231
+msgid "No nonce."
+msgstr "Nonce saknas."
+
+#: src/admin_trait.php:1237
+msgid "Invalid nonce."
+msgstr "Ogiltig nonce."
+
+#: src/admin_trait.php:1241
+msgid "Unauthorized user."
+msgstr "Obehörig användare."
+
+#: src/admin_trait.php:1246
+msgid "No wallet data provided."
+msgstr "Inga plånboksdata angavs."
+
+#: src/currencies/Currency.php:145
+msgid "Main blockchains"
+msgstr "Huvudblockkedjor"
+
+#: src/currencies/Currency.php:308
+#, php-format
+msgid "The address must be exactly %s characters long."
+msgstr "Adressen måste vara exakt %s tecken lång."
+
+#: src/donations_trait.php:29
+msgid "Use the form below to customize a shortcode that can be placed in your posts or a HTML widget."
+msgstr ""
+"Använd formuläret nedan för att anpassa en kortkod som kan placeras i inlägg eller i en HTML-"
+"widget."
+
+#: src/donations_trait.php:36
+msgid "If no currencies are selected, all available currencies will be shown."
+msgstr "Om inga valutor väljs visas alla tillgängliga valutor."
+
+#: src/donations_trait.php:38
+msgid "Show these currencies"
+msgstr "Visa dessa valutor"
+
+#: src/donations_trait.php:45
+msgid "Preselect this currency when showing the donation data."
+msgstr "Förvälj denna valuta när donationsinformationen visas."
+
+#: src/donations_trait.php:47
+msgid "Primary currency"
+msgstr "Primär valuta"
+
+#: src/donations_trait.php:48
+msgid "Random"
+msgstr "Slumpmässig"
+
+#: src/donations_trait.php:54
+msgid "User selects currency with icons"
+msgstr "Användaren väljer valuta med ikoner"
+
+#: src/donations_trait.php:58
+msgid "User selects currency with a dropdown box"
+msgstr "Användaren väljer valuta i en rullgardinsmeny"
+
+#: src/donations_trait.php:62
+msgid "Show the name of the currently selected currency."
+msgstr "Visa namnet på den valuta som är vald för närvarande."
+
+#: src/donations_trait.php:64
+msgid "Show the currency name"
+msgstr "Visa valutanamnet"
+
+#: src/donations_trait.php:68
+msgid "Show a QR code for the wallet address."
+msgstr "Visa en QR-kod för plånboksadressen."
+
+#: src/donations_trait.php:70
+msgid "Show QR code"
+msgstr "Visa QR-kod"
+
+#: src/donations_trait.php:74
+msgid "The width is specified in pixels. The height is the same as the width."
+msgstr "Bredden anges i pixlar. Höjden är samma som bredden."
+
+#: src/donations_trait.php:76
+msgid "QR code max width"
+msgstr "Maximal bredd för QR-kod"
+
+#: src/donations_trait.php:81
+msgid "Show the address of the wallet as a text string."
+msgstr "Visa plånboksadressen som text."
+
+#: src/donations_trait.php:83
+msgid "Show the wallet address"
+msgstr "Visa plånboksadressen"
+
+#: src/donations_trait.php:87
+msgid "How to align the widget on the page."
+msgstr "Hur widgeten ska justeras på sidan."
+
+#: src/donations_trait.php:89
+msgid "Alignment"
+msgstr "Justering"
+
+#: src/donations_trait.php:90
+msgid "None"
+msgstr "Ingen"
+
+#: src/donations_trait.php:91
+msgid "Left"
+msgstr "Vänster"
+
+#: src/donations_trait.php:92
+msgid "Center"
+msgstr "Centrerad"
+
+#: src/donations_trait.php:93
+msgid "Right"
+msgstr "Höger"
+
+#: src/donations_trait.php:96
+msgid "Generate shortcode"
+msgstr "Skapa kortkod"
+
+#: src/donations_trait.php:132
+#, php-format
+msgid "Your shortcode is: %s"
+msgstr "Din kortkod är: %s"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:307
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:217
+msgid "Configure your wallets here."
+msgstr "Konfigurera dina plånböcker här."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:314
+msgid "MyCryptoCheckout settings"
+msgstr "MyCryptoCheckout-inställningar"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:330
+msgid "If left empty, the texts below will use the MyCryptoCheckout defaults."
+msgstr "Om fälten lämnas tomma används MyCryptoCheckouts standardtexter."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:335
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:73
+msgid "Test mode"
+msgstr "Testläge"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:337
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:74
+msgid ""
+"Allow purchases to be made without sending any payment information to the MyCryptoCheckout API "
+"server. No payments will be processed in this mode."
+msgstr ""
+"Tillåt köp utan att skicka betalningsinformation till MyCryptoCheckouts API-server. Inga "
+"betalningar behandlas i detta läge."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:342
+msgid "This is the name of the payment gateway as visible to the visitor."
+msgstr "Namnet på betalningsmetoden som visas för besökaren."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:343
+msgid "Gateway name"
+msgstr "Namn på betalningsmetod"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:349
+msgid "E-mail instructions"
+msgstr "E-postinstruktioner"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:355
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:100
+msgid "Online instructions"
+msgstr "Onlineinstruktioner"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:362
+msgid ""
+"MyCryptoCheckout normally automatically inserts payment instructions into the [edd_receipt] "
+"shortcode that is used on the purchase confirmation page."
+msgstr ""
+"MyCryptoCheckout infogar normalt betalningsinstruktioner automatiskt i kortkoden [edd_receipt] "
+"som används på sidan för köpbekräftelse."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:363
+msgid "Do not insert payment instructions into the [edd_receipt] shortcode."
+msgstr "Infoga inte betalningsinstruktioner i kortkoden [edd_receipt]."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:369
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:120
+msgid "This is the text for the currency selection input."
+msgstr "Texten för valutaväljaren."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:370
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:118
+msgid "Text for currency selection"
+msgstr "Text för valutaval"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:378
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:158
+msgid "How many hours to wait for the payment to come through before marking the order as abandoned."
+msgstr "Antal timmar som systemet väntar på betalningen innan beställningen markeras som övergiven."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:379
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:156
+msgid "Payment timeout"
+msgstr "Tidsgräns för betalning"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:390
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:170
+msgid ""
+"If you are anticipating several purchases a second with the same currency, increase this amount "
+"to 100 or more to help prevent duplicate amount payments by slightly increasing the payment at "
+"random."
+msgstr ""
+"Om du väntar dig flera köp per sekund med samma valuta bör du höja värdet till 100 eller mer. Det"
+" hjälper till att undvika identiska betalningsbelopp genom att slumpmässigt öka det begärda "
+"beloppet något."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:391
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:168
+msgid "Payment amount spread"
+msgstr "Spridning av betalningsbelopp"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:400
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:188
+msgid "Reset to defaults"
+msgstr "Återställ standardvärden"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:402
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:191
+msgid "If you wish to reset all of these settings to the defaults, check this box and save your changes."
+msgstr ""
+"Markera rutan och spara ändringarna om du vill återställa alla dessa inställningar till "
+"standardvärdena."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:444
+#, php-format
+msgid "Warning! Payments using MyCryptoCheckout are not possible: %s"
+msgstr "Varning! Betalningar med MyCryptoCheckout är inte möjliga: %s"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:469
+msgid "Payment complete"
+msgstr "Betalningen är klar"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:479
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:480
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:505
+#: src/ecommerce/woocommerce/WooCommerce.php:327
+msgid "Test"
+msgstr "Test"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:484
+msgid "Awaiting blockchain transaction"
+msgstr "Väntar på blockkedjetransaktion"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:485
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:502
+msgid "Pending"
+msgstr "Väntande"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:493
+msgid "Attempting to contact API server"
+msgstr "Försöker kontakta API-servern"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:499
+msgid "Abandoned"
+msgstr "Övergiven"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:511
+#: src/ecommerce/woocommerce/WooCommerce.php:318
+msgid "MyCryptoCheckout details"
+msgstr "MyCryptoCheckout-detaljer"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:523 src/misc_methods_trait.php:120
+#: src/misc_methods_trait.php:610
+msgid "To"
+msgstr "Till"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:531
+msgid "Status"
+msgstr "Status"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:540
+msgid "API payment ID"
+msgstr "API-betalnings-ID"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:557
+msgid "API connection attempts"
+msgstr "Försök att ansluta till API:t"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:66
+msgid "Enable/Disable"
+msgstr "Aktivera/Inaktivera"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:67
+msgid "Enable MyCryptoCheckout"
+msgstr "Aktivera MyCryptoCheckout"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:80
+msgid "Send new order e-mail"
+msgstr "Skicka e-post om ny beställning"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:81
+msgid ""
+"Send the new order e-mail before the order is paid. Normally, the new order e-mail is only sent "
+"when then order has been paid."
+msgstr ""
+"Skicka e-postmeddelandet om ny beställning innan beställningen har betalats. Normalt skickas det "
+"först när beställningen har betalats."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:87
+msgid "Send invoice"
+msgstr "Skicka faktura"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:88
+msgid ""
+"Send an e-mail invoice to the customer after purchase with the order details and payment "
+"instructions."
+msgstr ""
+"Skicka en faktura via e-post till kunden efter köpet med beställningsuppgifter och "
+"betalningsinstruktioner."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:94
+msgid "E-mail Instructions"
+msgstr "E-postinstruktioner"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:106
+msgid "Hide order overview"
+msgstr "Dölj beställningsöversikt"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:109
+msgid ""
+"The order overview is usually placed above crypto payment instructions. Use this option to hide "
+"the overview and show the payment instructions higher up."
+msgstr ""
+"Beställningsöversikten visas vanligtvis ovanför instruktionerna för kryptobetalning. Använd "
+"alternativet för att dölja översikten och visa betalningsinstruktionerna högre upp."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:112
+msgid "Payment type name"
+msgstr "Namn på betalningstyp"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:114
+msgid "This is the name of the payment option the user will see during checkout."
+msgstr "Namnet på betalningsalternativet som användaren ser i kassan."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:125
+msgid "Show the cryptocurrency icons on the checkout page in various colors instead of the default black."
+msgstr "Visa kryptovalutaikonerna på kassasidan i olika färger i stället för standardfärgen svart."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:128
+msgid "Black"
+msgstr "Svart"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:130
+msgid "Brand colors"
+msgstr "Varumärkesfärger"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:132
+msgid "Orange"
+msgstr "Orange"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:134
+msgid "White"
+msgstr "Vit"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:136
+msgid "Colorize icons"
+msgstr "Färglägg ikoner"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:140
+msgid "Payment complete status"
+msgstr "Status efter slutförd betalning"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:144
+msgid "Completed"
+msgstr "Slutförd"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:146
+msgid "On hold"
+msgstr "Pausad"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:148
+msgid "Pending payment"
+msgstr "Väntande betalning"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:150
+msgid "Processing"
+msgstr "Behandlas"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:152
+msgid "After payment is complete, change the order to this status."
+msgstr "Ändra beställningen till denna status när betalningen är slutförd."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:181
+msgid "Show amount"
+msgstr "Visa belopp"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:184
+msgid "Show the amount in cryptocurrency in the currency selector during checkout."
+msgstr "Visa beloppet i kryptovaluta i valutaväljaren under kassan."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:203
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:222
+msgid "Accept cryptocurrency payments directly into your wallet using the MyCryptoCheckout service."
+msgstr "Ta emot kryptovalutabetalningar direkt i din plånbok med tjänsten MyCryptoCheckout."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:212
+msgid "You cannot currently accept any payments using this service:"
+msgstr "Du kan för närvarande inte ta emot några betalningar med denna tjänst:"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:393
+msgid "Awaiting cryptocurrency payment"
+msgstr "Väntar på kryptovalutabetalning"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:411
+msgid "Invalid cryptocurrency selected. Please choose a valid option."
+msgstr "Ogiltig kryptovaluta har valts. Välj ett giltigt alternativ."
+
+#: src/ecommerce/woocommerce/WooCommerce.php:102
+#, php-format
+msgid ""
+"Since you are using virtual currency %1$s as your WooCommerce currency, please change the decimal"
+" precision from %2$d to match MyCyyptoCheckout's: %3$s"
+msgstr ""
+"Eftersom du använder den virtuella valutan %1$s som WooCommerce-valuta måste du ändra "
+"decimalprecisionen från %2$d så att den stämmer överens med MyCyyptoCheckouts inställning: %3$s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:127
+#, php-format
+msgid "Your WooCommerce installation is using an unknown currency: %s"
+msgstr "Din WooCommerce-installation använder en okänd valuta: %s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:177
+msgid "Payment timed out."
+msgstr "Tidsgränsen för betalningen har löpt ut."
+
+#: src/ecommerce/woocommerce/WooCommerce.php:330
+#, php-format
+msgid "MyCryptoCheckout payment ID: %s"
+msgstr "MyCryptoCheckout-betalnings-ID: %s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:340
+#, php-format
+msgid "%d attempts made to contact the API server."
+msgstr "Antal försök att kontakta API-servern: %d."
+
+#: src/ecommerce/woocommerce/WooCommerce.php:349
+#, php-format
+msgid "Received %1$s&nbsp;%2$s<br/>to %3$s"
+msgstr "%1$s&nbsp;%2$s<br/>mottaget till %3$s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:359
+#, php-format
+msgid "Expecting %1$s&nbsp;%2$s<br/>to %3$s"
+msgstr "Förväntar %1$s&nbsp;%2$s<br/>till %3$s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:435
+msgid "MCC currency ID does not exist in POST."
+msgstr "MCC-valuta-ID saknas i POST."
+
+#: src/ecommerce/woocommerce/class-block.php:69
+msgid "Please select a currency."
+msgstr "Välj en valuta."
+
+#: src/menu_trait.php:37 src/menu_trait.php:153
+msgid "MyCryptoCheckout Settings"
+msgstr "MyCryptoCheckout-inställningar"
+
+#: src/menu_trait.php:39 src/menu_trait.php:155
+msgid "MyCryptoCheckout"
+msgstr "MyCryptoCheckout"
+
+#: src/menu_trait.php:60
+msgid "MyCryptoCheckout Currencies"
+msgstr "MyCryptoCheckout-valutor"
+
+#: src/menu_trait.php:62
+msgid "Currencies"
+msgstr "Valutor"
+
+#: src/menu_trait.php:79
+#, php-format
+msgid "Editing %s wallet"
+msgstr "Redigerar plånboken %s"
+
+#: src/menu_trait.php:81
+msgid "Edit wallet"
+msgstr "Redigera plånbok"
+
+#: src/menu_trait.php:89
+msgid "MyCryptoCheckout Account"
+msgstr "MyCryptoCheckout-konto"
+
+#: src/menu_trait.php:91
+msgid "Account"
+msgstr "Konto"
+
+#: src/menu_trait.php:96
+msgid "MyCryptoCheckout Donations"
+msgstr "MyCryptoCheckout-donationer"
+
+#: src/menu_trait.php:98
+msgid "Donations"
+msgstr "Donationer"
+
+#: src/menu_trait.php:105
+msgid "MyCryptoCheckout Unmatched Payments"
+msgstr "Omatchade MyCryptoCheckout-betalningar"
+
+#: src/menu_trait.php:107
+msgid "Unmatched Payments"
+msgstr "Omatchade betalningar"
+
+#: src/menu_trait.php:113
+msgid "MyCryptoCheckout Local Settings"
+msgstr "Lokala MyCryptoCheckout-inställningar"
+
+#: src/menu_trait.php:115
+msgid "Local Settings"
+msgstr "Lokala inställningar"
+
+#: src/menu_trait.php:120
+msgid "MyCryptoCheckout Global Settings"
+msgstr "Globala MyCryptoCheckout-inställningar"
+
+#: src/menu_trait.php:122
+msgid "Global Settings"
+msgstr "Globala inställningar"
+
+#: src/menu_trait.php:127
+msgid "MyCryptoCheckout Tools"
+msgstr "MyCryptoCheckout-verktyg"
+
+#: src/menu_trait.php:129
+msgid "Tools"
+msgstr "Verktyg"
+
+#: src/menu_trait.php:134
+msgid "Uninstall MyCryptoCheckout"
+msgstr "Avinstallera MyCryptoCheckout"
+
+#: src/menu_trait.php:136
+msgid "Uninstall"
+msgstr "Avinstallera"
+
+#: src/misc_methods_trait.php:82 src/misc_methods_trait.php:614
+msgid "Copied"
+msgstr "Kopierat"
+
+#: src/misc_methods_trait.php:106
+msgid "Please select a currency"
+msgstr "Välj en valuta"
+
+#: src/misc_methods_trait.php:107
+msgid "Cryptocurrency"
+msgstr "Kryptovaluta"
+
+#: src/misc_methods_trait.php:109
+msgid ""
+"Instructions for payment that will be shown on the purchase confirmation page. The following "
+"shortcodes are available: [AMOUNT], [CURRENCY], [TO]"
+msgstr ""
+"Betalningsinstruktioner som visas på sidan för köpbekräftelse. Följande kortkoder är "
+"tillgängliga: [AMOUNT], [CURRENCY], [TO]"
+
+#: src/misc_methods_trait.php:118
+msgid "To complete your order"
+msgstr "Slutför din beställning"
+
+#: src/misc_methods_trait.php:119
+msgid "Send"
+msgstr "Skicka"
+
+#: src/misc_methods_trait.php:134
+msgid "Please complete your order by"
+msgstr "Slutför din beställning genom att"
+
+#: src/misc_methods_trait.php:135
+msgid "sending"
+msgstr "skicka"
+
+#: src/misc_methods_trait.php:136
+msgid "to"
+msgstr "till"
+
+#: src/misc_methods_trait.php:142
+msgid ""
+"Instructions for payment that will be added to the e-mail receipt. The following shortcodes are "
+"available: [AMOUNT], [CURRENCY], [TO]"
+msgstr ""
+"Betalningsinstruktioner som läggs till i e-postkvittot. Följande kortkoder är tillgängliga: "
+"[AMOUNT], [CURRENCY], [TO]"
+
+#: src/misc_methods_trait.php:548
+#, php-format
+msgid "Post %s does not exist."
+msgstr "Inlägget %s finns inte."
+
+#: src/misc_methods_trait.php:560
+msgid "MyCryptoCheckout: Unable to contact the API server"
+msgstr "MyCryptoCheckout: kunde inte kontakta API-servern"
+
+#: src/misc_methods_trait.php:563
+msgid "Dear admin!\n"
+msgstr "Hej administratör!\n"
+
+#: src/misc_methods_trait.php:565
+msgid ""
+"MyCryptoCheckout was recently unable to contact the API server in order to retrieve a payment ID."
+" The plugin will continue to attempt to contact the API. The gateway will be unable to process "
+"payments until it has re-established a connection.\n"
+msgstr ""
+"MyCryptoCheckout kunde nyligen inte kontakta API-servern för att hämta ett betalnings-ID. "
+"Tillägget fortsätter att försöka kontakta API:t. Betalningsmetoden kan inte behandla betalningar "
+"förrän anslutningen har återställts.\n"
+
+#: src/misc_methods_trait.php:567
+msgid "Please log in and try refreshing your MyCryptoCheckout account settings.\n"
+msgstr "Logga in och försök uppdatera dina MyCryptoCheckout-kontoinställningar.\n"
+
+#: src/misc_methods_trait.php:604
+msgid "Complete your payment"
+msgstr "Slutför betalningen"
+
+#: src/misc_methods_trait.php:605
+#, php-format
+msgid "Please send the exact amount of %s to the address below."
+msgstr "Skicka exakt belopp i %s till adressen nedan."
+
+#: src/misc_methods_trait.php:606
+msgid "Important"
+msgstr "Viktigt"
+
+#: src/misc_methods_trait.php:607
+msgid "Send the exact amount shown to help ensure the payment is detected automatically."
+msgstr "Skicka exakt det belopp som visas så att betalningen kan identifieras automatiskt."
+
+#: src/misc_methods_trait.php:609
+msgid "Pay to address"
+msgstr "Betalningsadress"
+
+#: src/misc_methods_trait.php:611
+msgid "ENS / Unstoppable domain"
+msgstr "ENS-/Unstoppable-domän"
+
+#: src/misc_methods_trait.php:612
+msgid "Copy"
+msgstr "Kopiera"
+
+#: src/misc_methods_trait.php:613
+#, php-format
+msgid "Copy %s"
+msgstr "Kopiera %s"
+
+#: src/misc_methods_trait.php:615
+msgid "Pay with"
+msgstr "Betala med"
+
+#: src/misc_methods_trait.php:616
+msgid "Scan to pay"
+msgstr "Skanna för att betala"
+
+#: src/misc_methods_trait.php:617
+msgid "Pay with MetaMask"
+msgstr "Betala med MetaMask"
+
+#: src/misc_methods_trait.php:618
+msgid "Pay with Trust Wallet"
+msgstr "Betala med Trust Wallet"
+
+#: src/misc_methods_trait.php:619
+#, php-format
+msgid "Open in %s Wallet"
+msgstr "Öppna i %s Wallet"
+
+#: src/misc_methods_trait.php:620
+msgid "Insufficient funds for the transaction. Please check your balance."
+msgstr "Otillräckligt saldo för transaktionen. Kontrollera ditt saldo."
+
+#: src/misc_methods_trait.php:621
+msgid "or"
+msgstr "eller"
+
+#: src/misc_methods_trait.php:796
+#, php-format
+msgid "%s ago"
+msgstr "för %s sedan"
+
+#: src/payment_timer_trait.php:25
+msgid "Enable a payment timer on the order confirmation page."
+msgstr "Aktivera en betalningstimer på sidan för beställningsbekräftelse."
+
+#: src/payment_timer_trait.php:27
+msgid "Payment timer status"
+msgstr "Status för betalningstimer"
+
+#: src/payment_timer_trait.php:32
+msgid "This is the HTML code used to display the payment timer. Leave empty to use the default value."
+msgstr ""
+"HTML-koden som används för att visa betalningstimern. Lämna fältet tomt för att använda "
+"standardvärdet."
+
+#: src/payment_timer_trait.php:34
+msgid "Payment timer HTML"
+msgstr "HTML för betalningstimer"
+
+#: src/payment_timer_trait.php:40 src/qr_code_trait.php:38
+msgid "Disabled"
+msgstr "Inaktiverad"
+
+#: src/payment_timer_trait.php:46 src/qr_code_trait.php:44
+msgid "Use network admin default"
+msgstr "Använd nätverksadministrationens standardvärde"
+
+#: src/payment_timer_trait.php:51 src/qr_code_trait.php:49
+msgid "Enabled on all sites"
+msgstr "Aktiverad på alla webbplatser"
+
+#: src/payment_timer_trait.php:52 src/qr_code_trait.php:50
+msgid "Disabled on all sites"
+msgstr "Inaktiverad på alla webbplatser"
+
+#: src/payment_timer_trait.php:53 src/qr_code_trait.php:51
+msgid "Default enabled on all sites"
+msgstr "Aktiverad som standard på alla webbplatser"
+
+#: src/payment_timer_trait.php:54 src/qr_code_trait.php:52
+msgid "Default disabled on all sites"
+msgstr "Inaktiverad som standard på alla webbplatser"
+
+#: src/payment_timer_trait.php:78
+msgid "Awaiting payment"
+msgstr "Väntar på betalning"
+
+#: src/payment_timer_trait.php:79
+msgid "(checked every 15 secs)"
+msgstr "(kontrolleras var 15:e sekund)"
+
+#: src/payment_timer_trait.php:80
+msgid "Payment complete!"
+msgstr "Betalningen är klar!"
+
+#: src/qr_code_trait.php:23
+msgid "Enable a QR code for the wallet address on the order confirmation page."
+msgstr "Aktivera en QR-kod för plånboksadressen på sidan för beställningsbekräftelse."
+
+#: src/qr_code_trait.php:25
+msgid "QR code status"
+msgstr "QR-kodsstatus"
+
+#: src/qr_code_trait.php:30
+msgid "This is the HTML code used to display the QR code. Leave empty to use the default value."
+msgstr "HTML-koden som används för att visa QR-koden. Lämna fältet tomt för att använda standardvärdet."
+
+#: src/qr_code_trait.php:32
+msgid "QR code HTML"
+msgstr "HTML för QR-kod"
+
+#: src/security_trait.php:23
+msgid ""
+"TOTAL FREEZE: Blocks the creation of ANY new administrators. You can still see the option in "
+"menus, but saving will fail. Uncheck this temporarily if you need to add a new admin. "
+"Recommended: ON"
+msgstr ""
+"TOTAL LÅSNING: blockerar skapandet av ALLA nya administratörer. Alternativet visas fortfarande i "
+"menyerna, men det går inte att spara. Avmarkera tillfälligt om du behöver lägga till en ny "
+"administratör. Rekommendation: PÅ"
+
+#: src/security_trait.php:24
+msgid "Freeze Admin Creation"
+msgstr "Lås skapande av administratörer"
+
+#: src/security_trait.php:28
+msgid ""
+"Disables application passwords, preventing hackers from accessing admin functions externally. "
+"Recommended: ON"
+msgstr ""
+"Inaktiverar applikationslösenord och hindrar angripare från att komma åt administratörsfunktioner"
+" externt. Rekommendation: PÅ"
+
+#: src/security_trait.php:29
+msgid "Disable Application Passwords"
+msgstr "Inaktivera applikationslösenord"
+
+#: src/security_trait.php:33
+msgid ""
+"Disables the internal theme and plugin editors to prevent hackers from injecting code if they get"
+" into the dashboard. Recommended: ON"
+msgstr ""
+"Inaktiverar de inbyggda tema- och tilläggsredigerarna för att hindra angripare från att lägga in "
+"kod om de får åtkomst till adminpanelen. Rekommendation: PÅ"
+
+#: src/security_trait.php:34
+msgid "Disable File Editor"
+msgstr "Inaktivera filredigeraren"
+
+#: src/security_trait.php:38
+msgid ""
+"Completely disables XML-RPC (xmlrpc.php) to block brute-force attacks and DDoS vectors. "
+"Recommended: ON"
+msgstr ""
+"Inaktiverar XML-RPC (xmlrpc.php) helt för att blockera brute force-attacker och DDoS-vektorer. "
+"Rekommendation: PÅ"
+
+#: src/security_trait.php:39
+msgid "Disable XML-RPC"
+msgstr "Inaktivera XML-RPC"
+
+#: src/security_trait.php:111
+msgid "SECURITY BLOCK: Administrator creation is currently FROZEN by MyCryptoCheckout settings."
+msgstr ""
+"SÄKERHETSSPÄRR: skapandet av administratörer är för närvarande LÅST av MyCryptoCheckout-"
+"inställningarna."
+
+#: src/security_trait.php:197
+msgid "Action Blocked: Security Lockdown"
+msgstr "Åtgärden blockerades: säkerhetslåsning"
+
+#: src/security_trait.php:198
+msgid ""
+"The creation of new administrator accounts is currently <strong>disabled</strong> by your "
+"MyCryptoCheckout security settings."
+msgstr ""
+"Skapandet av nya administratörskonton är för närvarande <strong>inaktiverat</strong> av dina "
+"säkerhetsinställningar i MyCryptoCheckout."
+
+#: src/security_trait.php:199
+msgid ""
+"To authorize this action, please go to <em>Settings &gt; MyCryptoCheckout</em> and temporarily "
+"uncheck <strong>\"Freeze Admin Creation\"</strong>."
+msgstr ""
+"För att tillåta åtgärden går du till <em>Inställningar &gt; MyCryptoCheckout</em> och avmarkerar "
+"tillfälligt <strong>”Lås skapande av administratörer”</strong>."
+
+#: src/security_trait.php:203
+msgid "Security Violation"
+msgstr "Säkerhetsöverträdelse"
+
+#: src/security_trait.php:253
+#, php-format
+msgid "[%s] Wallet Settings Updated"
+msgstr "[%s] Plånboksinställningar uppdaterades"
+
+#: src/security_trait.php:265
+#, php-format
+msgid ""
+"Just a quick notification that the MyCryptoCheckout wallet addresses were manually updated via "
+"the WordPress Dashboard.\n"
+"\n"
+"Time: %1$s\n"
+"User: %2$s\n"
+"IP:   %3$s\n"
+"\n"
+msgstr ""
+"En kort avisering: MyCryptoCheckout-plånboksadresserna uppdaterades manuellt via WordPress-"
+"adminpanelen.\n"
+"\n"
+"Tid: %1$s\n"
+"Användare: %2$s\n"
+"IP:   %3$s\n"
+"\n"
+
+#: src/security_trait.php:271
+msgid "If you made this change, you can safely ignore this email.\n"
+msgstr "Om du gjorde ändringen kan du ignorera det här e-postmeddelandet.\n"
+
+#: src/security_trait.php:272
+msgid "If you do not recognize this activity, please verify your wallet addresses immediately:\n"
+msgstr "Om du inte känner igen aktiviteten bör du omedelbart kontrollera dina plånboksadresser:\n"
+
+#: src/traits/network_available.php:33
+msgid "Network settings"
+msgstr "Nätverksinställningar"
+
+#: src/traits/network_available.php:37
+msgid "Do you want this to be available on the whole network?"
+msgstr "Ska detta vara tillgängligt i hela nätverket?"
+
+#: src/traits/network_available.php:39
+msgid "Network available"
+msgstr "Tillgängligt i nätverket"
+
+#: src/traits/network_available.php:42
+msgid "If not network enabled, on which sites should this be available."
+msgstr "Om det inte är aktiverat i hela nätverket, på vilka webbplatser ska det vara tillgängligt?"
+
+#: src/traits/network_available.php:44
+msgid "Sites"
+msgstr "Webbplatser"
+
+#: src/traits/network_available.php:72
+msgid "Not available on any sites."
+msgstr "Inte tillgängligt på någon webbplats."
+
+#: src/traits/network_available.php:77
+#, php-format
+msgid "Available on %s"
+msgstr "Tillgängligt på %s"
+
+#: src/wallets/Wallet.php:128
+msgid "This wallet is disabled."
+msgstr "Den här plånboken är inaktiverad."
+
+#: src/wallets/Wallet.php:138
+#, php-format
+msgid "%d confirmations"
+msgstr "Antal bekräftelser: %d"
+
+#: src/wallets/Wallet.php:145
+#, php-format
+msgid "Last used %s"
+msgstr "Senast använd: %s"
+
+#: src/wallets/Wallet.php:152
+#, php-format
+msgid "Used %d times"
+msgstr "Antal användningar: %d"
+
+#: src/wallets/Wallets.php:42
+#, php-format
+msgid "You currently have the following currencies configured: %s"
+msgstr "Följande valutor är konfigurerade: %s"
+

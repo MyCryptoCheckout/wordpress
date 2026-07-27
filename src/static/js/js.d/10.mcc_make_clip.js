@@ -47,7 +47,10 @@
 					$temp_input.select();
 					document.execCommand( "copy" );
 
-					$input.attr( 'value', 'OK!' );
+					var copied_text = 'OK!';
+					if ( typeof mycryptocheckout_i18n !== 'undefined' && mycryptocheckout_i18n.copied )
+						copied_text = mycryptocheckout_i18n.copied;
+					$input.attr( 'value', copied_text );
 					setTimeout( function()
 					{
 						$input.attr( 'value', old_value );

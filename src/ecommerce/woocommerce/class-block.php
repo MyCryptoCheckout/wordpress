@@ -66,6 +66,7 @@ final class Mycryptocheckout_Gateway_Blocks extends AbstractPaymentMethodType
         return [
             'title' => $this->gateway()->title,
             'payment_fields' => $pf,
+            'select_currency_error' => __( 'Please select a currency.', 'mycryptocheckout' ),
         ];
     }
 

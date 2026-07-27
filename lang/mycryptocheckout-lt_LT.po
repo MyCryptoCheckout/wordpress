@@ -1,0 +1,1490 @@
+# Lietuvių translations for MyCryptoCheckout.
+# Copyright (C) 2026 MyCryptoCheckout
+# This file is distributed under the same license as the MyCryptoCheckout project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MyCryptoCheckout 2.170\n"
+"Report-Msgid-Bugs-To: https://mycryptocheckout.com\n"
+"POT-Creation-Date: 2026-07-20 00:00+0000\n"
+"PO-Revision-Date: 2026-07-20 00:00+0000\n"
+"Last-Translator: MyCryptoCheckout\n"
+"Language: lt_LT\n"
+"Language-Team: Lietuvių\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ?"
+" 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: src/Expired_License.php:117
+#, php-format
+msgid ""
+"Your MyCryptoCheckout license has expired! If you wish to renew it, please visit your <a "
+"href=\"%1$s\">account settings</a>. Or you can <a href=\"%2$s\">dismiss this notice</a>."
+msgstr ""
+"Jūsų MyCryptoCheckout licencija nebegalioja! Jei norite ją pratęsti, atidarykite <a "
+"href=\"%1$s\">paskyros nustatymus</a>. Taip pat galite <a href=\"%2$s\">paslėpti šį "
+"pranešimą</a>."
+
+#: src/admin_trait.php:50
+#, php-format
+msgid "Your PHP CURL module is missing. MyCryptoCheckout may not work 100%% well."
+msgstr "Trūksta PHP cURL modulio. MyCryptoCheckout gali veikti ne 100%% tinkamai."
+
+#: src/admin_trait.php:64
+#, php-format
+msgid ""
+"<strong>Keep Your Store Safe:</strong> Protect your site using our built-in <strong>Hardening "
+"Tools</strong> (Admin Lockdown, Disable File Editors, etc.) found in <a href=\"%1$s\">Global "
+"Settings &gt; Security</a>. We also strongly recommend you <a href=\"%2$s\" target=\"_blank\" "
+"rel=\"noopener\">enable login 2FA</a> and <a href=\"%3$s\" target=\"_blank\" "
+"rel=\"noopener\">Sucuri Monitor</a>."
+msgstr ""
+"<strong>Apsaugokite savo parduotuvę:</strong> apsaugokite svetainę naudodami mūsų integruotus "
+"<strong>saugumo stiprinimo įrankius</strong> (administratorių kūrimo blokavimą, failų redagavimo "
+"priemonių išjungimą ir kt.), esančius skiltyje <a href=\"%1$s\">Visuotiniai nustatymai &gt; "
+"Saugumas</a>. Taip pat primygtinai rekomenduojame <a href=\"%2$s\" target=\"_blank\" "
+"rel=\"noopener\">įjungti prisijungimo dviejų veiksnių autentifikavimą</a> ir <a href=\"%3$s\" "
+"target=\"_blank\" rel=\"noopener\">Sucuri Monitor</a>."
+
+#: src/admin_trait.php:69 src/admin_trait.php:94
+msgid "Dismiss this message."
+msgstr "Paslėpti šį pranešimą."
+
+#: src/admin_trait.php:91
+#, php-format
+msgid "Have you tried the <a href=\"%1$s\">new modern checkout style</a>?"
+msgstr "Ar jau išbandėte <a href=\"%1$s\">naują modernų atsiskaitymo stilių</a>?"
+
+#: src/admin_trait.php:100
+msgid "Refresh your account data"
+msgstr "Atnaujinti paskyros duomenis"
+
+#: src/admin_trait.php:104
+msgid "Delete account data"
+msgstr "Ištrinti paskyros duomenis"
+
+#: src/admin_trait.php:110 src/admin_trait.php:462 src/admin_trait.php:775 src/admin_trait.php:891
+#: src/admin_trait.php:1000 src/admin_trait.php:1071 src/donations_trait.php:102
+msgid "Security check failed. Please reload the page and try again."
+msgstr "Saugumo patikra nepavyko. Įkelkite puslapį iš naujo ir bandykite dar kartą."
+
+#: src/admin_trait.php:129
+msgid "Account data refreshed!"
+msgstr "Paskyros duomenys atnaujinti!"
+
+#: src/admin_trait.php:141
+msgid ""
+"Error refreshing your account data. Is your site password protected? Do you have coming soon / "
+"maintenance mode enabled? A firewall blocking api.mycryptocheckout.com?"
+msgstr ""
+"Atnaujinant paskyros duomenis įvyko klaida. Ar svetainė apsaugota slaptažodžiu? Ar įjungtas "
+"„netrukus“ arba priežiūros režimas? Ar užkarda blokuoja api.mycryptocheckout.com?"
+
+#: src/admin_trait.php:167
+msgid "It appears as if MyCryptoCheckout was unable to retrieve your account data from the API server."
+msgstr "Panašu, kad MyCryptoCheckout nepavyko gauti jūsų paskyros duomenų iš API serverio."
+
+#: src/admin_trait.php:168
+msgid "Click the Refresh your account data button below to try and retrieve your account data again."
+msgstr ""
+"Spustelėkite žemiau esantį mygtuką „Atnaujinti paskyros duomenis“, kad pabandytumėte juos gauti "
+"dar kartą."
+
+#: src/admin_trait.php:187
+msgid "Payments using MyCryptoCheckout are currently not available"
+msgstr "Mokėjimai naudojant MyCryptoCheckout šiuo metu nepasiekiami"
+
+#: src/admin_trait.php:194
+msgid "Your MyCryptoCheckout account details"
+msgstr "Jūsų MyCryptoCheckout paskyros informacija"
+
+#: src/admin_trait.php:198
+msgid "Key"
+msgstr "Raktas"
+
+#: src/admin_trait.php:200 src/admin_trait.php:373
+msgid "Details"
+msgstr "Išsami informacija"
+
+#: src/admin_trait.php:205
+msgid "API key"
+msgstr "API raktas"
+
+#: src/admin_trait.php:211
+msgid "Server name"
+msgstr "Serverio pavadinimas"
+
+#: src/admin_trait.php:215
+msgid "Account data refreshed"
+msgstr "Paskyros duomenys atnaujinti"
+
+#: src/admin_trait.php:221
+msgid "Your license expires"
+msgstr "Jūsų licencija baigia galioti"
+
+#: src/admin_trait.php:236
+msgid "Extend your license"
+msgstr "Pratęsti licenciją"
+
+#: src/admin_trait.php:238
+msgid "Purchase a license for unlimited payments"
+msgstr "Įsigyti neribotų mokėjimų licenciją"
+
+#: src/admin_trait.php:241
+msgid "Extend my license"
+msgstr "Pratęsti mano licenciją"
+
+#: src/admin_trait.php:241
+msgid "Add an unlimited license to my cart"
+msgstr "Pridėti neribotą licenciją į krepšelį"
+
+#: src/admin_trait.php:249
+msgid "Payments remaining this month"
+msgstr "Šį mėnesį likę mokėjimai"
+
+#: src/admin_trait.php:253
+msgid "Payments processed"
+msgstr "Apdoroti mokėjimai"
+
+#: src/admin_trait.php:257
+msgid "Physical currency exchange rates updated"
+msgstr "Fizinių valiutų kursai atnaujinti"
+
+#: src/admin_trait.php:261
+msgid "Cryptocurrency exchange rates updated"
+msgstr "Kriptovaliutų kursai atnaujinti"
+
+#: src/admin_trait.php:278
+#, php-format
+msgid "Currency %s is no longer available!"
+msgstr "Valiuta %s nebepasiekiama!"
+
+#: src/admin_trait.php:288
+msgid "Exchange rates for your currencies"
+msgstr "Jūsų valiutų kursai"
+
+#: src/admin_trait.php:296
+msgid "Reserved amounts"
+msgstr "Rezervuotos sumos"
+
+#: src/admin_trait.php:310
+msgid "Next scheduled hourly cron"
+msgstr "Kitas suplanuotas valandinis cron vykdymas"
+
+#: src/admin_trait.php:315
+msgid "Next scheduled account data update"
+msgstr "Kitas suplanuotas paskyros duomenų atnaujinimas"
+
+#: src/admin_trait.php:342
+msgid "You cannot modify your currencies until you have a valid account. Please see the Accounts tab."
+msgstr "Negalite keisti valiutų, kol neturite galiojančios paskyros. Žr. skirtuką „Paskyra“."
+
+#: src/admin_trait.php:355
+msgid "Delete"
+msgstr "Ištrinti"
+
+#: src/admin_trait.php:357
+msgid "Disable"
+msgstr "Išjungti"
+
+#: src/admin_trait.php:359
+msgid "Enable"
+msgstr "Įjungti"
+
+#: src/admin_trait.php:361
+msgid "Mark as used"
+msgstr "Pažymėti kaip naudotą"
+
+#: src/admin_trait.php:363
+msgid "Reset sorting"
+msgstr "Atkurti rūšiavimą"
+
+#: src/admin_trait.php:369 src/admin_trait.php:422
+msgid "Currency"
+msgstr "Valiuta"
+
+#: src/admin_trait.php:371
+msgid "Wallet"
+msgstr "Piniginė"
+
+#: src/admin_trait.php:403
+msgid "Edit this currency"
+msgstr "Redaguoti šią valiutą"
+
+#: src/admin_trait.php:416
+msgid "Add new currency / wallet"
+msgstr "Pridėti naują valiutą / piniginę"
+
+#: src/admin_trait.php:420
+msgid "Which currency shall the new wallet belong to?"
+msgstr "Kuriai valiutai turi priklausyti nauja piniginė?"
+
+#: src/admin_trait.php:425 src/admin_trait.php:666
+msgid "The address of your wallet to which you want to receive funds."
+msgstr "Piniginės adresas, kuriuo norite gauti lėšas."
+
+#: src/admin_trait.php:427
+msgid "If your currency has HD wallet support, you can add your public key when editing the wallet."
+msgstr "Jei valiuta palaiko HD pinigines, redaguodami piniginę galite pridėti viešąjį raktą."
+
+#: src/admin_trait.php:431 src/admin_trait.php:440 src/admin_trait.php:668 src/admin_trait.php:1129
+msgid "Address"
+msgstr "Adresas"
+
+#: src/admin_trait.php:447 src/admin_trait.php:756
+msgid "Your private view key that is used to see the amounts in private transactions to your wallet."
+msgstr "Jūsų privatus peržiūros raktas, naudojamas privačių operacijų į piniginę sumoms matyti."
+
+#: src/admin_trait.php:449 src/admin_trait.php:758
+msgid "Monero private view key"
+msgstr "Privatus Monero peržiūros raktas"
+
+#: src/admin_trait.php:455 src/admin_trait.php:769 src/admin_trait.php:885 src/admin_trait.php:994
+msgid "Save settings"
+msgstr "Išsaugoti nustatymus"
+
+#: src/admin_trait.php:479
+msgid "The selected wallets have been deleted."
+msgstr "Pasirinktos piniginės ištrintos."
+
+#: src/admin_trait.php:489
+msgid "The selected wallets have been disabled."
+msgstr "Pasirinktos piniginės išjungtos."
+
+#: src/admin_trait.php:499
+msgid "The selected wallets have been enabled."
+msgstr "Pasirinktos piniginės įjungtos."
+
+#: src/admin_trait.php:509
+msgid "The selected wallets have been marked as used."
+msgstr "Pasirinktos piniginės pažymėtos kaip naudotos."
+
+#: src/admin_trait.php:519
+msgid "The selected wallets have had their sort order reset."
+msgstr "Pasirinktų piniginių rūšiavimo tvarka atkurta."
+
+#: src/admin_trait.php:544 src/admin_trait.php:833 src/admin_trait.php:900 src/admin_trait.php:1021
+msgid "Settings saved!"
+msgstr "Nustatymai išsaugoti!"
+
+#: src/admin_trait.php:563
+msgid ""
+"This table shows the currencies you have setup. To edit a currency, click the address. To sort "
+"them, drag the currency name up or down."
+msgstr ""
+"Šioje lentelėje rodomos jūsų nustatytos valiutos. Norėdami redaguoti valiutą, spustelėkite "
+"adresą. Norėdami rūšiuoti, vilkite valiutos pavadinimą aukštyn arba žemyn."
+
+#: src/admin_trait.php:565
+msgid "If you have several wallets of the same currency, they will be used in sequential order."
+msgstr "Jei turite kelias tos pačios valiutos pinigines, jos bus naudojamos paeiliui."
+
+#: src/admin_trait.php:567
+#, php-format
+msgid "If you don't have a wallet address to use, perhaps %1$swe can recommend some wallets for you%2$s?"
+msgstr "Jei neturite piniginės adreso, galbūt %1$sgalime rekomenduoti keletą piniginių%2$s."
+
+#: src/admin_trait.php:582
+#, php-format
+msgid "After adding currencies, visit the %1$sWooCommerce Settings%2$s to enable the gateway and more."
+msgstr ""
+"Pridėję valiutas, atidarykite %1$sWooCommerce nustatymus%2$s, kad įjungtumėte mokėjimo šliuzą ir "
+"nustatytumėte kitas parinktis."
+
+#: src/admin_trait.php:595
+#, php-format
+msgid ""
+"After adding currencies, visit the %1$sEasy Digital Downloads Settings%2$s to enable the gateway "
+"and more."
+msgstr ""
+"Pridėję valiutas, atidarykite %1$sEasy Digital Downloads nustatymus%2$s, kad įjungtumėte mokėjimo"
+" šliuzą ir nustatytumėte kitas parinktis."
+
+#: src/admin_trait.php:602
+msgid "Current currencies / wallets"
+msgstr "Dabartinės valiutos / piniginės"
+
+#: src/admin_trait.php:630
+msgid "Invalid wallet ID!"
+msgstr "Neteisingas piniginės ID!"
+
+#: src/admin_trait.php:654
+msgid "Basic settings"
+msgstr "Pagrindiniai nustatymai"
+
+#: src/admin_trait.php:657
+msgid "Describe the wallet to yourself."
+msgstr "Įrašykite sau skirtą piniginės aprašą."
+
+#: src/admin_trait.php:659
+msgid "Label"
+msgstr "Žyma"
+
+#: src/admin_trait.php:678
+msgid ""
+"The ENS address of your wallet to which you want to receive funds. The resolving address must "
+"match your normal address."
+msgstr ""
+"Piniginės ENS adresas, kuriuo norite gauti lėšas. Nustatytasis adresas turi sutapti su įprastu "
+"adresu."
+
+#: src/admin_trait.php:680
+msgid "ENS Address"
+msgstr "ENS adresas"
+
+#: src/admin_trait.php:688
+msgid "Is this wallet enabled and ready to receive funds?"
+msgstr "Ar ši piniginė įjungta ir paruošta priimti lėšas?"
+
+#: src/admin_trait.php:690 src/payment_timer_trait.php:39 src/qr_code_trait.php:37
+msgid "Enabled"
+msgstr "Įjungta"
+
+#: src/admin_trait.php:694
+msgid ""
+"How many confirmations needed to regard orders as paid. 1 is the default. Only some blockchains "
+"support 0-conf (mempool)."
+msgstr ""
+"Patvirtinimų skaičius, reikalingas užsakymui laikyti apmokėtu. Numatytoji reikšmė yra 1. Tik kai "
+"kurios blokų grandinės palaiko 0 patvirtinimų (mempool)."
+
+#: src/admin_trait.php:696
+msgid "Confirmations"
+msgstr "Patvirtinimai"
+
+#: src/admin_trait.php:704
+msgid "This wallet supports HD public keys, but your system is missing the required PHP GMP library."
+msgstr "Ši piniginė palaiko viešuosius HD raktus, tačiau sistemoje nėra būtinos PHP GMP bibliotekos."
+
+#: src/admin_trait.php:709
+msgid "HD wallet settings"
+msgstr "HD piniginės nustatymai"
+
+#: src/admin_trait.php:717
+#, php-format
+msgid ""
+"If you have an HD wallet and want to generate a new address after each purchase, enter your %s "
+"public key here."
+msgstr ""
+"Jei naudojate HD piniginę ir po kiekvieno pirkimo norite sugeneruoti naują adresą, čia įveskite "
+"viešąjį %s raktą."
+
+#: src/admin_trait.php:719
+msgid "HD public key"
+msgstr "Viešasis HD raktas"
+
+#: src/admin_trait.php:726
+msgid ""
+"The index of the next public wallet address to use. The default is 0 and gets increased each time"
+" the wallet is used. This is related to your wallet's gap length."
+msgstr ""
+"Kito naudojamo viešojo piniginės adreso indeksas. Numatytoji reikšmė yra 0; ji padidinama "
+"kiekvieną kartą panaudojus piniginę. Tai susiję su piniginės tarpų ilgiu."
+
+#: src/admin_trait.php:728
+msgid "Wallet index"
+msgstr "Piniginės indeksas"
+
+#: src/admin_trait.php:742
+#, php-format
+msgid "The address at index %1$d is %2$s."
+msgstr "Adresas ties indeksu %1$d yra %2$s."
+
+#: src/admin_trait.php:745
+msgid "When using an HD wallet, you can accept amounts that are lower than requested."
+msgstr "Naudodami HD piniginę galite priimti mažesnes sumas, nei buvo paprašyta."
+
+#: src/admin_trait.php:746
+msgid "Payment tolerance percent"
+msgstr "Mokėjimo tolerancija procentais"
+
+#: src/admin_trait.php:813
+#, php-format
+msgid "This public key type is not supported. Please use only: %s"
+msgstr "Šio viešojo rakto tipas nepalaikomas. Naudokite tik: %s"
+
+#: src/admin_trait.php:874 src/admin_trait.php:971
+msgid "QR code"
+msgstr "QR kodas"
+
+#: src/admin_trait.php:880 src/admin_trait.php:982
+msgid "Payment timer"
+msgstr "Mokėjimo laikmatis"
+
+#: src/admin_trait.php:930
+msgid "Gateway fees"
+msgstr "Mokėjimo šliuzo mokesčiai"
+
+#: src/admin_trait.php:933
+msgid ""
+"If you wish to charge (or discount) visitors for using MyCryptoCheckout as the payment gateway, "
+"you can enter the fixed or percentage amounts in the boxes below. The cryptocurrency checkout "
+"price will be modified in accordance with the combined values below. These are applied to the "
+"original currency."
+msgstr ""
+"Jei norite taikyti lankytojams mokestį arba nuolaidą už MyCryptoCheckout naudojimą kaip mokėjimo "
+"šliuzą, žemiau įveskite fiksuotas arba procentines sumas. Atsiskaitymo kriptovaliuta kaina bus "
+"pakeista pagal bendrą toliau nurodytų reikšmių poveikį. Jos taikomos pradinei valiutai."
+
+#: src/admin_trait.php:937
+msgid ""
+"If you wish to mark your prices up (or down) when using cryptocurrency, enter the fixed amount in"
+" this box."
+msgstr ""
+"Jei atsiskaitant kriptovaliuta norite padidinti arba sumažinti kainas fiksuota suma, įveskite ją "
+"šiame laukelyje."
+
+#: src/admin_trait.php:939
+msgid "Markup amount"
+msgstr "Antkainio suma"
+
+#: src/admin_trait.php:948
+msgid ""
+"If you wish to mark your prices up (or down) when using cryptocurrency, enter the percentage in "
+"this box."
+msgstr ""
+"Jei atsiskaitant kriptovaliuta norite padidinti arba sumažinti kainas procentais, įveskite "
+"procentinę reikšmę šiame laukelyje."
+
+#: src/admin_trait.php:950
+#, php-format
+msgid "Markup %%"
+msgstr "Antkainis %%"
+
+#: src/admin_trait.php:958
+msgid "Checkout display"
+msgstr "Atsiskaitymo rodinys"
+
+#: src/admin_trait.php:961
+msgid ""
+"Choose the payment page layout shown after checkout. Classic keeps the existing layout. Modern "
+"uses the new card-style payment page."
+msgstr ""
+"Pasirinkite po atsiskaitymo rodomo mokėjimo puslapio išdėstymą. „Klasikinis“ išlaiko esamą "
+"išdėstymą. „Modernus“ naudoja naują kortelių stiliaus mokėjimo puslapį."
+
+#: src/admin_trait.php:962
+msgid "Payment page style"
+msgstr "Mokėjimo puslapio stilius"
+
+#: src/admin_trait.php:964
+msgid "Classic"
+msgstr "Klasikinis"
+
+#: src/admin_trait.php:965
+msgid "Modern"
+msgstr "Modernus"
+
+#: src/admin_trait.php:987
+msgid "Security"
+msgstr "Saugumas"
+
+#: src/admin_trait.php:1050
+msgid ""
+"The hourly run cron job will do things like update the account information, exchange rates, send "
+"unsent data to the API server, etc."
+msgstr ""
+"Valandinis cron darbas, be kita ko, atnaujins paskyros informaciją ir valiutų kursus bei išsiųs "
+"dar neišsiųstus duomenis į API serverį."
+
+#: src/admin_trait.php:1053
+msgid "Run hourly cron job"
+msgstr "Vykdyti valandinį cron darbą"
+
+#: src/admin_trait.php:1056
+msgid ""
+"Test the communication with the API server. If it doesn't work, then there is a conflict with "
+"another plugin or the theme."
+msgstr "Patikrina ryšį su API serveriu. Jei patikra nepavyksta, yra konfliktas su kitu įskiepiu arba tema."
+
+#: src/admin_trait.php:1059
+msgid "Test communication"
+msgstr "Patikrinti ryšį"
+
+#: src/admin_trait.php:1062
+msgid "Make all expired license notifications appear again."
+msgstr "Vėl rodyti visus pranešimus apie pasibaigusias licencijas."
+
+#: src/admin_trait.php:1065
+msgid "Reset expired license notifications"
+msgstr "Atkurti pranešimus apie pasibaigusias licencijas"
+
+#: src/admin_trait.php:1080
+msgid "MyCryptoCheckout hourly cron job run."
+msgstr "MyCryptoCheckout valandinis cron darbas įvykdytas."
+
+#: src/admin_trait.php:1088
+#, php-format
+msgid "Success! %s"
+msgstr "Pavyko! %s"
+
+#: src/admin_trait.php:1091
+#, php-format
+msgid "Communications failure: %s"
+msgstr "Ryšio klaida: %s"
+
+#: src/admin_trait.php:1099
+msgid ""
+"Notifications reset! The next time your account is refreshed, you might see an expired license "
+"notification. "
+msgstr ""
+"Pranešimai atkurti! Kitą kartą atnaujinus paskyrą gali būti parodytas pranešimas apie "
+"pasibaigusią licenciją. "
+
+#: src/admin_trait.php:1125
+msgid "Unmatched payments to your addresses"
+msgstr "Nesusieti mokėjimai į jūsų adresus"
+
+#: src/admin_trait.php:1131 src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:517
+#: src/misc_methods_trait.php:608
+msgid "Amount"
+msgstr "Suma"
+
+#: src/admin_trait.php:1133 src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:546
+msgid "Transaction ID"
+msgstr "Operacijos ID"
+
+#: src/admin_trait.php:1135
+msgid "Since"
+msgstr "Nuo"
+
+#: src/admin_trait.php:1151
+msgid ""
+"Unmatched payments are detected blockchain transactions to your wallet addresses that could not "
+"be automatically matched to an MCC order. Review the currency, amount, receiving address, and "
+"transaction ID, then verify the transaction on-chain before deciding whether it belongs to a "
+"customer order."
+msgstr ""
+"Nesusieti mokėjimai yra aptiktos blokų grandinės operacijos į jūsų piniginių adresus, kurių "
+"nepavyko automatiškai susieti su MCC užsakymu. Peržiūrėkite valiutą, sumą, gavimo adresą ir "
+"operacijos ID, tada patikrinkite operaciją blokų grandinėje prieš nuspręsdami, ar ji priklauso "
+"kliento užsakymui."
+
+#: src/admin_trait.php:1153
+msgid "Unmatched payments disappear automatically from the table after 7 days."
+msgstr "Nesusieti mokėjimai automatiškai pašalinami iš lentelės po 7 dienų."
+
+#: src/admin_trait.php:1218
+msgid "Settings"
+msgstr "Nustatymai"
+
+#: src/admin_trait.php:1231
+msgid "No nonce."
+msgstr "Trūksta nonce reikšmės."
+
+#: src/admin_trait.php:1237
+msgid "Invalid nonce."
+msgstr "Neteisinga nonce reikšmė."
+
+#: src/admin_trait.php:1241
+msgid "Unauthorized user."
+msgstr "Naudotojas neturi teisės."
+
+#: src/admin_trait.php:1246
+msgid "No wallet data provided."
+msgstr "Nepateikti piniginės duomenys."
+
+#: src/currencies/Currency.php:145
+msgid "Main blockchains"
+msgstr "Pagrindinės blokų grandinės"
+
+#: src/currencies/Currency.php:308
+#, php-format
+msgid "The address must be exactly %s characters long."
+msgstr "Adresas turi būti tiksliai %s simbolių ilgio."
+
+#: src/donations_trait.php:29
+msgid "Use the form below to customize a shortcode that can be placed in your posts or a HTML widget."
+msgstr ""
+"Naudokite žemiau esančią formą trumpajam kodui, kurį galima įterpti į įrašus arba HTML valdiklį, "
+"pritaikyti."
+
+#: src/donations_trait.php:36
+msgid "If no currencies are selected, all available currencies will be shown."
+msgstr "Jei nepasirinkta nė viena valiuta, bus rodomos visos galimos valiutos."
+
+#: src/donations_trait.php:38
+msgid "Show these currencies"
+msgstr "Rodyti šias valiutas"
+
+#: src/donations_trait.php:45
+msgid "Preselect this currency when showing the donation data."
+msgstr "Rodydami aukojimo informaciją iš anksto pasirinkti šią valiutą."
+
+#: src/donations_trait.php:47
+msgid "Primary currency"
+msgstr "Pagrindinė valiuta"
+
+#: src/donations_trait.php:48
+msgid "Random"
+msgstr "Atsitiktinė"
+
+#: src/donations_trait.php:54
+msgid "User selects currency with icons"
+msgstr "Naudotojas pasirenka valiutą naudodamas piktogramas"
+
+#: src/donations_trait.php:58
+msgid "User selects currency with a dropdown box"
+msgstr "Naudotojas pasirenka valiutą išskleidžiamajame sąraše"
+
+#: src/donations_trait.php:62
+msgid "Show the name of the currently selected currency."
+msgstr "Rodyti šiuo metu pasirinktos valiutos pavadinimą."
+
+#: src/donations_trait.php:64
+msgid "Show the currency name"
+msgstr "Rodyti valiutos pavadinimą"
+
+#: src/donations_trait.php:68
+msgid "Show a QR code for the wallet address."
+msgstr "Rodyti piniginės adreso QR kodą."
+
+#: src/donations_trait.php:70
+msgid "Show QR code"
+msgstr "Rodyti QR kodą"
+
+#: src/donations_trait.php:74
+msgid "The width is specified in pixels. The height is the same as the width."
+msgstr "Plotis nurodomas pikseliais. Aukštis lygus pločiui."
+
+#: src/donations_trait.php:76
+msgid "QR code max width"
+msgstr "Didžiausias QR kodo plotis"
+
+#: src/donations_trait.php:81
+msgid "Show the address of the wallet as a text string."
+msgstr "Rodyti piniginės adresą kaip tekstą."
+
+#: src/donations_trait.php:83
+msgid "Show the wallet address"
+msgstr "Rodyti piniginės adresą"
+
+#: src/donations_trait.php:87
+msgid "How to align the widget on the page."
+msgstr "Kaip lygiuoti valdiklį puslapyje."
+
+#: src/donations_trait.php:89
+msgid "Alignment"
+msgstr "Lygiavimas"
+
+#: src/donations_trait.php:90
+msgid "None"
+msgstr "Nėra"
+
+#: src/donations_trait.php:91
+msgid "Left"
+msgstr "Kairėje"
+
+#: src/donations_trait.php:92
+msgid "Center"
+msgstr "Centre"
+
+#: src/donations_trait.php:93
+msgid "Right"
+msgstr "Dešinėje"
+
+#: src/donations_trait.php:96
+msgid "Generate shortcode"
+msgstr "Generuoti trumpąjį kodą"
+
+#: src/donations_trait.php:132
+#, php-format
+msgid "Your shortcode is: %s"
+msgstr "Jūsų trumpasis kodas: %s"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:307
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:217
+msgid "Configure your wallets here."
+msgstr "Čia sukonfigūruokite savo pinigines."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:314
+msgid "MyCryptoCheckout settings"
+msgstr "MyCryptoCheckout nustatymai"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:330
+msgid "If left empty, the texts below will use the MyCryptoCheckout defaults."
+msgstr "Jei laukai paliekami tušti, bus naudojami numatytieji MyCryptoCheckout tekstai."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:335
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:73
+msgid "Test mode"
+msgstr "Bandomasis režimas"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:337
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:74
+msgid ""
+"Allow purchases to be made without sending any payment information to the MyCryptoCheckout API "
+"server. No payments will be processed in this mode."
+msgstr ""
+"Leisti pirkti nesiunčiant jokios mokėjimo informacijos į MyCryptoCheckout API serverį. Šiuo "
+"režimu mokėjimai nebus apdorojami."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:342
+msgid "This is the name of the payment gateway as visible to the visitor."
+msgstr "Tai lankytojui matomas mokėjimo šliuzo pavadinimas."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:343
+msgid "Gateway name"
+msgstr "Mokėjimo šliuzo pavadinimas"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:349
+msgid "E-mail instructions"
+msgstr "El. pašto instrukcijos"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:355
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:100
+msgid "Online instructions"
+msgstr "Internetinės instrukcijos"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:362
+msgid ""
+"MyCryptoCheckout normally automatically inserts payment instructions into the [edd_receipt] "
+"shortcode that is used on the purchase confirmation page."
+msgstr ""
+"MyCryptoCheckout paprastai automatiškai įterpia mokėjimo instrukcijas į trumpąjį kodą "
+"[edd_receipt], naudojamą pirkimo patvirtinimo puslapyje."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:363
+msgid "Do not insert payment instructions into the [edd_receipt] shortcode."
+msgstr "Neįterpti mokėjimo instrukcijų į trumpąjį kodą [edd_receipt]."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:369
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:120
+msgid "This is the text for the currency selection input."
+msgstr "Tai valiutos pasirinkimo lauko tekstas."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:370
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:118
+msgid "Text for currency selection"
+msgstr "Valiutos pasirinkimo tekstas"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:378
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:158
+msgid "How many hours to wait for the payment to come through before marking the order as abandoned."
+msgstr "Kiek valandų laukti mokėjimo prieš pažymint užsakymą kaip apleistą."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:379
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:156
+msgid "Payment timeout"
+msgstr "Mokėjimo laukimo laikas"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:390
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:170
+msgid ""
+"If you are anticipating several purchases a second with the same currency, increase this amount "
+"to 100 or more to help prevent duplicate amount payments by slightly increasing the payment at "
+"random."
+msgstr ""
+"Jei tikitės kelių pirkimų per sekundę ta pačia valiuta, padidinkite šią reikšmę iki 100 ar "
+"daugiau. Tai padeda išvengti vienodų mokėjimo sumų, atsitiktinai šiek tiek padidinant prašomą "
+"sumą."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:391
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:168
+msgid "Payment amount spread"
+msgstr "Mokėjimo sumos sklaida"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:400
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:188
+msgid "Reset to defaults"
+msgstr "Atkurti numatytąsias reikšmes"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:402
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:191
+msgid "If you wish to reset all of these settings to the defaults, check this box and save your changes."
+msgstr ""
+"Jei norite atkurti visų šių nustatymų numatytąsias reikšmes, pažymėkite šį laukelį ir išsaugokite"
+" pakeitimus."
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:444
+#, php-format
+msgid "Warning! Payments using MyCryptoCheckout are not possible: %s"
+msgstr "Įspėjimas! Mokėjimai naudojant MyCryptoCheckout negalimi: %s"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:469
+msgid "Payment complete"
+msgstr "Mokėjimas baigtas"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:479
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:480
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:505
+#: src/ecommerce/woocommerce/WooCommerce.php:327
+msgid "Test"
+msgstr "Bandymas"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:484
+msgid "Awaiting blockchain transaction"
+msgstr "Laukiama blokų grandinės operacijos"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:485
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:502
+msgid "Pending"
+msgstr "Laukiama"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:493
+msgid "Attempting to contact API server"
+msgstr "Bandoma susisiekti su API serveriu"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:499
+msgid "Abandoned"
+msgstr "Apleista"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:511
+#: src/ecommerce/woocommerce/WooCommerce.php:318
+msgid "MyCryptoCheckout details"
+msgstr "MyCryptoCheckout informacija"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:523 src/misc_methods_trait.php:120
+#: src/misc_methods_trait.php:610
+msgid "To"
+msgstr "Į"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:531
+msgid "Status"
+msgstr "Būsena"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:540
+msgid "API payment ID"
+msgstr "API mokėjimo ID"
+
+#: src/ecommerce/easy_digital_downloads/Easy_Digital_Downloads.php:557
+msgid "API connection attempts"
+msgstr "Bandymų prisijungti prie API skaičius"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:66
+msgid "Enable/Disable"
+msgstr "Įjungti / išjungti"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:67
+msgid "Enable MyCryptoCheckout"
+msgstr "Įjungti MyCryptoCheckout"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:80
+msgid "Send new order e-mail"
+msgstr "Siųsti naujo užsakymo el. laišką"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:81
+msgid ""
+"Send the new order e-mail before the order is paid. Normally, the new order e-mail is only sent "
+"when then order has been paid."
+msgstr ""
+"Siųsti naujo užsakymo el. laišką prieš apmokant užsakymą. Paprastai jis siunčiamas tik tada, kai "
+"užsakymas apmokėtas."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:87
+msgid "Send invoice"
+msgstr "Siųsti sąskaitą"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:88
+msgid ""
+"Send an e-mail invoice to the customer after purchase with the order details and payment "
+"instructions."
+msgstr ""
+"Po pirkimo išsiųsti klientui el. paštu sąskaitą su užsakymo informacija ir mokėjimo "
+"instrukcijomis."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:94
+msgid "E-mail Instructions"
+msgstr "El. pašto instrukcijos"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:106
+msgid "Hide order overview"
+msgstr "Slėpti užsakymo suvestinę"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:109
+msgid ""
+"The order overview is usually placed above crypto payment instructions. Use this option to hide "
+"the overview and show the payment instructions higher up."
+msgstr ""
+"Užsakymo suvestinė paprastai rodoma virš kriptovaliutos mokėjimo instrukcijų. Naudokite šią "
+"parinktį, kad paslėptumėte suvestinę ir mokėjimo instrukcijos būtų rodomos aukščiau."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:112
+msgid "Payment type name"
+msgstr "Mokėjimo tipo pavadinimas"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:114
+msgid "This is the name of the payment option the user will see during checkout."
+msgstr "Tai mokėjimo parinkties pavadinimas, kurį naudotojas matys atsiskaitydamas."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:125
+msgid "Show the cryptocurrency icons on the checkout page in various colors instead of the default black."
+msgstr "Atsiskaitymo puslapyje rodyti įvairių spalvų kriptovaliutų piktogramas, o ne numatytąsias juodas."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:128
+msgid "Black"
+msgstr "Juoda"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:130
+msgid "Brand colors"
+msgstr "Prekės ženklo spalvos"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:132
+msgid "Orange"
+msgstr "Oranžinė"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:134
+msgid "White"
+msgstr "Balta"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:136
+msgid "Colorize icons"
+msgstr "Spalvinti piktogramas"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:140
+msgid "Payment complete status"
+msgstr "Būsena baigus mokėjimą"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:144
+msgid "Completed"
+msgstr "Baigta"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:146
+msgid "On hold"
+msgstr "Sulaikyta"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:148
+msgid "Pending payment"
+msgstr "Laukiama mokėjimo"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:150
+msgid "Processing"
+msgstr "Apdorojama"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:152
+msgid "After payment is complete, change the order to this status."
+msgstr "Baigus mokėjimą pakeisti užsakymo būseną į šią."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:181
+msgid "Show amount"
+msgstr "Rodyti sumą"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:184
+msgid "Show the amount in cryptocurrency in the currency selector during checkout."
+msgstr "Atsiskaitymo metu valiutos parinkiklyje rodyti sumą kriptovaliuta."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:203
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:222
+msgid "Accept cryptocurrency payments directly into your wallet using the MyCryptoCheckout service."
+msgstr "Priimkite kriptovaliutų mokėjimus tiesiai į savo piniginę naudodami MyCryptoCheckout paslaugą."
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:212
+msgid "You cannot currently accept any payments using this service:"
+msgstr "Šiuo metu negalite priimti mokėjimų naudodami šią paslaugą:"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:393
+msgid "Awaiting cryptocurrency payment"
+msgstr "Laukiama mokėjimo kriptovaliuta"
+
+#: src/ecommerce/woocommerce/WC_Gateway_MyCryptoCheckout.php:411
+msgid "Invalid cryptocurrency selected. Please choose a valid option."
+msgstr "Pasirinkta netinkama kriptovaliuta. Pasirinkite tinkamą parinktį."
+
+#: src/ecommerce/woocommerce/WooCommerce.php:102
+#, php-format
+msgid ""
+"Since you are using virtual currency %1$s as your WooCommerce currency, please change the decimal"
+" precision from %2$d to match MyCyyptoCheckout's: %3$s"
+msgstr ""
+"Kadangi kaip WooCommerce valiutą naudojate virtualią valiutą %1$s, pakeiskite dešimtainį tikslumą"
+" iš %2$d, kad jis atitiktų MyCyyptoCheckout reikšmę: %3$s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:127
+#, php-format
+msgid "Your WooCommerce installation is using an unknown currency: %s"
+msgstr "Jūsų WooCommerce dieginyje naudojama nežinoma valiuta: %s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:177
+msgid "Payment timed out."
+msgstr "Baigėsi mokėjimo laikas."
+
+#: src/ecommerce/woocommerce/WooCommerce.php:330
+#, php-format
+msgid "MyCryptoCheckout payment ID: %s"
+msgstr "MyCryptoCheckout mokėjimo ID: %s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:340
+#, php-format
+msgid "%d attempts made to contact the API server."
+msgstr "Bandymų susisiekti su API serveriu skaičius: %d."
+
+#: src/ecommerce/woocommerce/WooCommerce.php:349
+#, php-format
+msgid "Received %1$s&nbsp;%2$s<br/>to %3$s"
+msgstr "Gauta %1$s&nbsp;%2$s<br/>adresu %3$s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:359
+#, php-format
+msgid "Expecting %1$s&nbsp;%2$s<br/>to %3$s"
+msgstr "Laukiama %1$s&nbsp;%2$s<br/>adresu %3$s"
+
+#: src/ecommerce/woocommerce/WooCommerce.php:435
+msgid "MCC currency ID does not exist in POST."
+msgstr "POST duomenyse nėra MCC valiutos ID."
+
+#: src/ecommerce/woocommerce/class-block.php:69
+msgid "Please select a currency."
+msgstr "Pasirinkite valiutą."
+
+#: src/menu_trait.php:37 src/menu_trait.php:153
+msgid "MyCryptoCheckout Settings"
+msgstr "MyCryptoCheckout nustatymai"
+
+#: src/menu_trait.php:39 src/menu_trait.php:155
+msgid "MyCryptoCheckout"
+msgstr "MyCryptoCheckout"
+
+#: src/menu_trait.php:60
+msgid "MyCryptoCheckout Currencies"
+msgstr "MyCryptoCheckout valiutos"
+
+#: src/menu_trait.php:62
+msgid "Currencies"
+msgstr "Valiutos"
+
+#: src/menu_trait.php:79
+#, php-format
+msgid "Editing %s wallet"
+msgstr "Redaguojama piniginė %s"
+
+#: src/menu_trait.php:81
+msgid "Edit wallet"
+msgstr "Redaguoti piniginę"
+
+#: src/menu_trait.php:89
+msgid "MyCryptoCheckout Account"
+msgstr "MyCryptoCheckout paskyra"
+
+#: src/menu_trait.php:91
+msgid "Account"
+msgstr "Paskyra"
+
+#: src/menu_trait.php:96
+msgid "MyCryptoCheckout Donations"
+msgstr "MyCryptoCheckout aukos"
+
+#: src/menu_trait.php:98
+msgid "Donations"
+msgstr "Aukos"
+
+#: src/menu_trait.php:105
+msgid "MyCryptoCheckout Unmatched Payments"
+msgstr "Nesusieti MyCryptoCheckout mokėjimai"
+
+#: src/menu_trait.php:107
+msgid "Unmatched Payments"
+msgstr "Nesusieti mokėjimai"
+
+#: src/menu_trait.php:113
+msgid "MyCryptoCheckout Local Settings"
+msgstr "Vietiniai MyCryptoCheckout nustatymai"
+
+#: src/menu_trait.php:115
+msgid "Local Settings"
+msgstr "Vietiniai nustatymai"
+
+#: src/menu_trait.php:120
+msgid "MyCryptoCheckout Global Settings"
+msgstr "Visuotiniai MyCryptoCheckout nustatymai"
+
+#: src/menu_trait.php:122
+msgid "Global Settings"
+msgstr "Visuotiniai nustatymai"
+
+#: src/menu_trait.php:127
+msgid "MyCryptoCheckout Tools"
+msgstr "MyCryptoCheckout įrankiai"
+
+#: src/menu_trait.php:129
+msgid "Tools"
+msgstr "Įrankiai"
+
+#: src/menu_trait.php:134
+msgid "Uninstall MyCryptoCheckout"
+msgstr "Pašalinti MyCryptoCheckout"
+
+#: src/menu_trait.php:136
+msgid "Uninstall"
+msgstr "Pašalinti"
+
+#: src/misc_methods_trait.php:82 src/misc_methods_trait.php:614
+msgid "Copied"
+msgstr "Nukopijuota"
+
+#: src/misc_methods_trait.php:106
+msgid "Please select a currency"
+msgstr "Pasirinkite valiutą"
+
+#: src/misc_methods_trait.php:107
+msgid "Cryptocurrency"
+msgstr "Kriptovaliuta"
+
+#: src/misc_methods_trait.php:109
+msgid ""
+"Instructions for payment that will be shown on the purchase confirmation page. The following "
+"shortcodes are available: [AMOUNT], [CURRENCY], [TO]"
+msgstr ""
+"Mokėjimo instrukcijos, kurios bus rodomos pirkimo patvirtinimo puslapyje. Galimi šie trumpieji "
+"kodai: [AMOUNT], [CURRENCY], [TO]"
+
+#: src/misc_methods_trait.php:118
+msgid "To complete your order"
+msgstr "Užbaikite užsakymą"
+
+#: src/misc_methods_trait.php:119
+msgid "Send"
+msgstr "Siųsti"
+
+#: src/misc_methods_trait.php:134
+msgid "Please complete your order by"
+msgstr "Užbaikite užsakymą"
+
+#: src/misc_methods_trait.php:135
+msgid "sending"
+msgstr "siųsdami"
+
+#: src/misc_methods_trait.php:136
+msgid "to"
+msgstr "į"
+
+#: src/misc_methods_trait.php:142
+msgid ""
+"Instructions for payment that will be added to the e-mail receipt. The following shortcodes are "
+"available: [AMOUNT], [CURRENCY], [TO]"
+msgstr ""
+"Mokėjimo instrukcijos, kurios bus pridėtos prie el. paštu siunčiamo kvito. Galimi šie trumpieji "
+"kodai: [AMOUNT], [CURRENCY], [TO]"
+
+#: src/misc_methods_trait.php:548
+#, php-format
+msgid "Post %s does not exist."
+msgstr "Įrašas %s neegzistuoja."
+
+#: src/misc_methods_trait.php:560
+msgid "MyCryptoCheckout: Unable to contact the API server"
+msgstr "MyCryptoCheckout: nepavyko susisiekti su API serveriu"
+
+#: src/misc_methods_trait.php:563
+msgid "Dear admin!\n"
+msgstr "Sveiki, administratoriau!\n"
+
+#: src/misc_methods_trait.php:565
+msgid ""
+"MyCryptoCheckout was recently unable to contact the API server in order to retrieve a payment ID."
+" The plugin will continue to attempt to contact the API. The gateway will be unable to process "
+"payments until it has re-established a connection.\n"
+msgstr ""
+"MyCryptoCheckout neseniai nepavyko susisiekti su API serveriu ir gauti mokėjimo ID. Įskiepis "
+"toliau bandys susisiekti su API. Mokėjimo šliuzas negalės apdoroti mokėjimų, kol ryšys nebus "
+"atkurtas.\n"
+
+#: src/misc_methods_trait.php:567
+msgid "Please log in and try refreshing your MyCryptoCheckout account settings.\n"
+msgstr "Prisijunkite ir pabandykite atnaujinti MyCryptoCheckout paskyros nustatymus.\n"
+
+#: src/misc_methods_trait.php:604
+msgid "Complete your payment"
+msgstr "Užbaikite mokėjimą"
+
+#: src/misc_methods_trait.php:605
+#, php-format
+msgid "Please send the exact amount of %s to the address below."
+msgstr "Išsiųskite tikslų %s kiekį žemiau nurodytu adresu."
+
+#: src/misc_methods_trait.php:606
+msgid "Important"
+msgstr "Svarbu"
+
+#: src/misc_methods_trait.php:607
+msgid "Send the exact amount shown to help ensure the payment is detected automatically."
+msgstr "Išsiųskite tiksliai nurodytą sumą, kad mokėjimas būtų automatiškai aptiktas."
+
+#: src/misc_methods_trait.php:609
+msgid "Pay to address"
+msgstr "Mokėjimo adresas"
+
+#: src/misc_methods_trait.php:611
+msgid "ENS / Unstoppable domain"
+msgstr "ENS / „Unstoppable“ domenas"
+
+#: src/misc_methods_trait.php:612
+msgid "Copy"
+msgstr "Kopijuoti"
+
+#: src/misc_methods_trait.php:613
+#, php-format
+msgid "Copy %s"
+msgstr "Kopijuoti %s"
+
+#: src/misc_methods_trait.php:615
+msgid "Pay with"
+msgstr "Mokėti naudojant"
+
+#: src/misc_methods_trait.php:616
+msgid "Scan to pay"
+msgstr "Nuskaitykite, kad sumokėtumėte"
+
+#: src/misc_methods_trait.php:617
+msgid "Pay with MetaMask"
+msgstr "Mokėti naudojant MetaMask"
+
+#: src/misc_methods_trait.php:618
+msgid "Pay with Trust Wallet"
+msgstr "Mokėti naudojant Trust Wallet"
+
+#: src/misc_methods_trait.php:619
+#, php-format
+msgid "Open in %s Wallet"
+msgstr "Atidaryti %s piniginėje"
+
+#: src/misc_methods_trait.php:620
+msgid "Insufficient funds for the transaction. Please check your balance."
+msgstr "Operacijai nepakanka lėšų. Patikrinkite savo likutį."
+
+#: src/misc_methods_trait.php:621
+msgid "or"
+msgstr "arba"
+
+#: src/misc_methods_trait.php:796
+#, php-format
+msgid "%s ago"
+msgstr "prieš %s"
+
+#: src/payment_timer_trait.php:25
+msgid "Enable a payment timer on the order confirmation page."
+msgstr "Įjungti mokėjimo laikmatį užsakymo patvirtinimo puslapyje."
+
+#: src/payment_timer_trait.php:27
+msgid "Payment timer status"
+msgstr "Mokėjimo laikmačio būsena"
+
+#: src/payment_timer_trait.php:32
+msgid "This is the HTML code used to display the payment timer. Leave empty to use the default value."
+msgstr ""
+"Tai HTML kodas, naudojamas mokėjimo laikmačiui rodyti. Palikite tuščią, jei norite naudoti "
+"numatytąją reikšmę."
+
+#: src/payment_timer_trait.php:34
+msgid "Payment timer HTML"
+msgstr "Mokėjimo laikmačio HTML"
+
+#: src/payment_timer_trait.php:40 src/qr_code_trait.php:38
+msgid "Disabled"
+msgstr "Išjungta"
+
+#: src/payment_timer_trait.php:46 src/qr_code_trait.php:44
+msgid "Use network admin default"
+msgstr "Naudoti numatytąją tinklo administratoriaus reikšmę"
+
+#: src/payment_timer_trait.php:51 src/qr_code_trait.php:49
+msgid "Enabled on all sites"
+msgstr "Įjungta visose svetainėse"
+
+#: src/payment_timer_trait.php:52 src/qr_code_trait.php:50
+msgid "Disabled on all sites"
+msgstr "Išjungta visose svetainėse"
+
+#: src/payment_timer_trait.php:53 src/qr_code_trait.php:51
+msgid "Default enabled on all sites"
+msgstr "Pagal numatymą įjungta visose svetainėse"
+
+#: src/payment_timer_trait.php:54 src/qr_code_trait.php:52
+msgid "Default disabled on all sites"
+msgstr "Pagal numatymą išjungta visose svetainėse"
+
+#: src/payment_timer_trait.php:78
+msgid "Awaiting payment"
+msgstr "Laukiama mokėjimo"
+
+#: src/payment_timer_trait.php:79
+msgid "(checked every 15 secs)"
+msgstr "(tikrinama kas 15 sek.)"
+
+#: src/payment_timer_trait.php:80
+msgid "Payment complete!"
+msgstr "Mokėjimas atliktas!"
+
+#: src/qr_code_trait.php:23
+msgid "Enable a QR code for the wallet address on the order confirmation page."
+msgstr "Įjungti piniginės adreso QR kodą užsakymo patvirtinimo puslapyje."
+
+#: src/qr_code_trait.php:25
+msgid "QR code status"
+msgstr "QR kodo būsena"
+
+#: src/qr_code_trait.php:30
+msgid "This is the HTML code used to display the QR code. Leave empty to use the default value."
+msgstr ""
+"Tai HTML kodas, naudojamas QR kodui rodyti. Palikite tuščią, jei norite naudoti numatytąją "
+"reikšmę."
+
+#: src/qr_code_trait.php:32
+msgid "QR code HTML"
+msgstr "QR kodo HTML"
+
+#: src/security_trait.php:23
+msgid ""
+"TOTAL FREEZE: Blocks the creation of ANY new administrators. You can still see the option in "
+"menus, but saving will fail. Uncheck this temporarily if you need to add a new admin. "
+"Recommended: ON"
+msgstr ""
+"VISIŠKAS BLOKAVIMAS: neleidžiama sukurti JOKIŲ naujų administratorių. Parinktis vis dar matoma "
+"meniu, tačiau išsaugoti nepavyks. Laikinai išjunkite šį nustatymą, jei reikia pridėti naują "
+"administratorių. Rekomenduojama: ĮJUNGTA"
+
+#: src/security_trait.php:24
+msgid "Freeze Admin Creation"
+msgstr "Blokuoti administratorių kūrimą"
+
+#: src/security_trait.php:28
+msgid ""
+"Disables application passwords, preventing hackers from accessing admin functions externally. "
+"Recommended: ON"
+msgstr ""
+"Išjungia programų slaptažodžius ir neleidžia įsilaužėliams iš išorės pasiekti administravimo "
+"funkcijų. Rekomenduojama: ĮJUNGTA"
+
+#: src/security_trait.php:29
+msgid "Disable Application Passwords"
+msgstr "Išjungti programų slaptažodžius"
+
+#: src/security_trait.php:33
+msgid ""
+"Disables the internal theme and plugin editors to prevent hackers from injecting code if they get"
+" into the dashboard. Recommended: ON"
+msgstr ""
+"Išjungia vidinius temų ir įskiepių redaktorius, kad įsilaužėliai negalėtų įterpti kodo gavę "
+"prieigą prie valdymo skydo. Rekomenduojama: ĮJUNGTA"
+
+#: src/security_trait.php:34
+msgid "Disable File Editor"
+msgstr "Išjungti failų redaktorių"
+
+#: src/security_trait.php:38
+msgid ""
+"Completely disables XML-RPC (xmlrpc.php) to block brute-force attacks and DDoS vectors. "
+"Recommended: ON"
+msgstr ""
+"Visiškai išjungia XML-RPC (xmlrpc.php), kad būtų blokuojamos slaptažodžių parinkimo atakos ir "
+"DDoS vektoriai. Rekomenduojama: ĮJUNGTA"
+
+#: src/security_trait.php:39
+msgid "Disable XML-RPC"
+msgstr "Išjungti XML-RPC"
+
+#: src/security_trait.php:111
+msgid "SECURITY BLOCK: Administrator creation is currently FROZEN by MyCryptoCheckout settings."
+msgstr "SAUGUMO BLOKAVIMAS: administratorių kūrimas šiuo metu UŽBLOKUOTAS MyCryptoCheckout nustatymuose."
+
+#: src/security_trait.php:197
+msgid "Action Blocked: Security Lockdown"
+msgstr "Veiksmas užblokuotas: saugumo blokavimas"
+
+#: src/security_trait.php:198
+msgid ""
+"The creation of new administrator accounts is currently <strong>disabled</strong> by your "
+"MyCryptoCheckout security settings."
+msgstr ""
+"Naujų administratorių paskyrų kūrimas šiuo metu <strong>išjungtas</strong> MyCryptoCheckout "
+"saugumo nustatymuose."
+
+#: src/security_trait.php:199
+msgid ""
+"To authorize this action, please go to <em>Settings &gt; MyCryptoCheckout</em> and temporarily "
+"uncheck <strong>\"Freeze Admin Creation\"</strong>."
+msgstr ""
+"Norėdami leisti šį veiksmą, atidarykite <em>Nustatymai &gt; MyCryptoCheckout</em> ir laikinai "
+"panaikinkite parinkties <strong>„Blokuoti administratorių kūrimą“</strong> žymėjimą."
+
+#: src/security_trait.php:203
+msgid "Security Violation"
+msgstr "Saugumo pažeidimas"
+
+#: src/security_trait.php:253
+#, php-format
+msgid "[%s] Wallet Settings Updated"
+msgstr "[%s] Atnaujinti piniginių nustatymai"
+
+#: src/security_trait.php:265
+#, php-format
+msgid ""
+"Just a quick notification that the MyCryptoCheckout wallet addresses were manually updated via "
+"the WordPress Dashboard.\n"
+"\n"
+"Time: %1$s\n"
+"User: %2$s\n"
+"IP:   %3$s\n"
+"\n"
+msgstr ""
+"Trumpas pranešimas: MyCryptoCheckout piniginių adresai buvo rankiniu būdu atnaujinti WordPress "
+"valdymo skydelyje.\n"
+"\n"
+"Laikas: %1$s\n"
+"Naudotojas: %2$s\n"
+"IP:   %3$s\n"
+"\n"
+
+#: src/security_trait.php:271
+msgid "If you made this change, you can safely ignore this email.\n"
+msgstr "Jei šį pakeitimą atlikote jūs, galite nepaisyti šio el. laiško.\n"
+
+#: src/security_trait.php:272
+msgid "If you do not recognize this activity, please verify your wallet addresses immediately:\n"
+msgstr "Jei neatpažįstate šios veiklos, nedelsdami patikrinkite piniginių adresus:\n"
+
+#: src/traits/network_available.php:33
+msgid "Network settings"
+msgstr "Tinklo nustatymai"
+
+#: src/traits/network_available.php:37
+msgid "Do you want this to be available on the whole network?"
+msgstr "Ar tai turi būti pasiekiama visame tinkle?"
+
+#: src/traits/network_available.php:39
+msgid "Network available"
+msgstr "Pasiekiama tinkle"
+
+#: src/traits/network_available.php:42
+msgid "If not network enabled, on which sites should this be available."
+msgstr "Jei neįjungta visame tinkle, kuriose svetainėse tai turi būti pasiekiama?"
+
+#: src/traits/network_available.php:44
+msgid "Sites"
+msgstr "Svetainės"
+
+#: src/traits/network_available.php:72
+msgid "Not available on any sites."
+msgstr "Nepasiekiama jokioje svetainėje."
+
+#: src/traits/network_available.php:77
+#, php-format
+msgid "Available on %s"
+msgstr "Pasiekiama svetainėje %s"
+
+#: src/wallets/Wallet.php:128
+msgid "This wallet is disabled."
+msgstr "Ši piniginė išjungta."
+
+#: src/wallets/Wallet.php:138
+#, php-format
+msgid "%d confirmations"
+msgstr "Patvirtinimų skaičius: %d"
+
+#: src/wallets/Wallet.php:145
+#, php-format
+msgid "Last used %s"
+msgstr "Paskutinį kartą naudota: %s"
+
+#: src/wallets/Wallet.php:152
+#, php-format
+msgid "Used %d times"
+msgstr "Naudojimų skaičius: %d"
+
+#: src/wallets/Wallets.php:42
+#, php-format
+msgid "You currently have the following currencies configured: %s"
+msgstr "Šiuo metu sukonfigūruotos šios valiutos: %s"
+

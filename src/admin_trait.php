@@ -66,7 +66,7 @@ trait admin_trait
 				'https://wordpress.org/plugins/wp-2fa/',
 				'https://wordpress.org/plugins/sucuri-scanner/'
 			);
-			$message_box_text .= '<br/><a href="' . $url . '">Dismiss this message.</a>';
+			$message_box_text .= '<br/><a href="' . esc_url( $url ) . '">' . esc_html__( 'Dismiss this message.', 'mycryptocheckout' ) . '</a>';
 			$r .= $this->info_message_box()->_( $message_box_text );
 		}
 
@@ -91,7 +91,7 @@ trait admin_trait
 					__( 'Have you tried the <a href="%1$s">new modern checkout style</a>?', 'mycryptocheckout' ),
 					$setting_url,
 				);
-				$message_box_text .= '<br/><br/><a href="' . $url . '">Dismiss this message.</a>';
+				$message_box_text .= '<br/><br/><a href="' . esc_url( $url ) . '">' . esc_html__( 'Dismiss this message.', 'mycryptocheckout' ) . '</a>';
 				$r .= $this->info_message_box()->_( $message_box_text );
 			}
 		}
@@ -107,7 +107,7 @@ trait admin_trait
 		{
 			// Verify Nonce.
 			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_account' ) ) {
-				wp_die( 'Security check failed. Please reload the page and try again.' );
+				wp_die( esc_html__( 'Security check failed. Please reload the page and try again.', 'mycryptocheckout' ) );
 			}
 
 			$form->post();
@@ -275,7 +275,7 @@ trait admin_trait
 				if ( $currency )
 					$exchange_rates[ $id ] = sprintf( '1 USD = %s %s', $currency->convert( 'USD', 1 ), $id );
 				else
-					$exchange_rates[ $id ] = sprintf( 'Currency %s is no longer available!', $id );
+					$exchange_rates[ $id ] = sprintf( __( 'Currency %s is no longer available!', 'mycryptocheckout' ), $id );
 			}
 			ksort( $exchange_rates );
 			$exchange_rates = implode( "\n", $exchange_rates );
@@ -459,7 +459,7 @@ trait admin_trait
 			// Verify Nonce.
 			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_currencies' ) )
 			{
-				wp_die( 'Security check failed. Please reload the page and try again.' );
+				wp_die( esc_html__( 'Security check failed. Please reload the page and try again.', 'mycryptocheckout' ) );
 			}
 
 			$form->post();
@@ -627,7 +627,7 @@ trait admin_trait
 		$wallets = $this->wallets();
 		if ( ! $wallets->has( $wallet_id ) )
 		{
-			echo 'Invalid wallet ID!';
+			echo esc_html__( 'Invalid wallet ID!', 'mycryptocheckout' );
 			return;
 		}
 		$this->enqueue_css();
@@ -772,7 +772,7 @@ trait admin_trait
 		{
 			// Verify Nonce.
 			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_wallet' ) ) {
-				wp_die( 'Security check failed. Please reload the page and try again.' );
+				wp_die( esc_html__( 'Security check failed. Please reload the page and try again.', 'mycryptocheckout' ) );
 			}
 
 			$form->post();
@@ -810,7 +810,7 @@ trait admin_trait
 									$pubs = implode( '/', $currency->supports->btc_hd_public_key_pubs );
 									$pub_type = substr( $public_key, 0, 4 );
 									if ( ! in_array( $pub_type, $currency->supports->btc_hd_public_key_pubs ) )
-										throw new Exception( sprintf( 'This public key type is not supported. Please use only: %s', implode( ' or ', $currency->supports->btc_hd_public_key_pubs ) ) );
+										throw new Exception( sprintf( __( 'This public key type is not supported. Please use only: %s', 'mycryptocheckout' ), implode( ' or ', $currency->supports->btc_hd_public_key_pubs ) ) );
 								}
 								$wallet->set( 'circa_amount', $circa_amount->get_filtered_post_value() );
 								$wallet->set( 'btc_hd_public_key_generate_address_path', $btc_hd_public_key_generate_address_path->get_filtered_post_value() );
@@ -888,7 +888,7 @@ trait admin_trait
 		{
 			// Verify Nonce.
 			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_local_settings' ) ) {
-				wp_die( 'Security check failed. Please reload the page and try again.' );
+				wp_die( esc_html__( 'Security check failed. Please reload the page and try again.', 'mycryptocheckout' ) );
 			}
 
 			$form->post();
@@ -997,7 +997,7 @@ trait admin_trait
 		{
 			// Verify Nonce.
 			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_save_global_settings' ) ) {
-				wp_die( 'Security check failed. Please reload the page and try again.' );
+				wp_die( esc_html__( 'Security check failed. Please reload the page and try again.', 'mycryptocheckout' ) );
 			}
 
 			$form->post();
@@ -1068,7 +1068,7 @@ trait admin_trait
 		{
 			// Verify Nonce.
 			if ( ! isset( $_POST['mcc_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mcc_nonce'] ) ), 'mcc_tools_action' ) ) {
-				wp_die( 'Security check failed. Please reload the page and try again.' );
+				wp_die( esc_html__( 'Security check failed. Please reload the page and try again.', 'mycryptocheckout' ) );
 			}
 
 			$form->post();
@@ -1228,22 +1228,22 @@ trait admin_trait
 	{
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- We are verifying the nonce immediately after retrieval.
 		if ( ! isset( $_REQUEST['nonce'] ) ) {
-			wp_die( 'No nonce.' );
+			wp_die( esc_html__( 'No nonce.', 'mycryptocheckout' ) );
 		}
 
 		$nonce = sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) );
 
 		if ( ! wp_verify_nonce( $nonce, 'mycryptocheckout_sort_wallets' ) ) {
-			wp_die( 'Invalid nonce.' );
+			wp_die( esc_html__( 'Invalid nonce.', 'mycryptocheckout' ) );
 		}
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( 'Unauthorized user.' );
+			wp_die( esc_html__( 'Unauthorized user.', 'mycryptocheckout' ) );
 		}
 
 		// Validate that wallets exist in POST and is an array.
 		if ( ! isset( $_POST['wallets'] ) || ! is_array( $_POST['wallets'] ) ) {
-			wp_die( 'No wallet data provided.' );
+			wp_die( esc_html__( 'No wallet data provided.', 'mycryptocheckout' ) );
 		}
 
 		// Load the wallets.
