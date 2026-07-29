@@ -245,6 +245,7 @@ The following plugins prevent MyCryptoCheckout from working correctly:
 = 2.170 =
 
 * New: Bundled full French, German, Italian, Lithuanian, Portuguese, Spanish, and Swedish translations across the customer checkout and plugin administration interface, including regional WordPress locale packages.
+* Tweak: Modern checkout UI is now default for new installs. Those using classic will have to manually change their checkout UI to modern.
 * Fix: Localized previously hardcoded classic and modern checkout, payment status, security notice, email, order detail, WooCommerce block, and clipboard messages.
 * Update: NPM dependencies.
 

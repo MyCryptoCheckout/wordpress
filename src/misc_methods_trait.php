@@ -692,7 +692,7 @@ trait misc_methods_trait
 				@details	classic keeps the existing template-based layout. modern rebuilds the payment page UI in checkout JS.
 				@since		2026-05-28
 			**/
-			'checkout_payment_style' => 'classic',
+			'checkout_payment_style' => 'modern',
 
 			/**
 				@brief		Enable the timer on the checkout page?
