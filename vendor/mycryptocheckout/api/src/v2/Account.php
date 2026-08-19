@@ -147,6 +147,8 @@ abstract class Account
 	public function get_unmatched_payments()
 	{
 		$r = [];
+        if ( ! isset( $this->data->unmatched_payments ) )
+            return $r;
 		foreach( $this->data->unmatched_payments as $raw_unmatched_payment )
 			$r []= new Unmatched_Payment( $raw_unmatched_payment );
 		return $r;
@@ -190,6 +192,8 @@ abstract class Account
 	{
 		if ( ! $this->is_valid() )
 			return false;
+        if ( ! isset( $this->data->unmatched_payments ) )
+            return false;
 		return count( $this->data->unmatched_payments ) > 0;
 	}
 

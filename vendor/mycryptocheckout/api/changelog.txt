@@ -1,3 +1,21 @@
+2.27		20260819
+
+Add unmatched payments functions.
+
+2.26		20260601
+
+Allow for private API IPs via define.
+
+2.25		20260525
+
+Add account data sanitization code
+Send the "plugin version" (based on Wordpress plugin minimum version requirement) to the API during account retrieval
+Send the "plugin version" when testing communications
+
+2.24		20260501
+
+get_payments_left() should return an int.
+
 2.23		20250103
 
 Fixed CF IP validity check.

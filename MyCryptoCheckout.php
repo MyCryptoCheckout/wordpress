@@ -8,7 +8,7 @@ Plugin Name:		MyCryptoCheckout
 Plugin URI:			https://mycryptocheckout.com
 Text Domain:		mycryptocheckout
 Domain Path:		/lang
-Version:			2.171
+Version:			2.172
 WC tested up to:	10.8.1
 License:			GPLv3
 */
@@ -86,7 +86,7 @@ namespace mycryptocheckout
 
 namespace
 {
-	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.171 );
+	define( 'MYCRYPTOCHECKOUT_PLUGIN_VERSION', 2.172 );
 	/**
 		@brief		Return the instance of MCC.
 		@since		2014-10-18 14:48:37
